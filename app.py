@@ -1,5 +1,7 @@
 import numpy as np
 from apikey.client import Client
+from robot import Robot
+import os
 
 # You should fil creds.json with API key for your acount obtained from
 # https://dev-portal.onshape.com/keys
@@ -46,15 +48,14 @@ for occurrence in root['occurrences']:
     }
 
 # Collecting parts instance from assembly and subassemblies
-parts = {}
-def collectParts(instances):
-    for instance in instances:
-        if instance['type'] == 'Part':
-            id = instance['id']
-            occurrence = occurrences[id]
-            instance['parent'] = occurrence['parent']
-            instance['transform'] = occurrence['transform']
-            parts[id] = instance
+instances = {}
+def collectParts(instancesToWalk):
+    for instance in instancesToWalk:
+        id = instance['id']
+        occurrence = occurrences[id]
+        instance['parent'] = occurrence['parent']
+        instance['transform'] = occurrence['transform']
+        instances[id] = instance
 
 collectParts(root['instances'])
 for asm in assembly['subAssemblies']:
@@ -84,5 +85,40 @@ def collect(id, parent = None):
     return part
 
 trunk = root['instances'][0]['id']
-robot = collect(trunk)
+tree = collect(trunk)
 
+robot = Robot()
+
+def addPart(link, part, matrix):
+    # Importing STL file for this part
+    stlFile = 'stls/%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'])
+    if not os.path.exists(stlFile):
+        stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'])
+        f = open(stlFile, 'w')
+        f.write(stl.text)
+        f.close()
+        
+    stlFile = 'package://'+stlFile
+    robot.addPart(link, part['id'], np.linalg.inv(matrix)*part['transform'])
+
+def buildRobot(tree, matrix):
+    print('~~~ Adding instance')
+    instance = instances[tree['id']]
+    link = robot.addLink(instance['name'])
+
+    if instance['type'] == 'part':
+        addPart(link, instance, matrix)
+    else:
+        for entryId in instances:
+            entry = instances[entryId]
+            if entry['type'] == 'Part' and entry['parent'] == instance['id']:
+                addPart(link, entry, matrix)
+
+    for child in tree['children']:
+        subLink = buildRobot(child, matrix*instance['transform'])
+        robot.addJoint(link, subLink, instance['transform'])
+
+    return link
+
+# Start building the robot
+buildRobot(tree, np.matrix(np.identity(4)))

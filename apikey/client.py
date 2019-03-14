@@ -239,3 +239,10 @@ class Client():
             'Accept': 'application/vnd.onshape.v1+octet-stream'
         }
         return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/stl', headers=req_headers)
+
+    def part_studio_stl_m(self, did, mid, eid):
+
+        req_headers = {
+            'Accept': 'application/vnd.onshape.v1+octet-stream'
+        }
+        return self._api.request('get', '/api/partstudios/d/' + did + '/m/' + mid + '/e/' + eid + '/stl', headers=req_headers)
