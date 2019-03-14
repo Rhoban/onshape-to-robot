@@ -91,15 +91,17 @@ robot = Robot()
 
 def addPart(link, part, matrix):
     # Importing STL file for this part
-    stlFile = 'stls/%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'])
+    stlFile = 'stls/%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
     if not os.path.exists(stlFile):
-        stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'])
+        stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
         f = open(stlFile, 'w')
         f.write(stl.text)
         f.close()
         
     stlFile = 'package://'+stlFile
     robot.addPart(link, part['id'], np.linalg.inv(matrix)*part['transform'])
+    massProperties = client.part_mas_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
+    print(massProperties)
 
 def buildRobot(tree, matrix):
     print('~~~ Adding instance')
