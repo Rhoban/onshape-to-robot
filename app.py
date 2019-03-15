@@ -91,17 +91,19 @@ robot = Robot()
 
 def addPart(link, part, matrix):
     # Importing STL file for this part
-    stlFile = 'stls/%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-    if not os.path.exists(stlFile):
+    stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    if not os.path.exists('urdf/'+stlFile):
         stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-        f = open(stlFile, 'w')
-        f.write(stl.text)
+        f = open('urdf/'+stlFile, 'wb')
+        f.write(stl.content)
         f.close()
         
-    stlFile = 'package://'+stlFile
-    robot.addPart(link, part['id'], np.linalg.inv(matrix)*part['transform'])
     massProperties = client.part_mas_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
-    print(massProperties)
+    massProperties = massProperties['bodies'][part['partId']]
+    mass = massProperties['mass'][0]
+    com = massProperties['centroid']
+    inertia = massProperties['inertia']
+    robot.addPart(link, part['id'], np.linalg.inv(matrix)*part['transform'], stlFile, mass, com, inertia)
 
 def buildRobot(tree, matrix):
     print('~~~ Adding instance')
@@ -124,3 +126,9 @@ def buildRobot(tree, matrix):
 
 # Start building the robot
 buildRobot(tree, np.matrix(np.identity(4)))
+robot.finalize()
+
+print("* Writing URDF file")
+urdf = file('urdf/robot.urdf', 'w')
+urdf.write(robot.urdf)
+urdf.close()

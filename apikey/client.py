@@ -245,7 +245,7 @@ class Client():
         req_headers = {
             'Accept': 'application/vnd.onshape.v1+octet-stream'
         }
-        return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', headers=req_headers)
+        return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter'}, headers=req_headers)
 
     def part_mas_properties(self, did, mid, eid, partid):
         return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
