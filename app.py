@@ -119,12 +119,6 @@ def buildRobot(tree, matrix):
     print('> '+instance['name'])
     link = robot.addLink(instance['name'])
 
-    if 'mate' in tree:
-        print('MATE CONNECTED!')
-
-    # Matrix pass from the world frame to the current instance
-    matrix = matrix*occurrence['transform']
-
     if instance['type'] == 'part':
         print('Error: instance '+instance['name']+' is not an assembly')
         exit()
@@ -136,12 +130,16 @@ def buildRobot(tree, matrix):
                 addPart(link, occurrence, matrix)
 
     for child in tree['children']:
-        # childOccurrence = getOccurrence([child['id']])
-        # print(child['id'])
-        # print(childOccurrence['transform'])
+        mate = child['mate']
+        if mate['matedEntities'][0]['matedOccurrence'][0] == tree['id']:
+            matedOccurrence = mate['matedEntities'][0]
+        else:
+            matedOccurrence = mate['matedEntities'][1]
+        o = getOccurrence(matedOccurrence['matedOccurrence'])
+        axisFrame = np.linalg.inv(matrix)*o['transform']
+        matrix = o['transform']
         subLink = buildRobot(child, matrix)
-        #  XXX/ Not correct
-        # robot.addJoint(link, subLink, childOccurrence['transform'])
+        robot.addJoint(link, subLink, axisFrame)
 
     return link
 
