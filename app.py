@@ -1,5 +1,6 @@
 import numpy as np
 from apikey.client import Client
+from copy import copy
 from robot import Robot
 import os
 
@@ -37,41 +38,34 @@ if assemblyId == None:
 print('* Retrieving assembly')
 assembly = client.get_assembly(documentId, workspaceId, assemblyId).json()
 
-# Collecting transform matrix for all the parts via occurences
-root = assembly['rootAssembly']
-occurrences = {}
-for occurrence in root['occurrences']:
-    path = occurrence['path']
-    target = path[-1]
-    matrix = np.reshape(occurrence['transform'], (4, 4))
-    occurrences[target] = {
-        'parent': path[0],
-        'transform': matrix,
-    }
-
 # Collecting parts instance from assembly and subassemblies
 instances = {}
 def collectParts(instancesToWalk):
     for instance in instancesToWalk:
-        id = instance['id']
-        # XXX: This is wrong, there is not only one occurence per instance :-)
-        occurrence = occurrences[id]
-        instance['parent'] = occurrence['parent']
-        instance['transform'] = occurrence['transform']
-        instances[id] = instance
+        instances[instance['id']] = instance
 
+root = assembly['rootAssembly']
 collectParts(root['instances'])
 for asm in assembly['subAssemblies']:
     collectParts(asm['instances'])
 
+# Collecting occurences
+occurrences = []
+for occurrence in root['occurrences']:
+    occurrence['instance'] = instances[occurrence['path'][-1]]
+    occurrence['transform'] = np.matrix(np.reshape(occurrence['transform'], (4, 4)))
+    occurrences.append(occurrence)
+
+# XXX: Instead of doing that, we can get the mate features in assembly using
+# ?includeMateFeatures=true when calling the get_assembly function, it's clearer...
 print('* Getting assembly features, scanning for DOFs...')
 relations = []
-features = client.get_assembly_features(documentId, workspaceId, assemblyId).json()
-for feature in features['features']:
-    if feature['message']['name'][0:3] == 'dof':
-        connectors = feature['message']['mateConnectors']
-        a = connectors[0]['message']['parameters'][1]['message']['queries'][0]['message']['path'][0]
-        b = connectors[1]['message']['parameters'][1]['message']['queries'][0]['message']['path'][0]
+features = root['features']
+for feature in features:
+    data = feature['featureData']
+    if data['name'][0:3] == 'dof':
+        a = data['matedEntities'][0]['matedOccurrence'][0]
+        b = data['matedEntities'][1]['matedOccurrence'][0]
         relations.append([a,b])
 print('- Found '+str(len(relations))+' DOFs')
     
@@ -92,7 +86,8 @@ tree = collect(trunk)
 
 robot = Robot()
 
-def addPart(link, part, matrix):
+def addPart(link, occurrence, matrix):
+    part = occurrence['instance']
     # Importing STL file for this part
     stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
     if not os.path.exists('urdf/'+stlFile):
@@ -106,34 +101,47 @@ def addPart(link, part, matrix):
     mass = massProperties['mass'][0]
     com = massProperties['centroid']
     inertia = massProperties['inertia']
-    robot.addPart(link, part['id'], np.linalg.inv(matrix)*part['transform'], stlFile, mass, com, inertia)
+    robot.addPart(link, '_'.join(occurrence['path']), np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia)
+
+def getOccurrence(path):
+    for occurrence in occurrences:
+        if occurrence['path'] == path:
+            return occurrence
 
 def buildRobot(tree, matrix):
-    # Matrix: World to the current instance
-    # Instance['transform']: Instance offset
     print('~~~ Adding instance')
-    instance = instances[tree['id']]
+    occurrence = getOccurrence([tree['id']])
+    instance = occurrence['instance']
+    print('> '+instance['name'])
     link = robot.addLink(instance['name'])
 
+    # Matrix pass from the world frame to the current instance
+    matrix = matrix*occurrence['transform']
+
     if instance['type'] == 'part':
-        addPart(link, instance, matrix*instance['transform'])
+        print('Error: instance '+instance['name']+' is not an assembly')
+        exit()
     else:
-        for entryId in instances:
-            entry = instances[entryId]
-            if entry['type'] == 'Part' and entry['parent'] == instance['id']:
-                addPart(link, entry, matrix*instance['transform'])
+        # The instance is probably an assembly, gathering everything that
+        # begins with the same path
+        for occurrence in occurrences:
+            if occurrence['path'][0] == tree['id'] and occurrence['instance']['type'] == 'Part':
+                addPart(link, occurrence, matrix)
 
     for child in tree['children']:
-        subLink = buildRobot(child, matrix*instance['transform'])
-        childInstance = instances[child['id']]
+        childOccurrence = getOccurrence([child['id']])
+        print(child['id'])
+        print(childOccurrence['transform'])
+        subLink = buildRobot(child, matrix)
         #  XXX/ Not correct
-        robot.addJoint(link, subLink, childInstance['transform'])
+        robot.addJoint(link, subLink, childOccurrence['transform'])
 
     return link
 
 # Start building the robot
 buildRobot(tree, np.matrix(np.identity(4)))
 robot.finalize()
+print(tree)
 
 print("* Writing URDF file")
 urdf = file('urdf/robot.urdf', 'w')

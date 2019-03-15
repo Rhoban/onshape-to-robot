@@ -140,7 +140,7 @@ class Client():
         return self._api.request('post', '/api/assemblies/d/' + did + '/w/' + wid, body=payload)
 
     def get_assembly(self, did, wid, eid):
-        return self._api.request('get', '/api/assemblies/d/'+did+'/w/'+wid+'/e/'+eid)
+        return self._api.request('get', '/api/assemblies/d/'+did+'/w/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true'})
 
     def get_features(self, did, wid, eid):
         '''
