@@ -8,6 +8,8 @@ import os
 
 # The first part in assembly should be the trunk
 # The sub-parts should revolute around Z-axis
+# DOFs should be named "dof..."
+# Assembly should be named "robot"
 
 client = Client(logging=False)
 
@@ -24,7 +26,7 @@ print('* Retrieving elements in the document, searching for the assembly...')
 elements = client.list_elements(documentId).json()
 assemblyId = None
 for element in elements:
-    if element['type'] == 'Assembly':
+    if element['type'] == 'Assembly' and element['name'].lower() == 'robot':
         print("- Found assembly, id: "+element['id']+', name: "'+element['name']+'"')
         assemblyId = element['id']
 
@@ -52,6 +54,7 @@ instances = {}
 def collectParts(instancesToWalk):
     for instance in instancesToWalk:
         id = instance['id']
+        # XXX: This is wrong, there is not only one occurence per instance :-)
         occurrence = occurrences[id]
         instance['parent'] = occurrence['parent']
         instance['transform'] = occurrence['transform']
@@ -106,21 +109,25 @@ def addPart(link, part, matrix):
     robot.addPart(link, part['id'], np.linalg.inv(matrix)*part['transform'], stlFile, mass, com, inertia)
 
 def buildRobot(tree, matrix):
+    # Matrix: World to the current instance
+    # Instance['transform']: Instance offset
     print('~~~ Adding instance')
     instance = instances[tree['id']]
     link = robot.addLink(instance['name'])
 
     if instance['type'] == 'part':
-        addPart(link, instance, matrix)
+        addPart(link, instance, matrix*instance['transform'])
     else:
         for entryId in instances:
             entry = instances[entryId]
             if entry['type'] == 'Part' and entry['parent'] == instance['id']:
-                addPart(link, entry, matrix)
+                addPart(link, entry, matrix*instance['transform'])
 
     for child in tree['children']:
         subLink = buildRobot(child, matrix*instance['transform'])
-        robot.addJoint(link, subLink, instance['transform'])
+        childInstance = instances[child['id']]
+        #  XXX/ Not correct
+        robot.addJoint(link, subLink, childInstance['transform'])
 
     return link
 
