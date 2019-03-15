@@ -66,7 +66,7 @@ for feature in features:
     if data['name'][0:3] == 'dof':
         a = data['matedEntities'][0]['matedOccurrence'][0]
         b = data['matedEntities'][1]['matedOccurrence'][0]
-        relations.append([a,b])
+        relations.append([a, b, data])
 print('- Found '+str(len(relations))+' DOFs')
     
 print('* Building robot tree')
@@ -76,9 +76,13 @@ def collect(id, parent = None):
     part['children'] = []
     for entry in relations:
         if entry[0] == id and entry[1] != parent:
-            part['children'].append(collect(entry[1], id))
+            child = collect(entry[1], id)
+            child['mate'] = entry[2]
+            part['children'].append(child)
         if entry[1] == id and entry[0] != parent:
-            part['children'].append(collect(entry[0], id))
+            child = collect(entry[0], id)
+            child['mate'] = entry[2]
+            part['children'].append(child)
     return part
 
 trunk = root['instances'][0]['id']
@@ -115,6 +119,9 @@ def buildRobot(tree, matrix):
     print('> '+instance['name'])
     link = robot.addLink(instance['name'])
 
+    if 'mate' in tree:
+        print('MATE CONNECTED!')
+
     # Matrix pass from the world frame to the current instance
     matrix = matrix*occurrence['transform']
 
@@ -129,12 +136,12 @@ def buildRobot(tree, matrix):
                 addPart(link, occurrence, matrix)
 
     for child in tree['children']:
-        childOccurrence = getOccurrence([child['id']])
-        print(child['id'])
-        print(childOccurrence['transform'])
+        # childOccurrence = getOccurrence([child['id']])
+        # print(child['id'])
+        # print(childOccurrence['transform'])
         subLink = buildRobot(child, matrix)
         #  XXX/ Not correct
-        robot.addJoint(link, subLink, childOccurrence['transform'])
+        # robot.addJoint(link, subLink, childOccurrence['transform'])
 
     return link
 
