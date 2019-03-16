@@ -35,22 +35,7 @@ class Robot:
     def append(self, str):
         self.urdf += str+"\n"
 
-    def addLink(self, name):
-        name = name.split(' ')[0].lower()
-        print('Part name: '+name)
-        self.append('<link name="'+name+'">')
-
-        self.append('<inertial>')
-        self.append('<origin xyz="0 0 0" rpy="0 0 0"/>')
-        self.append('<mass value="0.00000001"/>')
-        self.append('<inertia ixx="0.00001" ixy="0"  ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />')
-        self.append('</inertial>')
-
-        self.append('</link>')
-        self.append('')
-        return name
-
-    def addPart(self, parent, name, matrix, stl, mass, com, inertia):
+    def addLink(self, parent, name, matrix, stl, mass, com, inertia):
         self.append('<link name="'+name+'">')
         for entry in ['visual', 'collision']:
             self.append('<'+entry+'>')
@@ -69,13 +54,14 @@ class Robot:
 
         self.append('</link>')
 
-        self.append('<joint name="'+name+'_fixing" type="fixed">')
-        self.append(origin(matrix))
-        self.append('<parent link="'+parent+'"/>')
-        self.append('<child link="'+name+'"/>')
-        self.append('<axis xyz="0 0 0"/>')
-        self.append('</joint>')
-        self.append('')
+        if parent != name:
+            self.append('<joint name="'+name+'_fixing" type="fixed">')
+            self.append(origin(matrix))
+            self.append('<parent link="'+parent+'"/>')
+            self.append('<child link="'+name+'"/>')
+            self.append('<axis xyz="0 0 0"/>')
+            self.append('</joint>')
+            self.append('')
         pass
 
     def addJoint(self, linkFrom, linkTo, transform):

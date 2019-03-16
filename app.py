@@ -12,6 +12,10 @@ import os
 # DOFs should be named "dof..."
 # Assembly should be named "robot"
 
+# XXX: TODO:
+# - Tester sur un robot plus complexe (Metabot?)
+# - Les masses quasi nulles dans les link master c'est pas terrible, peut-on faire mieux?
+
 client = Client(logging=False)
 
 # Document that should be parsed
@@ -56,6 +60,11 @@ for occurrence in root['occurrences']:
     occurrence['transform'] = np.matrix(np.reshape(occurrence['transform'], (4, 4)))
     occurrences.append(occurrence)
 
+def getOccurrence(path):
+    for occurrence in occurrences:
+        if occurrence['path'] == path:
+            return occurrence
+
 # XXX: Instead of doing that, we can get the mate features in assembly using
 # ?includeMateFeatures=true when calling the get_assembly function, it's clearer...
 print('* Getting assembly features, scanning for DOFs...')
@@ -90,7 +99,7 @@ tree = collect(trunk)
 
 robot = Robot()
 
-def addPart(link, occurrence, matrix):
+def addPart(link, occurrence, matrix, name):
     part = occurrence['instance']
     # Importing STL file for this part
     stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
@@ -105,40 +114,49 @@ def addPart(link, occurrence, matrix):
     mass = massProperties['mass'][0]
     com = massProperties['centroid']
     inertia = massProperties['inertia']
-    robot.addPart(link, '_'.join(occurrence['path']), np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia)
+    robot.addLink(link, name, np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia)
 
-def getOccurrence(path):
-    for occurrence in occurrences:
-        if occurrence['path'] == path:
-            return occurrence
-
-def buildRobot(tree, matrix):
+def buildRobot(tree, matrix, linkPart=None):
     print('~~~ Adding instance')
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
     print('> '+instance['name'])
-    link = robot.addLink(instance['name'])
+    link = instance['name']
+    link = link.split(' ')[0].lower()
+    
+    print('DoubleArm, link: '+str(linkPart))
 
     if instance['type'] == 'part':
-        print('Error: instance '+instance['name']+' is not an assembly')
-        exit()
+        # XXX: Redundant code
+        name = '_'.join(occurrence['path'])
+        if linkPart == None:
+            linkPart = name
+        if name == linkPart:
+            name = link
+        addPart(link, occurrence, matrix, name)
     else:
         # The instance is probably an assembly, gathering everything that
         # begins with the same path
         for occurrence in occurrences:
             if occurrence['path'][0] == tree['id'] and occurrence['instance']['type'] == 'Part':
-                addPart(link, occurrence, matrix)
+                name = '_'.join(occurrence['path'])
+                print('Some part, name: '+name)
+                if linkPart == None:
+                    linkPart = name
+                if name == linkPart:
+                    name = link
+                addPart(link, occurrence, matrix, name)
 
     for child in tree['children']:
         mate = child['mate']
         if mate['matedEntities'][0]['matedOccurrence'][0] == tree['id']:
-            matedOccurrence = mate['matedEntities'][0]
-        else:
             matedOccurrence = mate['matedEntities'][1]
-        o = getOccurrence(matedOccurrence['matedOccurrence'])
-        axisFrame = np.linalg.inv(matrix)*o['transform']
-        matrix = o['transform']
-        subLink = buildRobot(child, matrix)
+        else:
+            matedOccurrence = mate['matedEntities'][0]
+        childLinkPart = getOccurrence(matedOccurrence['matedOccurrence'])
+        axisFrame = np.linalg.inv(matrix)*childLinkPart['transform']
+        matrix = childLinkPart['transform']
+        subLink = buildRobot(child, matrix, '_'.join(childLinkPart['path']))
         robot.addJoint(link, subLink, axisFrame)
 
     return link
