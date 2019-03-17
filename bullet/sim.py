@@ -13,9 +13,9 @@ planeId = p.loadURDF('plane.urdf')
 # Chargement du robot
 cubeStartPos = [0, 0, 0.1]
 cubeStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
-quadruped = p.loadURDF("./urdf/robot.urdf",
+robot = p.loadURDF("../urdf/robot.urdf",
                        cubeStartPos, cubeStartOrientation)
-cubePos, cubeOrn = p.getBasePositionAndOrientation(quadruped)
+cubePos, cubeOrn = p.getBasePositionAndOrientation(robot)
 
 # Map des joints
 jointsMap = []
@@ -26,7 +26,7 @@ p.setPhysicsEngineParameter(fixedTimeStep=dt)
 k = 0
 try:
     while True:
-        jointInfo = p.getJointInfo(quadruped, k)
+        jointInfo = p.getJointInfo(robot, k)
         if 'fixing' not in jointInfo[1].decode('utf-8'):
             jointsMap.append(k)
         k += 1
@@ -37,8 +37,8 @@ while True:
     t += dt
     joints = jointsPosition(t)
     for k in range(len(joints)):
-        jointInfo = p.getJointInfo(quadruped, jointsMap[k])
+        jointInfo = p.getJointInfo(robot, jointsMap[k])
         p.setJointMotorControl2(
-            quadruped, jointInfo[0], p.POSITION_CONTROL, joints[k])
+            robot, jointInfo[0], p.POSITION_CONTROL, joints[k])
     p.stepSimulation()
     sleep(dt)
