@@ -59,9 +59,10 @@ cubePos, cubeOrn = p.getBasePositionAndOrientation(robot)
 nJoints = p.getNumJoints(robot)
 
 # Drawing inertia boxes
-drawInertiaBox(robot, -1, [0,1,0])
-for i in range (nJoints):
-    drawInertiaBox(robot, i, [0,1,0])
+if False:
+    drawInertiaBox(robot, -1, [0,1,0])
+    for i in range (nJoints):
+        drawInertiaBox(robot, i, [0,1,0])
 
 # Map des joints
 jointsMap = []
@@ -69,6 +70,7 @@ t = 0
 dt = 0.01
 p.setPhysicsEngineParameter(fixedTimeStep=dt)
 
+# Collecting the available joints
 for k in range (nJoints):
     jointInfo = p.getJointInfo(robot, k)
     if 'fixing' not in jointInfo[1].decode('utf-8'):

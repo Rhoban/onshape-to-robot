@@ -73,9 +73,13 @@ features = root['features']
 for feature in features:
     data = feature['featureData']
     if data['name'][0:3] == 'dof':
+        name = '_'.join(data['name'].split('_')[1:])
+        if name == '':
+            print('Error: a DOF dones\'t have any name')
+            exit()
         a = data['matedEntities'][0]['matedOccurrence'][0]
         b = data['matedEntities'][1]['matedOccurrence'][0]
-        relations.append([a, b, data])
+        relations.append([a, b, data, name])
 print('- Found '+str(len(relations))+' DOFs')
     
 print('* Building robot tree')
@@ -87,10 +91,12 @@ def collect(id, parent = None):
         if entry[0] == id and entry[1] != parent:
             child = collect(entry[1], id)
             child['mate'] = entry[2]
+            child['relation'] = entry[3]
             part['children'].append(child)
         if entry[1] == id and entry[0] != parent:
             child = collect(entry[0], id)
             child['mate'] = entry[2]
+            child['relation'] = entry[3]
             part['children'].append(child)
     return part
 
@@ -154,7 +160,7 @@ def buildRobot(tree, matrix, linkPart=None):
         axisFrame = np.linalg.inv(matrix)*childLinkPart['transform']
         matrix = childLinkPart['transform']
         subLink = buildRobot(child, matrix, '_'.join(childLinkPart['path']))
-        robot.addJoint(link, subLink, axisFrame)
+        robot.addJoint(link, subLink, axisFrame, child['relation'])
 
     return link
 

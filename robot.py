@@ -128,8 +128,8 @@ class Robot:
                 self.append('')
 
 
-    def addJoint(self, linkFrom, linkTo, transform):
-        self.append('<joint name="'+linkFrom+'_'+linkTo+'" type="revolute">')
+    def addJoint(self, linkFrom, linkTo, transform, name):
+        self.append('<joint name="'+name+'" type="revolute">')
         self.append(origin(transform))
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
