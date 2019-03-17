@@ -60,6 +60,7 @@ for occurrence in root['occurrences']:
     occurrence['transform'] = np.matrix(np.reshape(occurrence['transform'], (4, 4)))
     occurrences.append(occurrence)
 
+# XXX: This could be improved using dicts
 def getOccurrence(path):
     for occurrence in occurrences:
         if occurrence['path'] == path:
@@ -72,14 +73,19 @@ relations = []
 features = root['features']
 for feature in features:
     data = feature['featureData']
+
+    occurrenceA = data['matedEntities'][0]['matedOccurrence'][0]
+    occurrenceB = data['matedEntities'][1]['matedOccurrence'][0]
+
     if data['name'][0:3] == 'dof':
         name = '_'.join(data['name'].split('_')[1:])
         if name == '':
             print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
             exit()
-        a = data['matedEntities'][0]['matedOccurrence'][0]
-        b = data['matedEntities'][1]['matedOccurrence'][0]
-        relations.append([a, b, data, name])
+        relations.append([occurrenceA, occurrenceB, data, name])
+
+    # print(getOccurrence([occurrenceA])['instance']['name'])
+    
 print('- Found '+str(len(relations))+' DOFs')
     
 print('* Building robot tree')
@@ -134,6 +140,7 @@ def buildRobot(tree, matrix, linkPart=None):
     link = link.split(' ')[0].lower()
 
     robot.startLink(link)
+    # Collecting all children in the tree
     if instance['type'] == 'part':
         name = '_'.join(occurrence['path'])
         addPart(occurrence, matrix, name == linkPart)
