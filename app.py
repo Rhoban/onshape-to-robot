@@ -99,7 +99,7 @@ tree = collect(trunk)
 
 robot = Robot()
 
-def addPart(occurrence, matrix):
+def addPart(occurrence, matrix, main):
     part = occurrence['instance']
     # Importing STL file for this part
     stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
@@ -109,12 +109,15 @@ def addPart(occurrence, matrix):
         f.write(stl.content)
         f.close()
         
+    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
+    colors = metadata['appearance']['color']
+    color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
     massProperties = client.part_mas_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
     massProperties = massProperties['bodies'][part['partId']]
     mass = massProperties['mass'][0]
     com = massProperties['centroid']
     inertia = massProperties['inertia']
-    robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia)
+    robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, main)
 
 def buildRobot(tree, matrix, linkPart=None):
     print('~~~ Adding instance')
@@ -126,13 +129,19 @@ def buildRobot(tree, matrix, linkPart=None):
 
     robot.startLink(link)
     if instance['type'] == 'part':
-        addPart(occurrence, matrix)
+        name = '_'.join(occurrence['path'])
+        addPart(occurrence, matrix, name == linkPart)
     else:
         # The instance is probably an assembly, gathering everything that
         # begins with the same path
         for occurrence in occurrences:
             if occurrence['path'][0] == tree['id'] and occurrence['instance']['type'] == 'Part':
-                addPart(occurrence, matrix)
+                name = '_'.join(occurrence['path'])
+                if linkPart == None:
+                    # XXX: This is not good if the first part doesn't have identity matrix...
+                    linkPart = name
+                    matrix = occurrence['transform']
+                addPart(occurrence, matrix, name == linkPart)
     robot.endLink()
 
     for child in tree['children']:
