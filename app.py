@@ -75,7 +75,7 @@ for feature in features:
     if data['name'][0:3] == 'dof':
         name = '_'.join(data['name'].split('_')[1:])
         if name == '':
-            print('Error: a DOF dones\'t have any name')
+            print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
             exit()
         a = data['matedEntities'][0]['matedOccurrence'][0]
         b = data['matedEntities'][1]['matedOccurrence'][0]
