@@ -123,8 +123,6 @@ def buildRobot(tree, matrix, linkPart=None):
     print('> '+instance['name'])
     link = instance['name']
     link = link.split(' ')[0].lower()
-    
-    print('DoubleArm, link: '+str(linkPart))
 
     robot.startLink(link)
     if instance['type'] == 'part':

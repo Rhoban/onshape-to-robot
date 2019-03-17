@@ -57,6 +57,8 @@ class Robot:
             p = np.matrix(r)
             inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
 
+        print(inertia)
+
         self.append('<inertial>')
         self.append('<origin xyz="%f %f %f" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
         self.append('<mass value="%f"/>' % mass)
@@ -79,11 +81,15 @@ class Robot:
         # Inertia
         I = np.matrix(np.reshape(inertia[:9], (3, 3)))
         R = matrix[:3, :3]
+        # Expressing COM in the link frame
+        com = np.array((matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
+        # Expressing inertia in the link frame
+        inertia = R.T*I*R
 
         self._dynamics.append({
             'mass': mass,
-            'com': np.array(com[:3]),
-            'inertia': R*I*R.T
+            'com': com,
+            'inertia': inertia
         })
 
     def addJoint(self, linkFrom, linkTo, transform):
