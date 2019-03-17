@@ -99,7 +99,7 @@ tree = collect(trunk)
 
 robot = Robot()
 
-def addPart(link, occurrence, matrix, name):
+def addPart(occurrence, matrix):
     part = occurrence['instance']
     # Importing STL file for this part
     stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
@@ -114,7 +114,7 @@ def addPart(link, occurrence, matrix, name):
     mass = massProperties['mass'][0]
     com = massProperties['centroid']
     inertia = massProperties['inertia']
-    robot.addLink(link, name, np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia)
+    robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia)
 
 def buildRobot(tree, matrix, linkPart=None):
     print('~~~ Adding instance')
@@ -126,26 +126,16 @@ def buildRobot(tree, matrix, linkPart=None):
     
     print('DoubleArm, link: '+str(linkPart))
 
+    robot.startLink(link)
     if instance['type'] == 'part':
-        # XXX: Redundant code
-        name = '_'.join(occurrence['path'])
-        if linkPart == None:
-            linkPart = name
-        if name == linkPart:
-            name = link
-        addPart(link, occurrence, matrix, name)
+        addPart(occurrence, matrix)
     else:
         # The instance is probably an assembly, gathering everything that
         # begins with the same path
         for occurrence in occurrences:
             if occurrence['path'][0] == tree['id'] and occurrence['instance']['type'] == 'Part':
-                name = '_'.join(occurrence['path'])
-                print('Some part, name: '+name)
-                if linkPart == None:
-                    linkPart = name
-                if name == linkPart:
-                    name = link
-                addPart(link, occurrence, matrix, name)
+                addPart(occurrence, matrix)
+    robot.endLink()
 
     for child in tree['children']:
         mate = child['mate']
@@ -164,9 +154,9 @@ def buildRobot(tree, matrix, linkPart=None):
 # Start building the robot
 buildRobot(tree, np.matrix(np.identity(4)))
 robot.finalize()
-print(tree)
+# print(tree)
 
 print("* Writing URDF file")
-urdf = file('urdf/robot.urdf', 'w')
+urdf = open('urdf/robot.urdf', 'w')
 urdf.write(robot.urdf)
 urdf.close()

@@ -35,34 +35,56 @@ class Robot:
     def append(self, str):
         self.urdf += str+"\n"
 
-    def addLink(self, parent, name, matrix, stl, mass, com, inertia):
+    def startLink(self, name):
         self.append('<link name="'+name+'">')
-        for entry in ['visual', 'collision']:
-            self.append('<'+entry+'>')
-            self.append('<geometry>')
-            self.append('<mesh filename="package://'+stl+'"/>')
-            self.append('</geometry>')
-            self.append('<origin xyz="0 0 0" rpy="0 0 0"/>')
-            self.append('</'+entry+'>')
+        self._dynamics = []
+
+    def endLink(self):
+        
+        mass = 0
+        com = np.array([0.0]*3)        
+        inertia = np.matrix(np.zeros((3,3)))
+        identity = np.matrix(np.eye(3))
+
+        for dynamic in self._dynamics:
+            mass += dynamic['mass']
+            com += dynamic['com']*dynamic['mass']
+        com /= mass
+
+        # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
+        for dynamic in self._dynamics:
+            r = dynamic['com'] - com
+            p = np.matrix(r)
+            inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
 
         self.append('<inertial>')
         self.append('<origin xyz="%f %f %f" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
         self.append('<mass value="%f"/>' % mass)
         self.append('<inertia ixx="%f" ixy="%f"  ixz="%f" iyy="%f" iyz="%f" izz="%f" />' %
-            (inertia[0], inertia[1], inertia[2], inertia[4], inertia[5], inertia[8]))
+            (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
         self.append('</inertial>')
 
         self.append('</link>')
+        self.append('')
 
-        if parent != name:
-            self.append('<joint name="'+name+'_fixing" type="fixed">')
+    def addPart(self, matrix, stl, mass, com, inertia):
+        for entry in ['visual', 'collision']:
+            self.append('<'+entry+'>')
+            self.append('<geometry>')
+            self.append('<mesh filename="package://'+stl+'"/>')
+            self.append('</geometry>')
             self.append(origin(matrix))
-            self.append('<parent link="'+parent+'"/>')
-            self.append('<child link="'+name+'"/>')
-            self.append('<axis xyz="0 0 0"/>')
-            self.append('</joint>')
-            self.append('')
-        pass
+            self.append('</'+entry+'>')
+
+        # Inertia
+        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
+        R = matrix[:3, :3]
+
+        self._dynamics.append({
+            'mass': mass,
+            'com': np.array(com[:3]),
+            'inertia': R*I*R.T
+        })
 
     def addJoint(self, linkFrom, linkTo, transform):
         self.append('<joint name="'+linkFrom+'_'+linkTo+'" type="revolute">')
