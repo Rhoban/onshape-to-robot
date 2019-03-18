@@ -121,10 +121,10 @@ while changed:
                     changed = True
             else:
                 if occurrenceA in assignations:
-                    assignParts(occurrenceB, occurrenceA)
+                    assignParts(occurrenceB, assignations[occurrenceA])
                     changed = True
                 if occurrenceB in assignations:
-                    assignParts(occurrenceA, occurrenceB)
+                    assignParts(occurrenceA, assignations[occurrenceB])
                     changed = True
     
 for occurrence in occurrences.values():
