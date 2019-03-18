@@ -54,19 +54,22 @@ for asm in assembly['subAssemblies']:
     collectParts(asm['instances'])
 
 # Collecting occurences
-occurrences = []
+occurrences = {}
 for occurrence in root['occurrences']:
+    occurrence['parent'] = None
     occurrence['instance'] = instances[occurrence['path'][-1]]
     occurrence['transform'] = np.matrix(np.reshape(occurrence['transform'], (4, 4)))
-    occurrences.append(occurrence)
+    occurrences[tuple(occurrence['path'])] = occurrence
 
+# Gets an occurrence given its path
 def getOccurrence(path):
-    for occurrence in occurrences:
-        if occurrence['path'] == path:
-            return occurrence
+    return occurrences[tuple(path)]
 
-# XXX: Instead of doing that, we can get the mate features in assembly using
-# ?includeMateFeatures=true when calling the get_assembly function, it's clearer...
+def assignParts(root, parent):
+    for occurrence in occurrences.values():
+        if occurrence['path'][0] == root:
+            occurrence['parent'] = parent
+
 print('* Getting assembly features, scanning for DOFs...')
 relations = []
 features = root['features']
@@ -76,7 +79,15 @@ for feature in features:
         a = data['matedEntities'][0]['matedOccurrence'][0]
         b = data['matedEntities'][1]['matedOccurrence'][0]
         relations.append([a, b, data])
+        assignParts(a, a)
+        assignParts(b, b)
 print('- Found '+str(len(relations))+' DOFs')
+
+for feature in features:
+    data = feature['featureData']
+    a = data['matedEntities'][0]['matedOccurrence'][0]
+    b = data['matedEntities'][1]['matedOccurrence'][0]
+    
     
 print('* Building robot tree')
 def collect(id, parent = None):
@@ -137,7 +148,7 @@ def buildRobot(tree, matrix, linkPart=None):
     else:
         # The instance is probably an assembly, gathering everything that
         # begins with the same path
-        for occurrence in occurrences:
+        for occurrence in occurrences.values():
             if occurrence['path'][0] == tree['id'] and occurrence['instance']['type'] == 'Part':
                 name = '_'.join(occurrence['path'])
                 print('Some part, name: '+name)
