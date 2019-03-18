@@ -11,6 +11,7 @@ import os
 # The sub-parts should revolute around Z-axis
 # DOFs should be named "dof..."
 # Assembly should be named "robot"
+# Only top-level parts (connected with joints) will be used in the top-level assembly
 
 # XXX: TODO:
 # - Tester sur un robot plus complexe (Metabot?)
@@ -114,7 +115,8 @@ robot = Robot()
 def addPart(occurrence, matrix, main):
     part = occurrence['instance']
     # Importing STL file for this part
-    stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    # stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    stlFile = part['name'].split(' ')[0].lower()+'.stl'
     if not os.path.exists('urdf/'+stlFile):
         stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
         f = open('urdf/'+stlFile, 'wb')
