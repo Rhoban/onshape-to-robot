@@ -66,6 +66,7 @@ if False:
 
 # Map des joints
 jointsMap = []
+framesMap = []
 t = 0
 dt = 0.01
 p.setPhysicsEngineParameter(fixedTimeStep=dt)
@@ -73,8 +74,15 @@ p.setPhysicsEngineParameter(fixedTimeStep=dt)
 # Collecting the available joints
 for k in range (nJoints):
     jointInfo = p.getJointInfo(robot, k)
-    if 'fixing' not in jointInfo[1].decode('utf-8'):
-        jointsMap.append(k)
+    name = jointInfo[1].decode('utf-8')
+    if '_fixing' not in name:
+        if '_frame' in name:
+            framesMap.append([name, k])
+        else:
+            jointsMap.append(k)
+
+print('* Found '+str(len(jointsMap))+' DOFs')
+print('* Found '+str(len(framesMap))+' frames')
 
 while True:
     t += dt
@@ -83,5 +91,15 @@ while True:
         jointInfo = p.getJointInfo(robot, jointsMap[k])
         p.setJointMotorControl2(
             robot, jointInfo[0], p.POSITION_CONTROL, joints[k])
+
+    print('~')
+    for name, joint in framesMap:
+        print('Frame '+name)
+        jointState = p.getLinkState(robot, joint)
+        pos = jointState[0]
+        orientation = p.getEulerFromQuaternion(jointState[1])
+        print(pos)
+        print(orientation)
+        
     p.stepSimulation()
     sleep(dt)

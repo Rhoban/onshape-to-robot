@@ -71,6 +71,24 @@ class Robot:
             self.append('</link>')
             self.append('')
 
+    def addFrame(self, name, matrix):
+        # Adding a dummy link
+        self.append('<link name="'+name+'_frame">')
+        self.append('<inertial>')
+        self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
+        self.append('<mass value="0" />')
+        self.append('<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
+        self.append('</inertial>')
+        self.append('</link>')
+
+        # Linking it with last link with a fixed link
+        self.append('<joint name="'+name+'_frame" type="fixed">')
+        self.append(origin(matrix))
+        self.append('<parent link="'+self._link_name+'" />')
+        self.append('<child link="'+name+'_frame" />')
+        self.append('<axis xyz="0 0 0" />')
+        self.append('</joint>')
+
     def addPart(self, matrix, stl, mass, com, inertia, color, main=False):
         if main:
             name = self._link_name

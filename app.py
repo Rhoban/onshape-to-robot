@@ -57,7 +57,7 @@ for asm in assembly['subAssemblies']:
 # Collecting occurences
 occurrences = {}
 for occurrence in root['occurrences']:
-    occurrence['parent'] = None
+    occurrence['assignation'] = None
     occurrence['instance'] = instances[occurrence['path'][-1]]
     occurrence['transform'] = np.matrix(np.reshape(occurrence['transform'], (4, 4)))
     occurrences[tuple(occurrence['path'])] = occurrence
@@ -66,13 +66,17 @@ for occurrence in root['occurrences']:
 def getOccurrence(path):
     return occurrences[tuple(path)]
 
+assignations = {}
+frames = {}
 def assignParts(root, parent):
+    assignations[root] = parent
     for occurrence in occurrences.values():
         if occurrence['path'][0] == root:
-            occurrence['parent'] = parent
+            occurrence['assignation'] = parent
 
 print('* Getting assembly features, scanning for DOFs...')
 relations = []
+topLevels = set()
 features = root['features']
 for feature in features:
     data = feature['featureData']
@@ -86,16 +90,46 @@ for feature in features:
             print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
             exit()
         relations.append([occurrenceA, occurrenceB, data, name])
-
-    # print(getOccurrence([occurrenceA])['instance']['name'])
-    
+        assignParts(occurrenceA, occurrenceA)
+        assignParts(occurrenceB, occurrenceB)
+        if occurrenceA not in frames:
+            frames[occurrenceA] = []
+        if occurrenceB not in frames:
+            frames[occurrenceB] = []
+                
 print('- Found '+str(len(relations))+' DOFs')
 
-for feature in features:
-    data = feature['featureData']
-    a = data['matedEntities'][0]['matedOccurrence'][0]
-    b = data['matedEntities'][1]['matedOccurrence'][0]
+# Spreading parts assignations
+changed = True
+while changed:
+    changed = False
+    for feature in features:
+        data = feature['featureData']
+        occurrenceA = data['matedEntities'][0]['matedOccurrence'][0]
+        occurrenceB = data['matedEntities'][1]['matedOccurrence'][0]
+
+        if (occurrenceA not in assignations) or (occurrenceB not in assignations):
+            if data['name'][0:5] == 'frame':
+                name = '_'.join(data['name'].split('_')[1:])
+                if occurrenceA in assignations:
+                    frames[occurrenceA].append([name, data['matedEntities'][1]['matedOccurrence']])
+                    assignParts(occurrenceB, 'frame')
+                    changed = True
+                if occurrenceB in assignations:
+                    frames[occurrenceB].append([name, data['matedEntities'][1]['matedOccurrence']])
+                    assignParts(occurrenceA, 'frame')
+                    changed = True
+            else:
+                if occurrenceA in assignations:
+                    assignParts(occurrenceB, occurrenceA)
+                    changed = True
+                if occurrenceB in assignations:
+                    assignParts(occurrenceA, occurrenceB)
+                    changed = True
     
+for occurrence in occurrences.values():
+    if occurrence['assignation'] is None:
+        print('! WARNING, part ('+occurrence['instance']['name']+') has no assignation, should be connected with DOF or with fixed constraint')
     
 print('* Building robot tree')
 def collect(id, parent = None):
@@ -142,29 +176,29 @@ def addPart(occurrence, matrix, main):
     robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, main)
 
 def buildRobot(tree, matrix, linkPart=None):
-    print('~~~ Adding instance ['+instance['name']+']')
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
+    print('~~~ Adding top-level instance ['+instance['name']+']')
+
     link = instance['name']
     link = link.split(' ')[0].lower()
 
     robot.startLink(link)
-    # Collecting all children in the tree
-    if instance['type'] == 'part':
-        name = '_'.join(occurrence['path'])
-        addPart(occurrence, matrix, name == linkPart)
-    else:
-        # The instance is probably an assembly, gathering everything that
-        # begins with the same path
-        for occurrence in occurrences.values():
-            if occurrence['path'][0] == tree['id'] and occurrence['instance']['type'] == 'Part':
-                name = '_'.join(occurrence['path'])
-                if linkPart == None:
-                    # XXX: This is not good if the first part doesn't have identity matrix...
-                    linkPart = name
-                    matrix = occurrence['transform']
-                addPart(occurrence, matrix, name == linkPart)
+    # Collecting all children in the tree assigned to this top-level part
+    for occurrence in occurrences.values():
+        if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
+            name = '_'.join(occurrence['path'])
+            if linkPart == None:
+                # XXX: This is not good if the first part doesn't have identity matrix...
+                linkPart = name
+                matrix = occurrence['transform']
+            addPart(occurrence, matrix, name == linkPart)
     robot.endLink()
+
+    # Adding the frames (linkage is relative to parent)
+    for name, part in frames[tree['id']]:
+        frame = np.linalg.inv(matrix)*getOccurrence(part)['transform']
+        robot.addFrame(name, frame)
 
     for child in tree['children']:
         mate = child['mate']
