@@ -4,3 +4,4 @@ creds.json
 stls
 urdf
 !urdf/.gitkeep
+.vscode
