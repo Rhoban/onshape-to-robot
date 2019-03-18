@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import numpy as np
 from onshape_api.client import Client
 from copy import copy
