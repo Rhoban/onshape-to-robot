@@ -4,7 +4,7 @@ import pybullet as p
 from time import sleep
 
 directory = 'urdf'
-if 1 in sys.argv:
+if len(sys.argv) > 1:
     directory = sys.argv[1]
 
 def jointsPosition(t):

@@ -22,10 +22,11 @@ import csg
 
 # Loading configuration
 configFile = './config.json'
-if 1 in sys.argv:
+if len(sys.argv) > 1:
     configFile = sys.argv[1]
+
 client = Client(logging=False, creds=configFile)
-config = json.load(configFile)
+config = json.load(open(configFile))
 
 documentId = config['documentId']
 drawFrames = config['drawFrames']
@@ -33,6 +34,11 @@ drawCollisions = config['drawCollisions']
 useScads = config['useScads']
 assemblyName = config['assemblyName']
 outputDirectory = config['outputDirectory']
+
+try:
+    os.makedirs(outputDirectory)
+except OSError:
+    pass
 
 print('* Retrieving workspace ID ...')
 document = client.get_document(documentId).json()
