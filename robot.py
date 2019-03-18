@@ -28,6 +28,7 @@ def origin(matrix):
 
 class Robot:
     def __init__(self):
+        self.drawCollisions = False
         self.urdf = ''
         self.append('<robot name="onshape">')
         pass
@@ -78,11 +79,7 @@ class Robot:
 
         self.append('<link name="'+name+'">')
 
-        # This flag can be used to put collisions element also in visual entry,
-        # allowing to visualize the pure shapes
-        drawCollisions = False
-
-        if not drawCollisions:
+        if not self.drawCollisions:
             # Visual
             self.append('<visual>')
             self.append('<geometry>')
@@ -94,7 +91,7 @@ class Robot:
             self.append('</visual>')
 
         entries = ['collision']
-        if drawCollisions:
+        if self.drawCollisions:
             entries.append('visual')
         for entry in entries:
             

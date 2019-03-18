@@ -3,6 +3,7 @@ from onshape_api.client import Client
 from copy import copy
 from robot import Robot
 import os
+import json
 import csg
 
 # You should fil creds.json with API key for your acount obtained from
@@ -19,10 +20,13 @@ import csg
 # - Les masses quasi nulles dans les link master c'est pas terrible, peut-on faire mieux?
 
 client = Client(logging=False)
+config = json.load('./config.json')
 
 # Document that should be parsed
-# XXX: Argv-ize
-documentId = '483c803918afc4d52e2647f0'
+documentId = config['documentId']
+drawFrames = config['drawFrames']
+drawCollisions = config['drawCollisions']
+useScads = config['useScads']
 
 print('* Retrieving workspace ID ...')
 document = client.get_document(documentId).json()
@@ -114,13 +118,11 @@ while changed:
                 name = '_'.join(data['name'].split('_')[1:])
                 if occurrenceA in assignations:
                     frames[occurrenceA].append([name, data['matedEntities'][1]['matedOccurrence']])
-                    # assignParts(occurrenceB, 'frame')
-                    assignParts(occurrenceB, assignations[occurrenceA])
+                    assignParts(occurrenceB, {True: assignations[occurrenceA], False: 'frame'}[drawFrames])
                     changed = True
                 if occurrenceB in assignations:
                     frames[occurrenceB].append([name, data['matedEntities'][1]['matedOccurrence']])
-                    # assignParts(occurrenceA, 'frame')
-                    assignParts(occurrenceA, assignations[occurrenceB])
+                    assignParts(occurrenceA, {True: assignations[occurrenceB], False: 'frame'}[drawFrames])
                     changed = True
             else:
                 if occurrenceA in assignations:
@@ -156,11 +158,13 @@ trunk = root['instances'][0]['id']
 tree = collect(trunk)
 
 robot = Robot()
+robot.drawCollisions = drawCollisions
 
+# Adds a part to the current robot link
 def addPart(occurrence, matrix):
     part = occurrence['instance']
+
     # Importing STL file for this part
-    # stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
     prefix = part['name'].split(' ')[0].lower()
     stlFile = prefix+'.stl'
     if not os.path.exists('urdf/'+stlFile):
@@ -168,32 +172,38 @@ def addPart(occurrence, matrix):
         f = open('urdf/'+stlFile, 'wb')
         f.write(stl.content)
         f.close()
-    scadFile = prefix+'.scad'
-    if os.path.exists('urdf/'+scadFile):
-        shapes = csg.process('urdf/'+scadFile)
-    else:
-        shapes = None
+
+    # Import the SCAD files pure shapes
+    shapes = None
+    if useScads:
+        scadFile = prefix+'.scad'
+        if os.path.exists('urdf/'+scadFile):
+            shapes = csg.process('urdf/'+scadFile)
         
+    # Obtain metadatas about part to retrieve color
     metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
     colors = metadata['appearance']['color']
     color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
+
+    # Obtain mass properties about that part
     massProperties = client.part_mas_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
     massProperties = massProperties['bodies'][part['partId']]
     mass = massProperties['mass'][0]
     com = massProperties['centroid']
     inertia = massProperties['inertia']
+
     robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, shapes)
 
 def buildRobot(tree, matrix, linkPart=None):
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
-    print('~~~ Adding top-level instance ['+instance['name']+']')
+    print('~ Adding top-level instance ['+instance['name']+']')
 
     link = instance['name']
     link = link.split(' ')[0].lower()
 
-    robot.startLink(link)
     # Collecting all children in the tree assigned to this top-level part
+    robot.startLink(link)
     for occurrence in occurrences.values():
         if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
             name = '_'.join(occurrence['path'])
@@ -205,6 +215,7 @@ def buildRobot(tree, matrix, linkPart=None):
         frame = np.linalg.inv(matrix)*getOccurrence(part)['transform']
         robot.addFrame(name, frame)
 
+    # Calling the function with recursion for children
     for child in tree['children']:
         mate = child['mate']
         if mate['matedEntities'][0]['matedOccurrence'][0] == tree['id']:
