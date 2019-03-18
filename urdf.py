@@ -11,7 +11,7 @@ import csg
 # DOFs should be named "dof..."
 
 # Loading configuration
-robots = 'robots/demo/'
+robot = 'robots/demo/'
 if len(sys.argv) > 1:
     robot = sys.argv[1]
 
