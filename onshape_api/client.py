@@ -35,6 +35,8 @@ class Client():
             - logging (bool, default=True): Turn logging on or off
         '''
 
+        self._metadata_cache = {}
+        self._massproperties_cache = {}
         self._stack = stack
         self._api = Onshape(stack=stack, logging=logging, creds=creds)
 
@@ -248,7 +250,12 @@ class Client():
         return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter'}, headers=req_headers)
 
     def part_get_metadata(self, did, mid, eid, partid):
-        return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata')
+        if (did, mid, eid, partid) not in self._metadata_cache:
+            self._metadata_cache[(did, mid, eid, partid)] = self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata')
+        return self._metadata_cache[(did, mid, eid, partid)]    
 
     def part_mas_properties(self, did, mid, eid, partid):
-        return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
+        if (did, mid, eid, partid) not in self._massproperties_cache:
+            self._massproperties_cache[(did, mid, eid, partid)] = self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
+
+        return self._massproperties_cache[(did, mid, eid, partid)]

@@ -209,6 +209,7 @@ def buildRobot(tree, matrix, linkPart=None):
     for occurrence in occurrences.values():
         if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
             name = '_'.join(occurrence['path'])
+            print('- Adding part '+occurrence['instance']['name'])
             addPart(occurrence, matrix)
     robot.endLink()
 
