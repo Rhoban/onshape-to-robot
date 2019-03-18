@@ -8,15 +8,6 @@ directory = 'urdf'
 if len(sys.argv) > 1:
     directory = sys.argv[1]
 
-def jointsPosition(t):
-    joints = [0]*2
-
-    # Envoi d'un sinus dans tous les joints
-    for joint in range(len(joints)):
-        joints[joint] = math.sin(t)
-
-    return joints
-
 def drawInertiaBox(parentUid, parentLinkIndex, color):
 	dyn = p.getDynamicsInfo(parentUid, parentLinkIndex)
 	mass=dyn[0]
@@ -100,11 +91,11 @@ print('* Found '+str(len(framesMap))+' frames')
 
 while True:
     t += dt
-    joints = jointsPosition(t)
-    for k in range(len(joints)):
-        jointInfo = p.getJointInfo(robot, jointsMap[k])
+    
+    for joint in jointsMap:
+        jointInfo = p.getJointInfo(robot, joint)
         p.setJointMotorControl2(
-            robot, jointInfo[0], p.POSITION_CONTROL, joints[k])
+            robot, jointInfo[0], p.POSITION_CONTROL, math.sin(t))
 
     print('~')
     for name, joint in framesMap:

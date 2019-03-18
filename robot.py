@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import uuid
  
 def rotationMatrixToEulerAngles(R) :     
     sy = math.sqrt(R[0,0] * R[0,0] +  R[1,0] * R[1,0])
@@ -135,12 +136,12 @@ class Robot:
         self.addFixedJoint(self._link_name, name, matrix)
 
 
-    def addJoint(self, linkFrom, linkTo, transform, name):
+    def addJoint(self, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
         self.append('<joint name="'+name+'" type="revolute">')
         self.append(origin(transform))
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
-        self.append('<axis xyz="0 0 1"/>')
+        self.append('<axis xyz="%f %f %f"/>' % tuple(zAxis))
         self.append('<limit effort="0.5" velocity="12.5664" />')
         self.append('<joint_properties friction="0.0"/>')
         self.append('</joint>')

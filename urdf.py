@@ -97,6 +97,7 @@ for feature in features:
         if name == '':
             print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
             exit()
+        
         relations.append([occurrenceA, occurrenceB, data, name])
         assignParts(occurrenceA, occurrenceA)
         assignParts(occurrenceB, occurrenceB)
@@ -195,15 +196,26 @@ def addPart(occurrence, matrix):
     com = massProperties['centroid']
     inertia = massProperties['inertia']
 
+    if abs(mass) < 1e-9:
+        print('! WARNING Part '+part['name']+' has no mass, maybe you should assign a material to it ?')
+
     robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, shapes)
+
+def processPartName(name):
+    parts = name.split(' ')
+    num = int(parts[-1][1:-1])
+    del parts[-1]
+    name = '_'.join(parts).lower()
+    if num != 1:
+        name += '_'+str(num)
+    return name
 
 def buildRobot(tree, matrix, linkPart=None):
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
     print('~ Adding top-level instance ['+instance['name']+']')
 
-    link = instance['name']
-    link = link.split(' ')[0].lower()
+    link = processPartName(instance['name'])
 
     # Collecting all children in the tree assigned to this top-level part
     robot.startLink(link)
@@ -227,10 +239,22 @@ def buildRobot(tree, matrix, linkPart=None):
         else:
             matedOccurrence = mate['matedEntities'][0]
         childLinkPart = getOccurrence(matedOccurrence['matedOccurrence'])
-        axisFrame = np.linalg.inv(matrix)*childLinkPart['transform']
-        matrix = childLinkPart['transform']
+
+        worldAxisFrame = childLinkPart['transform']
+        origin = matedOccurrence['matedCS']['origin']
+        zAxis = matedOccurrence['matedCS']['zAxis']
+
+        translation = np.matrix(np.identity(4))
+        translation[0, 3] += origin[0]
+        translation[1, 3] += origin[1]
+        translation[2, 3] += origin[2]
+        worldAxisFrame = worldAxisFrame * translation
+
+        axisFrame = np.linalg.inv(matrix)*worldAxisFrame
+        matrix = worldAxisFrame
+
         subLink = buildRobot(child, matrix, '_'.join(childLinkPart['path']))
-        robot.addJoint(link, subLink, axisFrame, child['relation'])
+        robot.addJoint(link, subLink, axisFrame, child['relation'], zAxis)
 
     return link
 
