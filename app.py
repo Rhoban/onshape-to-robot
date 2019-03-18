@@ -2,6 +2,7 @@ import numpy as np
 from onshape_api.client import Client
 from copy import copy
 from robot import Robot
+import sys
 import os
 import json
 import csg
@@ -19,14 +20,19 @@ import csg
 # - Tester sur un robot plus complexe (Metabot?)
 # - Les masses quasi nulles dans les link master c'est pas terrible, peut-on faire mieux?
 
-client = Client(logging=False)
-config = json.load('./config.json')
+# Loading configuration
+configFile = './config.json'
+if 1 in sys.argv:
+    configFile = sys.argv[1]
+client = Client(logging=False, creds=configFile)
+config = json.load(configFile)
 
-# Document that should be parsed
 documentId = config['documentId']
 drawFrames = config['drawFrames']
 drawCollisions = config['drawCollisions']
 useScads = config['useScads']
+assemblyName = config['assemblyName']
+outputDirectory = config['outputDirectory']
 
 print('* Retrieving workspace ID ...')
 document = client.get_document(documentId).json()
@@ -37,7 +43,7 @@ print('* Retrieving elements in the document, searching for the assembly...')
 elements = client.list_elements(documentId).json()
 assemblyId = None
 for element in elements:
-    if element['type'] == 'Assembly' and element['name'].lower() == 'robot':
+    if element['type'] == 'Assembly' and element['name'].lower() == assemblyName:
         print("- Found assembly, id: "+element['id']+', name: "'+element['name']+'"')
         assemblyId = element['id']
 
@@ -167,9 +173,9 @@ def addPart(occurrence, matrix):
     # Importing STL file for this part
     prefix = part['name'].split(' ')[0].lower()
     stlFile = prefix+'.stl'
-    if not os.path.exists('urdf/'+stlFile):
+    if not os.path.exists(outputDirectory+'/'+stlFile):
         stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-        f = open('urdf/'+stlFile, 'wb')
+        f = open(outputDirectory+'/'+stlFile, 'wb')
         f.write(stl.content)
         f.close()
 
@@ -177,8 +183,8 @@ def addPart(occurrence, matrix):
     shapes = None
     if useScads:
         scadFile = prefix+'.scad'
-        if os.path.exists('urdf/'+scadFile):
-            shapes = csg.process('urdf/'+scadFile)
+        if os.path.exists(outputDirectory+'/'+scadFile):
+            shapes = csg.process(outputDirectory+'/'+scadFile)
         
     # Obtain metadatas about part to retrieve color
     metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
@@ -236,6 +242,6 @@ robot.finalize()
 # print(tree)
 
 print("* Writing URDF file")
-urdf = open('urdf/robot.urdf', 'w')
+urdf = open(outputDirectory+'/robot.urdf', 'w')
 urdf.write(robot.urdf)
 urdf.close()

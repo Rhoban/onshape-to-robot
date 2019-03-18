@@ -1,6 +1,11 @@
 import math
+import sys
 import pybullet as p
 from time import sleep
+
+directory = 'urdf'
+if 1 in sys.argv:
+    directory = sys.argv[1]
 
 def jointsPosition(t):
     joints = [0]*2
@@ -61,7 +66,7 @@ planeId = p.loadURDF('bullet/plane.urdf')
 # Chargement du robot
 cubeStartPos = [0, 0, 0.1]
 cubeStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
-robot = p.loadURDF("urdf/robot.urdf",
+robot = p.loadURDF(directory+"/robot.urdf",
                        cubeStartPos, cubeStartOrientation)
 cubePos, cubeOrn = p.getBasePositionAndOrientation(robot)
 nJoints = p.getNumJoints(robot)

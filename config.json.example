@@ -5,6 +5,8 @@
 
     // Import options
     "documentId": "483c803918afc4d52e2647f0",
+    "assemblyName": "robot",
+    "outputDirectory": "urdf",
     "drawFrames": false,
     "drawCollisions": false,
     "useScads": true

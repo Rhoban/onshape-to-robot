@@ -26,7 +26,7 @@ class Client():
         - logging (bool, default=True): Turn logging on or off
     '''
 
-    def __init__(self, stack='https://cad.onshape.com', logging=True):
+    def __init__(self, stack='https://cad.onshape.com', logging=True, creds='./config.json'):
         '''
         Instantiates a new Onshape client.
 
@@ -36,7 +36,7 @@ class Client():
         '''
 
         self._stack = stack
-        self._api = Onshape(stack=stack, logging=logging)
+        self._api = Onshape(stack=stack, logging=logging, creds=creds)
 
     def new_document(self, name='Test Document', owner_type=0, public=False):
         '''
