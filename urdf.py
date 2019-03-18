@@ -8,7 +8,6 @@ import os
 import json
 import csg
 
-# The sub-parts should revolute around Z-axis
 # DOFs should be named "dof..."
 
 # Loading configuration
