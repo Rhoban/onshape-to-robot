@@ -1,0 +1,11 @@
+{
+    "onshape_api": "https://cad.onshape.com",
+    "onshape_access_key": "[KEY]",
+    "onshape_secret_key": "[SECRET]",
+
+    "documentId": "483c803918afc4d52e2647f0",
+    "assemblyName": "robot",
+    "drawFrames": false,
+    "drawCollisions": false,
+    "useScads": true
+}

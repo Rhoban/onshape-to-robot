@@ -4,7 +4,7 @@ import sys
 import pybullet as p
 from time import sleep
 
-directory = 'urdf'
+directory = 'robots/demo/'
 if len(sys.argv) > 1:
     directory = sys.argv[1]
 

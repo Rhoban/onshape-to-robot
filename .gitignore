@@ -5,3 +5,5 @@ stls
 urdf
 !urdf/.gitkeep
 .vscode
+robots
+!robots/demo/config.json

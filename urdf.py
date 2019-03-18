@@ -11,10 +11,11 @@ import csg
 # DOFs should be named "dof..."
 
 # Loading configuration
-configFile = './config.json'
+robots = 'robots/demo/'
 if len(sys.argv) > 1:
-    configFile = sys.argv[1]
+    robot = sys.argv[1]
 
+configFile = robot+'/config.json'
 client = Client(logging=False, creds=configFile)
 config = json.load(open(configFile))
 
@@ -23,7 +24,7 @@ drawFrames = config['drawFrames']
 drawCollisions = config['drawCollisions']
 useScads = config['useScads']
 assemblyName = config['assemblyName']
-outputDirectory = config['outputDirectory']
+outputDirectory = robot
 
 try:
     os.makedirs(outputDirectory)
