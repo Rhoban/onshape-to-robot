@@ -7,18 +7,8 @@ import os
 import json
 import csg
 
-# You should fil creds.json with API key for your acount obtained from
-# https://dev-portal.onshape.com/keys
-
-# The first part in assembly should be the trunk
 # The sub-parts should revolute around Z-axis
 # DOFs should be named "dof..."
-# Assembly should be named "robot"
-# Only top-level parts (connected with joints) will be used in the top-level assembly
-
-# XXX: TODO:
-# - Tester sur un robot plus complexe (Metabot?)
-# - Les masses quasi nulles dans les link master c'est pas terrible, peut-on faire mieux?
 
 # Loading configuration
 configFile = './config.json'
