@@ -5,7 +5,7 @@ onshape
 Provides access to the Onshape REST API
 '''
 
-from apikey import utils
+from onshape_api import utils
 
 import os
 import random
@@ -35,7 +35,7 @@ class Onshape():
         - logging (bool, default=True): Turn logging on or off
     '''
 
-    def __init__(self, stack, creds='./creds.json', logging=True):
+    def __init__(self, stack, creds='./config.json', logging=True):
         '''
         Instantiates an instance of the Onshape class. Reads credentials from a JSON file
         of this format:
@@ -53,7 +53,7 @@ class Onshape():
 
         Args:
             - stack (str): Base URL
-            - creds (str, default='./creds.json'): Credentials location
+            - creds (str, default='./config.json'): Credentials location
         '''
 
         if not os.path.isfile(creds):
@@ -61,14 +61,11 @@ class Onshape():
 
         with open(creds) as f:
             try:
-                stacks = json.load(f)
-                if stack in stacks:
-                    self._url = stack
-                    self._access_key = stacks[stack]['access_key'].encode('utf-8')
-                    self._secret_key = stacks[stack]['secret_key'].encode('utf-8')
-                    self._logging = logging
-                else:
-                    raise ValueError('specified stack not in file')
+                config = json.load(f)
+                self._url = config["onshape_api"]
+                self._access_key = config['onshape_access_key'].encode('utf-8')
+                self._secret_key = config['onshape_secret_key'].encode('utf-8')
+                self._logging = logging
             except TypeError:
                 raise ValueError('%s is not valid json' % creds)
 

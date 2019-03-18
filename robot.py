@@ -29,7 +29,6 @@ def origin(matrix):
 class Robot:
     def __init__(self):
         self.urdf = ''
-        self.mergeLinks = False
         self.append('<robot name="onshape">')
         pass
 
@@ -61,40 +60,10 @@ class Robot:
     def startLink(self, name):
         self._link_name = name
         self._link_childs = 0
-        if self.mergeLinks:
-            self.append('<link name="'+name+'">')
-        else:
-            self.addDummyLink(name)
-
-        self._dynamics = []
+        self.addDummyLink(name)
 
     def endLink(self):
-        if self.mergeLinks:
-            mass = 0
-            com = np.array([0.0]*3)        
-            inertia = np.matrix(np.zeros((3,3)))
-            identity = np.matrix(np.eye(3))
-
-            for dynamic in self._dynamics:
-                mass += dynamic['mass']
-                com += dynamic['com']*dynamic['mass']
-            com /= mass
-
-            # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
-            for dynamic in self._dynamics:
-                r = dynamic['com'] - com
-                p = np.matrix(r)
-                inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
-
-            self.append('<inertial>')
-            self.append('<origin xyz="%f %f %f" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
-            self.append('<mass value="%f"/>' % mass)
-            self.append('<inertia ixx="%f" ixy="%f"  ixz="%f" iyy="%f" iyz="%f" izz="%f" />' %
-                (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
-            self.append('</inertial>')
-
-            self.append('</link>')
-            self.append('')
+        pass
 
     def addFrame(self, name, matrix):
         # Adding a dummy link
@@ -103,54 +72,70 @@ class Robot:
         # Linking it with last link with a fixed link
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
-    def addPart(self, matrix, stl, mass, com, inertia, color, main=False):
-        # if main:
-        #     name = self._link_name
-        # else:
+    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None):
         name = self._link_name+'_'+str(self._link_childs)
         self._link_childs += 1
 
-        if not self.mergeLinks:
-            self.append('<link name="'+name+'">')
+        self.append('<link name="'+name+'">')
 
-        for entry in ['visual', 'collision']:
-            self.append('<'+entry+'>')
+        # This flag can be used to put collisions element also in visual entry,
+        # allowing to visualize the pure shapes
+        drawCollisions = False
+
+        if not drawCollisions:
+            # Visual
+            self.append('<visual>')
             self.append('<geometry>')
             self.append('<mesh filename="package://'+stl+'"/>')
             self.append('</geometry>')
-            if self.mergeLinks:
-                self.append(origin(matrix))
-
             self.append('<material name="'+name+'_material">')
             self.append('<color rgba="%f %f %f 1.0"/>' % (color[0], color[1], color[2]))
             self.append('</material>')
+            self.append('</visual>')
 
-            self.append('</'+entry+'>')
+        entries = ['collision']
+        if drawCollisions:
+            entries.append('visual')
+        for entry in entries:
+            
+            if shapes is None:
+                # We don't have pure shape, we use the mesh
+                self.append('<'+entry+'>')
+                self.append('<geometry>')
+                self.append('<mesh filename="package://'+stl+'"/>')
+                self.append('</geometry>')
+                self.append('<material name="'+name+'_material">')
+                self.append('<color rgba="%f %f %f 1.0"/>' % (color[0], color[1], color[2]))
+                self.append('</material>')
+                self.append('</'+entry+'>')
+            else:
+                # Inserting pure shapes in the URDF model
+                for shape in shapes:
+                        self.append('<'+entry+'>')
+                        self.append(origin(shape['transform']))
+                        self.append('<geometry>')
+                        if shape['type'] == 'cube':
+                            self.append('<box size="%f %f %f" />' % tuple(shape['parameters']))
+                        if shape['type'] == 'cylinder':
+                            self.append('<cylinder length="%f" radius="%f" />' % tuple(shape['parameters']))
+                        if shape['type'] == 'sphere':
+                            self.append('<sphere radius="%f" />' % shape['parameters'])
+                        self.append('</geometry>')
 
-        if self.mergeLinks:
-            # Inertia
-            I = np.matrix(np.reshape(inertia[:9], (3, 3)))
-            R = matrix[:3, :3]
-            # Expressing COM in the link frame
-            com = np.array((matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
-            # Expressing inertia in the link frame
-            inertia = R.T*I*R
+                        self.append('<material name="'+name+'_material">')
+                        self.append('<color rgba="%f %f %f 1.0"/>' % (color[0], color[1], color[2]))
+                        self.append('</material>')
+                        self.append('</'+entry+'>')
 
-            self._dynamics.append({
-                'mass': mass,
-                'com': com,
-                'inertia': inertia
-            })
-        else:
-            self.append('<inertial>')
-            self.append('<origin xyz="%f %f %f" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
-            self.append('<mass value="%f"/>' % mass)
-            self.append('<inertia ixx="%f" ixy="%f"  ixz="%f" iyy="%f" iyz="%f" izz="%f" />' %
-                (inertia[0], inertia[1], inertia[2], inertia[4], inertia[5], inertia[8]))
-            self.append('</inertial>')
-            self.append('</link>')
+        self.append('<inertial>')
+        self.append('<origin xyz="%f %f %f" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
+        self.append('<mass value="%f"/>' % mass)
+        self.append('<inertia ixx="%f" ixy="%f"  ixz="%f" iyy="%f" iyz="%f" izz="%f" />' %
+            (inertia[0], inertia[1], inertia[2], inertia[4], inertia[5], inertia[8]))
+        self.append('</inertial>')
+        self.append('</link>')
 
-            self.addFixedJoint(self._link_name, name, matrix)
+        self.addFixedJoint(self._link_name, name, matrix)
 
 
     def addJoint(self, linkFrom, linkTo, transform, name):

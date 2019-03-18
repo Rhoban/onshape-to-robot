@@ -1,0 +1,5 @@
+{
+    "onshape_api": "https://cad.onshape.com",
+    "onshape_access_key": "[ACCESS KEY]",
+    "onshape_secret_key": "[SECRET KEY]"
+}

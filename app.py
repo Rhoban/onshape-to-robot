@@ -1,8 +1,9 @@
 import numpy as np
-from apikey.client import Client
+from onshape_api.client import Client
 from copy import copy
 from robot import Robot
 import os
+import csg
 
 # You should fil creds.json with API key for your acount obtained from
 # https://dev-portal.onshape.com/keys
@@ -113,11 +114,13 @@ while changed:
                 name = '_'.join(data['name'].split('_')[1:])
                 if occurrenceA in assignations:
                     frames[occurrenceA].append([name, data['matedEntities'][1]['matedOccurrence']])
-                    assignParts(occurrenceB, 'frame')
+                    # assignParts(occurrenceB, 'frame')
+                    assignParts(occurrenceB, assignations[occurrenceA])
                     changed = True
                 if occurrenceB in assignations:
                     frames[occurrenceB].append([name, data['matedEntities'][1]['matedOccurrence']])
-                    assignParts(occurrenceA, 'frame')
+                    # assignParts(occurrenceA, 'frame')
+                    assignParts(occurrenceA, assignations[occurrenceB])
                     changed = True
             else:
                 if occurrenceA in assignations:
@@ -154,16 +157,22 @@ tree = collect(trunk)
 
 robot = Robot()
 
-def addPart(occurrence, matrix, main):
+def addPart(occurrence, matrix):
     part = occurrence['instance']
     # Importing STL file for this part
     # stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-    stlFile = part['name'].split(' ')[0].lower()+'.stl'
+    prefix = part['name'].split(' ')[0].lower()
+    stlFile = prefix+'.stl'
     if not os.path.exists('urdf/'+stlFile):
         stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
         f = open('urdf/'+stlFile, 'wb')
         f.write(stl.content)
         f.close()
+    scadFile = prefix+'.scad'
+    if os.path.exists('urdf/'+scadFile):
+        shapes = csg.process('urdf/'+scadFile)
+    else:
+        shapes = None
         
     metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
     colors = metadata['appearance']['color']
@@ -173,7 +182,7 @@ def addPart(occurrence, matrix, main):
     mass = massProperties['mass'][0]
     com = massProperties['centroid']
     inertia = massProperties['inertia']
-    robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, main)
+    robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, shapes)
 
 def buildRobot(tree, matrix, linkPart=None):
     occurrence = getOccurrence([tree['id']])
@@ -188,11 +197,7 @@ def buildRobot(tree, matrix, linkPart=None):
     for occurrence in occurrences.values():
         if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
             name = '_'.join(occurrence['path'])
-            if linkPart == None:
-                # XXX: This is not good if the first part doesn't have identity matrix...
-                linkPart = name
-                matrix = occurrence['transform']
-            addPart(occurrence, matrix, name == linkPart)
+            addPart(occurrence, matrix)
     robot.endLink()
 
     # Adding the frames (linkage is relative to parent)

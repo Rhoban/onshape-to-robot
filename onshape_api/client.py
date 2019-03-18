@@ -5,7 +5,7 @@ client
 Convenience functions for working with the Onshape API
 '''
 
-from apikey.onshape import Onshape
+from onshape_api.onshape import Onshape
 
 import mimetypes
 import random

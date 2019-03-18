@@ -1,7 +1,15 @@
 import math
 import pybullet as p
 from time import sleep
-from control import jointsPosition
+
+def jointsPosition(t):
+    joints = [0]*2
+
+    # Envoi d'un sinus dans tous les joints
+    for joint in range(len(joints)):
+        joints[joint] = math.sin(t)
+
+    return joints
 
 def drawInertiaBox(parentUid, parentLinkIndex, color):
 	dyn = p.getDynamicsInfo(parentUid, parentLinkIndex)
@@ -48,12 +56,12 @@ physicsClient = p.connect(p.GUI)
 p.setGravity(0, 0, -10)
 
 # Chargement du sol
-planeId = p.loadURDF('plane.urdf')
+planeId = p.loadURDF('bullet/plane.urdf')
 
 # Chargement du robot
 cubeStartPos = [0, 0, 0.1]
 cubeStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
-robot = p.loadURDF("../urdf/robot.urdf",
+robot = p.loadURDF("urdf/robot.urdf",
                        cubeStartPos, cubeStartOrientation)
 cubePos, cubeOrn = p.getBasePositionAndOrientation(robot)
 nJoints = p.getNumJoints(robot)

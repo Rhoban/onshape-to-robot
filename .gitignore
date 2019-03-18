@@ -1,6 +1,6 @@
 **.pyc
 data
-creds.json
+config.json
 stls
 urdf
 !urdf/.gitkeep
