@@ -11,6 +11,7 @@ import os
 # The sub-parts should revolute around Z-axis
 # DOFs should be named "dof..."
 # Assembly should be named "robot"
+# Only top-level parts (connected with joints) will be used in the top-level assembly
 
 # XXX: TODO:
 # - Tester sur un robot plus complexe (Metabot?)
@@ -75,12 +76,19 @@ relations = []
 features = root['features']
 for feature in features:
     data = feature['featureData']
+
+    occurrenceA = data['matedEntities'][0]['matedOccurrence'][0]
+    occurrenceB = data['matedEntities'][1]['matedOccurrence'][0]
+
     if data['name'][0:3] == 'dof':
-        a = data['matedEntities'][0]['matedOccurrence'][0]
-        b = data['matedEntities'][1]['matedOccurrence'][0]
-        relations.append([a, b, data])
-        assignParts(a, a)
-        assignParts(b, b)
+        name = '_'.join(data['name'].split('_')[1:])
+        if name == '':
+            print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
+            exit()
+        relations.append([occurrenceA, occurrenceB, data, name])
+
+    # print(getOccurrence([occurrenceA])['instance']['name'])
+    
 print('- Found '+str(len(relations))+' DOFs')
 
 for feature in features:
@@ -98,10 +106,12 @@ def collect(id, parent = None):
         if entry[0] == id and entry[1] != parent:
             child = collect(entry[1], id)
             child['mate'] = entry[2]
+            child['relation'] = entry[3]
             part['children'].append(child)
         if entry[1] == id and entry[0] != parent:
             child = collect(entry[0], id)
             child['mate'] = entry[2]
+            child['relation'] = entry[3]
             part['children'].append(child)
     return part
 
@@ -110,53 +120,51 @@ tree = collect(trunk)
 
 robot = Robot()
 
-def addPart(link, occurrence, matrix, name):
+def addPart(occurrence, matrix, main):
     part = occurrence['instance']
     # Importing STL file for this part
-    stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    # stlFile = '%s_%s_%s_%s.stl' % (part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    stlFile = part['name'].split(' ')[0].lower()+'.stl'
     if not os.path.exists('urdf/'+stlFile):
         stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
         f = open('urdf/'+stlFile, 'wb')
         f.write(stl.content)
         f.close()
         
+    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
+    colors = metadata['appearance']['color']
+    color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
     massProperties = client.part_mas_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
     massProperties = massProperties['bodies'][part['partId']]
     mass = massProperties['mass'][0]
     com = massProperties['centroid']
     inertia = massProperties['inertia']
-    robot.addLink(link, name, np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia)
+    robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, main)
 
 def buildRobot(tree, matrix, linkPart=None):
-    print('~~~ Adding instance')
+    print('~~~ Adding instance ['+instance['name']+']')
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
-    print('> '+instance['name'])
     link = instance['name']
     link = link.split(' ')[0].lower()
-    
-    print('DoubleArm, link: '+str(linkPart))
 
+    robot.startLink(link)
+    # Collecting all children in the tree
     if instance['type'] == 'part':
-        # XXX: Redundant code
         name = '_'.join(occurrence['path'])
-        if linkPart == None:
-            linkPart = name
-        if name == linkPart:
-            name = link
-        addPart(link, occurrence, matrix, name)
+        addPart(occurrence, matrix, name == linkPart)
     else:
         # The instance is probably an assembly, gathering everything that
         # begins with the same path
         for occurrence in occurrences.values():
             if occurrence['path'][0] == tree['id'] and occurrence['instance']['type'] == 'Part':
                 name = '_'.join(occurrence['path'])
-                print('Some part, name: '+name)
                 if linkPart == None:
+                    # XXX: This is not good if the first part doesn't have identity matrix...
                     linkPart = name
-                if name == linkPart:
-                    name = link
-                addPart(link, occurrence, matrix, name)
+                    matrix = occurrence['transform']
+                addPart(occurrence, matrix, name == linkPart)
+    robot.endLink()
 
     for child in tree['children']:
         mate = child['mate']
@@ -168,16 +176,16 @@ def buildRobot(tree, matrix, linkPart=None):
         axisFrame = np.linalg.inv(matrix)*childLinkPart['transform']
         matrix = childLinkPart['transform']
         subLink = buildRobot(child, matrix, '_'.join(childLinkPart['path']))
-        robot.addJoint(link, subLink, axisFrame)
+        robot.addJoint(link, subLink, axisFrame, child['relation'])
 
     return link
 
 # Start building the robot
 buildRobot(tree, np.matrix(np.identity(4)))
 robot.finalize()
-print(tree)
+# print(tree)
 
 print("* Writing URDF file")
-urdf = file('urdf/robot.urdf', 'w')
+urdf = open('urdf/robot.urdf', 'w')
 urdf.write(robot.urdf)
 urdf.close()
