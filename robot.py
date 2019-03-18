@@ -36,11 +36,36 @@ class Robot:
     def append(self, str):
         self.urdf += str+"\n"
 
+    def addDummyLink(self, name):
+        self.append('<link name="'+name+'">')
+        self.append('<inertial>')
+        self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
+        # XXX: We use a low mass because PyBullet consider mass 0 as world fixed
+        self.append('<mass value="1e-9" />')
+        self.append('<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
+        self.append('</inertial>')
+        self.append('</link>')
+
+    def addFixedJoint(self, parent, child, matrix, name=None):
+        if name is None:
+            name = parent+'_'+child+'_fixing'
+
+        self.append('<joint name="'+name+'" type="fixed">')
+        self.append(origin(matrix))
+        self.append('<parent link="'+parent+'" />')
+        self.append('<child link="'+child+'" />')
+        self.append('<axis xyz="0 0 0"/>')
+        self.append('</joint>')
+        self.append('')
+
     def startLink(self, name):
         self._link_name = name
         self._link_childs = 0
         if self.mergeLinks:
             self.append('<link name="'+name+'">')
+        else:
+            self.addDummyLink(name)
+
         self._dynamics = []
 
     def endLink(self):
@@ -73,27 +98,16 @@ class Robot:
 
     def addFrame(self, name, matrix):
         # Adding a dummy link
-        self.append('<link name="'+name+'_frame">')
-        self.append('<inertial>')
-        self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
-        self.append('<mass value="0" />')
-        self.append('<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
-        self.append('</inertial>')
-        self.append('</link>')
+        self.addDummyLink(name)
 
         # Linking it with last link with a fixed link
-        self.append('<joint name="'+name+'_frame" type="fixed">')
-        self.append(origin(matrix))
-        self.append('<parent link="'+self._link_name+'" />')
-        self.append('<child link="'+name+'_frame" />')
-        self.append('<axis xyz="0 0 0" />')
-        self.append('</joint>')
+        self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
     def addPart(self, matrix, stl, mass, com, inertia, color, main=False):
-        if main:
-            name = self._link_name
-        else:
-            name = self._link_name+'_'+str(self._link_childs)
+        # if main:
+        #     name = self._link_name
+        # else:
+        name = self._link_name+'_'+str(self._link_childs)
         self._link_childs += 1
 
         if not self.mergeLinks:
@@ -136,14 +150,7 @@ class Robot:
             self.append('</inertial>')
             self.append('</link>')
 
-            if not main:
-                self.append('<joint name="'+name+'_fixing" type="fixed">')
-                self.append(origin(matrix))
-                self.append('<parent link="'+self._link_name+'" />')
-                self.append('<child link="'+name+'" />')
-                self.append('<axis xyz="0 0 0"/>')
-                self.append('</joint>')
-                self.append('')
+            self.addFixedJoint(self._link_name, name, matrix)
 
 
     def addJoint(self, linkFrom, linkTo, transform, name):
