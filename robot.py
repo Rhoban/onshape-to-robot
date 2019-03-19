@@ -27,14 +27,17 @@ def origin(matrix):
 
     return urdf % (x, y, z, rpy[0], rpy[1], rpy[2])
 
-def pose(matrix):
-    urdf = '<pose>%f %f %f %f %f %f</pose>'
+def pose(matrix, frame = ''):
+    sdf = '<pose>%f %f %f %f %f %f</pose>'
     x = matrix[0, 3]
     y = matrix[1, 3]
     z = matrix[2, 3]
     rpy = rotationMatrixToEulerAngles(matrix)
 
-    return urdf % (x, y, z, rpy[0], rpy[1], rpy[2])
+    if frame != '':
+        sdf = '<frame name="'+frame+'_frame">'+sdf+'</frame>'
+
+    return sdf % (x, y, z, rpy[0], rpy[1], rpy[2])
 
 class Robot:
     def __init__(self):
@@ -205,7 +208,7 @@ class RobotSDF:
         self._dynamics = []
         # self.addDummyLink(name)
         self.append('<link name="'+name+'">')
-        self.append(pose(matrix))
+        self.append(pose(matrix, name))
 
     def endLink(self):
         mass = 0
@@ -225,7 +228,7 @@ class RobotSDF:
             inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
 
         self.append('<inertial>')
-        self.append('<pose>%f %f %f 0 0 0</pose>' % (com[0], com[1], com[2]))
+        self.append('<pose frame="'+self._link_name+'_frame">%f %f %f 0 0 0</pose>' % (com[0], com[1], com[2]))
         self.append('<mass>%f</mass>' % mass)
         self.append('<inertia><ixx>%f</ixx><ixy>%f</ixy><ixz>%f</ixz><iyy>%f</iyy><iyz>%f</iyz><izz>%f</izz></inertia>' % (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
         self.append('</inertial>')
