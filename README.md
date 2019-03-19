@@ -43,3 +43,7 @@ To run the simulation:
 ## Pure shapes
 
 XXX TODO
+
+
+gz model -m robot -d
+gz model --spawn-file=robot.sdf --model-name=robot
