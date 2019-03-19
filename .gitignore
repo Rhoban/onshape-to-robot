@@ -2,3 +2,4 @@
 .vscode
 robots
 !robots/demo/config.json
+data
