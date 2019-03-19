@@ -39,11 +39,12 @@ def pose(matrix, frame = ''):
 
     return sdf % (x, y, z, rpy[0], rpy[1], rpy[2])
 
-class Robot:
+class RobotURDF:
     def __init__(self):
         self.drawCollisions = False
         self.relative = True
         self.xml = ''
+        self.ext = 'urdf'
         self.append('<robot name="onshape">')
         pass
 
@@ -170,6 +171,7 @@ class RobotSDF:
     def __init__(self):
         self.drawCollisions = False
         self.xml = ''
+        self.ext = 'sdf'
         self.relative = False
         self.append('<sdf version="1.6">')
         self.append('<model name="onshape">')

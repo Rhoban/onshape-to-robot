@@ -2,7 +2,7 @@
 import numpy as np
 from onshape_api.client import Client
 from copy import copy
-from robot import Robot, RobotSDF
+from robot import RobotURDF, RobotSDF
 import sys
 import os
 import json
@@ -24,6 +24,7 @@ drawFrames = config['drawFrames']
 drawCollisions = config['drawCollisions']
 useScads = config['useScads']
 assemblyName = config['assemblyName']
+outputFormat = config['outputFormat']
 outputDirectory = robot
 
 try:
@@ -161,7 +162,13 @@ def collect(id, parent = None):
 trunk = root['instances'][0]['id']
 tree = collect(trunk)
 
-robot = RobotSDF()
+if outputFormat == 'urdf':
+    robot = RobotURDF()
+elif outputFormat == 'sdf':
+    robot = RobotSDF()
+else:
+    print('! ERROR Unknown output format: '+outputFormat+' (supported are urdf and sdf')
+    exit()
 robot.drawCollisions = drawCollisions
 
 # Adds a part to the current robot link
@@ -270,7 +277,7 @@ buildRobot(tree, np.matrix(np.identity(4)))
 robot.finalize()
 # print(tree)
 
-print("* Writing URDF file")
-urdf = open(outputDirectory+'/robot.sdf', 'w')
-urdf.write(robot.xml)
-urdf.close()
+print("* Writing "+robot.ext+" file")
+f = open(outputDirectory+'/robot.'+robot.ext, 'w')
+f.write(robot.xml)
+f.close()

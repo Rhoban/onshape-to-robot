@@ -5,6 +5,7 @@
 
     "documentId": "483c803918afc4d52e2647f0",
     "assemblyName": "robot",
+    "outputFormat": "urdf",
     "drawFrames": false,
     "drawCollisions": false,
     "useScads": true
