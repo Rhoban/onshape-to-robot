@@ -27,15 +27,25 @@ def origin(matrix):
 
     return urdf % (x, y, z, rpy[0], rpy[1], rpy[2])
 
+def pose(matrix):
+    urdf = '<pose>%f %f %f %f %f %f</pose>'
+    x = matrix[0, 3]
+    y = matrix[1, 3]
+    z = matrix[2, 3]
+    rpy = rotationMatrixToEulerAngles(matrix)
+
+    return urdf % (x, y, z, rpy[0], rpy[1], rpy[2])
+
 class Robot:
     def __init__(self):
         self.drawCollisions = False
-        self.urdf = ''
+        self.relative = True
+        self.xml = ''
         self.append('<robot name="onshape">')
         pass
 
     def append(self, str):
-        self.urdf += str+"\n"
+        self.xml += str+"\n"
 
     def addDummyLink(self, name):
         self.append('<link name="'+name+'">')
@@ -150,3 +160,137 @@ class Robot:
     
     def finalize(self):
         self.append('</robot>')
+
+
+class RobotSDF:
+    def __init__(self):
+        self.drawCollisions = False
+        self.xml = ''
+        self.relative = False
+        self.append('<sdf version="1.6">')
+        self.append('<model name="onshape">')
+        pass
+
+    def append(self, str):
+        self.xml += str+"\n"
+
+    def addDummyLink(self, name):
+        self.append('<link name="'+name+'">')
+        self.append('<inertial>')
+        self.append('<pose>0 0 0 0 0 0</pose>')
+        # XXX: We use a low mass because PyBullet consider mass 0 as world fixed
+        self.append('<mass>1e-9</mass>')
+        self.append('<inertia>')
+        self.append('<ixx>0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0</iyy><iyz>0</iyz><izz>0</izz>')
+        self.append('</inertia>')
+        self.append('</inertial>')
+        self.append('</link>')
+
+    def addFixedJoint(self, parent, child, matrix, name=None):
+        if name is None:
+            name = parent+'_'+child+'_fixing'
+
+        self.append('<joint name="'+name+'" type="fixed">')
+        self.append(pose(matrix))
+        self.append('<parent>'+parent+'</parent>')
+        self.append('<child>'+child+'</child>')
+        self.append('</joint>')
+        self.append('')
+
+    def startLink(self, name):
+        self._link_name = name
+        self._link_childs = 0
+        self.addDummyLink(name)
+
+    def endLink(self):
+        pass
+
+    def addFrame(self, name, matrix):
+        # Adding a dummy link
+        self.addDummyLink(name)
+
+        # Linking it with last link with a fixed link
+        self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
+
+    def material(self, color):
+        m = '<material>'
+        m += '<ambient>%f %f %f 1</ambient>' % (color[0], color[1], color[2])
+        m += '<diffuse>%f %f %f 1</diffuse>' % (color[0], color[1], color[2])
+        m += '<specular>0.1 0.1 0.1 1</specular>'
+        m += '<emissive>0 0 0 0</emissive>'
+        m += '</material>'
+
+        return m
+
+    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None):
+        name = self._link_name+'_'+str(self._link_childs)
+        self._link_childs += 1
+
+        self.append('<link name="'+name+'">')
+
+        if not self.drawCollisions:
+            # Visual
+            self.append('<visual>')
+            self.append('<geometry>')
+            self.append('<mesh><uri>file://'+stl+'</uri></mesh>')
+            self.append('</geometry>')
+            self.append(self.material(color))
+            self.append('</visual>')
+
+        entries = ['collision']
+        if self.drawCollisions:
+            entries.append('visual')
+        for entry in entries:
+            
+            if shapes is None:
+                # We don't have pure shape, we use the mesh
+                self.append('<'+entry+'>')
+                self.append('<geometry>')
+                self.append('<mesh><uri>file://'+stl+'</uri></mesh>')
+                self.append('</geometry>')
+                self.append(self.material(color))
+                self.append('</'+entry+'>')
+            else:
+                # Inserting pure shapes in the URDF model
+                for shape in shapes:
+                        self.append('<'+entry+'>')
+                        self.append(pose(shape['transform']))
+                        self.append('<geometry>')
+                        if shape['type'] == 'cube':
+                            self.append('<box><size>%f %f %f</size></box>' % tuple(shape['parameters']))
+                        if shape['type'] == 'cylinder':
+                            self.append('<cylinder><length>%f</length><radius>%f</radius></cylinder>' % tuple(shape['parameters']))
+                        if shape['type'] == 'sphere':
+                            self.append('<sphere><radius>%f</radius></sphere>' % shape['parameters'])
+                        self.append('</geometry>')
+
+                        self.append(self.material(color))
+                        self.append('</'+entry+'>')
+
+        self.append('<inertial>')
+        self.append('<pose>%f %f %f 0 0 0</pose>' % (com[0], com[1], com[2]))
+        self.append('<mass>%f</mass>' % mass)
+        self.append('<inertia><ixx>%f</ixx><ixy>%f</ixy><ixz>%f</ixz><iyy>%f</iyy><iyz>%f</iyz><izz>%f</izz></inertia>' %
+            (inertia[0], inertia[1], inertia[2], inertia[4], inertia[5], inertia[8]))
+        self.append('</inertial>')
+        self.append('</link>')
+
+        self.addFixedJoint(self._link_name, name, matrix)
+
+
+    def addJoint(self, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
+        self.append('<joint name="'+name+'" type="revolute">')
+        self.append(origin(transform))
+        self.append('<parent>'+linkFrom+'</parent>')
+        self.append('<child>'+linkTo+'</child>')
+        self.append('<axis>')
+        self.append('<xyz>%f %f %f</xyz>' % tuple(zAxis))
+        self.append('<limit><effort>0.5</effort><velocity>12.5664</velocity></limit>')
+        self.append('</axis>')
+        self.append('</joint>')
+        self.append('')
+        # print('Joint from: '+linkFrom+' to: '+linkTo+', transform: '+str(transform))
+    
+    def finalize(self):
+        self.append('</model>')
+        self.append('</sdf>')

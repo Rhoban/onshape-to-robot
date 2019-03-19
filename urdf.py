@@ -2,7 +2,7 @@
 import numpy as np
 from onshape_api.client import Client
 from copy import copy
-from robot import Robot
+from robot import Robot, RobotSDF
 import sys
 import os
 import json
@@ -161,7 +161,7 @@ def collect(id, parent = None):
 trunk = root['instances'][0]['id']
 tree = collect(trunk)
 
-robot = Robot()
+robot = RobotSDF()
 robot.drawCollisions = drawCollisions
 
 # Adds a part to the current robot link
@@ -199,7 +199,10 @@ def addPart(occurrence, matrix):
     if abs(mass) < 1e-9:
         print('! WARNING Part '+part['name']+' has no mass, maybe you should assign a material to it ?')
 
-    robot.addPart(np.linalg.inv(matrix)*occurrence['transform'], stlFile, mass, com, inertia, color, shapes)
+    pose = occurrence['transform']
+    if robot.relative:
+        pose = np.linalg.inv(matrix)*pose
+    robot.addPart(pose, stlFile, mass, com, inertia, color, shapes)
 
 def processPartName(name):
     parts = name.split(' ')
@@ -228,7 +231,9 @@ def buildRobot(tree, matrix, linkPart=None):
 
     # Adding the frames (linkage is relative to parent)
     for name, part in frames[tree['id']]:
-        frame = np.linalg.inv(matrix)*getOccurrence(part)['transform']
+        frame = getOccurrence(part)['transform']
+        if robot.relative:
+            frame = np.linalg.inv(matrix)*frame
         robot.addFrame(name, frame)
 
     # Calling the function with recursion for children
@@ -250,7 +255,9 @@ def buildRobot(tree, matrix, linkPart=None):
         translation[2, 3] += origin[2]
         worldAxisFrame = worldAxisFrame * translation
 
-        axisFrame = np.linalg.inv(matrix)*worldAxisFrame
+        axisFrame = worldAxisFrame
+        if robot.relative:
+            axisFrame = np.linalg.inv(matrix)*axisFrame
         matrix = worldAxisFrame
 
         subLink = buildRobot(child, matrix, '_'.join(childLinkPart['path']))
@@ -265,5 +272,5 @@ robot.finalize()
 
 print("* Writing URDF file")
 urdf = open(outputDirectory+'/robot.urdf', 'w')
-urdf.write(robot.urdf)
+urdf.write(robot.xml)
 urdf.close()
