@@ -1,0 +1,16 @@
+<sdf version='1.6'>
+  <model name='onshape'>
+    <link name='base_motor'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <visual name='base_motor_3_visual_3'>
+        <pose frame=''>0 0 -0.0125 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file://counterhorn.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
