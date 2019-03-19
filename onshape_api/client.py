@@ -161,10 +161,7 @@ class Client():
         return self._api.request('post', '/api/assemblies/d/' + did + '/w/' + wid, body=payload)
 
     def get_assembly(self, did, wid, eid):
-        def invoke():
-            return self._api.request('get', '/api/assemblies/d/'+did+'/w/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true'})
-
-        return json.loads(self.cache_get('assembly', (did, wid, eid), invoke))
+        return self._api.request('get', '/api/assemblies/d/'+did+'/w/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true'}).json()
 
     def get_features(self, did, wid, eid):
         '''

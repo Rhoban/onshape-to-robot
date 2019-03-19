@@ -57,8 +57,12 @@ assembly = client.get_assembly(documentId, workspaceId, assemblyId)
 
 # Collecting parts instance from assembly and subassemblies
 instances = {}
+firstInstance = None
 def collectParts(instancesToWalk):
+    global firstInstance
     for instance in instancesToWalk:
+        if firstInstance is None:
+            firstInstance = instance['id']
         instances[instance['id']] = instance
 
 root = assembly['rootAssembly']
@@ -111,6 +115,8 @@ for feature in features:
             frames[occurrenceB] = []
                 
 print('- Found '+str(len(relations))+' DOFs')
+if len(relations) == 0:
+    assignParts(firstInstance, firstInstance)
 
 # Spreading parts assignations
 changed = True
@@ -214,14 +220,19 @@ def addPart(occurrence, matrix):
         pose = np.linalg.inv(matrix)*pose
     robot.addPart(pose, stlFile, mass, com, inertia, color, shapes)
 
+partNames = {}
 def processPartName(name):
+    global partNames
     parts = name.split(' ')
-    num = int(parts[-1][1:-1])
     del parts[-1]
     name = '_'.join(parts).lower()
-    if num != 1:
-        name += '_'+str(num)
-    return name
+
+    if name in partNames:
+        partNames[name] += 1
+    else:
+        partNames[name] = 1
+
+    return name+'_'+str(partNames[name])
 
 def buildRobot(tree, matrix, linkPart=None):
     occurrence = getOccurrence([tree['id']])
@@ -240,13 +251,15 @@ def buildRobot(tree, matrix, linkPart=None):
     robot.endLink()
 
     # Adding the frames (linkage is relative to parent)
-    for name, part in frames[tree['id']]:
-        frame = getOccurrence(part)['transform']
-        if robot.relative:
-            frame = np.linalg.inv(matrix)*frame
-        robot.addFrame(name, frame)
+    if tree['id'] in frames:
+        for name, part in frames[tree['id']]:
+            frame = getOccurrence(part)['transform']
+            if robot.relative:
+                frame = np.linalg.inv(matrix)*frame
+            robot.addFrame(name, frame)
 
     # Calling the function with recursion for children
+    k = 0
     for child in tree['children']:
         mate = child['mate']
         if mate['matedEntities'][0]['matedOccurrence'][0] == tree['id']:
@@ -265,12 +278,13 @@ def buildRobot(tree, matrix, linkPart=None):
         translation[2, 3] += origin[2]
         worldAxisFrame = worldAxisFrame * translation
 
+        childMatrix = matrix
         axisFrame = worldAxisFrame
         if robot.relative:
             axisFrame = np.linalg.inv(matrix)*axisFrame
-            matrix = worldAxisFrame
+            childMatrix = worldAxisFrame
 
-        subLink = buildRobot(child, matrix, '_'.join(childLinkPart['path']))
+        subLink = buildRobot(child, childMatrix, '_'.join(childLinkPart['path']))
         robot.addJoint(link, subLink, axisFrame, child['relation'], zAxis)
 
     return link

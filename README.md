@@ -47,3 +47,7 @@ XXX TODO
 
 gz model -m robot -d
 gz model --spawn-file=robot.sdf --model-name=robot
+
+? Click first on target and after on body
+
+Pour le moment il faut aussi lancer gazebo dans le même dossier
