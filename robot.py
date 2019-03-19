@@ -224,7 +224,6 @@ class RobotSDF:
             p = np.matrix(r)
             inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
 
-        # inertia *= 10
         self.append('<inertial>')
         self.append('<pose>%f %f %f 0 0 0</pose>' % (com[0], com[1], com[2]))
         self.append('<mass>%f</mass>' % mass)
