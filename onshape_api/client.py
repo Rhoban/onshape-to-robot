@@ -11,7 +11,7 @@ import mimetypes
 import random
 import string
 import os
-
+import json
 
 class Client():
     '''
@@ -102,8 +102,27 @@ class Client():
         Returns:
             - requests.Response: Onshape response data
         '''
-
         return self._api.request('get', '/api/documents/' + did)
+
+    def cache_get(self, method, key, callback):
+        if type(key) == tuple:
+            key = '_'.join(list(key))
+        fileName = method+'__'+key
+        dirName = os.path.dirname(os.path.abspath(__file__))+'/cache'
+        if not os.path.exists(dirName):
+            os.mkdir(dirName)
+        fileName = dirName+'/'+fileName
+        if os.path.exists(fileName):
+            f = open(fileName, 'rb')
+            result = f.read()
+            f.close()
+        else:
+            result = callback().content
+            f = open(fileName, 'wb')
+            f.write(result)
+            f.close()
+        return result
+            
 
     def list_documents(self):
         '''
@@ -142,7 +161,10 @@ class Client():
         return self._api.request('post', '/api/assemblies/d/' + did + '/w/' + wid, body=payload)
 
     def get_assembly(self, did, wid, eid):
-        return self._api.request('get', '/api/assemblies/d/'+did+'/w/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true'})
+        def invoke():
+            return self._api.request('get', '/api/assemblies/d/'+did+'/w/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true'})
+
+        return json.loads(self.cache_get('assembly', (did, wid, eid), invoke))
 
     def get_features(self, did, wid, eid):
         '''
@@ -243,19 +265,22 @@ class Client():
         return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/stl', headers=req_headers)
 
     def part_studio_stl_m(self, did, mid, eid, partid):
+        def invoke():
+            req_headers = {
+                'Accept': 'application/vnd.onshape.v1+octet-stream'
+            }
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter'}, headers=req_headers)
 
-        req_headers = {
-            'Accept': 'application/vnd.onshape.v1+octet-stream'
-        }
-        return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter'}, headers=req_headers)
+        return self.cache_get('part_stl', (did, mid, eid, partid), invoke)
 
     def part_get_metadata(self, did, mid, eid, partid):
-        if (did, mid, eid, partid) not in self._metadata_cache:
-            self._metadata_cache[(did, mid, eid, partid)] = self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata')
-        return self._metadata_cache[(did, mid, eid, partid)]    
+        def invoke():
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata')
 
-    def part_mas_properties(self, did, mid, eid, partid):
-        if (did, mid, eid, partid) not in self._massproperties_cache:
-            self._massproperties_cache[(did, mid, eid, partid)] = self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
+        return json.loads(self.cache_get('metadata', (did, mid, eid, partid), invoke))
 
-        return self._massproperties_cache[(did, mid, eid, partid)]
+    def part_mass_properties(self, did, mid, eid, partid):
+        def invoke():
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
+
+        return json.loads(self.cache_get('massproperties', (did, mid, eid, partid), invoke))

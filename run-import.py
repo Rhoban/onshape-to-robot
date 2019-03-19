@@ -23,7 +23,10 @@ documentId = config['documentId']
 drawFrames = config['drawFrames']
 drawCollisions = config['drawCollisions']
 useScads = config['useScads']
-assemblyName = config['assemblyName']
+if 'assemblyName' in config:
+    assemblyName = config['assemblyName']
+else:
+    assemblyName = None
 outputFormat = config['outputFormat']
 outputDirectory = robot
 
@@ -41,7 +44,7 @@ print('* Retrieving elements in the document, searching for the assembly...')
 elements = client.list_elements(documentId).json()
 assemblyId = None
 for element in elements:
-    if element['type'] == 'Assembly' and element['name'].lower() == assemblyName:
+    if element['type'] == 'Assembly' and (assemblyName is None or element['name'].lower() == assemblyName):
         print("- Found assembly, id: "+element['id']+', name: "'+element['name']+'"')
         assemblyId = element['id']
 
@@ -50,7 +53,7 @@ if assemblyId == None:
     exit(1)
 
 print('* Retrieving assembly')
-assembly = client.get_assembly(documentId, workspaceId, assemblyId).json()
+assembly = client.get_assembly(documentId, workspaceId, assemblyId)
 
 # Collecting parts instance from assembly and subassemblies
 instances = {}
@@ -181,7 +184,7 @@ def addPart(occurrence, matrix):
     if not os.path.exists(outputDirectory+'/'+stlFile):
         stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
         f = open(outputDirectory+'/'+stlFile, 'wb')
-        f.write(stl.content)
+        f.write(stl)
         f.close()
 
     # Import the SCAD files pure shapes
@@ -192,12 +195,12 @@ def addPart(occurrence, matrix):
             shapes = csg.process(outputDirectory+'/'+scadFile)
         
     # Obtain metadatas about part to retrieve color
-    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
+    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
     colors = metadata['appearance']['color']
     color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
 
     # Obtain mass properties about that part
-    massProperties = client.part_mas_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId']).json()
+    massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
     massProperties = massProperties['bodies'][part['partId']]
     mass = massProperties['mass'][0]
     com = massProperties['centroid']

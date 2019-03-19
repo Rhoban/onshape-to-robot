@@ -3,3 +3,4 @@
 robots
 !robots/demo/config.json
 data
+**/cache/
