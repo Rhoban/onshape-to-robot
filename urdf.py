@@ -221,7 +221,7 @@ def buildRobot(tree, matrix, linkPart=None):
     link = processPartName(instance['name'])
 
     # Collecting all children in the tree assigned to this top-level part
-    robot.startLink(link)
+    robot.startLink(link, matrix)
     for occurrence in occurrences.values():
         if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
             name = '_'.join(occurrence['path'])
@@ -258,7 +258,7 @@ def buildRobot(tree, matrix, linkPart=None):
         axisFrame = worldAxisFrame
         if robot.relative:
             axisFrame = np.linalg.inv(matrix)*axisFrame
-        matrix = worldAxisFrame
+            matrix = worldAxisFrame
 
         subLink = buildRobot(child, matrix, '_'.join(childLinkPart['path']))
         robot.addJoint(link, subLink, axisFrame, child['relation'], zAxis)
@@ -271,6 +271,6 @@ robot.finalize()
 # print(tree)
 
 print("* Writing URDF file")
-urdf = open(outputDirectory+'/robot.urdf', 'w')
+urdf = open(outputDirectory+'/robot.sdf', 'w')
 urdf.write(robot.xml)
 urdf.close()
