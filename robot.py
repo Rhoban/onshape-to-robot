@@ -73,7 +73,7 @@ class RobotURDF:
         self.append('</joint>')
         self.append('')
 
-    def startLink(self, name):
+    def startLink(self, name, matrix):
         self._link_name = name
         self._link_childs = 0
         self.addDummyLink(name)
