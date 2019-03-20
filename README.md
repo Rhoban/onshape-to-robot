@@ -138,6 +138,9 @@ If you want to track some frames on your robot, you can do the following:
 <img src="img/smalls/frame.png" />
 </p>
 
+If you want to give it a try, you can use the `bullet.py` in `urdf` mode, it will output the
+frames on standard output.
+
 ## Cache
 
 Some requests are cached for convenience (recovery of STL, massproperties etc.). You can run
