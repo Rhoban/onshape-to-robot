@@ -65,6 +65,9 @@ To run the simulation:
 
     ./bullet.py robots/myrobot
 
+The example code will send sinusoidal signals to motors target positions to see the robot
+in action.
+
 ### Gazebo
 
 You can give a try to gazebo using:
@@ -95,8 +98,15 @@ shapes related:
 Then, the pure shapes from your scad will be used when generating the `sdf` or `urdf` file (next
 time you will run `run-import.py`, it will read your `.scad` files).
 
+**Note: `center=true` is mandatory in the current version.**
+
 Thus, if the `.scad` file is empty, your part will have no collision. If you want to use the mesh
 again, simply remove the `.scad` file.
+
+If you pass `drawCollisions` to `true`, the collisions will also be used for the render, which can
+be useful to debug:
+
+![](img/shape-approx.png)
 
 ## Frames
 
