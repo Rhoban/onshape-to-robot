@@ -85,7 +85,10 @@ You can give a try to gazebo using:
 
 ## Testing the example (quadruped robot)
 
-XXX Todo
+You can give a try to the `demo-quadruped` robot, which is a public assembly that can
+be [viewed here](https://cad.onshape.com/documents/11a7f59e37f711d732274fca/w/7807518dc67487ad405722c8/e/5233c6445c575366a6cc0d50):
+
+    ./onshape-to-robot.py robots/demo-quadruped/
 
 ## Pure shapes
 
