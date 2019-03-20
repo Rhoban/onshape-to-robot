@@ -8,8 +8,6 @@ import os
 import json
 import csg
 
-# DOFs should be named "dof..."
-
 # Loading configuration
 robot = 'robots/demo/'
 if len(sys.argv) > 1:
@@ -19,15 +17,25 @@ configFile = robot+'/config.json'
 client = Client(logging=False, creds=configFile)
 config = json.load(open(configFile))
 
-documentId = config['documentId']
-drawFrames = config['drawFrames']
-drawCollisions = config['drawCollisions']
-useScads = config['useScads']
-if 'assemblyName' in config:
-    assemblyName = config['assemblyName']
-else:
-    assemblyName = None
-outputFormat = config['outputFormat']
+def configGet(name, default=None):
+    global config
+    if name in config:
+        return config[name]
+    else:
+        if default is None:
+            print('! ERROR missing key "'+name+'" in config')
+            exit()
+        else:
+            return default
+
+documentId = configGet('documentId')
+drawFrames = configGet('drawFrames')
+drawCollisions = configGet('drawCollisions', False)
+useScads = configGet('useScads', True)
+assemblyName = configGet('assemblyName', False)
+outputFormat = configGet('outputFormat', 'urdf')
+jointMaxEffort = configGet('jointMaxEffort', 1)
+jointMaxVelocity = configGet('jointMaxVelocity', 20)
 outputDirectory = robot
 
 try:
@@ -44,7 +52,7 @@ print('* Retrieving elements in the document, searching for the assembly...')
 elements = client.list_elements(documentId).json()
 assemblyId = None
 for element in elements:
-    if element['type'] == 'Assembly' and (assemblyName is None or element['name'].lower() == assemblyName):
+    if element['type'] == 'Assembly' and (assemblyName is False or element['name'].lower() == assemblyName):
         print("- Found assembly, id: "+element['id']+', name: "'+element['name']+'"')
         assemblyId = element['id']
 
@@ -186,6 +194,8 @@ else:
     print('! ERROR Unknown output format: '+outputFormat+' (supported are urdf and sdf')
     exit()
 robot.drawCollisions = drawCollisions
+robot.jointMaxEffort = jointMaxEffort
+robot.jointMaxVelocity = jointMaxVelocity
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):

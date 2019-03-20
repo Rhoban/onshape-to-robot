@@ -54,6 +54,8 @@ Then edit `config.json` in your repository, here are the entries:
 * `useScads` if you want or not to use scad files for pure shapes (see below)
 * Optionnaly, `assemblyName` can be used to specify the name of the assembly. Else
   the first assembly found in document will be used.
+* `jointMaxEffort` and `jointMaxVelocity` can be used to specify the values that will
+  be used in the `joints` entry
 
 ## Running the import
 

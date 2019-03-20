@@ -44,6 +44,8 @@ class RobotURDF:
         self.drawCollisions = False
         self.relative = True
         self.xml = ''
+        self.jointMaxEffort = 1
+        self.jointMaxVelocity = False
         self.ext = 'urdf'
         self.append('<robot name="onshape">')
         pass
@@ -156,8 +158,7 @@ class RobotURDF:
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
         self.append('<axis xyz="%f %f %f"/>' % tuple(zAxis))
-        # XXX: Joint properties are currently hard-coded
-        self.append('<limit effort="0.5" velocity="12.5664" />')
+        self.append('<limit effort="%f" velocity="%f" />' % (self.jointMaxEffort, self.jointMaxVelocity))
         self.append('<joint_properties friction="0.0"/>')
         self.append('</joint>')
         self.append('')
@@ -170,6 +171,8 @@ class RobotSDF:
     def __init__(self):
         self.drawCollisions = False
         self.xml = ''
+        self.jointMaxEffort = 1
+        self.jointMaxVelocity = False
         self.ext = 'sdf'
         self.relative = False
         self.append('<sdf version="1.6">')
@@ -184,8 +187,7 @@ class RobotSDF:
         self.append('<pose>0 0 0 0 0 0</pose>')
         self.append('<inertial>')
         self.append('<pose>0 0 0 0 0 0</pose>')
-        # XXX: We use a low mass because PyBullet consider mass 0 as world fixed
-        self.append('<mass>0.0001</mass>')
+        self.append('<mass>1e-9</mass>')
         self.append('<inertia>')
         self.append('<ixx>0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0</iyy><iyz>0</iyz><izz>0</izz>')
         self.append('</inertia>')
@@ -331,8 +333,7 @@ class RobotSDF:
         self.append('<child>'+linkTo+'</child>')
         self.append('<axis>')
         self.append('<xyz>%f %f %f</xyz>' % tuple(zAxis))
-        # XXX: Joint properties are hard-coded
-        self.append('<limit><effort>0.5</effort><velocity>12.5664</velocity></limit>')
+        self.append('<limit><effort>%f</effort><velocity>%f</velocity></limit>' % (self.jointMaxEffort, self.jointMaxVelocity))
         self.append('</axis>')
         self.append('</joint>')
         self.append('')

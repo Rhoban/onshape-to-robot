@@ -7,5 +7,8 @@
     "outputFormat": "urdf",
     "drawFrames": false,
     "drawCollisions": false,
-    "useScads": true
+    "useScads": true,
+
+    "jointMaxEffort": 1.5,
+    "jointMaxVelocity": 22
 }
