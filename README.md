@@ -83,6 +83,10 @@ You can give a try to gazebo using:
     gz model -m robot -d
     gz model --spawn-file=robot.sdf --model-name=robot
 
+## Testing the example (quadruped robot)
+
+XXX Todo
+
 ## Pure shapes
 
 By default, meshes are also used for collision. This is versatile but is computationally

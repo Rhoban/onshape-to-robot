@@ -156,11 +156,11 @@ class RobotURDF:
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
         self.append('<axis xyz="%f %f %f"/>' % tuple(zAxis))
+        # XXX: Joint properties are currently hard-coded
         self.append('<limit effort="0.5" velocity="12.5664" />')
         self.append('<joint_properties friction="0.0"/>')
         self.append('</joint>')
         self.append('')
-        # print('Joint from: '+linkFrom+' to: '+linkTo+', transform: '+str(transform))
     
     def finalize(self):
         self.append('</robot>')
@@ -331,6 +331,7 @@ class RobotSDF:
         self.append('<child>'+linkTo+'</child>')
         self.append('<axis>')
         self.append('<xyz>%f %f %f</xyz>' % tuple(zAxis))
+        # XXX: Joint properties are hard-coded
         self.append('<limit><effort>0.5</effort><velocity>12.5664</velocity></limit>')
         self.append('</axis>')
         self.append('</joint>')
