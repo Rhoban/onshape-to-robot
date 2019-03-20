@@ -73,11 +73,37 @@ You can give a try to gazebo using:
     gz model -m robot -d
     gz model --spawn-file=robot.sdf --model-name=robot
 
-
 ## Pure shapes
 
-XXX Todo
+By default, meshes are also used for collision. This is versatile but is computationally
+expensive, and can be numerically instable.
+
+You can approximate those parts with pure shapes (namely boxes, spheres and cylinders).
+For this, we propose a solution based on `openscad`:
+
+    apt-get install openscad
+
+To do that, you need to create a `.scad` file next to `.stl` one. For instance `motor.scad`
+that will approximate `motor.stl` file.
+
+You can use `./edit-shape.py [stl-file]` that will automatically prepare and run the `.scad`
+using a template visualizing the `.stl` with transparency, allowing you to edit the pure
+shapes related:
+
+![](img/pure-shape.png)
+
+Then, the pure shapes from your scad will be used when generating the `sdf` or `urdf` file (next
+time you will run `run-import.py`, it will read your `.scad` files).
+
+Thus, if the `.scad` file is empty, your part will have no collision. If you want to use the mesh
+again, simply remove the `.scad` file.
 
 ## Frames
 
-XXX Todo
+If you want to track some frames on your robot, you can do the following:
+
+* Connect any part to your robot using mate relations in OnShape
+* Name one of these relations `frame_something`, when `something` will be the name of
+  the frame (a link) in the resulting `sdf` or `urdf`
+
+![](img/frame.png)
