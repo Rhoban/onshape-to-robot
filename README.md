@@ -132,3 +132,7 @@ If you want to track some frames on your robot, you can do the following:
 
 Some requests are cached for convenience (recovery of STL, massproperties etc.). You can run
 the `clear-cache.sh` script to remove all cached requests.
+
+## License
+
+This project is under MIT License, read the `LICENSE` file for more information
