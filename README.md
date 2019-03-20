@@ -61,6 +61,9 @@ You can run the import using:
 
     ./onshape-to-robot.py robots/myrobot
 
+This will produce files in the directory (next to the `config.json` file), including STLs (mesh
+files) and the `sdf` or `urdf`.
+
 ## Running the simulation
 
 ### PyBullet
