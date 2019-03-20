@@ -59,7 +59,7 @@ Then edit `config.json` in your repository, here are the entries:
 
 You can run the import using:
 
-    ./run-import.py robots/myrobot
+    ./onshape-to-robot.py robots/myrobot
 
 ## Running the simulation
 
@@ -102,7 +102,7 @@ shapes related:
 </p>
 
 Then, the pure shapes from your scad will be used when generating the `sdf` or `urdf` file (next
-time you will run `run-import.py`, it will read your `.scad` files).
+time you will run `onshape-to-robot.py`, it will read your `.scad` files).
 
 **Note: `center=true` is mandatory in the current version.**
 
@@ -127,3 +127,8 @@ If you want to track some frames on your robot, you can do the following:
 <p align="center">
 <img src="img/smalls/frame.png" />
 </p>
+
+## Cache
+
+Some requests are cached for convenience (recovery of STL, massproperties etc.). You can run
+the `clear-cache.sh` script to remove all cached requests.
