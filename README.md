@@ -1,4 +1,4 @@
-# OnShape to SDF/URDF importer
+# OnShape to Robot (SDF/URDF)
 
 <p align="center">
 <img src="img/main.png" />
