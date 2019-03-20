@@ -1,6 +1,8 @@
 # OnShape to SDF/URDF importer
 
+<p align="center">
 ![](img/main.png)
+</p>
 
 This tool is based on the [OnShape API](https://dev-portal.onshape.com/) to retrieve
 informations from an assembly and build an SDF or URDF model suitable for physics
@@ -14,7 +16,9 @@ There is some design constraints:
 * Degree of freedoms should be cylindrical mate connectors named `dof_something`, where `something` will be used to name the joint in the final document
 * When doing this connection, click the children joint first. This will be used to find the trunk of the robot (part with children but no parent)
 
+<p align="center">
 ![](img/smalls/design.png)
+</p>
 
 ## Requirements
 
@@ -93,7 +97,9 @@ You can use `./edit-shape.py [stl-file]` that will automatically prepare and run
 using a template visualizing the `.stl` with transparency, allowing you to edit the pure
 shapes related:
 
+<p align="center">
 ![](img/smalls/pure-shape.png)
+</p>
 
 Then, the pure shapes from your scad will be used when generating the `sdf` or `urdf` file (next
 time you will run `run-import.py`, it will read your `.scad` files).
@@ -106,7 +112,9 @@ again, simply remove the `.scad` file.
 If you pass `drawCollisions` to `true`, the collisions will also be used for the render, which can
 be useful to debug:
 
+<p align="center">
 ![](img/smalls/shape-approx.png)
+</p>
 
 ## Frames
 
@@ -116,4 +124,6 @@ If you want to track some frames on your robot, you can do the following:
 * Name one of these relations `frame_something`, when `something` will be the name of
   the frame (a link) in the resulting `sdf` or `urdf`
 
+<p align="center">
 ![](img/smalls/frame.png)
+</p>
