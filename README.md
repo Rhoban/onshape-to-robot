@@ -1,5 +1,7 @@
 # OnShape to URDF importer
 
+![](img/main.png)
+
 ## Requirements
 
 First clone this repository:
