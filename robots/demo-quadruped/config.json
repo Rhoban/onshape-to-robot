@@ -1,0 +1,11 @@
+{
+    "onshape_api": "https://cad.onshape.com",
+    "onshape_access_key": "U1unB5XBYPMg40nZrYpVHPX1",
+    "onshape_secret_key": "0IchyJ18GMrAzVbprywer1uei6u6H3eQNjO5JnbKAfahpMnD",
+
+    "documentId": "11a7f59e37f711d732274fca",
+    "outputFormat": "urdf",
+    "drawFrames": false,
+    "drawCollisions": false,
+    "useScads": true
+}

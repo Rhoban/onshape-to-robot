@@ -1,6 +1,7 @@
 **.pyc
 .vscode
 robots
-!robots/demo/config.json
+!robots/skeleton/config.json
+!robots/demo-quadruped/config.json
 data
 **/cache/
