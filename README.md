@@ -57,7 +57,7 @@ You can run the import using:
 
     ./run-import.py robots/myrobot
 
-## Running the simulation to test
+## Running the simulation
 
 ### PyBullet
 
@@ -75,3 +75,9 @@ You can give a try to gazebo using:
 
 
 ## Pure shapes
+
+XXX Todo
+
+## Frames
+
+XXX Todo
