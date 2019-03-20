@@ -1,7 +1,7 @@
 # OnShape to SDF/URDF importer
 
 <p align="center">
-![](img/main.png)
+<img src="img/main.png" />
 </p>
 
 This tool is based on the [OnShape API](https://dev-portal.onshape.com/) to retrieve
@@ -17,7 +17,7 @@ There is some design constraints:
 * When doing this connection, click the children joint first. This will be used to find the trunk of the robot (part with children but no parent)
 
 <p align="center">
-![](img/smalls/design.png)
+<img src="img/smalls/design.png" />
 </p>
 
 ## Requirements
@@ -98,7 +98,7 @@ using a template visualizing the `.stl` with transparency, allowing you to edit 
 shapes related:
 
 <p align="center">
-![](img/smalls/pure-shape.png)
+<img src="img/smalls/pure-shape.png" />
 </p>
 
 Then, the pure shapes from your scad will be used when generating the `sdf` or `urdf` file (next
@@ -113,7 +113,7 @@ If you pass `drawCollisions` to `true`, the collisions will also be used for the
 be useful to debug:
 
 <p align="center">
-![](img/smalls/shape-approx.png)
+<img src="img/smalls/shape-approx.png" />
 </p>
 
 ## Frames
@@ -125,5 +125,5 @@ If you want to track some frames on your robot, you can do the following:
   the frame (a link) in the resulting `sdf` or `urdf`
 
 <p align="center">
-![](img/smalls/frame.png)
+<img src="img/smalls/frame.png" />
 </p>
