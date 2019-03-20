@@ -183,6 +183,8 @@ for childId in relations:
     if entry[0] not in relations:
         trunk = entry[0]
         break
+trunkOccurrence = getOccurrence([trunk])
+print('Trunk is '+trunkOccurrence['instance']['name'])
 
 tree = collect(trunk)
 

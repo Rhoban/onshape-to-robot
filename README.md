@@ -92,6 +92,10 @@ be [viewed here](https://cad.onshape.com/documents/11a7f59e37f711d732274fca/w/78
 
     ./onshape-to-robot.py robots/demo-quadruped/
 
+Note: parallel constraints are here to keep the robot in its "zero" position when exporting,
+they can be supressed to manipulate the degrees of freedom in OnShape and unsupressed when
+exporting, or just to reset the robot to the "zero" position.
+
 ## Pure shapes
 
 By default, meshes are also used for collision. This is versatile but is computationally
