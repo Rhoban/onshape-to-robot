@@ -91,14 +91,15 @@ def assignParts(root, parent):
             occurrence['assignation'] = parent
 
 print('* Getting assembly features, scanning for DOFs...')
-relations = []
+trunk = None
+relations = {}
 topLevels = set()
 features = root['features']
 for feature in features:
     data = feature['featureData']
 
-    occurrenceA = data['matedEntities'][0]['matedOccurrence'][0]
-    occurrenceB = data['matedEntities'][1]['matedOccurrence'][0]
+    child = data['matedEntities'][0]['matedOccurrence'][0]
+    parent = data['matedEntities'][1]['matedOccurrence'][0]
 
     if data['name'][0:3] == 'dof':
         name = '_'.join(data['name'].split('_')[1:])
@@ -106,16 +107,19 @@ for feature in features:
             print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
             exit()
         
-        relations.append([occurrenceA, occurrenceB, data, name])
-        assignParts(occurrenceA, occurrenceA)
-        assignParts(occurrenceB, occurrenceB)
-        if occurrenceA not in frames:
-            frames[occurrenceA] = []
-        if occurrenceB not in frames:
-            frames[occurrenceB] = []
+        relations[child] = [parent, data, name]
+        assignParts(child, child)
+        assignParts(parent, parent)
+        if child not in frames:
+            frames[child] = []
+        if parent not in frames:
+            frames[parent] = []
                 
 print('- Found '+str(len(relations))+' DOFs')
+
+# If we have no DOF
 if len(relations) == 0:
+    trunk = firstInstance
     assignParts(firstInstance, firstInstance)
 
 # Spreading parts assignations
@@ -151,24 +155,27 @@ for occurrence in occurrences.values():
         print('! WARNING, part ('+occurrence['instance']['name']+') has no assignation, should be connected with DOF or with fixed constraint')
     
 print('* Building robot tree')
-def collect(id, parent = None):
+def collect(id):
     part = {}
     part['id'] = id
     part['children'] = []
-    for entry in relations:
-        if entry[0] == id and entry[1] != parent:
-            child = collect(entry[1], id)
-            child['mate'] = entry[2]
-            child['relation'] = entry[3]
-            part['children'].append(child)
-        if entry[1] == id and entry[0] != parent:
-            child = collect(entry[0], id)
-            child['mate'] = entry[2]
-            child['relation'] = entry[3]
+    for childId in relations:
+        entry = relations[childId]
+        if entry[0] == id:
+            child = collect(childId)
+            child['mate'] = entry[1]
+            child['relation'] = entry[2]
             part['children'].append(child)
     return part
 
-trunk = root['instances'][0]['id']
+# Searching for the trunk, assuming it is an element that has
+# not children
+for childId in relations:
+    entry = relations[childId]
+    if entry[0] not in relations:
+        trunk = entry[0]
+        break
+
 tree = collect(trunk)
 
 if outputFormat == 'urdf':
@@ -187,11 +194,10 @@ def addPart(occurrence, matrix):
     # Importing STL file for this part
     prefix = part['name'].split(' ')[0].lower()
     stlFile = prefix+'.stl'
-    if not os.path.exists(outputDirectory+'/'+stlFile):
-        stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-        f = open(outputDirectory+'/'+stlFile, 'wb')
-        f.write(stl)
-        f.close()
+    stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    f = open(outputDirectory+'/'+stlFile, 'wb')
+    f.write(stl)
+    f.close()
 
     # Import the SCAD files pure shapes
     shapes = None

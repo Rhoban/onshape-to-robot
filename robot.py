@@ -97,7 +97,6 @@ class RobotURDF:
         if not self.drawCollisions:
             # Visual
             self.append('<visual>')
-            self.append('<pose>0 0 0 0 0 0</pose>')
             self.append('<geometry>')
             self.append('<mesh filename="package://'+stl+'"/>')
             self.append('</geometry>')
