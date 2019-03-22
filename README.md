@@ -56,6 +56,8 @@ Then edit `config.json` in your repository, here are the entries:
   the first assembly found in document will be used.
 * `jointMaxEffort` and `jointMaxVelocity` can be used to specify the values that will
   be used in the `joints` entry
+* `noDynamics` can be set to `true` if you want to have all masses and inertia to 0
+  (suppose you want to create an environment)
 
 ## Running the import
 

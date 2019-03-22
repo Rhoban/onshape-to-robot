@@ -36,6 +36,7 @@ assemblyName = configGet('assemblyName', False)
 outputFormat = configGet('outputFormat', 'urdf')
 jointMaxEffort = configGet('jointMaxEffort', 1)
 jointMaxVelocity = configGet('jointMaxVelocity', 20)
+noDynamics =configGet('noDynamics', False)
 outputDirectory = robot
 
 try:
@@ -158,10 +159,6 @@ while changed:
                     assignParts(occurrenceA, assignations[occurrenceB])
                     changed = True
     
-for occurrence in occurrences.values():
-    if occurrence['assignation'] is None:
-        print('! WARNING, part ('+occurrence['instance']['name']+') has no assignation, should be connected with DOF or with fixed constraint')
-    
 print('* Building robot tree')
 def collect(id):
     part = {}
@@ -186,6 +183,11 @@ for childId in relations:
 trunkOccurrence = getOccurrence([trunk])
 print('Trunk is '+trunkOccurrence['instance']['name'])
 
+for occurrence in occurrences.values():
+    if occurrence['assignation'] is None:
+        print('! WARNING, part ('+occurrence['instance']['name']+') has no assignation, connecting it with trunk')
+        occurrence['assignation'] = trunk
+
 tree = collect(trunk)
 
 if outputFormat == 'urdf':
@@ -198,9 +200,11 @@ else:
 robot.drawCollisions = drawCollisions
 robot.jointMaxEffort = jointMaxEffort
 robot.jointMaxVelocity = jointMaxVelocity
+robot.noDynamics = noDynamics
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
+    global noDynamics
     part = occurrence['instance']
 
     # Importing STL file for this part
@@ -224,14 +228,19 @@ def addPart(occurrence, matrix):
     color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
 
     # Obtain mass properties about that part
-    massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-    massProperties = massProperties['bodies'][part['partId']]
-    mass = massProperties['mass'][0]
-    com = massProperties['centroid']
-    inertia = massProperties['inertia']
+    if noDynamics:
+        mass = 0
+        com = [0]*3
+        inertia = [0]*12
+    else:
+        massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+        massProperties = massProperties['bodies'][part['partId']]
+        mass = massProperties['mass'][0]
+        com = massProperties['centroid']
+        inertia = massProperties['inertia']
 
-    if abs(mass) < 1e-9:
-        print('! WARNING Part '+part['name']+' has no mass, maybe you should assign a material to it ?')
+        if abs(mass) < 1e-9:
+            print('! WARNING Part '+part['name']+' has no mass, maybe you should assign a material to it ?')
 
     pose = occurrence['transform']
     if robot.relative:

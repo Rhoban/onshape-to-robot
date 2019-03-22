@@ -45,7 +45,8 @@ class RobotURDF:
         self.relative = True
         self.xml = ''
         self.jointMaxEffort = 1
-        self.jointMaxVelocity = False
+        self.jointMaxVelocity = 10
+        self.noDynamics = False
         self.ext = 'urdf'
         self.append('<robot name="onshape">')
         pass
@@ -58,7 +59,10 @@ class RobotURDF:
         self.append('<inertial>')
         self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
         # XXX: We use a low mass because PyBullet consider mass 0 as world fixed
-        self.append('<mass value="1e-9" />')
+        if self.noDynamics:
+            self.append('<mass value="0" />')
+        else:
+            self.append('<mass value="1e-9" />')
         self.append('<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
         self.append('</inertial>')
         self.append('</link>')
@@ -172,7 +176,8 @@ class RobotSDF:
         self.drawCollisions = False
         self.xml = ''
         self.jointMaxEffort = 1
-        self.jointMaxVelocity = False
+        self.jointMaxVelocity = 10
+        self.noDynamics = False
         self.ext = 'sdf'
         self.relative = False
         self.append('<sdf version="1.6">')
