@@ -224,8 +224,11 @@ def addPart(occurrence, matrix):
         
     # Obtain metadatas about part to retrieve color
     metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-    colors = metadata['appearance']['color']
-    color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
+    if 'appearance' in metadata:
+        colors = metadata['appearance']['color']
+        color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
+    else:
+        color = [0.5, 0.5, 0.5]
 
     # Obtain mass properties about that part
     if noDynamics:
