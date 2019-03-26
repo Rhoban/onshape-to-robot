@@ -49,19 +49,44 @@ Then edit `config.json` in your repository, here are the entries:
 
 * `onshape_api`: URL for OnShape API
 * `onshape_access_key` and `onshape_secret_key` are the API key you obtained
-  from [OnShape developper portal](https://dev-portal.onshape.com/keys)
+  from [OnShape developer portal](https://dev-portal.onshape.com/keys)
 * `documentId` is the document ID to be imported (see above picture)
 * `outputFormat` can be `sdf` or `urdf`
 * `drawFrames` if you want the frames to be drawn
 * `drawCollisions` if you want the elements from collisions to be also put
   in visuals instead of meshes (can be used to debug pure shapes)
 * `useScads` if you want or not to use scad files for pure shapes (see below)
-* Optionnaly, `assemblyName` can be used to specify the name of the assembly. Else
+* Optionally, `assemblyName` can be used to specify the name of the assembly. Else
   the first assembly found in document will be used.
 * `jointMaxEffort` and `jointMaxVelocity` can be used to specify the values that will
-  be used in the `joints` entry
+  be used in the `joints` entry. Alternatively, they can be dictionaries associating
+  joints names to values.
 * `noDynamics` can be set to `true` if you want to have all masses and inertia to 0
   (suppose you want to create an environment)
+
+Here is an example of configuration:
+
+```json
+{
+    "onshape_api": "https://cad.onshape.com",
+    "onshape_access_key": "[KEY]",
+    "onshape_secret_key": "[SECRET]",
+
+    "documentId": "483c803918afc4d52e2647f0",
+    "assemblyName": "robot",
+    "outputFormat": "urdf",
+    "drawFrames": false,
+    "drawCollisions": false,
+    "useScads": true,
+    "noDynamics": false,
+
+    "jointMaxEffort": {
+        "default": 1.5,
+        "head_pitch": 0.5   
+    },
+    "jointMaxVelocity": 22
+}
+```
 
 ## Running the import
 

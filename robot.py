@@ -39,7 +39,7 @@ def pose(matrix, frame = ''):
 
     return sdf % (x, y, z, rpy[0], rpy[1], rpy[2])
 
-class RobotURDF:
+class Robot(object):
     def __init__(self):
         self.drawCollisions = False
         self.relative = True
@@ -47,12 +47,34 @@ class RobotURDF:
         self.jointMaxEffort = 1
         self.jointMaxVelocity = 10
         self.noDynamics = False
+    
+    def append(self, str):
+        self.xml += str+"\n"
+
+    def jointMaxEffortFor(self, jointName):
+        if isinstance(self.jointMaxEffort, dict):
+            if jointName in self.jointMaxEffort:
+                return self.jointMaxEffort[jointName]
+            else:
+                return self.jointMaxEffort['default']
+        else:
+            return self.jointMaxEffort
+
+    def jointMaxVelocityFor(self, jointName):
+        if isinstance(self.jointMaxVelocity, dict):
+            if jointName in self.jointMaxVelocity:
+                return self.jointMaxVelocity[jointName]
+            else:
+                return self.jointMaxVelocity['default']
+        else:
+            return self.jointMaxVelocity
+
+class RobotURDF(Robot):
+    def __init__(self):
+        super().__init__()
         self.ext = 'urdf'
         self.append('<robot name="onshape">')
         pass
-
-    def append(self, str):
-        self.xml += str+"\n"
 
     def addDummyLink(self, name):
         self.append('<link name="'+name+'">')
@@ -162,7 +184,7 @@ class RobotURDF:
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
         self.append('<axis xyz="%f %f %f"/>' % tuple(zAxis))
-        self.append('<limit effort="%f" velocity="%f" />' % (self.jointMaxEffort, self.jointMaxVelocity))
+        self.append('<limit effort="%f" velocity="%f" />' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name)))
         self.append('<joint_properties friction="0.0"/>')
         self.append('</joint>')
         self.append('')
@@ -171,21 +193,14 @@ class RobotURDF:
         self.append('</robot>')
 
 
-class RobotSDF:
+class RobotSDF(Robot):
     def __init__(self):
-        self.drawCollisions = False
-        self.xml = ''
-        self.jointMaxEffort = 1
-        self.jointMaxVelocity = 10
-        self.noDynamics = False
+        super().__init__()
         self.ext = 'sdf'
         self.relative = False
         self.append('<sdf version="1.6">')
         self.append('<model name="onshape">')
         pass
-
-    def append(self, str):
-        self.xml += str+"\n"
 
     def addDummyLink(self, name):
         self.append('<link name="'+name+'">')
@@ -338,7 +353,7 @@ class RobotSDF:
         self.append('<child>'+linkTo+'</child>')
         self.append('<axis>')
         self.append('<xyz>%f %f %f</xyz>' % tuple(zAxis))
-        self.append('<limit><effort>%f</effort><velocity>%f</velocity></limit>' % (self.jointMaxEffort, self.jointMaxVelocity))
+        self.append('<limit><effort>%f</effort><velocity>%f</velocity></limit>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name)))
         self.append('</axis>')
         self.append('</joint>')
         self.append('')
