@@ -111,7 +111,13 @@ for feature in features:
     parent = data['matedEntities'][1]['matedOccurrence'][0]
 
     if data['name'][0:3] == 'dof':
-        name = '_'.join(data['name'].split('_')[1:])
+        parts = data['name'].split('_')
+        del parts[0]
+        data['inverted'] = False
+        if parts[-1] == 'inv' or parts[-1] == 'inverted':
+            data['inverted'] = True
+            del parts[-1]
+        name = '_'.join(parts)
         if name == '':
             print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
             exit()
@@ -300,7 +306,10 @@ def buildRobot(tree, matrix, linkPart=None):
 
         worldAxisFrame = childLinkPart['transform']
         origin = matedOccurrence['matedCS']['origin']
-        zAxis = matedOccurrence['matedCS']['zAxis']
+        zAxis = np.array(matedOccurrence['matedCS']['zAxis'])
+
+        if mate['inverted']:
+            zAxis = -zAxis
 
         translation = np.matrix(np.identity(4))
         translation[0, 3] += origin[0]

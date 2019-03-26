@@ -20,6 +20,10 @@ There is some design constraints:
 <img src="img/smalls/design.png" />
 </p>
 
+It is possible to invert the axis for convenience by adding `_inv` at the end of the name. For instance
+`dof_head_pitch_inv` will result in a joint named `head_pitch` having the axis inverted with the one
+from the OnShape assembly.
+
 ## Requirements
 
 First clone this repository:
