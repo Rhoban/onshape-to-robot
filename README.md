@@ -61,6 +61,8 @@ Then edit `config.json` in your repository, here are the entries:
 * `jointMaxEffort` and `jointMaxVelocity` can be used to specify the values that will
   be used in the `joints` entry. Alternatively, they can be dictionaries associating
   joints names to values.
+* The `dynamics` key can be used to override inertial data computed by OnShape for
+  a specific part (see example below)
 * `noDynamics` can be set to `true` if you want to have all masses and inertia to 0
   (suppose you want to create an environment)
 
@@ -84,7 +86,17 @@ Here is an example of configuration:
         "default": 1.5,
         "head_pitch": 0.5   
     },
-    "jointMaxVelocity": 22
+    "jointMaxVelocity": 22,
+
+    "dynamics": {
+        "motorcase": {
+            "mass": 0.5,
+            "com": [0, 0.1, 0],
+            "inertia": [0.1, 0, 0,
+                        0, 0.1, 0,
+                        0, 0, 0.1]
+        }
+    }
 }
 ```
 

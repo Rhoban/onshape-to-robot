@@ -38,6 +38,10 @@ jointMaxEffort = configGet('jointMaxEffort', 1)
 jointMaxVelocity = configGet('jointMaxVelocity', 20)
 noDynamics =configGet('noDynamics', False)
 outputDirectory = robot
+tmp = configGet('dynamics', {})
+dynamicsOverride = {}
+for key in tmp:
+    dynamicsOverride[key.lower()] = tmp[key]
 
 try:
     os.makedirs(outputDirectory)
@@ -210,11 +214,11 @@ robot.noDynamics = noDynamics
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
-    global noDynamics
+    global noDynamics, dynamicsOverride
     part = occurrence['instance']
 
     # Importing STL file for this part
-    prefix = part['name'].split(' ')[0].lower()
+    prefix = extractPartName(part['name'])
     stlFile = prefix+'.stl'
     stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
     f = open(outputDirectory+'/'+stlFile, 'wb')
@@ -242,11 +246,17 @@ def addPart(occurrence, matrix):
         com = [0]*3
         inertia = [0]*12
     else:
-        massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
-        massProperties = massProperties['bodies'][part['partId']]
-        mass = massProperties['mass'][0]
-        com = massProperties['centroid']
-        inertia = massProperties['inertia']
+        if prefix in dynamicsOverride:
+            entry = dynamicsOverride[prefix]
+            mass = entry['mass']
+            com = entry['com']
+            inertia = entry['inertia']
+        else:
+            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+            massProperties = massProperties['bodies'][part['partId']]
+            mass = massProperties['mass'][0]
+            com = massProperties['centroid']
+            inertia = massProperties['inertia']
 
         if abs(mass) < 1e-9:
             print('! WARNING Part '+part['name']+' has no mass, maybe you should assign a material to it ?')
@@ -257,11 +267,14 @@ def addPart(occurrence, matrix):
     robot.addPart(pose, stlFile, mass, com, inertia, color, shapes)
 
 partNames = {}
-def processPartName(name):
-    global partNames
+def extractPartName(name):
     parts = name.split(' ')
     del parts[-1]
-    name = '_'.join(parts).lower()
+    return '_'.join(parts).lower()
+
+def processPartName(name):
+    global partNames
+    name = extractPartName(name)
 
     if name in partNames:
         partNames[name] += 1
