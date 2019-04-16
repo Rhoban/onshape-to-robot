@@ -158,7 +158,7 @@ while changed:
                     assignParts(occurrenceB, {True: assignations[occurrenceA], False: 'frame'}[drawFrames])
                     changed = True
                 if occurrenceB in assignations:
-                    frames[occurrenceB].append([name, data['matedEntities'][1]['matedOccurrence']])
+                    frames[occurrenceB].append([name, data['matedEntities'][0]['matedOccurrence']])
                     assignParts(occurrenceA, {True: assignations[occurrenceB], False: 'frame'}[drawFrames])
                     changed = True
             else:
