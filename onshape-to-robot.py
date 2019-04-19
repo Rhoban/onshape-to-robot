@@ -111,6 +111,10 @@ features = root['features']
 for feature in features:
     data = feature['featureData']
 
+    if len(data['matedEntities'][0]['matedOccurrence']) == 0 \
+        or len(data['matedEntities'][1]['matedOccurrence']) == 0:
+        continue
+
     child = data['matedEntities'][0]['matedOccurrence'][0]
     parent = data['matedEntities'][1]['matedOccurrence'][0]
 
@@ -125,6 +129,7 @@ for feature in features:
         if name == '':
             print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
             exit()
+        print('Found dof: '+name)
         
         relations[child] = [parent, data, name]
         assignParts(child, child)
@@ -147,6 +152,11 @@ while changed:
     changed = False
     for feature in features:
         data = feature['featureData']
+
+        if len(data['matedEntities'][0]['matedOccurrence']) == 0 \
+            or len(data['matedEntities'][1]['matedOccurrence']) == 0:
+            continue
+
         occurrenceA = data['matedEntities'][0]['matedOccurrence'][0]
         occurrenceB = data['matedEntities'][1]['matedOccurrence'][0]
 
