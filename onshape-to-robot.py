@@ -36,7 +36,8 @@ assemblyName = configGet('assemblyName', False)
 outputFormat = configGet('outputFormat', 'urdf')
 jointMaxEffort = configGet('jointMaxEffort', 1)
 jointMaxVelocity = configGet('jointMaxVelocity', 20)
-noDynamics =configGet('noDynamics', False)
+noDynamics = configGet('noDynamics', False)
+ignore = configGet('ignore', [])
 outputDirectory = robot
 tmp = configGet('dynamics', {})
 dynamicsOverride = {}
@@ -224,11 +225,15 @@ robot.noDynamics = noDynamics
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
-    global noDynamics, dynamicsOverride
+    global noDynamics, dynamicsOverride, ignore
     part = occurrence['instance']
 
     # Importing STL file for this part
     prefix = extractPartName(part['name'])
+
+    if prefix in ignore:
+        return
+
     stlFile = prefix+'.stl'
     stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
     f = open(outputDirectory+'/'+stlFile, 'wb')
