@@ -279,7 +279,7 @@ def addPart(occurrence, matrix):
     pose = occurrence['transform']
     if robot.relative:
         pose = np.linalg.inv(matrix)*pose
-    robot.addPart(pose, stlFile, mass, com, inertia, color, shapes)
+    robot.addPart(pose, stlFile, mass, com, inertia, color, shapes, prefix)
 
 partNames = {}
 def extractPartName(name):
