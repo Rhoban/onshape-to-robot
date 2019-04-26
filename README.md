@@ -65,6 +65,7 @@ Then edit `config.json` in your repository, here are the entries:
   a specific part (see example below)
 * `noDynamics` can be set to `true` if you want to have all masses and inertia to 0
   (suppose you want to create an environment)
+* `ignore` can be a list of part that you want to be ignored in the URDF export
 
 Here is an example of configuration:
 
@@ -96,9 +97,19 @@ Here is an example of configuration:
                         0, 0.1, 0,
                         0, 0, 0.1]
         }
-    }
+    },
+
+    "ignore": [
+        "small_screw",
+        "small_nut"
+    ]
 }
 ```
+
+## Naming links
+
+If you create a mate connector and name it `link_something`, the link corresponding to the part
+on which it is attached will be named `something` in the resulting URDF.
 
 ## Running the import
 
