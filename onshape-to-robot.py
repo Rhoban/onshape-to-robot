@@ -106,40 +106,47 @@ def assignParts(root, parent):
 
 print('* Getting assembly features, scanning for DOFs...')
 trunk = None
+occurrenceLinkNames = {}
 relations = {}
 topLevels = set()
 features = root['features']
 for feature in features:
-    data = feature['featureData']
+    if feature['featureType'] == 'mateConnector':
+        name = feature['featureData']['name']
+        if name[0:5] == 'link_':
+            name = name[5:]
+            occurrenceLinkNames[tuple(feature['featureData']['occurrence'])] = name
+    else:
+        data = feature['featureData']
 
-    if len(data['matedEntities'][0]['matedOccurrence']) == 0 \
-        or len(data['matedEntities'][1]['matedOccurrence']) == 0:
-        continue
+        if len(data['matedEntities'][0]['matedOccurrence']) == 0 \
+            or len(data['matedEntities'][1]['matedOccurrence']) == 0:
+            continue
 
-    child = data['matedEntities'][0]['matedOccurrence'][0]
-    parent = data['matedEntities'][1]['matedOccurrence'][0]
+        child = data['matedEntities'][0]['matedOccurrence'][0]
+        parent = data['matedEntities'][1]['matedOccurrence'][0]
 
-    if data['name'][0:3] == 'dof':
-        parts = data['name'].split('_')
-        del parts[0]
-        data['inverted'] = False
-        if parts[-1] == 'inv' or parts[-1] == 'inverted':
-            data['inverted'] = True
-            del parts[-1]
-        name = '_'.join(parts)
-        if name == '':
-            print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
-            exit()
-        print('Found dof: '+name)
-        
-        relations[child] = [parent, data, name]
-        assignParts(child, child)
-        assignParts(parent, parent)
-        if child not in frames:
-            frames[child] = []
-        if parent not in frames:
-            frames[parent] = []
-                
+        if data['name'][0:3] == 'dof':
+            parts = data['name'].split('_')
+            del parts[0]
+            data['inverted'] = False
+            if parts[-1] == 'inv' or parts[-1] == 'inverted':
+                data['inverted'] = True
+                del parts[-1]
+            name = '_'.join(parts)
+            if name == '':
+                print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
+                exit()
+            print('Found dof: '+name)
+            
+            relations[child] = [parent, data, name]
+            assignParts(child, child)
+            assignParts(parent, parent)
+            if child not in frames:
+                frames[child] = []
+            if parent not in frames:
+                frames[parent] = []
+      
 print('- Found '+str(len(relations))+' DOFs')
 
 # If we have no DOF
@@ -152,6 +159,9 @@ changed = True
 while changed:
     changed = False
     for feature in features:
+        if feature['featureType'] != 'mate':
+            continue
+
         data = feature['featureData']
 
         if len(data['matedEntities'][0]['matedOccurrence']) == 0 \
@@ -225,7 +235,7 @@ robot.noDynamics = noDynamics
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
-    global noDynamics, dynamicsOverride, ignore
+    global noDynamics, dynamicsOverride, ignore, occurrenceLinkNames
     part = occurrence['instance']
 
     # Importing STL file for this part
@@ -279,7 +289,13 @@ def addPart(occurrence, matrix):
     pose = occurrence['transform']
     if robot.relative:
         pose = np.linalg.inv(matrix)*pose
-    robot.addPart(pose, stlFile, mass, com, inertia, color, shapes, prefix)
+    
+    linkName = None
+    path = tuple(occurrence['path'])
+    if path in occurrenceLinkNames:
+        linkName = occurrenceLinkNames[path]
+
+    robot.addPart(pose, stlFile, mass, com, inertia, color, shapes, prefix, linkName)
 
 partNames = {}
 def extractPartName(name):

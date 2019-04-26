@@ -116,8 +116,10 @@ class RobotURDF(Robot):
         # Linking it with last link with a fixed link
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
-    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
+    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name='', linkName=None):
         name = self._link_name+'_'+str(self._link_childs)+'_'+name
+        if linkName is not None:
+            name = linkName
         self._link_childs += 1
 
         self.append('<link name="'+name+'">')
@@ -276,8 +278,10 @@ class RobotSDF(Robot):
 
         return m
 
-    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
+    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name='', linkName=None):
         name = self._link_name+'_'+str(self._link_childs)+'_'+name
+        if linkName is not None:
+            name = linkName
         self._link_childs += 1
 
         # self.append('<link name="'+name+'">')
