@@ -61,7 +61,7 @@ def parse_csg(data):
                 node, parameters = extract_node_parameters(line)
                 transform = np.matrix(np.identity(4))
                 for entry in matrices:
-                    transform = entry*transform
+                    transform = transform*entry
                 if node == 'cube':
                     shapes.append({
                         'type': 'cube',
