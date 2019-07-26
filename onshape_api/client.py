@@ -12,6 +12,7 @@ import random
 import string
 import os
 import json
+import hashlib
 
 class Client():
     '''
@@ -261,6 +262,11 @@ class Client():
         }
         return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/stl', headers=req_headers)
 
+    def hash_partid(self, data):
+        m = hashlib.sha1()
+        m.update(data.encode('utf-8'))
+        return m.hexdigest()
+
     def part_studio_stl_m(self, did, mid, eid, partid):
         def invoke():
             req_headers = {
@@ -268,16 +274,16 @@ class Client():
             }
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter'}, headers=req_headers)
 
-        return self.cache_get('part_stl', (did, mid, eid, partid), invoke)
+        return self.cache_get('part_stl', (did, mid, eid, self.hash_partid(partid)), invoke)
 
     def part_get_metadata(self, did, mid, eid, partid):
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata')
 
-        return json.loads(self.cache_get('metadata', (did, mid, eid, partid), invoke))
+        return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid)), invoke))
 
     def part_mass_properties(self, did, mid, eid, partid):
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
 
-        return json.loads(self.cache_get('massproperties', (did, mid, eid, partid), invoke))
+        return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid)), invoke))
