@@ -122,7 +122,7 @@ class Client():
             f = open(fileName, 'wb')
             f.write(result)
             f.close()
-        if isString and type(result) == 'bytes':
+        if isString and type(result) == bytes:
             result = result.decode('utf-8')
         return result
             
