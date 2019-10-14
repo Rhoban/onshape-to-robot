@@ -105,7 +105,7 @@ class Client():
         '''
         return self._api.request('get', '/api/documents/' + did)
 
-    def cache_get(self, method, key, callback):
+    def cache_get(self, method, key, callback, isString = False):
         if type(key) == tuple:
             key = '_'.join(list(key))
         fileName = method+'__'+key
@@ -122,6 +122,8 @@ class Client():
             f = open(fileName, 'wb')
             f.write(result)
             f.close()
+        if isString and type(result) == 'bytes':
+            result = result.decode('utf-8')
         return result
             
 
@@ -280,10 +282,10 @@ class Client():
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata')
 
-        return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid)), invoke))
+        return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid)), invoke, True))
 
     def part_mass_properties(self, did, mid, eid, partid):
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
 
-        return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid)), invoke))
+        return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid)), invoke, True).decode('utf-8'))
