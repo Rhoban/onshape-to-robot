@@ -288,4 +288,4 @@ class Client():
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
 
-        return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid)), invoke, True).decode('utf-8'))
+        return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid)), invoke, True))
