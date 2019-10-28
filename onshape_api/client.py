@@ -261,23 +261,23 @@ class Client():
         }
         return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/stl', headers=req_headers)
 
-    def part_studio_stl_m(self, did, mid, eid, partid):
+    def part_studio_stl_m(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
             req_headers = {
                 'Accept': 'application/vnd.onshape.v1+octet-stream'
             }
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter'}, headers=req_headers)
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter', 'configuration': configuration}, headers=req_headers)
 
-        return self.cache_get('part_stl', (did, mid, eid, partid), invoke)
+        return self.cache_get('part_stl', (did, mid, eid, partid, configuration), invoke)
 
-    def part_get_metadata(self, did, mid, eid, partid):
+    def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata')
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata', query={'configuration': configuration})
 
-        return json.loads(self.cache_get('metadata', (did, mid, eid, partid), invoke))
+        return json.loads(self.cache_get('metadata', (did, mid, eid, partid, configuration), invoke))
 
-    def part_mass_properties(self, did, mid, eid, partid):
+    def part_mass_properties(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties')
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties', query={'configuration': configuration})
 
-        return json.loads(self.cache_get('massproperties', (did, mid, eid, partid), invoke))
+        return json.loads(self.cache_get('massproperties', (did, mid, eid, partid, configuration), invoke))
