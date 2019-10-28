@@ -12,6 +12,7 @@ import random
 import string
 import os
 import json
+import hashlib
 
 class Client():
     '''
@@ -104,7 +105,7 @@ class Client():
         '''
         return self._api.request('get', '/api/documents/' + did)
 
-    def cache_get(self, method, key, callback):
+    def cache_get(self, method, key, callback, isString = False):
         if type(key) == tuple:
             key = '_'.join(list(key))
         fileName = method+'__'+key
@@ -121,6 +122,8 @@ class Client():
             f = open(fileName, 'wb')
             f.write(result)
             f.close()
+        if isString and type(result) == bytes:
+            result = result.decode('utf-8')
         return result
             
 
@@ -261,6 +264,11 @@ class Client():
         }
         return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/stl', headers=req_headers)
 
+    def hash_partid(self, data):
+        m = hashlib.sha1()
+        m.update(data.encode('utf-8'))
+        return m.hexdigest()
+
     def part_studio_stl_m(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
             req_headers = {
@@ -268,16 +276,16 @@ class Client():
             }
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/stl', query={'mode': 'binary', 'units': 'meter', 'configuration': configuration}, headers=req_headers)
 
-        return self.cache_get('part_stl', (did, mid, eid, partid, configuration), invoke)
+        return self.cache_get('part_stl', (did, mid, eid, self.hash_partid(partid), configuration), invoke)
 
     def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/metadata', query={'configuration': configuration})
 
-        return json.loads(self.cache_get('metadata', (did, mid, eid, partid, configuration), invoke))
+        return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
 
     def part_mass_properties(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties', query={'configuration': configuration})
 
-        return json.loads(self.cache_get('massproperties', (did, mid, eid, partid, configuration), invoke))
+        return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))

@@ -200,7 +200,7 @@ class Onshape():
 
             return self.request(method, location.path, query=new_query, headers=headers, base_url=new_base_url)
         elif not 200 <= res.status_code <= 206:
-            print('! ERROR ('+str(res.status_code)+') while usine OnShape API')
+            print('! ERROR ('+str(res.status_code)+') while using OnShape API')
             if res.text:
                 print('! '+res.text)
             exit()
