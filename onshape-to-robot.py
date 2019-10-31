@@ -239,13 +239,14 @@ def addPart(occurrence, matrix):
     part = occurrence['instance']
 
     # Importing STL file for this part
-    prefix = extractPartName(part['name'])
+    prefix = extractPartName(part['name'], part['configuration'])
 
     if prefix in ignore:
         return
 
     stlFile = prefix+'.stl'
-    stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], 
+                                   part['partId'], part['configuration'])
     f = open(outputDirectory+'/'+stlFile, 'wb')
     f.write(stl)
     f.close()
@@ -258,7 +259,7 @@ def addPart(occurrence, matrix):
             shapes = csg.process(outputDirectory+'/'+scadFile)
         
     # Obtain metadatas about part to retrieve color
-    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
     if 'appearance' in metadata:
         colors = metadata['appearance']['color']
         color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
@@ -277,7 +278,7 @@ def addPart(occurrence, matrix):
             com = entry['com']
             inertia = entry['inertia']
         else:
-            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'])
+            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
             massProperties = massProperties['bodies'][part['partId']]
             mass = massProperties['mass'][0]
             com = massProperties['centroid']
@@ -298,14 +299,18 @@ def addPart(occurrence, matrix):
     robot.addPart(pose, stlFile, mass, com, inertia, color, shapes, prefix, linkName)
 
 partNames = {}
-def extractPartName(name):
+def extractPartName(name, configuration):
     parts = name.split(' ')
     del parts[-1]
+
+    if configuration != 'default':
+        parts += ['_' + configuration.replace('=', '_').replace(' ', '_')]
+
     return '_'.join(parts).lower()
 
-def processPartName(name):
+def processPartName(name, configuration):
     global partNames
-    name = extractPartName(name)
+    name = extractPartName(name, configuration)
 
     if name in partNames:
         partNames[name] += 1
@@ -319,14 +324,17 @@ def buildRobot(tree, matrix, linkPart=None):
     instance = occurrence['instance']
     print('~ Adding top-level instance ['+instance['name']+']')
 
-    link = processPartName(instance['name'])
+    link = processPartName(instance['name'], instance['configuration'])
 
     # Collecting all children in the tree assigned to this top-level part
     robot.startLink(link, matrix)
     for occurrence in occurrences.values():
         if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
             name = '_'.join(occurrence['path'])
-            print('- Adding part '+occurrence['instance']['name'])
+            extra = ''
+            if occurrence['instance']['configuration'] != 'default':
+                extra =' (configuration: '+occurrence['instance']['configuration']+')'
+            print('- Adding part '+occurrence['instance']['name']+extra)
             addPart(occurrence, matrix)
     robot.endLink()
 
