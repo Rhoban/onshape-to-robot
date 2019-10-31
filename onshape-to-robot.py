@@ -58,7 +58,7 @@ print('* Retrieving elements in the document, searching for the assembly...')
 elements = client.list_elements(documentId).json()
 assemblyId = None
 for element in elements:
-    if element['type'] == 'Assembly' and (assemblyName is False or element['name'].lower() == assemblyName):
+    if element['type'] == 'Assembly' and (assemblyName is False or element['name'] == assemblyName):
         print("- Found assembly, id: "+element['id']+', name: "'+element['name']+'"')
         assemblyId = element['id']
 
