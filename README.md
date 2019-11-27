@@ -90,7 +90,7 @@ Then edit `config.json` in your repository, here are the entries:
 
 Here is an example of configuration:
 
-```json
+```js
 {
     // You should store those three in environment variables
     "onshape_api": "https://cad.onshape.com",
