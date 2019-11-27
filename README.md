@@ -32,7 +32,7 @@ First clone this repository:
 
 Install the dependencies (can be in your python3 virtualenv):
 
-    pip install numpy pybullet requests
+    pip install numpy pybullet requests commentjson
 
 You might also need OpenSCAD for pure shape estimation
 
@@ -92,24 +92,37 @@ Here is an example of configuration:
 
 ```json
 {
+    // You should store those three in environment variables
     "onshape_api": "https://cad.onshape.com",
     "onshape_access_key": "[KEY]",
     "onshape_secret_key": "[SECRET]",
 
+    // Can be found in the URL when editing the assembly
     "documentId": "483c803918afc4d52e2647f0",
+    // If not specified, the first assembly will be used
     "assemblyName": "robot",
+    // Can be urdf or sdf
     "outputFormat": "urdf",
+    // The frames parts are kept in the final file
     "drawFrames": false,
+    // Collisions (pure shapes) are also used in the visual section
     "drawCollisions": false,
+    // Wether or not the scan for SCAD files (pure shapes) should be done
     "useScads": true,
+    // Masses, com and inertias will be zero (can be used if you import a static
+    // field for example)
     "noDynamics": false,
 
+    // Those can be used to configure the joint max efforts and velocity, and
+    // overriden for specific joints
     "jointMaxEffort": {
         "default": 1.5,
         "head_pitch": 0.5   
     },
     "jointMaxVelocity": 22,
 
+    // This can be used to override the dynamics of some part (suppose it's a compound
+    // which dynamics is well specified)
     "dynamics": {
         "motorcase": {
             "mass": 0.5,
@@ -120,6 +133,7 @@ Here is an example of configuration:
         }
     },
 
+    // Some parts can be totally ignored during import
     "ignore": [
         "small_screw",
         "small_nut"

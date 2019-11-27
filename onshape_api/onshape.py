@@ -10,7 +10,7 @@ from onshape_api import utils
 import os
 import random
 import string
-import json
+import commentjson as json
 import hmac
 import hashlib
 import base64

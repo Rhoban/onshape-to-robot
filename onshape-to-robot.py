@@ -5,7 +5,7 @@ from copy import copy
 from robot import RobotURDF, RobotSDF
 import sys
 import os
-import json
+import commentjson as json
 import csg
 
 # Loading configuration & parameters
