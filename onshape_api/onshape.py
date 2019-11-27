@@ -73,8 +73,6 @@ class Onshape():
                 self._url = os.getenv('ONSHAPE_API')
                 self._access_key = os.getenv('ONSHAPE_ACCESS_KEY').encode('utf-8')
                 self._secret_key = os.getenv('ONSHAPE_SECRET_KEY').encode('utf-8')
-                print(self._access_key)
-                print(self._secret_key)
 
                 if self._url is None or self._access_key is None or self._secret_key is None:
                     exit('No key in config.json, and environment variables not set')
