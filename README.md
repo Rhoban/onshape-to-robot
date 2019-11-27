@@ -38,6 +38,25 @@ You might also need OpenSCAD for pure shape estimation
 
     apt-get install openscad
 
+## Setting up your API key
+
+To go any further, you will need to obtain API key and secret from the
+[OnShape developer portal](https://dev-portal.onshape.com/keys)
+
+We recommend you to store your API key and secret in environment variables, you can add something
+like this in your `.bashrc`:
+
+```bash
+// Obtained at https://dev-portal.onshape.com/keys
+export ONSHAPE_API=https://cad.onshape.com
+export ONSHAPE_ACCESS_KEY=Your_Access_Key
+export ONSHAPE_SECRET_KEY=Your_Secret_Key
+```
+
+Alternatively, those keys can be stored in the `config.json` file, that will override those
+parameters (see below). It is however preferred to use environment variables because you can then
+share safely your config.json without sharing your secret keys.
+
 ## Configuration
 
 Create your own robot configuration by copying the `robots/skeleton` directory
@@ -50,6 +69,8 @@ Then edit `config.json` in your repository, here are the entries:
 * `onshape_api`: URL for OnShape API
 * `onshape_access_key` and `onshape_secret_key` are the API key you obtained
   from [OnShape developer portal](https://dev-portal.onshape.com/keys)
+* **WARNING: Instead of storing those sensitive keys in your `config.json` file, you
+   can alternatively use the environment variables (see above)**
 * `documentId` is the document ID to be imported (see above picture)
 * `outputFormat` can be `sdf` or `urdf`
 * `drawFrames` if you want the frames to be drawn

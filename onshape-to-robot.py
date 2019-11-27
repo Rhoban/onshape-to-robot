@@ -8,14 +8,10 @@ import os
 import json
 import csg
 
-# Loading configuration
-robot = 'robots/demo/'
-if len(sys.argv) > 1:
-    robot = sys.argv[1]
-
-configFile = robot+'/config.json'
-client = Client(logging=False, creds=configFile)
-config = json.load(open(configFile))
+# Loading configuration & parameters
+if len(sys.argv) <= 1:
+    exit('Usage: onshape-to-robot.py [robot_directory]')
+robot = sys.argv[1]
 
 def configGet(name, default=None):
     global config
@@ -27,6 +23,10 @@ def configGet(name, default=None):
             exit()
         else:
             return default
+
+configFile = robot+'/config.json'
+client = Client(logging=False, creds=configFile)
+config = json.load(open(configFile))
 
 documentId = configGet('documentId')
 drawFrames = configGet('drawFrames')

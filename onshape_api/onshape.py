@@ -54,10 +54,12 @@ class Onshape():
         Args:
             - stack (str): Base URL
             - creds (str, default='./config.json'): Credentials location
-        '''
+        '''        
 
         if not os.path.isfile(creds):
             raise IOError('%s is not a file' % creds)
+
+        self._logging = logging
 
         with open(creds) as f:
             try:
@@ -65,9 +67,17 @@ class Onshape():
                 self._url = config["onshape_api"]
                 self._access_key = config['onshape_access_key'].encode('utf-8')
                 self._secret_key = config['onshape_secret_key'].encode('utf-8')
-                self._logging = logging
             except TypeError:
                 raise ValueError('%s is not valid json' % creds)
+            except KeyError:
+                self._url = os.getenv('ONSHAPE_API')
+                self._access_key = os.getenv('ONSHAPE_ACCESS_KEY').encode('utf-8')
+                self._secret_key = os.getenv('ONSHAPE_SECRET_KEY').encode('utf-8')
+                print(self._access_key)
+                print(self._secret_key)
+
+                if self._url is None or self._access_key is None or self._secret_key is None:
+                    exit('No key in config.json, and environment variables not set')
 
         if self._logging:
             utils.log('onshape instance created: url = %s, access key = %s' % (self._url, self._access_key))
