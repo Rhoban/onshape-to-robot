@@ -103,11 +103,36 @@ class RobotURDF(Robot):
 
     def startLink(self, name, matrix):
         self._link_name = name
-        self._link_childs = 0
-        self.addDummyLink(name)
+        self._dynamics = []
+        # self.addDummyLink(name)
+        self.append('<link name="'+name+'">')
 
     def endLink(self):
-        pass
+        mass = 0
+        com = np.array([0.0]*3)        
+        inertia = np.matrix(np.zeros((3,3)))
+        identity = np.matrix(np.eye(3))
+
+        for dynamic in self._dynamics:
+            mass += dynamic['mass']
+            com += dynamic['com']*dynamic['mass']
+        com /= mass
+
+        # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
+        for dynamic in self._dynamics:
+            r = dynamic['com'] - com
+            p = np.matrix(r)
+            inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
+
+        self.append('<inertial>')
+        self.append('<origin xyz="%g %g %g" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
+        self.append('<mass value="%g" />' % mass)
+        self.append('<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />' %
+            (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
+        self.append('</inertial>')
+
+        self.append('</link>')
+        self.append('')
 
     def addFrame(self, name, matrix):
         # Adding a dummy link
@@ -117,16 +142,11 @@ class RobotURDF(Robot):
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name='', linkName=None):
-        name = self._link_name+'_'+str(self._link_childs)+'_'+name
-        if linkName is not None:
-            name = linkName
-        self._link_childs += 1
-
-        self.append('<link name="'+name+'">')
 
         if not self.drawCollisions:
             # Visual
             self.append('<visual>')
+            self.append(origin(matrix))
             self.append('<geometry>')
             self.append('<mesh filename="package://'+stl+'"/>')
             self.append('</geometry>')
@@ -143,6 +163,7 @@ class RobotURDF(Robot):
             if shapes is None:
                 # We don't have pure shape, we use the mesh
                 self.append('<'+entry+'>')
+                self.append(origin(matrix))
                 self.append('<geometry>')
                 self.append('<mesh filename="package://'+stl+'"/>')
                 self.append('</geometry>')
@@ -154,7 +175,7 @@ class RobotURDF(Robot):
                 # Inserting pure shapes in the URDF model
                 for shape in shapes:
                         self.append('<'+entry+'>')
-                        self.append(origin(shape['transform']))
+                        self.append(origin(matrix*shape['transform']))
                         self.append('<geometry>')
                         if shape['type'] == 'cube':
                             self.append('<box size="%g %g %g" />' % tuple(shape['parameters']))
@@ -169,15 +190,28 @@ class RobotURDF(Robot):
                         self.append('</material>')
                         self.append('</'+entry+'>')
 
-        self.append('<inertial>')
-        self.append('<origin xyz="%g %g %g" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
-        self.append('<mass value="%g"/>' % mass)
-        self.append('<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />' %
-            (inertia[0], inertia[1], inertia[2], inertia[4], inertia[5], inertia[8]))
-        self.append('</inertial>')
-        self.append('</link>')
+        # self.append('<inertial>')
+        # self.append('<origin xyz="%g %g %g" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
+        # self.append('<mass value="%g"/>' % mass)
+        # self.append('<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />' %
+        #     (inertia[0], inertia[1], inertia[2], inertia[4], inertia[5], inertia[8]))
+        # self.append('</inertial>')
+        
+        # Inertia
+        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
+        R = matrix[:3, :3]
+        # Expressing COM in the link frame
+        com = np.array((matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
+        # Expressing inertia in the link frame
+        inertia = R.T*I*R
 
-        self.addFixedJoint(self._link_name, name, matrix)
+        self._dynamics.append({
+            'mass': mass,
+            'com': com,
+            'inertia': inertia
+        })
+
+        # self.addFixedJoint(self._link_name, name, matrix)
 
 
     def addJoint(self, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
