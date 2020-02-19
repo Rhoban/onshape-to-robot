@@ -3,62 +3,30 @@ import numpy as np
 from onshape_api.client import Client
 from copy import copy
 from robot import RobotURDF, RobotSDF
+from colorama import Fore, Back, Style
 import sys
 import os
 import commentjson as json
 import csg
 
-# Loading configuration & parameters
-if len(sys.argv) <= 1:
-    exit('Usage: onshape-to-robot.py [robot_directory]')
-robot = sys.argv[1]
+# Loading configuration
+from config import config, configFile
 
-def configGet(name, default=None):
-    global config
-    if name in config:
-        return config[name]
-    else:
-        if default is None:
-            print('! ERROR missing key "'+name+'" in config')
-            exit()
-        else:
-            return default
-
-configFile = robot+'/config.json'
+# OnShape API client
 client = Client(logging=False, creds=configFile)
-config = json.load(open(configFile))
 
-documentId = configGet('documentId')
-drawFrames = configGet('drawFrames')
-drawCollisions = configGet('drawCollisions', False)
-useScads = configGet('useScads', True)
-assemblyName = configGet('assemblyName', False)
-outputFormat = configGet('outputFormat', 'urdf')
-jointMaxEffort = configGet('jointMaxEffort', 1)
-jointMaxVelocity = configGet('jointMaxVelocity', 20)
-noDynamics = configGet('noDynamics', False)
-ignore = configGet('ignore', [])
-outputDirectory = robot
-tmp = configGet('dynamics', {})
-dynamicsOverride = {}
-for key in tmp:
-    dynamicsOverride[key.lower()] = tmp[key]
+if config['versionId'] is None:
+    print("\n" + Style.BRIGHT + '* Retrieving workspace ID ...' + Style.RESET_ALL)
+    document = client.get_document(config['documentId']).json()
+    workspaceId = document['defaultWorkspace']['id']
+else:
+    print("\n" + Style.BRIGHT + '* Using configuration version ID '+config['versionId']+' ...' + Style.RESET_ALL)
 
-try:
-    os.makedirs(outputDirectory)
-except OSError:
-    pass
-
-print('* Retrieving workspace ID ...')
-document = client.get_document(documentId).json()
-workspaceId = document['defaultWorkspace']['id']
-print('- Workspace id: '+workspaceId)
-
-print('* Retrieving elements in the document, searching for the assembly...')
-elements = client.list_elements(documentId).json()
+print("\n" + Style.BRIGHT + '* Retrieving elements in the document, searching for the assembly...' + Style.RESET_ALL)
+elements = client.list_elements(config['documentId']).json()
 assemblyId = None
 for element in elements:
-    if element['type'] == 'Assembly' and (assemblyName is False or element['name'] == assemblyName):
+    if element['type'] == 'Assembly' and (config['assemblyName'] is False or element['name'] == config['assemblyName']):
         print("- Found assembly, id: "+element['id']+', name: "'+element['name']+'"')
         assemblyId = element['id']
 
@@ -66,8 +34,11 @@ if assemblyId == None:
     print("! Unable to find assembly in this document")
     exit(1)
 
-print('* Retrieving assembly')
-assembly = client.get_assembly(documentId, workspaceId, assemblyId)
+print("\n" + Style.BRIGHT + '* Retrieving assembly' + Style.RESET_ALL)
+if config['versionId'] is None:
+    assembly = client.get_assembly(config['documentId'], workspaceId, assemblyId)
+else:
+    assembly = client.get_assembly(config['documentId'], config['versionId'], assemblyId, 'v')
 
 # Collecting parts instance from assembly and subassemblies
 instances = {}
@@ -104,7 +75,7 @@ def assignParts(root, parent):
         if occurrence['path'][0] == root:
             occurrence['assignation'] = parent
 
-print('* Getting assembly features, scanning for DOFs...')
+print("\n" + Style.BRIGHT +'* Getting assembly features, scanning for DOFs...' + Style.RESET_ALL)
 trunk = None
 occurrenceLinkNames = {}
 relations = {}
@@ -117,9 +88,13 @@ for feature in features:
             name = name[5:]
             occurrenceLinkNames[tuple(feature['featureData']['occurrence'])] = name
     else:
-        data = feature['featureData']
+        if feature['suppressed']:
+            continue
 
-        if len(data['matedEntities'][0]['matedOccurrence']) == 0 \
+        data = feature['featureData']
+        
+        if len(data['matedEntities']) != 2 or \
+            len(data['matedEntities'][0]['matedOccurrence']) == 0 \
             or len(data['matedEntities'][1]['matedOccurrence']) == 0:
             continue
 
@@ -135,9 +110,10 @@ for feature in features:
                 del parts[-1]
             name = '_'.join(parts)
             if name == '':
-                print('! Error: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")')
+                print(Fore.RED + 
+                    'ERROR: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")' + Style.RESET_ALL)
                 exit()
-            print('Found dof: '+name)
+            print(Fore.GREEN + '+ Found DOF: '+name + Style.RESET_ALL)
             
             relations[child] = [parent, data, name]
             assignParts(child, child)
@@ -147,7 +123,7 @@ for feature in features:
             if parent not in frames:
                 frames[parent] = []
       
-print('- Found '+str(len(relations))+' DOFs')
+print(Fore.GREEN + Style.BRIGHT + '* Found total '+str(len(relations))+' DOFs')
 
 # If we have no DOF
 if len(relations) == 0:
@@ -159,38 +135,39 @@ changed = True
 while changed:
     changed = False
     for feature in features:
-        if feature['featureType'] != 'mate':
+        if feature['featureType'] != 'mate' or feature['suppressed']:
             continue
 
         data = feature['featureData']
 
-        if len(data['matedEntities'][0]['matedOccurrence']) == 0 \
+        if len(data['matedEntities']) != 2 \
+            or len(data['matedEntities'][0]['matedOccurrence']) == 0 \
             or len(data['matedEntities'][1]['matedOccurrence']) == 0:
             continue
 
         occurrenceA = data['matedEntities'][0]['matedOccurrence'][0]
         occurrenceB = data['matedEntities'][1]['matedOccurrence'][0]
 
-        if (occurrenceA not in assignations) or (occurrenceB not in assignations):
+        if (occurrenceA not in assignations) != (occurrenceB not in assignations):
             if data['name'][0:5] == 'frame':
                 name = '_'.join(data['name'].split('_')[1:])
                 if occurrenceA in assignations:
                     frames[occurrenceA].append([name, data['matedEntities'][1]['matedOccurrence']])
-                    assignParts(occurrenceB, {True: assignations[occurrenceA], False: 'frame'}[drawFrames])
+                    assignParts(occurrenceB, {True: assignations[occurrenceA], False: 'frame'}[config['drawFrames']])
                     changed = True
-                if occurrenceB in assignations:
+                else:
                     frames[occurrenceB].append([name, data['matedEntities'][0]['matedOccurrence']])
-                    assignParts(occurrenceA, {True: assignations[occurrenceB], False: 'frame'}[drawFrames])
+                    assignParts(occurrenceA, {True: assignations[occurrenceB], False: 'frame'}[config['drawFrames']])
                     changed = True
             else:
                 if occurrenceA in assignations:
                     assignParts(occurrenceB, assignations[occurrenceA])
                     changed = True
-                if occurrenceB in assignations:
+                else:
                     assignParts(occurrenceA, assignations[occurrenceB])
                     changed = True
-    
-print('* Building robot tree')
+
+print("\n" + Style.BRIGHT + '* Building robot tree' + Style.RESET_ALL)
 def collect(id):
     part = {}
     part['id'] = id
@@ -212,51 +189,51 @@ for childId in relations:
         trunk = entry[0]
         break
 trunkOccurrence = getOccurrence([trunk])
-print('Trunk is '+trunkOccurrence['instance']['name'])
+print(Style.BRIGHT + '* Trunk is '+trunkOccurrence['instance']['name'] + Style.RESET_ALL)
 
 for occurrence in occurrences.values():
     if occurrence['assignation'] is None:
-        print('! WARNING, part ('+occurrence['instance']['name']+') has no assignation, connecting it with trunk')
+        print(Fore.YELLOW + 'WARNING: part ('+occurrence['instance']['name']+') has no assignation, connecting it with trunk' + Style.RESET_ALL)
         occurrence['assignation'] = trunk
 
 tree = collect(trunk)
 
-if outputFormat == 'urdf':
+if config['outputFormat'] == 'urdf':
     robot = RobotURDF()
-elif outputFormat == 'sdf':
+elif config['jointMaxEffort'] == 'sdf':
     robot = RobotSDF()
 else:
-    print('! ERROR Unknown output format: '+outputFormat+' (supported are urdf and sdf')
+    print(Fore.RED + '! ERROR Unknown output format: '+config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
     exit()
-robot.drawCollisions = drawCollisions
-robot.jointMaxEffort = jointMaxEffort
-robot.jointMaxVelocity = jointMaxVelocity
-robot.noDynamics = noDynamics
+robot.drawCollisions = config['drawCollisions']
+robot.jointMaxEffort = config['jointMaxEffort']
+robot.jointMaxVelocity = config['jointMaxVelocity']
+robot.noDynamics = config['noDynamics']
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
-    global noDynamics, dynamicsOverride, ignore, occurrenceLinkNames
+    global config, occurrenceLinkNames
     part = occurrence['instance']
 
     # Importing STL file for this part
     prefix = extractPartName(part['name'], part['configuration'])
 
-    if prefix in ignore:
+    if prefix in config['ignore']:
         return
 
     stlFile = prefix+'.stl'
     stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], 
                                    part['partId'], part['configuration'])
-    f = open(outputDirectory+'/'+stlFile, 'wb')
+    f = open(config['outputDirectory']+'/'+stlFile, 'wb')
     f.write(stl)
     f.close()
 
     # Import the SCAD files pure shapes
     shapes = None
-    if useScads:
+    if config['useScads']:
         scadFile = prefix+'.scad'
-        if os.path.exists(outputDirectory+'/'+scadFile):
-            shapes = csg.process(outputDirectory+'/'+scadFile)
+        if os.path.exists(config['outputDirectory']+'/'+scadFile):
+            shapes = csg.process(config['outputDirectory']+'/'+scadFile)
         
     # Obtain metadatas about part to retrieve color
     metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
@@ -267,13 +244,13 @@ def addPart(occurrence, matrix):
         color = [0.5, 0.5, 0.5]
 
     # Obtain mass properties about that part
-    if noDynamics:
+    if config['noDynamics']:
         mass = 0
         com = [0]*3
         inertia = [0]*12
     else:
-        if prefix in dynamicsOverride:
-            entry = dynamicsOverride[prefix]
+        if prefix in config['dynamicsOverride']:
+            entry = config['dynamicsOverride'][prefix]
             mass = entry['mass']
             com = entry['com']
             inertia = entry['inertia']
@@ -285,7 +262,7 @@ def addPart(occurrence, matrix):
             inertia = massProperties['inertia']
 
         if abs(mass) < 1e-9:
-            print('! WARNING Part '+part['name']+' has no mass, maybe you should assign a material to it ?')
+            print(Fore.YELLOW + 'WARNING: part '+part['name']+' has no mass, maybe you should assign a material to it ?' + Style.RESET_ALL)
 
     pose = occurrence['transform']
     if robot.relative:
@@ -322,7 +299,7 @@ def processPartName(name, configuration):
 def buildRobot(tree, matrix, linkPart=None):
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
-    print('~ Adding top-level instance ['+instance['name']+']')
+    print(Fore.BLUE + Style.BRIGHT + '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
 
     link = processPartName(instance['name'], instance['configuration'])
 
@@ -333,8 +310,8 @@ def buildRobot(tree, matrix, linkPart=None):
             name = '_'.join(occurrence['path'])
             extra = ''
             if occurrence['instance']['configuration'] != 'default':
-                extra =' (configuration: '+occurrence['instance']['configuration']+')'
-            print('- Adding part '+occurrence['instance']['name']+extra)
+                extra = Style.DIM + ' (configuration: '+occurrence['instance']['configuration']+')'
+            print(Fore.GREEN + '+ Adding part '+occurrence['instance']['name']+extra + Style.RESET_ALL)
             addPart(occurrence, matrix)
     robot.endLink()
 
@@ -385,7 +362,7 @@ buildRobot(tree, np.matrix(np.identity(4)))
 robot.finalize()
 # print(tree)
 
-print("* Writing "+robot.ext+" file")
-f = open(outputDirectory+'/robot.'+robot.ext, 'w')
+print("\n" + Style.BRIGHT + "* Writing "+robot.ext.upper()+" file" + Style.RESET_ALL)
+f = open(config['outputDirectory']+'/robot.'+robot.ext, 'w')
 f.write(robot.xml)
 f.close()
