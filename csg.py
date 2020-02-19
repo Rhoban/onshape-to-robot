@@ -1,5 +1,12 @@
-import json, re, os
+import json
+import re
+import os
 import numpy as np
+
+"""
+These functions are responsible for parsing CSG files (constructive solid geometry), which are files
+produced by OpenSCAD, containing no loop, variables etc.
+"""
 
 def multmatrix_parse(parameters):
     matrix = np.matrix(json.loads(parameters), dtype=float)
@@ -8,12 +15,14 @@ def multmatrix_parse(parameters):
     matrix[2, 3] /= 1000.0
     return matrix
 
+
 def cube_parse(parameters):
     results = re.findall(r'^size = (.+), center = (.+)$', parameters)
     if len(results) != 1:
         print("! Can't parse CSG cube parameters: "+parameters)
         exit()
     return np.array(json.loads(results[0][0]), dtype=float)/1000.0
+
 
 def cylinder_parse(parameters):
     results = re.findall(r'h = (.+), r1 = (.+), r2', parameters)
@@ -23,12 +32,14 @@ def cylinder_parse(parameters):
     result = results[0]
     return np.array([result[0], result[1]], dtype=float)/1000.0
 
+
 def sphere_parse(parameters):
     results = re.findall(r'r = (.+)$', parameters)
     if len(results) != 1:
         print("! Can't parse CSG sphere parameters: "+parameters)
         exit()
     return float(results[0])/1000.0
+
 
 def extract_node_parameters(line):
     line = line.strip()
@@ -40,6 +51,7 @@ def extract_node_parameters(line):
     if parameters[-1] == '{':
         parameters = parameters[:-3]
     return node, parameters
+
 
 def parse_csg(data):
     shapes = []
@@ -82,6 +94,7 @@ def parse_csg(data):
                     })
     return shapes
 
+
 def process(filename):
     os.system('openscad '+filename+' -o /tmp/data.csg')
     f = open('/tmp/data.csg')
@@ -89,5 +102,3 @@ def process(filename):
     f.close()
 
     return parse_csg(data)
-
-# print(process('urdf/motorcase.scad'))
