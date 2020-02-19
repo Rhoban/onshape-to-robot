@@ -352,7 +352,7 @@ class RobotSDF(Robot):
                 for shape in shapes:
                     k += 1
                     self.append('<'+entry+' name="'+name+'_'+entry+'_'+str(k)+'">')
-                    self.append(pose(shape['transform']))
+                    self.append(pose(matrix*shape['transform']))
                     self.append('<geometry>')
                     if shape['type'] == 'cube':
                         self.append('<box><size>%g %g %g</size></box>' % tuple(shape['parameters']))
