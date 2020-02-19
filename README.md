@@ -32,7 +32,7 @@ First clone this repository:
 
 Install the dependencies (can be in your python3 virtualenv):
 
-    pip install numpy pybullet requests commentjson
+    pip install numpy pybullet requests commentjson colorama
 
 You might also need OpenSCAD for pure shape estimation
 
@@ -72,6 +72,9 @@ Then edit `config.json` in your repository, here are the entries:
 * **WARNING: Instead of storing those sensitive keys in your `config.json` file, you
    can alternatively use the environment variables (see above)**
 * `documentId` is the document ID to be imported (see above picture)
+* `versionId` is the version ID to be imported (optional, can be used to "fix" a version ID), it can be
+  also found in the URL, after the `/v/` part when selecting a specific version. If you don't specify any, the
+  last version from your workspace will be automatically retrievied
 * `outputFormat` can be `sdf` or `urdf`
 * `drawFrames` if you want the frames to be drawn
 * `drawCollisions` if you want the elements from collisions to be also put
