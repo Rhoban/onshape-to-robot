@@ -16,16 +16,17 @@ from config import config, configFile
 client = Client(logging=False, creds=configFile)
 
 # If a versionId is provided, it will be used, else the main workspace is retrieved
-if config['versionId'] is None:
+if config['versionId'] == '':
     print("\n" + Style.BRIGHT + '* Retrieving workspace ID ...' + Style.RESET_ALL)
     document = client.get_document(config['documentId']).json()
     workspaceId = document['defaultWorkspace']['id']
+    print(Fore.GREEN + "+ Using workspace id: " + workspaceId + Style.RESET_ALL)
 else:
     print("\n" + Style.BRIGHT + '* Using configuration version ID '+config['versionId']+' ...' + Style.RESET_ALL)
 
 # Now, finding the assembly, according to given name in configuration, or else the first possible one
 print("\n" + Style.BRIGHT + '* Retrieving elements in the document, searching for the assembly...' + Style.RESET_ALL)
-if config['versionId'] is None:
+if config['versionId'] == '':
     elements = client.list_elements(config['documentId'], workspaceId).json()
 else:
     elements = client.list_elements(config['documentId'], config['versionId'], 'v').json()
@@ -42,7 +43,7 @@ if assemblyId == None:
 
 # Retrieving the assembly
 print("\n" + Style.BRIGHT + '* Retrieving assembly' + Style.RESET_ALL)
-if config['versionId'] is None:
+if config['versionId'] == '':
     assembly = client.get_assembly(config['documentId'], workspaceId, assemblyId)
 else:
     assembly = client.get_assembly(config['documentId'], config['versionId'], assemblyId, 'v')

@@ -27,7 +27,7 @@ configFile = robot+'/config.json'
 config = json.load(open(configFile))
 
 config['documentId'] = configGet('documentId')
-config['versionId'] = configGet('versionId', None)
+config['versionId'] = configGet('versionId', '')
 config['drawFrames'] = configGet('drawFrames')
 config['drawCollisions'] = configGet('drawCollisions', False)
 config['useScads'] = configGet('useScads', True)
