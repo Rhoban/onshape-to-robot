@@ -137,12 +137,12 @@ class Client():
 
         return self._api.request('get', '/api/documents')
 
-    def list_elements(self, did):
+    def list_elements(self, did, wid, type='w'):
         '''
         Get the list of elements in a given document
         '''
 
-        return self._api.request('get', '/api/documents/'+did+'/elements')
+        return self._api.request('get', '/api/documents/d/'+did+'/'+type+'/'+wid+'/elements')
 
     def create_assembly(self, did, wid, name='My Assembly'):
         '''
