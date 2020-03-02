@@ -70,7 +70,6 @@ class RobotDescription(object):
             return self.jointMaxVelocity
 
     def resetLinkDynamics(self):
-        self._link_name = name
         self._link_childs = 0
         self._dynamics = []
 
@@ -142,7 +141,7 @@ class RobotURDF(RobotDescription):
 
     def startLink(self, name, matrix):
         self._link_name = name
-        self._dynamics = []
+        self.resetLinkDynamics()
         # self.addDummyLink(name)
         self.append('<link name="'+name+'">')
 
@@ -253,8 +252,22 @@ class RobotSDF(RobotDescription):
         self.append('</joint>')
         self.append('')
 
+    def addDummyLink(self, name):
+        self.append('<link name="'+name+'">')
+        self.append('<pose>0 0 0 0 0 0</pose>')
+        self.append('<inertial>')
+        self.append('<pose>0 0 0 0 0 0</pose>')
+        self.append('<mass>1e-9</mass>')
+        self.append('<inertia>')
+        self.append('<ixx>0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0</iyy><iyz>0</iyz><izz>0</izz>')
+        self.append('</inertia>')
+        self.append('</inertial>')
+        self.append('</link>')
+
+
     def startLink(self, name, matrix):
-        self.resetLinkDynamics
+        self._link_name = name
+        self.resetLinkDynamics()
         # self.addDummyLink(name)
         self.append('<link name="'+name+'">')
         self.append(pose(matrix, name))
