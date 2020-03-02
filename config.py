@@ -54,6 +54,7 @@ except OSError:
 # Checking that OpenSCAD is present
 if config['useScads']:
     print(Style.BRIGHT + '* Checking OpenSCAD version...' + Style.RESET_ALL)
-    if os.system('openscad -v') != 0:
+    if os.system('openscad -v 2> /dev/null') != 0:
         print(Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
+        print(Fore.BLUE + "TIP: consider installing openscad: sudo apt-get install openscad" + Style.RESET_ALL)
         config['useScads'] = False
