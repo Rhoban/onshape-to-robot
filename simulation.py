@@ -10,18 +10,23 @@ class Simulation:
         self.t = 0
         self.dt = 0.001
 
-        # Instanciation de Bullet
+        # Instantiating Bullet
         physicsClient = p.connect(p.GUI)
         p.setGravity(0, 0, -10)
 
-        # Chargement du sol
+        # Loading floor
         planeId = p.loadURDF('bullet/plane.urdf')
 
-        # Chargement du robot
+        # Loading robot
         cubeStartPos = [0, 0, 0.75]
         cubeStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
-        self.robot = p.loadURDF(directory+"/robot.urdf",
-                            cubeStartPos, cubeStartOrientation)
+        # self.robot = p.loadURDF(directory+"/robot.urdf",
+        #                     cubeStartPos, cubeStartOrientation)
+
+        # In case we want to read SDF, but PyBullet can't do that properly so far
+        # https://github.com/bulletphysics/bullet3/issues/2651
+        # self.robot = p.loadSDF(directory+"/robot.sdf")[0]
+        # p.resetBasePositionAndOrientation(self.robot, cubeStartPos, cubeStartOrientation)
 
         # Engine parameters
         p.setPhysicsEngineParameter(fixedTimeStep=self.dt)
