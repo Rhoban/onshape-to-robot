@@ -21,16 +21,16 @@ def cube_parse(parameters):
     if len(results) != 1:
         print("! Can't parse CSG cube parameters: "+parameters)
         exit()
-    return np.array(json.loads(results[0][0]), dtype=float)/1000.0
+    return np.array(json.loads(results[0][0]), dtype=float)/1000.0, results[0][1] == 'true'
 
 
 def cylinder_parse(parameters):
-    results = re.findall(r'h = (.+), r1 = (.+), r2', parameters)
+    results = re.findall(r'h = (.+), r1 = (.+), r2 = (.+), center = (.+)', parameters)
     if len(results) != 1:
         print("! Can't parse CSG cylinder parameters: "+parameters)
         exit()
     result = results[0]
-    return np.array([result[0], result[1]], dtype=float)/1000.0
+    return np.array([result[0], result[1]], dtype=float)/1000.0, result[3] == 'true'
 
 
 def sphere_parse(parameters):
@@ -75,15 +75,23 @@ def parse_csg(data):
                 for entry in matrices:
                     transform = transform*entry
                 if node == 'cube':
+                    size, center = cube_parse(parameters)
+                    if not center:
+                        transform[0, 3] += size[0]/2.0
+                        transform[1, 3] += size[1]/2.0
+                        transform[2, 3] += size[2]/2.0
                     shapes.append({
                         'type': 'cube',
-                        'parameters': cube_parse(parameters),
+                        'parameters': size,
                         'transform': transform
                     })
                 if node == 'cylinder':
+                    size, center = cylinder_parse(parameters)
+                    if not center:
+                        transform[2, 3] += size[0]/2.0
                     shapes.append({
                         'type': 'cylinder',
-                        'parameters': cylinder_parse(parameters),
+                        'parameters': size,
                         'transform': transform
                     })
                 if node == 'sphere':

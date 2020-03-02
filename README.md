@@ -212,8 +212,6 @@ shapes related:
 Then, the pure shapes from your scad will be used when generating the `sdf` or `urdf` file (next
 time you will run `onshape-to-robot.py`, it will read your `.scad` files).
 
-**Note: `center=true` is mandatory in the current version.**
-
 Thus, if the `.scad` file is empty, your part will have no collision. If you want to use the mesh
 again, simply remove the `.scad` file.
 
