@@ -39,7 +39,7 @@ def pose(matrix, frame = ''):
 
     return sdf % (x, y, z, rpy[0], rpy[1], rpy[2])
 
-class Robot(object):
+class RobotDescription(object):
     def __init__(self):
         self.drawCollisions = False
         self.relative = True
@@ -69,7 +69,46 @@ class Robot(object):
         else:
             return self.jointMaxVelocity
 
-class RobotURDF(Robot):
+    def resetLinkDynamics(self):
+        self._link_name = name
+        self._link_childs = 0
+        self._dynamics = []
+
+    def addLinkDynamics(self, matrix, mass, com, inertia):
+        # Inertia
+        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
+        R = matrix[:3, :3]
+        # Expressing COM in the link frame
+        com = np.array((matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
+        # Expressing inertia in the link frame
+        inertia = R.T*I*R
+
+        self._dynamics.append({
+            'mass': mass,
+            'com': com,
+            'inertia': inertia
+        })
+
+    def linkDynamics(self):
+        mass = 0
+        com = np.array([0.0]*3)        
+        inertia = np.matrix(np.zeros((3,3)))
+        identity = np.matrix(np.eye(3))
+
+        for dynamic in self._dynamics:
+            mass += dynamic['mass']
+            com += dynamic['com']*dynamic['mass']
+        com /= mass
+
+        # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
+        for dynamic in self._dynamics:
+            r = dynamic['com'] - com
+            p = np.matrix(r)
+            inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
+
+        return mass, com, inertia
+
+class RobotURDF(RobotDescription):
     def __init__(self):
         super().__init__()
         self.ext = 'urdf'
@@ -108,21 +147,7 @@ class RobotURDF(Robot):
         self.append('<link name="'+name+'">')
 
     def endLink(self):
-        mass = 0
-        com = np.array([0.0]*3)        
-        inertia = np.matrix(np.zeros((3,3)))
-        identity = np.matrix(np.eye(3))
-
-        for dynamic in self._dynamics:
-            mass += dynamic['mass']
-            com += dynamic['com']*dynamic['mass']
-        com /= mass
-
-        # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
-        for dynamic in self._dynamics:
-            r = dynamic['com'] - com
-            p = np.matrix(r)
-            inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
+        mass, com, inertia = self.linkDynamics()
 
         self.append('<inertial>')
         self.append('<origin xyz="%g %g %g" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
@@ -189,29 +214,8 @@ class RobotURDF(Robot):
                         self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
                         self.append('</material>')
                         self.append('</'+entry+'>')
-
-        # self.append('<inertial>')
-        # self.append('<origin xyz="%g %g %g" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
-        # self.append('<mass value="%g"/>' % mass)
-        # self.append('<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />' %
-        #     (inertia[0], inertia[1], inertia[2], inertia[4], inertia[5], inertia[8]))
-        # self.append('</inertial>')
         
-        # Inertia
-        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
-        R = matrix[:3, :3]
-        # Expressing COM in the link frame
-        com = np.array((matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
-        # Expressing inertia in the link frame
-        inertia = R.T*I*R
-
-        self._dynamics.append({
-            'mass': mass,
-            'com': com,
-            'inertia': inertia
-        })
-
-        # self.addFixedJoint(self._link_name, name, matrix)
+        self.addLinkDynamics(matrix, mass, com, inertia)
 
 
     def addJoint(self, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
@@ -229,7 +233,7 @@ class RobotURDF(Robot):
         self.append('</robot>')
 
 
-class RobotSDF(Robot):
+class RobotSDF(RobotDescription):
     def __init__(self):
         super().__init__()
         self.ext = 'sdf'
@@ -237,18 +241,6 @@ class RobotSDF(Robot):
         self.append('<sdf version="1.6">')
         self.append('<model name="onshape">')
         pass
-
-    def addDummyLink(self, name):
-        self.append('<link name="'+name+'">')
-        self.append('<pose>0 0 0 0 0 0</pose>')
-        self.append('<inertial>')
-        self.append('<pose>0 0 0 0 0 0</pose>')
-        self.append('<mass>1e-9</mass>')
-        self.append('<inertia>')
-        self.append('<ixx>0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0</iyy><iyz>0</iyz><izz>0</izz>')
-        self.append('</inertia>')
-        self.append('</inertial>')
-        self.append('</link>')
 
     def addFixedJoint(self, parent, child, matrix, name=None):
         if name is None:
@@ -262,29 +254,13 @@ class RobotSDF(Robot):
         self.append('')
 
     def startLink(self, name, matrix):
-        self._link_name = name
-        self._link_childs = 0
-        self._dynamics = []
+        self.resetLinkDynamics
         # self.addDummyLink(name)
         self.append('<link name="'+name+'">')
         self.append(pose(matrix, name))
 
     def endLink(self):
-        mass = 0
-        com = np.array([0.0]*3)        
-        inertia = np.matrix(np.zeros((3,3)))
-        identity = np.matrix(np.eye(3))
-
-        for dynamic in self._dynamics:
-            mass += dynamic['mass']
-            com += dynamic['com']*dynamic['mass']
-        com /= mass
-
-        # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
-        for dynamic in self._dynamics:
-            r = dynamic['com'] - com
-            p = np.matrix(r)
-            inertia += dynamic['inertia'] + (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
+        mass, com, inertia = self.linkDynamics()
 
         self.append('<inertial>')
         self.append('<pose frame="'+self._link_name+'_frame">%g %g %g 0 0 0</pose>' % (com[0], com[1], com[2]))
@@ -366,24 +342,8 @@ class RobotSDF(Robot):
                         self.append(self.material(color))
                     self.append('</'+entry+'>')
 
-        # Inertia
-        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
-        R = matrix[:3, :3]
-        # Expressing COM in the link frame
-        com = np.array((matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
-        # Expressing inertia in the link frame
-        inertia = R.T*I*R
-
-        self._dynamics.append({
-            'mass': mass,
-            'com': com,
-            'inertia': inertia
-        })
-        # self.append('</link>')
-
-        # self.addFixedJoint(self._link_name, name, matrix)
-
-
+        self.addLinkDynamics(matrix, mass, com, inertia);
+        
     def addJoint(self, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
         self.append('<joint name="'+name+'" type="revolute">')
         self.append(pose(transform))

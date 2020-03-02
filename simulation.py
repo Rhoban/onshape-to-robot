@@ -20,8 +20,8 @@ class Simulation:
         # Loading robot
         cubeStartPos = [0, 0, 0.75]
         cubeStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
-        # self.robot = p.loadURDF(directory+"/robot.urdf",
-        #                     cubeStartPos, cubeStartOrientation)
+        self.robot = p.loadURDF(directory+"/robot.urdf",
+                            cubeStartPos, cubeStartOrientation)
 
         # In case we want to read SDF, but PyBullet can't do that properly so far
         # https://github.com/bulletphysics/bullet3/issues/2651
