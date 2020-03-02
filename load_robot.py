@@ -130,7 +130,7 @@ for feature in features:
             if parent not in frames:
                 frames[parent] = []
       
-print(Fore.GREEN + Style.BRIGHT + '* Found total '+str(len(relations))+' DOFs')
+print(Fore.GREEN + Style.BRIGHT + '* Found total '+str(len(relations))+' DOFs' + Style.RESET_ALL)
 
 # If we have no DOF
 if len(relations) == 0:
