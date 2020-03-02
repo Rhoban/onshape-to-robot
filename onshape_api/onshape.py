@@ -17,6 +17,7 @@ import base64
 import urllib
 import datetime
 import requests
+from colorama import Fore, Back, Style
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
@@ -71,8 +72,20 @@ class Onshape():
                 raise ValueError('%s is not valid json' % creds)
             except KeyError:
                 self._url = os.getenv('ONSHAPE_API')
-                self._access_key = os.getenv('ONSHAPE_ACCESS_KEY').encode('utf-8')
-                self._secret_key = os.getenv('ONSHAPE_SECRET_KEY').encode('utf-8')
+                self._access_key = os.getenv('ONSHAPE_ACCESS_KEY')
+                self._secret_key = os.getenv('ONSHAPE_SECRET_KEY')
+
+                if self._url is None or self._access_key is None or self._secret_key is None:
+                    print(Fore.RED + 'ERROR: No OnShape API access key are set' + Style.RESET_ALL)
+                    print()
+                    print(Fore.BLUE + 'TIP: Connect to https://dev-portal.onshape.com/keys, and edit your .bashrc file:' + Style.RESET_ALL)
+                    print(Fore.BLUE + 'export ONSHAPE_API=https://cad.onshape.com' + Style.RESET_ALL)
+                    print(Fore.BLUE + 'export ONSHAPE_ACCESS_KEY=Your_Access_Key' + Style.RESET_ALL)
+                    print(Fore.BLUE + 'export ONSHAPE_SECRET_KEY=Your_Secret_Key' + Style.RESET_ALL)
+                    exit(1)
+
+                self._access_key = self._access_key.encode('utf-8')
+                self._secret_key = self._secret_key.encode('utf-8')
 
                 if self._url is None or self._access_key is None or self._secret_key is None:
                     exit('No key in config.json, and environment variables not set')

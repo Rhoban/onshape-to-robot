@@ -17,7 +17,7 @@ if config['outputFormat'] == 'urdf':
 elif config['outputFormat'] == 'sdf':
     robot = RobotSDF()
 else:
-    print(Fore.RED + '! ERROR Unknown output format: '+config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
+    print(Fore.RED + 'ERROR: Unknown output format: '+config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
     exit()
 robot.drawCollisions = config['drawCollisions']
 robot.jointMaxEffort = config['jointMaxEffort']
