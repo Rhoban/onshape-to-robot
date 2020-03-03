@@ -122,7 +122,11 @@ for feature in features:
                 exit()
             print(Fore.GREEN + '+ Found DOF: '+name + Style.RESET_ALL)
             
-            relations[child] = [parent, data, name]
+            jointType = 'revolute'
+            if data['mateType'] == 'SLIDER':
+                jointType = 'prismatic'
+
+            relations[child] = [parent, data, name, jointType]
             assignParts(child, child)
             assignParts(parent, parent)
             if child not in frames:
@@ -214,6 +218,7 @@ def collect(id):
             child['occurrence'] = matedOccurrence['matedOccurrence']
             child['origin'] = matedOccurrence['matedCS']['origin']
             child['zAxis'] = np.array(matedOccurrence['matedCS']['zAxis'])
+            child['jointType'] = entry[3]
             if mate['inverted']:
                 child['zAxis'] = -child['zAxis']
             part['children'].append(child)

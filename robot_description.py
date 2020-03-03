@@ -117,7 +117,9 @@ class RobotDescription(object):
         for dynamic in self._dynamics:
             mass += dynamic['mass']
             com += dynamic['com']*dynamic['mass']
-        com /= mass
+
+        if mass > 0:
+            com /= mass
 
         # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
         for dynamic in self._dynamics:
@@ -251,8 +253,8 @@ class RobotURDF(RobotDescription):
         self.addLinkDynamics(matrix, mass, com, inertia)
 
 
-    def addJoint(self, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
-        self.append('<joint name="'+name+'" type="revolute">')
+    def addJoint(self, jointType, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
+        self.append('<joint name="'+name+'" type="'+jointType+'">')
         self.append(origin(transform))
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
@@ -402,8 +404,8 @@ class RobotSDF(RobotDescription):
 
         self.addLinkDynamics(matrix, mass, com, inertia);
         
-    def addJoint(self, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
-        self.append('<joint name="'+name+'" type="revolute">')
+    def addJoint(self, jointType, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
+        self.append('<joint name="'+name+'" type="'+jointType+'">')
         self.append(pose(transform))
         self.append('<parent>'+linkFrom+'</parent>')
         self.append('<child>'+linkTo+'</child>')
