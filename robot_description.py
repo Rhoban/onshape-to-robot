@@ -209,9 +209,10 @@ class RobotURDF(RobotDescription):
                             self.append('<sphere radius="%g" />' % shape['parameters'])
                         self.append('</geometry>')
 
-                        self.append('<material name="'+name+'_material">')
-                        self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
-                        self.append('</material>')
+                        if entry == 'visual':
+                            self.append('<material name="'+name+'_material">')
+                            self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
+                            self.append('</material>')
                         self.append('</'+entry+'>')
         
         self.addLinkDynamics(matrix, mass, com, inertia)
@@ -324,7 +325,6 @@ class RobotSDF(RobotDescription):
         if self.drawCollisions:
             entries.append('visual')
         for entry in entries:
-            
             if shapes is None:
                 # We don't have pure shape, we use the mesh
                 self.append('<'+entry+' name="'+name+'_'+entry+'">')
