@@ -30,13 +30,25 @@ config['documentId'] = configGet('documentId')
 config['versionId'] = configGet('versionId', '')
 config['drawFrames'] = configGet('drawFrames')
 config['drawCollisions'] = configGet('drawCollisions', False)
-config['useScads'] = configGet('useScads', True)
 config['assemblyName'] = configGet('assemblyName', False)
 config['outputFormat'] = configGet('outputFormat', 'urdf')
+
+# Using OpenSCAD for simplified geometry
+config['useScads'] = configGet('useScads', True)
+
+# Dynamics
 config['jointMaxEffort'] = configGet('jointMaxEffort', 1)
 config['jointMaxVelocity'] = configGet('jointMaxVelocity', 20)
 config['noDynamics'] = configGet('noDynamics', False)
+
+# Ignore list
 config['ignore'] = configGet('ignore', [])
+
+# STLs merge and simplification
+config['mergeSTLs'] = configGet('mergeSTLs', False)
+config['maxSTLSize'] = configGet('maxSTLSize', 3)
+config['simplifySTLs'] = configGet('simplifySTLs', False)
+
 config['outputDirectory'] = robot
 config['dynamicsOverride'] = {}
 
@@ -53,7 +65,7 @@ except OSError:
 
 # Checking that OpenSCAD is present
 if config['useScads']:
-    print(Style.BRIGHT + '* Checking OpenSCAD version...' + Style.RESET_ALL)
+    print(Style.BRIGHT + '* Checking OpenSCAD presence...' + Style.RESET_ALL)
     if os.system('openscad -v 2> /dev/null') != 0:
         print(Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
         print(Fore.BLUE + "TIP: consider installing openscad:" + Style.RESET_ALL)
@@ -61,3 +73,12 @@ if config['useScads']:
         print(Fore.BLUE + "sudo apt-get update" + Style.RESET_ALL)
         print(Fore.BLUE + "sudo apt-get install openscad" + Style.RESET_ALL)
         config['useScads'] = False
+
+# Checking that MeshLab is present
+if config['simplifySTLs']:
+    print(Style.BRIGHT + '* Checking MeshLab presence...' + Style.RESET_ALL)
+    if not os.path.exists('/usr/bin/meshlabserver') != 0:
+        print(Fore.RED + "No /usr/bin/meshlabserver, disabling STL simplification support" + Style.RESET_ALL)
+        print(Fore.BLUE + "TIP: consider installing meshlab:" + Style.RESET_ALL)
+        print(Fore.BLUE + "sudo apt-get install meshlab" + Style.RESET_ALL)
+        config['simplifySTLs'] = False

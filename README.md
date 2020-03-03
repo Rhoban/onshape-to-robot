@@ -115,6 +115,12 @@ Here is an example of configuration:
     // Masses, com and inertias will be zero (can be used if you import a static
     // field for example)
     "noDynamics": false,
+    // Should the STLs of the same link be merged?
+    "mergeSTLs": false,
+    // Should we simplify STLs files?
+    "simplifySTLs": false,
+    // Maximum size (M) of STL files to run simplification (required meshlab)
+    "maxSTLSize": 3,
 
     // Those can be used to configure the joint max efforts and velocity, and
     // overriden for specific joints

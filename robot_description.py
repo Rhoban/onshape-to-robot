@@ -1,6 +1,8 @@
 import numpy as np
+import os
 import math
 import uuid
+import stl_combine
  
 def rotationMatrixToEulerAngles(R) :     
     sy = math.sqrt(R[0,0] * R[0,0] +  R[1,0] * R[1,0])
@@ -43,6 +45,9 @@ class RobotDescription(object):
     def __init__(self):
         self.drawCollisions = False
         self.relative = True
+        self.mergeSTLs = False
+        self.simplifySTLs = False
+        self.maxSTLSize = 3
         self.xml = ''
         self.jointMaxEffort = 1
         self.jointMaxVelocity = 10
@@ -69,7 +74,10 @@ class RobotDescription(object):
         else:
             return self.jointMaxVelocity
 
-    def resetLinkDynamics(self):
+    def resetLink(self):
+        self._mesh = None
+        self._mesh_dir = ''
+        self._color = np.array([0., 0., 0.])
         self._link_childs = 0
         self._dynamics = []
 
@@ -87,6 +95,18 @@ class RobotDescription(object):
             'com': com,
             'inertia': inertia
         })
+
+    def addLinkSTL(self, stl, matrix, color, mass):
+        self._color += np.array(color) * mass
+        self._mesh_dir = os.path.dirname(stl)
+
+        m = stl_combine.load_mesh(stl)
+        stl_combine.apply_matrix(m, matrix)
+
+        if self._mesh is None:
+            self._mesh = m
+        else:
+            self._mesh = stl_combine.combine_meshes(self._mesh, m)
 
     def linkDynamics(self):
         mass = 0
@@ -141,12 +161,19 @@ class RobotURDF(RobotDescription):
 
     def startLink(self, name, matrix):
         self._link_name = name
-        self.resetLinkDynamics()
+        self.resetLink()
         # self.addDummyLink(name)
         self.append('<link name="'+name+'">')
 
     def endLink(self):
         mass, com, inertia = self.linkDynamics()
+
+        if self._mesh is not None:
+            color = self._color / mass
+            stl_combine.save_mesh(self._mesh, self._mesh_dir+'/'+self._link_name+'.stl')
+            if self.simplifySTLs:
+                stl_combine.simplify_stl(self._mesh_dir+'/'+self._link_name+'.stl', self.maxSTLSize)
+            self.addVisualSTL(np.identity(4), self._link_name+'.stl', color, self._link_name)
 
         self.append('<inertial>')
         self.append('<origin xyz="%g %g %g" rpy="0 0 0"/>' % (com[0], com[1], com[2]))
@@ -165,19 +192,25 @@ class RobotURDF(RobotDescription):
         # Linking it with last link with a fixed link
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
+    def addVisualSTL(self, matrix, stl, color, name):
+        # Visual
+        self.append('<visual>')
+        self.append(origin(matrix))
+        self.append('<geometry>')
+        self.append('<mesh filename="package://'+stl+'"/>')
+        self.append('</geometry>')
+        self.append('<material name="'+name+'_material">')
+        self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
+        self.append('</material>')
+        self.append('</visual>')
+
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name='', linkName=None):
 
         if not self.drawCollisions:
-            # Visual
-            self.append('<visual>')
-            self.append(origin(matrix))
-            self.append('<geometry>')
-            self.append('<mesh filename="package://'+stl+'"/>')
-            self.append('</geometry>')
-            self.append('<material name="'+name+'_material">')
-            self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
-            self.append('</material>')
-            self.append('</visual>')
+            if self.mergeSTLs:
+                self.addLinkSTL(stl, matrix, color, mass)
+            else:
+                self.addVisualSTL(matrix, os.path.basename(stl), color, name)
 
         entries = ['collision']
         if self.drawCollisions:
@@ -189,7 +222,7 @@ class RobotURDF(RobotDescription):
                 self.append('<'+entry+'>')
                 self.append(origin(matrix))
                 self.append('<geometry>')
-                self.append('<mesh filename="package://'+stl+'"/>')
+                self.append('<mesh filename="package://'+os.path.basename(stl)+'"/>')
                 self.append('</geometry>')
                 self.append('<material name="'+name+'_material">')
                 self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
@@ -268,13 +301,20 @@ class RobotSDF(RobotDescription):
 
     def startLink(self, name, matrix):
         self._link_name = name
-        self.resetLinkDynamics()
+        self.resetLink()
         # self.addDummyLink(name)
         self.append('<link name="'+name+'">')
         self.append(pose(matrix, name))
 
     def endLink(self):
         mass, com, inertia = self.linkDynamics()
+
+        if self._mesh is not None:
+            color = self._color / mass
+            stl_combine.save_mesh(self._mesh, self._mesh_dir+'/'+self._link_name+'.stl')
+            if self.simplifySTLs:
+                stl_combine.simplify_stl(self._mesh_dir+'/'+self._link_name+'.stl', self.maxSTLSize)
+            self.addVisualSTL(np.identity(4), self._link_name+'.stl', color, self._link_name)
 
         self.append('<inertial>')
         self.append('<pose frame="'+self._link_name+'_frame">%g %g %g 0 0 0</pose>' % (com[0], com[1], com[2]))
@@ -302,6 +342,15 @@ class RobotSDF(RobotDescription):
 
         return m
 
+    def addVisualSTL(self, matrix, stl, color, name):
+        self.append('<visual name="'+name+'_visual">')
+        self.append(pose(matrix))
+        self.append('<geometry>')
+        self.append('<mesh><uri>file://'+stl+'</uri></mesh>')
+        self.append('</geometry>')
+        self.append(self.material(color))
+        self.append('</visual>')
+
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name='', linkName=None):
         name = self._link_name+'_'+str(self._link_childs)+'_'+name
         if linkName is not None:
@@ -312,14 +361,10 @@ class RobotSDF(RobotDescription):
         # self.append(pose(matrix))
 
         if not self.drawCollisions:
-            # Visual
-            self.append('<visual name="'+name+'_visual">')
-            self.append(pose(matrix))
-            self.append('<geometry>')
-            self.append('<mesh><uri>file://'+stl+'</uri></mesh>')
-            self.append('</geometry>')
-            self.append(self.material(color))
-            self.append('</visual>')
+            if self.mergeSTLs:
+                self.addLinkSTL(stl, matrix, color, mass)
+            else:
+                self.addVisualSTL(matrix, os.path.basename(stl), color, name)
 
         entries = ['collision']
         if self.drawCollisions:

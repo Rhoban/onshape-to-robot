@@ -21,6 +21,9 @@ else:
     exit()
 robot.drawCollisions = config['drawCollisions']
 robot.jointMaxEffort = config['jointMaxEffort']
+robot.mergeSTLs = config['mergeSTLs']
+robot.maxSTLSize = config['maxSTLSize']
+robot.simplifySTLs = config['simplifySTLs']
 robot.jointMaxVelocity = config['jointMaxVelocity']
 robot.noDynamics = config['noDynamics']
 
@@ -84,7 +87,7 @@ def addPart(occurrence, matrix):
     
     linkName = None
 
-    robot.addPart(pose, stlFile, mass, com, inertia, color, shapes, prefix, occurrence['linkName'])
+    robot.addPart(pose, config['outputDirectory']+'/'+stlFile, mass, com, inertia, color, shapes, prefix, occurrence['linkName'])
 
 partNames = {}
 def extractPartName(name, configuration):
