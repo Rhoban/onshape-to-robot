@@ -78,8 +78,8 @@ def addPart(occurrence, matrix):
             com = massProperties['centroid']
             inertia = massProperties['inertia']
 
-        if abs(mass) < 1e-9:
-            print(Fore.YELLOW + 'WARNING: part '+part['name']+' has no mass, maybe you should assign a material to it ?' + Style.RESET_ALL)
+            if abs(mass) < 1e-9:
+                print(Fore.YELLOW + 'WARNING: part '+part['name']+' has no mass, maybe you should assign a material to it ?' + Style.RESET_ALL)
 
     pose = occurrence['transform']
     if robot.relative:

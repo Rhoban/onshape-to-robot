@@ -55,7 +55,10 @@ config['dynamicsOverride'] = {}
 # Creating dynamics override array
 tmp = configGet('dynamics', {})
 for key in tmp:
-    config['dynamicsOverride'][key.lower()] = tmp[key]
+    if tmp[key] == 'fixed':
+        config['dynamicsOverride'][key.lower()] = {"com": [0,0,0], "mass": 0, "inertia": [0,0,0,0,0,0,0,0,0]}
+    else:
+        config['dynamicsOverride'][key.lower()] = tmp[key]
 
 # Output directory, making it if it doesn't exists
 try:

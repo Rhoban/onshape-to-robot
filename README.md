@@ -139,7 +139,9 @@ Here is an example of configuration:
             "inertia": [0.1, 0, 0,
                         0, 0.1, 0,
                         0, 0, 0.1]
-        }
+        },
+        // "fixed" can be used to assign a null mass to the object, which makes it fixed (non-dynamics)
+        "base": "fixed"
     },
 
     // Some parts can be totally ignored during import
