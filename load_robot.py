@@ -120,11 +120,19 @@ for feature in features:
                 print(Fore.RED + 
                     'ERROR: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")' + Style.RESET_ALL)
                 exit()
-            print(Fore.GREEN + '+ Found DOF: '+name + Style.RESET_ALL)
             
-            jointType = 'revolute'
-            if data['mateType'] == 'SLIDER':
+            if data['mateType'] == 'REVOLUTE' or data['mateType'] == 'CYLINDRICAL':
+                jointType = 'revolute'
+            elif data['mateType'] == 'SLIDER':
                 jointType = 'prismatic'
+            elif data['mateType'] == 'FASTENED':
+                jointType = 'fixed'
+            else:
+                print(Fore.RED +'ERROR: "'+ name+'" is declared as a DOF but the mate type is '+data['mateType']+'')
+                print('       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported'  +Style.RESET_ALL)
+                exit(1)
+
+            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM + '('+jointType+')' + Style.RESET_ALL)
 
             relations[child] = [parent, data, name, jointType]
             assignParts(child, child)
