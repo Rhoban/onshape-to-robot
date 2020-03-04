@@ -153,7 +153,7 @@ class RobotURDF(RobotDescription):
         if name is None:
             name = parent+'_'+child+'_fixing'
 
-        self.append('<joint name="'+name+'" type="fixed">')
+        self.append('<joint name="'+name+'" type="floating">')
         self.append(origin(matrix))
         self.append('<parent link="'+parent+'" />')
         self.append('<child link="'+child+'" />')
@@ -281,7 +281,7 @@ class RobotSDF(RobotDescription):
         if name is None:
             name = parent+'_'+child+'_fixing'
 
-        self.append('<joint name="'+name+'" type="fixed">')
+        self.append('<joint name="'+name+'" type="floating">')
         self.append(pose(matrix))
         self.append('<parent>'+parent+'</parent>')
         self.append('<child>'+child+'</child>')

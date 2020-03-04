@@ -16,7 +16,7 @@ There is some design constraints:
 * Degree of freedoms should be slider, cylindrical or revolute mate connectors named `dof_something`, where `something` will be used to name the joint in the final document
     * If the mate connector is *cylindrical* or *revolute*, a `revolute` joint will be issued
     * If the mate connector is a *slider*, a `prismatic` joint will be issued
-    * If the mate connector is *fastened*, a `fixed` joint will be issued
+    * If the mate connector is *fastened*, a `floating` joint will be issued
 * When doing this connection, click the children joint first. This will be used to find the trunk of the robot (part with children but no parent)
 
 <p align="center">

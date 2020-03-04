@@ -126,7 +126,7 @@ for feature in features:
             elif data['mateType'] == 'SLIDER':
                 jointType = 'prismatic'
             elif data['mateType'] == 'FASTENED':
-                jointType = 'fixed'
+                jointType = 'floating'
             else:
                 print(Fore.RED +'ERROR: "'+ name+'" is declared as a DOF but the mate type is '+data['mateType']+'')
                 print('       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported'  +Style.RESET_ALL)
