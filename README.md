@@ -35,7 +35,7 @@ First clone this repository:
 
 Install the dependencies (can be in your python3 virtualenv):
 
-    pip install numpy pybullet requests commentjson colorama
+    pip install numpy pybullet requests commentjson colorama numpy-stl
 
 You might also need OpenSCAD for pure shape estimation
 
