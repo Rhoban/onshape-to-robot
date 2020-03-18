@@ -26,6 +26,10 @@ robot.maxSTLSize = config['maxSTLSize']
 robot.simplifySTLs = config['simplifySTLs']
 robot.jointMaxVelocity = config['jointMaxVelocity']
 robot.noDynamics = config['noDynamics']
+robot.packageName = config['packageName']
+robot.addDummyBaseLink = config['addDummyBaseLink']
+robot.robotName = config['robotName']
+
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):

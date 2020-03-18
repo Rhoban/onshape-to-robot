@@ -52,6 +52,11 @@ config['simplifySTLs'] = configGet('simplifySTLs', False)
 config['outputDirectory'] = robot
 config['dynamicsOverride'] = {}
 
+# ROS support
+config['packageName'] = configGet('packageName', '')
+config['addDummyBaseLink'] = configGet('addDummyBaseLink', False)
+config['robotName'] = configGet('robotName', 'onshape')
+
 # Creating dynamics override array
 tmp = configGet('dynamics', {})
 for key in tmp:

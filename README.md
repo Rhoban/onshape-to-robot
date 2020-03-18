@@ -93,6 +93,10 @@ Then edit `config.json` in your repository, here are the entries:
 * `noDynamics` can be set to `true` if you want to have all masses and inertia to 0
   (suppose you want to create an environment)
 * `ignore` can be a list of part that you want to be ignored in the URDF export
+* `packageName` adds a string to the paths of stl files. This is helpful for ROS users 
+  as they often need to specify their robot_description package.
+* `addDummyBaseLink` adds a base_link without inertia as root. This is often necessary for ROS users
+* `robotName` specifies the robot name.
 
 Here is an example of configuration:
 

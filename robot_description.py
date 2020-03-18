@@ -52,6 +52,9 @@ class RobotDescription(object):
         self.jointMaxEffort = 1
         self.jointMaxVelocity = 10
         self.noDynamics = False
+        self.packageName = ""
+        self.addDummyBaseLink = False
+        self.robotName = "onshape"
     
     def append(self, str):
         self.xml += str+"\n"
@@ -133,7 +136,7 @@ class RobotURDF(RobotDescription):
     def __init__(self):
         super().__init__()
         self.ext = 'urdf'
-        self.append('<robot name="onshape">')
+        self.append('<robot name="' + self.robotName + '">')
         pass
 
     def addDummyLink(self, name):
@@ -148,6 +151,15 @@ class RobotURDF(RobotDescription):
         self.append('<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
         self.append('</inertial>')
         self.append('</link>')
+
+    def addDummyBaseLink(self, name):
+        # adds a dummy base_link for ROS users
+        self.append('<link name="base_link"></link>')
+        self.append('<joint name="base_link_to_base" type="fixed">')
+        self.append('<parent link="base_link"/>')
+        self.append('<child link="' + name + '" />')
+        self.append('<origin rpy="0.0 0 0" xyz="0 0 0"/>')
+        self.append('</joint>')
 
     def addFixedJoint(self, parent, child, matrix, name=None):
         if name is None:
@@ -165,6 +177,9 @@ class RobotURDF(RobotDescription):
         self._link_name = name
         self.resetLink()
         # self.addDummyLink(name)
+        if self.addBaseLink:
+            self.addDummyBaseLink(name)
+            self.addBaseLink = False
         self.append('<link name="'+name+'">')
 
     def endLink(self):
@@ -199,7 +214,7 @@ class RobotURDF(RobotDescription):
         self.append('<visual>')
         self.append(origin(matrix))
         self.append('<geometry>')
-        self.append('<mesh filename="package://'+stl+'"/>')
+        self.append('<mesh filename="package://' + self.packageName +stl+'"/>')
         self.append('</geometry>')
         self.append('<material name="'+name+'_material">')
         self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
@@ -224,7 +239,7 @@ class RobotURDF(RobotDescription):
                 self.append('<'+entry+'>')
                 self.append(origin(matrix))
                 self.append('<geometry>')
-                self.append('<mesh filename="package://'+os.path.basename(stl)+'"/>')
+                self.append('<mesh filename="package://'+ self.packageName +os.path.basename(stl)+'"/>')
                 self.append('</geometry>')
                 self.append('<material name="'+name+'_material">')
                 self.append('<color rgba="%g %g %g 1.0"/>' % (color[0], color[1], color[2]))
@@ -277,7 +292,7 @@ class RobotSDF(RobotDescription):
         self.ext = 'sdf'
         self.relative = False
         self.append('<sdf version="1.6">')
-        self.append('<model name="onshape">')
+        self.append('<model name="'+self.robotName + '">')
         pass
 
     def addFixedJoint(self, parent, child, matrix, name=None):
