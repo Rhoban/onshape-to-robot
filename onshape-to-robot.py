@@ -146,6 +146,7 @@ def buildRobot(tree, matrix, linkPart=None):
         origin = child['origin']
         zAxis = child['zAxis']
         jointType = child['jointType']
+        jointLimits = child['jointLimits']
 
         translation = np.matrix(np.identity(4))
         translation[0, 3] += origin[0]
@@ -163,7 +164,7 @@ def buildRobot(tree, matrix, linkPart=None):
             childMatrix = matrix
 
         subLink = buildRobot(child, childMatrix, '_'.join(childLinkPart['path']))
-        robot.addJoint(jointType, link, subLink, axisFrame, child['dof_name'], zAxis)
+        robot.addJoint(jointType, link, subLink, axisFrame, child['dof_name'], jointLimits, zAxis)
 
     return link
 

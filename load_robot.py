@@ -2,6 +2,7 @@ import numpy as np
 from onshape_api.client import Client
 from config import config, configFile
 from colorama import Fore, Back, Style
+import math
 
 # OnShape API client
 client = Client(logging=False, creds=configFile)
@@ -83,6 +84,26 @@ def assignParts(root, parent):
         if occurrence['path'][0] == root:
             occurrence['assignation'] = parent
 
+# Load joint features to get limits later
+if config['versionId'] == '':
+    joint_features = client.get_features(config['documentId'], workspaceId, assemblyId)
+else:
+    joint_features = client.get_features(config['documentId'], config['versionId'], assemblyId)
+
+def getLimits(name):
+    for feature in joint_features['features']:
+        # find coresponding joint
+        if name == feature['message']['name']:
+            # find min and max values
+            for parameter in feature['message']['parameters']:
+                if parameter['message']['parameterId'] == "limitAxialZMin":
+                    min = math.radians(float(parameter['message']["expression"][:-4]))
+                if parameter['message']['parameterId'] == "limitAxialZMax":
+                    max = math.radians(float(parameter['message']["expression"][:-4]))
+            return (min,max)
+    print(Fore.YELLOW + 'WARNING: joint ' + name + " has no limits specified but is revolute or spherical" + Style.RESET_ALL)
+    return (0, 0)
+
 # First, features are scanned to find the DOFs. Links that they connects are then tagged 
 print("\n" + Style.BRIGHT +'* Getting assembly features, scanning for DOFs...' + Style.RESET_ALL)
 trunk = None
@@ -123,18 +144,21 @@ for feature in features:
             
             if data['mateType'] == 'REVOLUTE' or data['mateType'] == 'CYLINDRICAL':
                 jointType = 'revolute'
+                limits = getLimits(data['name'])
             elif data['mateType'] == 'SLIDER':
                 jointType = 'prismatic'
+                limits = (0, 0)
             elif data['mateType'] == 'FASTENED':
                 jointType = 'floating'
+                limits = (0, 0)
             else:
                 print(Fore.RED +'ERROR: "'+ name+'" is declared as a DOF but the mate type is '+data['mateType']+'')
                 print('       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported'  +Style.RESET_ALL)
                 exit(1)
 
-            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM + '('+jointType+')' + Style.RESET_ALL)
+            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM + '('+jointType+')[' +str(round(limits[0], 3)) + ': ' + str(round(limits[1], 3)) + ']' + Style.RESET_ALL)
 
-            relations[child] = [parent, data, name, jointType]
+            relations[child] = [parent, data, name, jointType, limits]
             assignParts(child, child)
             assignParts(parent, parent)
             if child not in frames:
@@ -229,6 +253,7 @@ def collect(id):
             child['jointType'] = entry[3]
             if mate['inverted']:
                 child['zAxis'] = -child['zAxis']
+            child['jointLimits'] = entry[4]
             part['children'].append(child)
     return part
 
