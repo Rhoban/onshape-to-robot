@@ -6,6 +6,7 @@ from colorama import Fore, Back, Style
 import sys
 import os
 import csg
+import hashlib
 
 # Loading configuration, collecting occurrences and building robot tree
 from load_robot import \
@@ -40,7 +41,10 @@ def addPart(occurrence, matrix):
 
     stlFile = prefix+'.stl'
     # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
-    shortend_configuration = part['configuration'][:40]
+    if len(part['configuration']) > 40:
+        shortend_configuration = hashlib.md5(part['configuration'].encode('utf-8')).hexdigest()
+    else:
+        shortend_configuration = part['configuration']
     stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], 
                                    part['partId'], shortend_configuration)
     f = open(config['outputDirectory']+'/'+stlFile, 'wb')
