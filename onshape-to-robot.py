@@ -6,6 +6,7 @@ from colorama import Fore, Back, Style
 import sys
 import os
 import csg
+import hashlib
 
 # Loading configuration, collecting occurrences and building robot tree
 from load_robot import \
@@ -43,8 +44,13 @@ def addPart(occurrence, matrix):
         return
 
     stlFile = prefix+'.stl'
+    # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
+    if len(part['configuration']) > 40:
+        shortend_configuration = hashlib.md5(part['configuration'].encode('utf-8')).hexdigest()
+    else:
+        shortend_configuration = part['configuration']
     stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], 
-                                   part['partId'], part['configuration'])
+                                   part['partId'], shortend_configuration)
     f = open(config['outputDirectory']+'/'+stlFile, 'wb')
     f.write(stl)
     f.close()
@@ -57,7 +63,7 @@ def addPart(occurrence, matrix):
             shapes = csg.process(config['outputDirectory']+'/'+scadFile)
         
     # Obtain metadatas about part to retrieve color
-    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
+    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], shortend_configuration)
     if 'appearance' in metadata:
         colors = metadata['appearance']['color']
         color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
@@ -76,7 +82,7 @@ def addPart(occurrence, matrix):
             com = entry['com']
             inertia = entry['inertia']
         else:
-            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
+            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], shortend_configuration)
             massProperties = massProperties['bodies'][part['partId']]
             mass = massProperties['mass'][0]
             com = massProperties['centroid']
@@ -98,7 +104,8 @@ def extractPartName(name, configuration):
     parts = name.split(' ')
     del parts[-1]
 
-    if configuration != 'default':
+    # only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
+    if configuration != 'default' and len(configuration) < 40:
         parts += ['_' + configuration.replace('=', '_').replace(' ', '_')]
 
     return '_'.join(parts).lower()
