@@ -179,7 +179,7 @@ class Client():
             - requests.Response: Onshape response data
         '''
 
-        return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/features')
+        return self._api.request('get', '/api/assemblies/d/' + did + '/w/' + wid + '/e/' + eid + '/features').json()
 
     def get_assembly_features(self, did, wid, eid):
         '''

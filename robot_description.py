@@ -253,13 +253,13 @@ class RobotURDF(RobotDescription):
         self.addLinkDynamics(matrix, mass, com, inertia)
 
 
-    def addJoint(self, jointType, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
+    def addJoint(self, jointType, linkFrom, linkTo, transform, name, jointLimits, zAxis=[0,0,1]):
         self.append('<joint name="'+name+'" type="'+jointType+'">')
         self.append(origin(transform))
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
         self.append('<axis xyz="%g %g %g"/>' % tuple(zAxis))
-        self.append('<limit effort="%g" velocity="%g" />' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name)))
+        self.append('<limit effort="%g" velocity="%g" lower="%g" upper="%g"/>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), *jointLimits))
         self.append('<joint_properties friction="0.0"/>')
         self.append('</joint>')
         self.append('')
@@ -299,7 +299,6 @@ class RobotSDF(RobotDescription):
         self.append('</inertia>')
         self.append('</inertial>')
         self.append('</link>')
-
 
     def startLink(self, name, matrix):
         self._link_name = name
@@ -404,14 +403,14 @@ class RobotSDF(RobotDescription):
 
         self.addLinkDynamics(matrix, mass, com, inertia);
         
-    def addJoint(self, jointType, linkFrom, linkTo, transform, name, zAxis=[0,0,1]):
+    def addJoint(self, jointType, linkFrom, linkTo, transform, name, jointLimits, zAxis=[0,0,1]):
         self.append('<joint name="'+name+'" type="'+jointType+'">')
         self.append(pose(transform))
         self.append('<parent>'+linkFrom+'</parent>')
         self.append('<child>'+linkTo+'</child>')
         self.append('<axis>')
         self.append('<xyz>%g %g %g</xyz>' % tuple(zAxis))
-        self.append('<limit><effort>%g</effort><velocity>%g</velocity></limit>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name)))
+        self.append('<limit><effort>%g</effort><velocity>%g</velocity><lower>%g</lower><upper>%g</upper></limit>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), *jointLimits))
         self.append('</axis>')
         self.append('</joint>')
         self.append('')
