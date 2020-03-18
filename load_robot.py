@@ -90,19 +90,35 @@ if config['versionId'] == '':
 else:
     joint_features = client.get_features(config['documentId'], config['versionId'], assemblyId)
 
-def getLimits(name):
+# Gets the limits of a given joint
+def getLimits(jointType, name):
+    enabled = False
+    minimum, maximum = 0, 0
     for feature in joint_features['features']:
         # find coresponding joint
         if name == feature['message']['name']:
             # find min and max values
             for parameter in feature['message']['parameters']:
-                if parameter['message']['parameterId'] == "limitAxialZMin":
-                    min = math.radians(float(parameter['message']["expression"][:-4]))
-                if parameter['message']['parameterId'] == "limitAxialZMax":
-                    max = math.radians(float(parameter['message']["expression"][:-4]))
-            return (min,max)
-    print(Fore.YELLOW + 'WARNING: joint ' + name + " has no limits specified but is revolute or spherical" + Style.RESET_ALL)
-    return (0, 0)
+                if parameter['message']['parameterId'] == "limitsEnabled":
+                    enabled = parameter['message']['value']
+
+                if jointType == 'revolute':
+                    # Note: we here assume it's in deg
+                    if parameter['message']['parameterId'] == 'limitAxialZMin':
+                        minimum = math.radians(float(parameter['message']['expression'][:-4]))
+                    if parameter['message']['parameterId'] == 'limitAxialZMax':
+                        maximum = math.radians(float(parameter['message']['expression'][:-4]))
+                elif jointType == 'prismatic':
+                    # Note: we here assume it's in mm
+                    if parameter['message']['parameterId'] == 'limitZMin':
+                        minimum = float(parameter['message']['expression'][:-3])/1000.0
+                    if parameter['message']['parameterId'] == 'limitZMax':
+                        maximum = float(parameter['message']['expression'][:-3])/1000.0
+    if enabled:
+        return (minimum, maximum)
+    else:
+        print(Fore.YELLOW + 'WARNING: joint ' + name + ' of type ' + jointType + ' has no limits ' + Style.RESET_ALL)
+        return None
 
 # First, features are scanned to find the DOFs. Links that they connects are then tagged 
 print("\n" + Style.BRIGHT +'* Getting assembly features, scanning for DOFs...' + Style.RESET_ALL)
@@ -144,19 +160,22 @@ for feature in features:
             
             if data['mateType'] == 'REVOLUTE' or data['mateType'] == 'CYLINDRICAL':
                 jointType = 'revolute'
-                limits = getLimits(data['name'])
+                limits = getLimits(jointType, data['name'])
             elif data['mateType'] == 'SLIDER':
                 jointType = 'prismatic'
-                limits = (0, 0)
+                limits = getLimits(jointType, data['name'])
             elif data['mateType'] == 'FASTENED':
                 jointType = 'floating'
-                limits = (0, 0)
+                limits = None
             else:
                 print(Fore.RED +'ERROR: "'+ name+'" is declared as a DOF but the mate type is '+data['mateType']+'')
                 print('       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported'  +Style.RESET_ALL)
                 exit(1)
 
-            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM + '('+jointType+')[' +str(round(limits[0], 3)) + ': ' + str(round(limits[1], 3)) + ']' + Style.RESET_ALL)
+            limitsStr = ''
+            if limits is not None:
+                limitsStr = '[' +str(round(limits[0], 3)) + ': ' + str(round(limits[1], 3)) + ']'
+            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM + '('+jointType+')'+limitsStr+ Style.RESET_ALL)
 
             relations[child] = [parent, data, name, jointType, limits]
             assignParts(child, child)

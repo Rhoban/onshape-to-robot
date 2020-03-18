@@ -259,7 +259,10 @@ class RobotURDF(RobotDescription):
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
         self.append('<axis xyz="%g %g %g"/>' % tuple(zAxis))
-        self.append('<limit effort="%g" velocity="%g" lower="%g" upper="%g"/>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), *jointLimits))
+        lowerUpperLimits = ''
+        if jointLimits is not None:
+            lowerUpperLimits = 'lower="%g" upper="%g"' % jointLimits
+        self.append('<limit effort="%g" velocity="%g" %s/>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), lowerUpperLimits))
         self.append('<joint_properties friction="0.0"/>')
         self.append('</joint>')
         self.append('')
@@ -410,7 +413,10 @@ class RobotSDF(RobotDescription):
         self.append('<child>'+linkTo+'</child>')
         self.append('<axis>')
         self.append('<xyz>%g %g %g</xyz>' % tuple(zAxis))
-        self.append('<limit><effort>%g</effort><velocity>%g</velocity><lower>%g</lower><upper>%g</upper></limit>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), *jointLimits))
+        lowerUpperLimits = ''
+        if jointLimits is not None:
+            lowerUpperLimits = '<lower>%g</lower><upper>%g</upper>' % jointLimits
+        self.append('<limit><effort>%g</effort><velocity>%g</velocity>%s</limit>' % (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), lowerUpperLimits))
         self.append('</axis>')
         self.append('</joint>')
         self.append('')
