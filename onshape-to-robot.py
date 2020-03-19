@@ -15,10 +15,8 @@ from load_robot import \
 # Creating robot for output
 if config['outputFormat'] == 'urdf':
     robot = RobotURDF(config['robotName'])
-    robot.additionalXML = config['additionalUrdf']
 elif config['outputFormat'] == 'sdf':
     robot = RobotSDF(config['robotName'])
-    robot.additionalXML = config['additionalSdf']
 else:
     print(Fore.RED + 'ERROR: Unknown output format: '+config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
     exit()
