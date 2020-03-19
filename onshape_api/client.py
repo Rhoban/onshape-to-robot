@@ -166,7 +166,7 @@ class Client():
     def get_assembly(self, did, wid, eid, type='w'):
         return self._api.request('get', '/api/assemblies/d/'+did+'/'+type+'/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true', 'includeMateConnectors': 'true'}).json()
 
-    def get_features(self, did, wid, eid):
+    def get_features(self, did, wid, eid, type='w'):
         '''
         Gets the feature list for specified document / workspace / part studio.
 
@@ -179,7 +179,7 @@ class Client():
             - requests.Response: Onshape response data
         '''
 
-        return self._api.request('get', '/api/assemblies/d/' + did + '/w/' + wid + '/e/' + eid + '/features').json()
+        return self._api.request('get', '/api/assemblies/d/' + did + '/'+type+'/' + wid + '/e/' + eid + '/features').json()
 
     def get_assembly_features(self, did, wid, eid):
         '''
