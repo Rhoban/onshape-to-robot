@@ -57,6 +57,22 @@ config['packageName'] = configGet('packageName', '')
 config['addDummyBaseLink'] = configGet('addDummyBaseLink', False)
 config['robotName'] = configGet('robotName', 'onshape')
 
+# additional XML code to insert
+urdfFileName = configGet('additionalUrdfFile', '')
+if urdfFileName == '':
+    config['additionalUrdf'] = ''
+else:
+    with open(robot + urdfFileName, 'r') as urdfFile:
+        config['additionalUrdf'] = urdfFile.read()
+        
+SdfFileName = configGet('additionalSdfFile', '')
+if SdfFileName == '':
+    config['additionalSdf'] = ''
+else:
+    with open(robot + SdfFileName, 'r') as SdfFile:
+        config['additionalSdf'] = SdfFile.read()
+
+
 # Creating dynamics override array
 tmp = configGet('dynamics', {})
 for key in tmp:
