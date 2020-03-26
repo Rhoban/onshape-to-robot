@@ -97,6 +97,9 @@ Then edit `config.json` in your repository, here are the entries:
   as they often need to specify their robot_description package.
 * `addDummyBaseLink` adds a base_link without inertia as root. This is often necessary for ROS users
 * `robotName` specifies the robot name.
+* `additionalUrdfFile` specifies a file with xml content that is inserted into the URDF at the end of the file. 
+  Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
+* `additionalSdfFile` the same but for the SDF output. The XML content is added inside the <model> part.
 
 Here is an example of configuration:
 
