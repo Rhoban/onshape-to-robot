@@ -88,7 +88,7 @@ def assignParts(root, parent):
 if config['versionId'] == '':
     joint_features = client.get_features(config['documentId'], workspaceId, assemblyId)
 else:
-    joint_features = client.get_features(config['documentId'], config['versionId'], assemblyId)
+    joint_features = client.get_features(config['documentId'], config['versionId'], assemblyId, type='v')
 
 # Gets the limits of a given joint
 def getLimits(jointType, name):
