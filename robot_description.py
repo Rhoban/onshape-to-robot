@@ -42,7 +42,7 @@ def pose(matrix, frame = ''):
     return sdf % (x, y, z, rpy[0], rpy[1], rpy[2])
 
 class RobotDescription(object):
-    def __init__(self):
+    def __init__(self, name):
         self.drawCollisions = False
         self.relative = True
         self.mergeSTLs = False
@@ -54,8 +54,8 @@ class RobotDescription(object):
         self.noDynamics = False
         self.packageName = ""
         self.addDummyBaseLink = False
-        self.robotName = "onshape"
-    
+        self.robotName = name
+
     def append(self, str):
         self.xml += str+"\n"
 
@@ -133,8 +133,8 @@ class RobotDescription(object):
         return mass, com, inertia
 
 class RobotURDF(RobotDescription):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name):
+        super().__init__(name)
         self.ext = 'urdf'
         self.append('<robot name="' + self.robotName + '">')
         pass
@@ -288,8 +288,8 @@ class RobotURDF(RobotDescription):
 
 
 class RobotSDF(RobotDescription):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name):
+        super().__init__(name)
         self.ext = 'sdf'
         self.relative = False
         self.append('<sdf version="1.6">')
