@@ -99,7 +99,7 @@ Then edit `config.json` in your repository, here are the entries:
 * `robotName` specifies the robot name.
 * `additionalUrdfFile` specifies a file with xml content that is inserted into the URDF at the end of the file. 
   Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
-* `additionalSdfFile` the same but for the SDF output.
+* `additionalSdfFile` the same but for the SDF output. The XML content is added inside the <model> part.
 
 Here is an example of configuration:
 
