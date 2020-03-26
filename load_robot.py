@@ -130,7 +130,7 @@ for feature in features:
         name = feature['featureData']['name']
         if name[0:5] == 'link_':
             name = name[5:]
-            occurrences[tuple(feature['featureData']['occurrence'])]['linkName'] = name
+            occurrences[(feature['featureData']['occurrence'][0],)]['linkName'] = name
     else:
         if feature['suppressed']:
             continue

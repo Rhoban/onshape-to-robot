@@ -95,9 +95,7 @@ def addPart(occurrence, matrix):
     if robot.relative:
         pose = np.linalg.inv(matrix)*pose
     
-    linkName = None
-
-    robot.addPart(pose, config['outputDirectory']+'/'+stlFile, mass, com, inertia, color, shapes, prefix, occurrence['linkName'])
+    robot.addPart(pose, config['outputDirectory']+'/'+stlFile, mass, com, inertia, color, shapes, prefix)
 
 partNames = {}
 def extractPartName(name, configuration):
@@ -110,16 +108,19 @@ def extractPartName(name, configuration):
 
     return '_'.join(parts).lower()
 
-def processPartName(name, configuration):
-    global partNames
-    name = extractPartName(name, configuration)
+def processPartName(name, configuration, overrideName=None):
+    if overrideName is None:
+        global partNames
+        name = extractPartName(name, configuration)
 
-    if name in partNames:
-        partNames[name] += 1
+        if name in partNames:
+            partNames[name] += 1
+        else:
+            partNames[name] = 1
+
+        return name+'_'+str(partNames[name])
     else:
-        partNames[name] = 1
-
-    return name+'_'+str(partNames[name])
+        return overrideName
 
 def buildRobot(tree, matrix, linkPart=None):
     occurrence = getOccurrence([tree['id']])
@@ -127,7 +128,7 @@ def buildRobot(tree, matrix, linkPart=None):
     print(Fore.BLUE + Style.BRIGHT + '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
 
     # Build a part name that is unique but still informative
-    link = processPartName(instance['name'], instance['configuration'])
+    link = processPartName(instance['name'], instance['configuration'], occurrence['linkName'])
 
     # Create the link, collecting all children in the tree assigned to this top-level part
     robot.startLink(link, matrix)

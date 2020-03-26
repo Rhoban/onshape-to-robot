@@ -221,7 +221,7 @@ class RobotURDF(RobotDescription):
         self.append('</material>')
         self.append('</visual>')
 
-    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name='', linkName=None):
+    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
 
         if not self.drawCollisions:
             if self.mergeSTLs:
@@ -370,7 +370,7 @@ class RobotSDF(RobotDescription):
         self.append(self.material(color))
         self.append('</visual>')
 
-    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name='', linkName=None):
+    def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
         name = self._link_name+'_'+str(self._link_childs)+'_'+name
         if linkName is not None:
             name = linkName
