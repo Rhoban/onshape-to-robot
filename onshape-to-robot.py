@@ -125,8 +125,18 @@ def buildRobot(tree, matrix, linkPart=None):
     instance = occurrence['instance']
     print(Fore.BLUE + Style.BRIGHT + '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
 
-    # Build a part name that is unique but still informative
-    link = processPartName(instance['name'], instance['configuration'])
+    # Try to use link name that is specified by mate
+    link = occurrence['linkName']
+    if link is None:
+        # look it the mate is on one of the subparts
+        for suboccurrence in occurrences.values():
+            if suboccurrence['assignation'] == tree['id'] and suboccurrence['instance']['type'] == 'Part' and \
+                    suboccurrence['linkName'] is not None:
+                link = suboccurrence['linkName']
+                break
+        # As fallback build a part name that is unique but still informative
+        if link is None:
+            link = processPartName(instance['name'], instance['configuration'])
 
     # Create the link, collecting all children in the tree assigned to this top-level part
     robot.startLink(link, matrix)
