@@ -15,10 +15,8 @@ from load_robot import \
 # Creating robot for output
 if config['outputFormat'] == 'urdf':
     robot = RobotURDF()
-    robot.additionalXML = config['additionalUrdf']
 elif config['outputFormat'] == 'sdf':
     robot = RobotSDF()
-    robot.additionalXML = config['additionalSdf']
 else:
     print(Fore.RED + 'ERROR: Unknown output format: '+config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
     exit()
@@ -32,7 +30,7 @@ robot.noDynamics = config['noDynamics']
 robot.packageName = config['packageName']
 robot.addDummyBaseLink = config['addDummyBaseLink']
 robot.robotName = config['robotName']
-
+robot.additionalXML = config['additionalXML']
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
