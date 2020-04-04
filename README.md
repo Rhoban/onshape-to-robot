@@ -184,8 +184,7 @@ To run the simulation:
 
     ./bullet.py robots/myrobot
 
-The example code will send sinusoidal signals to motors target positions to see the robot
-in action.
+You will have sliders available on the right to control the DOFs.
 
 ### Gazebo
 
