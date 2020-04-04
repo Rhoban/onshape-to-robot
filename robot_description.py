@@ -283,6 +283,7 @@ class RobotURDF(RobotDescription):
         self.append('')
     
     def finalize(self):
+        self.append(self.additionalXML)
         self.append('</robot>')
 
 
@@ -438,5 +439,6 @@ class RobotSDF(RobotDescription):
         # print('Joint from: '+linkFrom+' to: '+linkTo+', transform: '+str(transform))
     
     def finalize(self):
+        self.append(self.additionalXML)
         self.append('</model>')
         self.append('</sdf>')
