@@ -31,7 +31,7 @@ from the OnShape assembly.
 
 First clone this repository:
 
-    git clone git@github.com:Gregwar/onshape-urdf.git
+    git clone git@github.com:Rhoban/onshape-to-robot.git
 
 Install the dependencies (can be in your python3 virtualenv):
 
