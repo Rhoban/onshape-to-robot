@@ -373,8 +373,6 @@ class RobotSDF(RobotDescription):
 
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
         name = self._link_name+'_'+str(self._link_childs)+'_'+name
-        if linkName is not None:
-            name = linkName
         self._link_childs += 1
 
         # self.append('<link name="'+name+'">')
