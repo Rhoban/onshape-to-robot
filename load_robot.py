@@ -23,10 +23,12 @@ if config['versionId'] == '':
 else:
     elements = client.list_elements(config['documentId'], config['versionId'], 'v').json()
 assemblyId = None
+assemblyName = ''
 for element in elements:
     if element['type'] == 'Assembly' and \
         (config['assemblyName'] is False or element['name'] == config['assemblyName']):
         print(Fore.GREEN + "+ Found assembly, id: "+element['id']+', name: "'+element['name']+'"' + Style.RESET_ALL)
+        assemblyName = element['name']
         assemblyId = element['id']
 
 if assemblyId == None:
@@ -34,7 +36,7 @@ if assemblyId == None:
     exit(1)
 
 # Retrieving the assembly
-print("\n" + Style.BRIGHT + '* Retrieving assembly' + Style.RESET_ALL)
+print("\n" + Style.BRIGHT + '* Retrieving assembly "'+assemblyName+'" with id '+assemblyId+ Style.RESET_ALL)
 if config['versionId'] == '':
     assembly = client.get_assembly(config['documentId'], workspaceId, assemblyId)
 else:
