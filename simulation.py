@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import math
 import sys
+import os
 import time
 import pybullet as p
 from time import sleep
@@ -15,7 +16,8 @@ class Simulation:
         p.setGravity(0, 0, -10)
 
         # Loading floor
-        planeId = p.loadURDF('bullet/plane.urdf')
+        planeDirectory = os.path.dirname(os.path.abspath(__file__))
+        planeId = p.loadURDF(planeDirectory+'/bullet/plane.urdf')
 
         # Loading robot
         cubeStartPos = [0, 0, 0.75]
