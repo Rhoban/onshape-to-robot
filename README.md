@@ -27,6 +27,18 @@ It is possible to invert the axis for convenience by adding `_inv` at the end of
 `dof_head_pitch_inv` will result in a joint named `head_pitch` having the axis inverted with the one
 from the OnShape assembly.
 
+## Onshape-to-robot scripts
+
+Onshape-to-robot provide the following scripts:
+
+* `onshape-to-robot`: the main script that run the robot import (given a directory containing a `config.json` file,
+  see below)
+* `onshape-to-robot-edit-shape`: a tool that runs OpenSCAD with proper configuration to allow you editing the pure
+  shape approximation of some mesh manually
+* `onshape-to-robot-bullet`: simple test that can run your robot in a simulation once it's imported
+* `onshape-to-robot-clear-cache`: clearing the cache of API requests (used to speed up re-runs)
+
+
 ## Installation & requirements
 
 ### From pip
