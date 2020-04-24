@@ -86,12 +86,25 @@ Alternatively, those keys can be stored in the `config.json` file, that will ove
 parameters (see below). It is however preferred to use environment variables because you can then
 share safely your `config.json` without sharing your secret keys.
 
-## Configuration
+## Export your own robot
 
-Create your own robot configuration, you can have a look in [robots/skeleton/](robots/skeleton/)
-for example.
+To export your own robot, first create a directory:
 
-Then edit `config.json` in your repository, here are the entries:
+    mkdir my-robot
+
+Then edit `my-robot/config.json`, here is the minimum example:
+
+```json
+{
+    "documentId": "your-document-id",
+    "outputFormat": "urdf"
+}
+```
+
+Here, we just specify the document id (see picture above) and the output format. You can now run the
+`onshape-ro-robot my-robot` command, that will start the import.
+
+Here is the full list of possible entries for this configuration.
 
 * `onshape_api`: URL for OnShape API
 * `onshape_access_key` and `onshape_secret_key` are the API key you obtained
@@ -218,16 +231,9 @@ You can give a try to gazebo using:
     gz model -m robot -d
     gz model --spawn-file=robot.sdf --model-name=robot
 
-## Testing the example (quadruped robot)
+## Examples
 
-You can give a try to the `demo-quadruped` robot, which is a public assembly that can
-be [viewed here](https://cad.onshape.com/documents/11a7f59e37f711d732274fca/w/7807518dc67487ad405722c8/e/5233c6445c575366a6cc0d50):
-
-    onshape-to-robot robots/demo-quadruped/
-
-Note: parallel constraints are here to keep the robot in its "zero" position when exporting,
-they can be supressed to manipulate the degrees of freedom in OnShape and unsupressed when
-exporting, or just to reset the robot to the "zero" position.
+Several examples can be found in the [examples repository](https://github.com/Rhoban/onshape-to-robot-examples)
 
 ## Pure shapes
 

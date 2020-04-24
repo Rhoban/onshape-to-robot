@@ -30,7 +30,7 @@ config = json.load(open(configFile))
 
 config['documentId'] = configGet('documentId')
 config['versionId'] = configGet('versionId', '')
-config['drawFrames'] = configGet('drawFrames')
+config['drawFrames'] = configGet('drawFrames', False)
 config['drawCollisions'] = configGet('drawCollisions', False)
 config['assemblyName'] = configGet('assemblyName', False)
 config['outputFormat'] = configGet('outputFormat', 'urdf')
