@@ -72,14 +72,12 @@ export ONSHAPE_SECRET_KEY=Your_Secret_Key
 
 Alternatively, those keys can be stored in the `config.json` file, that will override those
 parameters (see below). It is however preferred to use environment variables because you can then
-share safely your config.json without sharing your secret keys.
+share safely your `config.json` without sharing your secret keys.
 
 ## Configuration
 
-Create your own robot configuration by copying the `robots/skeleton` directory
-to your own:
-
-    cp -R robots/skeleton/ robots/myrobot
+Create your own robot configuration, you can have a look in [robots/skeleton/](robots/skeleton/)
+for example.
 
 Then edit `config.json` in your repository, here are the entries:
 
