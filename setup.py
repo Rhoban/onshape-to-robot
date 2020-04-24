@@ -1,11 +1,11 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README-pypi.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="onshape-to-robot",
-    version="0.1.2",
+    version="0.1.3",
     author="Rhoban team",
     author_email="team@rhoban.com",
     description="Converting OnShape assembly to robot definition (SDF or URDF) through OnShape API ",
@@ -25,6 +25,6 @@ setuptools.setup(
         "numpy", "pybullet", "requests", "commentjson", "colorama", "numpy-stl", "transforms3d"
     ],
     include_package_data=True,
-    package_data={'': ['bullet/*', 'README-pypi.md']},
+    package_data={'': ['bullet/*', 'README.md']},
     python_requires='>=3.6',
 )
