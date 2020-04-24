@@ -12,7 +12,7 @@ else:
     print("Usage: onshape-to-robot-bullet [robot dir]")
     exit(1)
 
-sim = Simulation(directory)
+sim = Simulation(directory+'/robot.urdf', gui=True, panels=True)
 
 controls = {}
 for name in sim.getJoints():
@@ -34,4 +34,6 @@ while True:
             print("- x=%f\ty=%f\tz=%f" % frames[frame][0])
             print("- r=%f\tp=%f\ty=%f" % frames[frame][1])
             print("")
+
+    sim.tick()
 
