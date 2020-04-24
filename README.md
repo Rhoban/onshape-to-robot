@@ -43,7 +43,7 @@ Onshape-to-robot provide the following commands:
 
 ### From pip
 
-You can run:
+Run the following to install [onshape-to-robot from pypi](https://pypi.org/project/onshape-to-robot/):
 
     pip install onshape-to-robot
 
