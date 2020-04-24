@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 import numpy as np
 from copy import copy
-from robot_description import RobotURDF, RobotSDF
 from colorama import Fore, Back, Style
 import sys
+from sys import exit
 import os
-import csg
 import hashlib
+from . import csg
+from .robot_description import RobotURDF, RobotSDF
 
 # Loading configuration, collecting occurrences and building robot tree
-from load_robot import \
+from .load_robot import \
     config, client, tree, occurrences, getOccurrence, frames
 
 # Creating robot for output

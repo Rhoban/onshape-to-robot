@@ -2,7 +2,7 @@ import numpy as np
 import os
 import math
 import uuid
-import stl_combine
+from . import stl_combine
  
 def rotationMatrixToEulerAngles(R) :     
     sy = math.sqrt(R[0,0] * R[0,0] +  R[1,0] * R[1,0])

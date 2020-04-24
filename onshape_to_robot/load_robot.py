@@ -1,8 +1,9 @@
-import numpy as np
-from onshape_api.client import Client
-from config import config, configFile
-from colorama import Fore, Back, Style
 import math
+from sys import exit
+import numpy as np
+from .onshape_api.client import Client
+from .config import config, configFile
+from colorama import Fore, Back, Style
 
 # OnShape API client
 client = Client(logging=False, creds=configFile)

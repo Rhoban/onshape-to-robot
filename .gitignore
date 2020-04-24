@@ -5,3 +5,6 @@ robots
 !robots/demo-quadruped/config.json
 data
 **/cache/
+dist
+build
+onshape_to_robot.egg-info

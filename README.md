@@ -171,7 +171,7 @@ on which it is attached will be named `something` in the resulting URDF.
 
 You can run the import using:
 
-    ./onshape-to-robot.py robots/myrobot
+    onshape-to-robot robots/myrobot
 
 This will produce files in the directory (next to the `config.json` file), including STLs (mesh
 files) and the `sdf` or `urdf`.
@@ -182,7 +182,7 @@ files) and the `sdf` or `urdf`.
 
 To run the simulation:
 
-    ./bullet.py robots/myrobot
+    onshape-to-robot-bullet robots/myrobot
 
 You will have sliders available on the right to control the DOFs.
 
@@ -199,7 +199,7 @@ You can give a try to gazebo using:
 You can give a try to the `demo-quadruped` robot, which is a public assembly that can
 be [viewed here](https://cad.onshape.com/documents/11a7f59e37f711d732274fca/w/7807518dc67487ad405722c8/e/5233c6445c575366a6cc0d50):
 
-    ./onshape-to-robot.py robots/demo-quadruped/
+    onshape-to-robot robots/demo-quadruped/
 
 Note: parallel constraints are here to keep the robot in its "zero" position when exporting,
 they can be supressed to manipulate the degrees of freedom in OnShape and unsupressed when
@@ -218,7 +218,7 @@ For this, we propose a solution based on `openscad`:
 To do that, you need to create a `.scad` file next to `.stl` one. For instance `motor.scad`
 that will approximate `motor.stl` file.
 
-You can use `./edit-shape.py [stl-file]` that will automatically prepare and run the `.scad`
+You can use `onshape-to-robot-edit-shape [stl-file]` that will automatically prepare and run the `.scad`
 using a template visualizing the `.stl` with transparency, allowing you to edit the pure
 shapes related:
 
@@ -227,7 +227,7 @@ shapes related:
 </p>
 
 Then, the pure shapes from your scad will be used when generating the `sdf` or `urdf` file (next
-time you will run `onshape-to-robot.py`, it will read your `.scad` files).
+time you will run `onshape-to-robot`, it will read your `.scad` files).
 
 Thus, if the `.scad` file is empty, your part will have no collision. If you want to use the mesh
 again, simply remove the `.scad` file.
@@ -251,7 +251,7 @@ If you want to track some frames on your robot, you can do the following:
 <img src="img/smalls/frame.png" />
 </p>
 
-If you want to give it a try, you can use the `bullet.py` in `urdf` mode, it will output the
+If you want to give it a try, you can use the `onshape-to-robot-bullet` in `urdf` mode, it will output the
 frames on standard output.
 
 ## Joint frames
