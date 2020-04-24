@@ -27,9 +27,9 @@ It is possible to invert the axis for convenience by adding `_inv` at the end of
 `dof_head_pitch_inv` will result in a joint named `head_pitch` having the axis inverted with the one
 from the OnShape assembly.
 
-## Onshape-to-robot scripts
+## Onshape-to-robot commands
 
-Onshape-to-robot provide the following scripts:
+Onshape-to-robot provide the following commands:
 
 * `onshape-to-robot`: the main script that run the robot import (given a directory containing a `config.json` file,
   see below)
