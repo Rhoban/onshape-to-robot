@@ -29,6 +29,14 @@ from the OnShape assembly.
 
 ## Installation & requirements
 
+### From pip
+
+You can run:
+
+    pip install onshape-to-robot
+
+### From the repository
+
 First clone this repository:
 
     git clone git@github.com:Rhoban/onshape-to-robot.git
@@ -37,9 +45,15 @@ Install the dependencies (can be in your python3 virtualenv):
 
     pip install numpy pybullet requests commentjson colorama numpy-stl
 
+### Optional requirement
+
 You might also need OpenSCAD for pure shape estimation
 
     apt-get install openscad
+
+And Meshlab for STLs simplifications
+
+    apt-get install meshlab
 
 ## Setting up your API key
 
