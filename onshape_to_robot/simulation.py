@@ -107,13 +107,13 @@ class Simulation:
         print('* Found '+str(len(self.joints))+' DOFs')
         print('* Found '+str(len(self.frames))+' frames')
 
-    def setFloorFrictions(self, lateral=0.8, spinning=0.1, rolling=0.1):
+    def setFloorFrictions(self, lateral=1, spinning=-1, rolling=-1):
         """Sets the frictions with the plane object
 
         Keyword Arguments:
-            lateral {float} -- lateral friction (default: {0.8})
-            spinning {float} -- spinning friction (default: {0.1})
-            rolling {float} -- rolling friction (default: {0.1})
+            lateral {float} -- lateral friction (default: {1.0})
+            spinning {float} -- spinning friction (default: {-1.0})
+            rolling {float} -- rolling friction (default: {-1.0})
         """
         if self.floor is not None:
             p.changeDynamics(self.floor, -1, lateralFriction=lateral,
