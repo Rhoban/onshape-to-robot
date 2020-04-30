@@ -82,7 +82,7 @@ If it is not specified, the very last one will be used for import.
 ``drawFrames``
 ~~~~~~~~~~~~~~
 
-*optional, default: ``false``*
+*optional, default: false*
 
 When :ref:`adding custom frames to your model <custom-frames>`, the part that is used for positionning the frame is
 by default excluded from the output description (a dummy link is kept instead). Passing this option to ``true`` will
@@ -91,7 +91,7 @@ keep it instead.
 ``drawCollisions``
 ~~~~~~~~~~~~~~~~~~
 
-*optional, default: ``false``*
+*optional, default: false*
 
 If you use :doc:`pure shapes approximations <pure-shapes>`, the collisions in your description will not be meshes
 but shapes like boxes, cylinders etc. If you pass this argument to ``true``, it will use the same output in the
@@ -122,7 +122,7 @@ Alternatively, they can be dictionaries associating named joints to the values.
 ``dynamics``
 ~~~~~~~~~~~~
 
-*optional, default: ``{}``*
+*optional, default: {}*
 
 This ``dict`` can be used to override the mass and inertia computed by Onshape for a specific part.
 See :ref:`example <example-config>` below.
@@ -131,7 +131,7 @@ See :ref:`example <example-config>` below.
 ``noDynamics``
 ~~~~~~~~~~~~~~
 
-*optional, default: ``false``*
+*optional, default: false*
 
 This flag can be set if there is no dynamics. In that case all masses and inertia will be set to 0.
 In pyBullet, this will result in static object (think of some environment for example).
@@ -139,7 +139,7 @@ In pyBullet, this will result in static object (think of some environment for ex
 ``ignore``
 ~~~~~~~~~~
 
-*optional, default: ``[]``*
+*optional, default: []*
 
 This can be a list of parts that you want to be ignored during the export.
 
@@ -175,7 +175,7 @@ Specifies a file with XML content that is inserted into the URDF/SDF at the end 
 ``connectWithFixedLinks``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*optional, default: ``true``*
+*optional, default: true*
 
 When part is not in any joint (orphan), onshape-to-robot tries to merge it with the most
 relevant part of the robot, first checking for existing mates, and then finally connecting it to the trunk. This
@@ -184,7 +184,7 @@ option defined wether it will be merged or attached to that part with a ``fixed`
 ``mergeSTLs``
 ~~~~~~~~~~~~~
 
-*optional, default: ``false``*
+*optional, default: false*
 
 This can be used to merge STLs file of the same ``link`` into one unique STL. It is actually better combined with
 ``simplifySTLs``, that can be used to reduce the STL file sizes.
@@ -192,7 +192,7 @@ This can be used to merge STLs file of the same ``link`` into one unique STL. It
 ``simplifySTLs``
 ~~~~~~~~~~~~~~~~
 
-*optional, default: ``false``*
+*optional, default: false*
 
 If this is set, the STL files will be reduced (see ``maxSTLSize``). This requires ``meshlab`` tool (``sudo
 apt-get install meshlab``).
