@@ -298,8 +298,12 @@ class Simulation:
         """
         for name in joints.keys():
             if name in self.joints:
-                p.setJointMotorControl2(
-                    self.robot, self.joints[name], p.POSITION_CONTROL, joints[name])
+                if name.endswith('_speed'):
+                    p.setJointMotorControl2(
+                    self.robot, self.joints[name], p.VELOCITY_CONTROL, targetVelocity=joints[name])
+                else:
+                    p.setJointMotorControl2(
+                        self.robot, self.joints[name], p.POSITION_CONTROL, joints[name])
             else:
                 raise Exception("Can't find joint %s" % name)
 
