@@ -35,7 +35,8 @@ Onshape-to-robot provide the following commands:
   see below)
 * `onshape-to-robot-edit-shape`: a tool that runs OpenSCAD with proper configuration to allow you editing the pure
   shape approximation of some mesh manually
-* `onshape-to-robot-bullet`: simple test that can run your robot in a simulation once it's imported
+* `onshape-to-robot-bullet`: simple test that can run your robot in a simulation once it's imported. Pass `-f` to make
+  the base of your robot fixed (if it is a robotic arm for example).
 * `onshape-to-robot-clear-cache`: clearing the cache of API requests (used to speed up re-runs)
 
 
