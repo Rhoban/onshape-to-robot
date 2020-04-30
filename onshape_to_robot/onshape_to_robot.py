@@ -155,18 +155,10 @@ def buildRobot(tree, matrix):
     # Following the children in the tree, calling this function recursively
     k = 0
     for child in tree['children']:
-        childLinkPart = getOccurrence(child['occurrence'])
-        childWorldFrame = childLinkPart['transform']
-        origin = child['origin']
-        zAxis = child['zAxis']
+        worldAxisFrame = child['axis_frame']
+        zAxis = child['z_axis']
         jointType = child['jointType']
         jointLimits = child['jointLimits']
-
-        translation = np.matrix(np.identity(4))
-        translation[0, 3] += origin[0]
-        translation[1, 3] += origin[1]
-        translation[2, 3] += origin[2]
-        worldAxisFrame = childWorldFrame * translation
 
         if robot.relative:
             axisFrame = np.linalg.inv(matrix)*worldAxisFrame
