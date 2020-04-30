@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'onshape-to-robot'
+project = 'Onshape to robot'
 copyright = '2020, Rhoban'
 author = 'Rhoban'
 
