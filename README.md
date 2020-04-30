@@ -8,40 +8,24 @@ This tool is based on the [OnShape API](https://dev-portal.onshape.com/) to retr
 informations from an assembly and build an SDF or URDF model suitable for physics
 simulation.
 
-## Design-time considerations
+Documentation summary:
 
-There is some design constraints:
+* [Installation & requirements](#installation--requirements)
+* [Setting up your API key](#setting-up-your-api-key)
+* [Onshape-to-robot commands](#onshape-to-robot-commands)
+* [Design-time considerations](#design-time-considerations)
+* [Create an export configuration for your robot](#create-an-export-configuration-for-your-robot)
+* [Running the import](#running-the-import)
+* [Naming links](#naming-links)
+* [Add custom frames in your model](#add-custom-frames-in-your-model)
+* [Running the simulation](#running-the-simulation)
+* [Pure shapes approximation](#pure-shapes-approximation)
+* [Cache](#cache)
+* [License](#license]
 
-* Try to make your robot assembly mostly based on sub pre-assembled components (avoid to have a lot of constraints that are not relevant for the export). In this main assembly, do not use features such as sub-assemblies network.
-* Degree of freedoms should be slider, cylindrical or revolute mate connectors named `dof_something`, where `something` will be used to name the joint in the final document
-    * If the mate connector is *cylindrical* or *revolute*, a `revolute` joint will be issued
-    * If the mate connector is a *slider*, a `prismatic` joint will be issued
-    * If the mate connector is *fastened*, a `floating` joint will be issued
-* When doing this connection, click the children joint first. This will be used to find the trunk of the robot (part with children but no parent)
 
-<p align="center">
-<img src="img/smalls/design.png" />
-</p>
-
-It is possible to invert the axis for convenience by adding `_inv` at the end of the name. For instance
-`dof_head_pitch_inv` will result in a joint named `head_pitch` having the axis inverted with the one
-from the OnShape assembly.
-
-## Onshape-to-robot commands
-
-Onshape-to-robot provide the following commands:
-
-* `onshape-to-robot`: the main script that run the robot import (given a directory containing a `config.json` file,
-  see below)
-* `onshape-to-robot-edit-shape`: a tool that runs OpenSCAD with proper configuration to allow you editing the pure
-  shape approximation of some mesh manually
-* `onshape-to-robot-bullet`: simple test that can run your robot in a simulation once it's imported. Pass `-f` to make
-  the base of your robot fixed (if it is a robotic arm for example).
-  * If a joint name ends with `_speed`, it will control its with speed instead of position.
-  * If a joint name ends with `_passive`, it will not be controlled.
-  * If a joint specify its limits, they will be used for side sliders.
-* `onshape-to-robot-clear-cache`: clearing the cache of API requests (used to speed up re-runs)
-
+Also, consider [Browsing robot examples](https://github.com/Rhoban/onshape-to-robot-examples) to understand better
+how to design and configure your export.
 
 ## Installation & requirements
 
@@ -90,7 +74,41 @@ Alternatively, those keys can be stored in the `config.json` file, that will ove
 parameters (see below). It is however preferred to use environment variables because you can then
 share safely your `config.json` without sharing your secret keys.
 
-## Export your own robot
+## Onshape-to-robot commands
+
+Onshape-to-robot provide the following commands:
+
+* `onshape-to-robot`: the main script that run the robot import (given a directory containing a `config.json` file,
+  see below)
+* `onshape-to-robot-edit-shape`: a tool that runs OpenSCAD with proper configuration to allow you editing the pure
+  shape approximation of some mesh manually
+* `onshape-to-robot-bullet`: simple test that can run your robot in a simulation once it's imported. Pass `-f` to make
+  the base of your robot fixed (if it is a robotic arm for example).
+  * If a joint name ends with `_speed`, it will control its with speed instead of position.
+  * If a joint name ends with `_passive`, it will not be controlled.
+  * If a joint specify its limits, they will be used for side sliders.
+* `onshape-to-robot-clear-cache`: clearing the cache of API requests (used to speed up re-runs)
+
+## Design-time considerations
+
+There is some design constraints:
+
+* Try to make your robot assembly mostly based on sub pre-assembled components (avoid to have a lot of constraints that are not relevant for the export). In this main assembly, do not use features such as sub-assemblies network.
+* Degree of freedoms should be slider, cylindrical or revolute mate connectors named `dof_something`, where `something` will be used to name the joint in the final document
+    * If the mate connector is *cylindrical* or *revolute*, a `revolute` joint will be issued
+    * If the mate connector is a *slider*, a `prismatic` joint will be issued
+    * If the mate connector is *fastened*, a `floating` joint will be issued
+* When doing this connection, click the children joint first. This will be used to find the trunk of the robot (part with children but no parent)
+
+<p align="center">
+<img src="img/smalls/design.png" />
+</p>
+
+It is possible to invert the axis for convenience by adding `_inv` at the end of the name. For instance
+`dof_head_pitch_inv` will result in a joint named `head_pitch` having the axis inverted with the one
+from the OnShape assembly.
+
+## Create an export configuration for your robot
 
 To export your own robot, first create a directory:
 
@@ -206,11 +224,6 @@ Here is an example of configuration:
 }
 ```
 
-## Naming links
-
-If you create a mate connector and name it `link_something`, the link corresponding to the part
-on which it is attached will be named `something` in the resulting URDF.
-
 ## Running the import
 
 You can run the import using:
@@ -219,6 +232,31 @@ You can run the import using:
 
 This will produce files in the directory (next to the `config.json` file), including STLs (mesh
 files) and the `sdf` or `urdf`.
+
+## Naming links
+
+If you create a mate connector and name it `link_something`, the link corresponding to the part
+on which it is attached will be named `something` in the resulting URDF.
+
+## Add custom frames in your model
+
+If you want to track some frames on your robot, you can do the following:
+
+* Connect any part to your robot using mate relations in OnShape
+* Name one of these relations `frame_something`, when `something` will be the name of
+  the frame (a link) in the resulting `sdf` or `urdf`
+
+<p align="center">
+<img src="img/smalls/frame.png" />
+</p>
+
+If you want to give it a try, you can use the `onshape-to-robot-bullet` in `urdf` mode, it will output the
+frames on standard output.
+
+## Joint frames
+
+Joint frames are positionned wherever you positionned the mate connector itself, and oriented in
+the frame of the child link.
 
 ## Running the simulation
 
@@ -242,7 +280,7 @@ You can give a try to gazebo using:
 
 Several examples can be found in the [examples repository](https://github.com/Rhoban/onshape-to-robot-examples)
 
-## Pure shapes
+## Pure shapes approximation
 
 By default, meshes are also used for collision. This is versatile but is computationally
 expensive, and can be numerically instable.
@@ -276,30 +314,10 @@ be useful to debug:
 <img src="img/smalls/shape-approx.png" />
 </p>
 
-## Frames
-
-If you want to track some frames on your robot, you can do the following:
-
-* Connect any part to your robot using mate relations in OnShape
-* Name one of these relations `frame_something`, when `something` will be the name of
-  the frame (a link) in the resulting `sdf` or `urdf`
-
-<p align="center">
-<img src="img/smalls/frame.png" />
-</p>
-
-If you want to give it a try, you can use the `onshape-to-robot-bullet` in `urdf` mode, it will output the
-frames on standard output.
-
-## Joint frames
-
-Joint frames are positionned wherever you positionned the mate connector itself, and oriented in
-the frame of the child link.
-
 ## Cache
 
 Some requests are cached for convenience (recovery of STL, massproperties etc.). You can run
-the `clear-cache.sh` script to remove all cached requests.
+the `onshape-to-robot-clear-cache` script to remove all cached requests.
 
 ## License
 
