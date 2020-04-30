@@ -16,7 +16,10 @@ sim = Simulation(args.directory+'/robot.urdf', gui=True, panels=True, fixed=args
 
 controls = {}
 for name in sim.getJoints():
-    controls[name] = p.addUserDebugParameter(name, -math.pi, math.pi, 0)
+    if name.endswith('_speed'):
+        controls[name] = p.addUserDebugParameter(name, -math.pi*3, math.pi*3, 0)
+    else:
+        controls[name] = p.addUserDebugParameter(name, -math.pi, math.pi, 0)
 
 lastPrint = 0
 while True:
