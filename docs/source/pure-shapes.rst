@@ -40,13 +40,12 @@ not ``false``).
 Part with no collision
 ----------------------
 
-Thus, if the ``.scad`` file is empty, your part will have no collision. If you want to use the mesh
-again, simply remove the ``.scad`` file.
+If the ``.scad`` file is empty, your part will have no collision.
 
 Re-using the mesh
 -----------------
 
-To use the mesh for collision, simply remove the ``.scad`` next to it file again.
+To use the mesh for collision, simply remove the ``.scad`` that has the same name that the ``.stl`` file.
 
 Drawing collisions
 ------------------
