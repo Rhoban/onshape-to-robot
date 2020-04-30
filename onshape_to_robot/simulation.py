@@ -20,7 +20,7 @@ class Simulation:
 
         Keyword Arguments:
             field {bool} -- enable the display of the field (default: {False})
-            fixed {bool} -- makes the robot floating/fixed (default: {False})
+            fixed {bool} -- makes the base of the robot floating/fixed (default: {False})
             transparent {bool} -- makes the robot transparent (default: {False})
             gui {bool} -- enables the gui visualizer, if False it will runs headless (default {True})
             realTime {bool} -- try to have simulation in real time (default {True})
