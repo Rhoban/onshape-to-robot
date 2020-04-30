@@ -46,6 +46,8 @@ Install the dependencies (can be in your python3 virtualenv):
 You can know use the scripts that are in the root folder of repository (feel free to add it to your
 ``$PATH`` and ``$PYTHONPATH`` to run it from anywhere)
 
+.. _api-key:
+
 Setting up your API key
 -----------------------
 

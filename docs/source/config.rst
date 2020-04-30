@@ -41,9 +41,9 @@ API key (``onshape_access_key``) and secret key (``onshape_secret_key``).
 
 .. warning::
 
-    Even if this is possible to specify the key in the ``config.json`` file, it is
+    Even if this is possible to specify the api key in the ``config.json`` file, it is
     very sensitive and we recommend you to set them up as environment variable.
-    See the :doc:`installation section <installation>` to check out how to do that.
+    See the following section: :ref:`Setting up API key section <api-key>`.
 
 ``documentId``
 ~~~~~~~~~~~~~~
