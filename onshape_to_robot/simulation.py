@@ -63,7 +63,9 @@ class Simulation:
             self.floor = None
 
         # Loading robot
-        startPos = [0, 0, 1]
+        startPos = [0, 0, 0]
+        if not fixed:
+            startPos[2] = 1
         startOrientation = p.getQuaternionFromEuler([0, 0, 0])
         self.robot = p.loadURDF(robotPath,
                                 startPos, startOrientation,
@@ -82,6 +84,7 @@ class Simulation:
 
         # Retrieving joints and frames
         self.joints = {}
+        self.jointsInfos = {}
         self.jointsIndexes = {}
         self.frames = {}
 
@@ -90,13 +93,19 @@ class Simulation:
         for k in range(p.getNumJoints(self.robot)):
             jointInfo = p.getJointInfo(self.robot, k)
             name = jointInfo[1].decode('utf-8')
-            if '_fixing' not in name:
+            if not name.endswith('_fixing') and not name.endswith('_passive'):
                 if '_frame' in name:
                     self.frames[name] = k
                 else:
                     self.jointsIndexes[name] = n
                     n += 1
                     self.joints[name] = k
+                    self.jointsInfos[name] = {
+                        'type': jointInfo[2]
+                    }
+                    if jointInfo[8] < jointInfo[9]:
+                        self.jointsInfos[name]['lowerLimit'] = jointInfo[8]
+                        self.jointsInfos[name]['upperLimit'] = jointInfo[9]
 
         # Changing robot opacity if transparent set to true
         if transparent:
@@ -314,6 +323,15 @@ class Simulation:
             list -- list of str, with joint names
         """
         return self.joints.keys()
+
+    def getJointsInfos(self, name):
+        """Get informations about a joint
+
+        Return:
+            list -- a list with key type, lowerLimit & upperLimit (if defined)
+        """
+
+        return self.jointsInfos[name]
 
     def getRobotMass(self):
         """Returns the robot mass

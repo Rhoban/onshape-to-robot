@@ -19,7 +19,14 @@ for name in sim.getJoints():
     if name.endswith('_speed'):
         controls[name] = p.addUserDebugParameter(name, -math.pi*3, math.pi*3, 0)
     else:
-        controls[name] = p.addUserDebugParameter(name, -math.pi, math.pi, 0)
+        infos = sim.getJointsInfos(name)
+        low = -math.pi
+        high = math.pi
+        if 'lowerLimit' in infos:
+            low = infos['lowerLimit']
+        if 'upperLimit' in infos:
+            high = infos['upperLimit']
+        controls[name] = p.addUserDebugParameter(name, low, high, 0)
 
 lastPrint = 0
 while True:
