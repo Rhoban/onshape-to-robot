@@ -5,6 +5,8 @@ Installation & requirements
 Requirements
 -------------
 
+You will need an Onshape account and Python 3.
+
 .. note::
 
     You might also need OpenSCAD for pure shape estimation and meshlab for STLs simplification. Those are not
