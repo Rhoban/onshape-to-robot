@@ -222,7 +222,7 @@ def connectParts(child, parent):
     if config['connectWithFixedLinks']:
         assignParts(child, child)
         relations[child] = {
-            'parent': trunk, 
+            'parent': parent, 
             'worldAxisFrame': np.identity(4),
             'zAxis': np.array([0, 0, 1]),
             'name': str(uuid.uuid4()),
