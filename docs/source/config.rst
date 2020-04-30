@@ -34,7 +34,7 @@ Once this is done, if you properly :doc:`installed and setup your API key <insta
 Here is the full list of possible entries for this configuration.
 
 ``onshape_api``, ``onshape_access_key`` and ``onshape_secret_key``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Those allow you to specify the URL for onshape API (``onshape_api``), and your
 API key (``onshape_access_key``) and secret key (``onshape_secret_key``).
@@ -159,7 +159,7 @@ Prepends a string to the paths of STL files. This is helpful for ROS users as th
 Adds a ``base_link`` without inertia as root. This is often necessary for ROS users.
 
 ``robotName``
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 *optional*
 
