@@ -136,7 +136,10 @@ Here is the full list of possible entries for this configuration.
 * `robotName` specifies the robot name.
 * `additionalUrdfFile` specifies a file with xml content that is inserted into the URDF at the end of the file. 
   Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
-* `additionalSdfFile` the same but for the SDF output. The XML content is added inside the <model> part.
+* `additionalSdfFile` the same but for the SDF output. The XML content is added inside the `<model>` part.
+* `connectWithFixedLinks` when part is not in any joint (orphan), onshape-to-robot tries to merge it with the most
+relevant part of the robot, first checking for existing mates, and then finally connecting it to the trunk. This
+option defined wether it will be merged or attached to that part with a `fixed` joint.
 
 Here is an example of configuration:
 

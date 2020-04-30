@@ -1,6 +1,7 @@
 import math
 from sys import exit
 import numpy as np
+import uuid
 from .onshape_api.client import Client
 from .config import config, configFile
 from colorama import Fore, Back, Style
@@ -217,6 +218,20 @@ if len(relations) == 0:
     trunk = firstInstance
     assignParts(firstInstance, firstInstance)
 
+def connectParts(child, parent):
+    if config['connectWithFixedLinks']:
+        assignParts(child, child)
+        relations[child] = {
+            'parent': trunk, 
+            'worldAxisFrame': np.identity(4),
+            'zAxis': np.array([0, 0, 1]),
+            'name': str(uuid.uuid4()),
+            'type': 'fixed',
+            'limits': None
+        }
+    else:
+        assignParts(child, parent)
+
 # Spreading parts assignations, this parts mainly does two things:
 # 1. Finds the parts of the top level assembly that are not directly in a sub assembly and try to assign them
 #    to an existing link that was identified before
@@ -251,10 +266,10 @@ while changed:
                     changed = True
             else:
                 if occurrenceA in assignations:
-                    assignParts(occurrenceB, assignations[occurrenceA])
+                    connectParts(occurrenceB, assignations[occurrenceA])
                     changed = True
                 else:
-                    assignParts(occurrenceA, assignations[occurrenceB])
+                    connectParts(occurrenceA, assignations[occurrenceB])
                     changed = True
 
 # Building and checking robot tree, here we:
@@ -275,7 +290,8 @@ print(Style.BRIGHT + '* Trunk is '+trunkOccurrence['instance']['name'] + Style.R
 for occurrence in occurrences.values():
     if occurrence['assignation'] is None:
         print(Fore.YELLOW + 'WARNING: part ('+occurrence['instance']['name']+') has no assignation, connecting it with trunk' + Style.RESET_ALL)
-        occurrence['assignation'] = trunk
+        child = occurrence['path'][0]
+        connectParts(child, trunk)
 
 def collect(id):
     part = {}
