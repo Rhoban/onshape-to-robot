@@ -225,7 +225,7 @@ def connectParts(child, parent):
             'parent': parent, 
             'worldAxisFrame': np.identity(4),
             'zAxis': np.array([0, 0, 1]),
-            'name': str(uuid.uuid4()),
+            'name': str(uuid.uuid4())+'_fixing',
             'type': 'fixed',
             'limits': None
         }
