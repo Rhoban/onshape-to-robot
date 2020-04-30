@@ -3,16 +3,16 @@ import math
 import sys
 import os
 import time
+import argparse
 import pybullet as p
 from .simulation import Simulation
 
-if len(sys.argv) > 1:
-    directory = sys.argv[1]
-else:
-    print("Usage: onshape-to-robot-bullet [robot dir]")
-    exit(1)
+parser = argparse.ArgumentParser(prog="onshape-to-robot-bullet")
+parser.add_argument('-f', '--fixed', action='store_true')
+parser.add_argument('directory')
+args = parser.parse_args()
 
-sim = Simulation(directory+'/robot.urdf', gui=True, panels=True)
+sim = Simulation(args.directory+'/robot.urdf', gui=True, panels=True, fixed=args.fixed)
 
 controls = {}
 for name in sim.getJoints():
