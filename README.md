@@ -21,7 +21,7 @@ Documentation summary:
 * [Running the simulation](#running-the-simulation)
 * [Pure shapes approximation](#pure-shapes-approximation)
 * [Cache](#cache)
-* [License](#license]
+* [License](#license)
 
 
 Also, consider [Browsing robot examples](https://github.com/Rhoban/onshape-to-robot-examples) to understand better
