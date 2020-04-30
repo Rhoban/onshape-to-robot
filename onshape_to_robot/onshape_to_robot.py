@@ -124,7 +124,7 @@ def processPartName(name, configuration, overrideName=None):
     else:
         return overrideName
 
-def buildRobot(tree, matrix, linkPart=None):
+def buildRobot(tree, matrix):
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
     print(Fore.BLUE + Style.BRIGHT + '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
@@ -177,7 +177,7 @@ def buildRobot(tree, matrix, linkPart=None):
             axisFrame = worldAxisFrame
             childMatrix = matrix
 
-        subLink = buildRobot(child, childMatrix, '_'.join(childLinkPart['path']))
+        subLink = buildRobot(child, childMatrix)
         robot.addJoint(jointType, link, subLink, axisFrame, child['dof_name'], jointLimits, zAxis)
 
     return link
