@@ -69,7 +69,7 @@ class Simulation:
         startOrientation = p.getQuaternionFromEuler([0, 0, 0])
         self.robot = p.loadURDF(robotPath,
                                 startPos, startOrientation,
-                                flags=p.URDF_USE_SELF_COLLISION, useFixedBase=fixed)
+                                flags=(p.URDF_USE_SELF_COLLISION + p.URDF_USE_INERTIA_FROM_FILE), useFixedBase=fixed)
 
         # Ball is loaded when needed
         self.ball = None
