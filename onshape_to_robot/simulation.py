@@ -33,6 +33,7 @@ class Simulation:
         self.t = 0
         self.start = time.time()
         self.dt = 0.005
+        self.mass = None
 
         # Debug lines drawing
         self.lines = []
@@ -339,16 +340,46 @@ class Simulation:
         Returns:
             float -- the robot mass (kg)
         """
+        if self.mass is None:
+            k = -1
+            self.mass = 0
+            while True:
+                if k == -1 or p.getLinkState(self.robot, k) is not None:
+                    d = p.getDynamicsInfo(self.robot, k)
+                    self.mass += d[0]
+                else:
+                    break
+                k += 1
+
+        return self.mass
+
+    def getCenterOfMassPosition(self):
+        """Returns center of mass of the robot
+
+        Returns:
+            pos -- (x, y, z) robot center of mass
+        """
+
         k = -1
         mass = 0
+        com = np.array([0., 0., 0.])
         while True:
-            if k == -1 or p.getLinkState(self.robot, k) is not None:
-                d = p.getDynamicsInfo(self.robot, k)
-                mass += d[0]
+            if k == -1:
+                pos, _ = p.getBasePositionAndOrientation(self.robot)
             else:
-                break
+                res = p.getLinkState(self.robot, k)
+                if res is None:
+                    break
+                pos = res[0]
+
+            d = p.getDynamicsInfo(self.robot, k)
+            m = d[0]
+            com += np.array(pos) * m
+            mass += m
+
             k += 1
-        return mass
+        
+        return com / mass
 
     def addDebugPosition(self, position, color=None, duration=30):
         """Adds a debug position to be drawn as a line
