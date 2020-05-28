@@ -306,7 +306,12 @@ class Simulation:
         
         Raises:
             Exception: if a joint is not found, exception is raised
+
+        Returns:
+            applied {dict} -- dict of joint states (position, velocity, reaction forces, applied torque)
         """
+        applied = {}
+
         for name in joints.keys():
             if name in self.joints:
                 if name.endswith('_speed'):
@@ -320,8 +325,12 @@ class Simulation:
                     else:
                         p.setJointMotorControl2(
                             self.robot, self.joints[name], p.POSITION_CONTROL, joints[name])
+
+                applied[name] = p.getJointState(self.robot, self.joints[name])
             else:
                 raise Exception("Can't find joint %s" % name)
+
+        return applied
 
     def getJoints(self):
         """Get all the joints names
