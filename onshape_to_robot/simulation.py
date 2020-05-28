@@ -88,6 +88,7 @@ class Simulation:
         self.jointsInfos = {}
         self.jointsIndexes = {}
         self.frames = {}
+        self.maxTorques = {}
 
         # Collecting the available joints
         n = 0
@@ -312,8 +313,13 @@ class Simulation:
                     p.setJointMotorControl2(
                     self.robot, self.joints[name], p.VELOCITY_CONTROL, targetVelocity=joints[name])
                 else:
-                    p.setJointMotorControl2(
-                        self.robot, self.joints[name], p.POSITION_CONTROL, joints[name])
+                    if name in self.maxTorques:
+                        maxTorque = self.maxTorques[name]
+                        p.setJointMotorControl2(
+                            self.robot, self.joints[name], p.POSITION_CONTROL, joints[name], force=maxTorque)
+                    else:
+                        p.setJointMotorControl2(
+                            self.robot, self.joints[name], p.POSITION_CONTROL, joints[name])
             else:
                 raise Exception("Can't find joint %s" % name)
 
