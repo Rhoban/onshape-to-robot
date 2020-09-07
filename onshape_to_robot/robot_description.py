@@ -46,6 +46,7 @@ class RobotDescription(object):
         self.drawCollisions = False
         self.relative = True
         self.mergeSTLs = False
+        self.useFixedLinks = False
         self.simplifySTLs = False
         self.maxSTLSize = 3
         self.xml = ''
@@ -82,6 +83,7 @@ class RobotDescription(object):
         self._mesh_dir = ''
         self._color = np.array([0., 0., 0.])
         self._link_childs = 0
+        self._visuals = []
         self._dynamics = []
 
     def addLinkDynamics(self, matrix, mass, com, inertia):
@@ -139,7 +141,7 @@ class RobotURDF(RobotDescription):
         self.append('<robot name="' + self.robotName + '">')
         pass
 
-    def addDummyLink(self, name):
+    def addDummyLink(self, name, visualMatrix=None, visualSTL=None, visualColor=None):
         self.append('<link name="'+name+'">')
         self.append('<inertial>')
         self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
@@ -150,6 +152,8 @@ class RobotURDF(RobotDescription):
             self.append('<mass value="1e-9" />')
         self.append('<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
         self.append('</inertial>')
+        if visualSTL is not None:
+            self.addVisualSTL(visualMatrix, visualSTL, visualColor, name+"_visual")
         self.append('</link>')
 
     def addDummyBaseLinkMethod(self, name):
@@ -199,8 +203,19 @@ class RobotURDF(RobotDescription):
             (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
         self.append('</inertial>')
 
+        if self.useFixedLinks:
+            self.append('<visual><geometry><box size="0 0 0" /></geometry></visual>')
+
         self.append('</link>')
         self.append('')
+
+        if self.useFixedLinks:
+            n = 0
+            for visual in self._visuals:
+                n += 1
+                visual_name = '%s_%d' % (self._link_name, n)
+                self.addDummyLink(visual_name, visual[0], visual[1], visual[2])
+                self.addJoint('fixed', self._link_name, visual_name, np.eye(4), visual_name+'_fixing', None)
 
     def addFrame(self, name, matrix):
         # Adding a dummy link
@@ -224,7 +239,9 @@ class RobotURDF(RobotDescription):
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
 
         if not self.drawCollisions:
-            if self.mergeSTLs:
+            if self.useFixedLinks:
+                self._visuals.append([matrix, self.packageName +os.path.basename(stl), color])
+            elif self.mergeSTLs:
                 self.addLinkSTL(stl, matrix, color, mass)
             else:
                 self.addVisualSTL(matrix, os.path.basename(stl), color, name)
@@ -307,7 +324,7 @@ class RobotSDF(RobotDescription):
         self.append('</joint>')
         self.append('')
 
-    def addDummyLink(self, name):
+    def addDummyLink(self, name, visualMatrix=None, visualSTL=None, visualColor=None):
         self.append('<link name="'+name+'">')
         self.append('<pose>0 0 0 0 0 0</pose>')
         self.append('<inertial>')
@@ -317,6 +334,8 @@ class RobotSDF(RobotDescription):
         self.append('<ixx>0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0</iyy><iyz>0</iyz><izz>0</izz>')
         self.append('</inertia>')
         self.append('</inertial>')
+        if visualSTL is not None:
+            self.addVisualSTL(visualMatrix, visualSTL, visualColor, name+"_visual")
         self.append('</link>')
 
     def startLink(self, name, matrix):
@@ -342,8 +361,19 @@ class RobotSDF(RobotDescription):
         self.append('<inertia><ixx>%g</ixx><ixy>%g</ixy><ixz>%g</ixz><iyy>%g</iyy><iyz>%g</iyz><izz>%g</izz></inertia>' % (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
         self.append('</inertial>')
 
+        if self.useFixedLinks:
+            self.append('<visual><geometry><box><size>0 0 0</size></box></geometry></visual>')
+
         self.append('</link>')
         self.append('')
+
+        if self.useFixedLinks:
+            n = 0
+            for visual in self._visuals:
+                n += 1
+                visual_name = '%s_%d' % (self._link_name, n)
+                self.addDummyLink(visual_name, visual[0], visual[1], visual[2])
+                self.addJoint('fixed', self._link_name, visual_name, np.eye(4), visual_name+'_fixing', None)
 
     def addFrame(self, name, matrix):
         # Adding a dummy link
@@ -379,7 +409,9 @@ class RobotSDF(RobotDescription):
         # self.append(pose(matrix))
 
         if not self.drawCollisions:
-            if self.mergeSTLs:
+            if self.useFixedLinks:
+                self._visuals.append([matrix, self.packageName +os.path.basename(stl), color])
+            elif self.mergeSTLs:
                 self.addLinkSTL(stl, matrix, color, mass)
             else:
                 self.addVisualSTL(matrix, os.path.basename(stl), color, name)

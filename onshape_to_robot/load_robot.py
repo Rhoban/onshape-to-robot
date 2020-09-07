@@ -219,18 +219,7 @@ if len(relations) == 0:
     assignParts(firstInstance, firstInstance)
 
 def connectParts(child, parent):
-    if config['connectWithFixedLinks']:
-        assignParts(child, child)
-        relations[child] = {
-            'parent': parent, 
-            'worldAxisFrame': np.identity(4),
-            'zAxis': np.array([0, 0, 1]),
-            'name': str(uuid.uuid4())+'_fixing',
-            'type': 'fixed',
-            'limits': None
-        }
-    else:
-        assignParts(child, parent)
+    assignParts(child, parent)
 
 # Spreading parts assignations, this parts mainly does two things:
 # 1. Finds the parts of the top level assembly that are not directly in a sub assembly and try to assign them

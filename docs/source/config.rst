@@ -172,14 +172,13 @@ Specifies the robot name.
 
 Specifies a file with XML content that is inserted into the URDF/SDF at the end of the file. Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
 
-``connectWithFixedLinks``
+``useFixedLinks``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*optional, default: true*
+*optional, default: false*
 
-When part is not in any joint (orphan), onshape-to-robot tries to merge it with the most
-relevant part of the robot, first checking for existing mates, and then finally connecting it to the trunk. This
-option defined wether it will be merged or attached to that part with a ``fixed`` joint.
+With this option, visual parts will be added through fixed links to each part of the robot. Mostly, this feature
+is a hack to keep colors properly for rendering in PyBullet (see https://github.com/bulletphysics/bullet3/issues/2650).
 
 ``mergeSTLs``
 ~~~~~~~~~~~~~

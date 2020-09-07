@@ -32,7 +32,7 @@ robot.packageName = config['packageName']
 robot.addDummyBaseLink = config['addDummyBaseLink']
 robot.robotName = config['robotName']
 robot.additionalXML = config['additionalXML']
-
+robot.useFixedLinks = config['useFixedLinks']
 
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
