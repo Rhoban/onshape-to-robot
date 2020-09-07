@@ -32,7 +32,7 @@ class Simulation:
         self.realTime = realTime
         self.t = 0
         self.start = time.time()
-        self.dt = 0.005
+        self.dt = 0.001
         self.mass = None
 
         # Debug lines drawing
@@ -71,9 +71,6 @@ class Simulation:
         self.robot = p.loadURDF(robotPath,
                                 startPos, startOrientation,
                                 flags=(p.URDF_USE_SELF_COLLISION + p.URDF_USE_INERTIA_FROM_FILE), useFixedBase=fixed)
-
-        # Ball is loaded when needed
-        self.ball = None
 
         # Setting frictions parameters to default ones
         self.setFloorFrictions()
@@ -218,19 +215,8 @@ class Simulation:
         """
         p.resetBasePositionAndOrientation(self.robot, pos, orn)
 
-    def setBallPos(self, x, y):
-        """Sets the ball position on the field"""
-        if self.ball is not None:
-            # Putting the ball on the ground at given position
-            p.resetBasePositionAndOrientation(
-                self.ball, [x, y, 0.06], p.getQuaternionFromEuler([0, 0, 0]))
-
-            # Stopping the ball speed
-            p.changeDynamics(self.ball, 0,
-                             linearDamping=0, angularDamping=0.1)
-
     def reset(self, height=0.5, orientation='straight'):
-        """Resets the robot for experiment (joints, robot position, ball position, simulator time)
+        """Resets the robot for experiment (joints, robot position, simulator time)
         
         Keyword Arguments:
             height {float} -- height of the reset (m) (default: {0.55})
