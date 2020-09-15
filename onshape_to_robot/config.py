@@ -13,16 +13,20 @@ if len(sys.argv) <= 1:
 robot = sys.argv[1]
 
 
-def configGet(name, default=None):
+def configGet(name, default=None, hasDefault=False):
     global config
+
+    if default is not None:
+        hasDefault = True
+
     if name in config:
         return config[name]
     else:
-        if default is None:
+        if hasDefault:
+            return default
+        else:
             print(Fore.RED + 'ERROR: missing key "'+name+'" in config' + Style.RESET_ALL)
             exit()
-        else:
-            return default
 
 
 configFile = robot+'/config.json'
@@ -46,7 +50,7 @@ config['noDynamics'] = configGet('noDynamics', False)
 
 # Ignore list
 config['ignore'] = configGet('ignore', [])
-config['whitelist'] = configGet('whitelist', None)
+config['whitelist'] = configGet('whitelist', None, hasDefault=True)
 
 # STLs merge and simplification
 config['mergeSTLs'] = configGet('mergeSTLs', False)
