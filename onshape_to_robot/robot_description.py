@@ -82,6 +82,7 @@ class RobotDescription(object):
         self._mesh = None
         self._mesh_dir = ''
         self._color = np.array([0., 0., 0.])
+        self._color_mass = 0
         self._link_childs = 0
         self._visuals = []
         self._dynamics = []
@@ -103,6 +104,7 @@ class RobotDescription(object):
 
     def addLinkSTL(self, stl, matrix, color, mass):
         self._color += np.array(color) * mass
+        self._color_mass += mass
         self._mesh_dir = os.path.dirname(stl)
 
         m = stl_combine.load_mesh(stl)
@@ -190,7 +192,7 @@ class RobotURDF(RobotDescription):
         mass, com, inertia = self.linkDynamics()
 
         if self._mesh is not None:
-            color = self._color / mass
+            color = self._color / self._color_mass
             stl_combine.save_mesh(self._mesh, self._mesh_dir+'/'+self._link_name+'.stl')
             if self.simplifySTLs:
                 stl_combine.simplify_stl(self._mesh_dir+'/'+self._link_name+'.stl', self.maxSTLSize)
@@ -349,7 +351,7 @@ class RobotSDF(RobotDescription):
         mass, com, inertia = self.linkDynamics()
 
         if self._mesh is not None:
-            color = self._color / mass
+            color = self._color / self._color_mass
             stl_combine.save_mesh(self._mesh, self._mesh_dir+'/'+self._link_name+'.stl')
             if self.simplifySTLs:
                 stl_combine.simplify_stl(self._mesh_dir+'/'+self._link_name+'.stl', self.maxSTLSize)
