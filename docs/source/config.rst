@@ -153,6 +153,13 @@ Note: the dynamics of the part will not be ignored, but the visual and collision
 This can be used as the opposed of ``ignore``, to import only some items listed in the configuration
 (all items not listed in ``whitelist`` will be ignored if it is not ``None``)
 
+``color``
+~~~~~~~~~~
+
+*optional, default: None*
+
+Can override the color for parts (should be an array: ``[r, g, b]`` with numbers from 0 to 1)
+
 ``packageName``
 ~~~~~~~~~~~~~~~
 

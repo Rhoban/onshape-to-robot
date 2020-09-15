@@ -84,12 +84,15 @@ def addPart(occurrence, matrix):
             shapes = csg.process(config['outputDirectory']+'/'+scadFile)
         
     # Obtain metadatas about part to retrieve color
-    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
-    if 'appearance' in metadata:
-        colors = metadata['appearance']['color']
-        color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
+    if config['color'] is not None:
+        color = config['color']
     else:
-        color = [0.5, 0.5, 0.5]
+        metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
+        if 'appearance' in metadata:
+            colors = metadata['appearance']['color']
+            color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
+        else:
+            color = [0.5, 0.5, 0.5]
 
     # Obtain mass properties about that part
     if config['noDynamics']:

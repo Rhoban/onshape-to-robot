@@ -15,9 +15,7 @@ robot = sys.argv[1]
 
 def configGet(name, default=None, hasDefault=False):
     global config
-
-    if default is not None:
-        hasDefault = True
+    hasDefault = hasDefault or (default is not None)
 
     if name in config:
         return config[name]
@@ -51,6 +49,9 @@ config['noDynamics'] = configGet('noDynamics', False)
 # Ignore list
 config['ignore'] = configGet('ignore', [])
 config['whitelist'] = configGet('whitelist', None, hasDefault=True)
+
+# Color override
+config['color'] = configGet('color', None, hasDefault=True)
 
 # STLs merge and simplification
 config['mergeSTLs'] = configGet('mergeSTLs', False)
