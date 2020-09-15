@@ -46,6 +46,7 @@ config['noDynamics'] = configGet('noDynamics', False)
 
 # Ignore list
 config['ignore'] = configGet('ignore', [])
+config['whitelist'] = configGet('whitelist', None)
 
 # STLs merge and simplification
 config['mergeSTLs'] = configGet('mergeSTLs', False)

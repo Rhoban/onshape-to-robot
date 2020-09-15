@@ -103,7 +103,7 @@ and avoiding loading meshes just for visualization.
 ``useScads``
 ~~~~~~~~~~~~
 
-*optional, default: ``true`` (needs ``openscad`` installed)*
+*optional, default: true (needs openscad installed)*
 
 If you create :doc:`pure shapes approximations <pure-shapes>` of your parts, you will have ``.scad`` files sitting
 in your directory, this flag can be used to disable using them (if ``false``, full meshes will be then used for
@@ -144,6 +144,14 @@ In pyBullet, this will result in static object (think of some environment for ex
 This can be a list of parts that you want to be ignored during the export.
 
 Note: the dynamics of the part will not be ignored, but the visual and collision aspect will.
+
+``whitelist``
+~~~~~~~~~~
+
+*optional, default: None*
+
+This can be used as the opposed of ``ignore``, to import only some items listed in the configuration
+(all items not listed in ``whitelist`` will be ignored if it is not ``None``)
 
 ``packageName``
 ~~~~~~~~~~~~~~~

@@ -34,6 +34,14 @@ robot.robotName = config['robotName']
 robot.additionalXML = config['additionalXML']
 robot.useFixedLinks = config['useFixedLinks']
 
+def partIsIgnore(name):
+    global config
+
+    if config['whitelist'] is None:
+        return name in config['ignore']
+    else:
+        return name not in config['whitelist']
+
 # Adds a part to the current robot link
 def addPart(occurrence, matrix):
     global config, occurrenceLinkNames
@@ -45,11 +53,13 @@ def addPart(occurrence, matrix):
     extra = ''
     if occurrence['instance']['configuration'] != 'default':
         extra = Style.DIM + ' (configuration: '+occurrence['instance']['configuration']+')'
-    if prefix in config['ignore']:
+    symbol = '+'
+    if partIsIgnore(prefix):
+        symbol = '-'
         extra += Style.DIM + ' / ignoring visual and collision'
-    print(Fore.GREEN + '+ Adding part '+occurrence['instance']['name']+extra + Style.RESET_ALL)
+    print(Fore.GREEN + symbol+' Adding part '+occurrence['instance']['name']+extra + Style.RESET_ALL)
 
-    if prefix in config['ignore']:
+    if partIsIgnore(prefix):
         stlFile = None
     else:
         stlFile = prefix+'.stl'

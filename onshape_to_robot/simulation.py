@@ -143,7 +143,7 @@ class Simulation:
         Returns:
             (tuple(3), tuple(3)) -- (x,y,z), (roll, pitch, yaw)
         """
-        pose = p.getBasePositionAndOrientation()
+        pose = p.getBasePositionAndOrientation(self.robot)
         return (pose[0], p.getEulerFromQuaternion(pose[1]))
 
     def frameToWorldMatrix(self, frame):
