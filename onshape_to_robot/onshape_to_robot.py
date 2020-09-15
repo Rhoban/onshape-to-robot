@@ -85,6 +85,10 @@ def addPart(occurrence, matrix):
             inertia = entry['inertia']
         else:
             massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], shortend_configuration)
+
+            if part['partId'] not in massProperties['bodies']:
+                print(Fore.YELLOW + 'WARNING: part '+part['name']+' has no dynamics (maybe it is a surface)' + Style.RESET_ALL)
+                return
             massProperties = massProperties['bodies'][part['partId']]
             mass = massProperties['mass'][0]
             com = massProperties['centroid']
