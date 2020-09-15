@@ -42,20 +42,29 @@ def addPart(occurrence, matrix):
     # Importing STL file for this part
     prefix = extractPartName(part['name'], part['configuration'])
 
+    extra = ''
+    if occurrence['instance']['configuration'] != 'default':
+        extra = Style.DIM + ' (configuration: '+occurrence['instance']['configuration']+')'
     if prefix in config['ignore']:
-        return
+        extra += Style.DIM + ' / ignoring visual and collision'
+    print(Fore.GREEN + '+ Adding part '+occurrence['instance']['name']+extra + Style.RESET_ALL)
 
-    stlFile = prefix+'.stl'
-    # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
-    if len(part['configuration']) > 40:
-        shortend_configuration = hashlib.md5(part['configuration'].encode('utf-8')).hexdigest()
+    if prefix in config['ignore']:
+        stlFile = None
     else:
-        shortend_configuration = part['configuration']
-    stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], 
-                                   part['partId'], shortend_configuration)
-    f = open(config['outputDirectory']+'/'+stlFile, 'wb')
-    f.write(stl)
-    f.close()
+        stlFile = prefix+'.stl'
+        # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
+        if len(part['configuration']) > 40:
+            shortend_configuration = hashlib.md5(part['configuration'].encode('utf-8')).hexdigest()
+        else:
+            shortend_configuration = part['configuration']
+        stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], 
+                                    part['partId'], shortend_configuration)
+        f = open(config['outputDirectory']+'/'+stlFile, 'wb')
+        f.write(stl)
+        f.close()
+
+        stlFile = config['outputDirectory']+'/'+stlFile
 
     # Import the SCAD files pure shapes
     shapes = None
@@ -65,7 +74,7 @@ def addPart(occurrence, matrix):
             shapes = csg.process(config['outputDirectory']+'/'+scadFile)
         
     # Obtain metadatas about part to retrieve color
-    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], shortend_configuration)
+    metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
     if 'appearance' in metadata:
         colors = metadata['appearance']['color']
         color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
@@ -84,7 +93,7 @@ def addPart(occurrence, matrix):
             com = entry['com']
             inertia = entry['inertia']
         else:
-            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], shortend_configuration)
+            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
 
             if part['partId'] not in massProperties['bodies']:
                 print(Fore.YELLOW + 'WARNING: part '+part['name']+' has no dynamics (maybe it is a surface)' + Style.RESET_ALL)
@@ -101,7 +110,7 @@ def addPart(occurrence, matrix):
     if robot.relative:
         pose = np.linalg.inv(matrix)*pose
     
-    robot.addPart(pose, config['outputDirectory']+'/'+stlFile, mass, com, inertia, color, shapes, prefix)
+    robot.addPart(pose, stlFile, mass, com, inertia, color, shapes, prefix)
 
 partNames = {}
 def extractPartName(name, configuration):
@@ -140,11 +149,6 @@ def buildRobot(tree, matrix):
     robot.startLink(link, matrix)
     for occurrence in occurrences.values():
         if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
-            name = '_'.join(occurrence['path'])
-            extra = ''
-            if occurrence['instance']['configuration'] != 'default':
-                extra = Style.DIM + ' (configuration: '+occurrence['instance']['configuration']+')'
-            print(Fore.GREEN + '+ Adding part '+occurrence['instance']['name']+extra + Style.RESET_ALL)
             addPart(occurrence, matrix)
     robot.endLink()
 

@@ -143,6 +143,8 @@ In pyBullet, this will result in static object (think of some environment for ex
 
 This can be a list of parts that you want to be ignored during the export.
 
+Note: the dynamics of the part will not be ignored, but the visual and collision aspect will.
+
 ``packageName``
 ~~~~~~~~~~~~~~~
 
