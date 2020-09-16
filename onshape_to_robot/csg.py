@@ -52,6 +52,11 @@ def extract_node_parameters(line):
         parameters = parameters[:-3]
     return node, parameters
 
+def T(x, y, z):
+    m = np.matrix(np.eye(4))
+    m.T[3,:3] = [x, y, z]
+
+    return m
 
 def parse_csg(data):
     shapes = []
@@ -77,9 +82,7 @@ def parse_csg(data):
                 if node == 'cube':
                     size, center = cube_parse(parameters)
                     if not center:
-                        transform[0, 3] += size[0]/2.0
-                        transform[1, 3] += size[1]/2.0
-                        transform[2, 3] += size[2]/2.0
+                        transform = transform * T(size[0]/2.0, size[1]/2.0, size[2]/2.0)
                     shapes.append({
                         'type': 'cube',
                         'parameters': size,
@@ -88,7 +91,7 @@ def parse_csg(data):
                 if node == 'cylinder':
                     size, center = cylinder_parse(parameters)
                     if not center:
-                        transform[2, 3] += size[0]/2.0
+                        transform = transform * T(0, 0, size[0]/2.0)
                     shapes.append({
                         'type': 'cylinder',
                         'parameters': size,
