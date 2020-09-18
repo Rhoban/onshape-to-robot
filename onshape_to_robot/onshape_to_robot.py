@@ -88,7 +88,7 @@ def addPart(occurrence, matrix):
     if config['useScads']:
         scadFile = prefix+'.scad'
         if os.path.exists(config['outputDirectory']+'/'+scadFile):
-            shapes = csg.process(config['outputDirectory']+'/'+scadFile)
+            shapes = csg.process(config['outputDirectory']+'/'+scadFile, config['pureShapeDilatation'])
         
     # Obtain metadatas about part to retrieve color
     if config['color'] is not None:

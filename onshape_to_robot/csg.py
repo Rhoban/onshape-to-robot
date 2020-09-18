@@ -16,29 +16,31 @@ def multmatrix_parse(parameters):
     return matrix
 
 
-def cube_parse(parameters):
+def cube_parse(parameters, dilatation):
     results = re.findall(r'^size = (.+), center = (.+)$', parameters)
     if len(results) != 1:
         print("! Can't parse CSG cube parameters: "+parameters)
         exit()
-    return np.array(json.loads(results[0][0]), dtype=float)/1000.0, results[0][1] == 'true'
+    extra = np.array([dilatation]*3)
+    return (extra + np.array(json.loads(results[0][0]), dtype=float)/1000.0), results[0][1] == 'true'
 
 
-def cylinder_parse(parameters):
+def cylinder_parse(parameters, dilatation):
     results = re.findall(r'h = (.+), r1 = (.+), r2 = (.+), center = (.+)', parameters)
     if len(results) != 1:
         print("! Can't parse CSG cylinder parameters: "+parameters)
         exit()
     result = results[0]
-    return np.array([result[0], result[1]], dtype=float)/1000.0, result[3] == 'true'
+    extra = np.array([dilatation/2, dilatation])
+    return (extra + np.array([result[0], result[1]], dtype=float)/1000.0), result[3] == 'true'
 
 
-def sphere_parse(parameters):
+def sphere_parse(parameters, dilatation):
     results = re.findall(r'r = (.+)$', parameters)
     if len(results) != 1:
         print("! Can't parse CSG sphere parameters: "+parameters)
         exit()
-    return float(results[0])/1000.0
+    return dilatation + float(results[0])/1000.0
 
 
 def extract_node_parameters(line):
@@ -58,7 +60,7 @@ def T(x, y, z):
 
     return m
 
-def parse_csg(data):
+def parse_csg(data, dilatation):
     shapes = []
     lines = data.split("\n")
     matrices = []
@@ -80,7 +82,7 @@ def parse_csg(data):
                 for entry in matrices:
                     transform = transform*entry
                 if node == 'cube':
-                    size, center = cube_parse(parameters)
+                    size, center = cube_parse(parameters, dilatation)
                     if not center:
                         transform = transform * T(size[0]/2.0, size[1]/2.0, size[2]/2.0)
                     shapes.append({
@@ -89,7 +91,7 @@ def parse_csg(data):
                         'transform': transform
                     })
                 if node == 'cylinder':
-                    size, center = cylinder_parse(parameters)
+                    size, center = cylinder_parse(parameters, dilatation)
                     if not center:
                         transform = transform * T(0, 0, size[0]/2.0)
                     shapes.append({
@@ -100,17 +102,17 @@ def parse_csg(data):
                 if node == 'sphere':
                     shapes.append({
                         'type': 'sphere',
-                        'parameters': sphere_parse(parameters),
+                        'parameters': sphere_parse(parameters, dilatation),
                         'transform': transform
                     })
     return shapes
 
 
-def process(filename):
+def process(filename, dilatation):
     os.system('openscad '+filename+' -o _tmp_data.csg')
     f = open('_tmp_data.csg')
     data = f.read()
     f.close()
     os.system('rm _tmp_data.csg')    
 
-    return parse_csg(data)
+    return parse_csg(data, dilatation)

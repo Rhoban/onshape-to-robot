@@ -40,6 +40,7 @@ config['useFixedLinks'] = configGet('useFixedLinks', False)
 
 # Using OpenSCAD for simplified geometry
 config['useScads'] = configGet('useScads', True)
+config['pureShapeDilatation'] = configGet('pureShapeDilatation', 0.0)
 
 # Dynamics
 config['jointMaxEffort'] = configGet('jointMaxEffort', 1)

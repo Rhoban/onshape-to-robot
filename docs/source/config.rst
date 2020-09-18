@@ -109,6 +109,14 @@ If you create :doc:`pure shapes approximations <pure-shapes>` of your parts, you
 in your directory, this flag can be used to disable using them (if ``false``, full meshes will be then used for
 collisions).
 
+``pureShapeDilatation``
+~~~~~~~~~~~~~~~~~~~~~~~
+
+*optional, default: 0*
+
+If you want to use pure shape as safety check for collisions, you can use this parameter to add some extra
+dilatation to all of them.
+
 ``jointMaxEffort`` and ``jointMaxVelocity``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
