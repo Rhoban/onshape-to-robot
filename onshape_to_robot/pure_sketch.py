@@ -88,8 +88,15 @@ else:
                 if len(boxes[id]) == 4:
                     A, B = np.array(boxes[id]['A']), np.array(boxes[id]['B'])
                     C, D = np.array(boxes[id]['C']), np.array(boxes[id]['D'])
+                    AB = B-A
+
+                    # Making sure that the orientation of the square is correct
+                    AB90 = np.array([-AB[1], AB[0]])
+                    side = AB90.dot(C-A)
                     width = np.linalg.norm(B-A)
                     height = np.linalg.norm(B-D)
+                    if side < 0:
+                        A, B, C, D = C, D, A, B
 
                     AB = B-A
                     alpha = np.rad2deg(math.atan2(AB[1], AB[0]))
