@@ -270,6 +270,13 @@ class Client():
         m.update(data.encode('utf-8'))
         return m.hexdigest()
 
+    def get_sketches(self, did, mid, eid, configuration):
+        def invoke():
+            return self._api.request('get', '/api/partstudios/d/' + did + '/m/' + mid + '/e/' + eid + '/sketches', 
+            query={'includeGeometry': 'true', 'configuration': configuration})
+
+        return json.loads(self.cache_get('sketches', (did, mid, eid, configuration), invoke))
+
     def get_parts(self, did, mid, eid, configuration):
         def invoke():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid, query=

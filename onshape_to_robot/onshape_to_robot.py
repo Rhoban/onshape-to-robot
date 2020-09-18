@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 from copy import copy
+import commentjson as json
 from colorama import Fore, Back, Style
 import sys
 from sys import exit
@@ -57,6 +58,7 @@ def addPart(occurrence, matrix):
     if partIsIgnore(prefix):
         symbol = '-'
         extra += Style.DIM + ' / ignoring visual and collision'
+
     print(Fore.GREEN + symbol+' Adding part '+occurrence['instance']['name']+extra + Style.RESET_ALL)
 
     if partIsIgnore(prefix):
@@ -72,6 +74,11 @@ def addPart(occurrence, matrix):
                                     part['partId'], shortend_configuration)
         f = open(config['outputDirectory']+'/'+stlFile, 'wb')
         f.write(stl)
+        f.close()
+
+        stlMetadata = prefix+'.part'
+        f = open(config['outputDirectory']+'/'+stlMetadata, 'wb')
+        f.write(json.dumps(part).encode('UTF-8'))
         f.close()
 
         stlFile = config['outputDirectory']+'/'+stlFile

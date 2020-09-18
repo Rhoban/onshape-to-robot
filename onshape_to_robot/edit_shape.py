@@ -2,7 +2,7 @@
 import sys, os
 
 if len(sys.argv) < 2:
-    print('Usage: edit-shape.py [stl file]')
+    print('Usage: onshape-to-robot-edit-shape {STL file}')
 else:
     fileName = sys.argv[1]
     parts = fileName.split('.')
