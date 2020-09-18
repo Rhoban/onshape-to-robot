@@ -53,6 +53,18 @@ def collectParts(instancesToWalk):
     for instance in instancesToWalk:
         if firstInstance is None:
             firstInstance = instance['id']
+
+        if instance['type'] == 'Part' and instance['id'] in instances:
+            i1 = instance
+            i2 = instances[instance['id']]
+            entries = ['documentId', 'documentVersion', 'documentMicroversion', 'elementId', 'partId']
+            for entry in entries:
+                if i1[entry] != i2[entry]:
+                    print(Fore.YELLOW + "BE CAREFUL: Same id is used for multiple instances:" + Style.RESET_ALL)
+                    print(Fore.YELLOW + "- " + instance['name'] + Style.RESET_ALL)
+                    print(Fore.YELLOW + "- " + instances[instance['id']]['name'] + Style.RESET_ALL)
+                    break
+
         instances[instance['id']] = instance
 
 root = assembly['rootAssembly']
