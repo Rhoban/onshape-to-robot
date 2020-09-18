@@ -107,10 +107,10 @@ def parse_csg(data):
 
 
 def process(filename):
-    os.system('openscad '+filename+' -o data.csg')
-    f = open('data.csg')
+    os.system('openscad '+filename+' -o _tmp_data.csg')
+    f = open('_tmp_data.csg')
     data = f.read()
     f.close()
-    os.system('rm data.csg')    
+    os.system('rm _tmp_data.csg')    
 
     return parse_csg(data)
