@@ -220,6 +220,16 @@ apt-get install meshlab``).
 
 This is the maximum size (in ``M``) of STL files before they are reduced by ``simplifySTLs``.
 
+``useCollisionsConfigurations``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*optional, default: true*
+
+With this option (enabled by default), the collisions=true configuration will be passed when exporting STL
+meshes (and NOT dynamics), in order to retrieve simplified mesh parts from OnShape.
+
+This is a way to approximate your robot with simpler meshes.
+
 .. _example-config:
 
 Example ``config.json`` file

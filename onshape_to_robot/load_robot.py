@@ -8,6 +8,7 @@ from colorama import Fore, Back, Style
 
 # OnShape API client
 client = Client(logging=False, creds=configFile)
+client.useCollisionsConfigurations = config['useCollisionsConfigurations']
 
 # If a versionId is provided, it will be used, else the main workspace is retrieved
 if config['versionId'] == '':

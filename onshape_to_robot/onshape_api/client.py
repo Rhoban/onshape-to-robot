@@ -40,6 +40,7 @@ class Client():
         self._massproperties_cache = {}
         self._stack = stack
         self._api = Onshape(stack=stack, logging=logging, creds=creds)
+        self.useCollisionsConfigurations = True
 
     def new_document(self, name='Test Document', owner_type=0, public=False):
         '''
@@ -269,7 +270,48 @@ class Client():
         m.update(data.encode('utf-8'))
         return m.hexdigest()
 
+    def get_parts(self, did, mid, eid, configuration):
+        def invoke():
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid, query=
+                {'configuration': configuration})
+
+        return json.loads(self.cache_get('parts_list', (did, mid, eid, configuration), invoke))
+
+    def find_new_partid(self, did, mid, eid, partid, configuration_before, configuration):
+        before = self.get_parts(did, mid, eid, configuration_before)
+        name = None
+        for entry in before:
+            if entry['partId'] == partid:
+                name = entry['name']
+        
+        if name is not None:
+            after = self.get_parts(did, mid, eid, configuration)
+            for entry in after:
+                if entry['name'] == name:
+                    return entry['partId']
+        else:
+            print("OnShape ERROR: Can't find new partid for "+str(partid))
+
+        return partid
+
     def part_studio_stl_m(self, did, mid, eid, partid, configuration = 'default'):
+        if self.useCollisionsConfigurations:
+            configuration_before = configuration
+            parts = configuration.split(';')
+            partIdChanged = False
+            result = ''
+            for k, part in enumerate(parts):
+                kv = part.split('=')
+                if len(kv) == 2:
+                    if kv[0] == 'collisions':
+                        kv[1] = 'true'
+                        partIdChanged = True
+                parts[k] = '='.join(kv)
+            configuration = ';'.join(parts)
+
+            if partIdChanged:
+                partid = self.find_new_partid(did, mid, eid, partid, configuration_before, configuration)
+    
         def invoke():
             req_headers = {
                 'Accept': 'application/vnd.onshape.v1+octet-stream'

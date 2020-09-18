@@ -61,6 +61,9 @@ config['simplifySTLs'] = configGet('simplifySTLs', False)
 config['outputDirectory'] = robot
 config['dynamicsOverride'] = {}
 
+# Add collisions=true configuration on parts
+config['useCollisionsConfigurations'] = configGet('useCollisionsConfigurations', True)
+
 # ROS support
 config['packageName'] = configGet('packageName', '')
 config['addDummyBaseLink'] = configGet('addDummyBaseLink', False)
