@@ -8,6 +8,7 @@ from colorama import Fore, Back, Style
 
 # OnShape API client
 client = Client(logging=False, creds=configFile)
+client.useCollisionsConfigurations = config['useCollisionsConfigurations']
 
 # If a versionId is provided, it will be used, else the main workspace is retrieved
 if config['versionId'] == '':
@@ -52,6 +53,18 @@ def collectParts(instancesToWalk):
     for instance in instancesToWalk:
         if firstInstance is None:
             firstInstance = instance['id']
+
+        if instance['type'] == 'Part' and instance['id'] in instances:
+            i1 = instance
+            i2 = instances[instance['id']]
+            entries = ['documentId', 'documentVersion', 'documentMicroversion', 'elementId', 'partId']
+            for entry in entries:
+                if i1[entry] != i2[entry]:
+                    print(Fore.YELLOW + "BE CAREFUL: Same id is used for multiple instances:" + Style.RESET_ALL)
+                    print(Fore.YELLOW + "- " + instance['name'] + Style.RESET_ALL)
+                    print(Fore.YELLOW + "- " + instances[instance['id']]['name'] + Style.RESET_ALL)
+                    break
+
         instances[instance['id']] = instance
 
 root = assembly['rootAssembly']
@@ -219,18 +232,7 @@ if len(relations) == 0:
     assignParts(firstInstance, firstInstance)
 
 def connectParts(child, parent):
-    if config['connectWithFixedLinks']:
-        assignParts(child, child)
-        relations[child] = {
-            'parent': parent, 
-            'worldAxisFrame': np.identity(4),
-            'zAxis': np.array([0, 0, 1]),
-            'name': str(uuid.uuid4())+'_fixing',
-            'type': 'fixed',
-            'limits': None
-        }
-    else:
-        assignParts(child, parent)
+    assignParts(child, parent)
 
 # Spreading parts assignations, this parts mainly does two things:
 # 1. Finds the parts of the top level assembly that are not directly in a sub assembly and try to assign them

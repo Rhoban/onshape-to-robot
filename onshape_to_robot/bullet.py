@@ -9,10 +9,15 @@ from .simulation import Simulation
 
 parser = argparse.ArgumentParser(prog="onshape-to-robot-bullet")
 parser.add_argument('-f', '--fixed', action='store_true')
+parser.add_argument('-x', '--x', type=float, default=0)
+parser.add_argument('-y', '--y', type=float, default=0)
+parser.add_argument('-z', '--z', type=float, default=0)
 parser.add_argument('directory')
 args = parser.parse_args()
 
 sim = Simulation(args.directory+'/robot.urdf', gui=True, panels=True, fixed=args.fixed)
+pos, rpy = sim.getRobotPose()
+sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], [0,0,0,1])
 
 controls = {}
 for name in sim.getJoints():

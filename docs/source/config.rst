@@ -103,11 +103,19 @@ and avoiding loading meshes just for visualization.
 ``useScads``
 ~~~~~~~~~~~~
 
-*optional, default: ``true`` (needs ``openscad`` installed)*
+*optional, default: true (needs openscad installed)*
 
 If you create :doc:`pure shapes approximations <pure-shapes>` of your parts, you will have ``.scad`` files sitting
 in your directory, this flag can be used to disable using them (if ``false``, full meshes will be then used for
 collisions).
+
+``pureShapeDilatation``
+~~~~~~~~~~~~~~~~~~~~~~~
+
+*optional, default: 0*
+
+If you want to use pure shape as safety check for collisions, you can use this parameter to add some extra
+dilatation to all of them.
 
 ``jointMaxEffort`` and ``jointMaxVelocity``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -143,6 +151,23 @@ In pyBullet, this will result in static object (think of some environment for ex
 
 This can be a list of parts that you want to be ignored during the export.
 
+Note: the dynamics of the part will not be ignored, but the visual and collision aspect will.
+
+``whitelist``
+~~~~~~~~~~
+
+*optional, default: None*
+
+This can be used as the opposed of ``ignore``, to import only some items listed in the configuration
+(all items not listed in ``whitelist`` will be ignored if it is not ``None``)
+
+``color``
+~~~~~~~~~~
+
+*optional, default: None*
+
+Can override the color for parts (should be an array: ``[r, g, b]`` with numbers from 0 to 1)
+
 ``packageName``
 ~~~~~~~~~~~~~~~
 
@@ -172,14 +197,13 @@ Specifies the robot name.
 
 Specifies a file with XML content that is inserted into the URDF/SDF at the end of the file. Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
 
-``connectWithFixedLinks``
+``useFixedLinks``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*optional, default: true*
+*optional, default: false*
 
-When part is not in any joint (orphan), onshape-to-robot tries to merge it with the most
-relevant part of the robot, first checking for existing mates, and then finally connecting it to the trunk. This
-option defined wether it will be merged or attached to that part with a ``fixed`` joint.
+With this option, visual parts will be added through fixed links to each part of the robot. Mostly, this feature
+is a hack to keep colors properly for rendering in PyBullet (see https://github.com/bulletphysics/bullet3/issues/2650).
 
 ``mergeSTLs``
 ~~~~~~~~~~~~~
@@ -203,6 +227,16 @@ apt-get install meshlab``).
 *optional, default: 3*
 
 This is the maximum size (in ``M``) of STL files before they are reduced by ``simplifySTLs``.
+
+``useCollisionsConfigurations``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*optional, default: true*
+
+With this option (enabled by default), the collisions=true configuration will be passed when exporting STL
+meshes (and NOT dynamics), in order to retrieve simplified mesh parts from OnShape.
+
+This is a way to approximate your robot with simpler meshes.
 
 .. _example-config:
 

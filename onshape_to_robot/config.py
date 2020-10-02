@@ -13,16 +13,18 @@ if len(sys.argv) <= 1:
 robot = sys.argv[1]
 
 
-def configGet(name, default=None):
+def configGet(name, default=None, hasDefault=False):
     global config
+    hasDefault = hasDefault or (default is not None)
+
     if name in config:
         return config[name]
     else:
-        if default is None:
+        if hasDefault:
+            return default
+        else:
             print(Fore.RED + 'ERROR: missing key "'+name+'" in config' + Style.RESET_ALL)
             exit()
-        else:
-            return default
 
 
 configFile = robot+'/config.json'
@@ -34,10 +36,11 @@ config['drawFrames'] = configGet('drawFrames', False)
 config['drawCollisions'] = configGet('drawCollisions', False)
 config['assemblyName'] = configGet('assemblyName', False)
 config['outputFormat'] = configGet('outputFormat', 'urdf')
-config['connectWithFixedLinks'] = configGet('connectWithFixedLinks', True)
+config['useFixedLinks'] = configGet('useFixedLinks', False)
 
 # Using OpenSCAD for simplified geometry
 config['useScads'] = configGet('useScads', True)
+config['pureShapeDilatation'] = configGet('pureShapeDilatation', 0.0)
 
 # Dynamics
 config['jointMaxEffort'] = configGet('jointMaxEffort', 1)
@@ -46,6 +49,10 @@ config['noDynamics'] = configGet('noDynamics', False)
 
 # Ignore list
 config['ignore'] = configGet('ignore', [])
+config['whitelist'] = configGet('whitelist', None, hasDefault=True)
+
+# Color override
+config['color'] = configGet('color', None, hasDefault=True)
 
 # STLs merge and simplification
 config['mergeSTLs'] = configGet('mergeSTLs', False)
@@ -54,6 +61,9 @@ config['simplifySTLs'] = configGet('simplifySTLs', False)
 
 config['outputDirectory'] = robot
 config['dynamicsOverride'] = {}
+
+# Add collisions=true configuration on parts
+config['useCollisionsConfigurations'] = configGet('useCollisionsConfigurations', True)
 
 # ROS support
 config['packageName'] = configGet('packageName', '')
