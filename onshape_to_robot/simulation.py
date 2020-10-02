@@ -438,7 +438,7 @@ class Simulation:
         """Gets all contact points and forces
         
         Returns:
-            list -- list of entries (link_name, position in m, force in N)
+            list -- list of entries (link_name, position in m, normal force vector, force in N)
         """
         result = []
         contacts = p.getContactPoints(bodyA=self.floor, bodyB=self.robot)
@@ -448,7 +448,7 @@ class Simulation:
                 link_name = (p.getJointInfo(self.robot, link_index)[12]).decode()
             else:
                 link_name = 'base'
-            result.append((link_name, contact[6], contact[9]))
+            result.append((link_name, contact[6], contact[7], contact[9]))
 
         return result
 
