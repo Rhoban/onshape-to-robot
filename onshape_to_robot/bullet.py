@@ -15,7 +15,11 @@ parser.add_argument('-z', '--z', type=float, default=0)
 parser.add_argument('directory')
 args = parser.parse_args()
 
-sim = Simulation(args.directory+'/robot.urdf', gui=True, panels=True, fixed=args.fixed)
+robotPath = args.directory
+if not robotPath.endswith('.urdf'):
+    robotPath += '/robot.urdf'
+
+sim = Simulation(robotPath, gui=True, panels=True, fixed=args.fixed)
 pos, rpy = sim.getRobotPose()
 sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], [0,0,0,1])
 
