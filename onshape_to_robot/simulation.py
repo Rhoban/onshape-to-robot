@@ -15,7 +15,8 @@ class Simulation:
     A Bullet simulation involving Sigmaban humanoid robot
     """
 
-    def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True, realTime=True, panels=False):
+    def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True,
+        realTime=True, panels=False, useUrdfInertia=True):
         """Creates an instance of humanoid simulation
 
         Keyword Arguments:
@@ -24,7 +25,8 @@ class Simulation:
             transparent {bool} -- makes the robot transparent (default: {False})
             gui {bool} -- enables the gui visualizer, if False it will runs headless (default {True})
             realTime {bool} -- try to have simulation in real time (default {True})
-            panels {bool} -- show/hide the user interaction pyBullet panels
+            panels {bool} -- show/hide the user interaction pyBullet panels (default {False})
+            useUrdfInertia {bool} -- use URDF from URDF file (default {True})
         """
 
         self.dir = os.path.dirname(os.path.abspath(__file__))
@@ -32,7 +34,7 @@ class Simulation:
         self.realTime = realTime
         self.t = 0
         self.start = time.time()
-        self.dt = 0.001
+        self.dt = 0.005
         self.mass = None
 
         # Debug lines drawing
@@ -68,9 +70,12 @@ class Simulation:
         if not fixed:
             startPos[2] = 1
         startOrientation = p.getQuaternionFromEuler([0, 0, 0])
+        flags = p.URDF_USE_SELF_COLLISION
+        if useUrdfInertia:
+            flags += p.URDF_USE_INERTIA_FROM_FILE
         self.robot = p.loadURDF(robotPath,
                                 startPos, startOrientation,
-                                flags=(p.URDF_USE_SELF_COLLISION + p.URDF_USE_INERTIA_FROM_FILE), useFixedBase=fixed)
+                                flags=flags, useFixedBase=fixed)
 
         # Setting frictions parameters to default ones
         self.setFloorFrictions()
