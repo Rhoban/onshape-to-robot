@@ -16,7 +16,7 @@ class Simulation:
     """
 
     def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True,
-        realTime=True, panels=False, useUrdfInertia=True):
+        realTime=True, panels=False, useUrdfInertia=True, dt=0.002):
         """Creates an instance of humanoid simulation
 
         Keyword Arguments:
@@ -27,6 +27,7 @@ class Simulation:
             realTime {bool} -- try to have simulation in real time (default {True})
             panels {bool} -- show/hide the user interaction pyBullet panels (default {False})
             useUrdfInertia {bool} -- use URDF from URDF file (default {True})
+            dt {float} -- time step (default {0.002})
         """
 
         self.dir = os.path.dirname(os.path.abspath(__file__))
@@ -34,7 +35,7 @@ class Simulation:
         self.realTime = realTime
         self.t = 0
         self.start = time.time()
-        self.dt = 0.005
+        self.dt = dt
         self.mass = None
 
         # Debug lines drawing
