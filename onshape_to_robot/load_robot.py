@@ -45,38 +45,37 @@ if config['versionId'] == '':
 else:
     assembly = client.get_assembly(config['documentId'], config['versionId'], assemblyId, 'v')
 
-# Collecting parts instance from assembly and subassemblies
-instances = {}
-firstInstance = None
-def collectParts(instancesToWalk):
-    global firstInstance
-    for instance in instancesToWalk:
-        if firstInstance is None:
-            firstInstance = instance['id']
-
-        if instance['type'] == 'Part' and instance['id'] in instances:
-            i1 = instance
-            i2 = instances[instance['id']]
-            entries = ['documentId', 'documentVersion', 'documentMicroversion', 'elementId', 'partId']
-            for entry in entries:
-                if i1[entry] != i2[entry]:
-                    print(Fore.YELLOW + "BE CAREFUL: Same id is used for multiple instances:" + Style.RESET_ALL)
-                    print(Fore.YELLOW + "- " + instance['name'] + Style.RESET_ALL)
-                    print(Fore.YELLOW + "- " + instances[instance['id']]['name'] + Style.RESET_ALL)
-                    break
-
-        instances[instance['id']] = instance
-
 root = assembly['rootAssembly']
-collectParts(root['instances'])
-for asm in assembly['subAssemblies']:
-    collectParts(asm['instances'])
+
+# Finds a (leaf) instance given the full path, typically A B C where A and B would be subassemblies and C
+# the final part
+def findInstance(path, instances=None):
+    global assembly
+
+    if instances is None:
+        instances = assembly['rootAssembly']['instances']
+    
+    for instance in instances:
+        if instance['id'] == path[0]:
+            if len(path) == 1:
+                # If the length of remaining path is 1, the part is in the current assembly/subassembly
+                return instance
+            else:
+                # Else, we need to find the matching sub assembly to find the proper part (recursively)
+                d = instance['documentId']
+                m = instance['documentMicroversion']
+                e = instance['elementId']
+                for asm in assembly['subAssemblies']:
+                    if asm['documentId'] == d and asm['documentMicroversion'] == m and asm['elementId'] == e:
+                        return findInstance(path[1:], asm['instances'])
+
+    print(Fore.RED + 'Could not find instance for ' + str(path) + Style.RESET_ALL)
 
 # Collecting occurrences, the path is the assembly / sub assembly chain
 occurrences = {}
 for occurrence in root['occurrences']:
     occurrence['assignation'] = None
-    occurrence['instance'] = instances[occurrence['path'][-1]]
+    occurrence['instance'] = findInstance(occurrence['path'])
     occurrence['transform'] = np.matrix(np.reshape(occurrence['transform'], (4, 4)))
     occurrence['linkName'] = None
     occurrences[tuple(occurrence['path'])] = occurrence
@@ -228,8 +227,8 @@ print(Fore.GREEN + Style.BRIGHT + '* Found total '+str(len(relations))+' DOFs' +
 
 # If we have no DOF
 if len(relations) == 0:
-    trunk = firstInstance
-    assignParts(firstInstance, firstInstance)
+    trunk = root['instances'][0]['id']
+    assignParts(trunk, trunk)
 
 def connectParts(child, parent):
     assignParts(child, parent)
