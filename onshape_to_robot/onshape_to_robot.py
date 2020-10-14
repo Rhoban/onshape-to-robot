@@ -64,7 +64,7 @@ def addPart(occurrence, matrix):
     if partIsIgnore(prefix):
         stlFile = None
     else:
-        stlFile = prefix+'.stl'
+        stlFile = prefix.replace('/', '_')+'.stl'
         # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
         if len(part['configuration']) > 40:
             shortend_configuration = hashlib.md5(part['configuration'].encode('utf-8')).hexdigest()
@@ -76,7 +76,7 @@ def addPart(occurrence, matrix):
         f.write(stl)
         f.close()
 
-        stlMetadata = prefix+'.part'
+        stlMetadata = prefix.replace('/', '_')+'.part'
         f = open(config['outputDirectory']+'/'+stlMetadata, 'wb')
         f.write(json.dumps(part).encode('UTF-8'))
         f.close()
