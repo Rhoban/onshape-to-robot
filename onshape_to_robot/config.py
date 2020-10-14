@@ -15,12 +15,17 @@ if len(sys.argv) <= 1:
 robot = sys.argv[1]
 
 
-def configGet(name, default=None, hasDefault=False):
+def configGet(name, default=None, hasDefault=False, valuesList=None):
     global config
     hasDefault = hasDefault or (default is not None)
 
     if name in config:
-        return config[name]
+        value = config[name]
+        if valuesList is not None and value not in valuesList:
+            print(Fore.RED+"ERROR: Value for "+name +
+                  " should be one of: "+(','.join(valuesList))+Style.RESET_ALL)
+            exit()
+        return value
     else:
         if hasDefault:
             return default
@@ -58,9 +63,11 @@ config['whitelist'] = configGet('whitelist', None, hasDefault=True)
 config['color'] = configGet('color', None, hasDefault=True)
 
 # STLs merge and simplification
-config['mergeSTLs'] = configGet('mergeSTLs', False)
+config['mergeSTLs'] = configGet('mergeSTLs', 'no', valuesList=[
+                                'no', 'visual', 'collision', 'all'])
 config['maxSTLSize'] = configGet('maxSTLSize', 3)
-config['simplifySTLs'] = configGet('simplifySTLs', False)
+config['simplifySTLs'] = configGet('simplifySTLs', 'no', valuesList=[
+                                   'no', 'visual', 'collision', 'all'])
 
 config['outputDirectory'] = robot
 config['dynamicsOverride'] = {}

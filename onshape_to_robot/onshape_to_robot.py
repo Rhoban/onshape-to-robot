@@ -35,6 +35,7 @@ robot.addDummyBaseLink = config['addDummyBaseLink']
 robot.robotName = config['robotName']
 robot.additionalXML = config['additionalXML']
 robot.useFixedLinks = config['useFixedLinks']
+robot.meshDir = config['outputDirectory']
 
 
 def partIsIgnore(name):

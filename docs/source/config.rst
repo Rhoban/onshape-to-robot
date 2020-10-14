@@ -208,15 +208,28 @@ is a hack to keep colors properly for rendering in PyBullet (see https://github.
 ``mergeSTLs``
 ~~~~~~~~~~~~~
 
-*optional, default: false*
+*optional, default: "no"*
+
+Can be "no", "visual", "collision" or "all".
 
 This can be used to merge STLs file of the same ``link`` into one unique STL. It is actually better combined with
 ``simplifySTLs``, that can be used to reduce the STL file sizes.
 
+**Note: this will only merge visual for visual, see ``mergeSTLsCollisions``**
+
+``mergeSTLsCollisions``
+~~~~~~~~~~~~~
+
+*optional, default: false*
+
+STLs used for collisions will also be merged if this flag is ``true``. Note that 
+
 ``simplifySTLs``
 ~~~~~~~~~~~~~~~~
 
-*optional, default: false*
+*optional, default: "no"*
+
+Can be "no", "visual", "collision" or "all".
 
 If this is set, the STL files will be reduced (see ``maxSTLSize``). This requires ``meshlab`` tool (``sudo
 apt-get install meshlab``).
