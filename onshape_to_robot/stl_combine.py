@@ -7,14 +7,18 @@ import os
 from stl import mesh
 from colorama import Fore, Back, Style
 
+
 def load_mesh(stl_file):
     return mesh.Mesh.from_file(stl_file)
+
 
 def save_mesh(mesh, stl_file):
     mesh.save(stl_file, mode=stl.Mode.BINARY)
 
+
 def combine_meshes(m1, m2):
     return mesh.Mesh(np.concatenate([m1.data, m2.data]))
+
 
 def apply_matrix(mesh, matrix):
     rotation = matrix[0:3, 0:3]
@@ -78,10 +82,12 @@ def reduce_faces(in_file, out_file, reduction=0.5):
     # print("Done:")
     #print(in_file + " > " + out_file + ": " + last_line)
 
+
 def simplify_stl(stl_file, max_size=3):
     size_M = os.path.getsize(stl_file)/(1024*1024)
-    
+
     if size_M > max_size:
-        print(Fore.BLUE + '+ '+os.path.basename(stl_file) + (' is %.2f M, running mesh simplification' % size_M))
+        print(Fore.BLUE + '+ '+os.path.basename(stl_file) +
+              (' is %.2f M, running mesh simplification' % size_M))
         shutil.copyfile(stl_file, '/tmp/simplify.stl')
         reduce_faces('/tmp/simplify.stl', stl_file, max_size / size_M)
