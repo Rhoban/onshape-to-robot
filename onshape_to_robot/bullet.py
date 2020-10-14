@@ -21,7 +21,8 @@ if not robotPath.endswith('.urdf'):
 
 sim = Simulation(robotPath, gui=True, panels=True, fixed=args.fixed)
 pos, rpy = sim.getRobotPose()
-sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], [0,0,0,1])
+_, orn = p.getBasePositionAndOrientation(sim.robot)
+sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], orn)
 
 controls = {}
 for name in sim.getJoints():
@@ -57,4 +58,3 @@ while True:
             print(sim.getCenterOfMassPosition())
 
     sim.tick()
-
