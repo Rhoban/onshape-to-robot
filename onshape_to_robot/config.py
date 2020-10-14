@@ -8,8 +8,10 @@ config = {}
 
 # Loading configuration & parameters
 if len(sys.argv) <= 1:
-    exit(Fore.RED + 'ERROR: usage: onshape-to-robot.py [robot_directory]' + Style.RESET_ALL)
-    exit("Read documentation at https://github.com/rhoban/onshape-to-robot/#onshape-to-robot-sdfurdf")
+    print(Fore.RED +
+          'ERROR: usage: onshape-to-robot.py [robot_directory]' + Style.RESET_ALL)
+    print("Read documentation at https://onshape-to-robot.readthedocs.io/")
+    exit("")
 robot = sys.argv[1]
 
 
@@ -23,7 +25,8 @@ def configGet(name, default=None, hasDefault=False):
         if hasDefault:
             return default
         else:
-            print(Fore.RED + 'ERROR: missing key "'+name+'" in config' + Style.RESET_ALL)
+            print(Fore.RED + 'ERROR: missing key "' +
+                  name+'" in config' + Style.RESET_ALL)
             exit()
 
 
@@ -63,7 +66,8 @@ config['outputDirectory'] = robot
 config['dynamicsOverride'] = {}
 
 # Add collisions=true configuration on parts
-config['useCollisionsConfigurations'] = configGet('useCollisionsConfigurations', True)
+config['useCollisionsConfigurations'] = configGet(
+    'useCollisionsConfigurations', True)
 
 # ROS support
 config['packageName'] = configGet('packageName', '')
@@ -87,7 +91,8 @@ else:
 tmp = configGet('dynamics', {})
 for key in tmp:
     if tmp[key] == 'fixed':
-        config['dynamicsOverride'][key.lower()] = {"com": [0,0,0], "mass": 0, "inertia": [0,0,0,0,0,0,0,0,0]}
+        config['dynamicsOverride'][key.lower()] = {"com": [0, 0, 0], "mass": 0, "inertia": [
+            0, 0, 0, 0, 0, 0, 0, 0, 0]}
     else:
         config['dynamicsOverride'][key.lower()] = tmp[key]
 
@@ -101,7 +106,8 @@ except OSError:
 if config['useScads']:
     print(Style.BRIGHT + '* Checking OpenSCAD presence...' + Style.RESET_ALL)
     if os.system('openscad -v 2> /dev/null') != 0:
-        print(Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
+        print(
+            Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
         print(Fore.BLUE + "TIP: consider installing openscad:" + Style.RESET_ALL)
         print(Fore.BLUE + "sudo add-apt-repository ppa:openscad/releases" + Style.RESET_ALL)
         print(Fore.BLUE + "sudo apt-get update" + Style.RESET_ALL)
