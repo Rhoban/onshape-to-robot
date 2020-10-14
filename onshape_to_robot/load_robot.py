@@ -17,20 +17,24 @@ if config['versionId'] == '':
     workspaceId = document['defaultWorkspace']['id']
     print(Fore.GREEN + "+ Using workspace id: " + workspaceId + Style.RESET_ALL)
 else:
-    print("\n" + Style.BRIGHT + '* Using configuration version ID '+config['versionId']+' ...' + Style.RESET_ALL)
+    print("\n" + Style.BRIGHT + '* Using configuration version ID ' +
+          config['versionId']+' ...' + Style.RESET_ALL)
 
 # Now, finding the assembly, according to given name in configuration, or else the first possible one
-print("\n" + Style.BRIGHT + '* Retrieving elements in the document, searching for the assembly...' + Style.RESET_ALL)
+print("\n" + Style.BRIGHT +
+      '* Retrieving elements in the document, searching for the assembly...' + Style.RESET_ALL)
 if config['versionId'] == '':
     elements = client.list_elements(config['documentId'], workspaceId).json()
 else:
-    elements = client.list_elements(config['documentId'], config['versionId'], 'v').json()
+    elements = client.list_elements(
+        config['documentId'], config['versionId'], 'v').json()
 assemblyId = None
 assemblyName = ''
 for element in elements:
     if element['type'] == 'Assembly' and \
-        (config['assemblyName'] is False or element['name'] == config['assemblyName']):
-        print(Fore.GREEN + "+ Found assembly, id: "+element['id']+', name: "'+element['name']+'"' + Style.RESET_ALL)
+            (config['assemblyName'] is False or element['name'] == config['assemblyName']):
+        print(Fore.GREEN + "+ Found assembly, id: " +
+              element['id']+', name: "'+element['name']+'"' + Style.RESET_ALL)
         assemblyName = element['name']
         assemblyId = element['id']
 
@@ -39,22 +43,27 @@ if assemblyId == None:
     exit(1)
 
 # Retrieving the assembly
-print("\n" + Style.BRIGHT + '* Retrieving assembly "'+assemblyName+'" with id '+assemblyId+ Style.RESET_ALL)
+print("\n" + Style.BRIGHT + '* Retrieving assembly "' +
+      assemblyName+'" with id '+assemblyId + Style.RESET_ALL)
 if config['versionId'] == '':
-    assembly = client.get_assembly(config['documentId'], workspaceId, assemblyId)
+    assembly = client.get_assembly(
+        config['documentId'], workspaceId, assemblyId)
 else:
-    assembly = client.get_assembly(config['documentId'], config['versionId'], assemblyId, 'v')
+    assembly = client.get_assembly(
+        config['documentId'], config['versionId'], assemblyId, 'v')
 
 root = assembly['rootAssembly']
 
 # Finds a (leaf) instance given the full path, typically A B C where A and B would be subassemblies and C
 # the final part
+
+
 def findInstance(path, instances=None):
     global assembly
 
     if instances is None:
         instances = assembly['rootAssembly']['instances']
-    
+
     for instance in instances:
         if instance['id'] == path[0]:
             if len(path) == 1:
@@ -71,18 +80,23 @@ def findInstance(path, instances=None):
 
     print(Fore.RED + 'Could not find instance for ' + str(path) + Style.RESET_ALL)
 
+
 # Collecting occurrences, the path is the assembly / sub assembly chain
 occurrences = {}
 for occurrence in root['occurrences']:
     occurrence['assignation'] = None
     occurrence['instance'] = findInstance(occurrence['path'])
-    occurrence['transform'] = np.matrix(np.reshape(occurrence['transform'], (4, 4)))
+    occurrence['transform'] = np.matrix(
+        np.reshape(occurrence['transform'], (4, 4)))
     occurrence['linkName'] = None
     occurrences[tuple(occurrence['path'])] = occurrence
 
 # Gets an occurrence given its full path
+
+
 def getOccurrence(path):
     return occurrences[tuple(path)]
+
 
 # Assignations are pieces that will be in the same link. Note that this is only for top-level
 # item of the path (all sub assemblies and parts in assemblies are naturally in the same link as
@@ -94,19 +108,25 @@ assignations = {}
 # manually identified frames
 frames = {}
 
+
 def assignParts(root, parent):
     assignations[root] = parent
     for occurrence in occurrences.values():
         if occurrence['path'][0] == root:
             occurrence['assignation'] = parent
 
+
 # Load joint features to get limits later
 if config['versionId'] == '':
-    joint_features = client.get_features(config['documentId'], workspaceId, assemblyId)
+    joint_features = client.get_features(
+        config['documentId'], workspaceId, assemblyId)
 else:
-    joint_features = client.get_features(config['documentId'], config['versionId'], assemblyId, type='v')
+    joint_features = client.get_features(
+        config['documentId'], config['versionId'], assemblyId, type='v')
 
 # Gets the limits of a given joint
+
+
 def getLimits(jointType, name):
     enabled = False
     minimum, maximum = 0, 0
@@ -121,23 +141,30 @@ def getLimits(jointType, name):
                 if jointType == 'revolute':
                     # Note: we here assume it's in deg
                     if parameter['message']['parameterId'] == 'limitAxialZMin':
-                        minimum = math.radians(float(parameter['message']['expression'][:-4]))
+                        minimum = math.radians(
+                            float(parameter['message']['expression'][:-4]))
                     if parameter['message']['parameterId'] == 'limitAxialZMax':
-                        maximum = math.radians(float(parameter['message']['expression'][:-4]))
+                        maximum = math.radians(
+                            float(parameter['message']['expression'][:-4]))
                 elif jointType == 'prismatic':
                     # Note: we here assume it's in mm
                     if parameter['message']['parameterId'] == 'limitZMin':
-                        minimum = float(parameter['message']['expression'][:-3])/1000.0
+                        minimum = float(
+                            parameter['message']['expression'][:-3])/1000.0
                     if parameter['message']['parameterId'] == 'limitZMax':
-                        maximum = float(parameter['message']['expression'][:-3])/1000.0
+                        maximum = float(
+                            parameter['message']['expression'][:-3])/1000.0
     if enabled:
         return (minimum, maximum)
     else:
-        print(Fore.YELLOW + 'WARNING: joint ' + name + ' of type ' + jointType + ' has no limits ' + Style.RESET_ALL)
+        print(Fore.YELLOW + 'WARNING: joint ' + name + ' of type ' +
+              jointType + ' has no limits ' + Style.RESET_ALL)
         return None
 
-# First, features are scanned to find the DOFs. Links that they connects are then tagged 
-print("\n" + Style.BRIGHT +'* Getting assembly features, scanning for DOFs...' + Style.RESET_ALL)
+
+# First, features are scanned to find the DOFs. Links that they connects are then tagged
+print("\n" + Style.BRIGHT +
+      '* Getting assembly features, scanning for DOFs...' + Style.RESET_ALL)
 trunk = None
 relations = {}
 features = root['features']
@@ -146,16 +173,17 @@ for feature in features:
         name = feature['featureData']['name']
         if name[0:5] == 'link_':
             name = name[5:]
-            occurrences[(feature['featureData']['occurrence'][0],)]['linkName'] = name
+            occurrences[(feature['featureData']['occurrence'][0],)
+                        ]['linkName'] = name
     else:
         if feature['suppressed']:
             continue
 
         data = feature['featureData']
-        
+
         if len(data['matedEntities']) != 2 or \
-            len(data['matedEntities'][0]['matedOccurrence']) == 0 \
-            or len(data['matedEntities'][1]['matedOccurrence']) == 0:
+                len(data['matedEntities'][0]['matedOccurrence']) == 0 \
+                or len(data['matedEntities'][1]['matedOccurrence']) == 0:
             continue
 
         child = data['matedEntities'][0]['matedOccurrence'][0]
@@ -170,10 +198,10 @@ for feature in features:
                 del parts[-1]
             name = '_'.join(parts)
             if name == '':
-                print(Fore.RED + 
-                    'ERROR: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")' + Style.RESET_ALL)
+                print(Fore.RED +
+                      'ERROR: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")' + Style.RESET_ALL)
                 exit()
-            
+
             if data['mateType'] == 'REVOLUTE' or data['mateType'] == 'CYLINDRICAL':
                 jointType = 'revolute'
                 limits = getLimits(jointType, data['name'])
@@ -184,18 +212,23 @@ for feature in features:
                 jointType = 'floating'
                 limits = None
             else:
-                print(Fore.RED +'ERROR: "'+ name+'" is declared as a DOF but the mate type is '+data['mateType']+'')
-                print('       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported'  +Style.RESET_ALL)
+                print(Fore.RED + 'ERROR: "' + name +
+                      '" is declared as a DOF but the mate type is '+data['mateType']+'')
+                print(
+                    '       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported' + Style.RESET_ALL)
                 exit(1)
 
             limitsStr = ''
             if limits is not None:
-                limitsStr = '[' +str(round(limits[0], 3)) + ': ' + str(round(limits[1], 3)) + ']'
-            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM + '('+jointType+')'+limitsStr+ Style.RESET_ALL)
+                limitsStr = '[' + str(round(limits[0], 3)) + \
+                    ': ' + str(round(limits[1], 3)) + ']'
+            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM +
+                  '('+jointType+')'+limitsStr + Style.RESET_ALL)
 
             # We compute the axis in the world frame
             matedEntity = data['matedEntities'][0]
-            matedTransform = getOccurrence(matedEntity['matedOccurrence'])['transform']
+            matedTransform = getOccurrence(
+                matedEntity['matedOccurrence'])['transform']
             zAxis = np.array(matedEntity['matedCS']['zAxis'])
             if data['inverted']:
                 zAxis = -zAxis
@@ -208,7 +241,7 @@ for feature in features:
             worldAxisFrame = matedTransform * translation
 
             relations[child] = {
-                'parent': parent, 
+                'parent': parent,
                 'worldAxisFrame': worldAxisFrame,
                 'zAxis': zAxis,
                 'name': name,
@@ -222,16 +255,19 @@ for feature in features:
                 frames[child] = []
             if parent not in frames:
                 frames[parent] = []
-      
-print(Fore.GREEN + Style.BRIGHT + '* Found total '+str(len(relations))+' DOFs' + Style.RESET_ALL)
+
+print(Fore.GREEN + Style.BRIGHT + '* Found total ' +
+      str(len(relations))+' DOFs' + Style.RESET_ALL)
 
 # If we have no DOF
 if len(relations) == 0:
     trunk = root['instances'][0]['id']
     assignParts(trunk, trunk)
 
+
 def connectParts(child, parent):
     assignParts(child, parent)
+
 
 # Spreading parts assignations, this parts mainly does two things:
 # 1. Finds the parts of the top level assembly that are not directly in a sub assembly and try to assign them
@@ -247,8 +283,8 @@ while changed:
         data = feature['featureData']
 
         if len(data['matedEntities']) != 2 \
-            or len(data['matedEntities'][0]['matedOccurrence']) == 0 \
-            or len(data['matedEntities'][1]['matedOccurrence']) == 0:
+                or len(data['matedEntities'][0]['matedOccurrence']) == 0 \
+                or len(data['matedEntities'][1]['matedOccurrence']) == 0:
             continue
 
         occurrenceA = data['matedEntities'][0]['matedOccurrence'][0]
@@ -258,12 +294,16 @@ while changed:
             if data['name'][0:5] == 'frame':
                 name = '_'.join(data['name'].split('_')[1:])
                 if occurrenceA in assignations:
-                    frames[occurrenceA].append([name, data['matedEntities'][1]['matedOccurrence']])
-                    assignParts(occurrenceB, {True: assignations[occurrenceA], False: 'frame'}[config['drawFrames']])
+                    frames[occurrenceA].append(
+                        [name, data['matedEntities'][1]['matedOccurrence']])
+                    assignParts(occurrenceB, {True: assignations[occurrenceA], False: 'frame'}[
+                                config['drawFrames']])
                     changed = True
                 else:
-                    frames[occurrenceB].append([name, data['matedEntities'][0]['matedOccurrence']])
-                    assignParts(occurrenceA, {True: assignations[occurrenceB], False: 'frame'}[config['drawFrames']])
+                    frames[occurrenceB].append(
+                        [name, data['matedEntities'][0]['matedOccurrence']])
+                    assignParts(occurrenceA, {True: assignations[occurrenceB], False: 'frame'}[
+                                config['drawFrames']])
                     changed = True
             else:
                 if occurrenceA in assignations:
@@ -286,13 +326,16 @@ for childId in relations:
         trunk = entry['parent']
         break
 trunkOccurrence = getOccurrence([trunk])
-print(Style.BRIGHT + '* Trunk is '+trunkOccurrence['instance']['name'] + Style.RESET_ALL)
+print(Style.BRIGHT + '* Trunk is ' +
+      trunkOccurrence['instance']['name'] + Style.RESET_ALL)
 
 for occurrence in occurrences.values():
     if occurrence['assignation'] is None:
-        print(Fore.YELLOW + 'WARNING: part ('+occurrence['instance']['name']+') has no assignation, connecting it with trunk' + Style.RESET_ALL)
+        print(Fore.YELLOW + 'WARNING: part (' +
+              occurrence['instance']['name']+') has no assignation, connecting it with trunk' + Style.RESET_ALL)
         child = occurrence['path'][0]
         connectParts(child, trunk)
+
 
 def collect(id):
     part = {}
@@ -309,5 +352,6 @@ def collect(id):
             child['jointLimits'] = entry['limits']
             part['children'].append(child)
     return part
+
 
 tree = collect(trunk)

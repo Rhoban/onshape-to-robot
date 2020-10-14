@@ -8,6 +8,7 @@ These functions are responsible for parsing CSG files (constructive solid geomet
 produced by OpenSCAD, containing no loop, variables etc.
 """
 
+
 def multmatrix_parse(parameters):
     matrix = np.matrix(json.loads(parameters), dtype=float)
     matrix[0, 3] /= 1000.0
@@ -26,7 +27,8 @@ def cube_parse(parameters, dilatation):
 
 
 def cylinder_parse(parameters, dilatation):
-    results = re.findall(r'h = (.+), r1 = (.+), r2 = (.+), center = (.+)', parameters)
+    results = re.findall(
+        r'h = (.+), r1 = (.+), r2 = (.+), center = (.+)', parameters)
     if len(results) != 1:
         print("! Can't parse CSG cylinder parameters: "+parameters)
         exit()
@@ -54,11 +56,13 @@ def extract_node_parameters(line):
         parameters = parameters[:-3]
     return node, parameters
 
+
 def T(x, y, z):
     m = np.matrix(np.eye(4))
-    m.T[3,:3] = [x, y, z]
+    m.T[3, :3] = [x, y, z]
 
     return m
+
 
 def parse_csg(data, dilatation):
     shapes = []
@@ -84,7 +88,8 @@ def parse_csg(data, dilatation):
                 if node == 'cube':
                     size, center = cube_parse(parameters, dilatation)
                     if not center:
-                        transform = transform * T(size[0]/2.0, size[1]/2.0, size[2]/2.0)
+                        transform = transform * \
+                            T(size[0]/2.0, size[1]/2.0, size[2]/2.0)
                     shapes.append({
                         'type': 'cube',
                         'parameters': size,
@@ -113,6 +118,6 @@ def process(filename, dilatation):
     f = open('_tmp_data.csg')
     data = f.read()
     f.close()
-    os.system('rm _tmp_data.csg')    
+    os.system('rm _tmp_data.csg')
 
     return parse_csg(data, dilatation)

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import sys, os
+import sys
+import os
 
 if len(sys.argv) < 2:
     print('Usage: onshape-to-robot-edit-shape {STL file}')
@@ -20,5 +21,3 @@ else:
         f.close()
     directory = os.path.dirname(fileName)
     os.system('cd '+directory+'; openscad '+os.path.basename(fileName))
-
-    

@@ -16,7 +16,7 @@ class Simulation:
     """
 
     def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True,
-        realTime=True, panels=False, useUrdfInertia=True, dt=0.002):
+                 realTime=True, panels=False, useUrdfInertia=True, dt=0.002):
         """Creates an instance of humanoid simulation
 
         Keyword Arguments:
@@ -42,7 +42,8 @@ class Simulation:
         self.lines = []
         self.currentLine = 0
         self.lastLinesDraw = 0
-        self.lineColors = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1]]
+        self.lineColors = [[1, 0, 0], [0, 1, 0], [
+            0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1]]
 
         # Instanciating bullet
         if gui:
@@ -54,10 +55,11 @@ class Simulation:
         # Light GUI
         if not panels:
             p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
-            p.configureDebugVisualizer(p.COV_ENABLE_SEGMENTATION_MARK_PREVIEW, 0)
+            p.configureDebugVisualizer(
+                p.COV_ENABLE_SEGMENTATION_MARK_PREVIEW, 0)
             p.configureDebugVisualizer(p.COV_ENABLE_DEPTH_BUFFER_PREVIEW, 0)
             p.configureDebugVisualizer(p.COV_ENABLE_RGB_BUFFER_PREVIEW, 0)
-            
+
         p.configureDebugVisualizer(p.COV_ENABLE_MOUSE_PICKING, 1)
 
         # Loading floor and/or plane ground
@@ -131,7 +133,7 @@ class Simulation:
         """
         if self.floor is not None:
             p.changeDynamics(self.floor, -1, lateralFriction=lateral,
-                            spinningFriction=spinning, rollingFriction=rolling)
+                             spinningFriction=spinning, rollingFriction=rolling)
 
     def lookAt(self, target):
         """Control the look of the visualizer camera
@@ -141,7 +143,8 @@ class Simulation:
         """
         if self.gui:
             params = p.getDebugVisualizerCamera()
-            p.resetDebugVisualizerCamera(params[10], params[8], params[9], target)
+            p.resetDebugVisualizerCamera(
+                params[10], params[8], params[9], target)
 
     def getRobotPose(self):
         """Gets the robot (origin) position
@@ -172,11 +175,11 @@ class Simulation:
 
     def transformation(self, frameA, frameB):
         """Transformation matrix AtoB
-        
+
         Arguments:
             frameA {str} -- frame A name
             frameB {str} -- frame B name
-        
+
         Returns:
             np.matrix -- A 4x4 matrix
         """
@@ -189,7 +192,7 @@ class Simulation:
         """Converts a pyBullet pose to a transformation matrix"""
         translation = pose[0]
         quaternion = pose[1]
-        
+
         # NOTE: PyBullet quaternions are x, y, z, w
         rotation = quat2mat([quaternion[3], quaternion[0],
                              quaternion[1], quaternion[2]])
@@ -214,7 +217,7 @@ class Simulation:
 
     def setRobotPose(self, pos, orn):
         """Sets the robot (origin) pose
-        
+
         Arguments:
             pos {tuple} -- (x,y,z) position
             orn {tuple} -- (x,y,z,w) quaternions
@@ -223,7 +226,7 @@ class Simulation:
 
     def reset(self, height=0.5, orientation='straight'):
         """Resets the robot for experiment (joints, robot position, simulator time)
-        
+
         Keyword Arguments:
             height {float} -- height of the reset (m) (default: {0.55})
             orientation {str} -- orientation (straight, front or back) of the robot (default: {'straight'})
@@ -246,7 +249,7 @@ class Simulation:
 
     def resetPose(self, pos, orn):
         """Called by reset() with the robot pose
-        
+
         Arguments:
             pos {tuple} -- (x,y,z) position
             orn {tuple} -- (x,y,z,w) quaternions
@@ -255,10 +258,10 @@ class Simulation:
 
     def getFrame(self, frame):
         """Gets the given frame
-        
+
         Arguments:
             frame {str} -- frame name
-        
+
         Returns:
             tuple -- (pos, orn), where pos is (x, y, z) and orn is quaternions (x, y, z, w)
         """
@@ -267,7 +270,7 @@ class Simulation:
 
     def getFrames(self):
         """Gets the available frames in the current robot model
-        
+
         Returns:
             dict -- dict of str -> (pos, orientation)
         """
@@ -283,7 +286,7 @@ class Simulation:
 
     def resetJoints(self, joints):
         """Reset all the joints to a given position
-        
+
         Arguments:
             joints {dict} -- dict of joint name -> angle (float, radian)
         """
@@ -292,10 +295,10 @@ class Simulation:
 
     def setJoints(self, joints):
         """Set joint targets for motor control in simulation
-        
+
         Arguments:
             joints {dict} -- dict of joint name -> angle (float, radian)
-        
+
         Raises:
             Exception: if a joint is not found, exception is raised
 
@@ -308,7 +311,7 @@ class Simulation:
             if name in self.joints:
                 if name.endswith('_speed'):
                     p.setJointMotorControl2(
-                    self.robot, self.joints[name], p.VELOCITY_CONTROL, targetVelocity=joints[name])
+                        self.robot, self.joints[name], p.VELOCITY_CONTROL, targetVelocity=joints[name])
                 else:
                     if name in self.maxTorques:
                         maxTorque = self.maxTorques[name]
@@ -326,7 +329,7 @@ class Simulation:
 
     def getJoints(self):
         """Get all the joints names
-        
+
         Returns:
             list -- list of str, with joint names
         """
@@ -385,15 +388,15 @@ class Simulation:
             mass += m
 
             k += 1
-        
+
         return com / mass
 
     def addDebugPosition(self, position, color=None, duration=30):
         """Adds a debug position to be drawn as a line
-        
+
         Arguments:
             position {tuple} -- (x,y,z) (m)
-        
+
         Keyword Arguments:
             color {tuple} -- (r,g,b) (0->1) (default: {None})
             duration {float} -- line duration on screen before disapearing (default: {30})
@@ -408,7 +411,7 @@ class Simulation:
         self.lines[self.currentLine]['to'] = position
         self.lines[self.currentLine]['color'] = color
         self.lines[self.currentLine]['duration'] = duration
-        
+
         self.currentLine += 1
 
     def drawDebugLines(self):
@@ -418,7 +421,8 @@ class Simulation:
             for line in self.lines:
                 if 'from' in line:
                     if line['update'] == True:
-                        p.addUserDebugLine(line['from'], line['to'], line['color'], 2, line['duration'])
+                        p.addUserDebugLine(
+                            line['from'], line['to'], line['color'], 2, line['duration'])
                         line['update'] = False
                     else:
                         del line['from']
@@ -428,7 +432,7 @@ class Simulation:
 
     def contactPoints(self):
         """Gets all contact points and forces
-        
+
         Returns:
             list -- list of entries (link_name, position in m, normal force vector, force in N)
         """
@@ -437,7 +441,8 @@ class Simulation:
         for contact in contacts:
             link_index = contact[4]
             if link_index >= 0:
-                link_name = (p.getJointInfo(self.robot, link_index)[12]).decode()
+                link_name = (p.getJointInfo(
+                    self.robot, link_index)[12]).decode()
             else:
                 link_name = 'base'
             result.append((link_name, contact[6], contact[7], contact[9]))
@@ -446,7 +451,7 @@ class Simulation:
 
     def autoCollisions(self):
         """Returns the total amount of N in autocollisions (not with ground)
-        
+
         Returns:
             float -- Newtons of collisions not with ground
         """
@@ -472,4 +477,3 @@ class Simulation:
         delay = self.t - (time.time() - self.start)
         if delay > 0 and self.realTime:
             time.sleep(delay)
-        

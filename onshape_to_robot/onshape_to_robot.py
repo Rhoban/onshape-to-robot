@@ -20,7 +20,8 @@ if config['outputFormat'] == 'urdf':
 elif config['outputFormat'] == 'sdf':
     robot = RobotSDF(config['robotName'])
 else:
-    print(Fore.RED + 'ERROR: Unknown output format: '+config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
+    print(Fore.RED + 'ERROR: Unknown output format: ' +
+          config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
     exit()
 robot.drawCollisions = config['drawCollisions']
 robot.jointMaxEffort = config['jointMaxEffort']
@@ -35,6 +36,7 @@ robot.robotName = config['robotName']
 robot.additionalXML = config['additionalXML']
 robot.useFixedLinks = config['useFixedLinks']
 
+
 def partIsIgnore(name):
     global config
 
@@ -44,6 +46,8 @@ def partIsIgnore(name):
         return name not in config['whitelist']
 
 # Adds a part to the current robot link
+
+
 def addPart(occurrence, matrix):
     global config, occurrenceLinkNames
     part = occurrence['instance']
@@ -53,13 +57,15 @@ def addPart(occurrence, matrix):
 
     extra = ''
     if occurrence['instance']['configuration'] != 'default':
-        extra = Style.DIM + ' (configuration: '+occurrence['instance']['configuration']+')'
+        extra = Style.DIM + ' (configuration: ' + \
+            occurrence['instance']['configuration']+')'
     symbol = '+'
     if partIsIgnore(prefix):
         symbol = '-'
         extra += Style.DIM + ' / ignoring visual and collision'
 
-    print(Fore.GREEN + symbol+' Adding part '+occurrence['instance']['name']+extra + Style.RESET_ALL)
+    print(Fore.GREEN + symbol+' Adding part ' +
+          occurrence['instance']['name']+extra + Style.RESET_ALL)
 
     if partIsIgnore(prefix):
         stlFile = None
@@ -67,11 +73,12 @@ def addPart(occurrence, matrix):
         stlFile = prefix.replace('/', '_')+'.stl'
         # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
         if len(part['configuration']) > 40:
-            shortend_configuration = hashlib.md5(part['configuration'].encode('utf-8')).hexdigest()
+            shortend_configuration = hashlib.md5(
+                part['configuration'].encode('utf-8')).hexdigest()
         else:
             shortend_configuration = part['configuration']
-        stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'], 
-                                    part['partId'], shortend_configuration)
+        stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'],
+                                       part['partId'], shortend_configuration)
         f = open(config['outputDirectory']+'/'+stlFile, 'wb')
         f.write(stl)
         f.close()
@@ -88,16 +95,19 @@ def addPart(occurrence, matrix):
     if config['useScads']:
         scadFile = prefix+'.scad'
         if os.path.exists(config['outputDirectory']+'/'+scadFile):
-            shapes = csg.process(config['outputDirectory']+'/'+scadFile, config['pureShapeDilatation'])
-        
+            shapes = csg.process(
+                config['outputDirectory']+'/'+scadFile, config['pureShapeDilatation'])
+
     # Obtain metadatas about part to retrieve color
     if config['color'] is not None:
         color = config['color']
     else:
-        metadata = client.part_get_metadata(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
+        metadata = client.part_get_metadata(
+            part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
         if 'appearance' in metadata:
             colors = metadata['appearance']['color']
-            color = np.array([colors['red'], colors['green'], colors['blue']])/255.0
+            color = np.array(
+                [colors['red'], colors['green'], colors['blue']])/255.0
         else:
             color = [0.5, 0.5, 0.5]
 
@@ -113,10 +123,12 @@ def addPart(occurrence, matrix):
             com = entry['com']
             inertia = entry['inertia']
         else:
-            massProperties = client.part_mass_properties(part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
+            massProperties = client.part_mass_properties(
+                part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
 
             if part['partId'] not in massProperties['bodies']:
-                print(Fore.YELLOW + 'WARNING: part '+part['name']+' has no dynamics (maybe it is a surface)' + Style.RESET_ALL)
+                print(Fore.YELLOW + 'WARNING: part ' +
+                      part['name']+' has no dynamics (maybe it is a surface)' + Style.RESET_ALL)
                 return
             massProperties = massProperties['bodies'][part['partId']]
             mass = massProperties['mass'][0]
@@ -124,15 +136,19 @@ def addPart(occurrence, matrix):
             inertia = massProperties['inertia']
 
             if abs(mass) < 1e-9:
-                print(Fore.YELLOW + 'WARNING: part '+part['name']+' has no mass, maybe you should assign a material to it ?' + Style.RESET_ALL)
+                print(Fore.YELLOW + 'WARNING: part ' +
+                      part['name']+' has no mass, maybe you should assign a material to it ?' + Style.RESET_ALL)
 
     pose = occurrence['transform']
     if robot.relative:
         pose = np.linalg.inv(matrix)*pose
-    
+
     robot.addPart(pose, stlFile, mass, com, inertia, color, shapes, prefix)
 
+
 partNames = {}
+
+
 def extractPartName(name, configuration):
     parts = name.split(' ')
     del parts[-1]
@@ -142,6 +158,7 @@ def extractPartName(name, configuration):
         parts += ['_' + configuration.replace('=', '_').replace(' ', '_')]
 
     return '_'.join(parts).lower()
+
 
 def processPartName(name, configuration, overrideName=None):
     if overrideName is None:
@@ -157,13 +174,16 @@ def processPartName(name, configuration, overrideName=None):
     else:
         return overrideName
 
+
 def buildRobot(tree, matrix):
     occurrence = getOccurrence([tree['id']])
     instance = occurrence['instance']
-    print(Fore.BLUE + Style.BRIGHT + '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
+    print(Fore.BLUE + Style.BRIGHT +
+          '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
 
     # Build a part name that is unique but still informative
-    link = processPartName(instance['name'], instance['configuration'], occurrence['linkName'])
+    link = processPartName(
+        instance['name'], instance['configuration'], occurrence['linkName'])
 
     # Create the link, collecting all children in the tree assigned to this top-level part
     robot.startLink(link, matrix)
@@ -198,16 +218,19 @@ def buildRobot(tree, matrix):
             childMatrix = matrix
 
         subLink = buildRobot(child, childMatrix)
-        robot.addJoint(jointType, link, subLink, axisFrame, child['dof_name'], jointLimits, zAxis)
+        robot.addJoint(jointType, link, subLink, axisFrame,
+                       child['dof_name'], jointLimits, zAxis)
 
     return link
+
 
 # Start building the robot
 buildRobot(tree, np.matrix(np.identity(4)))
 robot.finalize()
 # print(tree)
 
-print("\n" + Style.BRIGHT + "* Writing "+robot.ext.upper()+" file" + Style.RESET_ALL)
+print("\n" + Style.BRIGHT + "* Writing " +
+      robot.ext.upper()+" file" + Style.RESET_ALL)
 f = open(config['outputDirectory']+'/robot.'+robot.ext, 'w')
 f.write(robot.xml)
 f.close()

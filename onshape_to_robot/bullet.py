@@ -27,7 +27,8 @@ sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], orn)
 controls = {}
 for name in sim.getJoints():
     if name.endswith('_speed'):
-        controls[name] = p.addUserDebugParameter(name, -math.pi*3, math.pi*3, 0)
+        controls[name] = p.addUserDebugParameter(
+            name, -math.pi*3, math.pi*3, 0)
     else:
         infos = sim.getJointsInfos(name)
         low = -math.pi
