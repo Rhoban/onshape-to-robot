@@ -52,6 +52,9 @@ def addPart(occurrence, matrix):
     global config, occurrenceLinkNames
     part = occurrence['instance']
 
+    if part['suppressed']:
+        return
+
     # Importing STL file for this part
     prefix = extractPartName(part['name'], part['configuration'])
 
