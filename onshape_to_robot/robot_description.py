@@ -291,6 +291,7 @@ class RobotURDF(RobotDescription):
                             stl), color, name, entry)
                 else:
                     # Inserting pure shapes in the URDF model
+                    self.append('<!-- Shapes for '+name+' -->')
                     for shape in shapes:
                         self.append('<'+entry+'>')
                         self.append(origin(matrix*shape['transform']))
@@ -473,6 +474,7 @@ class RobotSDF(RobotDescription):
                 else:
                     # Inserting pure shapes in the URDF model
                     k = 0
+                    self.append('<!-- Shapes for '+name+' -->')
                     for shape in shapes:
                         k += 1
                         self.append('<'+entry+' name="'+name +

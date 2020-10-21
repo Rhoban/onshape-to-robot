@@ -57,21 +57,21 @@ def addPart(occurrence, matrix):
         return
 
     # Importing STL file for this part
-    prefix = extractPartName(part['name'], part['configuration'])
+    justPart, prefix = extractPartName(part['name'], part['configuration'])
 
     extra = ''
     if occurrence['instance']['configuration'] != 'default':
         extra = Style.DIM + ' (configuration: ' + \
             occurrence['instance']['configuration']+')'
     symbol = '+'
-    if partIsIgnore(prefix):
+    if partIsIgnore(justPart):
         symbol = '-'
         extra += Style.DIM + ' / ignoring visual and collision'
 
     print(Fore.GREEN + symbol+' Adding part ' +
           occurrence['instance']['name']+extra + Style.RESET_ALL)
 
-    if partIsIgnore(prefix):
+    if partIsIgnore(justPart):
         stlFile = None
     else:
         stlFile = prefix.replace('/', '_')+'.stl'
@@ -156,18 +156,19 @@ partNames = {}
 def extractPartName(name, configuration):
     parts = name.split(' ')
     del parts[-1]
+    basePartName = '_'.join(parts).lower()
 
     # only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
     if configuration != 'default' and len(configuration) < 40:
         parts += ['_' + configuration.replace('=', '_').replace(' ', '_')]
 
-    return '_'.join(parts).lower()
+    return basePartName, '_'.join(parts).lower()
 
 
 def processPartName(name, configuration, overrideName=None):
     if overrideName is None:
         global partNames
-        name = extractPartName(name, configuration)
+        _, name = extractPartName(name, configuration)
 
         if name in partNames:
             partNames[name] += 1
