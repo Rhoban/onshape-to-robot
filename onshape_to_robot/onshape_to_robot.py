@@ -175,7 +175,10 @@ def processPartName(name, configuration, overrideName=None):
         else:
             partNames[name] = 1
 
-        return name+'_'+str(partNames[name])
+        if partNames[name] == 1:
+            return name
+        else:
+            return name+'_'+str(partNames[name])
     else:
         return overrideName
 
