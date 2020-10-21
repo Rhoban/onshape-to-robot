@@ -70,21 +70,19 @@ def getLimits(jointType, name):
     enabled = False
     minimum, maximum = 0, 0
     for feature in joint_features['features']:
-        # find coresponding joint
+        # Find coresponding joint
         if name == feature['message']['name']:
-            # find min and max values
+            # Find min and max values
             for parameter in feature['message']['parameters']:
                 if parameter['message']['parameterId'] == "limitsEnabled":
                     enabled = parameter['message']['value']
 
                 if jointType == 'revolute':
-                    # Note: we here assume it's in deg
                     if parameter['message']['parameterId'] == 'limitAxialZMin':
                         minimum = readParameterValue(parameter)
                     if parameter['message']['parameterId'] == 'limitAxialZMax':
                         maximum = readParameterValue(parameter)
                 elif jointType == 'prismatic':
-                    # Note: we here assume it's in mm
                     if parameter['message']['parameterId'] == 'limitZMin':
                         minimum = readParameterValue(parameter)
                     if parameter['message']['parameterId'] == 'limitZMax':
