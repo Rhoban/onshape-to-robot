@@ -115,97 +115,8 @@ def assignParts(root, parent):
         if occurrence['path'][0] == root:
             occurrence['assignation'] = parent
 
-
-# Load joint features to get limits later
-if config['versionId'] == '':
-    joint_features = client.get_features(
-        config['documentId'], workspaceId, assemblyId)
-else:
-    joint_features = client.get_features(
-        config['documentId'], config['versionId'], assemblyId, type='v')
-
-# Retrieving root configuration parameters
-configurationParameters = {}
-parts = root['fullConfiguration'].split(';')
-for part in parts:
-    kv = part.split('=')
-    if len(kv) == 2:
-        configurationParameters[kv[0]] = kv[1].replace('+', ' ')
-
-
-def readExpression(expression):
-    # Expression can itself be a variable from configuration
-    if expression[0] == '#':
-        expression = configurationParameters[expression[1:]]
-
-    parts = expression.split(' ')
-
-    # Checking the unit, returning only radians and meters
-    if parts[1] == 'deg':
-        return math.radians(float(parts[0]))
-    elif parts[1] == 'radian':
-        return float(parts[0])
-    elif parts[1] == 'mm':
-        return float(parts[0])/1000.0
-    elif parts[1] == 'm':
-        return float(parts[0])
-    else:
-        print(Fore.RED + 'Unknown unit: '+parts[1] + Style.RESET_ALL)
-        exit()
-
-
-def readParameterValue(parameter):
-    global configurationParameters
-
-    # This is an expression
-    if parameter['typeName'] == 'BTMParameterNullableQuantity':
-        return readExpression(parameter['message']['expression'])
-    if parameter['typeName'] == 'BTMParameterConfigured':
-        message = parameter['message']
-        parameterValue = (
-            configurationParameters[message['configurationParameterId']] == 'true')
-
-        for value in message['values']:
-            if value['message']['booleanValue'] == parameterValue:
-                return readExpression(value['message']['value']['message']['expression'])
-    else:
-        print(Fore.RED+'Unknown feature type: ' +
-              parameter['typeName']+Style.RESET_ALL)
-        exit()
-
-# Gets the limits of a given joint
-
-
-def getLimits(jointType, name):
-    enabled = False
-    minimum, maximum = 0, 0
-    for feature in joint_features['features']:
-        # find coresponding joint
-        if name == feature['message']['name']:
-            # find min and max values
-            for parameter in feature['message']['parameters']:
-                if parameter['message']['parameterId'] == "limitsEnabled":
-                    enabled = parameter['message']['value']
-
-                if jointType == 'revolute':
-                    # Note: we here assume it's in deg
-                    if parameter['message']['parameterId'] == 'limitAxialZMin':
-                        minimum = readParameterValue(parameter)
-                    if parameter['message']['parameterId'] == 'limitAxialZMax':
-                        maximum = readParameterValue(parameter)
-                elif jointType == 'prismatic':
-                    # Note: we here assume it's in mm
-                    if parameter['message']['parameterId'] == 'limitZMin':
-                        minimum = readParameterValue(parameter)
-                    if parameter['message']['parameterId'] == 'limitZMax':
-                        maximum = readParameterValue(parameter)
-    if enabled:
-        return (minimum, maximum)
-    else:
-        print(Fore.YELLOW + 'WARNING: joint ' + name + ' of type ' +
-              jointType + ' has no limits ' + Style.RESET_ALL)
-        return None
-
+from .features import init as features_init, getLimits
+features_init(client, config, root, workspaceId, assemblyId)
 
 # First, features are scanned to find the DOFs. Links that they connects are then tagged
 print("\n" + Style.BRIGHT +
@@ -287,9 +198,11 @@ for feature in features:
 
             if child in relations:
                 print(Fore.RED)
-                print('Error, the relation '+name + ' is connected a child that is already connected')
+                print('Error, the relation '+name +
+                      ' is connected a child that is already connected')
                 print('Be sure you ordered properly your relations, see:')
-                print('https://onshape-to-robot.readthedocs.io/en/latest/design.html#specifying-degrees-of-freedom')
+                print(
+                    'https://onshape-to-robot.readthedocs.io/en/latest/design.html#specifying-degrees-of-freedom')
                 print(Style.RESET_ALL)
                 exit()
 
