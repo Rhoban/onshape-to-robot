@@ -124,6 +124,55 @@ else:
     joint_features = client.get_features(
         config['documentId'], config['versionId'], assemblyId, type='v')
 
+# Retrieving root configuration parameters
+configurationParameters = {}
+parts = root['fullConfiguration'].split(';')
+for part in parts:
+    kv = part.split('=')
+    if len(kv) == 2:
+        configurationParameters[kv[0]] = kv[1].replace('+', ' ')
+
+
+def readExpression(expression):
+    # Expression can itself be a variable from configuration
+    if expression[0] == '#':
+        expression = configurationParameters[expression[1:]]
+
+    parts = expression.split(' ')
+
+    # Checking the unit, returning only radians and meters
+    if parts[1] == 'deg':
+        return math.radians(float(parts[0]))
+    elif parts[1] == 'radian':
+        return float(parts[0])
+    elif parts[1] == 'mm':
+        return float(parts[0])/1000.0
+    elif parts[1] == 'm':
+        return float(parts[0])
+    else:
+        print(Fore.RED + 'Unknown unit: '+parts[1] + Style.RESET_ALL)
+        exit()
+
+
+def readParameterValue(parameter):
+    global configurationParameters
+
+    # This is an expression
+    if parameter['typeName'] == 'BTMParameterNullableQuantity':
+        return readExpression(parameter['message']['expression'])
+    if parameter['typeName'] == 'BTMParameterConfigured':
+        message = parameter['message']
+        parameterValue = (
+            configurationParameters[message['configurationParameterId']] == 'true')
+
+        for value in message['values']:
+            if value['message']['booleanValue'] == parameterValue:
+                return readExpression(value['message']['value']['message']['expression'])
+    else:
+        print(Fore.RED+'Unknown feature type: ' +
+              parameter['typeName']+Style.RESET_ALL)
+        exit()
+
 # Gets the limits of a given joint
 
 
@@ -141,19 +190,15 @@ def getLimits(jointType, name):
                 if jointType == 'revolute':
                     # Note: we here assume it's in deg
                     if parameter['message']['parameterId'] == 'limitAxialZMin':
-                        minimum = math.radians(
-                            float(parameter['message']['expression'][:-4]))
+                        minimum = readParameterValue(parameter)
                     if parameter['message']['parameterId'] == 'limitAxialZMax':
-                        maximum = math.radians(
-                            float(parameter['message']['expression'][:-4]))
+                        maximum = readParameterValue(parameter)
                 elif jointType == 'prismatic':
                     # Note: we here assume it's in mm
                     if parameter['message']['parameterId'] == 'limitZMin':
-                        minimum = float(
-                            parameter['message']['expression'][:-3])/1000.0
+                        minimum = readParameterValue(parameter)
                     if parameter['message']['parameterId'] == 'limitZMax':
-                        maximum = float(
-                            parameter['message']['expression'][:-3])/1000.0
+                        maximum = readParameterValue(parameter)
     if enabled:
         return (minimum, maximum)
     else:
@@ -239,6 +284,14 @@ for feature in features:
             translation[1, 3] += origin[1]
             translation[2, 3] += origin[2]
             worldAxisFrame = matedTransform * translation
+
+            if child in relations:
+                print(Fore.RED)
+                print('Error, the relation '+name + ' is connected a child that is already connected')
+                print('Be sure you ordered properly your relations, see:')
+                print('https://onshape-to-robot.readthedocs.io/en/latest/design.html#specifying-degrees-of-freedom')
+                print(Style.RESET_ALL)
+                exit()
 
             relations[child] = {
                 'parent': parent,
