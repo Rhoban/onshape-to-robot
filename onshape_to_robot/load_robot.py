@@ -174,13 +174,6 @@ for feature in features:
                     '       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported' + Style.RESET_ALL)
                 exit(1)
 
-            limitsStr = ''
-            if limits is not None:
-                limitsStr = '[' + str(round(limits[0], 3)) + \
-                    ': ' + str(round(limits[1], 3)) + ']'
-            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM +
-                  '('+jointType+')'+limitsStr + Style.RESET_ALL)
-
             # We compute the axis in the world frame
             matedEntity = data['matedEntities'][0]
             matedTransform = getOccurrence(
@@ -188,7 +181,16 @@ for feature in features:
             zAxis = np.array(matedEntity['matedCS']['zAxis'])
             if data['inverted']:
                 zAxis = -zAxis
+                if limits is not None:
+                    limits = (-limits[1], -limits[0])
             origin = matedEntity['matedCS']['origin']
+
+            limitsStr = ''
+            if limits is not None:
+                limitsStr = '[' + str(round(limits[0], 3)) + \
+                    ': ' + str(round(limits[1], 3)) + ']'
+            print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM +
+                  '('+jointType+')'+limitsStr + Style.RESET_ALL)
 
             translation = np.matrix(np.identity(4))
             translation[0, 3] += origin[0]
