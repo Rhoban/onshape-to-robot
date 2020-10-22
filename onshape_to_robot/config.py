@@ -69,6 +69,9 @@ config['maxSTLSize'] = configGet('maxSTLSize', 3)
 config['simplifySTLs'] = configGet('simplifySTLs', 'no', valuesList=[
                                    'no', 'visual', 'collision', 'all'])
 
+# Post-import commands to execute
+config['postImportCommands'] = configGet('postImportCommands', [])
+
 config['outputDirectory'] = robot
 config['dynamicsOverride'] = {}
 

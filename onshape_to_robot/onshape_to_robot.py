@@ -242,3 +242,9 @@ print("\n" + Style.BRIGHT + "* Writing " +
 f = open(config['outputDirectory']+'/robot.'+robot.ext, 'w')
 f.write(robot.xml)
 f.close()
+
+if len(config['postImportCommands']):
+    print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
+    for command in config['postImportCommands']:
+        print("* "+command)
+        os.system(command)

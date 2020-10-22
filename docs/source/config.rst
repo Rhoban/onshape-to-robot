@@ -251,6 +251,14 @@ meshes (and NOT dynamics), in order to retrieve simplified mesh parts from OnSha
 
 This is a way to approximate your robot with simpler meshes.
 
+``postImportCommands``
+~~~~~~~~~~~~~~~~~~~~~~
+
+*optional, default: []*
+
+This is an array of commands that will be executed after the import is done. It can be used to be sure that
+some processing scripts are run everytime you run onshape-to-robot.
+
 .. _example-config:
 
 Example ``config.json`` file
