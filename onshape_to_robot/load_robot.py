@@ -209,7 +209,7 @@ for feature in features:
             worldAxisFrame = matedTransform * translation
 
             # Resulting frame of axis, always revolving around z
-            worldAxisFrame = worldAxisFrame.dot(jointBase)
+            worldAxisFrame = worldAxisFrame.dot(jointToPart)
 
             limitsStr = ''
             if limits is not None:
