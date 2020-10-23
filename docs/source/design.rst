@@ -52,5 +52,9 @@ frames on standard output.
 Joint frames
 ------------
 
-Joint frames are positionned wherever you positionned the mate connector itself, and oriented in
-the frame of the child link.
+Joint frames are the ones you see in OnShape when you click on the joint in the tree on the left.
+Thus, they are always revolving around the z axis, or translating along the z axis, even if the
+``_inv`` suffix is added.
+
+.. image:: _static/img/zaxis.png
+    :align: center
