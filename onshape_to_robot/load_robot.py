@@ -186,7 +186,7 @@ for feature in features:
                 np.array(matedEntity['matedCS']['xAxis']),
                 np.array(matedEntity['matedCS']['yAxis']),
                 np.array(matedEntity['matedCS']['zAxis'])
-            ))
+            )).T
             
             if data['inverted']:
                 if limits is not None:
