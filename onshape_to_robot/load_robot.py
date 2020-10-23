@@ -178,12 +178,38 @@ for feature in features:
             matedEntity = data['matedEntities'][0]
             matedTransform = getOccurrence(
                 matedEntity['matedOccurrence'])['transform']
-            zAxis = np.array(matedEntity['matedCS']['zAxis'])
+            
+            # jointToPart is the (rotation only) matrix from joint to the part
+            # it is attached to
+            jointToPart = np.eye(4)
+            jointToPart[:3, :3] = np.stack((
+                np.array(matedEntity['matedCS']['xAxis']),
+                np.array(matedEntity['matedCS']['yAxis']),
+                np.array(matedEntity['matedCS']['zAxis'])
+            ))
+            
             if data['inverted']:
-                zAxis = -zAxis
                 if limits is not None:
                     limits = (-limits[1], -limits[0])
+
+                # Flipping the joint around X axis
+                flip = np.array([[1, 0, 0, 0],
+                                [0, -1, 0, 0],
+                                [0, 0, -1, 0],
+                                [0, 0,  0,  1]])
+                jointToPart = flip.dot(jointToPart)
+
+            zAxis = np.array([0, 0, 1])
+
             origin = matedEntity['matedCS']['origin']
+            translation = np.matrix(np.identity(4))
+            translation[0, 3] += origin[0]
+            translation[1, 3] += origin[1]
+            translation[2, 3] += origin[2]
+            worldAxisFrame = matedTransform * translation
+
+            # Resulting frame of axis, always revolving around z
+            worldAxisFrame = worldAxisFrame.dot(jointBase)
 
             limitsStr = ''
             if limits is not None:
@@ -191,12 +217,6 @@ for feature in features:
                     ': ' + str(round(limits[1], 3)) + ']'
             print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM +
                   '('+jointType+')'+limitsStr + Style.RESET_ALL)
-
-            translation = np.matrix(np.identity(4))
-            translation[0, 3] += origin[0]
-            translation[1, 3] += origin[1]
-            translation[2, 3] += origin[2]
-            worldAxisFrame = matedTransform * translation
 
             if child in relations:
                 print(Fore.RED)
