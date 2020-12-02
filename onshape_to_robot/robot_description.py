@@ -439,7 +439,7 @@ class RobotSDF(RobotDescription):
         self.append('<geometry>')
         self.append('<mesh><uri>file://'+stl+'</uri></mesh>')
         self.append('</geometry>')
-        if entry == 'visual':
+        if node == 'visual':
             self.append(self.material(color))
         self.append('</'+node+'>')
 
