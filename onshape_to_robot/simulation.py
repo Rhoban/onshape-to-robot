@@ -16,7 +16,7 @@ class Simulation:
     """
 
     def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True,
-                 realTime=True, panels=False, useUrdfInertia=True, dt=0.002):
+                 realTime=True, panels=False, useUrdfInertia=True, dt=0.002, physicsClient = None):
         """Creates an instance of humanoid simulation
 
         Keyword Arguments:
@@ -46,10 +46,11 @@ class Simulation:
             0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1]]
 
         # Instanciating bullet
-        if gui:
-            physicsClient = p.connect(p.GUI)
-        else:
-            physicsClient = p.connect(p.DIRECT)
+        if physicsClient is None:
+            if gui:
+                physicsClient = p.connect(p.GUI)
+            else:
+                physicsClient = p.connect(p.DIRECT)
         p.setGravity(0, 0, -9.81)
 
         # Light GUI
