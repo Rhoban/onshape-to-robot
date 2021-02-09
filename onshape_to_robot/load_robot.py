@@ -137,7 +137,7 @@ for feature in features:
 
         data = feature['featureData']
 
-        if len(data['matedEntities']) != 2 or \
+        if 'matedEntities' not in data or len(data['matedEntities']) != 2 or \
                 len(data['matedEntities'][0]['matedOccurrence']) == 0 \
                 or len(data['matedEntities'][1]['matedOccurrence']) == 0:
             continue
