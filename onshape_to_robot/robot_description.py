@@ -209,7 +209,7 @@ class RobotURDF(RobotDescription):
 
         for node in ['visual', 'collision']:
             if self._mesh[node] is not None:
-                if node == 'visual':
+                if node == 'visual' and self._color_mass > 0:
                     color = self._color / self._color_mass
                 else:
                     color = [0.5, 0.5, 0.5]
