@@ -49,6 +49,9 @@ If you want to track some frames on your robot, you can do the following:
 If you want to give it a try, you can use the ``onshape-to-robot-bullet`` in ``urdf`` mode, it will output the
 frames on standard output.
 
+Here is a `link <https://cad.onshape.com/documents/fadc07564402eea7b8d39250/w/afe354d59e4c06d33ce690d2/e/7406c5f00136aee43a4606cb>`_ of a document that can be used as a frame (note: the center cube is 5mm side, so
+you might need 2.5mm offset to center it).
+
 Joint frames
 ------------
 
