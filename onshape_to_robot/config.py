@@ -40,6 +40,7 @@ config = json.load(open(configFile))
 
 config['documentId'] = configGet('documentId')
 config['versionId'] = configGet('versionId', '')
+config['workspaceId'] = configGet('workspaceId', '')
 config['drawFrames'] = configGet('drawFrames', False)
 config['drawCollisions'] = configGet('drawCollisions', False)
 config['assemblyName'] = configGet('assemblyName', False)
@@ -132,3 +133,7 @@ if config['simplifySTLs']:
         print(Fore.BLUE + "TIP: consider installing meshlab:" + Style.RESET_ALL)
         print(Fore.BLUE + "sudo apt-get install meshlab" + Style.RESET_ALL)
         config['simplifySTLs'] = False
+
+# Checking that versionId and workspaceId are not set on same time
+if config['versionId'] != '' and config['workspaceId'] != '':
+    print(Style.RED + "You can't specify workspaceId AND versionId")

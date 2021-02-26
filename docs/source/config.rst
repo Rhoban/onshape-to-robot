@@ -68,6 +68,15 @@ created by the export.
 This can be used to specify the name of the assembly (in the Onshape document) to be used for robot export. If none
 is used, the first assembly found will be used.
 
+``workspaceId``
+~~~~~~~~~~~~~
+
+*optional, no default*
+
+This argument can be used to use a specific workspace of the document. This can be used for specific branches
+ofr your robot without making a version.
+The workspace ID can be found in URL, after the ``/w/`` part when selecting a specific version in the tree.
+
 ``versionId``
 ~~~~~~~~~~~~~
 
@@ -76,7 +85,7 @@ is used, the first assembly found will be used.
 This argument can be used to use a specific version of the document instead of the last one. The version ID
 can be found in URL, after the ``/v/`` part when selecting a specific version in the tree.
 
-If it is not specified, the very last one will be used for import.
+If it is not specified, the very last version will be used for import.
 
 
 ``drawFrames``
