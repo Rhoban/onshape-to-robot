@@ -16,7 +16,8 @@ if config['versionId'] != '':
           config['versionId']+' ...' + Style.RESET_ALL)
 elif config['workspaceId'] != '':
     print("\n" + Style.BRIGHT + '* Using configuration workspace ID ' +
-          config['workspace']+' ...' + Style.RESET_ALL)
+          config['workspaceId']+' ...' + Style.RESET_ALL)
+    workspaceId = config['workspaceId']
 else:
     print("\n" + Style.BRIGHT + '* Retrieving workspace ID ...' + Style.RESET_ALL)
     document = client.get_document(config['documentId']).json()
@@ -29,9 +30,6 @@ print("\n" + Style.BRIGHT +
 if config['versionId'] != '':
     elements = client.list_elements(
         config['documentId'], config['versionId'], 'v').json()
-elif config['workspaceId'] != '':
-    elements = client.list_elements(
-        config['documentId'], config['workspaceId'], 'w').json()
 else:
     elements = client.list_elements(config['documentId'], workspaceId).json()
 assemblyId = None
@@ -54,9 +52,6 @@ print("\n" + Style.BRIGHT + '* Retrieving assembly "' +
 if config['versionId'] != '':
     assembly = client.get_assembly(
         config['documentId'], config['versionId'], assemblyId, 'v')
-elif config['workspaceId'] != '':
-    assembly = client.get_assembly(
-        config['documentId'], config['workspaceId'], assemblyId, 'w')
 else:
     assembly = client.get_assembly(
         config['documentId'], workspaceId, assemblyId)
