@@ -114,10 +114,12 @@ def parse_csg(data, dilatation):
 
 
 def process(filename, dilatation):
-    os.system('openscad '+filename+' -o _tmp_data.csg')
-    f = open('_tmp_data.csg')
+    tmp_data = os.getcwd()+'/_tmp_data.csg'
+    os.system('openscad '+filename+' -o '+tmp_data)
+    print('openscad '+filename+' -o '+tmp_data)
+    f = open(tmp_data)
     data = f.read()
     f.close()
-    os.system('rm _tmp_data.csg')
+    os.system('rm '+tmp_data)
 
     return parse_csg(data, dilatation)
