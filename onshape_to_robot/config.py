@@ -36,6 +36,9 @@ def configGet(name, default=None, hasDefault=False, valuesList=None):
 
 
 configFile = robot+'/config.json'
+if not os.path.exists(configFile):
+    print(Fore.RED+"ERROR: The file "+configFile+" can't be found"+Style.RESET_ALL)
+    exit()
 config = json.load(open(configFile))
 
 config['documentId'] = configGet('documentId')
