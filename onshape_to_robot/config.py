@@ -49,6 +49,7 @@ config['drawCollisions'] = configGet('drawCollisions', False)
 config['assemblyName'] = configGet('assemblyName', False)
 config['outputFormat'] = configGet('outputFormat', 'urdf')
 config['useFixedLinks'] = configGet('useFixedLinks', False)
+config['configuration'] = configGet('configuration', 'default')
 
 # Using OpenSCAD for simplified geometry
 config['useScads'] = configGet('useScads', True)

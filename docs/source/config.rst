@@ -87,6 +87,15 @@ can be found in URL, after the ``/v/`` part when selecting a specific version in
 
 If it is not specified, the very last version will be used for import.
 
+``configuration``
+~~~~~~~~~~~~~~~~~
+
+*optional, default: "default"*
+
+This is the robot configuration string that will be passed to Onshape. An example of format:
+
+.. code-block:: js
+    left_motor_angle=3+radian;enable_yaw=true
 
 ``drawFrames``
 ~~~~~~~~~~~~~~

@@ -51,10 +51,10 @@ print("\n" + Style.BRIGHT + '* Retrieving assembly "' +
       assemblyName+'" with id '+assemblyId + Style.RESET_ALL)
 if config['versionId'] != '':
     assembly = client.get_assembly(
-        config['documentId'], config['versionId'], assemblyId, 'v')
+        config['documentId'], config['versionId'], assemblyId, 'v', configuration=config['configuration'])
 else:
     assembly = client.get_assembly(
-        config['documentId'], workspaceId, assemblyId)
+        config['documentId'], workspaceId, assemblyId, configuration=config['configuration'])
 
 root = assembly['rootAssembly']
 
