@@ -14,8 +14,11 @@ import os
 import json
 import hashlib
 
-def escape_slash(s):
+def double_escape_slash(s):
     return s.replace('/', '%252f')
+
+def escape_slash(s):
+    return s.replace('/', '%2f')
 
 class Client():
     '''
@@ -332,12 +335,12 @@ class Client():
 
     def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/metadata', query={'configuration': configuration})
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+double_escape_slash(partid)+'/metadata', query={'configuration': configuration})
 
         return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
 
     def part_mass_properties(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+partid+'/massproperties', query={'configuration': configuration})
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/massproperties', query={'configuration': configuration})
 
         return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
