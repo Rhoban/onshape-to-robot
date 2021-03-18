@@ -56,6 +56,10 @@ def addPart(occurrence, matrix):
     if part['suppressed']:
         return
 
+    if part['partId'] == '':
+        print(Fore.YELLOW + 'WARNING: Part '+part['name']+' has no partId'+Style.RESET_ALL)
+        return
+
     # Importing STL file for this part
     justPart, prefix = extractPartName(part['name'], part['configuration'])
 
