@@ -196,12 +196,13 @@ for feature in features:
                 if limits is not None:
                     limits = (-limits[1], -limits[0])
 
+
                 # Flipping the joint around X axis
                 flip = np.array([[1, 0, 0, 0],
                                 [0, -1, 0, 0],
                                 [0, 0, -1, 0],
                                 [0, 0,  0,  1]])
-                jointToPart = flip.dot(jointToPart)
+                jointToPart = jointToPart.dot(flip)
 
             zAxis = np.array([0, 0, 1])
 
