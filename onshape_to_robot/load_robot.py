@@ -7,6 +7,7 @@ from .config import config, configFile
 from colorama import Fore, Back, Style
 
 # OnShape API client
+workspaceId = None
 client = Client(logging=False, creds=configFile)
 client.useCollisionsConfigurations = config['useCollisionsConfigurations']
 
