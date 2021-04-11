@@ -3,6 +3,7 @@ import sys
 import os
 import commentjson as json
 from colorama import Fore, Back, Style
+from pathlib import Path
 
 config = {}
 
@@ -40,7 +41,7 @@ if not os.path.exists(configFile):
     print(Fore.RED+"ERROR: The file "+configFile+" can't be found"+Style.RESET_ALL)
     exit()
 config = json.load(open(configFile))
-
+config['robotFolder'] = Path(robot).name
 config['documentId'] = configGet('documentId')
 config['versionId'] = configGet('versionId', '')
 config['workspaceId'] = configGet('workspaceId', '')

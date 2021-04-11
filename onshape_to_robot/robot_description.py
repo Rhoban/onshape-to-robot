@@ -4,7 +4,6 @@ import math
 import uuid
 from . import stl_combine
 
-
 def rotationMatrixToEulerAngles(R):
     sy = math.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
 
@@ -62,6 +61,7 @@ class RobotDescription(object):
         self.addDummyBaseLink = False
         self.robotName = name
         self.meshDir = None
+        self.robotFolder = ''
 
     def shouldMergeSTLs(self, node):
         return self.mergeSTLs == 'all' or self.mergeSTLs == node
@@ -437,7 +437,7 @@ class RobotSDF(RobotDescription):
         self.append('<'+node+' name="'+name+'_visual">')
         self.append(pose(matrix))
         self.append('<geometry>')
-        self.append('<mesh><uri>file://'+stl+'</uri></mesh>')
+        self.append(f'<mesh><uri>model://{self.robotFolder}/{stl}</uri></mesh>')
         self.append('</geometry>')
         if node == 'visual':
             self.append(self.material(color))
