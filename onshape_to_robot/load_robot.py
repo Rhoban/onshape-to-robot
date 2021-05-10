@@ -163,15 +163,18 @@ for feature in features:
                       'ERROR: a DOF dones\'t have any name ("'+data['name']+'" should be "dof_...")' + Style.RESET_ALL)
                 exit()
 
+            limits = None
             if data['mateType'] == 'REVOLUTE' or data['mateType'] == 'CYLINDRICAL':
                 jointType = 'revolute'
-                limits = getLimits(jointType, data['name'])
+
+                if not config['ignoreLimits']:
+                    limits = getLimits(jointType, data['name'])
             elif data['mateType'] == 'SLIDER':
                 jointType = 'prismatic'
-                limits = getLimits(jointType, data['name'])
+                if not config['ignoreLimits']:
+                    limits = getLimits(jointType, data['name'])
             elif data['mateType'] == 'FASTENED':
                 jointType = 'fixed'
-                limits = None
             else:
                 print(Fore.RED + 'ERROR: "' + name +
                       '" is declared as a DOF but the mate type is '+data['mateType']+'')
@@ -202,7 +205,7 @@ for feature in features:
                                 [0, -1, 0, 0],
                                 [0, 0, -1, 0],
                                 [0, 0,  0,  1]])
-                jointToPart = flip.dot(jointToPart)
+                jointToPart = jointToPart.dot(flip)
 
             zAxis = np.array([0, 0, 1])
 
