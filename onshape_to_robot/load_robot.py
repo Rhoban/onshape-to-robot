@@ -166,9 +166,10 @@ for feature in features:
             limits = None
             if data['mateType'] == 'REVOLUTE' or data['mateType'] == 'CYLINDRICAL':
                 jointType = 'revolute'
-
                 if not config['ignoreLimits']:
                     limits = getLimits(jointType, data['name'])
+                    if limits == None:
+                        jointType = 'continuous'
             elif data['mateType'] == 'SLIDER':
                 jointType = 'prismatic'
                 if not config['ignoreLimits']:
@@ -179,7 +180,7 @@ for feature in features:
                 print(Fore.RED + 'ERROR: "' + name +
                       '" is declared as a DOF but the mate type is '+data['mateType']+'')
                 print(
-                    '       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported' + Style.RESET_ALL)
+                    '       Only REVOLUTE, CYLINDRICAL, SLIDER, CONTINUOUS and FASTENED are supported' + Style.RESET_ALL)
                 exit(1)
 
             # We compute the axis in the world frame
