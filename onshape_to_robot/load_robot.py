@@ -180,7 +180,7 @@ for feature in features:
                 print(Fore.RED + 'ERROR: "' + name +
                       '" is declared as a DOF but the mate type is '+data['mateType']+'')
                 print(
-                    '       Only REVOLUTE, CYLINDRICAL, SLIDER, and FASTENED are supported' + Style.RESET_ALL)
+                    '       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported' + Style.RESET_ALL)
                 exit(1)
 
             # We compute the axis in the world frame
