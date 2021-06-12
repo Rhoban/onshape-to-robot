@@ -57,7 +57,7 @@ rm -r urdf/{*.stl,*.part}
 
 cd launch/
 
-wget https://gist.githubusercontent.com/KamalanathanN/d62e6a1f2a067a8ee6d79ccdd26444b2/raw/68a637d1b1a363ef9bd5ad46965a09f54ed3a88d/urdf.rviz
+wget https://raw.githubusercontent.com/KamalanathanN/onshape-to-robot/master/urdf.rviz
 
 cat >./display.launch <<EOF
 <launch>
