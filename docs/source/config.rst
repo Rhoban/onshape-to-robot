@@ -308,9 +308,9 @@ Here is an example of configuration:
         // field for example)
         "noDynamics": false,
         // Should the STLs of the same link be merged?
-        "mergeSTLs": false,
+        "mergeSTLs": "no",
         // Should we simplify STLs files?
-        "simplifySTLs": false,
+        "simplifySTLs": "no",
         // Maximum size (M) of STL files to run simplification (required meshlab)
         "maxSTLSize": 3,
 
