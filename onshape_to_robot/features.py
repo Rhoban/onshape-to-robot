@@ -27,8 +27,11 @@ def init(client, config, root, workspaceId, assemblyId):
 
 def readExpression(expression):
     # Expression can itself be a variable from configuration
+    # XXX: This doesn't handle all expression, only values and variables
     if expression[0] == '#':
         expression = configuration_parameters[expression[1:]]
+    if expression[0:2] == '-#':
+        expression = '-'+configuration_parameters[expression[2:]]
 
     parts = expression.split(' ')
 
@@ -46,20 +49,29 @@ def readExpression(expression):
         exit()
 
 
-def readParameterValue(parameter):
+def readParameterValue(parameter, name):
     # This is an expression
     if parameter['typeName'] == 'BTMParameterNullableQuantity':
         return readExpression(parameter['message']['expression'])
     if parameter['typeName'] == 'BTMParameterConfigured':
         message = parameter['message']
-        parameterValue = (
-            configuration_parameters[message['configurationParameterId']] == 'true')
+        parameterValue = configuration_parameters[message['configurationParameterId']]
 
         for value in message['values']:
-            if value['message']['booleanValue'] == parameterValue:
-                return readExpression(value['message']['value']['message']['expression'])
+            if value['typeName'] == 'BTMConfiguredValueByBoolean':
+                booleanValue = (parameterValue == 'true')
+                if value['message']['booleanValue'] == booleanValue:
+                    return readExpression(value['message']['value']['message']['expression'])
+            elif value['typeName'] == 'BTMConfiguredValueByEnum':
+                if value['message']['enumValue'] == parameterValue:
+                    return readExpression(value['message']['value']['message']['expression'])
+            else:
+                print(Fore.RED+"Can't read value of parameter "+name+" configured with "+value['typeName']+Style.RESET_ALL)
+                exit()
+
+        print(Fore.RED+"Could not find the value for "+name+Style.RESET_ALL)
     else:
-        print(Fore.RED+'Unknown feature type: ' +
+        print(Fore.RED+'Unknown feature type for '+name+': ' +
               parameter['typeName']+Style.RESET_ALL)
         exit()
 
@@ -79,14 +91,14 @@ def getLimits(jointType, name):
 
                 if jointType == 'revolute':
                     if parameter['message']['parameterId'] == 'limitAxialZMin':
-                        minimum = readParameterValue(parameter)
+                        minimum = readParameterValue(parameter, name)
                     if parameter['message']['parameterId'] == 'limitAxialZMax':
-                        maximum = readParameterValue(parameter)
+                        maximum = readParameterValue(parameter, name)
                 elif jointType == 'prismatic':
                     if parameter['message']['parameterId'] == 'limitZMin':
-                        minimum = readParameterValue(parameter)
+                        minimum = readParameterValue(parameter, name)
                     if parameter['message']['parameterId'] == 'limitZMax':
-                        maximum = readParameterValue(parameter)
+                        maximum = readParameterValue(parameter, name)
     if enabled:
         return (minimum, maximum)
     else:
