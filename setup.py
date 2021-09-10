@@ -5,7 +5,7 @@ with open("README-pypi.md", "r") as fh:
 
 setuptools.setup(
     name="onshape-to-robot",
-    version="0.3.12",
+    version="0.3.13",
     author="Rhoban team",
     author_email="team@rhoban.com",
     description="Converting OnShape assembly to robot definition (SDF or URDF) through OnShape API ",
