@@ -9,7 +9,7 @@ config = {}
 # Loading configuration & parameters
 if len(sys.argv) <= 1:
     print(Fore.RED +
-          'ERROR: usage: onshape-to-robot.py [robot_directory]' + Style.RESET_ALL)
+          'ERROR: usage: onshape-to-robot {robot_directory}' + Style.RESET_ALL)
     print("Read documentation at https://onshape-to-robot.readthedocs.io/")
     exit("")
 robot = sys.argv[1]
