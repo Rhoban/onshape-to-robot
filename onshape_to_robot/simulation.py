@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 from transforms3d.quaternions import mat2quat, quat2mat
 import math
 import sys
