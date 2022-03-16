@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import os
-import onshape_to_robot.onshape_api as api
+from onshape_to_robot.clear_cache import clear_cache
 
-cacheDir = os.path.dirname(api.__file__)+'/cache/'
-print("Cleaning cache directory ("+cacheDir+")")
-os.system("rm -rf "+cacheDir+"/*")
+if __name__ == "__main__":
+    clear_cache()

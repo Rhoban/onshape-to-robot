@@ -13,11 +13,11 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/rhoban/onshape-to-robot/",
     packages=setuptools.find_packages(),
-    scripts=["onshape-to-robot-clear-cache"],
     entry_points={
         "console_scripts": [
             "onshape-to-robot=onshape_to_robot:onshape_to_robot",
             "onshape-to-robot-bullet=onshape_to_robot:bullet",
+            "onshape-to-robot-clear-cache=onshape_to_robot:clear_cache",
             "onshape-to-robot-edit-shape=onshape_to_robot:edit_shape",
             "onshape-to-robot-pure-sketch=onshape_to_robot:pure_sketch",
         ]
