@@ -267,7 +267,7 @@ class Client():
         '''
 
         req_headers = {
-            'Accept': 'application/vnd.onshape.v1+octet-stream'
+            'Accept': '*/*'
         }
         return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/stl', headers=req_headers)
 
@@ -327,7 +327,7 @@ class Client():
     
         def invoke():
             req_headers = {
-                'Accept': 'application/vnd.onshape.v1+octet-stream'
+                'Accept': '*/*'
             }
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/stl', query={'mode': 'binary', 'units': 'meter', 'configuration': configuration}, headers=req_headers)
 
