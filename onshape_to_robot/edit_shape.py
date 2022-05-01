@@ -15,8 +15,7 @@ else:
         scad += "// cube([10, 10, 10], center=true);\n"
         scad += "// cylinder(r=10, h=10, center=true);\n"
         scad += "// sphere(10);\n"
-        f = open(fileName, 'w')
-        f.write(scad)
-        f.close()
+        with open(fileName, "w", encoding="utf-8") as stream:
+            stream.write(scad)
     directory = os.path.dirname(fileName)
     os.system('cd '+directory+'; openscad '+os.path.basename(fileName))

@@ -86,14 +86,12 @@ def addPart(occurrence, matrix):
             shortend_configuration = part['configuration']
         stl = client.part_studio_stl_m(part['documentId'], part['documentMicroversion'], part['elementId'],
                                        part['partId'], shortend_configuration)
-        f = open(config['outputDirectory']+'/'+stlFile, 'wb')
-        f.write(stl)
-        f.close()
+        with open(config['outputDirectory']+'/'+stlFile, 'wb', encoding="utf-8") as stream:
+            stream.write(stl)
 
         stlMetadata = prefix.replace('/', '_')+'.part'
-        f = open(config['outputDirectory']+'/'+stlMetadata, 'wb')
-        f.write(json.dumps(part).encode('UTF-8'))
-        f.close()
+        with open(config['outputDirectory']+'/'+stlMetadata, 'wb', encoding="utf-8") as stream:
+            stream.write(json.dumps(part).encode('UTF-8'))
 
         stlFile = config['outputDirectory']+'/'+stlFile
 
@@ -242,9 +240,8 @@ robot.finalize()
 
 print("\n" + Style.BRIGHT + "* Writing " +
       robot.ext.upper()+" file" + Style.RESET_ALL)
-f = open(config['outputDirectory']+'/robot.'+robot.ext, 'w')
-f.write(robot.xml)
-f.close()
+with open(config['outputDirectory']+'/robot.'+robot.ext, 'w', encoding="utf-8") as stream:
+    stream.write(robot.xml)
 
 if len(config['postImportCommands']):
     print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)

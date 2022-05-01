@@ -121,14 +121,12 @@ class Client():
             os.mkdir(dirName)
         fileName = dirName+'/'+fileName
         if os.path.exists(fileName):
-            f = open(fileName, 'rb')
-            result = f.read()
-            f.close()
+            with open(fileName, "rb", encoding="utf-8") as stream:
+                result = stream.read()
         else:
             result = callback().content
-            f = open(fileName, 'wb')
-            f.write(result)
-            f.close()
+            with open(fileName, 'wb') as stream:
+                stream.write(result)
         if isString and type(result) == bytes:
             result = result.decode('utf-8')
         return result
@@ -237,7 +235,8 @@ class Client():
         mimetype = mimetypes.guess_type(filepath)[0]
         encoded_filename = os.path.basename(filepath)
         file_content_length = str(os.path.getsize(filepath))
-        blob = open(filepath)
+        with open(filepath, "r", encoding="utf-8") as stream:
+            blob = stream.read()
 
         req_headers = {
             'Content-Type': 'multipart/form-data; boundary="%s"' % boundary_key
@@ -248,7 +247,7 @@ class Client():
         payload += '--' + boundary_key + '\r\nContent-Disposition: form-data; name="fileContentLength"\r\n\r\n' + file_content_length + '\r\n'
         payload += '--' + boundary_key + '\r\nContent-Disposition: form-data; name="file"; filename="' + encoded_filename + '"\r\n'
         payload += 'Content-Type: ' + mimetype + '\r\n\r\n'
-        payload += blob.read()
+        payload += blob
         payload += '\r\n--' + boundary_key + '--'
 
         return self._api.request('post', '/api/blobelements/d/' + did + '/w/' + wid, headers=req_headers, body=payload)

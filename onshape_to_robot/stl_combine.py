@@ -61,8 +61,8 @@ filter_script_mlx = """<!DOCTYPE FilterScript>
 
 
 def create_tmp_filter_file(filename='filter_file_tmp.mlx', reduction=0.9):
-    with open('/tmp/' + filename, 'w') as f:
-        f.write(filter_script_mlx.replace('%reduction%', str(reduction)))
+    with open('/tmp/' + filename, 'w', encoding="utf-8") as stream:
+        stream.write(filter_script_mlx.replace('%reduction%', str(reduction)))
     return '/tmp/' + filename
 
 

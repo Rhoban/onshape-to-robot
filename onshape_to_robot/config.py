@@ -39,7 +39,8 @@ configFile = robot+'/config.json'
 if not os.path.exists(configFile):
     print(Fore.RED+"ERROR: The file "+configFile+" can't be found"+Style.RESET_ALL)
     exit()
-config = json.load(open(configFile))
+with open(configFile, "r", encoding="utf8") as stream:
+    config = json.load(stream)
 
 config['documentId'] = configGet('documentId')
 config['versionId'] = configGet('versionId', '')
@@ -99,8 +100,8 @@ else:
 if additionalFileName == '':
     config['additionalXML'] = ''
 else:
-    with open(robot + additionalFileName, 'r') as additionalXMLFile:
-        config['additionalXML'] = additionalXMLFile.read()
+    with open(robot + additionalFileName, "r", encoding="utf-8") as stream:
+        config['additionalXML'] = stream.read()
 
 
 # Creating dynamics override array

@@ -24,8 +24,8 @@ else:
     parts[-1] = 'scad'
     scadFileName = '.'.join(parts)
 
-    f = open(partFileName, 'r')
-    part = json.load(f)
+    with open(partFileName, 'r', encoding="utf-8") as stream:
+        part = json.load(stream)
     partid = part['partId']
     result = client.get_sketches(part['documentId'], part['documentMicroversion'], part['elementId'], part['configuration'])
 
@@ -108,14 +108,10 @@ else:
             scad += "}\n"
             scad += "}\n"
 
-        f = open(scadFileName, 'w')
-        f.write(scad)
-        f.close()
+        with open(scadFileName, 'w', encoding="utf-8") as stream:
+            stream.write(scad)
 
         directory = os.path.dirname(fileName)
         os.system('cd '+directory+'; openscad '+os.path.basename(scadFileName))
     else:
         print(Fore.RED + "ERROR: Can't find pure shape sketch in this part" + Style.RESET_ALL)
-
-
-    

@@ -1,7 +1,7 @@
 import setuptools
 
-with open("README-pypi.md", "r") as fh:
-    long_description = fh.read()
+with open("README-pypi.md", "r", encoding="utf-8") as stream:
+    long_description = stream.read()
 
 setuptools.setup(
     name="onshape-to-robot",
