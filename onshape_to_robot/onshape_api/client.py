@@ -13,6 +13,7 @@ import string
 import os
 import json
 import hashlib
+from pathlib import Path
 
 def double_escape_slash(s):
     return s.replace('/', '%252f')
@@ -47,6 +48,14 @@ class Client():
         self._stack = stack
         self._api = Onshape(stack=stack, logging=logging, creds=creds)
         self.useCollisionsConfigurations = True
+
+    @staticmethod
+    def get_cache_path() -> Path:
+        """Return the path to the user cache."""
+        path = Path.home() / ".cache" / "onshape-to-robot"
+        path.mkdir(parents=True, exist_ok=True)
+        return path
+
 
     def new_document(self, name='Test Document', owner_type=0, public=False):
         '''
@@ -116,12 +125,10 @@ class Client():
         if type(key) == tuple:
             key = '_'.join(list(key))
         fileName = method+'__'+key
-        dirName = os.path.dirname(os.path.abspath(__file__))+'/cache'
-        if not os.path.exists(dirName):
-            os.mkdir(dirName)
-        fileName = dirName+'/'+fileName
+        dirName = self.get_cache_path()
+        fileName = dirName / fileName
         if os.path.exists(fileName):
-            with open(fileName, "rb", encoding="utf-8") as stream:
+            with open(fileName, "rb") as stream:
                 result = stream.read()
         else:
             result = callback().content
