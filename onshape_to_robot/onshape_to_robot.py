@@ -6,6 +6,7 @@ import sys
 from sys import exit
 import os
 import hashlib
+from pathlib import Path
 from . import csg
 from .robot_description import RobotURDF, RobotSDF
 
@@ -242,8 +243,8 @@ def main():
 
     print("\n" + Style.BRIGHT + "* Writing " +
         robot.ext.upper()+" file" + Style.RESET_ALL)
-    with open(config['outputDirectory']+'/robot.'+robot.ext, 'w', encoding="utf-8") as stream:
-        stream.write(robot.xml)
+    filepath = Path(config['outputDirectory']) / "robot.{}".format(robot.ext)
+    robot.write(filepath)
 
     if len(config['postImportCommands']):
         print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)

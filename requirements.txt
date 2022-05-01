@@ -1,5 +1,7 @@
+bs4
 colorama
 commentjson
+lxml
 numpy
 numpy-stl
 pybullet

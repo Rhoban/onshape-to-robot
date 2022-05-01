@@ -2,8 +2,14 @@ import numpy as np
 import os
 import math
 import uuid
-from . import stl_combine
 
+from pathlib import Path
+from xml.etree import ElementTree
+from xml.dom import minidom
+
+from bs4 import BeautifulSoup
+
+from . import stl_combine
 
 def rotationMatrixToEulerAngles(R):
     sy = math.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
@@ -148,6 +154,19 @@ class RobotDescription(object):
                 (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
 
         return mass, com, inertia
+
+    def write(self, filepath: Path) -> None:
+        """Write the robot description to the passed filepath.
+
+        Args:
+            filepath: The path to the robot description to write.
+
+        """
+        xml = BeautifulSoup(self.xml, "xml").prettify()
+        element = ElementTree.fromstring(xml)
+        tree = ElementTree.ElementTree(element)
+        print("Writing robot description to {}".format(filepath))
+        tree.write(filepath, encoding="utf-8")
 
 
 class RobotURDF(RobotDescription):
