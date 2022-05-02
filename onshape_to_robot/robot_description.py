@@ -257,7 +257,7 @@ class RobotURDF(RobotDescription):
         self.append(origin(matrix))
         self.append('<geometry>')
         self.append('<mesh filename="package://' +
-                    self.packageName + stl+'"/>')
+                    self.packageName.strip("/") + "/" + stl+'"/>')
         self.append('</geometry>')
         self.append('<material name="'+name+'_material">')
         self.append('<color rgba="%g %g %g 1.0"/>' %
