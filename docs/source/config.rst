@@ -69,7 +69,7 @@ This can be used to specify the name of the assembly (in the Onshape document) t
 is used, the first assembly found will be used.
 
 ``workspaceId``
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 *optional, no default*
 
@@ -95,6 +95,7 @@ If it is not specified, the very last version will be used for import.
 This is the robot configuration string that will be passed to Onshape. An example of format:
 
 .. code-block:: js
+
     left_motor_angle=3+radian;enable_yaw=true
 
 ``drawFrames``
@@ -172,7 +173,7 @@ This can be a list of parts that you want to be ignored during the export.
 Note: the dynamics of the part will not be ignored, but the visual and collision aspect will.
 
 ``whitelist``
-~~~~~~~~~~
+~~~~~~~~~~~~~
 
 *optional, default: None*
 
@@ -180,7 +181,7 @@ This can be used as the opposed of ``ignore``, to import only some items listed 
 (all items not listed in ``whitelist`` will be ignored if it is not ``None``)
 
 ``color``
-~~~~~~~~~~
+~~~~~~~~~
 
 *optional, default: None*
 
@@ -216,7 +217,7 @@ Specifies the robot name.
 Specifies a file with XML content that is inserted into the URDF/SDF at the end of the file. Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
 
 ``useFixedLinks``
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 *optional, default: false*
 
@@ -236,11 +237,11 @@ This can be used to merge STLs file of the same ``link`` into one unique STL. It
 **Note: this will only merge visual for visual, see ``mergeSTLsCollisions``**
 
 ``mergeSTLsCollisions``
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 *optional, default: false*
 
-STLs used for collisions will also be merged if this flag is ``true``. Note that 
+STLs used for collisions will also be merged if this flag is ``true``. Note that
 
 ``simplifySTLs``
 ~~~~~~~~~~~~~~~~
@@ -318,7 +319,7 @@ Here is an example of configuration:
         // overriden for specific joints
         "jointMaxEffort": {
             "default": 1.5,
-            "head_pitch": 0.5   
+            "head_pitch": 0.5
         },
         "jointMaxVelocity": 22,
 
