@@ -35,6 +35,7 @@ robot.robotName = config['robotName']
 robot.additionalXML = config['additionalXML']
 robot.useFixedLinks = config['useFixedLinks']
 robot.meshDir = config['outputDirectory']
+robot.robotFolder = config['robotFolder']
 
 
 def partIsIgnore(name):
