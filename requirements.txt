@@ -1,0 +1,9 @@
+colorama
+commentjson
+numpy
+numpy-stl
+pybullet
+requests
+sphinx
+sphinx-rtd-theme
+transforms3d
