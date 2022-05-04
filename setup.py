@@ -1,7 +1,7 @@
 import setuptools
 
-with open("README-pypi.md", "r") as fh:
-    long_description = fh.read()
+with open("README-pypi.md", "r", encoding="utf-8") as stream:
+    long_description = stream.read()
 
 setuptools.setup(
     name="onshape-to-robot",
@@ -15,11 +15,11 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     entry_points={
         "console_scripts": [
-            "onshape-to-robot=onshape_to_robot:onshape_to_robot",
-            "onshape-to-robot-bullet=onshape_to_robot:bullet",
-            "onshape-to-robot-clear-cache=onshape_to_robot:clear_cache",
-            "onshape-to-robot-edit-shape=onshape_to_robot:edit_shape",
-            "onshape-to-robot-pure-sketch=onshape_to_robot:pure_sketch",
+            "onshape-to-robot=onshape_to_robot:onshape_to_robot.main",
+            "onshape-to-robot-bullet=onshape_to_robot:bullet.main",
+            "onshape-to-robot-clear-cache=onshape_to_robot:clear_cache.main",
+            "onshape-to-robot-edit-shape=onshape_to_robot:edit_shape.main",
+            "onshape-to-robot-pure-sketch=onshape_to_robot:pure_sketch.main",
         ]
     },
     classifiers=[

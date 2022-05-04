@@ -1,17 +1,15 @@
 """Clear the onshape-to-robot cache."""
-import os
+import shutil
 
-from . import onshape_api as api
-
-# Directory used for cache.
-CACHE_DIR = os.path.join(os.path.dirname(api.__file__), "cache")
+from .onshape_api.client import Client
 
 
-def clear_cache():
+def main():
     """Clear the onshape-to-robot cache."""
-    print("Cleaning cache directory ({})".format(CACHE_DIR))
-    os.system("rm -rf {}/*".format(CACHE_DIR))
+    cache_dir = Client.get_cache_path()
+    print("Removing cache directory: {}".format(cache_dir))
+    shutil.rmtree(cache_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":
-    clear_cache()
+    main()
