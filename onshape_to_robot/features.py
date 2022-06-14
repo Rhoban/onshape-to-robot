@@ -38,7 +38,7 @@ def readExpression(expression):
     # Checking the unit, returning only radians and meters
     if parts[1] == 'deg':
         return math.radians(float(parts[0]))
-    elif parts[1] == 'radian':
+    elif parts[1] in ['radian', 'rad']:
         return float(parts[0])
     elif parts[1] == 'mm':
         return float(parts[0])/1000.0
