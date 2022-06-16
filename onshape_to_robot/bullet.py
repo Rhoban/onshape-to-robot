@@ -56,8 +56,8 @@ def main():
                 print("- x=%f\ty=%f\tz=%f" % frames[frame][0])
                 print("- r=%f\tp=%f\ty=%f" % frames[frame][1])
                 print("")
-                print("Center of mass:")
-                print(sim.getCenterOfMassPosition())
+            print("Center of mass:")
+            print(sim.getCenterOfMassPosition())
 
         sim.tick()
 
