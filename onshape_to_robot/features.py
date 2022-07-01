@@ -44,6 +44,8 @@ def readExpression(expression):
         return float(parts[0])/1000.0
     elif parts[1] == 'm':
         return float(parts[0])
+    elif parts[1] == 'in':
+        return float(parts[0])*0.0254
     else:
         print(Fore.RED + 'Unknown unit: '+parts[1] + Style.RESET_ALL)
         exit()
