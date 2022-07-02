@@ -259,10 +259,11 @@ class RobotURDF(RobotDescription):
         self.append('<mesh filename="package://' +
                     self.packageName.strip("/") + "/" + stl+'"/>')
         self.append('</geometry>')
-        self.append('<material name="'+name+'_material">')
-        self.append('<color rgba="%g %g %g 1.0"/>' %
-                    (color[0], color[1], color[2]))
-        self.append('</material>')
+        if node == "visual":
+            self.append('<material name="'+name+'_material">')
+            self.append('<color rgba="%g %g %g 1.0"/>' %
+                        (color[0], color[1], color[2]))
+            self.append('</material>')
         self.append('</'+node+'>')
 
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
