@@ -109,9 +109,6 @@ class RobotDescription(object):
         # Expressing inertia in the link frame
         inertia = R*I*R.T
 
-        print(matrix)
-        print(inertia)
-
         self._dynamics.append({
             'mass': mass,
             'com': com,
