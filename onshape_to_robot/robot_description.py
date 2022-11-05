@@ -101,7 +101,6 @@ class RobotDescription(object):
     def addLinkDynamics(self, matrix, mass, com, inertia):
         # Inertia
         I = np.matrix(np.reshape(inertia[:9], (3, 3)))
-        print(I)
         R = matrix[:3, :3]
         # Expressing COM in the link frame
         com = np.array(
