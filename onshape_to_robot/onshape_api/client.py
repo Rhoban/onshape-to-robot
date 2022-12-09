@@ -344,6 +344,7 @@ class Client():
 
     def part_mass_properties(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/massproperties', query={'configuration': configuration})
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/massproperties', query={'configuration': configuration, 'useMassPropertyOverrides': True})
 
+        print(partid)
         return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
