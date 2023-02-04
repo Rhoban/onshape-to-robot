@@ -338,7 +338,7 @@ class Client():
 
     def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/metadata', query={'configuration': configuration})
+            return self._api.request('get', '/api/metadata/d/' + did + '/m/' + mid + '/e/' + eid + '/p/'+escape_slash(partid), query={'configuration': configuration})
 
         return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
 

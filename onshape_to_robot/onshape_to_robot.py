@@ -111,12 +111,15 @@ def main():
         else:
             metadata = client.part_get_metadata(
                 part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
-            if 'appearance' in metadata:
-                colors = metadata['appearance']['color']
-                color = np.array(
-                    [colors['red'], colors['green'], colors['blue']])/255.0
-            else:
-                color = [0.5, 0.5, 0.5]
+
+            color = [0.5, 0.5, 0.5]
+
+            # XXX: There must be a better way to retrieve the part color
+            for entry in metadata['properties']:
+                if 'value' in entry and type(entry['value']) is dict and 'color' in entry['value']:
+                    rgb = entry['value']['color']
+                    color = np.array(
+                        [rgb['red'], rgb['green'], rgb['blue']])/255.0
 
         # Obtain mass properties about that part
         if config['noDynamics']:
