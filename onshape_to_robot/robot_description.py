@@ -23,7 +23,7 @@ def rotationMatrixToEulerAngles(R):
 
 
 def origin(matrix):
-    urdf = '<origin xyz="%g %g %g" rpy="%g %g %g" />'
+    urdf = '<origin xyz="%.20g %.20g %.20g" rpy="%.20g %.20g %.20g" />'
     x = matrix[0, 3]
     y = matrix[1, 3]
     z = matrix[2, 3]
@@ -33,7 +33,7 @@ def origin(matrix):
 
 
 def pose(matrix, frame=''):
-    sdf = '<pose>%g %g %g %g %g %g</pose>'
+    sdf = '<pose>%.20g %.20g %.20g %.20g %.20g %.20g</pose>'
     x = matrix[0, 3]
     y = matrix[1, 3]
     z = matrix[2, 3]
@@ -222,10 +222,10 @@ class RobotURDF(RobotDescription):
                 self.addSTL(np.identity(4), filename, color, self._link_name, node)
 
         self.append('<inertial>')
-        self.append('<origin xyz="%g %g %g" rpy="0 0 0"/>' %
+        self.append('<origin xyz="%.20g %.20g %.20g" rpy="0 0 0"/>' %
                     (com[0], com[1], com[2]))
-        self.append('<mass value="%g" />' % mass)
-        self.append('<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />' %
+        self.append('<mass value="%.20g" />' % mass)
+        self.append('<inertia ixx="%.20g" ixy="%.20g"  ixz="%.20g" iyy="%.20g" iyz="%.20g" izz="%.20g" />' %
                     (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
         self.append('</inertial>')
 
@@ -260,7 +260,7 @@ class RobotURDF(RobotDescription):
                     self.packageName.strip("/") + "/" + stl+'"/>')
         self.append('</geometry>')
         self.append('<material name="'+name+'_material">')
-        self.append('<color rgba="%g %g %g 1.0"/>' %
+        self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
                     (color[0], color[1], color[2]))
         self.append('</material>')
         self.append('</'+node+'>')
@@ -297,19 +297,19 @@ class RobotURDF(RobotDescription):
                         self.append(origin(matrix*shape['transform']))
                         self.append('<geometry>')
                         if shape['type'] == 'cube':
-                            self.append('<box size="%g %g %g" />' %
+                            self.append('<box size="%.20g %.20g %.20g" />' %
                                         tuple(shape['parameters']))
                         if shape['type'] == 'cylinder':
                             self.append(
-                                '<cylinder length="%g" radius="%g" />' % tuple(shape['parameters']))
+                                '<cylinder length="%.20g" radius="%.20g" />' % tuple(shape['parameters']))
                         if shape['type'] == 'sphere':
-                            self.append('<sphere radius="%g" />' %
+                            self.append('<sphere radius="%.20g" />' %
                                         shape['parameters'])
                         self.append('</geometry>')
 
                         if entry == 'visual':
                             self.append('<material name="'+name+'_material">')
-                            self.append('<color rgba="%g %g %g 1.0"/>' %
+                            self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
                                         (color[0], color[1], color[2]))
                             self.append('</material>')
                         self.append('</'+entry+'>')
@@ -321,11 +321,11 @@ class RobotURDF(RobotDescription):
         self.append(origin(transform))
         self.append('<parent link="'+linkFrom+'" />')
         self.append('<child link="'+linkTo+'" />')
-        self.append('<axis xyz="%g %g %g"/>' % tuple(zAxis))
+        self.append('<axis xyz="%.20g %.20g %.20g"/>' % tuple(zAxis))
         lowerUpperLimits = ''
         if jointLimits is not None:
-            lowerUpperLimits = 'lower="%g" upper="%g"' % jointLimits
-        self.append('<limit effort="%g" velocity="%g" %s/>' %
+            lowerUpperLimits = 'lower="%.20g" upper="%.20g"' % jointLimits
+        self.append('<limit effort="%.20g" velocity="%.20g" %s/>' %
                     (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), lowerUpperLimits))
         self.append('<joint_properties friction="0.0"/>')
         self.append('</joint>')
@@ -394,9 +394,9 @@ class RobotSDF(RobotDescription):
 
         self.append('<inertial>')
         self.append('<pose frame="'+self._link_name +
-                    '_frame">%g %g %g 0 0 0</pose>' % (com[0], com[1], com[2]))
-        self.append('<mass>%g</mass>' % mass)
-        self.append('<inertia><ixx>%g</ixx><ixy>%g</ixy><ixz>%g</ixz><iyy>%g</iyy><iyz>%g</iyz><izz>%g</izz></inertia>' %
+                    '_frame">%.20g %.20g %.20g 0 0 0</pose>' % (com[0], com[1], com[2]))
+        self.append('<mass>%.20g</mass>' % mass)
+        self.append('<inertia><ixx>%.20g</ixx><ixy>%.20g</ixy><ixz>%.20g</ixz><iyy>%.20g</iyy><iyz>%.20g</iyz><izz>%.20g</izz></inertia>' %
                     (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
         self.append('</inertial>')
 
@@ -425,8 +425,8 @@ class RobotSDF(RobotDescription):
 
     def material(self, color):
         m = '<material>'
-        m += '<ambient>%g %g %g 1</ambient>' % (color[0], color[1], color[2])
-        m += '<diffuse>%g %g %g 1</diffuse>' % (color[0], color[1], color[2])
+        m += '<ambient>%.20g %.20g %.20g 1</ambient>' % (color[0], color[1], color[2])
+        m += '<diffuse>%.20g %.20g %.20g 1</diffuse>' % (color[0], color[1], color[2])
         m += '<specular>0.1 0.1 0.1 1</specular>'
         m += '<emissive>0 0 0 0</emissive>'
         m += '</material>'
@@ -482,14 +482,14 @@ class RobotSDF(RobotDescription):
                         self.append(pose(matrix*shape['transform']))
                         self.append('<geometry>')
                         if shape['type'] == 'cube':
-                            self.append('<box><size>%g %g %g</size></box>' %
+                            self.append('<box><size>%.20g %.20g %.20g</size></box>' %
                                         tuple(shape['parameters']))
                         if shape['type'] == 'cylinder':
                             self.append(
-                                '<cylinder><length>%g</length><radius>%g</radius></cylinder>' % tuple(shape['parameters']))
+                                '<cylinder><length>%.20g</length><radius>%.20g</radius></cylinder>' % tuple(shape['parameters']))
                         if shape['type'] == 'sphere':
                             self.append(
-                                '<sphere><radius>%g</radius></sphere>' % shape['parameters'])
+                                '<sphere><radius>%.20g</radius></sphere>' % shape['parameters'])
                         self.append('</geometry>')
 
                         if entry == 'visual':
@@ -504,11 +504,11 @@ class RobotSDF(RobotDescription):
         self.append('<parent>'+linkFrom+'</parent>')
         self.append('<child>'+linkTo+'</child>')
         self.append('<axis>')
-        self.append('<xyz>%g %g %g</xyz>' % tuple(zAxis))
+        self.append('<xyz>%.20g %.20g %.20g</xyz>' % tuple(zAxis))
         lowerUpperLimits = ''
         if jointLimits is not None:
-            lowerUpperLimits = '<lower>%g</lower><upper>%g</upper>' % jointLimits
-        self.append('<limit><effort>%g</effort><velocity>%g</velocity>%s</limit>' %
+            lowerUpperLimits = '<lower>%.20g</lower><upper>%.20g</upper>' % jointLimits
+        self.append('<limit><effort>%.20g</effort><velocity>%.20g</velocity>%s</limit>' %
                     (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), lowerUpperLimits))
         self.append('</axis>')
         self.append('</joint>')
