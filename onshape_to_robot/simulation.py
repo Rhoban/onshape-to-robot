@@ -463,6 +463,36 @@ class Simulation:
                     total += contact[9]
         return total
 
+    def addConstraint(self, frameA, frameB, constraint = p.JOINT_POINT2POINT):
+        """Adds a constraint between two given frames
+
+        Args:
+            frameA (str): frame A name
+            frameB (str): frame A name
+            constraint (int, optional): pyBullet joint type. Defaults to p.JOINT_POINT2POINT.
+
+        Returns:
+            int: returns from pybullet createConstraint
+        """        
+        infosA = p.getJointInfo(self.robot, self.frames[frameA])
+        infosB = p.getJointInfo(self.robot, self.frames[frameB])
+        
+        posA = infosA[14]
+        parentA = infosA[16]
+        posB = infosB[14]
+        parentB = infosB[16]
+        
+        return p.createConstraint(
+            self.robot,
+            parentA,
+            self.robot,
+            parentB,
+            constraint,
+            [0.0, 0.0, 1.0],
+            posA,
+            posB,
+        )
+
     def execute(self):
         """Executes the simulaiton infinitely (blocks)"""
         while True:
