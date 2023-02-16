@@ -123,7 +123,13 @@ class Client():
             key = '_'.join(list(key))
         fileName = method+'__'+key
         dirName = self.get_cache_path()
+
+        m = hashlib.sha1()
+        m.update(fileName.encode('utf-8'))
+        fileName = m.hexdigest()
+        
         fileName = dirName / fileName
+
         if os.path.exists(fileName):
             with open(fileName, "rb") as stream:
                 result = stream.read()
