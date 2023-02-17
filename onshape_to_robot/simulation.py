@@ -90,6 +90,7 @@ class Simulation:
 
         # Retrieving joints and frames
         self.joints = {}
+        self.passive_joints = {}
         self.jointsInfos = {}
         self.jointsIndexes = {}
         self.frames = {}
@@ -100,7 +101,10 @@ class Simulation:
         for k in range(p.getNumJoints(self.robot)):
             jointInfo = p.getJointInfo(self.robot, k)
             name = jointInfo[1].decode('utf-8')
-            if not name.endswith('_fixing') and not name.endswith('_passive'):
+            
+            if name.endswith('_passive'):
+                self.passive_joints[name] = k
+            elif not name.endswith('_fixing'):
                 if '_frame' in name:
                     self.frames[name] = k
                 else:
@@ -307,6 +311,9 @@ class Simulation:
         """
         applied = {}
 
+        for name in self.passive_joints:
+            p.setJointMotorControl2(self.robot, self.passive_joints[name], controlMode=p.VELOCITY_CONTROL, force=0)
+
         for name in joints.keys():
             if name in self.joints:
                 if name.endswith('_speed'):
@@ -477,21 +484,20 @@ class Simulation:
         infosA = p.getJointInfo(self.robot, self.frames[frameA])
         infosB = p.getJointInfo(self.robot, self.frames[frameB])
         
-        posA = infosA[14]
-        parentA = infosA[16]
-        posB = infosB[14]
-        parentB = infosB[16]
-        
-        return p.createConstraint(
+        c =  p.createConstraint(
             self.robot,
-            parentA,
+            infosA[16],
             self.robot,
-            parentB,
+            infosB[16],
             constraint,
             [0.0, 0.0, 1.0],
-            posA,
-            posB,
+            infosA[14],
+            infosB[14],
         )
+
+        p.changeConstraint(c, maxForce=1e6)
+
+        return c
 
     def execute(self):
         """Executes the simulaiton infinitely (blocks)"""
