@@ -312,7 +312,7 @@ class Simulation:
         applied = {}
 
         for name in self.passive_joints:
-            p.setJointMotorControl2(self.robot, self.passive_joints[name], controlMode=p.VELOCITY_CONTROL, force=0)
+            p.setJointMotorControl2(self.robot, self.passive_joints[name], controlMode=p.VELOCITY_CONTROL, force=1)
 
         for name in joints.keys():
             if name in self.joints:
@@ -483,6 +483,18 @@ class Simulation:
         """        
         infosA = p.getJointInfo(self.robot, self.frames[frameA])
         infosB = p.getJointInfo(self.robot, self.frames[frameB])
+
+        st = p.getLinkState(self.robot, infosA[16])
+        T_world_parentA = self.poseToMatrix(st[:2])
+        T_world_childA = self.poseToMatrix(self.getFrame(frameA))
+        T_parentA_childA = np.linalg.inv(T_world_parentA) * T_world_childA
+        childApose = self.matrixToPose(T_parentA_childA)
+
+        st = p.getLinkState(self.robot, infosB[16])
+        T_world_parentB = self.poseToMatrix(st[:2])
+        T_world_childB = self.poseToMatrix(self.getFrame(frameB))
+        T_parentB_childB = np.linalg.inv(T_world_parentB) * T_world_childB
+        childBpose = self.matrixToPose(T_parentB_childB)
         
         c =  p.createConstraint(
             self.robot,
@@ -490,12 +502,14 @@ class Simulation:
             self.robot,
             infosB[16],
             constraint,
-            [0.0, 0.0, 1.0],
-            infosA[14],
-            infosB[14],
+            [0.0, 0.0, 0.0],
+            childApose[0],
+            childBpose[0],
+            childApose[1],
+            childBpose[1],
         )
 
-        p.changeConstraint(c, maxForce=1e6)
+        p.changeConstraint(c, maxForce=1e3)
 
         return c
 
