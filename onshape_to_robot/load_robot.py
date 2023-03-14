@@ -124,6 +124,7 @@ def assignParts(root, parent):
 from .features import init as features_init, getLimits
 features_init(client, config, root, workspaceId, assemblyId)
 
+
 # First, features are scanned to find the DOFs. Links that they connects are then tagged
 print("\n" + Style.BRIGHT +
       '* Getting assembly features, scanning for DOFs...' + Style.RESET_ALL)
@@ -330,6 +331,13 @@ for occurrence in occurrences.values():
         child = occurrence['path'][0]
         connectParts(child, trunk)
 
+# If a sub-assembly is suppressed, we also mark as suppressed the parts in this sub-assembly
+for occurrence in occurrences.values():
+    if not occurrence['instance']['suppressed']:
+        for k in range(len(occurrence['path'])-1):
+            upper_path = tuple(occurrence['path'][0:k+1])
+            if upper_path in occurrences and occurrences[upper_path]['instance']['suppressed']:
+                occurrence['instance']['suppressed'] = True
 
 def collect(id):
     part = {}
@@ -346,6 +354,5 @@ def collect(id):
             child['jointLimits'] = entry['limits']
             part['children'].append(child)
     return part
-
 
 tree = collect(trunk)

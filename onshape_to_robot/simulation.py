@@ -312,7 +312,7 @@ class Simulation:
         applied = {}
 
         for name in self.passive_joints:
-            p.setJointMotorControl2(self.robot, self.passive_joints[name], controlMode=p.VELOCITY_CONTROL, force=1)
+            p.setJointMotorControl2(self.robot, self.passive_joints[name], controlMode=p.VELOCITY_CONTROL, force=0)
 
         for name in joints.keys():
             if name in self.joints:
