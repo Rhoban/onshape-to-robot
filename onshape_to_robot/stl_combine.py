@@ -41,21 +41,26 @@ def apply_matrix(mesh, matrix):
 # conserving face normals, planar simplification and
 # post-simplimfication cleaning)
 # And going to Filter > Show current filter script
-filter_script_mlx = """<!DOCTYPE FilterScript>
+filter_script_mlx = """
+<!DOCTYPE FilterScript>
 <FilterScript>
- <filter name="Quadric Edge Collapse Decimation">
-  <Param type="RichFloat" value="%reduction%" name="TargetPerc"/>
-  <Param type="RichFloat" value="0.3" name="QualityThr"/>
-  <Param type="RichBool" value="false" name="PreserveBoundary"/>
-  <Param type="RichFloat" value="1" name="BoundaryWeight"/>
-  <Param type="RichBool" value="false" name="PreserveNormal"/>
-  <Param type="RichBool" value="false" name="PreserveTopology"/>
-  <Param type="RichBool" value="false" name="OptimalPlacement"/>
-  <Param type="RichBool" value="true" name="PlanarQuadric"/>
-  <Param type="RichBool" value="false" name="QualityWeight"/>
-  <Param type="RichBool" value="true" name="AutoClean"/>
-  <Param type="RichBool" value="false" name="Selected"/>
- </filter>
+<filter name="Simplification: Quadric Edge Collapse Decimation">
+
+<Param type="RichFloat" value="%reduction%" name="TargetPerc"/>
+<Param type="RichFloat" value="0.5" name="QualityThr"/>
+<Param type="RichBool" value="false" name="PreserveBoundary"/>
+<Param type="RichFloat" value="1" name="BoundaryWeight"/>
+<Param type="RichBool" value="true" name="PreserveNormal"/>
+<Param type="RichBool" value="false" name="PreserveTopology"/>
+<Param type="RichBool" value="true" name="OptimalPlacement"/>
+<Param type="RichBool" value="true" name="PlanarQuadric"/>
+<Param type="RichBool" value="false" name="QualityWeight"/>
+<Param type="RichFloat" value="0.001" name="PlanarWeight"/>
+<Param type="RichBool" value="true" name="AutoClean"/>
+<Param type="RichBool" value="false" name="Selected"/>
+
+
+</filter>
 </FilterScript>
 """
 
@@ -73,7 +78,7 @@ def reduce_faces(in_file, out_file, reduction=0.5):
     # Add the filter script
     command += " -s " + filter_script_path
     # Add the output filename and output flags
-    command += " -o " + out_file + " -om vn fn"
+    command += " -o " + out_file 
     command += " > /tmp/meshlab.log 2>&1"
     # Execute command
     # print("Going to execute: " + command)
