@@ -102,6 +102,7 @@ def getLimits(jointType, name):
     if enabled:
         return (minimum, maximum)
     else:
-        print(Fore.YELLOW + 'WARNING: joint ' + name + ' of type ' +
-              jointType + ' has no limits ' + Style.RESET_ALL)
+        if jointType != 'continuous':
+            print(Fore.YELLOW + 'WARNING: joint ' + name + ' of type ' +
+                jointType + ' has no limits ' + Style.RESET_ALL)
         return None
