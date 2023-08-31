@@ -1,4 +1,4 @@
-colorama
+colorama>=0.4.6
 commentjson
 numpy
 numpy-stl

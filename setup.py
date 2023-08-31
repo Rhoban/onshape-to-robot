@@ -5,7 +5,7 @@ with open("README-pypi.md", "r", encoding="utf-8") as stream:
 
 setuptools.setup(
     name="onshape-to-robot",
-    version="0.3.18",
+    version="0.3.19",
     author="Rhoban team",
     author_email="team@rhoban.com",
     description="Converting OnShape assembly to robot definition (SDF or URDF) through OnShape API ",
@@ -29,7 +29,7 @@ setuptools.setup(
     ],
     keywords="robot robotics cad design onshape bullet pybullet sdf urdf gazebo ros model kinematics",
     install_requires=[
-        "numpy", "pybullet", "requests", "commentjson", "colorama", "numpy-stl", "transforms3d"
+        "numpy", "pybullet", "requests", "commentjson", "colorama>=0.4.6", "numpy-stl", "transforms3d"
     ],
     include_package_data=True,
     package_data={'': ['bullet/*', 'README.md']},
