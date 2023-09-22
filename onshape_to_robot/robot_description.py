@@ -2,8 +2,17 @@ import numpy as np
 import os
 import math
 import uuid
+from xml.sax.saxutils import escape
 from . import stl_combine
 
+
+def xml_escape(unescaped: str) -> str:
+    """Escapes XML characters in a string so that it can be safely added to an XML file
+    """
+    return escape(unescaped, entities={
+        "'": "&apos;",
+        "\"": "&quot;"
+    })
 
 def rotationMatrixToEulerAngles(R):
     sy = math.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
@@ -253,14 +262,19 @@ class RobotURDF(RobotDescription):
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
     def addSTL(self, matrix, stl, color, name, node='visual'):
+        stl_file = self.packageName.strip("/") + "/" + stl
+        stl_file = xml_escape(stl_file)
+
+        material_name = name + "_material"
+        material_name = xml_escape(material_name)
+
         self.append('<'+node+'>')
         self.append(origin(matrix))
         self.append('<geometry>')
-        self.append('<mesh filename="package://' +
-                    self.packageName.strip("/") + "/" + stl+'"/>')
+        self.append('<mesh filename="package://' + stl_file + '"/>')
         self.append('</geometry>')
         if node == 'visual':
-            self.append('<material name="'+name+'_material">')
+            self.append('<material name="'+material_name+'">')
             self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
                         (color[0], color[1], color[2]))
             self.append('</material>')
