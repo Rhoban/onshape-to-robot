@@ -14,7 +14,7 @@ class Simulation:
     A Bullet simulation involving Sigmaban humanoid robot
     """
 
-    def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True,
+    def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True, ignore_self_collisions=False,
                  realTime=True, panels=False, useUrdfInertia=True, dt=0.002, physicsClient = None):
         """Creates an instance of humanoid simulation
 
@@ -73,7 +73,7 @@ class Simulation:
         if not fixed:
             startPos[2] = 1
         startOrientation = p.getQuaternionFromEuler([0, 0, 0])
-        flags = p.URDF_USE_SELF_COLLISION
+        flags = 0 if ignore_self_collisions else p.URDF_USE_SELF_COLLISION
         if useUrdfInertia:
             flags += p.URDF_USE_INERTIA_FROM_FILE
         self.robot = p.loadURDF(robotPath,
