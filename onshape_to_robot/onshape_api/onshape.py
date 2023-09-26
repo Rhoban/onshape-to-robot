@@ -227,6 +227,9 @@ class Onshape():
             print('! ERROR ('+str(res.status_code)+') while using OnShape API')
             if res.text:
                 print('! '+res.text)
+
+            if res.status_code == 403:
+                print('HINT: Check that your access rights are correct, and that the clock on your computer is set correctly')
             exit()
             if self._logging:
                 utils.log('request failed, details: ' + res.text, level=1)

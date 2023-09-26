@@ -2,8 +2,10 @@ from sys import exit
 import sys
 import os
 import commentjson as json
-from colorama import Fore, Back, Style
+import subprocess
+from colorama import Fore, Back, Style, just_fix_windows_console
 
+just_fix_windows_console()
 config = {}
 
 # Loading configuration & parameters
@@ -122,13 +124,18 @@ except OSError:
 # Checking that OpenSCAD is present
 if config['useScads']:
     print(Style.BRIGHT + '* Checking OpenSCAD presence...' + Style.RESET_ALL)
-    if os.system('openscad -v 2> /dev/null') != 0:
+    try:
+        subprocess.run(["openscad", "-v"])
+    except FileNotFoundError:
         print(
             Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
         print(Fore.BLUE + "TIP: consider installing openscad:" + Style.RESET_ALL)
+        print(Fore.BLUE + "Linux:" + Style.RESET_ALL)
         print(Fore.BLUE + "sudo add-apt-repository ppa:openscad/releases" + Style.RESET_ALL)
         print(Fore.BLUE + "sudo apt-get update" + Style.RESET_ALL)
         print(Fore.BLUE + "sudo apt-get install openscad" + Style.RESET_ALL)
+        print(Fore.BLUE + "Windows:" + Style.RESET_ALL)
+        print(Fore.BLUE + "go to: https://openscad.org/downloads.html " + Style.RESET_ALL)
         config['useScads'] = False
 
 # Checking that MeshLab is present

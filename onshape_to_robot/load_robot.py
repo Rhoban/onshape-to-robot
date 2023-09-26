@@ -167,7 +167,10 @@ for feature in features:
 
             limits = None
             if data['mateType'] == 'REVOLUTE' or data['mateType'] == 'CYLINDRICAL':
-                jointType = 'revolute'
+                if 'wheel' in parts or 'continuous' in parts:
+                    jointType = 'continuous'
+                else:
+                    jointType = 'revolute'
 
                 if not config['ignoreLimits']:
                     limits = getLimits(jointType, data['name'])
