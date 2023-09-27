@@ -287,6 +287,18 @@ class Simulation:
             frames[name] = [pos, orientation]
 
         return frames
+    
+    def getVelocity(self, frame):
+        """Gets the velocity of the given frame
+
+        Arguments:
+            frame {str} -- frame name
+
+        Returns:
+            tuple -- (linear, angular)
+        """
+        jointState = p.getLinkState(self.robot, self.frames[frame], computeLinkVelocity=True)
+        return (jointState[6], jointState[7])
 
     def resetJoints(self, joints):
         """Reset all the joints to a given position
