@@ -248,7 +248,7 @@ def main():
     xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
     xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
     
-    with open(os.path.join(config['outputDirectory'],'robot.'+robot.ext), "wb") as stream:
+    with open(os.path.join(config['outputDirectory'], 'robot.'+robot.ext), "wb") as stream:
         stream.write(xml_data)
 
     if len(config['postImportCommands']):
