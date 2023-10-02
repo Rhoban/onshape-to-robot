@@ -163,11 +163,10 @@ def main():
         parts = name.split(' ')
         del parts[-1]
         basePartName = '_'.join(parts).lower()
-
+        
         # only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
         if configuration != 'default' and len(configuration) < 40:
             parts += ['_' + configuration.replace('=', '_').replace(' ', '_')]
-
         return basePartName, '_'.join(parts).lower()
 
 
@@ -187,7 +186,6 @@ def main():
                 return name+'_'+str(partNames[name])
         else:
             return overrideName
-
 
     def buildRobot(tree, matrix):
         occurrence = getOccurrence([tree['id']])
@@ -243,16 +241,30 @@ def main():
     robot.finalize()
     # print(tree)
 
-    print("\n" + Style.BRIGHT + "* Writing " +
-        robot.ext.upper()+" file" + Style.RESET_ALL)
-    with open(config['outputDirectory']+'/robot.'+robot.ext, 'w', encoding="utf-8") as stream:
-        stream.write(robot.xml)
+    ### 
+    import xml
+    from cc.xmljson import XMLJSON
+    
+    print(robot.json)
+    xml_tree = XMLJSON.gdata.etree(robot.json, root=xml.etree.ElementTree.Element("robot", attrib={"name": "humanoid_v2"}))
+    xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
+    # tree.write("robot_.urdf", encoding="utf-8")
+    xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
+    with open("robot_.urdf", "wb") as f:
+        f.write(xml_data)
 
-    if len(config['postImportCommands']):
-        print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
-        for command in config['postImportCommands']:
-            print("* "+command)
-            os.system(command)
+    ### 
+
+    # print("\n" + Style.BRIGHT + "* Writing " +
+    #     robot.ext.upper()+" file" + Style.RESET_ALL)
+    # with open(config['outputDirectory']+'/robot.'+robot.ext, 'w', encoding="utf-8") as stream:
+    #     stream.write(robot.xml)
+
+    # if len(config['postImportCommands']):
+    #     print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
+    #     for command in config['postImportCommands']:
+    #         print("* "+command)
+    #         os.system(command)
 
 
 if __name__ == "__main__":
