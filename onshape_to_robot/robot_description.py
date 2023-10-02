@@ -63,10 +63,7 @@ class RobotDescription(object):
         self.robotName = name
         self.meshDir = None
 
-        self.json = {
-            "link": [],
-            "joint": [],
-        }
+        self.json = {}
         self.current_link_idx = 0
         self.floating_precision = 6
 
@@ -167,6 +164,13 @@ class RobotURDF(RobotDescription):
     def __init__(self, name):
         super().__init__(name)
         self.ext = 'urdf'
+        self.json = {
+            "robot": {
+                "name": self.robotName,
+                "link": [],
+                "joint": [],
+            }
+        }
         self.append('<robot name="' + self.robotName + '">')
         pass
 
@@ -195,7 +199,7 @@ class RobotURDF(RobotDescription):
                 },
             },
         }
-        self.json["link"].append(dummy_link)
+        self.json["robot"]["link"].append(dummy_link)
         self.append('<link name="'+name+'">')
         self.append('<inertial>')
         self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
@@ -244,7 +248,7 @@ class RobotURDF(RobotDescription):
             base_link = {
                 "name": "base_link",
                 }
-            self.json["link"].append(base_link)
+            self.json["robot"]["link"].append(base_link)
             base_joint = {
                 "name": "base_link_to_base",
                 "type": "fixed",
@@ -259,14 +263,14 @@ class RobotURDF(RobotDescription):
                     "rpy": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(0, 0, 0, precision=self.floating_precision),
                 },
             }
-            self.json["joint"].append(base_joint)
+            self.json["robot"]["joint"].append(base_joint)
 
             self.addDummyBaseLink = False
 
-        self.json["link"].append({"name": name, "$t": None})
+        self.json["robot"]["link"].append({"name": name, "$t": None})
         self.append('<link name="'+name+'">')
 
-        self.current_link_idx = len(self.json["link"]) - 1
+        self.current_link_idx = len(self.json["robot"]["link"]) - 1
         
 
     def endLink(self):
@@ -305,7 +309,7 @@ class RobotURDF(RobotDescription):
                 "izz": "{:.{precision}f}".format(inertia[2, 2], precision=self.floating_precision),
             }
         }
-        self.json["link"][self.current_link_idx]["inertial"] = inertial
+        self.json["robot"]["link"][self.current_link_idx]["inertial"] = inertial
         self.append('<inertial>')
         self.append('<origin xyz="%.20g %.20g %.20g" rpy="0 0 0"/>' %
                     (com[0], com[1], com[2]))
@@ -354,7 +358,7 @@ class RobotURDF(RobotDescription):
                 },
             }
         
-        self.json["link"][self.current_link_idx][node] = node_data
+        self.json["robot"]["link"][self.current_link_idx][node] = node_data
 
         self.append('<'+node+'>')
         self.append(origin(matrix))
@@ -447,7 +451,7 @@ class RobotURDF(RobotDescription):
             joint["limit"]["lower"] = jointLimits[0]
             joint["limit"]["upper"] = jointLimits[1]
 
-        self.json["joint"].append(joint)
+        self.json["robot"]["joint"].append(joint)
         self.append('<joint name="'+name+'" type="'+jointType+'">')
         self.append(origin(transform))
         self.append('<parent link="'+linkFrom+'" />')
@@ -472,6 +476,16 @@ class RobotSDF(RobotDescription):
         super().__init__(name)
         self.ext = 'sdf'
         self.relative = False
+        self.json = {
+            "sdf": {
+                "version": "1.6",
+                "model": {
+                    "name": self.robotName,
+                    "link": [],
+                    "joint": [],
+                }
+            }
+        }
         self.append('<sdf version="1.6">')
         self.append('<model name="'+self.robotName + '">')
         pass

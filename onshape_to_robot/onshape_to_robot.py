@@ -245,8 +245,7 @@ def main():
     import xml
     from cc.xmljson import XMLJSON
     
-    print(robot.json)
-    xml_tree = XMLJSON.gdata.etree(robot.json, root=xml.etree.ElementTree.Element("robot", attrib={"name": "humanoid_v2"}))
+    xml_tree = XMLJSON.gdata.etree(robot.json)[0]
     xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
     # tree.write("robot_.urdf", encoding="utf-8")
     xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
