@@ -348,7 +348,7 @@ class RobotURDF(RobotDescription):
             "origin": self.origin_(matrix),
             "geometry": {
                 "mesh": {
-                    "uri": "package://{}/{}".format(self.packageName.strip("/"), stl),
+                    "filename": "package://{}/{}".format(self.packageName.strip("/"), stl),
                 },
             },
         }
