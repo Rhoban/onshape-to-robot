@@ -247,7 +247,6 @@ def main():
     
     xml_tree = XMLJSON.gdata.etree(robot.json)[0]
     xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
-    # tree.write("robot_.urdf", encoding="utf-8")
     xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
     with open(config['outputDirectory']+'/robot.'+robot.ext, "wb") as stream:
         stream.write(xml_data)
