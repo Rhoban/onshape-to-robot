@@ -1,11 +1,15 @@
-import numpy as np
+import xml
 from copy import copy
-import commentjson as json
-from colorama import Fore, Back, Style
 import sys
 from sys import exit
 import os
 import hashlib
+
+import numpy as np
+import commentjson as json
+from colorama import Fore, Back, Style
+from cc.xmljson import XMLJSON
+
 from . import csg
 from .robot_description import RobotURDF, RobotSDF
 
@@ -239,16 +243,12 @@ def main():
     # Start building the robot
     buildRobot(tree, np.matrix(np.identity(4)))
     robot.finalize()
-    # print(tree)
-
-    ### 
-    import xml
-    from cc.xmljson import XMLJSON
     
     xml_tree = XMLJSON.gdata.etree(robot.json)[0]
     xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
     xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
-    with open(config['outputDirectory']+'/robot.'+robot.ext, "wb") as stream:
+    
+    with open(os.path.join(config['outputDirectory'],'robot.'+robot.ext), "wb") as stream:
         stream.write(xml_data)
 
     if len(config['postImportCommands']):

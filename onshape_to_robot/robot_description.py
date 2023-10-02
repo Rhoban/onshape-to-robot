@@ -1,7 +1,9 @@
-import numpy as np
 import os
 import math
 import uuid
+
+import numpy as np
+
 from . import stl_combine
 
 
