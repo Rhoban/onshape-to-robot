@@ -256,8 +256,11 @@ class RobotURDF(RobotDescription):
         self.append('<'+node+'>')
         self.append(origin(matrix))
         self.append('<geometry>')
-        self.append('<mesh filename="package://' +
+        
+        self.append('<mesh filename="meshes' +
                     self.packageName.strip("/") + "/" + stl+'"/>')
+        # self.append('<mesh filename="package://' +
+        #             self.packageName.strip("/") + "/" + stl+'"/>')
         self.append('</geometry>')
         if node == 'visual':
             self.append('<material name="'+name+'_material">')

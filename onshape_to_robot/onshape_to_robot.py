@@ -51,7 +51,7 @@ def main():
     # Adds a part to the current robot link
 
 
-    def addPart(occurrence, matrix):
+    def addPart(occurrence, matrix, instance_name):
         part = occurrence['instance']
 
         if part['suppressed']:
@@ -79,7 +79,9 @@ def main():
         if partIsIgnore(justPart):
             stlFile = None
         else:
-            stlFile = prefix.replace('/', '_')+'.stl'
+            stlFile = "meshes/" + instance_name.split("<")[0].replace(" ", "_") + prefix.replace('/', '_')+'.stl'
+            # stlFile = "./meshes/" + instance_name.replace("<", "").replace(">", "").replace(" ", "_") + "_" + prefix.replace('/', '_')+'.stl'
+            print(stlFile, instance_name, prefix)
             # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
             if len(part['configuration']) > 40:
                 shortend_configuration = hashlib.md5(
@@ -91,7 +93,7 @@ def main():
             with open(config['outputDirectory']+'/'+stlFile, 'wb') as stream:
                 stream.write(stl)
 
-            stlMetadata = prefix.replace('/', '_')+'.part'
+            stlMetadata = "parts/" + prefix.replace('/', '_')+'.part'
             with open(config['outputDirectory']+'/'+stlMetadata, 'w', encoding="utf-8") as stream:
                 json.dump(part, stream, indent=4, sort_keys=True)
 
@@ -203,7 +205,7 @@ def main():
         robot.startLink(link, matrix)
         for occurrence in occurrences.values():
             if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
-                addPart(occurrence, matrix)
+                addPart(occurrence, matrix, instance['name'])
         robot.endLink()
 
         # Adding the frames (linkage is relative to parent)
