@@ -6,6 +6,8 @@ import sys
 from sys import exit
 import os
 import hashlib
+from omegaconf import OmegaConf
+
 from . import csg
 from .robot_description import RobotURDF, RobotSDF
 
@@ -13,20 +15,38 @@ from .robot_description import RobotURDF, RobotSDF
 partNames = {}
 
 def main():
+    config_ = OmegaConf.load("config.yaml")
+    
+    root_directory = config_.outputDirectory.root
+    
+    urdf_directory = os.path.join(root_directory, config_.outputDirectory.urdf)
+    if not os.path.exists(urdf_directory):
+        os.makedirs(urdf_directory)
+    
+    mesh_directory = os.path.join(root_directory, config_.outputDirectory.meshes)
+    if not os.path.exists(mesh_directory):
+        os.makedirs(mesh_directory)
+        
+    scad_directory = os.path.join(root_directory, config_.outputDirectory.scad)
+    if not os.path.exists(scad_directory):
+        os.makedirs(scad_directory)
+    
+    
     # Loading configuration, collecting occurrences and building robot tree
     from .load_robot import \
         config, client, tree, occurrences, getOccurrence, frames
 
 
     # Creating robot for output
-    if config['outputFormat'] == 'urdf':
-        robot = RobotURDF(config['robotName'])
-    elif config['outputFormat'] == 'sdf':
-        robot = RobotSDF(config['robotName'])
+    if config_.outputFormat == 'urdf':
+        robot = RobotURDF(config['robotName'], config_)
+    elif config_.outputFormat == 'sdf':
+        robot = RobotSDF(config['robotName'], config_)
     else:
         print(Fore.RED + 'ERROR: Unknown output format: ' +
             config['outputFormat']+' (supported are urdf and sdf)' + Style.RESET_ALL)
         exit()
+    
     robot.drawCollisions = config['drawCollisions']
     robot.jointMaxEffort = config['jointMaxEffort']
     robot.mergeSTLs = config['mergeSTLs']
@@ -79,9 +99,8 @@ def main():
         if partIsIgnore(justPart):
             stlFile = None
         else:
-            stlFile = "meshes/" + instance_name.split("<")[0].replace(" ", "_") + prefix.replace('/', '_')+'.stl'
-            # stlFile = "./meshes/" + instance_name.replace("<", "").replace(">", "").replace(" ", "_") + "_" + prefix.replace('/', '_')+'.stl'
-            print(stlFile, instance_name, prefix)
+            stlFile = os.path.join(mesh_directory, instance_name.split("<")[0].replace(" ", "_") + prefix.replace("/", "_")+".stl")
+            
             # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
             if len(part['configuration']) > 40:
                 shortend_configuration = hashlib.md5(
@@ -101,11 +120,18 @@ def main():
 
         # Import the SCAD files pure shapes
         shapes = None
+        
+        config['useScads'] = True
         if config['useScads']:
             scadFile = prefix+'.scad'
-            if os.path.exists(config['outputDirectory']+'/'+scadFile):
+            scad_path = os.path.join(scad_directory, scadFile)
+            if os.path.exists(scad_path):
                 shapes = csg.process(
-                    config['outputDirectory']+'/'+scadFile, config['pureShapeDilatation'])
+                    scad_path, config['pureShapeDilatation'])
+            else:
+                print("generating SCAD!")
+                with open(scad_path, 'w', encoding="utf-8") as stream:
+                    stream.write("")
 
         # Obtain metadatas about part to retrieve color
         if config['color'] is not None:

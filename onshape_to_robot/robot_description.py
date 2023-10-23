@@ -46,7 +46,8 @@ def pose(matrix, frame=''):
 
 
 class RobotDescription(object):
-    def __init__(self, name):
+    def __init__(self, name, config=None):
+        self.config = config
         self.drawCollisions = False
         self.relative = True
         self.mergeSTLs = 'no'
@@ -151,8 +152,9 @@ class RobotDescription(object):
 
 
 class RobotURDF(RobotDescription):
-    def __init__(self, name):
+    def __init__(self, name, config=None):
         super().__init__(name)
+        self.config = config
         self.ext = 'urdf'
         self.append('<robot name="' + self.robotName + '">')
         pass
@@ -214,12 +216,16 @@ class RobotURDF(RobotDescription):
                 else:
                     color = [0.5, 0.5, 0.5]
 
-                filename = self._link_name+'_'+node+'.stl'
+                stl_filename = "{link}_{node}.stl".format(link=self._link_name, node=node)
+                stl_path = os.path.join(
+                    self.config.outputDirectory.meshes, 
+                    self.packageName.strip("/"), 
+                    stl_filename)
                 stl_combine.save_mesh(
-                    self._mesh[node], self.meshDir+'/'+filename)
+                    self._mesh[node], stl_path)
                 if self.shouldSimplifySTLs(node):
-                    stl_combine.simplify_stl(self.meshDir+'/'+filename, self.maxSTLSize)
-                self.addSTL(np.identity(4), filename, color, self._link_name, node)
+                    stl_combine.simplify_stl(stl_path, self.maxSTLSize)
+                self.addSTL(np.identity(4), stl_filename, color, self._link_name, node)
 
         self.append('<inertial>')
         self.append('<origin xyz="%.20g %.20g %.20g" rpy="0 0 0"/>' %
@@ -257,10 +263,13 @@ class RobotURDF(RobotDescription):
         self.append(origin(matrix))
         self.append('<geometry>')
         
-        self.append('<mesh filename="meshes' +
-                    self.packageName.strip("/") + "/" + stl+'"/>')
-        # self.append('<mesh filename="package://' +
-        #             self.packageName.strip("/") + "/" + stl+'"/>')
+        stl_filename = os.path.join(self.config.outputDirectory.meshes, self.packageName.strip("/"), stl)
+        
+        if self.config.flavor == "gym":
+            self.append('<mesh filename="{uri}"/>'.format(uri=stl_filename))
+        else: # "ros"
+            package_name = self.config.ros_package_name
+            self.append('<mesh filename="package://{package}/{uri}"/>'.format(package=package_name, uri=stl_filename))
         self.append('</geometry>')
         if node == 'visual':
             self.append('<material name="'+name+'_material">')
@@ -341,8 +350,9 @@ class RobotURDF(RobotDescription):
 
 
 class RobotSDF(RobotDescription):
-    def __init__(self, name):
+    def __init__(self, name, config=None):
         super().__init__(name)
+        self.config = config
         self.ext = 'sdf'
         self.relative = False
         self.append('<sdf version="1.6">')
