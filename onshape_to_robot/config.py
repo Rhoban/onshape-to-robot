@@ -5,15 +5,16 @@ import commentjson as json
 import subprocess
 from colorama import Fore, Back, Style, just_fix_windows_console
 
+from omegaconf import OmegaConf
+
+
+
+
 just_fix_windows_console()
 config = {}
 
 # Loading configuration & parameters
-if len(sys.argv) <= 1:
-    print(Fore.RED +
-          'ERROR: usage: onshape-to-robot {robot_directory}' + Style.RESET_ALL)
-    print("Read documentation at https://onshape-to-robot.readthedocs.io/")
-    exit("")
+
 robot = sys.argv[1]
 
 
@@ -37,7 +38,7 @@ def configGet(name, default=None, hasDefault=False, valuesList=None):
             exit()
 
 
-configFile = robot+'/config.json'
+configFile = robot.replace(".yaml", ".json")
 if not os.path.exists(configFile):
     print(Fore.RED+"ERROR: The file "+configFile+" can't be found"+Style.RESET_ALL)
     exit()
@@ -115,11 +116,6 @@ for key in tmp:
     else:
         config['dynamicsOverride'][key.lower()] = tmp[key]
 
-# Output directory, making it if it doesn't exists
-try:
-    os.makedirs(config['outputDirectory'])
-except OSError:
-    pass
 
 # Checking that OpenSCAD is present
 if config['useScads']:
