@@ -7,6 +7,7 @@ from colorama import Fore, Back, Style
 import sys
 from sys import exit
 import os
+import subprocess
 import hashlib
 from omegaconf import OmegaConf
 
@@ -15,20 +16,136 @@ from .robot_description import RobotURDF#, RobotSDF
 
 
 class OnshapeRobotExporter:
-    def __init__(self, config_path="config.yaml"):
+    def __init__(self, config_path="./config.yaml"):
         self.config_path = config_path
+
+        if not os.path.exists(self.config_path):
+            print(Fore.RED+"ERROR: The file "+self.config_path+" can't be found"+Style.RESET_ALL)
+            exit()
+
+
+        # validate configuration parameters
+
         self.config = OmegaConf.load(self.config_path)
+
+
+        self.config["documentId"]       = self.getConfig("documentId")
+        self.config["versionId"]        = self.getConfig("versionId", "")
+        self.config["workspaceId"]      = self.getConfig("workspaceId", "")
+        self.config["drawFrames"]       = self.getConfig("drawFrames", False)
+        self.config["drawCollisions"]   = self.getConfig("drawCollisions", False)
+        self.config["assemblyName"]     = self.getConfig("assemblyName", False)
+        self.config["outputFormat"]     = self.getConfig("outputFormat", "urdf")
+        self.config["useFixedLinks"]    = self.getConfig("useFixedLinks", False)
+        self.config["configuration"]    = self.getConfig("configuration", "default")
+        self.config["ignoreLimits"]     = self.getConfig("ignoreLimits", False)
+
+
+
+        # Using OpenSCAD for simplified geometry
+        self.config["useScads"]         = self.getConfig("useScads", True)
+        self.config["pureShapeDilatation"] = self.getConfig("pureShapeDilatation", 0.0)
+
+        # Dynamics
+        self.config["jointMaxEffort"]   = self.getConfig("jointMaxEffort", 1)
+        self.config["jointMaxVelocity"] = self.getConfig("jointMaxVelocity", 20)
+        self.config["noDynamics"]       = self.getConfig("noDynamics", False)
+
+        # Ignore list
+        self.config["ignore"]           = self.getConfig("ignore", [])
+        self.config["whitelist"]        = self.getConfig("whitelist", None, hasDefault=True)
+
+        # Color override
+        self.config["color"]            = self.getConfig("color", None, hasDefault=True)
+
+        # STLs merge and simplification
+        self.config["mergeSTLs"]        = self.getConfig("mergeSTLs", "no", valuesList=[
+                                            "no", "visual", "collision", "all"])
+        self.config["maxSTLSize"]       = self.getConfig("maxSTLSize", 3)
+        self.config["simplifySTLs"]     = self.getConfig("simplifySTLs", "no", valuesList=[
+                                            "no", "visual", "collision", "all"])
+
+        # Post-import commands to execute
+        self.config["postImportCommands"] = self.getConfig("postImportCommands", [])
+
+        self.config["dynamicsOverride"] = {}
+
+        # Add collisions=true configuration on parts
+        self.config["useCollisionsConfigurations"] = self.getConfig(
+            "useCollisionsConfigurations", True)
+
+        # ROS support
+        self.config["packageName"]      = self.getConfig("packageName", "")
+        self.config["addDummyBaseLink"] = self.getConfig("addDummyBaseLink", False)
+        self.config["robotName"]        = self.getConfig("robotName", "onshape")
+
+
+        # additional XML code to insert
+        if self.config['outputFormat'] == 'urdf':
+            additionalFileName = self.getConfig('additionalUrdfFile', '')
+        else:
+            additionalFileName = self.getConfig('additionalSdfFile', '')
+
+        # if additionalFileName == '':
+        #     self.config['additionalXML'] = ''
+        # else:
+        #     with open(robot + additionalFileName, "r", encoding="utf-8") as stream:
+        #         self.config['additionalXML'] = stream.read()
+
+
+        # Creating dynamics override array
+        tmp = self.getConfig('dynamics', {})
+        for key in tmp:
+            if tmp[key] == 'fixed':
+                self.config['dynamicsOverride'][key.lower()] = {"com": [0, 0, 0], "mass": 0, "inertia": [
+                    0, 0, 0, 0, 0, 0, 0, 0, 0]}
+            else:
+                self.config['dynamicsOverride'][key.lower()] = tmp[key]
+
+
+        # Checking that OpenSCAD is present
+        if self.config['useScads']:
+            print(Style.BRIGHT + '* Checking OpenSCAD presence...' + Style.RESET_ALL)
+            try:
+                subprocess.run(["openscad", "-v"])
+            except FileNotFoundError:
+                print(
+                    Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
+                print(Fore.BLUE + "TIP: consider installing openscad:" + Style.RESET_ALL)
+                print(Fore.BLUE + "Linux:" + Style.RESET_ALL)
+                print(Fore.BLUE + "sudo add-apt-repository ppa:openscad/releases" + Style.RESET_ALL)
+                print(Fore.BLUE + "sudo apt update" + Style.RESET_ALL)
+                print(Fore.BLUE + "sudo apt install openscad" + Style.RESET_ALL)
+                print(Fore.BLUE + "Windows:" + Style.RESET_ALL)
+                print(Fore.BLUE + "go to: https://openscad.org/downloads.html " + Style.RESET_ALL)
+                self.config['useScads'] = False
+
+        # Checking that MeshLab is present
+        if self.config['simplifySTLs']:
+            print(Style.BRIGHT + '* Checking MeshLab presence...' + Style.RESET_ALL)
+            if not os.path.exists('/usr/bin/meshlabserver') != 0:
+                print(Fore.RED + "No /usr/bin/meshlabserver, disabling STL simplification support" + Style.RESET_ALL)
+                print(Fore.BLUE + "TIP: consider installing meshlab:" + Style.RESET_ALL)
+                print(Fore.BLUE + "sudo apt-get install meshlab" + Style.RESET_ALL)
+                self.config['simplifySTLs'] = False
+
+        # Checking that versionId and workspaceId are not set on same time
+        if self.config['versionId'] != '' and self.config['workspaceId'] != '':
+            print(Style.RED + "You can't specify workspaceId AND versionId")
+
+
 
         # convert workspace root path as absolute path
         self.root_directory = os.path.dirname(os.path.abspath(config_path))
         print("workspace path:", self.root_directory)
 
+
         self.robot = None
 
         # Creating robot for output
-        if self.config.outputFormat == 'urdf':
+        if self.config.outputFormat == "urdf":
             self.robot = RobotURDF(self.config.robotName, self.config, self)
-        # elif self.config.outputFormat == 'sdf':
+        # elif self.config.outputFormat == "sdf":
         #     self.robot = RobotSDF(self.config.robotName, self.config)
         else:
             print(Fore.RED + 'ERROR: Unknown output format: ' +
@@ -37,7 +154,23 @@ class OnshapeRobotExporter:
         
         self.createDirectories()
 
-        
+    def getConfig(self, name, default=None, hasDefault=False, valuesList=None):
+        hasDefault = hasDefault or (default is not None)
+
+        if name in self.config.keys():
+            value = self.config[name]
+            if valuesList is not None and value not in valuesList:
+                print(Fore.RED+"ERROR: Value for "+name +
+                    " should be one of: "+(','.join(valuesList))+Style.RESET_ALL)
+                exit()
+            return value
+        else:
+            if hasDefault:
+                return default
+            else:
+                print(Fore.RED + 'ERROR: missing key "' +
+                    name+'" in config' + Style.RESET_ALL)
+                exit()
 
     def createDirectories(self):        
         # Output directory, making it if it doesn't exists
@@ -83,31 +216,33 @@ def main():
     
     
     # Loading configuration, collecting occurrences and building robot tree
-    from .load_robot import \
-        config, client, tree, occurrences, getOccurrence, frames
+    # from .load_robot import \
+    #     config, client, tree, occurrences, getOccurrence, frames
+    from .load_robot import connectOnShape
+    client, tree, occurrences, getOccurrence, frames = connectOnShape(exporter.config)
 
 
     
-    exporter.robot.drawCollisions = config['drawCollisions']
-    exporter.robot.jointMaxEffort = config['jointMaxEffort']
-    exporter.robot.mergeSTLs = config['mergeSTLs']
-    exporter.robot.maxSTLSize = config['maxSTLSize']
-    exporter.robot.simplifySTLs = config['simplifySTLs']
-    exporter.robot.jointMaxVelocity = config['jointMaxVelocity']
-    exporter.robot.noDynamics = config['noDynamics']
-    exporter.robot.packageName = config['packageName']
-    exporter.robot.addDummyBaseLink = config['addDummyBaseLink']
-    exporter.robot.robotName = config['robotName']
-    exporter.robot.additionalXML = config['additionalXML']
-    exporter.robot.useFixedLinks = config['useFixedLinks']
+    exporter.robot.drawCollisions = exporter.config['drawCollisions']
+    exporter.robot.jointMaxEffort = exporter.config['jointMaxEffort']
+    exporter.robot.mergeSTLs = exporter.config['mergeSTLs']
+    exporter.robot.maxSTLSize = exporter.config['maxSTLSize']
+    exporter.robot.simplifySTLs = exporter.config['simplifySTLs']
+    exporter.robot.jointMaxVelocity = exporter.config['jointMaxVelocity']
+    exporter.robot.noDynamics = exporter.config['noDynamics']
+    exporter.robot.packageName = exporter.config['packageName']
+    exporter.robot.addDummyBaseLink = exporter.config['addDummyBaseLink']
+    exporter.robot.robotName = exporter.config['robotName']
+    # exporter.robot.additionalXML = exporter.config['additionalXML']
+    exporter.robot.useFixedLinks = exporter.config['useFixedLinks']
     exporter.robot.meshDir
 
 
     def partIsIgnore(name):
-        if config['whitelist'] is None:
-            return name in config['ignore']
+        if exporter.config['whitelist'] is None:
+            return name in exporter.config['ignore']
         else:
-            return name not in config['whitelist']
+            return name not in exporter.config['whitelist']
 
     # Adds a part to the current robot link
 
@@ -161,21 +296,21 @@ def main():
         # Import the SCAD files pure shapes
         shapes = None
         
-        config['useScads'] = True
-        if config['useScads']:
+        exporter.config['useScads'] = True
+        if exporter.config['useScads']:
             scadFile = prefix+'.scad'
             scad_path = os.path.join(exporter.root_directory, exporter.scad_directory, scadFile)
             if os.path.exists(scad_path):
                 shapes = csg.process(
-                    scad_path, config['pureShapeDilatation'])
+                    scad_path, exporter.config['pureShapeDilatation'])
             else:
                 print("generating SCAD!")
                 with open(scad_path, 'w', encoding="utf-8") as stream:
                     stream.write("")
 
         # Obtain metadatas about part to retrieve color
-        if config['color'] is not None:
-            color = config['color']
+        if exporter.config['color'] is not None:
+            color = exporter.config['color']
         else:
             metadata = client.part_get_metadata(
                 part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
@@ -190,13 +325,13 @@ def main():
                         [rgb['red'], rgb['green'], rgb['blue']])/255.0
 
         # Obtain mass properties about that part
-        if config['noDynamics']:
+        if exporter.config['noDynamics']:
             mass = 0
             com = [0]*3
             inertia = [0]*12
         else:
-            if prefix in config['dynamicsOverride']:
-                entry = config['dynamicsOverride'][prefix]
+            if prefix in exporter.config['dynamicsOverride']:
+                entry = exporter.config['dynamicsOverride'][prefix]
                 mass = entry['mass']
                 com = entry['com']
                 inertia = entry['inertia']
@@ -316,9 +451,9 @@ def main():
     with open(os.path.join(exporter.root_directory, exporter.urdf_directory, "robot."+exporter.robot.ext), 'w', encoding="utf-8") as stream:
         stream.write(exporter.robot.xml)
 
-    if len(config['postImportCommands']):
+    if len(exporter.config['postImportCommands']):
         print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
-        for command in config['postImportCommands']:
+        for command in exporter.config['postImportCommands']:
             print("* "+command)
             os.system(command)
 

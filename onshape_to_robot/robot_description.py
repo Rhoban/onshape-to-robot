@@ -74,22 +74,18 @@ class RobotDescription(object):
         self.xml += str+"\n"
 
     def jointMaxEffortFor(self, jointName):
-        if isinstance(self.jointMaxEffort, dict):
-            if jointName in self.jointMaxEffort:
-                return self.jointMaxEffort[jointName]
-            else:
-                return self.jointMaxEffort['default']
-        else:
+        if isinstance(self.jointMaxEffort, int) or isinstance(self.jointMaxEffort, float):
             return self.jointMaxEffort
+        if jointName in self.jointMaxEffort:
+            return self.jointMaxEffort[jointName]
+        return self.jointMaxEffort["default"]
 
     def jointMaxVelocityFor(self, jointName):
-        if isinstance(self.jointMaxVelocity, dict):
-            if jointName in self.jointMaxVelocity:
-                return self.jointMaxVelocity[jointName]
-            else:
-                return self.jointMaxVelocity['default']
-        else:
+        if isinstance(self.jointMaxVelocity, int) or isinstance(self.jointMaxVelocity, float):
             return self.jointMaxVelocity
+        if jointName in self.jointMaxVelocity:
+            return self.jointMaxVelocity[jointName]
+        return self.jointMaxVelocity["default"]
 
     def resetLink(self):
         self._mesh = {'visual': None, 'collision': None}
@@ -260,7 +256,7 @@ class RobotURDF(RobotDescription):
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
     def addSTL(self, matrix, stl_path, color, name, node='visual'):
-        print("AddSTL:", stl_path)
+        # print("AddSTL:", stl_path)
         self.append('<'+node+'>')
         self.append(origin(matrix))
         self.append('<geometry>')
@@ -280,7 +276,7 @@ class RobotURDF(RobotDescription):
 
     def addPart(self, matrix, stl_path, mass, com, inertia, color, shapes=None, name=''):
         if stl_path is not None:
-            print(stl_path,self.packageName)
+            # print(stl_path,self.packageName)
             if not self.drawCollisions:
                 if self.useFixedLinks:
                     self._visuals.append(
@@ -344,7 +340,7 @@ class RobotURDF(RobotDescription):
         self.append('')
 
     def finalize(self):
-        self.append(self.additionalXML)
+        # self.append(self.additionalXML)
         self.append('</robot>')
 
 
