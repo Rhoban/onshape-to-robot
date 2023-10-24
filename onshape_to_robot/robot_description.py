@@ -347,11 +347,12 @@ class RobotURDF(RobotDescription):
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
     def addSTL(self, matrix, stl_path, color, name, node='visual'):
+        package_name = self.config.ros_package_name
         node_data = {
             "origin": self.origin_(matrix),
             "geometry": {
                 "mesh": {
-                    "filename": "package://{}/{}".format(self.packageName.strip("/"), stl_path),
+                    "filename": "package://{package}/{uri}".format(package=package_name, uri=stl_path),
                 },
             },
         }
@@ -372,7 +373,6 @@ class RobotURDF(RobotDescription):
         if self.config.flavor == "gym":
             self.append('<mesh filename="{uri}"/>'.format(uri=stl_path))
         else: # "ros"
-            package_name = self.config.ros_package_name
             self.append('<mesh filename="package://{package}/{uri}"/>'.format(package=package_name, uri=stl_path))
         self.append('</geometry>')
         if node == 'visual':
