@@ -4,12 +4,19 @@ from copy import copy
 import commentjson as json
 import colorama
 from colorama import Fore, Back, Style
+import xml
+from copy import copy
 import sys
 from sys import exit
 import os
 import subprocess
 import hashlib
 from omegaconf import OmegaConf
+
+import numpy as np
+import commentjson as json
+from colorama import Fore, Back, Style
+from cc.xmljson import XMLJSON
 
 from . import csg
 from .robot_description import RobotURDF#, RobotSDF
@@ -366,11 +373,10 @@ def main():
         parts = name.split(' ')
         del parts[-1]
         basePartName = '_'.join(parts).lower()
-
+        
         # only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
         if configuration != 'default' and len(configuration) < 40:
             parts += ['_' + configuration.replace('=', '_').replace(' ', '_')]
-
         return basePartName, '_'.join(parts).lower()
 
 
@@ -390,7 +396,6 @@ def main():
                 return name+'_'+str(partNames[name])
         else:
             return overrideName
-
 
     def buildRobot(tree, matrix):
         occurrence = getOccurrence([tree['id']])
@@ -443,13 +448,20 @@ def main():
 
     # Start building the robot
     buildRobot(tree, np.matrix(np.identity(4)))
+
     exporter.robot.finalize()
     # print(tree)
 
+
+    xml_tree = XMLJSON.gdata.etree(exporter.robot.json)[0]
+    xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
+    xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
+    
     print("\n" + Style.BRIGHT + "* Writing " +
         exporter.robot.ext.upper()+" file" + Style.RESET_ALL)
-    with open(os.path.join(exporter.root_directory, exporter.urdf_directory, "robot."+exporter.robot.ext), 'w', encoding="utf-8") as stream:
-        stream.write(exporter.robot.xml)
+    with open(os.path.join(exporter.root_directory, exporter.urdf_directory, "robot."+exporter.robot.ext), "wb") as stream:
+        stream.write(xml_data)
+
 
     if len(exporter.config['postImportCommands']):
         print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
