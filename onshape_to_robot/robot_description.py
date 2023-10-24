@@ -50,25 +50,24 @@ class RobotDescription(object):
     def __init__(self, name, config=None, exporter=None):
         self.config = config
         self.exporter = exporter
-        self.drawCollisions = False
+        # self.drawCollisions = False
         self.relative = True
-        self.mergeSTLs = 'no'
-        self.mergeSTLsCollisions = False
-        self.useFixedLinks = False
-        self.simplifySTLs = 'no'
-        self.maxSTLSize = 3
-        self.xml = ''
-        self.jointMaxEffort = 1
-        self.jointMaxVelocity = 10
-        self.noDynamics = False
-        self.packageName = ""
-        self.addDummyBaseLink = False
+        # self.mergeSTLs = 'no'
+        # self.mergeSTLsCollisions = False
+        # self.useFixedLinks = False
+        # self.simplifySTLs = 'no'
+        # self.maxSTLSize = 3
+        # self.jointMaxEffort = 1
+        # self.jointMaxVelocity = 10
+        # self.noDynamics = False
+        # self.packageName = ""
         self.robotName = name
         self.meshDir = None
 
         self.json = {}
         self.current_link_idx = 0
         self.floating_precision = 6
+        self.added_dummy_link = False
 
     def origin_(self, transform):
         rpy = rotationMatrixToEulerAngles(transform)
@@ -77,27 +76,24 @@ class RobotDescription(object):
             "rpy": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(rpy[0], rpy[1], rpy[2], precision=self.floating_precision),
         }
     def shouldMergeSTLs(self, node):
-        return self.mergeSTLs == 'all' or self.mergeSTLs == node
+        return self.config.mergeSTLs == 'all' or self.config.mergeSTLs == node
 
     def shouldSimplifySTLs(self, node):
-        return self.simplifySTLs == 'all' or self.simplifySTLs == node
-
-    def append(self, str):
-        self.xml += str+"\n"
+        return self.config.simplifySTLs == 'all' or self.config.simplifySTLs == node
 
     def jointMaxEffortFor(self, jointName):
-        if isinstance(self.jointMaxEffort, int) or isinstance(self.jointMaxEffort, float):
-            return self.jointMaxEffort
-        if jointName in self.jointMaxEffort:
-            return self.jointMaxEffort[jointName]
-        return self.jointMaxEffort["default"]
+        if isinstance(self.config.jointMaxEffort, int) or isinstance(self.config.jointMaxEffort, float):
+            return self.config.jointMaxEffort
+        if jointName in self.config.jointMaxEffort:
+            return self.config.jointMaxEffort[jointName]
+        return self.config.jointMaxEffort["default"]
 
     def jointMaxVelocityFor(self, jointName):
-        if isinstance(self.jointMaxVelocity, int) or isinstance(self.jointMaxVelocity, float):
-            return self.jointMaxVelocity
-        if jointName in self.jointMaxVelocity:
-            return self.jointMaxVelocity[jointName]
-        return self.jointMaxVelocity["default"]
+        if isinstance(self.config.jointMaxVelocity, int) or isinstance(self.config.jointMaxVelocity, float):
+            return self.config.jointMaxVelocity
+        if jointName in self.config.jointMaxVelocity:
+            return self.config.jointMaxVelocity[jointName]
+        return self.config.jointMaxVelocity["default"]
 
     def resetLink(self):
         self._mesh = {'visual': None, 'collision': None}
@@ -172,7 +168,6 @@ class RobotURDF(RobotDescription):
                 "joint": [],
             }
         }
-        self.append('<robot name="' + self.robotName + '">')
         pass
 
     def addDummyLink(self, name, visualMatrix=None, visualSTL=None, visualColor=None):
@@ -191,85 +186,67 @@ class RobotURDF(RobotDescription):
                     "value": mass_value,
                 },
                 "inertia": {
-                    "ixx": "0",
-                    "ixy": "0",
-                    "ixz": "0",
-                    "iyy": "0",
-                    "iyz": "0",
-                    "izz": "0",
+                    "ixx": "0", "ixy": "0", "ixz": "0",
+                                "iyy": "0", "iyz": "0",
+                                            "izz": "0",
                 },
             },
         }
         self.json["robot"]["link"].append(dummy_link)
-        self.append('<link name="'+name+'">')
-        self.append('<inertial>')
-        self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
-        # XXX: We use a low mass because PyBullet consider mass 0 as world fixed
-        if self.noDynamics:
-            self.append('<mass value="0" />')
-        else:
-            self.append('<mass value="1e-9" />')
-        self.append(
-            '<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
-        self.append('</inertial>')
         if visualSTL is not None:
             self.addSTL(visualMatrix, visualSTL, visualColor,
                         name+"_visual", 'visual')
-        self.append('</link>')
 
-    def addDummyBaseLinkMethod(self, name):
+    def addDummyBaseLink(self, name):
         # adds a dummy base_link for ROS users
-        self.append('<link name="base_link"></link>')
-        self.append('<joint name="base_link_to_base" type="fixed">')
-        self.append('<parent link="base_link"/>')
-        self.append('<child link="' + name + '" />')
-        self.append('<origin rpy="0.0 0 0" xyz="0 0 0"/>')
-        self.append('</joint>')
+        dummy_base_link = {
+            "name": "base_link",
+        }
+        dummy_base_joint = {
+            "name": "base_link_to_base",
+            "type": "fixed",
+            "parent": {
+                "link": "base_link",
+            },
+            "child": {
+                "link": name
+            },
+            "origin": {
+                "xyz": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(0, 0, 0, precision=self.floating_precision),
+                "rpy": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(0, 0, 0, precision=self.floating_precision),
+            }
+        }
+        self.json["robot"]["link"].append(dummy_base_link)
+        self.json["robot"]["joint"].append(dummy_base_joint)
 
     def addFixedJoint(self, parent, child, matrix, name=None):
         if name is None:
             name = parent+'_'+child+'_fixing'
 
-        self.append('<joint name="'+name+'" type="fixed">')
-        self.append(origin(matrix))
-        self.append('<parent link="'+parent+'" />')
-        self.append('<child link="'+child+'" />')
-        self.append('<axis xyz="0 0 0"/>')
-        self.append('</joint>')
-        self.append('')
+        self.json["joints"].append({
+            "name": name,
+            "origin": origin(matrix),
+            "parent": {
+                "link": parent
+            },
+            "child": {
+                "link": child
+            },
+            "axis": {
+                "xyz": "0 0 0"
+            }
+        })
 
     def startLink(self, name, matrix):
         self._link_name = name
         self.resetLink()
 
-        if self.addDummyBaseLink:
-            self.addDummyBaseLinkMethod(name)
+        if not self.added_dummy_link and self.config.addDummyBaseLink:
+            self.addDummyBaseLink(name)
             
-            # adds a dummy base_link for ROS users
-            base_link = {
-                "name": "base_link",
-                }
-            self.json["robot"]["link"].append(base_link)
-            base_joint = {
-                "name": "base_link_to_base",
-                "type": "fixed",
-                "parent": {
-                    "link": "base_link"
-                },
-                "child": {
-                    "link": name,
-                },
-                "origin": {
-                    "xyz": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(0, 0, 0, precision=self.floating_precision),
-                    "rpy": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(0, 0, 0, precision=self.floating_precision),
-                },
-            }
-            self.json["robot"]["joint"].append(base_joint)
-
-            self.addDummyBaseLink = False
+            self.added_dummy_link = True
 
         self.json["robot"]["link"].append({"name": name, "$t": None})
-        self.append('<link name="'+name+'">')
 
         self.current_link_idx = len(self.json["robot"]["link"]) - 1
         
@@ -287,7 +264,7 @@ class RobotURDF(RobotDescription):
                 stl_filename = "{link}_{node}.stl".format(link=self._link_name, node=node)
                 stl_path = os.path.join(
                     self.exporter.mesh_directory, 
-                    self.packageName.strip("/"), 
+                    self.config.packageName.strip("/"), 
                     stl_filename)
                 stl_combine.save_mesh(
                     self._mesh[node], os.path.join(self.exporter.root_directory, stl_path))
@@ -315,22 +292,14 @@ class RobotURDF(RobotDescription):
             }
         }
         self.json["robot"]["link"][self.current_link_idx]["inertial"] = inertial
-        self.append('<inertial>')
-        self.append('<origin xyz="%.20g %.20g %.20g" rpy="0 0 0"/>' %
-                    (com[0], com[1], com[2]))
-        self.append('<mass value="%.20g" />' % mass)
-        self.append('<inertia ixx="%.20g" ixy="%.20g"  ixz="%.20g" iyy="%.20g" iyz="%.20g" izz="%.20g" />' %
-                    (inertia[0, 0], inertia[0, 1], inertia[0, 2], inertia[1, 1], inertia[1, 2], inertia[2, 2]))
-        self.append('</inertial>')
 
-        if self.useFixedLinks:
-            self.append(
-                '<visual><geometry><box size="0 0 0" /></geometry></visual>')
+        if self.config.useFixedLinks:
+            inertial["visual"] = {
+                "geometry": {"box": {"size": "0 0 0"}}
+            }
 
-        self.append('</link>')
-        self.append('')
 
-        if self.useFixedLinks:
+        if self.config.useFixedLinks:
             n = 0
             for visual in self._visuals:
                 n += 1
@@ -347,12 +316,17 @@ class RobotURDF(RobotDescription):
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
     def addSTL(self, matrix, stl_path, color, name, node='visual'):
+
         package_name = self.config.ros_package_name
+        if self.config.flavor == "gym":
+            mesh_path = stl_path
+        elif self.config.flavor == "ros":
+            mesh_path = "package://{package}/{uri}".format(package=package_name, uri=stl_path)
         node_data = {
             "origin": self.origin_(matrix),
             "geometry": {
                 "mesh": {
-                    "filename": "package://{package}/{uri}".format(package=package_name, uri=stl_path),
+                    "filename": mesh_path,
                 },
             },
         }
@@ -366,27 +340,12 @@ class RobotURDF(RobotDescription):
         
         self.json["robot"]["link"][self.current_link_idx][node] = node_data
 
-        self.append('<'+node+'>')
-        self.append(origin(matrix))
-        self.append('<geometry>')
-        
-        if self.config.flavor == "gym":
-            self.append('<mesh filename="{uri}"/>'.format(uri=stl_path))
-        else: # "ros"
-            self.append('<mesh filename="package://{package}/{uri}"/>'.format(package=package_name, uri=stl_path))
-        self.append('</geometry>')
-        if node == 'visual':
-            self.append('<material name="'+name+'_material">')
-            self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
-                        (color[0], color[1], color[2]))
-            self.append('</material>')
-        self.append('</'+node+'>')
 
     def addPart(self, matrix, stl_path, mass, com, inertia, color, shapes=None, name=''):
         if stl_path is not None:
             # print(stl_path,self.packageName)
-            if not self.drawCollisions:
-                if self.useFixedLinks:
+            if not self.config.drawCollisions:
+                if self.config.useFixedLinks:
                     self._visuals.append(
                         [matrix, self.packageName + stl_path, color])
                 elif self.shouldMergeSTLs('visual'):
@@ -395,7 +354,7 @@ class RobotURDF(RobotDescription):
                     self.addSTL(matrix, stl_path, color, name, 'visual')
 
             entries = ['collision']
-            if self.drawCollisions:
+            if self.config.drawCollisions:
                 entries.append('visual')
             for entry in entries:
 
@@ -406,29 +365,30 @@ class RobotURDF(RobotDescription):
                     else:
                         self.addSTL(matrix, stl_path, color, name, entry)
                 else:
-                    # Inserting pure shapes in the URDF model
-                    self.append('<!-- Shapes for '+name+' -->')
-                    for shape in shapes:
-                        self.append('<'+entry+'>')
-                        self.append(origin(matrix*shape['transform']))
-                        self.append('<geometry>')
-                        if shape['type'] == 'cube':
-                            self.append('<box size="%.20g %.20g %.20g" />' %
-                                        tuple(shape['parameters']))
-                        if shape['type'] == 'cylinder':
-                            self.append(
-                                '<cylinder length="%.20g" radius="%.20g" />' % tuple(shape['parameters']))
-                        if shape['type'] == 'sphere':
-                            self.append('<sphere radius="%.20g" />' %
-                                        shape['parameters'])
-                        self.append('</geometry>')
+                    pass
+                    # # Inserting pure shapes in the URDF model
+                    # self.append('<!-- Shapes for '+name+' -->')
+                    # for shape in shapes:
+                    #     self.append('<'+entry+'>')
+                    #     self.append(origin(matrix*shape['transform']))
+                    #     self.append('<geometry>')
+                    #     if shape['type'] == 'cube':
+                    #         self.append('<box size="%.20g %.20g %.20g" />' %
+                    #                     tuple(shape['parameters']))
+                    #     if shape['type'] == 'cylinder':
+                    #         self.append(
+                    #             '<cylinder length="%.20g" radius="%.20g" />' % tuple(shape['parameters']))
+                    #     if shape['type'] == 'sphere':
+                    #         self.append('<sphere radius="%.20g" />' %
+                    #                     shape['parameters'])
+                    #     self.append('</geometry>')
 
-                        if entry == 'visual':
-                            self.append('<material name="'+name+'_material">')
-                            self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
-                                        (color[0], color[1], color[2]))
-                            self.append('</material>')
-                        self.append('</'+entry+'>')
+                    #     if entry == 'visual':
+                    #         self.append('<material name="'+name+'_material">')
+                    #         self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
+                    #                     (color[0], color[1], color[2]))
+                    #         self.append('</material>')
+                    #     self.append('</'+entry+'>')
 
         self.addLinkDynamics(matrix, mass, com, inertia)
 
@@ -460,23 +420,10 @@ class RobotURDF(RobotDescription):
             joint["limit"]["upper"] = jointLimits[1]
 
         self.json["robot"]["joint"].append(joint)
-        self.append('<joint name="'+name+'" type="'+jointType+'">')
-        self.append(origin(transform))
-        self.append('<parent link="'+linkFrom+'" />')
-        self.append('<child link="'+linkTo+'" />')
-        self.append('<axis xyz="%.20g %.20g %.20g"/>' % tuple(zAxis))
-        lowerUpperLimits = ''
-        if jointLimits is not None:
-            lowerUpperLimits = 'lower="%.20g" upper="%.20g"' % jointLimits
-        self.append('<limit effort="%.20g" velocity="%.20g" %s/>' %
-                    (self.jointMaxEffortFor(name), self.jointMaxVelocityFor(name), lowerUpperLimits))
-        self.append('<joint_properties friction="0.0"/>')
-        self.append('</joint>')
-        self.append('')
 
     def finalize(self):
+        pass
         # self.append(self.additionalXML)
-        self.append('</robot>')
 
 
 # class RobotSDF(RobotDescription):

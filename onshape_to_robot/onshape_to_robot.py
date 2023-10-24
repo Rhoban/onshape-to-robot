@@ -229,22 +229,6 @@ def main():
     client, tree, occurrences, getOccurrence, frames = connectOnShape(exporter.config)
 
 
-    
-    exporter.robot.drawCollisions = exporter.config['drawCollisions']
-    exporter.robot.jointMaxEffort = exporter.config['jointMaxEffort']
-    exporter.robot.mergeSTLs = exporter.config['mergeSTLs']
-    exporter.robot.maxSTLSize = exporter.config['maxSTLSize']
-    exporter.robot.simplifySTLs = exporter.config['simplifySTLs']
-    exporter.robot.jointMaxVelocity = exporter.config['jointMaxVelocity']
-    exporter.robot.noDynamics = exporter.config['noDynamics']
-    exporter.robot.packageName = exporter.config['packageName']
-    exporter.robot.addDummyBaseLink = exporter.config['addDummyBaseLink']
-    exporter.robot.robotName = exporter.config['robotName']
-    # exporter.robot.additionalXML = exporter.config['additionalXML']
-    exporter.robot.useFixedLinks = exporter.config['useFixedLinks']
-    exporter.robot.meshDir
-
-
     def partIsIgnore(name):
         if exporter.config['whitelist'] is None:
             return name in exporter.config['ignore']
@@ -450,7 +434,7 @@ def main():
     buildRobot(tree, np.matrix(np.identity(4)))
 
     exporter.robot.finalize()
-    # print(tree)
+    print(exporter.robot.json)
 
 
     xml_tree = XMLJSON.gdata.etree(exporter.robot.json)[0]
