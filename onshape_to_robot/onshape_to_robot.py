@@ -448,8 +448,91 @@ def main():
     print([j["name"] for j in reorder_joint])
     exporter.robot.json["robot"]["joint"] = reorder_joint
 
+    json.dump(exporter.robot.json, open(os.path.join(exporter.root_directory, exporter.config.outputDirectory.urdf, "robot.json"), "w"), indent=2)
+
+    # mjcf configs
+    mjcf_data = {
+        "mujoco": {
+            "model": "humanoid",
+            "statistic": {
+                "extent": "2",
+                "center": "0 0 1",
+            },
+            "option": {
+                "timestep": "0.00555",
+            },
+            "default": {
+                "motor": {
+                    "ctrlrange": "-1 1",
+                    "ctrllimited": True,
+                },
+                "default": {
+                    "class": "body",
+                    "geom": {
+                        "type": "capsule",
+                        "condim": 1,
+                        "friction": "1.0 0.05 0.05",
+                        "solimp": ".9 .99 .003",
+                        "solref": ".015 1",
+                    },
+                    "joint": {
+                        "type": "hinge",
+                        "damping": 0.1,
+                        "stiffness": 5,
+                        "armature": .007,
+                        "limited": True,
+                        "solimplimit": "0 .99 .01",
+                    },
+                    "site": {
+                        "type": "box",
+                        "size": ".01 .01 .02",
+                        "rgba": "1 0 0 1",
+                    }
+                },
+                "default": {
+                    "class": "touch",
+                    "site": {
+                        "type": "capsule",
+                        "rgba": "0 0 1 .3",
+                    },
+                },
+            },
+            "worldbody": {
+                "geom": {
+                    "name": "floor",
+                    "type": "plane",
+                    "conaffinity": 1,
+                    "size": "100 100 .2",
+                    "material": "grid",
+                },
+                "body": {
+                    "name": "pelvis",
+                    "pos": "0 0 1",
+                    "childclass": "body",
+                    "freejoint": {
+                        "name": "root",
+                    },
+                },
+            },
+        },
+    }
+    xml_tree = XMLJSON.gdata.etree(mjcf_data)[0]
+    xml.etree.ElementTree.indent(xml_tree, space="  ", level=0)
+    xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
+    
+    ext = "mjcf"
+    
+    xml_data = xml_data.replace(b"<?xml version='1.0' encoding='utf8'?>", b"")    
+    print("\n" + Style.BRIGHT + "* Writing " +
+        ext.upper()+" file" + Style.RESET_ALL)
+    with open(os.path.join(exporter.root_directory, exporter.config.outputDirectory.urdf, "robot."+ext), "wb") as stream:
+        stream.write(xml_data)
+        
+    # End of MJCF
+        
+
     xml_tree = XMLJSON.gdata.etree(exporter.robot.json)[0]
-    # xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
+    xml.etree.ElementTree.indent(xml_tree, space="  ", level=0)
     xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
     
     print("\n" + Style.BRIGHT + "* Writing " +

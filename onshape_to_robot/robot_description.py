@@ -316,11 +316,10 @@ class RobotURDF(RobotDescription):
         self.addFixedJoint(self._link_name, name, matrix, name+'_frame')
 
     def addSTL(self, matrix, stl_path, color, name, node='visual'):
-
-        package_name = self.config.ros_package_name
         if self.config.flavor == "gym":
             mesh_path = stl_path
         elif self.config.flavor == "ros":
+            package_name = self.config.ros_package_name
             mesh_path = "package://{package}/{uri}".format(package=package_name, uri=stl_path)
         node_data = {
             "origin": self.origin_(matrix),
@@ -339,7 +338,6 @@ class RobotURDF(RobotDescription):
             }
         
         self.json["robot"]["link"][self.current_link_idx][node] = node_data
-
 
     def addPart(self, matrix, stl_path, mass, com, inertia, color, shapes=None, name=''):
         if stl_path is not None:
