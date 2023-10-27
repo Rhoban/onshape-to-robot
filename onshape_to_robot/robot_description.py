@@ -365,7 +365,42 @@ class RobotURDF(RobotDescription):
                     else:
                         self.addSTL(matrix, stl_path, color, name, entry)
                 else:
-                    pass
+                    
+                    # # Inserting pure shapes in the URDF model
+                    node_data = {
+                        "origin": self.origin_(matrix),
+                        "geometry": []
+                    }
+                    for shape in shapes:
+                        
+                        if shape['type'] == 'cube':
+                            node_data["geometry"].append({
+                                "box": {
+                                    "size": "%.20g %.20g %.20g" % tuple(shape['parameters'])
+                                }})
+                        if shape['type'] == 'cylinder':
+                            node_data["geometry"].append({
+                                "cylinder": {
+                                    "length": "%.20g" % tuple(shape['parameters'])[0],
+                                    "radius": "%.20g" % tuple(shape['parameters'])[1],
+                                }})
+                        if shape['type'] == 'sphere':
+                            node_data["geometry"].append({
+                                "sphere": {
+                                    "radius": "%.20g" % shape['parameters'],
+                                }})
+                        
+                        if entry == 'visual':
+                            node_data["material"] = {
+                                "name": name+"_material",
+                                "color": {
+                                    "rgba": "%.20g %.20g %.20g 1.0" % (color[0], color[1], color[2]),
+                                },
+                            }
+                            
+                        self.json["robot"]["link"][self.current_link_idx][entry] = node_data
+        
+        
                     # # Inserting pure shapes in the URDF model
                     # self.append('<!-- Shapes for '+name+' -->')
                     # for shape in shapes:
