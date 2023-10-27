@@ -11,7 +11,7 @@ from sys import exit
 import os
 import subprocess
 import hashlib
-from omegaconf import OmegaConf
+import omegaconf
 
 import numpy as np
 import commentjson as json
@@ -33,7 +33,10 @@ class OnshapeRobotExporter:
 
         # validate configuration parameters
 
-        self.config = OmegaConf.load(self.config_path)
+        self.config = omegaconf.OmegaConf.load(self.config_path)
+        self.config_ = self.config
+        
+        # breakpoint()
 
 
         self.config["documentId"]       = self.getConfig("documentId")
@@ -143,7 +146,7 @@ class OnshapeRobotExporter:
 
 
         # convert workspace root path as absolute path
-        self.root_directory = os.path.dirname(os.path.abspath(config_path))
+        self.root_directory = os.path.join(os.path.dirname(os.path.abspath(config_path)), self.config.outputDirectory.root)
         print("workspace path:", self.root_directory)
 
 
@@ -184,22 +187,11 @@ class OnshapeRobotExporter:
         if not os.path.exists(self.root_directory):
             os.makedirs(self.root_directory)
 
-        # these are all relative paths
-        if self.config.flavor == "ros":
-            self.part_directory = "parts"
-            self.urdf_directory = "urdf"
-            self.mesh_directory = "meshes"
-            self.scad_directory = "scad"
-        else:
-            self.part_directory = "parts"
-            self.urdf_directory = "urdf"
-            self.mesh_directory = "meshes"
-            self.scad_directory = "scad"
 
-        part_dir_abs = os.path.join(self.root_directory, self.part_directory)
-        urdf_dir_abs = os.path.join(self.root_directory, self.urdf_directory)
-        mesh_dir_abs = os.path.join(self.root_directory, self.mesh_directory)
-        scad_dir_abs = os.path.join(self.root_directory, self.scad_directory)
+        part_dir_abs = os.path.join(self.root_directory, self.config.outputDirectory.parts)
+        urdf_dir_abs = os.path.join(self.root_directory, self.config.outputDirectory.urdf)
+        mesh_dir_abs = os.path.join(self.root_directory, self.config.outputDirectory.meshes)
+        scad_dir_abs = os.path.join(self.root_directory, self.config.outputDirectory.scad)
 
         if not os.path.exists(part_dir_abs):
             os.makedirs(part_dir_abs)
@@ -266,7 +258,7 @@ def main():
         if partIsIgnore(justPart):
             stl_path = None
         else:
-            stl_path = os.path.join(exporter.mesh_directory, instance_name.split("<")[0].replace(" ", "_") + prefix.replace("/", "_")+".stl")
+            stl_path = os.path.join(exporter.config.outputDirectory.meshes, instance_name.split("<")[0].replace(" ", "_") + prefix.replace("/", "_")+".stl")
             
             # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
             if len(part['configuration']) > 40:
@@ -279,7 +271,7 @@ def main():
             with open(os.path.join(exporter.root_directory, stl_path), "wb") as stream:
                 stream.write(stl)
 
-            stlMetadata = os.path.join(exporter.part_directory, prefix.replace('/', '_')+'.part')
+            stlMetadata = os.path.join(exporter.config.outputDirectory.parts, prefix.replace('/', '_')+'.part')
             with open(os.path.join(exporter.root_directory, stlMetadata), 'w', encoding="utf-8") as stream:
                 json.dump(part, stream, indent=4, sort_keys=True)
 
@@ -290,7 +282,7 @@ def main():
         exporter.config['useScads'] = True
         if exporter.config['useScads']:
             scadFile = prefix+'.scad'
-            scad_path = os.path.join(exporter.root_directory, exporter.scad_directory, scadFile)
+            scad_path = os.path.join(exporter.root_directory, exporter.config.outputDirectory.scad, scadFile)
             if os.path.exists(scad_path):
                 shapes = csg.process(
                     scad_path, exporter.config['pureShapeDilatation'])
@@ -434,16 +426,35 @@ def main():
     buildRobot(tree, np.matrix(np.identity(4)))
 
     exporter.robot.finalize()
-    print(exporter.robot.json)
-
+    # print(exporter.robot.json)
+    
+    reorder_joint = [None] * len(exporter.config_.jointOrder)
+    reorder_joint_extra = []
+    exporter.config_.jointOrder
+    for j in exporter.robot.json["robot"]["joint"]:
+        try:
+            desired_index = exporter.config_.jointOrder.index(j["name"])
+            print(desired_index)
+            reorder_joint[desired_index] = j
+        except omegaconf.errors.ConfigValueError:
+            reorder_joint_extra.append(j)
+    
+    for j in reorder_joint:
+        if j is None:
+            reorder_joint.remove(j)
+        
+    reorder_joint.extend(reorder_joint_extra)
+    
+    print([j["name"] for j in reorder_joint])
+    exporter.robot.json["robot"]["joint"] = reorder_joint
 
     xml_tree = XMLJSON.gdata.etree(exporter.robot.json)[0]
-    xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
+    # xml.etree.ElementTree.indent(xml_tree, space="\t", level=0)
     xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
     
     print("\n" + Style.BRIGHT + "* Writing " +
         exporter.robot.ext.upper()+" file" + Style.RESET_ALL)
-    with open(os.path.join(exporter.root_directory, exporter.urdf_directory, "robot."+exporter.robot.ext), "wb") as stream:
+    with open(os.path.join(exporter.root_directory, exporter.config.outputDirectory.urdf, "robot."+exporter.robot.ext), "wb") as stream:
         stream.write(xml_data)
 
 
@@ -455,7 +466,6 @@ def main():
 
 
 if __name__ == "__main__":
-
     if len(sys.argv) <= 1:
         print(Fore.RED +
             'ERROR: usage: onshape-to-robot {robot_directory}' + Style.RESET_ALL)

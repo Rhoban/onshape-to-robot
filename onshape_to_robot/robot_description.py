@@ -263,7 +263,7 @@ class RobotURDF(RobotDescription):
 
                 stl_filename = "{link}_{node}.stl".format(link=self._link_name, node=node)
                 stl_path = os.path.join(
-                    self.exporter.mesh_directory, 
+                    self.exporter.config.outputDirectory.meshes, 
                     self.config.packageName.strip("/"), 
                     stl_filename)
                 stl_combine.save_mesh(
