@@ -367,12 +367,12 @@ class RobotURDF(RobotDescription):
                 else:
                     
                     # # Inserting pure shapes in the URDF model
-                    node_data = {
-                        "origin": self.origin_(matrix),
-                        "geometry": []
-                    }
                     for shape in shapes:
                         
+                        node_data = {
+                            "origin": self.origin_(matrix*shape['transform']),
+                            "geometry": []
+                        }
                         if shape['type'] == 'cube':
                             node_data["geometry"].append({
                                 "box": {
