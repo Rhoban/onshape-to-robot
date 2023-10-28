@@ -60,7 +60,7 @@ class OnShapeClient:
         root = assembly['rootAssembly']
         
         # self.assembly["rootAssembly"]["occurrences"][0]: dict_keys(['hidden', 'fixed', 'transform', 'path'])
-        breakpoint()
+        
         
         # self.assembly["rootAssembly"]["instances"][0]: dict_keys(['name', 'suppressed', 'id', 'type', 'featureId', 'fullConfiguration', 'configuration', 'documentId', 'elementId', 'documentMicroversion'])
         
