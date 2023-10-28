@@ -93,13 +93,6 @@ class RobotDescription(object):
             return self.config.jointMaxVelocity[jointName]
         return self.config.jointMaxVelocity["default"]
 
-    def resetLink(self):
-        self._mesh = {'visual': None, 'collision': None}
-        self._color = np.array([0., 0., 0.])
-        self._color_mass = 0
-        self._link_childs = 0
-        self._visuals = []
-        self._dynamics = []
 
     def addLinkDynamics(self, matrix, mass, com, inertia):
         # Inertia
@@ -111,7 +104,7 @@ class RobotDescription(object):
         # Expressing inertia in the link frame
         inertia = R*I*R.T
 
-        self._dynamics.append({
+        self.exporter._dynamics.append({
             'mass': mass,
             'com': com,
             'inertia': inertia
@@ -119,16 +112,16 @@ class RobotDescription(object):
 
     def mergeSTL(self, stl_path, matrix, color, mass, node='visual'):
         if node == 'visual':
-            self._color += np.array(color) * mass
-            self._color_mass += mass
+            self.exporter._color += np.array(color) * mass
+            self.exporter._color_mass += mass
 
         m = stl_combine.load_mesh(os.path.join(self.exporter.root_directory, stl_path))
         stl_combine.apply_matrix(m, matrix)
 
-        if self._mesh[node] is None:
-            self._mesh[node] = m
+        if self.exporter._mesh[node] is None:
+            self.exporter._mesh[node] = m
         else:
-            self._mesh[node] = stl_combine.combine_meshes(self._mesh[node], m)
+            self.exporter._mesh[node] = stl_combine.combine_meshes(self.exporter._mesh[node], m)
 
     def linkDynamics(self):
         mass = 0
@@ -136,7 +129,7 @@ class RobotDescription(object):
         inertia = np.matrix(np.zeros((3, 3)))
         identity = np.matrix(np.eye(3))
 
-        for dynamic in self._dynamics:
+        for dynamic in self.exporter._dynamics:
             mass += dynamic['mass']
             com += dynamic['com']*dynamic['mass']
 
@@ -144,7 +137,7 @@ class RobotDescription(object):
             com /= mass
 
         # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
-        for dynamic in self._dynamics:
+        for dynamic in self.exporter._dynamics:
             r = dynamic['com'] - com
             p = np.matrix(r)
             inertia += dynamic['inertia'] + \
@@ -242,7 +235,7 @@ class RobotURDF(RobotDescription):
         return None
 
     def startLink(self, link_name):
-        self.resetLink()
+        self.exporter.resetLink()
 
         for link in self.json["robot"]["link"]:
             if link["name"] == link_name:
@@ -257,9 +250,9 @@ class RobotURDF(RobotDescription):
         mass, com, inertia = self.linkDynamics()
 
         for node in ['visual', 'collision']:
-            if self._mesh[node] is not None:
-                if node == 'visual' and self._color_mass > 0:
-                    color = self._color / self._color_mass
+            if self.exporter._mesh[node] is not None:
+                if node == 'visual' and self.exporter._color_mass > 0:
+                    color = self.exporter._color / self.exporter._color_mass
                 else:
                     color = [0.5, 0.5, 0.5]
 
@@ -269,12 +262,11 @@ class RobotURDF(RobotDescription):
                     self.config.packageName.strip("/"), 
                     stl_filename)
                 stl_combine.save_mesh(
-                    self._mesh[node], os.path.join(self.exporter.root_directory, stl_path))
+                    self.exporter._mesh[node], os.path.join(self.exporter.root_directory, stl_path))
                 if self.shouldSimplifySTLs(node):
                     stl_combine.simplify_stl(os.path.join(self.exporter.root_directory, stl_path), self.maxSTLSize)
                 self.addSTL(link_name, np.identity(4), stl_path, color, link_name, node)
 
-        link_target = None
         
         inertial = {
             "origin": {

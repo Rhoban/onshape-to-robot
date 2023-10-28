@@ -262,6 +262,13 @@ class OnshapeRobotExporter:
 
         return link_name
     
+    def resetLink(self):
+        self._mesh = {'visual': None, 'collision': None}
+        self._color = np.array([0., 0., 0.])
+        self._color_mass = 0
+        self._link_childs = 0
+        self._visuals = []
+        self._dynamics = []
     
     def partIsIgnore(self, name):
         if self.config['whitelist'] is None:
