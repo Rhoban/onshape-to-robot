@@ -52,7 +52,21 @@ class OnShapeClient:
             assembly = self.client.get_assembly(
                 config['documentId'], workspace_id, assembly_id, configuration=config['configuration'])
 
+
+        # self.assembly: dict_keys(['rootAssembly', 'subAssemblies', 'parts', 'partStudioFeatures'])
+        self.assembly = assembly
+
+        # self.assembly["rootAssembly"]: dict_keys(['occurrences', 'patterns', 'features', 'instances', 'fullConfiguration', 'configuration', 'documentId', 'elementId', 'documentMicroversion'])
         root = assembly['rootAssembly']
+        
+        # self.assembly["rootAssembly"]["occurrences"][0]: dict_keys(['hidden', 'fixed', 'transform', 'path'])
+        breakpoint()
+        
+        # self.assembly["rootAssembly"]["instances"][0]: dict_keys(['name', 'suppressed', 'id', 'type', 'featureId', 'fullConfiguration', 'configuration', 'documentId', 'elementId', 'documentMicroversion'])
+        
+        self.all_parts = {}
+        
+        
 
         # Finds a (leaf) instance given the full path, typically A B C where A and B would be subassemblies and C
         # the final part
@@ -66,6 +80,8 @@ class OnShapeClient:
                 np.reshape(occurrence['transform'], (4, 4)))
             occurrence['linkName'] = None
             self.occurrences[tuple(occurrence['path'])] = occurrence
+            
+            self.all_parts[occurrence['instance']["id"]] = occurrence
 
         # Gets an occurrence given its full path
 

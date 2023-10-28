@@ -372,7 +372,9 @@ class OnshapeRobotExporter:
         scad_filename = "{part_name}.scad".format(part_name=full_part_name)
         
 
-        parent = self.client.getParent(part["id"])
+        parent_id = self.client.getParent(part["id"])
+        #parent = self.client.all_parts.get(parent_id)
+        parent = self.client.assembly["rootAssembly"].get(parent_id)
         print(parent)
         
         if parent:
