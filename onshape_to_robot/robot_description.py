@@ -94,21 +94,6 @@ class RobotDescription(object):
         return self.config.jointMaxVelocity["default"]
 
 
-    def addLinkDynamics(self, matrix, mass, com, inertia):
-        # Inertia
-        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
-        R = matrix[:3, :3]
-        # Expressing COM in the link frame
-        com = np.array(
-            (matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
-        # Expressing inertia in the link frame
-        inertia = R*I*R.T
-
-        self.exporter._dynamics.append({
-            'mass': mass,
-            'com': com,
-            'inertia': inertia
-        })
 
     def mergeSTL(self, stl_path, matrix, color, mass, node='visual'):
         if node == 'visual':
@@ -122,28 +107,6 @@ class RobotDescription(object):
             self.exporter._mesh[node] = m
         else:
             self.exporter._mesh[node] = stl_combine.combine_meshes(self.exporter._mesh[node], m)
-
-    def linkDynamics(self):
-        mass = 0
-        com = np.array([0.0]*3)
-        inertia = np.matrix(np.zeros((3, 3)))
-        identity = np.matrix(np.eye(3))
-
-        for dynamic in self.exporter._dynamics:
-            mass += dynamic['mass']
-            com += dynamic['com']*dynamic['mass']
-
-        if mass > 0:
-            com /= mass
-
-        # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
-        for dynamic in self.exporter._dynamics:
-            r = dynamic['com'] - com
-            p = np.matrix(r)
-            inertia += dynamic['inertia'] + \
-                (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
-
-        return mass, com, inertia
 
 
 class RobotURDF(RobotDescription):
@@ -234,20 +197,17 @@ class RobotURDF(RobotDescription):
                 return idx
         return None
 
-    def startLink(self, link_name):
-        self.exporter.resetLink()
-
+    def createLink(self, link_name):
+        # Check if link already exists
         for link in self.json["robot"]["link"]:
             if link["name"] == link_name:
                 raise Exception("Link name already exists: " + link_name)
         
         self.json["robot"]["link"].append({"name": link_name, "$t": None})
         
-        # self.current_link_idx = len(self.json["robot"]["link"]) - 1
-        
 
-    def endLink(self, link_name):
-        mass, com, inertia = self.linkDynamics()
+    def endLink(self, link_name, mass, com, inertia):
+        
 
         for node in ['visual', 'collision']:
             if self.exporter._mesh[node] is not None:
@@ -336,7 +296,7 @@ class RobotURDF(RobotDescription):
         idx = self.getLinkIndex(link_name)
         self.json["robot"]["link"][idx][node] = node_data
 
-    def addPart(self, link_name, matrix, stl_path, mass, com, inertia, color, shapes=None, name=''):
+    def addPart(self, link_name, matrix, stl_path, mass, color, shapes=None, name=''):
         if stl_path is not None:
             print("ADD PART STL:", stl_path, self.config.packageName)
             if not self.config.drawCollisions:
@@ -396,32 +356,7 @@ class RobotURDF(RobotDescription):
                         idx = self.getLinkIndex(link_name)
                         self.json["robot"]["link"][idx][entry] = node_data
         
-        
-                    # # Inserting pure shapes in the URDF model
-                    # self.append('<!-- Shapes for '+name+' -->')
-                    # for shape in shapes:
-                    #     self.append('<'+entry+'>')
-                    #     self.append(origin(matrix*shape['transform']))
-                    #     self.append('<geometry>')
-                    #     if shape['type'] == 'cube':
-                    #         self.append('<box size="%.20g %.20g %.20g" />' %
-                    #                     tuple(shape['parameters']))
-                    #     if shape['type'] == 'cylinder':
-                    #         self.append(
-                    #             '<cylinder length="%.20g" radius="%.20g" />' % tuple(shape['parameters']))
-                    #     if shape['type'] == 'sphere':
-                    #         self.append('<sphere radius="%.20g" />' %
-                    #                     shape['parameters'])
-                    #     self.append('</geometry>')
 
-                    #     if entry == 'visual':
-                    #         self.append('<material name="'+name+'_material">')
-                    #         self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
-                    #                     (color[0], color[1], color[2]))
-                    #         self.append('</material>')
-                    #     self.append('</'+entry+'>')
-
-        self.addLinkDynamics(matrix, mass, com, inertia)
 
     def addJoint(self, joint_type, parent_link, child_link, transform, name, joint_limits, z_axis=[0, 0, 1]):
         for j in self.json["robot"]["joint"]:

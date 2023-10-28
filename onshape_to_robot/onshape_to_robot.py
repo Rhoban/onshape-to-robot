@@ -218,17 +218,21 @@ class OnshapeRobotExporter:
         link_name = self.generateLinkName(instance["name"], instance["configuration"], occurrence["linkName"])
         print("link:", link_name)
         
+        # if this is root
         if tree == self.client.tree:
-            # this is root
             if self.config.addDummyBaseLink:
                 self.robot.addDummyBaseLink(link_name)    
 
         # Create the link, collecting all children in the tree assigned to this top-level part
-        self.robot.startLink(link_name)
+        self.resetLink()
+        self.robot.createLink(link_name)
+        
         for occurrence in self.client.occurrences.values():
             if occurrence["assignation"] == tree["id"] and occurrence["instance"]["type"] == "Part":
                 self.addPart(link_name, occurrence, matrix)
-        self.robot.endLink(link_name)
+        
+        mass, com, inertia = self.linkDynamics()
+        self.robot.endLink(link_name, mass, com, inertia)
 
         # Adding the frames (linkage is relative to parent)
         if tree["id"] in self.client.frames:
@@ -269,6 +273,29 @@ class OnshapeRobotExporter:
         self._link_childs = 0
         self._visuals = []
         self._dynamics = []
+        
+    def linkDynamics(self):
+        mass = 0
+        com = np.array([0.0]*3)
+        inertia = np.matrix(np.zeros((3, 3)))
+        identity = np.matrix(np.eye(3))
+
+        for dynamic in self._dynamics:
+            mass += dynamic['mass']
+            com += dynamic['com']*dynamic['mass']
+
+        if mass > 0:
+            com /= mass
+
+        # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
+        for dynamic in self._dynamics:
+            r = dynamic['com'] - com
+            p = np.matrix(r)
+            inertia += dynamic['inertia'] + \
+                (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
+
+        return mass, com, inertia
+
     
     def partIsIgnore(self, name):
         if self.config['whitelist'] is None:
@@ -290,6 +317,8 @@ class OnshapeRobotExporter:
             return
 
         print("Add Part:", link_name)
+        
+        
         # Importing STL file for this part
         base_part_name, full_part_name = self.extractPartName(part["name"], part["configuration"])
 
@@ -336,6 +365,8 @@ class OnshapeRobotExporter:
                 json.dump(part, stream, indent=2, sort_keys=True)
 
 
+
+
         # Import the SCAD files pure shapes
         shapes = None
         
@@ -350,6 +381,8 @@ class OnshapeRobotExporter:
                 print("generating SCAD!")
                 with open(scad_path, 'w', encoding="utf-8") as stream:
                     stream.write("")
+
+
 
         # Obtain metadatas about part to retrieve color
         if self.config['color'] is not None:
@@ -367,8 +400,10 @@ class OnshapeRobotExporter:
                     color = np.array(
                         [rgb['red'], rgb['green'], rgb['blue']])/255.0
 
+
+
         # Obtain mass properties about that part
-        if self.config['noDynamics']:
+        if self.config["noDynamics"]:
             mass = 0
             com = [0]*3
             inertia = [0]*12
@@ -379,17 +414,17 @@ class OnshapeRobotExporter:
                 com = entry['com']
                 inertia = entry['inertia']
             else:
-                massProperties = self.client.client.part_mass_properties(
+                mass_properties = self.client.client.part_mass_properties(
                     part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
 
-                if part['partId'] not in massProperties['bodies']:
+                if part['partId'] not in mass_properties['bodies']:
                     print(Fore.YELLOW + 'WARNING: part ' +
                         part['name']+' has no dynamics (maybe it is a surface)' + Style.RESET_ALL)
                     return
-                massProperties = massProperties['bodies'][part['partId']]
-                mass = massProperties['mass'][0]
-                com = massProperties['centroid']
-                inertia = massProperties['inertia']
+                mass_properties = mass_properties['bodies'][part['partId']]
+                mass = mass_properties['mass'][0]
+                com = mass_properties['centroid']
+                inertia = mass_properties['inertia']
 
                 if abs(mass) < 1e-9:
                     print(Fore.YELLOW + 'WARNING: part ' +
@@ -399,7 +434,26 @@ class OnshapeRobotExporter:
         if self.robot.relative:
             pose = np.linalg.inv(matrix)*pose
 
-        self.robot.addPart(link_name, pose, stl_path, mass, com, inertia, color, shapes, full_part_name)
+        self.robot.addPart(link_name, pose, stl_path, mass, color, shapes, full_part_name)
+        
+        self.addLinkDynamics(pose, mass, com, inertia)
+        
+        
+    def addLinkDynamics(self, matrix, mass, com, inertia):
+        # Inertia
+        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
+        R = matrix[:3, :3]
+        # Expressing COM in the link frame
+        com = np.array(
+            (matrix*np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
+        # Expressing inertia in the link frame
+        inertia = R*I*R.T
+
+        self._dynamics.append({
+            'mass': mass,
+            'com': com,
+            'inertia': inertia
+        })
 
     def extractPartName(self, name, configuration):
         name_lst = name.split(" ")
