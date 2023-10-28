@@ -1,22 +1,16 @@
 import os
-import numpy as np
-from copy import copy
-import commentjson as json
-import colorama
-from colorama import Fore, Back, Style
-import xml
-from copy import copy
 import sys
 from sys import exit
-import os
 import subprocess
 import hashlib
-import omegaconf
+import xml
+import json
 
 import numpy as np
-import commentjson as json
-from colorama import Fore, Back, Style
+import omegaconf
 from cc.xmljson import XMLJSON
+import colorama
+from colorama import Fore, Style
 
 from . import csg
 from .robot_description import URDFDescription, MJCFDescription#, RobotSDF
@@ -239,7 +233,6 @@ class OnshapeRobotExporter:
 
         # Create the link, collecting all children in the tree assigned to this top-level part
         self.resetLink()
-        
         
         self.robot.createLink(link_name)
         
@@ -619,26 +612,6 @@ class OnshapeRobotExporter:
         else:
             return name+'_'+str(self.part_name_counts[name])
     
-    def reorderJoints(self):
-        reorder_joint = [None] * len(self.config.jointOrder)
-        reorder_joint_extra = []
-        
-        for j in self.robot.json["robot"]["joint"]:
-            try:
-                desired_index = self.config.jointOrder.index(j["name"])
-                print(desired_index)
-                reorder_joint[desired_index] = j
-            except omegaconf.errors.ConfigValueError:
-                reorder_joint_extra.append(j)
-        
-        for j in reorder_joint:
-            if j is None:
-                reorder_joint.remove(j)
-            
-        reorder_joint.extend(reorder_joint_extra)
-        
-        print([j["name"] for j in reorder_joint])
-        self.robot.json["robot"]["joint"] = reorder_joint
 
     def write(self):
         json.dump(self.robot.json, open(os.path.join(self.root_directory, self.config.outputDirectory.urdf, "robot.json"), "w"), indent=2)
@@ -648,11 +621,13 @@ class OnshapeRobotExporter:
         xml.etree.ElementTree.indent(xml_tree, space="  ", level=0)
         xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
         
-        print("\n" + Style.BRIGHT + "* Writing " +
-            self.robot.ext.upper()+" file" + Style.RESET_ALL)
+        if self.robot.ext == "mjcf":
+            print("EXT:", self.robot.ext)
+            xml_data = xml_data.replace(b"<?xml version='1.0' encoding='utf8'?>", b"")    
+        
+        print("{STYLE} * Writing {ext} file... {RESET}".format(STYLE=Style.BRIGHT, ext=self.robot.ext.upper(), RESET=Style.RESET_ALL))
         with open(os.path.join(self.root_directory, self.config.outputDirectory.urdf, "robot."+self.robot.ext), "wb") as stream:
             stream.write(xml_data)
-
 
         if len(self.config['postImportCommands']):
             print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
@@ -674,95 +649,9 @@ def main():
     exporter.robot.finalize()
     # print(exporter.robot.json)
     
-    exporter.reorderJoints()
+    exporter.robot.reorderJoints()
     exporter.write()
     
-    # mjcf configs
-    mjcf_data = {
-        "mujoco": {
-            "model": "humanoid",
-            "statistic": {
-                "extent": "2",
-                "center": "0 0 1",
-            },
-            "option": {
-                "timestep": "0.00555",
-            },
-            "default": {
-                "motor": {
-                    "ctrlrange": "-1 1",
-                    "ctrllimited": True,
-                },
-                "default": {
-                    "class": "body",
-                    "geom": {
-                        "type": "capsule",
-                        "condim": 1,
-                        "friction": "1.0 0.05 0.05",
-                        "solimp": ".9 .99 .003",
-                        "solref": ".015 1",
-                    },
-                    "joint": {
-                        "type": "hinge",
-                        "damping": 0.1,
-                        "stiffness": 5,
-                        "armature": .007,
-                        "limited": True,
-                        "solimplimit": "0 .99 .01",
-                    },
-                    "site": {
-                        "size": 0.04,
-                        "group": 3,
-                    },
-                    "default": [
-                        {
-                            "class": "force-torque",
-                            "site": {
-                                "type": "box",
-                                "size": ".01 .01 .02",
-                                "rgba": "1 0 0 1",
-                            },
-                        },
-                        {
-                            "class": "touch",
-                            "site": {
-                                "type": "capsule",
-                                "rgba": "0 0 1 .3",
-                            },
-                        }
-                    ]
-                }
-            },
-            "worldbody": {
-                "geom": {
-                    "name": "floor",
-                    "type": "plane",
-                    "conaffinity": 1,
-                    "size": "100 100 .2",
-                    "material": "grid",
-                },
-                "body": {
-                    "name": "pelvis",
-                    "pos": "0 0 1",
-                    "childclass": "body",
-                    "freejoint": {
-                        "name": "root",
-                    },
-                },
-            },
-        },
-    }
-    xml_tree = XMLJSON.gdata.etree(mjcf_data)[0]
-    xml.etree.ElementTree.indent(xml_tree, space="  ", level=0)
-    xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
-    
-    ext = "mjcf"
-    
-    xml_data = xml_data.replace(b"<?xml version='1.0' encoding='utf8'?>", b"")    
-    print("\n" + Style.BRIGHT + "* Writing " +
-        ext.upper()+" file" + Style.RESET_ALL)
-    with open(os.path.join(exporter.root_directory, exporter.config.outputDirectory.urdf, "robot."+ext), "wb") as stream:
-        stream.write(xml_data)
         
     # End of MJCF
         

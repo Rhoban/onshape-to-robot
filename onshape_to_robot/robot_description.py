@@ -3,6 +3,7 @@ import math
 import uuid
 
 import numpy as np
+import omegaconf
 
 from . import stl_combine
 
@@ -64,7 +65,116 @@ class RobotDescription(object):
         
 
 class MJCFDescription(RobotDescription):
-    pass
+    def __init__(self, name, config=None):
+        super().__init__(name)
+        self.config = config
+        self.ext = "mjcf"
+        self.json = {
+            "mujoco": {
+                "model": "humanoid",
+                "statistic": {
+                    "extent": "2",
+                    "center": "0 0 1",
+                },
+                "option": {
+                    "timestep": "0.00555",
+                },
+                "default": {
+                    "motor": {
+                        "ctrlrange": "-1 1",
+                        "ctrllimited": True,
+                    },
+                    "default": {
+                        "class": "body",
+                        "geom": {
+                            "type": "capsule",
+                            "condim": 1,
+                            "friction": "1.0 0.05 0.05",
+                            "solimp": ".9 .99 .003",
+                            "solref": ".015 1",
+                        },
+                        "joint": {
+                            "type": "hinge",
+                            "damping": 0.1,
+                            "stiffness": 5,
+                            "armature": .007,
+                            "limited": True,
+                            "solimplimit": "0 .99 .01",
+                        },
+                        "site": {
+                            "size": 0.04,
+                            "group": 3,
+                        },
+                        "default": [
+                            {
+                                "class": "force-torque",
+                                "site": {
+                                    "type": "box",
+                                    "size": ".01 .01 .02",
+                                    "rgba": "1 0 0 1",
+                                },
+                            },
+                            {
+                                "class": "touch",
+                                "site": {
+                                    "type": "capsule",
+                                    "rgba": "0 0 1 .3",
+                                },
+                            }
+                        ]
+                    }
+                },
+                "worldbody": {
+                    "geom": {
+                        "name": "floor",
+                        "type": "plane",
+                        "conaffinity": 1,
+                        "size": "100 100 .2",
+                        "material": "grid",
+                    },
+                    "body": [],
+                },
+            },
+        }
+        
+        self._current_link = self.json["mujoco"]["worldbody"]
+        
+    def createLink(self, link_name):
+        print("createLink:", self._current_link, link_name)
+        
+        # Check if link already exists
+        for link in self._current_link["body"]:
+            if link["name"] == link_name:
+                raise Exception("Link name already exists: " + link_name)
+        
+        elem = {
+            "name": link_name,
+            "geom": [],
+            "body": [],
+        }
+        self._current_link["body"].append(elem)
+        self._current_link = self._current_link["body"][len(self._current_link["body"])-1]
+        
+    def addSTL(self, link_name, matrix, stl_path, color, name, node='visual'):
+        self._current_link["geom"].append({
+            "filename": stl_path
+        })
+    
+    def endLink(self, link_name, mass, com, inertia):
+        pass
+    
+    def addFixedVisualLink(self, link_name):
+        pass
+
+    def addJoint(self, joint_type, parent_link, child_link, transform, name, joint_limits, z_axis=[0, 0, 1], effort_limit=None, velocity_limit=None):
+        pass
+     
+    def finalize(self):
+        pass
+        # self.append(self.additionalXML)
+
+    def reorderJoints(self):
+        pass
 
 
 class URDFDescription(RobotDescription):
@@ -266,6 +376,28 @@ class URDFDescription(RobotDescription):
             joint["limit"]["upper"] = joint_limits[1]
 
         self.json["robot"]["joint"].append(joint)
+        
+    def reorderJoints(self):
+        reorder_joint = [None] * len(self.config.jointOrder)
+        reorder_joint_extra = []
+        
+        for j in self.json["robot"]["joint"]:
+            try:
+                desired_index = self.config.jointOrder.index(j["name"])
+                print(desired_index)
+                reorder_joint[desired_index] = j
+            except omegaconf.errors.ConfigValueError:
+                reorder_joint_extra.append(j)
+        
+        for j in reorder_joint:
+            if j is None:
+                reorder_joint.remove(j)
+            
+        reorder_joint.extend(reorder_joint_extra)
+        
+        print([j["name"] for j in reorder_joint])
+        self.json["robot"]["joint"] = reorder_joint
+        
 
     def finalize(self):
         pass
