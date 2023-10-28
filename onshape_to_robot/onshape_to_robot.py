@@ -348,8 +348,12 @@ class OnshapeRobotExporter:
 
     # Adds a part to the current robot link
     def addPart(self, link_name, occurrence, matrix):
+        
+        # dict_keys(['hidden', 'fixed', 'transform', 'path', 'assignation', 'instance', 'linkName'])
+        
+        # dict_keys(['name', 'suppressed', 'id', 'type', 'isStandardContent', 'partId', 'fullConfiguration', 'documentVersion', 'configuration', 'elementId', 'documentId', 'documentMicroversion'])
         part = occurrence["instance"]
-
+        
         # Checking if this part should be ignored
         if part["suppressed"]:
             return
@@ -358,8 +362,6 @@ class OnshapeRobotExporter:
             print("{STYLE}WARNING: Part '{name}' has no partId{RESET}".format(
                 STYLE=Fore.YELLOW, name=part["name"], RESET=Style.RESET_ALL))
             return
-
-        print("Add Part:", link_name)
         
         
         # Importing STL file for this part
@@ -368,6 +370,16 @@ class OnshapeRobotExporter:
         stl_filename = "{unique_name}.stl".format(unique_name=unique_name)
         metadata_filename = "{unique_name}.json".format(unique_name=unique_name)
         scad_filename = "{part_name}.scad".format(part_name=full_part_name)
+        
+
+        parent = self.client.getParent(part["id"])
+        print(parent)
+        
+        if parent:
+            _, parent_name = self.extractPartName(parent["instance"]["name"], parent["instance"]["configuration"])
+        else:
+            parent_name = "I'm already root"
+        print("Add PART:", unique_name, "----> parent:", parent_name)
 
         configuration_info = ""
         if occurrence["instance"]["configuration"] != "default":
@@ -477,9 +489,6 @@ class OnshapeRobotExporter:
         if self.robot.relative:
             pose = np.linalg.inv(matrix)*pose
 
-        # self.robot.addPart(link_name, pose, stl_path, mass, color, shapes, full_part_name)
-            
-        # def addPart(self, link_name, matrix, stl_path, mass, color, shapes=None, name=''):
         if stl_path is not None:
             print("ADD PART STL:", stl_path, self.config.packageName)
             if not self.config.drawCollisions:

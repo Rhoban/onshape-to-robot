@@ -57,33 +57,11 @@ class OnShapeClient:
         # Finds a (leaf) instance given the full path, typically A B C where A and B would be subassemblies and C
         # the final part
 
-        def findInstance(assembly, path, instances=None):
-
-            if instances is None:
-                instances = assembly['rootAssembly']['instances']
-
-            for instance in instances:
-                if instance['id'] == path[0]:
-                    if len(path) == 1:
-                        # If the length of remaining path is 1, the part is in the current assembly/subassembly
-                        return instance
-                    else:
-                        # Else, we need to find the matching sub assembly to find the proper part (recursively)
-                        d = instance['documentId']
-                        m = instance['documentMicroversion']
-                        e = instance['elementId']
-                        for asm in assembly['subAssemblies']:
-                            if asm['documentId'] == d and asm['documentMicroversion'] == m and asm['elementId'] == e:
-                                return findInstance(assembly, path[1:], asm['instances'])
-
-            print(Fore.RED + 'Could not find instance for ' + str(path) + Style.RESET_ALL)
-
-
         # Collecting occurrences, the path is the assembly / sub assembly chain
         self.occurrences = {}
         for occurrence in root['occurrences']:
             occurrence['assignation'] = None
-            occurrence['instance'] = findInstance(assembly, occurrence['path'])
+            occurrence['instance'] = self.findInstance(assembly, occurrence['path'])
             occurrence['transform'] = np.matrix(
                 np.reshape(occurrence['transform'], (4, 4)))
             occurrence['linkName'] = None
@@ -118,7 +96,7 @@ class OnShapeClient:
         print("\n" + Style.BRIGHT +
             '* Getting assembly features, scanning for DOFs...' + Style.RESET_ALL)
         trunk = None
-        relations = {}
+        self.relations = {}
         features = root['features']
         for feature in features:
             if feature['featureType'] == 'mateConnector':
@@ -221,7 +199,7 @@ class OnShapeClient:
                     print(Fore.GREEN + '+ Found DOF: '+name + ' ' + Style.DIM +
                         '('+jointType+')'+limitsStr + Style.RESET_ALL)
 
-                    if child in relations:
+                    if child in self.relations:
                         print(Fore.RED)
                         print('Error, the relation '+name +
                             ' is connected a child that is already connected')
@@ -231,7 +209,7 @@ class OnShapeClient:
                         print(Style.RESET_ALL)
                         exit()
 
-                    relations[child] = {
+                    self.relations[child] = {
                         'parent': parent,
                         'worldAxisFrame': worldAxisFrame,
                         'zAxis': zAxis,
@@ -244,10 +222,10 @@ class OnShapeClient:
                     assignParts(parent, parent)
 
         print(Fore.GREEN + Style.BRIGHT + '* Found total ' +
-            str(len(relations))+' DOFs' + Style.RESET_ALL)
+            str(len(self.relations))+' DOFs' + Style.RESET_ALL)
 
         # If we have no DOF
-        if len(relations) == 0:
+        if len(self.relations) == 0:
             trunk = root['instances'][0]['id']
             assignParts(trunk, trunk)
 
@@ -307,9 +285,9 @@ class OnShapeClient:
         # 3. Collect all the pieces of the robot tree
         print("\n" + Style.BRIGHT + '* Building robot tree' + Style.RESET_ALL)
 
-        for childId in relations:
-            entry = relations[childId]
-            if entry['parent'] not in relations:
+        for childId in self.relations:
+            entry = self.relations[childId]
+            if entry['parent'] not in self.relations:
                 trunk = entry['parent']
                 break
         trunkOccurrence = self.getOccurrence([trunk])
@@ -335,8 +313,8 @@ class OnShapeClient:
             part = {}
             part['id'] = id
             part['children'] = []
-            for childId in relations:
-                entry = relations[childId]
+            for childId in self.relations:
+                entry = self.relations[childId]
                 if entry['parent'] == id:
                     child = collect(childId)
                     child['axis_frame'] = entry['worldAxisFrame']
@@ -348,8 +326,35 @@ class OnShapeClient:
             return part
 
         self.tree = collect(trunk)
+    
+    def getParent(self, part_id):
+        part = self.relations.get(part_id)
+        if not part:
+            return None
+        return part["parent"]
 
         #return self.client, tree, occurrences, getOccurrence, frames
+
+    def findInstance(self, assembly, path, instances=None):
+        if instances is None:
+            instances = assembly['rootAssembly']['instances']
+
+        for instance in instances:
+            if instance['id'] == path[0]:
+                if len(path) == 1:
+                    # If the length of remaining path is 1, the part is in the current assembly/subassembly
+                    return instance
+                else:
+                    # Else, we need to find the matching sub assembly to find the proper part (recursively)
+                    d = instance['documentId']
+                    m = instance['documentMicroversion']
+                    e = instance['elementId']
+                    for asm in assembly['subAssemblies']:
+                        if asm['documentId'] == d and asm['documentMicroversion'] == m and asm['elementId'] == e:
+                            return self.findInstance(assembly, path[1:], asm['instances'])
+
+        print(Fore.RED + 'Could not find instance for ' + str(path) + Style.RESET_ALL)
+
 
     def getWorkspaceId(self):
         # If a versionId is provided, it will be used, else the main workspace is retrieved
