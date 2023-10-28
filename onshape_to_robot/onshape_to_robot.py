@@ -26,19 +26,67 @@ class OnshapeRobotExporter:
     def __init__(self, config_path="./config.yaml"):
         self.config_path = config_path
 
+        self.part_name_counts = {}
+    
         if not os.path.exists(self.config_path):
             print(Fore.RED+"ERROR: The file "+self.config_path+" can't be found"+Style.RESET_ALL)
             exit()
 
+        self.processConfig()
 
-        # validate configuration parameters
 
-        self.config = omegaconf.OmegaConf.load(self.config_path)
-        self.config_ = self.config
+        # convert workspace root path as absolute path
+        self.root_directory = os.path.join(os.path.dirname(os.path.abspath(config_path)), self.config.outputDirectory.root)
+        print("workspace path:", self.root_directory)
+
+
+        self.robot = None
+
+        # Creating robot for output
+        if self.config.outputFormat == "urdf":
+            self.robot = RobotURDF(self.config.robotName, self.config, self)
+        # elif self.config.outputFormat == "sdf":
+        #     self.robot = RobotSDF(self.config.robotName, self.config)
+        else:
+            print(Fore.RED + 'ERROR: Unknown output format: ' +
+                self.config.outputFormat +' (supported are urdf and sdf)' + Style.RESET_ALL)
+            exit()
         
-        # breakpoint()
+        self.createDirectories()
+        
+        
+        # Loading configuration, collecting occurrences and building robot tree
+        # from .load_robot import \
+        #     config, client, tree, occurrences, getOccurrence, frames
+        # from .load_robot import connectOnShape
+        from .load_robot import OnShapeClient
+        
+        self.client = OnShapeClient(self.config)
+        # self.client, self.tree, self.occurrences, self.getOccurrence, self.frames = connectOnShape(self.config)
 
+        
 
+    def getConfig(self, name, default=None, has_default=False, values_list=None):
+        has_default = has_default or (default is not None)
+        if name in self.config.keys():
+            value = self.config[name]
+            if values_list is not None and value not in values_list:
+                print(Fore.RED+"ERROR: Value for "+name +
+                    " should be one of: "+(','.join(values_list))+Style.RESET_ALL)
+                exit()
+            return value
+        else:
+            if has_default:
+                return default
+            else:
+                print(Fore.RED + 'ERROR: missing key "' +
+                    name+'" in config' + Style.RESET_ALL)
+                exit()
+    
+    def processConfig(self):
+        # validate configuration parameters
+        self.config = omegaconf.OmegaConf.load(self.config_path)
+        
         self.config["documentId"]       = self.getConfig("documentId")
         self.config["versionId"]        = self.getConfig("versionId", "")
         self.config["workspaceId"]      = self.getConfig("workspaceId", "")
@@ -63,16 +111,16 @@ class OnshapeRobotExporter:
 
         # Ignore list
         self.config["ignore"]           = self.getConfig("ignore", [])
-        self.config["whitelist"]        = self.getConfig("whitelist", None, hasDefault=True)
+        self.config["whitelist"]        = self.getConfig("whitelist", None, has_default=True)
 
         # Color override
-        self.config["color"]            = self.getConfig("color", None, hasDefault=True)
+        self.config["color"]            = self.getConfig("color", None, has_default=True)
 
         # STLs merge and simplification
-        self.config["mergeSTLs"]        = self.getConfig("mergeSTLs", "no", valuesList=[
+        self.config["mergeSTLs"]        = self.getConfig("mergeSTLs", "no", values_list=[
                                             "no", "visual", "collision", "all"])
         self.config["maxSTLSize"]       = self.getConfig("maxSTLSize", 3)
-        self.config["simplifySTLs"]     = self.getConfig("simplifySTLs", "no", valuesList=[
+        self.config["simplifySTLs"]     = self.getConfig("simplifySTLs", "no", values_list=[
                                             "no", "visual", "collision", "all"])
 
         # Post-import commands to execute
@@ -88,8 +136,8 @@ class OnshapeRobotExporter:
         self.config["packageName"]      = self.getConfig("packageName", "")
         self.config["addDummyBaseLink"] = self.getConfig("addDummyBaseLink", False)
         self.config["robotName"]        = self.getConfig("robotName", "onshape")
-
-
+        
+        
         # additional XML code to insert
         if self.config['outputFormat'] == 'urdf':
             additionalFileName = self.getConfig('additionalUrdfFile', '')
@@ -145,42 +193,6 @@ class OnshapeRobotExporter:
 
 
 
-        # convert workspace root path as absolute path
-        self.root_directory = os.path.join(os.path.dirname(os.path.abspath(config_path)), self.config.outputDirectory.root)
-        print("workspace path:", self.root_directory)
-
-
-        self.robot = None
-
-        # Creating robot for output
-        if self.config.outputFormat == "urdf":
-            self.robot = RobotURDF(self.config.robotName, self.config, self)
-        # elif self.config.outputFormat == "sdf":
-        #     self.robot = RobotSDF(self.config.robotName, self.config)
-        else:
-            print(Fore.RED + 'ERROR: Unknown output format: ' +
-                self.config.outputFormat +' (supported are urdf and sdf)' + Style.RESET_ALL)
-            exit()
-        
-        self.createDirectories()
-
-    def getConfig(self, name, default=None, hasDefault=False, valuesList=None):
-        hasDefault = hasDefault or (default is not None)
-
-        if name in self.config.keys():
-            value = self.config[name]
-            if valuesList is not None and value not in valuesList:
-                print(Fore.RED+"ERROR: Value for "+name +
-                    " should be one of: "+(','.join(valuesList))+Style.RESET_ALL)
-                exit()
-            return value
-        else:
-            if hasDefault:
-                return default
-            else:
-                print(Fore.RED + 'ERROR: missing key "' +
-                    name+'" in config' + Style.RESET_ALL)
-                exit()
 
     def createDirectories(self):        
         # Output directory, making it if it doesn't exists
@@ -203,34 +215,68 @@ class OnshapeRobotExporter:
             os.makedirs(scad_dir_abs)
 
 
+    def buildRobot(self, tree, matrix):
+        occurrence = self.client.getOccurrence([tree['id']])
+        
+        instance = occurrence['instance']
+        
+        print(Fore.BLUE + Style.BRIGHT +
+            '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
 
-partNames = {}
+        # Build a part name that is unique but still informative
+        link = self.processPartName(
+            instance['name'], instance['configuration'], occurrence['linkName'])
 
-def main():
-    colorama.just_fix_windows_console()
+        # Create the link, collecting all children in the tree assigned to this top-level part
+        self.robot.startLink(link, matrix)
+        for occurrence in self.client.occurrences.values():
+            if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
+                self.addPart(occurrence, matrix, instance['name'])
+        self.robot.endLink()
 
-    config_path = sys.argv[1]
+        # Adding the frames (linkage is relative to parent)
+        if tree['id'] in self.client.frames:
+            for name, part in self.client.frames[tree['id']]:
+                frame = self.client.getOccurrence(part)['transform']
+                if self.robot.relative:
+                    frame = np.linalg.inv(matrix)*frame
+                self.robot.addFrame(name, frame)
 
-    exporter = OnshapeRobotExporter(config_path) 
+        # Following the children in the tree, calling this function recursively
+        k = 0
+        for child in tree['children']:
+            worldAxisFrame = child['axis_frame']
+            zAxis = child['z_axis']
+            jointType = child['jointType']
+            jointLimits = child['jointLimits']
+
+            if self.robot.relative:
+                axisFrame = np.linalg.inv(matrix)*worldAxisFrame
+                childMatrix = worldAxisFrame
+            else:
+                # In SDF format, everything is expressed in the world frame, in this case
+                # childMatrix will be always identity
+                axisFrame = worldAxisFrame
+                childMatrix = matrix
+
+            subLink = self.buildRobot(child, childMatrix)
+            self.robot.addJoint(jointType, link, subLink, axisFrame,
+                        child['dof_name'], jointLimits, zAxis)
+
+        return link
     
     
-    # Loading configuration, collecting occurrences and building robot tree
-    # from .load_robot import \
-    #     config, client, tree, occurrences, getOccurrence, frames
-    from .load_robot import connectOnShape
-    client, tree, occurrences, getOccurrence, frames = connectOnShape(exporter.config)
 
-
-    def partIsIgnore(name):
-        if exporter.config['whitelist'] is None:
-            return name in exporter.config['ignore']
+    def partIsIgnore(self, name):
+        if self.config['whitelist'] is None:
+            return name in self.config['ignore']
         else:
-            return name not in exporter.config['whitelist']
+            return name not in self.config['whitelist']
 
     # Adds a part to the current robot link
 
 
-    def addPart(occurrence, matrix, instance_name):
+    def addPart(self, occurrence, matrix, instance_name):
         part = occurrence['instance']
 
         if part['suppressed']:
@@ -241,24 +287,24 @@ def main():
             return
 
         # Importing STL file for this part
-        justPart, prefix = extractPartName(part['name'], part['configuration'])
+        justPart, prefix = self.extractPartName(part['name'], part['configuration'])
 
         extra = ''
         if occurrence['instance']['configuration'] != 'default':
             extra = Style.DIM + ' (configuration: ' + \
                 occurrence['instance']['configuration']+')'
         symbol = '+'
-        if partIsIgnore(justPart):
+        if self.partIsIgnore(justPart):
             symbol = '-'
             extra += Style.DIM + ' / ignoring visual and collision'
 
         print(Fore.GREEN + symbol+' Adding part ' +
             occurrence['instance']['name']+extra + Style.RESET_ALL)
 
-        if partIsIgnore(justPart):
+        if self.partIsIgnore(justPart):
             stl_path = None
         else:
-            stl_path = os.path.join(exporter.config.outputDirectory.meshes, instance_name.split("<")[0].replace(" ", "_") + prefix.replace("/", "_")+".stl")
+            stl_path = os.path.join(self.config.outputDirectory.meshes, instance_name.split("<")[0].replace(" ", "_") + prefix.replace("/", "_")+".stl")
             
             # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
             if len(part['configuration']) > 40:
@@ -266,36 +312,36 @@ def main():
                     part['configuration'].encode('utf-8')).hexdigest()
             else:
                 shortend_configuration = part['configuration']
-            stl = client.part_studio_stl_m(part["documentId"], part["documentMicroversion"], part["elementId"],
+            stl = self.client.getSTLPart(part["documentId"], part["documentMicroversion"], part["elementId"],
                                         part["partId"], shortend_configuration)
-            with open(os.path.join(exporter.root_directory, stl_path), "wb") as stream:
+            with open(os.path.join(self.root_directory, stl_path), "wb") as stream:
                 stream.write(stl)
 
-            stlMetadata = os.path.join(exporter.config.outputDirectory.parts, prefix.replace('/', '_')+'.part')
-            with open(os.path.join(exporter.root_directory, stlMetadata), 'w', encoding="utf-8") as stream:
+            stlMetadata = os.path.join(self.config.outputDirectory.parts, prefix.replace('/', '_')+'.part')
+            with open(os.path.join(self.root_directory, stlMetadata), 'w', encoding="utf-8") as stream:
                 json.dump(part, stream, indent=4, sort_keys=True)
 
 
         # Import the SCAD files pure shapes
         shapes = None
         
-        exporter.config['useScads'] = True
-        if exporter.config['useScads']:
+        self.config['useScads'] = True
+        if self.config['useScads']:
             scadFile = prefix+'.scad'
-            scad_path = os.path.join(exporter.root_directory, exporter.config.outputDirectory.scad, scadFile)
+            scad_path = os.path.join(self.root_directory, self.config.outputDirectory.scad, scadFile)
             if os.path.exists(scad_path):
                 shapes = csg.process(
-                    scad_path, exporter.config['pureShapeDilatation'])
+                    scad_path, self.config['pureShapeDilatation'])
             else:
                 print("generating SCAD!")
                 with open(scad_path, 'w', encoding="utf-8") as stream:
                     stream.write("")
 
         # Obtain metadatas about part to retrieve color
-        if exporter.config['color'] is not None:
-            color = exporter.config['color']
+        if self.config['color'] is not None:
+            color = self.config['color']
         else:
-            metadata = client.part_get_metadata(
+            metadata = self.client.client.part_get_metadata(
                 part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
 
             color = [0.5, 0.5, 0.5]
@@ -308,18 +354,18 @@ def main():
                         [rgb['red'], rgb['green'], rgb['blue']])/255.0
 
         # Obtain mass properties about that part
-        if exporter.config['noDynamics']:
+        if self.config['noDynamics']:
             mass = 0
             com = [0]*3
             inertia = [0]*12
         else:
-            if prefix in exporter.config['dynamicsOverride']:
-                entry = exporter.config['dynamicsOverride'][prefix]
+            if prefix in self.config['dynamicsOverride']:
+                entry = self.config['dynamicsOverride'][prefix]
                 mass = entry['mass']
                 com = entry['com']
                 inertia = entry['inertia']
             else:
-                massProperties = client.part_mass_properties(
+                massProperties = self.client.client.part_mass_properties(
                     part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
 
                 if part['partId'] not in massProperties['bodies']:
@@ -336,120 +382,103 @@ def main():
                         part['name']+' has no mass, maybe you should assign a material to it ?' + Style.RESET_ALL)
 
         pose = occurrence['transform']
-        if exporter.robot.relative:
+        if self.robot.relative:
             pose = np.linalg.inv(matrix)*pose
 
-        exporter.robot.addPart(pose, stl_path, mass, com, inertia, color, shapes, prefix)
+        self.robot.addPart(pose, stl_path, mass, com, inertia, color, shapes, prefix)
 
-
-    partNames = {}
-
-
-    def extractPartName(name, configuration):
-        parts = name.split(' ')
-        del parts[-1]
-        basePartName = '_'.join(parts).lower()
+    def extractPartName(self, name, configuration):
+        name_lst = name.split(" ")
+        base_partname = "_".join(name_lst[:-1]).lower()
+        config_name = ""
         
         # only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
-        if configuration != 'default' and len(configuration) < 40:
-            parts += ['_' + configuration.replace('=', '_').replace(' ', '_')]
-        return basePartName, '_'.join(parts).lower()
+        if configuration != "default" and len(configuration) < 40:
+            config_name = "_" + configuration.replace("=", "_").replace(" ", "_")
+            
+        full_name = base_partname + config_name
+        
+        return base_partname, full_name
 
+    """
+    Convert Onshape part names to legal names
+    
+    This method will read in onshape part names, replace all spaces with underscores, and remove the "<" ">" symbol for part instance numbers.
+    """
+    def processPartName(self, name, configuration, override_name=None):
+        if override_name:
+            return override_name
+        
+        _, name = self.extractPartName(name, configuration)
 
-    def processPartName(name, configuration, overrideName=None):
-        if overrideName is None:
-            global partNames
-            _, name = extractPartName(name, configuration)
-
-            if name in partNames:
-                partNames[name] += 1
-            else:
-                partNames[name] = 1
-
-            if partNames[name] == 1:
-                return name
-            else:
-                return name+'_'+str(partNames[name])
+        if name in self.part_name_counts:
+            self.part_name_counts[name] += 1
         else:
-            return overrideName
+            self.part_name_counts[name] = 1
 
-    def buildRobot(tree, matrix):
-        occurrence = getOccurrence([tree['id']])
-        instance = occurrence['instance']
-        print(Fore.BLUE + Style.BRIGHT +
-            '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
+        if self.part_name_counts[name] == 1:
+            return name
+        else:
+            return name+'_'+str(self.part_name_counts[name])
+    
+    def reorderJoints(self):
+        reorder_joint = [None] * len(self.config.jointOrder)
+        reorder_joint_extra = []
+        
+        for j in self.robot.json["robot"]["joint"]:
+            try:
+                desired_index = self.config.jointOrder.index(j["name"])
+                print(desired_index)
+                reorder_joint[desired_index] = j
+            except omegaconf.errors.ConfigValueError:
+                reorder_joint_extra.append(j)
+        
+        for j in reorder_joint:
+            if j is None:
+                reorder_joint.remove(j)
+            
+        reorder_joint.extend(reorder_joint_extra)
+        
+        print([j["name"] for j in reorder_joint])
+        self.robot.json["robot"]["joint"] = reorder_joint
 
-        # Build a part name that is unique but still informative
-        link = processPartName(
-            instance['name'], instance['configuration'], occurrence['linkName'])
-
-        # Create the link, collecting all children in the tree assigned to this top-level part
-        exporter.robot.startLink(link, matrix)
-        for occurrence in occurrences.values():
-            if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
-                addPart(occurrence, matrix, instance['name'])
-        exporter.robot.endLink()
-
-        # Adding the frames (linkage is relative to parent)
-        if tree['id'] in frames:
-            for name, part in frames[tree['id']]:
-                frame = getOccurrence(part)['transform']
-                if exporter.robot.relative:
-                    frame = np.linalg.inv(matrix)*frame
-                exporter.robot.addFrame(name, frame)
-
-        # Following the children in the tree, calling this function recursively
-        k = 0
-        for child in tree['children']:
-            worldAxisFrame = child['axis_frame']
-            zAxis = child['z_axis']
-            jointType = child['jointType']
-            jointLimits = child['jointLimits']
-
-            if exporter.robot.relative:
-                axisFrame = np.linalg.inv(matrix)*worldAxisFrame
-                childMatrix = worldAxisFrame
-            else:
-                # In SDF format, everything is expressed in the world frame, in this case
-                # childMatrix will be always identity
-                axisFrame = worldAxisFrame
-                childMatrix = matrix
-
-            subLink = buildRobot(child, childMatrix)
-            exporter.robot.addJoint(jointType, link, subLink, axisFrame,
-                        child['dof_name'], jointLimits, zAxis)
-
-        return link
+    def write(self):
+        json.dump(self.robot.json, open(os.path.join(self.root_directory, self.config.outputDirectory.urdf, "robot.json"), "w"), indent=2)
 
 
+        xml_tree = XMLJSON.gdata.etree(self.robot.json)[0]
+        xml.etree.ElementTree.indent(xml_tree, space="  ", level=0)
+        xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
+        
+        print("\n" + Style.BRIGHT + "* Writing " +
+            self.robot.ext.upper()+" file" + Style.RESET_ALL)
+        with open(os.path.join(self.root_directory, self.config.outputDirectory.urdf, "robot."+self.robot.ext), "wb") as stream:
+            stream.write(xml_data)
+
+
+        if len(self.config['postImportCommands']):
+            print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
+            for command in self.config['postImportCommands']:
+                print("* "+command)
+                os.system(command)
+
+
+def main():
+    colorama.just_fix_windows_console()
+
+    config_path = sys.argv[1]
+
+    exporter = OnshapeRobotExporter(config_path) 
+    
     # Start building the robot
-    buildRobot(tree, np.matrix(np.identity(4)))
+    exporter.buildRobot(exporter.client.tree, np.matrix(np.identity(4)))
 
     exporter.robot.finalize()
     # print(exporter.robot.json)
     
-    reorder_joint = [None] * len(exporter.config_.jointOrder)
-    reorder_joint_extra = []
-    exporter.config_.jointOrder
-    for j in exporter.robot.json["robot"]["joint"]:
-        try:
-            desired_index = exporter.config_.jointOrder.index(j["name"])
-            print(desired_index)
-            reorder_joint[desired_index] = j
-        except omegaconf.errors.ConfigValueError:
-            reorder_joint_extra.append(j)
+    exporter.reorderJoints()
+    exporter.write()
     
-    for j in reorder_joint:
-        if j is None:
-            reorder_joint.remove(j)
-        
-    reorder_joint.extend(reorder_joint_extra)
-    
-    print([j["name"] for j in reorder_joint])
-    exporter.robot.json["robot"]["joint"] = reorder_joint
-
-    json.dump(exporter.robot.json, open(os.path.join(exporter.root_directory, exporter.config.outputDirectory.urdf, "robot.json"), "w"), indent=2)
-
     # mjcf configs
     mjcf_data = {
         "mujoco": {
@@ -484,18 +513,27 @@ def main():
                         "solimplimit": "0 .99 .01",
                     },
                     "site": {
-                        "type": "box",
-                        "size": ".01 .01 .02",
-                        "rgba": "1 0 0 1",
-                    }
-                },
-                "default": {
-                    "class": "touch",
-                    "site": {
-                        "type": "capsule",
-                        "rgba": "0 0 1 .3",
+                        "size": 0.04,
+                        "group": 3,
                     },
-                },
+                    "default": [
+                        {
+                            "class": "force-torque",
+                            "site": {
+                                "type": "box",
+                                "size": ".01 .01 .02",
+                                "rgba": "1 0 0 1",
+                            },
+                        },
+                        {
+                            "class": "touch",
+                            "site": {
+                                "type": "capsule",
+                                "rgba": "0 0 1 .3",
+                            },
+                        }
+                    ]
+                }
             },
             "worldbody": {
                 "geom": {
@@ -530,22 +568,6 @@ def main():
         
     # End of MJCF
         
-
-    xml_tree = XMLJSON.gdata.etree(exporter.robot.json)[0]
-    xml.etree.ElementTree.indent(xml_tree, space="  ", level=0)
-    xml_data = xml.etree.ElementTree.tostring(xml_tree, encoding="utf8")
-    
-    print("\n" + Style.BRIGHT + "* Writing " +
-        exporter.robot.ext.upper()+" file" + Style.RESET_ALL)
-    with open(os.path.join(exporter.root_directory, exporter.config.outputDirectory.urdf, "robot."+exporter.robot.ext), "wb") as stream:
-        stream.write(xml_data)
-
-
-    if len(exporter.config['postImportCommands']):
-        print("\n" + Style.BRIGHT + "* Executing post-import commands" + Style.RESET_ALL)
-        for command in exporter.config['postImportCommands']:
-            print("* "+command)
-            os.system(command)
 
 
 if __name__ == "__main__":
