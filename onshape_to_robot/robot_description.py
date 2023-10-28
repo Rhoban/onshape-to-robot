@@ -47,22 +47,10 @@ def pose(matrix, frame=''):
 
 
 class RobotDescription(object):
-    def __init__(self, name, config=None, exporter=None):
+    def __init__(self, name, config=None):
         self.config = config
-        self.exporter = exporter
-        # self.drawCollisions = False
         self.relative = True
-        # self.mergeSTLs = 'no'
-        # self.mergeSTLsCollisions = False
-        # self.useFixedLinks = False
-        # self.simplifySTLs = 'no'
-        # self.maxSTLSize = 3
-        # self.jointMaxEffort = 1
-        # self.jointMaxVelocity = 10
-        # self.noDynamics = False
-        # self.packageName = ""
-        self.robotName = name
-        self.meshDir = None
+        self.robot_name = name
 
         self.json = {}
         self.floating_precision = 6
@@ -74,50 +62,23 @@ class RobotDescription(object):
             "rpy": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(rpy[0], rpy[1], rpy[2], precision=self.floating_precision),
         }
         
-    def jointMaxEffortFor(self, jointName):
-        if isinstance(self.config.jointMaxEffort, int) or isinstance(self.config.jointMaxEffort, float):
-            return self.config.jointMaxEffort
-        if jointName in self.config.jointMaxEffort:
-            return self.config.jointMaxEffort[jointName]
-        return self.config.jointMaxEffort["default"]
 
-    def jointMaxVelocityFor(self, jointName):
-        if isinstance(self.config.jointMaxVelocity, int) or isinstance(self.config.jointMaxVelocity, float):
-            return self.config.jointMaxVelocity
-        if jointName in self.config.jointMaxVelocity:
-            return self.config.jointMaxVelocity[jointName]
-        return self.config.jointMaxVelocity["default"]
+class MJCFDescription(RobotDescription):
+    pass
 
 
-
-    def mergeSTL(self, stl_path, matrix, color, mass, node='visual'):
-        if node == 'visual':
-            self.exporter._color += np.array(color) * mass
-            self.exporter._color_mass += mass
-
-        m = stl_combine.load_mesh(os.path.join(self.exporter.root_directory, stl_path))
-        stl_combine.apply_matrix(m, matrix)
-
-        if self.exporter._mesh[node] is None:
-            self.exporter._mesh[node] = m
-        else:
-            self.exporter._mesh[node] = stl_combine.combine_meshes(self.exporter._mesh[node], m)
-
-
-class RobotURDF(RobotDescription):
-    def __init__(self, name, config=None, exporter=None):
+class URDFDescription(RobotDescription):
+    def __init__(self, name, config=None):
         super().__init__(name)
         self.config = config
-        self.exporter = exporter
         self.ext = 'urdf'
         self.json = {
             "robot": {
-                "name": self.robotName,
+                "name": self.robot_name,
                 "link": [],
                 "joint": [],
             }
         }
-        pass
 
     def addDummyLink(self, link_name, visualMatrix=None, visualSTL=None, visualColor=None):
         if self.noDynamics:
@@ -273,7 +234,7 @@ class RobotURDF(RobotDescription):
 
 
 
-    def addJoint(self, joint_type, parent_link, child_link, transform, name, joint_limits, z_axis=[0, 0, 1]):
+    def addJoint(self, joint_type, parent_link, child_link, transform, name, joint_limits, z_axis=[0, 0, 1], effort_limit=None, velocity_limit=None):
         for j in self.json["robot"]["joint"]:
             if j["name"] == name:
                 raise Exception("Joint name already exists: " + name)
@@ -290,14 +251,16 @@ class RobotURDF(RobotDescription):
             "axis": {
                 "xyz": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(z_axis[0], z_axis[1], z_axis[2], precision=self.floating_precision),
             },
-            "limit": {
-                "effort": "{:.{precision}f}".format(self.jointMaxEffortFor(name), precision=self.floating_precision),
-                "velocity": "{:.{precision}f}".format(self.jointMaxVelocityFor(name), precision=self.floating_precision),
-            },
+            "limit": {},
             "joint_properties": {
                 "friction": "{:.{precision}f}".format(0, precision=self.floating_precision),
             },
         }
+        
+        if effort_limit:
+            joint["limit"]["effort"] = "{:.{precision}f}".format(effort_limit, precision=self.floating_precision)
+        if velocity_limit:
+            joint["limit"]["velocity"] = "{:.{precision}f}".format(velocity_limit, precision=self.floating_precision)
         if joint_limits is not None:
             joint["limit"]["lower"] = joint_limits[0]
             joint["limit"]["upper"] = joint_limits[1]

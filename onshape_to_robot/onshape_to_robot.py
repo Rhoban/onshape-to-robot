@@ -19,7 +19,7 @@ from colorama import Fore, Back, Style
 from cc.xmljson import XMLJSON
 
 from . import csg
-from .robot_description import RobotURDF#, RobotSDF
+from .robot_description import URDFDescription, MJCFDescription#, RobotSDF
 from .load_robot import OnShapeClient
 from . import stl_combine
 
@@ -46,11 +46,13 @@ class OnshapeRobotExporter:
 
         # Creating robot for output
         if self.config.outputFormat == "urdf":
-            self.robot = RobotURDF(self.config.robotName, self.config, self)
+            self.robot = URDFDescription(self.config.robotName, self.config)
+        elif self.config.outputFormat == "mjcf":
+            self.robot = MJCFDescription(self.config.robotName, self.config)
         # elif self.config.outputFormat == "sdf":
         #     self.robot = RobotSDF(self.config.robotName, self.config)
         else:
-            print("{STYLE}RROR: Unknown output format: {output_format} supported are urdf and sdf {RESET}".format(
+            print("{STYLE}RROR: Unknown output format: \"{output_format}\". Supported are \"urdf\" and \"mjcf\" {RESET}".format(
                 STYLE=Fore.RED, output_format=self.config.outputFormat, RESET=Style.RESET_ALL))
             exit()
         
@@ -60,6 +62,17 @@ class OnshapeRobotExporter:
         self.client = OnShapeClient(self.config)
         
 
+    def jointMaxEffortFor(self, jointName):
+        if jointName in self.config.jointMaxEffort:
+            return self.config.jointMaxEffort[jointName]
+        return self.config.jointMaxEffort["default"]
+
+    def jointMaxVelocityFor(self, jointName):
+        if jointName in self.config.jointMaxVelocity:
+            return self.config.jointMaxVelocity[jointName]
+        return self.config.jointMaxVelocity["default"]
+    
+    
     def getConfig(self, name, default=None, has_default=False, values_list=None):
         has_default = has_default or (default is not None)
         if name in self.config.keys():
@@ -290,8 +303,10 @@ class OnshapeRobotExporter:
             child_link_name = self._buildRobot(child, child_matrix)
             
             print("joint:", link_name, " <---> ", child_link_name)
+            torque_limit = self.jointMaxEffortFor(child["dof_name"])
+            velocity_limit = self.jointMaxVelocityFor(child["dof_name"])
             self.robot.addJoint(joint_type, link_name, child_link_name, axis_frame,
-                        child["dof_name"], joint_limits, z_axis)
+                        child["dof_name"], joint_limits, z_axis, torque_limit, velocity_limit)
 
         return link_name
     
@@ -480,7 +495,7 @@ class OnshapeRobotExporter:
                     self._visuals.append(
                         [pose, self.config.packageName + stl_path, color])
                 elif self.shouldMergeSTLs('visual'):
-                    self.robot.mergeSTL(stl_path, pose, color, mass)
+                    self.mergeSTL(stl_path, pose, color, mass)
                 else:
                     self.robot.addSTL(link_name, pose, stl_path, color, full_part_name, 'visual')
 
@@ -492,7 +507,7 @@ class OnshapeRobotExporter:
                 if shapes is None:
                     # We don't have pure shape, we use the mesh
                     if self.shouldMergeSTLs(entry):
-                        self.robot.mergeSTL(stl_path, pose, color, mass, entry)
+                        self.mergeSTL(stl_path, pose, color, mass, entry)
                     else:
                         self.robot.addSTL(link_name, pose, stl_path, color, full_part_name, entry)
                 else:
@@ -539,6 +554,21 @@ class OnshapeRobotExporter:
         
         self.addLinkDynamics(pose, mass, com, inertia)
         
+
+    def mergeSTL(self, stl_path, matrix, color, mass, node='visual'):
+        if node == 'visual':
+            self._color += np.array(color) * mass
+            self._color_mass += mass
+
+        m = stl_combine.load_mesh(os.path.join(self.root_directory, stl_path))
+        stl_combine.apply_matrix(m, matrix)
+
+        if self._mesh[node] is None:
+            self._mesh[node] = m
+        else:
+            self._mesh[node] = stl_combine.combine_meshes(self._mesh[node], m)
+
+
         
     def addLinkDynamics(self, matrix, mass, com, inertia):
         # Inertia
