@@ -11,25 +11,14 @@ from colorama import Fore, Back, Style
 
 class OnShapeClient:
     def __init__(self, config):
+        self.config = config
+        
         # OnShape API client
-        workspaceId = None
         self.client = Client(logging=False, creds=None)
-        self.client.useCollisionsConfigurations = config['useCollisionsConfigurations']
+        self.client.useCollisionsConfigurations = config["useCollisionsConfigurations"]
 
-        # If a versionId is provided, it will be used, else the main workspace is retrieved
-        if config['versionId'] != '':
-            print("\n" + Style.BRIGHT + '* Using configuration version ID ' +
-                config['versionId']+' ...' + Style.RESET_ALL)
-        elif config['workspaceId'] != '':
-            print("\n" + Style.BRIGHT + '* Using configuration workspace ID ' +
-                config['workspaceId']+' ...' + Style.RESET_ALL)
-            workspaceId = config['workspaceId']
-        else:
-            print("\n" + Style.BRIGHT + '* Retrieving workspace ID ...' + Style.RESET_ALL)
-            document = self.client.get_document(config['documentId']).json()
-            workspaceId = document['defaultWorkspace']['id']
-            print(Fore.GREEN + "+ Using workspace id: " + workspaceId + Style.RESET_ALL)
-
+        workspace_id = self.getWorkspaceId()
+        
         # Now, finding the assembly, according to given name in configuration, or else the first possible one
         print("\n" + Style.BRIGHT +
             '* Retrieving elements in the document, searching for the assembly...' + Style.RESET_ALL)
@@ -37,30 +26,31 @@ class OnShapeClient:
             elements = self.client.list_elements(
                 config['documentId'], config['versionId'], 'v').json()
         else:
-            elements = self.client.list_elements(config['documentId'], workspaceId).json()
-        assemblyId = None
-        assemblyName = ''
+            elements = self.client.list_elements(config['documentId'], workspace_id).json()
+            
+        assembly_id = None
+        assemblyName = ""
         for element in elements:
             if element['type'] == 'Assembly' and \
                     (config['assemblyName'] is False or element['name'] == config['assemblyName']):
                 print(Fore.GREEN + "+ Found assembly, id: " +
                     element['id']+', name: "'+element['name']+'"' + Style.RESET_ALL)
                 assemblyName = element['name']
-                assemblyId = element['id']
+                assembly_id = element['id']
 
-        if assemblyId == None:
+        if assembly_id == None:
             print(Fore.RED + "ERROR: Unable to find assembly in this document" + Style.RESET_ALL)
             exit(1)
 
         # Retrieving the assembly
         print("\n" + Style.BRIGHT + '* Retrieving assembly "' +
-            assemblyName+'" with id '+assemblyId + Style.RESET_ALL)
+            assemblyName+'" with id '+assembly_id + Style.RESET_ALL)
         if config['versionId'] != '':
             assembly = self.client.get_assembly(
-                config['documentId'], config['versionId'], assemblyId, 'v', configuration=config['configuration'])
+                config['documentId'], config['versionId'], assembly_id, 'v', configuration=config['configuration'])
         else:
             assembly = self.client.get_assembly(
-                config['documentId'], workspaceId, assemblyId, configuration=config['configuration'])
+                config['documentId'], workspace_id, assembly_id, configuration=config['configuration'])
 
         root = assembly['rootAssembly']
 
@@ -121,7 +111,7 @@ class OnShapeClient:
                     occurrence['assignation'] = parent
 
         from .features import init as features_init, getLimits
-        features_init(self.client, config, root, workspaceId, assemblyId)
+        features_init(self.client, config, root, workspace_id, assembly_id)
 
 
         # First, features are scanned to find the DOFs. Links that they connects are then tagged
@@ -361,9 +351,29 @@ class OnShapeClient:
 
         #return self.client, tree, occurrences, getOccurrence, frames
 
+    def getWorkspaceId(self):
+        # If a versionId is provided, it will be used, else the main workspace is retrieved
+        if self.config["versionId"]:
+            print("\n" + Style.BRIGHT + "* Using configuration version ID " +
+                self.config["versionId"]+' ...' + Style.RESET_ALL)
+            return None
+        
+        if self.config["workspaceId"]:
+            print("\n" + Style.BRIGHT + "* Using configuration workspace ID " +
+                self.config["workspaceId"]+' ...' + Style.RESET_ALL)
+            return self.config["workspaceId"]
+        
+        print("\n" + Style.BRIGHT + "* Retrieving workspace ID ..." + Style.RESET_ALL)
+        document = self.client.get_document(self.config["documentId"]).json()
+        workspace_id = document["defaultWorkspace"]["id"]
+        print(Fore.GREEN + "+ Using workspace id: " + workspace_id + Style.RESET_ALL)
+        return workspace_id
+
 
     def getOccurrence(self, path):
         return self.occurrences[tuple(path)]
     
-    def getSTLPart(self, documentId, documentMicroversion, elementId, partId, shortend_configuration):
-        return self.client.part_studio_stl_m(documentId, documentMicroversion, elementId, partId, shortend_configuration)
+    def fetchSTL(self, part, shortend_configuration):
+        return self.client.part_studio_stl_m(
+            part["documentId"], part["documentMicroversion"], part["elementId"], part["partId"], 
+            shortend_configuration)

@@ -20,7 +20,7 @@ from cc.xmljson import XMLJSON
 
 from . import csg
 from .robot_description import RobotURDF#, RobotSDF
-
+from .load_robot import OnShapeClient
 
 class OnshapeRobotExporter:
     def __init__(self, config_path="./config.yaml"):
@@ -29,7 +29,8 @@ class OnshapeRobotExporter:
         self.part_name_counts = {}
     
         if not os.path.exists(self.config_path):
-            print(Fore.RED+"ERROR: The file "+self.config_path+" can't be found"+Style.RESET_ALL)
+            print("{STYLE}ERROR: The file {config_path} can't be found.{RESET}".format(
+                STYLE=Fore.RED, config_path=self.config_path, RESET=Style.RESET_ALL))
             exit()
 
         self.processConfig()
@@ -48,22 +49,14 @@ class OnshapeRobotExporter:
         # elif self.config.outputFormat == "sdf":
         #     self.robot = RobotSDF(self.config.robotName, self.config)
         else:
-            print(Fore.RED + 'ERROR: Unknown output format: ' +
-                self.config.outputFormat +' (supported are urdf and sdf)' + Style.RESET_ALL)
+            print("{STYLE}RROR: Unknown output format: {output_format} supported are urdf and sdf {RESET}".format(
+                STYLE=Fore.RED, output_format=self.config.outputFormat, RESET=Style.RESET_ALL))
             exit()
         
         self.createDirectories()
         
         
-        # Loading configuration, collecting occurrences and building robot tree
-        # from .load_robot import \
-        #     config, client, tree, occurrences, getOccurrence, frames
-        # from .load_robot import connectOnShape
-        from .load_robot import OnShapeClient
-        
         self.client = OnShapeClient(self.config)
-        # self.client, self.tree, self.occurrences, self.getOccurrence, self.frames = connectOnShape(self.config)
-
         
 
     def getConfig(self, name, default=None, has_default=False, values_list=None):
@@ -71,16 +64,16 @@ class OnshapeRobotExporter:
         if name in self.config.keys():
             value = self.config[name]
             if values_list is not None and value not in values_list:
-                print(Fore.RED+"ERROR: Value for "+name +
-                    " should be one of: "+(','.join(values_list))+Style.RESET_ALL)
+                print("{STYLE}ERROR: Value for {name} should be one of: {values} {RESET}".format(
+                    STYLE=Fore.RED, name=name, values=", ".join(values_list), RESET=Style.RESET_ALL))
                 exit()
             return value
         else:
             if has_default:
                 return default
             else:
-                print(Fore.RED + 'ERROR: missing key "' +
-                    name+'" in config' + Style.RESET_ALL)
+                print("{STYLE}ERROR: missing key {name} in config {RESET}".format(
+                    STYLE=Fore.RED, name=name, RESET=Style.RESET_ALL))
                 exit()
     
     def processConfig(self):
@@ -163,12 +156,11 @@ class OnshapeRobotExporter:
 
         # Checking that OpenSCAD is present
         if self.config['useScads']:
-            print(Style.BRIGHT + '* Checking OpenSCAD presence...' + Style.RESET_ALL)
+            print("{STYLE} * Checking OpenSCAD presence...{RESET}".format(STYLE=Style.BRIGHT, RESET=Style.RESET_ALL))
             try:
                 subprocess.run(["openscad", "-v"])
             except FileNotFoundError:
-                print(
-                    Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
+                print("{STYLE}Can't run openscad -v, disabling OpenSCAD support.{RESET}".format(STYLE=Fore.RED, RESET=Style.RESET_ALL))
                 print(Fore.BLUE + "TIP: consider installing openscad:" + Style.RESET_ALL)
                 print(Fore.BLUE + "Linux:" + Style.RESET_ALL)
                 print(Fore.BLUE + "sudo add-apt-repository ppa:openscad/releases" + Style.RESET_ALL)
@@ -176,11 +168,11 @@ class OnshapeRobotExporter:
                 print(Fore.BLUE + "sudo apt install openscad" + Style.RESET_ALL)
                 print(Fore.BLUE + "Windows:" + Style.RESET_ALL)
                 print(Fore.BLUE + "go to: https://openscad.org/downloads.html " + Style.RESET_ALL)
-                self.config['useScads'] = False
+                self.config["useScads"] = False
 
         # Checking that MeshLab is present
         if self.config['simplifySTLs']:
-            print(Style.BRIGHT + '* Checking MeshLab presence...' + Style.RESET_ALL)
+            print("{STYLE} * Checking MeshLab presence...{RESET}".format(STYLE=Style.BRIGHT, RESET=Style.RESET_ALL))
             if not os.path.exists('/usr/bin/meshlabserver') != 0:
                 print(Fore.RED + "No /usr/bin/meshlabserver, disabling STL simplification support" + Style.RESET_ALL)
                 print(Fore.BLUE + "TIP: consider installing meshlab:" + Style.RESET_ALL)
@@ -188,17 +180,13 @@ class OnshapeRobotExporter:
                 self.config['simplifySTLs'] = False
 
         # Checking that versionId and workspaceId are not set on same time
-        if self.config['versionId'] != '' and self.config['workspaceId'] != '':
-            print(Style.RED + "You can't specify workspaceId AND versionId")
-
-
-
+        if self.config["versionId"] != "" and self.config["workspaceId"] != "":
+            print("{STYLE}You can't specify workspaceId AND versionId.{RESET}".format(STYLE=Style.RED, RESET=Style.RESET_ALL))
 
     def createDirectories(self):        
         # Output directory, making it if it doesn't exists
         if not os.path.exists(self.root_directory):
             os.makedirs(self.root_directory)
-
 
         part_dir_abs = os.path.join(self.root_directory, self.config.outputDirectory.parts)
         urdf_dir_abs = os.path.join(self.root_directory, self.config.outputDirectory.urdf)
@@ -214,59 +202,67 @@ class OnshapeRobotExporter:
         if not os.path.exists(scad_dir_abs):
             os.makedirs(scad_dir_abs)
 
+    def buildRobot(self):
+        root = self.client.tree
+        self._buildRobot(root, np.matrix(np.identity(4)))
 
-    def buildRobot(self, tree, matrix):
-        occurrence = self.client.getOccurrence([tree['id']])
+    def _buildRobot(self, tree, matrix):
+        occurrence = self.client.getOccurrence([tree["id"]])
         
-        instance = occurrence['instance']
+        instance = occurrence["instance"]
         
-        print(Fore.BLUE + Style.BRIGHT +
-            '* Adding top-level instance ['+instance['name']+']' + Style.RESET_ALL)
+        print("{STYLE}* Adding top-level instance [{instance_name}] {RESET}".format(
+            STYLE=Fore.BLUE + Style.BRIGHT, instance_name=instance["name"], RESET=Style.RESET_ALL))
 
         # Build a part name that is unique but still informative
-        link = self.processPartName(
-            instance['name'], instance['configuration'], occurrence['linkName'])
+        link_name = self.generateLinkName(instance["name"], instance["configuration"], occurrence["linkName"])
+        print("link:", link_name)
+        
+        if tree == self.client.tree:
+            # this is root
+            if self.config.addDummyBaseLink:
+                self.robot.addDummyBaseLink(link_name)    
 
         # Create the link, collecting all children in the tree assigned to this top-level part
-        self.robot.startLink(link, matrix)
+        self.robot.startLink(link_name)
         for occurrence in self.client.occurrences.values():
-            if occurrence['assignation'] == tree['id'] and occurrence['instance']['type'] == 'Part':
-                self.addPart(occurrence, matrix, instance['name'])
-        self.robot.endLink()
+            if occurrence["assignation"] == tree["id"] and occurrence["instance"]["type"] == "Part":
+                self.addPart(link_name, occurrence, matrix)
+        self.robot.endLink(link_name)
 
         # Adding the frames (linkage is relative to parent)
-        if tree['id'] in self.client.frames:
-            for name, part in self.client.frames[tree['id']]:
-                frame = self.client.getOccurrence(part)['transform']
+        if tree["id"] in self.client.frames:
+            for name, part in self.client.frames[tree["id"]]:
+                frame = self.client.getOccurrence(part)["transform"]
                 if self.robot.relative:
                     frame = np.linalg.inv(matrix)*frame
                 self.robot.addFrame(name, frame)
 
         # Following the children in the tree, calling this function recursively
-        k = 0
-        for child in tree['children']:
-            worldAxisFrame = child['axis_frame']
-            zAxis = child['z_axis']
-            jointType = child['jointType']
-            jointLimits = child['jointLimits']
+        for child in tree["children"]:
+            world_axis_frame = child["axis_frame"]
+            z_axis = child["z_axis"]
+            joint_type = child["jointType"]
+            joint_limits = child["jointLimits"]
 
             if self.robot.relative:
-                axisFrame = np.linalg.inv(matrix)*worldAxisFrame
-                childMatrix = worldAxisFrame
+                axis_frame = np.linalg.inv(matrix) * world_axis_frame
+                child_matrix = world_axis_frame
             else:
                 # In SDF format, everything is expressed in the world frame, in this case
                 # childMatrix will be always identity
-                axisFrame = worldAxisFrame
-                childMatrix = matrix
+                axis_frame = world_axis_frame
+                child_matrix = matrix
 
-            subLink = self.buildRobot(child, childMatrix)
-            self.robot.addJoint(jointType, link, subLink, axisFrame,
-                        child['dof_name'], jointLimits, zAxis)
+            child_link_name = self._buildRobot(child, child_matrix)
+            
+            print("joint:", link_name, " <---> ", child_link_name)
+            self.robot.addJoint(joint_type, link_name, child_link_name, axis_frame,
+                        child["dof_name"], joint_limits, z_axis)
 
-        return link
+        return link_name
     
     
-
     def partIsIgnore(self, name):
         if self.config['whitelist'] is None:
             return name in self.config['ignore']
@@ -274,52 +270,63 @@ class OnshapeRobotExporter:
             return name not in self.config['whitelist']
 
     # Adds a part to the current robot link
+    def addPart(self, link_name, occurrence, matrix):
+        part = occurrence["instance"]
 
-
-    def addPart(self, occurrence, matrix, instance_name):
-        part = occurrence['instance']
-
-        if part['suppressed']:
+        # Checking if this part should be ignored
+        if part["suppressed"]:
             return
 
-        if part['partId'] == '':
-            print(Fore.YELLOW + 'WARNING: Part '+part['name']+' has no partId'+Style.RESET_ALL)
+        if part["partId"] == "":
+            print("{STYLE}WARNING: Part '{name}' has no partId{RESET}".format(
+                STYLE=Fore.YELLOW, name=part["name"], RESET=Style.RESET_ALL))
             return
 
+        print("Add Part:", link_name)
         # Importing STL file for this part
-        justPart, prefix = self.extractPartName(part['name'], part['configuration'])
+        base_part_name, full_part_name = self.extractPartName(part["name"], part["configuration"])
 
-        extra = ''
-        if occurrence['instance']['configuration'] != 'default':
-            extra = Style.DIM + ' (configuration: ' + \
-                occurrence['instance']['configuration']+')'
-        symbol = '+'
-        if self.partIsIgnore(justPart):
-            symbol = '-'
-            extra += Style.DIM + ' / ignoring visual and collision'
+        configuration_info = ""
+        if occurrence["instance"]["configuration"] != "default":
+            configuration_info = "{STYLE} (configuration: '{config}')".format(
+                STYLE=Style.DIM, config=occurrence["instance"]["configuration"])
+            
+        symbol = "+"
+        if self.partIsIgnore(base_part_name):
+            symbol = "-"
+            configuration_info += "{STYLE} / ignoring visual and collision".format(Style.DIM)
 
-        print(Fore.GREEN + symbol+' Adding part ' +
-            occurrence['instance']['name']+extra + Style.RESET_ALL)
+        print("{STYLE}{symbol} Adding part {name} {configuration_info} {RESET}".format(
+            STYLE=Fore.GREEN,
+            symbol=symbol,
+            name=occurrence["instance"]["name"],
+            configuration_info=configuration_info,
+            RESET=Style.RESET_ALL))
 
-        if self.partIsIgnore(justPart):
+        if self.partIsIgnore(base_part_name):
             stl_path = None
         else:
-            stl_path = os.path.join(self.config.outputDirectory.meshes, instance_name.split("<")[0].replace(" ", "_") + prefix.replace("/", "_")+".stl")
+            stl_filename = "{link_name}_{part_name}.stl".format(link_name=link_name, part_name=full_part_name)
+            
+            stl_path = os.path.join(self.config.outputDirectory.meshes, stl_filename)
+            stl_metadata_path = os.path.join(self.config.outputDirectory.parts, full_part_name+".part")
             
             # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
-            if len(part['configuration']) > 40:
+            if len(part["configuration"]) > 40:
                 shortend_configuration = hashlib.md5(
-                    part['configuration'].encode('utf-8')).hexdigest()
+                    part["configuration"].encode("utf-8")).hexdigest()
             else:
-                shortend_configuration = part['configuration']
-            stl = self.client.getSTLPart(part["documentId"], part["documentMicroversion"], part["elementId"],
-                                        part["partId"], shortend_configuration)
-            with open(os.path.join(self.root_directory, stl_path), "wb") as stream:
+                shortend_configuration = part["configuration"]
+            
+            stl = self.client.fetchSTL(part, shortend_configuration)
+            
+            stl_path_abs = os.path.join(self.root_directory, stl_path)
+            with open(stl_path_abs, "wb") as stream:
                 stream.write(stl)
 
-            stlMetadata = os.path.join(self.config.outputDirectory.parts, prefix.replace('/', '_')+'.part')
-            with open(os.path.join(self.root_directory, stlMetadata), 'w', encoding="utf-8") as stream:
-                json.dump(part, stream, indent=4, sort_keys=True)
+            stl_metadata_path_abs = os.path.join(self.root_directory, stl_metadata_path)
+            with open(stl_metadata_path_abs, "w", encoding="utf-8") as stream:
+                json.dump(part, stream, indent=2, sort_keys=True)
 
 
         # Import the SCAD files pure shapes
@@ -327,7 +334,7 @@ class OnshapeRobotExporter:
         
         self.config['useScads'] = True
         if self.config['useScads']:
-            scadFile = prefix+'.scad'
+            scadFile = full_part_name+'.scad'
             scad_path = os.path.join(self.root_directory, self.config.outputDirectory.scad, scadFile)
             if os.path.exists(scad_path):
                 shapes = csg.process(
@@ -359,8 +366,8 @@ class OnshapeRobotExporter:
             com = [0]*3
             inertia = [0]*12
         else:
-            if prefix in self.config['dynamicsOverride']:
-                entry = self.config['dynamicsOverride'][prefix]
+            if full_part_name in self.config['dynamicsOverride']:
+                entry = self.config['dynamicsOverride'][full_part_name]
                 mass = entry['mass']
                 com = entry['com']
                 inertia = entry['inertia']
@@ -385,27 +392,27 @@ class OnshapeRobotExporter:
         if self.robot.relative:
             pose = np.linalg.inv(matrix)*pose
 
-        self.robot.addPart(pose, stl_path, mass, com, inertia, color, shapes, prefix)
+        self.robot.addPart(link_name, pose, stl_path, mass, com, inertia, color, shapes, full_part_name)
 
     def extractPartName(self, name, configuration):
         name_lst = name.split(" ")
-        base_partname = "_".join(name_lst[:-1]).lower()
+        base_name = "_".join(name_lst[:-1]).lower()
         config_name = ""
         
         # only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
         if configuration != "default" and len(configuration) < 40:
             config_name = "_" + configuration.replace("=", "_").replace(" ", "_")
             
-        full_name = base_partname + config_name
+        full_part_name = base_name + config_name
         
-        return base_partname, full_name
+        return base_name, full_part_name
 
     """
-    Convert Onshape part names to legal names
+    Convert Onshape part name to a legal link name
     
     This method will read in onshape part names, replace all spaces with underscores, and remove the "<" ">" symbol for part instance numbers.
     """
-    def processPartName(self, name, configuration, override_name=None):
+    def generateLinkName(self, name, configuration, override_name=None):
         if override_name:
             return override_name
         
@@ -471,7 +478,7 @@ def main():
     exporter = OnshapeRobotExporter(config_path) 
     
     # Start building the robot
-    exporter.buildRobot(exporter.client.tree, np.matrix(np.identity(4)))
+    exporter.buildRobot()
 
     exporter.robot.finalize()
     # print(exporter.robot.json)
