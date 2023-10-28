@@ -67,18 +67,13 @@ class RobotDescription(object):
         self.json = {}
         self.floating_precision = 6
 
-    def origin_(self, transform):
+    def getOrigin(self, transform):
         rpy = rotationMatrixToEulerAngles(transform)
         return {
             "xyz": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(transform[0, 3], transform[1, 3], transform[2, 3], precision=self.floating_precision),
             "rpy": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(rpy[0], rpy[1], rpy[2], precision=self.floating_precision),
         }
-    def shouldMergeSTLs(self, node):
-        return self.config.mergeSTLs == 'all' or self.config.mergeSTLs == node
-
-    def shouldSimplifySTLs(self, node):
-        return self.config.simplifySTLs == 'all' or self.config.simplifySTLs == node
-
+        
     def jointMaxEffortFor(self, jointName):
         if isinstance(self.config.jointMaxEffort, int) or isinstance(self.config.jointMaxEffort, float):
             return self.config.jointMaxEffort
@@ -208,26 +203,6 @@ class RobotURDF(RobotDescription):
 
     def endLink(self, link_name, mass, com, inertia):
         
-
-        for node in ['visual', 'collision']:
-            if self.exporter._mesh[node] is not None:
-                if node == 'visual' and self.exporter._color_mass > 0:
-                    color = self.exporter._color / self.exporter._color_mass
-                else:
-                    color = [0.5, 0.5, 0.5]
-
-                stl_filename = "{link}_{node}.stl".format(link=link_name, node=node)
-                stl_path = os.path.join(
-                    self.exporter.config.outputDirectory.meshes, 
-                    self.config.packageName.strip("/"), 
-                    stl_filename)
-                stl_combine.save_mesh(
-                    self.exporter._mesh[node], os.path.join(self.exporter.root_directory, stl_path))
-                if self.shouldSimplifySTLs(node):
-                    stl_combine.simplify_stl(os.path.join(self.exporter.root_directory, stl_path), self.maxSTLSize)
-                self.addSTL(link_name, np.identity(4), stl_path, color, link_name, node)
-
-        
         inertial = {
             "origin": {
                 "xyz": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(com[0], com[1], com[2], precision=self.floating_precision),
@@ -254,7 +229,7 @@ class RobotURDF(RobotDescription):
                 "geometry": {"box": {"size": "0 0 0"}}
             }
 
-
+    def addFixedVisualLink(self, link_name):
         if self.config.useFixedLinks:
             n = 0
             for visual in self._visuals:
@@ -278,7 +253,7 @@ class RobotURDF(RobotDescription):
             package_name = self.config.ros_package_name
             mesh_path = "package://{package}/{uri}".format(package=package_name, uri=stl_path)
         node_data = {
-            "origin": self.origin_(matrix),
+            "origin": self.getOrigin(matrix),
             "geometry": {
                 "mesh": {
                     "filename": mesh_path,
@@ -296,66 +271,6 @@ class RobotURDF(RobotDescription):
         idx = self.getLinkIndex(link_name)
         self.json["robot"]["link"][idx][node] = node_data
 
-    def addPart(self, link_name, matrix, stl_path, mass, color, shapes=None, name=''):
-        if stl_path is not None:
-            print("ADD PART STL:", stl_path, self.config.packageName)
-            if not self.config.drawCollisions:
-                if self.config.useFixedLinks:
-                    self._visuals.append(
-                        [matrix, self.config.packageName + stl_path, color])
-                elif self.shouldMergeSTLs('visual'):
-                    self.mergeSTL(stl_path, matrix, color, mass)
-                else:
-                    self.addSTL(link_name, matrix, stl_path, color, name, 'visual')
-
-            entries = ['collision']
-            if self.config.drawCollisions:
-                entries.append('visual')
-            for entry in entries:
-
-                if shapes is None:
-                    # We don't have pure shape, we use the mesh
-                    if self.shouldMergeSTLs(entry):
-                        self.mergeSTL(stl_path, matrix, color, mass, entry)
-                    else:
-                        self.addSTL(link_name, matrix, stl_path, color, name, entry)
-                else:
-                    
-                    # # Inserting pure shapes in the URDF model
-                    for shape in shapes:
-                        
-                        node_data = {
-                            "origin": self.origin_(matrix*shape['transform']),
-                            "geometry": []
-                        }
-                        if shape['type'] == 'cube':
-                            node_data["geometry"].append({
-                                "box": {
-                                    "size": "%.20g %.20g %.20g" % tuple(shape['parameters'])
-                                }})
-                        if shape['type'] == 'cylinder':
-                            node_data["geometry"].append({
-                                "cylinder": {
-                                    "length": "%.20g" % tuple(shape['parameters'])[0],
-                                    "radius": "%.20g" % tuple(shape['parameters'])[1],
-                                }})
-                        if shape['type'] == 'sphere':
-                            node_data["geometry"].append({
-                                "sphere": {
-                                    "radius": "%.20g" % shape['parameters'],
-                                }})
-                        
-                        if entry == 'visual':
-                            node_data["material"] = {
-                                "name": name+"_material",
-                                "color": {
-                                    "rgba": "%.20g %.20g %.20g 1.0" % (color[0], color[1], color[2]),
-                                },
-                            }
-                            
-                        idx = self.getLinkIndex(link_name)
-                        self.json["robot"]["link"][idx][entry] = node_data
-        
 
 
     def addJoint(self, joint_type, parent_link, child_link, transform, name, joint_limits, z_axis=[0, 0, 1]):
@@ -371,7 +286,7 @@ class RobotURDF(RobotDescription):
             "child": {
                 "link": child_link,
             },
-            "origin": self.origin_(transform),
+            "origin": self.getOrigin(transform),
             "axis": {
                 "xyz": "{:.{precision}f} {:.{precision}f} {:.{precision}f}".format(z_axis[0], z_axis[1], z_axis[2], precision=self.floating_precision),
             },

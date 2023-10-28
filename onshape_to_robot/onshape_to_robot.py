@@ -21,6 +21,7 @@ from cc.xmljson import XMLJSON
 from . import csg
 from .robot_description import RobotURDF#, RobotSDF
 from .load_robot import OnShapeClient
+from . import stl_combine
 
 class OnshapeRobotExporter:
     def __init__(self, config_path="./config.yaml"):
@@ -225,14 +226,41 @@ class OnshapeRobotExporter:
 
         # Create the link, collecting all children in the tree assigned to this top-level part
         self.resetLink()
+        
+        
         self.robot.createLink(link_name)
         
         for occurrence in self.client.occurrences.values():
             if occurrence["assignation"] == tree["id"] and occurrence["instance"]["type"] == "Part":
                 self.addPart(link_name, occurrence, matrix)
         
-        mass, com, inertia = self.linkDynamics()
+        mass, com, inertia = self.getLinkDynamics()
+        
+        
+        
+        
+        for node in ['visual', 'collision']:
+            if self._mesh[node] is not None:
+                if node == 'visual' and self._color_mass > 0:
+                    color = self._color / self._color_mass
+                else:
+                    color = [0.5, 0.5, 0.5]
+
+                stl_filename = "{link}_{node}.stl".format(link=link_name, node=node)
+                stl_path = os.path.join(
+                    self.config.outputDirectory.meshes, 
+                    self.config.packageName.strip("/"), 
+                    stl_filename)
+                stl_path_abs = os.path.join(self.root_directory, stl_path)
+                stl_combine.save_mesh(self._mesh[node], stl_path_abs)
+                if self.shouldSimplifySTLs(node):
+                    stl_combine.simplify_stl(stl_path_abs, self.config.maxSTLSize)
+                self.robot.addSTL(link_name, np.identity(4), stl_path, color, link_name, node)
+
+        
         self.robot.endLink(link_name, mass, com, inertia)
+        self.robot.addFixedVisualLink(link_name)
+
 
         # Adding the frames (linkage is relative to parent)
         if tree["id"] in self.client.frames:
@@ -241,6 +269,7 @@ class OnshapeRobotExporter:
                 if self.robot.relative:
                     frame = np.linalg.inv(matrix)*frame
                 self.robot.addFrame(name, frame)
+
 
         # Following the children in the tree, calling this function recursively
         for child in tree["children"]:
@@ -274,7 +303,7 @@ class OnshapeRobotExporter:
         self._visuals = []
         self._dynamics = []
         
-    def linkDynamics(self):
+    def getLinkDynamics(self):
         mass = 0
         com = np.array([0.0]*3)
         inertia = np.matrix(np.zeros((3, 3)))
@@ -295,6 +324,12 @@ class OnshapeRobotExporter:
                 (np.dot(r, r)*identity - p.T*p)*dynamic['mass']
 
         return mass, com, inertia
+
+    def shouldMergeSTLs(self, node):
+        return self.config.mergeSTLs == 'all' or self.config.mergeSTLs == node
+
+    def shouldSimplifySTLs(self, node):
+        return self.config.simplifySTLs == 'all' or self.config.simplifySTLs == node
 
     
     def partIsIgnore(self, name):
@@ -321,6 +356,10 @@ class OnshapeRobotExporter:
         
         # Importing STL file for this part
         base_part_name, full_part_name = self.extractPartName(part["name"], part["configuration"])
+        unique_name = "{link_name}_{part_name}".format(link_name=link_name, part_name=full_part_name)
+        stl_filename = "{unique_name}.stl".format(unique_name=unique_name)
+        metadata_filename = "{unique_name}.json".format(unique_name=unique_name)
+        scad_filename = "{unique_name}.scad".format(unique_name=unique_name)
 
         configuration_info = ""
         if occurrence["instance"]["configuration"] != "default":
@@ -342,10 +381,8 @@ class OnshapeRobotExporter:
         if self.partIsIgnore(base_part_name):
             stl_path = None
         else:
-            stl_filename = "{link_name}_{part_name}.stl".format(link_name=link_name, part_name=full_part_name)
-            
             stl_path = os.path.join(self.config.outputDirectory.meshes, stl_filename)
-            stl_metadata_path = os.path.join(self.config.outputDirectory.parts, full_part_name+".part")
+            metadata_path = os.path.join(self.config.outputDirectory.parts, metadata_filename)
             
             # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
             if len(part["configuration"]) > 40:
@@ -360,8 +397,8 @@ class OnshapeRobotExporter:
             with open(stl_path_abs, "wb") as stream:
                 stream.write(stl)
 
-            stl_metadata_path_abs = os.path.join(self.root_directory, stl_metadata_path)
-            with open(stl_metadata_path_abs, "w", encoding="utf-8") as stream:
+            metadata_path_abs = os.path.join(self.root_directory, metadata_path)
+            with open(metadata_path_abs, "w", encoding="utf-8") as stream:
                 json.dump(part, stream, indent=2, sort_keys=True)
 
 
@@ -370,16 +407,15 @@ class OnshapeRobotExporter:
         # Import the SCAD files pure shapes
         shapes = None
         
-        self.config['useScads'] = True
-        if self.config['useScads']:
-            scadFile = full_part_name+'.scad'
-            scad_path = os.path.join(self.root_directory, self.config.outputDirectory.scad, scadFile)
-            if os.path.exists(scad_path):
+        if self.config["useScads"]:
+            scad_path = os.path.join(self.config.outputDirectory.scad, scad_filename)
+            scad_path_abs = os.path.join(self.root_directory, scad_path)
+            if os.path.exists(scad_path_abs):
                 shapes = csg.process(
-                    scad_path, self.config['pureShapeDilatation'])
+                    scad_path_abs, self.config['pureShapeDilatation'])
             else:
                 print("generating SCAD!")
-                with open(scad_path, 'w', encoding="utf-8") as stream:
+                with open(scad_path_abs, 'w', encoding="utf-8") as stream:
                     stream.write("")
 
 
@@ -434,7 +470,72 @@ class OnshapeRobotExporter:
         if self.robot.relative:
             pose = np.linalg.inv(matrix)*pose
 
-        self.robot.addPart(link_name, pose, stl_path, mass, color, shapes, full_part_name)
+        # self.robot.addPart(link_name, pose, stl_path, mass, color, shapes, full_part_name)
+            
+        # def addPart(self, link_name, matrix, stl_path, mass, color, shapes=None, name=''):
+        if stl_path is not None:
+            print("ADD PART STL:", stl_path, self.config.packageName)
+            if not self.config.drawCollisions:
+                if self.config.useFixedLinks:
+                    self._visuals.append(
+                        [pose, self.config.packageName + stl_path, color])
+                elif self.shouldMergeSTLs('visual'):
+                    self.robot.mergeSTL(stl_path, pose, color, mass)
+                else:
+                    self.robot.addSTL(link_name, pose, stl_path, color, full_part_name, 'visual')
+
+            entries = ['collision']
+            if self.config.drawCollisions:
+                entries.append('visual')
+            for entry in entries:
+
+                if shapes is None:
+                    # We don't have pure shape, we use the mesh
+                    if self.shouldMergeSTLs(entry):
+                        self.robot.mergeSTL(stl_path, pose, color, mass, entry)
+                    else:
+                        self.robot.addSTL(link_name, pose, stl_path, color, full_part_name, entry)
+                else:
+                    
+                    # # Inserting pure shapes in the URDF model
+                    for shape in shapes:
+                        
+                        node_data = {
+                            "origin": self.robot.getOrigin(pose*shape['transform']),
+                            "geometry": []
+                        }
+                        if shape['type'] == 'cube':
+                            node_data["geometry"].append({
+                                "box": {
+                                    "size": "%.20g %.20g %.20g" % tuple(shape['parameters'])
+                                }})
+                        if shape['type'] == 'cylinder':
+                            node_data["geometry"].append({
+                                "cylinder": {
+                                    "length": "%.20g" % tuple(shape['parameters'])[0],
+                                    "radius": "%.20g" % tuple(shape['parameters'])[1],
+                                }})
+                        if shape['type'] == 'sphere':
+                            node_data["geometry"].append({
+                                "sphere": {
+                                    "radius": "%.20g" % shape['parameters'],
+                                }})
+                        
+                        if entry == 'visual':
+                            node_data["material"] = {
+                                "name": full_part_name+"_material",
+                                "color": {
+                                    "rgba": "%.20g %.20g %.20g 1.0" % (color[0], color[1], color[2]),
+                                },
+                            }
+                            
+                        idx = self.robot.getLinkIndex(link_name)
+                        self.robot.json["robot"]["link"][idx][entry] = node_data
+        
+        
+        
+        
+        
         
         self.addLinkDynamics(pose, mass, com, inertia)
         
