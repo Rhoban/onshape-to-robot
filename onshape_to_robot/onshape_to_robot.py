@@ -374,7 +374,7 @@ class OnshapeRobotExporter:
         unique_name = "{link_name}_{part_name}".format(link_name=link_name, part_name=full_part_name)
         stl_filename = "{unique_name}.stl".format(unique_name=unique_name)
         metadata_filename = "{unique_name}.json".format(unique_name=unique_name)
-        scad_filename = "{unique_name}.scad".format(unique_name=unique_name)
+        scad_filename = "{part_name}.scad".format(part_name=full_part_name)
 
         configuration_info = ""
         if occurrence["instance"]["configuration"] != "default":
@@ -426,8 +426,7 @@ class OnshapeRobotExporter:
             scad_path = os.path.join(self.config.outputDirectory.scad, scad_filename)
             scad_path_abs = os.path.join(self.root_directory, scad_path)
             if os.path.exists(scad_path_abs):
-                shapes = csg.process(
-                    scad_path_abs, self.config['pureShapeDilatation'])
+                shapes = csg.process(scad_path_abs, self.config["pureShapeDilatation"])
             else:
                 print("generating SCAD!")
                 with open(scad_path_abs, 'w', encoding="utf-8") as stream:
@@ -514,7 +513,7 @@ class OnshapeRobotExporter:
                     
                     # # Inserting pure shapes in the URDF model
                     for shape in shapes:
-                        
+                        print("ADDING LINK SHAOE:", shape['type'])
                         node_data = {
                             "origin": self.robot.getOrigin(pose*shape['transform']),
                             "geometry": []
