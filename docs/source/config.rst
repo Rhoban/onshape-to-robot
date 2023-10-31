@@ -241,7 +241,7 @@ This can be used to merge STLs file of the same ``link`` into one unique STL. It
 
 *optional, default: false*
 
-STLs used for collisions will also be merged if this flag is ``true``. Note that
+STLs used for collisions will also be merged if this flag is ``true``. 
 
 ``simplifySTLs``
 ~~~~~~~~~~~~~~~~
