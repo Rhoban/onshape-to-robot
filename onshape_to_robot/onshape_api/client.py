@@ -13,10 +13,11 @@ import string
 import os
 import json
 import hashlib
+import urllib.parse
 from pathlib import Path
 
-def escape_slash(s):
-    return s.replace('/', '%2f')
+def urlencode(s):
+    return urllib.parse.quote(s)
 
 class Client():
     '''
@@ -338,18 +339,18 @@ class Client():
             req_headers = {
                 'Accept': '*/*'
             }
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/stl', query={'mode': 'binary', 'units': 'meter', 'configuration': configuration}, headers=req_headers)
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+urlencode(partid)+'/stl', query={'mode': 'binary', 'units': 'meter', 'configuration': configuration}, headers=req_headers)
 
         return self.cache_get('part_stl', (did, mid, eid, self.hash_partid(partid), configuration), invoke)
 
     def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/metadata/d/' + did + '/m/' + mid + '/e/' + eid + '/p/'+escape_slash(partid), query={'configuration': configuration})
+            return self._api.request('get', '/api/metadata/d/' + did + '/m/' + mid + '/e/' + eid + '/p/'+urlencode(partid), query={'configuration': configuration})
 
         return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
 
     def part_mass_properties(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/massproperties', query={'configuration': configuration, 'useMassPropertyOverrides': True})
+            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+urlencode(partid)+'/massproperties', query={'configuration': configuration, 'useMassPropertyOverrides': True})
 
         return json.loads(self.cache_get('massproperties', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
