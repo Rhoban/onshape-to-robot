@@ -56,6 +56,18 @@ frames on standard output.
 Here is a `link <https://cad.onshape.com/documents/fadc07564402eea7b8d39250/w/afe354d59e4c06d33ce690d2/e/7406c5f00136aee43a4606cb>`_ of a document that can be used as a frame (note: the center cube is 5mm side, so
 you might need 2.5mm offset to center it).
 
+Closing frames
+--------------
+
+If your robot includes closing loop, those can't be handled in the URDF file directly since the robot has to have
+a kinematics structure that is a tree.
+
+However, it is possible to add multiple frames, and to make constraints out of them during your simulation.
+
+If you add a relation with ``closing_something`` as name, two frames will be added to your URDF
+(``closing_something_1`` and ``closing_something_2``) that will be attached to the two parts mated.
+It's up to you to handle it further by adding proper constraints.
+
 Joint frames
 ------------
 
