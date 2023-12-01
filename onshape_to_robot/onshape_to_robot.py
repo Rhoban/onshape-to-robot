@@ -208,8 +208,12 @@ def main():
 
         # Adding the frames (linkage is relative to parent)
         if tree['id'] in frames:
-            for name, part in frames[tree['id']]:
-                frame = getOccurrence(part)['transform']
+            for name, partOrFrame in frames[tree['id']]:
+                if type(partOrFrame) == list:
+                    frame = getOccurrence(partOrFrame)['transform']
+                else:
+                    frame = partOrFrame
+                
                 if robot.relative:
                     frame = np.linalg.inv(matrix)*frame
                 robot.addFrame(name, frame)
