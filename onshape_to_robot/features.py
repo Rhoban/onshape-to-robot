@@ -39,6 +39,14 @@ def readExpression(expression):
     if parts[1] == 'deg':
         return math.radians(float(parts[0]))
     elif parts[1] in ['radian', 'rad']:
+        # looking for PI
+        if isinstance(parts[0], str):
+            if parts[0] == '(PI)':
+                val = math.pi
+            else:
+                raise ValueError(f"{parts[0]} variable isn't supported")
+        else:
+            val = parts[0]
         return float(parts[0])
     elif parts[1] == 'mm':
         return float(parts[0])/1000.0
