@@ -141,9 +141,15 @@ def main():
                         part['name']+' has no dynamics (maybe it is a surface)' + Style.RESET_ALL)
                     return
                 massProperties = massProperties['bodies'][part['partId']]
-                mass = massProperties['mass'][0]
-                com = massProperties['centroid']
-                inertia = massProperties['inertia']
+                try:
+                    mass = massProperties["mass"][0]
+                    com = massProperties["centroid"]
+                    inertia = massProperties["inertia"]
+                except IndexError:
+                    # The part of type Surface has no mass properties.
+                    mass = 0
+                    com = [0] * 3
+                    inertia = [0] * 9
 
                 if abs(mass) < 1e-9:
                     print(Fore.YELLOW + 'WARNING: part ' +
