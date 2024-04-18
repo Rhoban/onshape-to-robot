@@ -42,12 +42,12 @@ def readExpression(expression):
         # looking for PI
         if isinstance(parts[0], str):
             if parts[0] == '(PI)':
-                val = math.pi
+                value = math.pi
             else:
                 raise ValueError(f"{parts[0]} variable isn't supported")
         else:
-            val = parts[0]
-        return float(parts[0])
+            value = parts[0]
+        return float(value)
     elif parts[1] == 'mm':
         return float(parts[0])/1000.0
     elif parts[1] == 'cm':
