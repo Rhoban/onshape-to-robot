@@ -10,6 +10,7 @@ from .simulation import Simulation
 def main():
     parser = argparse.ArgumentParser(prog="onshape-to-robot-bullet")
     parser.add_argument('-f', '--fixed', action='store_true')
+    parser.add_argument('-n', '--no-self-collisions', action='store_true')
     parser.add_argument('-x', '--x', type=float, default=0)
     parser.add_argument('-y', '--y', type=float, default=0)
     parser.add_argument('-z', '--z', type=float, default=0)
@@ -20,7 +21,7 @@ def main():
     if not robotPath.endswith('.urdf'):
         robotPath += '/robot.urdf'
 
-    sim = Simulation(robotPath, gui=True, panels=True, fixed=args.fixed)
+    sim = Simulation(robotPath, gui=True, panels=True, fixed=args.fixed, ignore_self_collisions=args.no_self_collisions)
     pos, rpy = sim.getRobotPose()
     _, orn = p.getBasePositionAndOrientation(sim.robot)
     sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], orn)
