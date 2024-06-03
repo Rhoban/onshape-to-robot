@@ -133,8 +133,12 @@ def main():
                 com = entry['com']
                 inertia = entry['inertia']
             else:
-                massProperties = client.part_mass_properties(
-                    part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
+                if part['isStandardContent']:
+                    massProperties = client.standard_cont_mass_properties(
+                        part['documentId'], part['documentVersion'], part['elementId'], part['partId'],config['documentId'], part['configuration'])
+                else:
+                    massProperties = client.part_mass_properties(
+                        part['documentId'], part['documentMicroversion'], part['elementId'], part['partId'], part['configuration'])
 
                 if part['partId'] not in massProperties['bodies']:
                     print(Fore.YELLOW + 'WARNING: part ' +
