@@ -48,11 +48,15 @@ def main():
         else:
             return name not in config['whitelist']
 
-    # Adds a part to the current robot link
-
+    def renamePart(name):
+        """Remove special characters from part names."""
+        return name.replace('"', "in").replace("'", "ft")
 
     def addPart(occurrence, matrix):
+        """Add a part to the current robot link."""
         part = occurrence['instance']
+        part['name'] = renamePart(part['name'])
+        part['configuration'] = renamePart(part['configuration'])
 
         if part['suppressed']:
             return
