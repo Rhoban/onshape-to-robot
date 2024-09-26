@@ -20,6 +20,7 @@ import requests
 from colorama import Fore, Back, Style
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
+from dotenv import load_dotenv
 
 __all__ = [
     'Onshape'
@@ -68,6 +69,8 @@ class Onshape():
             except TypeError as ex:
                 raise ValueError('%s is not valid json' % creds) from ex
 
+        #No idea why the name of the dotenv file needed to be spesified but the code breaks without it.
+        load_dotenv(".env")
         try:
             self._url = config["onshape_api"]
             self._access_key = config['onshape_access_key'].encode('utf-8')
