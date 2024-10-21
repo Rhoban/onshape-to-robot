@@ -41,8 +41,9 @@ def readExpression(expression):
     elif parts[1] in ['radian', 'rad']:
         # looking for PI
         if isinstance(parts[0], str):
-            if parts[0] == '(PI)':
-                value = math.pi
+            if 'PI' in parts[0]:
+                PI = math.pi
+                value = eval(parts[0])
             else:
                 raise ValueError(f"{parts[0]} variable isn't supported")
         else:
