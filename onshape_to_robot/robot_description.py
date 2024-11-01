@@ -268,7 +268,7 @@ class RobotURDF(RobotDescription):
         material_name = name + "_material"
         material_name = xml_escape(material_name)
 
-        self.append('<'+node+'>')
+        self.append(f'<{node} name="{name}">')
         self.append(origin(matrix))
         self.append('<geometry>')
         self.append(f'<mesh filename="package://{stl_file}"/>')
@@ -278,7 +278,7 @@ class RobotURDF(RobotDescription):
             self.append('<color rgba="%.20g %.20g %.20g 1.0"/>' %
                         (color[0], color[1], color[2]))
             self.append('</material>')
-        self.append('</'+node+'>')
+        self.append(f'</{node}>')
 
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
         if stl is not None:
@@ -449,14 +449,14 @@ class RobotSDF(RobotDescription):
         return m
 
     def addSTL(self, matrix, stl, color, name, node='visual'):
-        self.append('<'+node+' name="'+name+'_visual">')
+        self.append(f'<{node} name="{name}_visual">')
         self.append(pose(matrix))
         self.append('<geometry>')
         self.append('<mesh><uri>file://'+stl+'</uri></mesh>')
         self.append('</geometry>')
         if node == 'visual':
             self.append(self.material(color))
-        self.append('</'+node+'>')
+        self.append(f'</{node}>')
 
     def addPart(self, matrix, stl, mass, com, inertia, color, shapes=None, name=''):
         name = self._link_name+'_'+str(self._link_childs)+'_'+name
