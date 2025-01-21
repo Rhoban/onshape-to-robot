@@ -209,12 +209,19 @@ Adds a ``base_link`` without inertia as root. This is often necessary for ROS us
 
 Specifies the robot name.
 
-``additionalXML``
+``additionalUrdfFile``
 ~~~~~~~~~~~~~~~~~
 
 *optional*
 
-Specifies a file with XML content that is inserted into the URDF/SDF at the end of the file. Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
+Specifies a file with XML content that is inserted into the URDF at the end of the file. Useful to add things that can't be modelled in onshape, e.g. simulated sensors.
+
+``additionalSdfFile``
+~~~~~~~~~~~~~~~~~
+
+*optional*
+
+The same as ``additionalUrdfFile`` but for the SDF output.
 
 ``useFixedLinks``
 ~~~~~~~~~~~~~~~~~
