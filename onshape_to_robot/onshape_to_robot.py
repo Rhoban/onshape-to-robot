@@ -47,10 +47,11 @@ def main():
             return name in config['ignore']
         else:
             return name not in config['whitelist']
+        
+    def slugify(value):
+        return "".join(c if c.isalnum() else "_" for c in value).strip("_")
 
     # Adds a part to the current robot link
-
-
     def addPart(occurrence, matrix):
         part = occurrence['instance']
 
@@ -79,7 +80,7 @@ def main():
         if partIsIgnore(justPart):
             stlFile = None
         else:
-            stlFile = prefix.replace('/', '_')+'.stl'
+            stlFile = slugify(prefix)+'.stl'
             # shorten the configuration to a maximum number of chars to prevent errors. Necessary for standard parts like screws
             if len(part['configuration']) > 40:
                 shortend_configuration = hashlib.md5(
@@ -91,7 +92,7 @@ def main():
             with open(config['outputDirectory']+'/'+stlFile, 'wb') as stream:
                 stream.write(stl)
 
-            stlMetadata = prefix.replace('/', '_')+'.part'
+            stlMetadata = slugify(prefix)+'.part'
             with open(config['outputDirectory']+'/'+stlMetadata, 'w', encoding="utf-8") as stream:
                 json.dump(part, stream, indent=4, sort_keys=True)
 
