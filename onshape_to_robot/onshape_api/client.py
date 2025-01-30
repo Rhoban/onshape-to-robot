@@ -356,6 +356,6 @@ class Client():
     
     def standard_cont_mass_properties(self, did, vid, eid, partid, linkDocumentId, configuration):
         def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/v/' + vid + '/e/' + eid + '/partid/'+escape_slash(partid)+'/massproperties', query={'configuration': configuration, 'useMassPropertyOverrides': True, "linkDocumentId": linkDocumentId, "inferMetadataOwner": True})
+            return self._api.request('get', '/api/parts/d/' + did + '/v/' + vid + '/e/' + eid + '/partid/'+escape_url(partid)+'/massproperties', query={'configuration': configuration, 'useMassPropertyOverrides': True, "linkDocumentId": linkDocumentId, "inferMetadataOwner": True})
 
         return json.loads(self.cache_get('standard_massproperties', (did, vid, eid, self.hash_partid(partid), configuration), invoke, True))
