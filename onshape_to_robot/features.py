@@ -17,8 +17,6 @@ def init(client, config, root, workspaceId, assemblyId):
     else:
         joint_features = client.get_features(
             config['documentId'], config['versionId'], assemblyId, type='v', configuration=config["configuration"])
-        matevalues = client.matevalues(
-            config['documentId'], config['versionId'], assemblyId, type='v', configuration=config["configuration"])
 
     # Retrieving root configuration parameters
     configuration_parameters = {}

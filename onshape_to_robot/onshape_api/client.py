@@ -342,8 +342,8 @@ class Client():
 
         return self.cache_get('part_stl', (did, mid, eid, self.hash_partid(partid), configuration), invoke)
 
-    def matevalues(self, did, wvid, eid, type_='w', configuration = 'default'):
-        return self._api.request('get', '/api/assemblies/d/' + did + '/'+type_+'/' + wvid + '/e/' + eid + '/matevalues', query={'configuration': configuration}).json()
+    def matevalues(self, did, wid, eid, configuration = 'default'):
+        return self._api.request('get', '/api/assemblies/d/' + did + '/w/' + wid + '/e/' + eid + '/matevalues', query={'configuration': configuration}).json()
 
     def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
