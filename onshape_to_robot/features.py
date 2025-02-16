@@ -3,18 +3,22 @@ from colorama import Fore, Back, Style
 
 joint_features = {}
 configuration_parameters = {}
-
+matevalues = {}
 
 def init(client, config, root, workspaceId, assemblyId):
-    global configuration_parameters, joint_features
+    global configuration_parameters, joint_features, matevalues
 
     # Load joint features to get limits later
     if config['versionId'] == '':
         joint_features = client.get_features(
-            config['documentId'], workspaceId, assemblyId)
+            config['documentId'], workspaceId, assemblyId, configuration=config["configuration"])
+        matevalues = client.matevalues(
+            config['documentId'], workspaceId, assemblyId, configuration=config["configuration"])
     else:
         joint_features = client.get_features(
-            config['documentId'], config['versionId'], assemblyId, type='v')
+            config['documentId'], config['versionId'], assemblyId, type='v', configuration=config["configuration"])
+        matevalues = client.matevalues(
+            config['documentId'], config['versionId'], assemblyId, type='v', configuration=config["configuration"])
 
     # Retrieving root configuration parameters
     configuration_parameters = {}
@@ -87,9 +91,20 @@ def readParameterValue(parameter, name):
               parameter['typeName']+Style.RESET_ALL)
         exit()
 
+# Gets the offset of a given joint
+def getOffset(name):
+    for entry in matevalues['mateValues']:
+        if entry['mateName'] == name:
+            if 'rotationZ' in entry:
+                return entry['rotationZ']
+            elif 'translationZ' in entry:
+                return entry['translationZ']
+            else:
+                print(Fore.YELLOW + 'Unknown offset type for ' + name + Style.RESET_ALL)
+    return None
+
+
 # Gets the limits of a given joint
-
-
 def getLimits(jointType, name):
     enabled = False
     minimum, maximum = 0, 0
@@ -112,6 +127,9 @@ def getLimits(jointType, name):
                     if parameter['message']['parameterId'] == 'limitZMax':
                         maximum = readParameterValue(parameter, name)
     if enabled:
+        offset = getOffset(name)
+        minimum -= offset
+        maximum -= offset
         return (minimum, maximum)
     else:
         if jointType != 'continuous':

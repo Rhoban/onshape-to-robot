@@ -181,20 +181,20 @@ class Client():
     def get_assembly(self, did, wid, eid, type='w', configuration='default'):
         return self._api.request('get', '/api/assemblies/d/'+did+'/'+type+'/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true', 'includeMateConnectors': 'true', 'includeNonSolids': 'true', 'configuration': configuration}).json()
 
-    def get_features(self, did, wid, eid, type='w'):
+    def get_features(self, did, wvid, eid, type='w', configuration='default'):
         '''
         Gets the feature list for specified document / workspace / part studio.
 
         Args:
             - did (str): Document ID
-            - wid (str): Workspace ID
+            - mid (str): Microversion
             - eid (str): Element ID
 
         Returns:
             - requests.Response: Onshape response data
         '''
 
-        return self._api.request('get', '/api/assemblies/d/' + did + '/'+type+'/' + wid + '/e/' + eid + '/features').json()
+        return self._api.request('get', '/api/assemblies/d/' + did + '/'+type+'/' + wvid + '/e/' + eid + '/features', {'configuration': configuration}).json()
 
     def get_assembly_features(self, did, wid, eid):
         '''
@@ -341,6 +341,9 @@ class Client():
             return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_url(partid)+'/stl', query={'mode': 'binary', 'units': 'meter', 'configuration': configuration}, headers=req_headers)
 
         return self.cache_get('part_stl', (did, mid, eid, self.hash_partid(partid), configuration), invoke)
+
+    def matevalues(self, did, wvid, eid, type_='w', configuration = 'default'):
+        return self._api.request('get', '/api/assemblies/d/' + did + '/'+type_+'/' + wvid + '/e/' + eid + '/matevalues', query={'configuration': configuration}).json()
 
     def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
         def invoke():
