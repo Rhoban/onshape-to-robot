@@ -33,6 +33,7 @@ class DOF:
         joint_type: str,
         T_world_mate: np.ndarray,
         limits: tuple | None,
+        z_axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
     ):
         if body1_id > body2_id:
             body1_id, body2_id = body2_id, body1_id
@@ -42,6 +43,15 @@ class DOF:
         self.joint_type: str = joint_type
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
+        self.z_axis: np.ndarray = z_axis
+
+    def other_body(self, body_id: int):
+        if body_id == self.body1_id:
+            return self.body2_id
+        elif body_id == self.body2_id:
+            return self.body1_id
+        else:
+            raise Exception(f"ERROR: body {body_id} is not part of this DOF")
 
 
 class Assembly:
@@ -82,6 +92,7 @@ class Assembly:
         self.ensure_workspace_or_version()
         self.find_assembly()
         self.retrieve_assembly()
+        self.find_instances()
         self.load_features()
         self.load_configuration()
         self.process_mates()
@@ -161,6 +172,40 @@ class Assembly:
         self.occurrences: dict = {}
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
             self.occurrences[tuple(occurrence["path"])] = occurrence
+
+    def find_instances(self, prefix: list = [], instances=None, labels=[]):
+        """
+        Walking all the instances and associating them with their occurrences
+        """
+        if instances is None:
+            instances = self.assembly_data["rootAssembly"]["instances"]
+
+        for instance in instances:
+            if "type" in instance:
+                if instance["type"] == "Part":
+                    path = prefix + [instance["id"]]
+                    self.get_occurrence(path)["instance"] = instance
+                elif instance["type"] == "Assembly":
+                    path = prefix + [instance["id"]]
+                    self.get_occurrence(path)["instance"] = instance
+
+                    if not instance["suppressed"]:
+                        d = instance["documentId"]
+                        m = instance["documentMicroversion"]
+                        e = instance["elementId"]
+                        c = instance["configuration"]
+                        for sub_assembly in self.assembly_data["subAssemblies"]:
+                            if (
+                                sub_assembly["documentId"] == d
+                                and sub_assembly["documentMicroversion"] == m
+                                and sub_assembly["elementId"] == e
+                                and sub_assembly["configuration"] == c
+                            ):
+                                self.find_instances(
+                                    prefix + [instance["id"]],
+                                    sub_assembly["instances"],
+                                    labels + [instance["name"]],
+                                )
 
     def load_features(self):
         """
@@ -415,7 +460,7 @@ class Assembly:
             if instance["id"] not in self.instance_body:
                 print(
                     warning(
-                        f"WARNING: Item {instance['name']} is not connected to the tree"
+                        f"WARNING: Item {instance['name']} is not connected to the tree (ignoring)"
                     )
                 )
 
@@ -605,15 +650,18 @@ class Assembly:
                     warning(f"WARNING: joint {name} of type {joint_type} has no limits")
                 )
             return None
-        
+
     def body_instance(self, body_id: int):
         """
         Get the (first) instance associated with a given body
         """
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] in self.instance_body and self.instance_body[instance["id"]] == body_id:
+            if (
+                instance["id"] in self.instance_body
+                and self.instance_body[instance["id"]] == body_id
+            ):
                 return instance
-            
+
         return None
 
     def body_occurrences(self, body_id: int):
@@ -624,3 +672,15 @@ class Assembly:
             key = occurrence["path"][0]
             if key in self.instance_body and self.instance_body[key] == body_id:
                 yield occurrence
+
+    def get_dof(self, body1_id: int, body2_id: int):
+        """
+        Get a DOF for given bodies
+        """
+        for dof in self.dofs:
+            if (dof.body1_id == body1_id and dof.body2_id == body2_id) or (
+                dof.body1_id == body2_id and dof.body2_id == body1_id
+            ):
+                return dof
+
+        raise Exception(f"ERROR: no DOF found between {body1_id} and {body2_id}")

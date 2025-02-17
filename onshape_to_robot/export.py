@@ -2,6 +2,7 @@ import sys
 from .config import Config
 from .message import error
 from .assembly import Assembly
+from .robot_builder import RobotBuilder
 
 try:
     # Retrieving robot path
@@ -16,10 +17,11 @@ try:
     # Loading configuration
     config = Config(robot_path)
 
-    # Processing the assembly
+    # Retrieving and processing the assembly
     assembly = Assembly(config)
 
-    print(assembly.body_instance(0))
+    # Building the robot
+    robot_builder = RobotBuilder(config, assembly)
 
 except Exception as e:
     print(error(f"ERROR: {e}"))
