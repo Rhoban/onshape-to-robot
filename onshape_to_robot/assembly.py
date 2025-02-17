@@ -4,6 +4,7 @@ from .config import Config
 from .message import error, info, bright, success, warning
 from .onshape_api.client import Client
 from .features import init as features_init, getLimits
+from .robot import Joint
 
 INSTANCE_IGNORE = -1
 INSTANCE_ROOT = 0
@@ -344,18 +345,18 @@ class Assembly:
                 limits = None
                 if data["mateType"] == "REVOLUTE" or data["mateType"] == "CYLINDRICAL":
                     if "wheel" in parts or "continuous" in parts:
-                        joint_type = "continuous"
+                        joint_type = Joint.CONTINUOUS
                     else:
-                        joint_type = "revolute"
+                        joint_type = Joint.REVOLUTE
 
                     if not self.config.ignore_limits:
                         limits = self.get_limits(joint_type, data["name"])
                 elif data["mateType"] == "SLIDER":
-                    joint_type = "prismatic"
+                    joint_type = Joint.PRISMATIC
                     if not self.config.ignore_limits:
                         limits = self.get_limits(joint_type, data["name"])
                 elif data["mateType"] == "FASTENED":
-                    joint_type = "fixed"
+                    joint_type = Joint.FIXED
                 else:
                     raise Exception(
                         f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
@@ -645,12 +646,12 @@ class Assembly:
                     if parameter["message"]["parameterId"] == "limitsEnabled":
                         enabled = parameter["message"]["value"]
 
-                    if joint_type == "revolute":
+                    if joint_type == Joint.REVOLUTE:
                         if parameter["message"]["parameterId"] == "limitAxialZMin":
                             minimum = self.read_parameter_value(parameter, name)
                         if parameter["message"]["parameterId"] == "limitAxialZMax":
                             maximum = self.read_parameter_value(parameter, name)
-                    elif joint_type == "prismatic":
+                    elif joint_type == Joint.PRISMATIC:
                         if parameter["message"]["parameterId"] == "limitZMin":
                             minimum = self.read_parameter_value(parameter, name)
                         if parameter["message"]["parameterId"] == "limitZMax":
@@ -662,7 +663,7 @@ class Assembly:
                 maximum -= offset
             return (minimum, maximum)
         else:
-            if joint_type != "continuous":
+            if joint_type != Joint.CONTINUOUS:
                 print(
                     warning(f"WARNING: joint {name} of type {joint_type} has no limits")
                 )

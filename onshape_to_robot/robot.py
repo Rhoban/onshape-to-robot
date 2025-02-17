@@ -10,20 +10,20 @@ class Part:
         self,
         name: str,
         T_world_part: np.ndarray,
-        stl_file: str,
+        mesh_file: str,
         mass: float,
         com: np.ndarray,
         inertia: np.ndarray,
-        color: tuple,
+        color: tuple | None,
         shapes: dict | None,
     ):
         self.name: str = name
         self.T_world_part: np.ndarray = T_world_part
-        self.stl_file: str = stl_file
+        self.mesh_file: str = mesh_file
         self.mass: float = mass
         self.com: np.ndarray = com
         self.inertia: np.ndarray = inertia
-        self.color: tuple = color
+        self.color: tuple | None = color
         self.shapes: dict | None = shapes
 
 
@@ -73,6 +73,12 @@ class Joint:
     """
     A joint connects two links.
     """
+
+    # Joint types
+    FIXED = "fixed"
+    REVOLUTE = "revolute"
+    PRISMATIC = "prismatic"
+    CONTINUOUS = "continuous"
 
     def __init__(
         self,
