@@ -74,8 +74,8 @@ class Config:
         self.pure_shape_dilatation: float = self.get("pureShapeDilatation", 0.0)
 
         # Joint efforts
-        self.joint_max_effort: float = self.get("jointMaxEffort", 1)
-        self.joint_max_velocity: float = self.get("jointMaxVelocity", 20)
+        self.joint_max_effort: float | dict = self.get("jointMaxEffort", 1)
+        self.joint_max_velocity: float | dict = self.get("jointMaxVelocity", 20)
         self.no_dynamics: bool = self.get("noDynamics", False)
 
         # Ignore / whitelists

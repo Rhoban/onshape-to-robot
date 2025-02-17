@@ -302,9 +302,25 @@ class RobotBuilder:
 
             child_link_name = self.build_robot(child_body)
 
+            if isinstance(self.config.joint_max_effort, dict):
+                max_effort = self.config.joint_max_effort.get(
+                    dof.name, self.config.joint_max_effort["default"]
+                )
+            else:
+                max_effort = self.config.joint_max_effort
+
+            if isinstance(self.config.joint_max_velocity, dict):
+                max_velocity = self.config.joint_max_velocity.get(
+                    dof.name, self.config.joint_max_velocity["default"]
+                )
+            else:
+                max_velocity = self.config.joint_max_velocity
+
             joint = Joint(
                 dof.name,
                 dof.joint_type,
+                max_effort,
+                max_velocity,
                 self.robot.get_link(link_name),
                 self.robot.get_link(child_link_name),
                 dof.limits,

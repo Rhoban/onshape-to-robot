@@ -84,6 +84,8 @@ class Joint:
         self,
         name: str,
         joint_type: str,
+        max_effort: float | None,
+        max_velocity: float | None,
         parent: Link,
         child: Link,
         limits: tuple[float, float] | None,
@@ -92,6 +94,8 @@ class Joint:
     ):
         self.name: str = name
         self.joint_type: str = joint_type
+        self.max_effort: float | None = max_effort
+        self.max_velocity: float | None = max_velocity
         self.parent: Link = parent
         self.child: Link = child
         self.limits: tuple[float, float] | None = limits
