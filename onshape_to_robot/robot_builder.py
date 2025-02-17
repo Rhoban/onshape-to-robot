@@ -6,17 +6,17 @@ from .message import warning, info, success, error, dim, bright
 from .assembly import Assembly, INSTANCE_ROOT
 from .config import Config
 from .robot_description import RobotURDF, RobotSDF, RobotDescription
+from .robot import Part, Joint, Link, Robot
 from .csg import process as csg_process
 
 
 class RobotBuilder:
-    def __init__(self, config: Config, assembly: Assembly):
+    def __init__(self, config: Config):
         self.config: Config = config
-        self.assembly: Assembly = assembly
-        self.robot: RobotDescription = None
+        self.assembly: Assembly = Assembly(config)
+        self.robot: Robot = Robot()
         self.part_names = {}
 
-        self.make_robot()
         self.build_robot(INSTANCE_ROOT)
         self.export_robot()
 
@@ -24,21 +24,22 @@ class RobotBuilder:
         """
         Export the robot to the output file
         """
-        self.robot.finalize()
-        print(bright(f"* Writing {self.robot.ext.upper()} file"))
+        pass
+        # self.robot.finalize()
+        # print(bright(f"* Writing {self.robot.ext.upper()} file"))
 
-        with open(
-            self.config.output_directory + "/robot." + self.robot.ext,
-            "w",
-            encoding="utf-8",
-        ) as stream:
-            stream.write(self.robot.xml)
+        # with open(
+        #     self.config.output_directory + "/robot." + self.robot.ext,
+        #     "w",
+        #     encoding="utf-8",
+        # ) as stream:
+        #     stream.write(self.robot.xml)
 
-        if len(self.config.post_import_commands):
-            print(bright(f"* Executing post-import commands"))
-            for command in self.config.post_import_commands:
-                print("* " + command)
-                os.system(command)
+        # if len(self.config.post_import_commands):
+        #     print(bright(f"* Executing post-import commands"))
+        #     for command in self.config.post_import_commands:
+        #         print("* " + command)
+        #         os.system(command)
 
     def part_is_ignored(self, name: str) -> bool:
         """
@@ -223,9 +224,10 @@ class RobotBuilder:
                             f"WARNING: part {instance['name']} has no mass, maybe you should assign a material to it ?"
                         )
                     )
-        return mass, com, inertia
 
-    def add_part(self, occurrence: dict, T_world_link: np.ndarray):
+        return mass, com[:3], np.reshape(inertia[:9], (3, 3))
+
+    def add_part(self, occurrence: dict):
         """
         Add a part to the current link
         """
@@ -272,18 +274,10 @@ class RobotBuilder:
 
         T_world_part = np.array(occurrence["transform"]).reshape(4, 4)
 
-        self.robot.addPart(
-            np.linalg.inv(T_world_link) @ T_world_part,
-            stl_file,
-            mass,
-            com,
-            inertia,
-            color,
-            shapes,
-            prefix,
-        )
+        part = Part(prefix, T_world_part, stl_file, mass, com, inertia, color, shapes)
+        self.robot.links[-1].parts.append(part)
 
-    def build_robot(self, body_id: int, T_world_link: np.ndarray = np.eye(4)):
+    def build_robot(self, body_id: int):
         """
         Add recursively body nodes to the robot description.
         """
@@ -291,38 +285,32 @@ class RobotBuilder:
         link_name = self.unique_part_name(instance)
 
         # Adding all the parts in the current link
-        self.robot.startLink(link_name, T_world_link)
+        self.robot.links.append(Link(link_name))
         for occurrence in self.assembly.body_occurrences(body_id):
             if occurrence["instance"]["type"] == "Part":
-                self.add_part(occurrence, T_world_link)
-        self.robot.endLink()
+                self.add_part(occurrence)
 
         # Adding frames to the link
         for frame in self.assembly.frames:
             if frame.body_id == body_id:
-                T_world_frame = frame.T_world_frame
-                T_link_frame = np.linalg.inv(T_world_link) @ T_world_frame
-
-                self.robot.addFrame(frame.name, T_link_frame)
+                self.robot.links[-1].frames[frame.name] = frame.T_world_frame
 
         for children_body in self.assembly.tree_children[body_id]:
             dof = self.assembly.get_dof(body_id, children_body)
             child_body = dof.other_body(body_id)
             T_world_axis = dof.T_world_mate.copy()
 
-            if self.robot.relative:
-                child_link_name = self.build_robot(child_body, T_world_axis)
-            else:
-                child_link_name = self.build_robot(child_body, T_world_link)
+            child_link_name = self.build_robot(child_body)
 
-            self.robot.addJoint(
-                dof.joint_type,
-                link_name,
-                child_link_name,
-                np.linalg.inv(T_world_link) @ T_world_axis,
+            joint = Joint(
                 dof.name,
+                dof.joint_type,
+                self.robot.get_link(link_name),
+                self.robot.get_link(child_link_name),
                 dof.limits,
                 dof.z_axis,
+                T_world_axis,
             )
+            self.robot.joints.append(joint)
 
         return link_name
