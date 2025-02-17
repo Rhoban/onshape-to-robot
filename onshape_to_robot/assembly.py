@@ -135,18 +135,31 @@ class Assembly:
 
         self.assembly_id = None
         self.assembly_name = ""
+        assemblies: dict = {}
         for element in elements:
-            if element["type"] == "Assembly" and (
-                (not self.config.assembly_name)
-                or element["name"] == self.config.assembly_name
-            ):
-                print(
-                    success(
-                        f"+ Found assembly, id: {element['id']}, name: {element['name']}"
-                    )
+            if element["type"] == "Assembly":
+                assemblies[element["name"]] = element["id"]
+
+        if self.config.assembly_name:
+            if self.config.assembly_name in assemblies:
+                self.assembly_id = assemblies[self.config.assembly_name]
+                self.assembly_name = self.config.assembly_name
+            else:
+                raise Exception(
+                    f"ERROR: Unable to find required assembly {self.config.assembly_name} in this document"
                 )
-                self.assembly_name = element["name"]
-                self.assembly_id = element["id"]
+        else:
+            if len(assemblies) == 0:
+                raise Exception("ERROR: No assembly found in this document\n")
+            elif len(assemblies) == 1:
+                self.assembly_name = list(assemblies.keys())[0]
+                self.assembly_id = list(assemblies.values())[0]
+            else:
+                raise Exception(
+                    f"ERROR: Multiple assemblies found, please specify the assembly name\n"
+                    + '       to export (use "assemblyName" in the configuration file)\n'
+                    + f"       Available assemblies: {', '.join(assemblies.keys())}"
+                )
 
         if self.assembly_id == None:
             raise Exception(f"ERROR: Unable to find assembly in this document")
