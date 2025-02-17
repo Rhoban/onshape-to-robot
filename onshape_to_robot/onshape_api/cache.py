@@ -14,7 +14,7 @@ def get_cache_path() -> Path:
     return path
 
 
-def can_cache(method, *args, **kwargs):
+def can_cache(method, *args, **kwargs) -> bool:
     """
     Check if the cache can be used.
     When using wmv=w, the current workspace is used, which make it impossible to cache.
