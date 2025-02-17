@@ -182,10 +182,10 @@ class Assembly:
 
         for instance in instances:
             if "type" in instance:
-                if instance["type"] == "Part":
-                    path = prefix + [instance["id"]]
-                    self.get_occurrence(path)["instance"] = instance
-                elif instance["type"] == "Assembly":
+                path = prefix + [instance["id"]]
+                self.get_occurrence(path)["instance"] = instance
+
+                if instance["type"] == "Assembly":
                     path = prefix + [instance["id"]]
                     self.get_occurrence(path)["instance"] = instance
 
