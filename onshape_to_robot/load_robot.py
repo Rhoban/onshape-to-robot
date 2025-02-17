@@ -5,7 +5,7 @@ import numpy as np
 import uuid
 from .onshape_api.client import Client
 from .config import config, configFile
-from colorama import Fore, Back, Style
+from .message import error, info, bright, success, warning
 
 # OnShape API client
 workspaceId = None
@@ -13,78 +13,43 @@ client = Client(logging=False, creds=configFile)
 client.useCollisionsConfigurations = config["useCollisionsConfigurations"]
 
 # If a versionId is provided, it will be used, else the main workspace is retrieved
+print("")
 if config["versionId"] != "":
-    print(
-        "\n"
-        + Style.BRIGHT
-        + "* Using configuration version ID "
-        + config["versionId"]
-        + " ..."
-        + Style.RESET_ALL
-    )
+    print(bright(f"* Using configuration version ID {config['versionId']} ..."))
 elif config["workspaceId"] != "":
-    print(
-        "\n"
-        + Style.BRIGHT
-        + "* Using configuration workspace ID "
-        + config["workspaceId"]
-        + " ..."
-        + Style.RESET_ALL
-    )
+    print(bright(f"* Using configuration workspace ID {config['workspaceId']} ..."))
     workspaceId = config["workspaceId"]
 else:
-    print("\n" + Style.BRIGHT + "* Retrieving workspace ID ..." + Style.RESET_ALL)
-    document = client.get_document(config["documentId"]).json()
+    print(bright("* Retrieving workspace ID ..."))
+    document = client.get_document(config["documentId"])
     workspaceId = document["defaultWorkspace"]["id"]
-    print(Fore.GREEN + "+ Using workspace id: " + workspaceId + Style.RESET_ALL)
+    print(success(f"+ Using workspace id: {workspaceId}"))
 
 # Now, finding the assembly, according to given name in configuration, or else the first possible one
-print(
-    "\n"
-    + Style.BRIGHT
-    + "* Retrieving elements in the document, searching for the assembly..."
-    + Style.RESET_ALL
-)
+print("")
+print(bright("* Retrieving elements in the document, searching for the assembly..."))
 if config["versionId"] != "":
     elements = client.list_elements(
         config["documentId"], config["versionId"], "v"
-    ).json()
+    )
 else:
-    elements = client.list_elements(config["documentId"], workspaceId).json()
+    elements = client.list_elements(config["documentId"], workspaceId)
 assemblyId = None
 assemblyName = ""
 for element in elements:
     if element["type"] == "Assembly" and (
         config["assemblyName"] is False or element["name"] == config["assemblyName"]
     ):
-        print(
-            Fore.GREEN
-            + "+ Found assembly, id: "
-            + element["id"]
-            + ', name: "'
-            + element["name"]
-            + '"'
-            + Style.RESET_ALL
-        )
+        print(success(f"+ Found assembly, id: {element['id']}, name: {element['name']}"))
         assemblyName = element["name"]
         assemblyId = element["id"]
 
 if assemblyId == None:
-    print(
-        Fore.RED + "ERROR: Unable to find assembly in this document" + Style.RESET_ALL
-    )
+    print(error(f"ERROR: Unable to find assembly in this document"))
     exit(1)
 
 # Retrieving the assembly
-print(
-    "\n"
-    + Style.BRIGHT
-    + '* Retrieving assembly "'
-    + assemblyName
-    + '" with id '
-    + assemblyId
-    + Style.RESET_ALL
-)
+print(bright(f"* Retrieving assembly \"{assemblyName}\" with id {assemblyId}"))
 if config["versionId"] != "":
     assembly = client.get_assembly(
         config["documentId"],
@@ -131,7 +96,7 @@ def findInstance(path, instances=None):
                     ):
                         return findInstance(path[1:], asm["instances"])
 
-    print(Fore.RED + "Could not find instance for " + str(path) + Style.RESET_ALL)
+    print(error(f"Could not find instance for {str(path)}"))
 
 
 # Collecting occurrences, the path is the assembly / sub assembly chain
@@ -188,12 +153,8 @@ def get_T_part_mate(matedEntity: dict):
 
 
 # First, features are scanned to find the DOFs. Links that they connects are then tagged
-print(
-    "\n"
-    + Style.BRIGHT
-    + "* Getting assembly features, scanning for DOFs..."
-    + Style.RESET_ALL
-)
+print("")
+print(bright("* Getting assembly features, scanning for DOFs..."))
 trunk = None
 relations = {}
 features = root["features"]
@@ -241,13 +202,7 @@ for feature in features:
                 del parts[-1]
             name = "_".join(parts)
             if name == "":
-                print(
-                    Fore.RED
-                    + "ERROR: a DOF dones't have any name (\""
-                    + data["name"]
-                    + '" should be "dof_...")'
-                    + Style.RESET_ALL
-                )
+                print(error(f"ERROR: a dof doesn't have any name ({data['name']} should be \"dof_...\")"))
                 exit()
 
             limits = None
@@ -266,18 +221,8 @@ for feature in features:
             elif data["mateType"] == "FASTENED":
                 jointType = "fixed"
             else:
-                print(
-                    Fore.RED
-                    + 'ERROR: "'
-                    + name
-                    + '" is declared as a DOF but the mate type is '
-                    + data["mateType"]
-                    + ""
-                )
-                print(
-                    "       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"
-                    + Style.RESET_ALL
-                )
+                print(error(f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}"))
+                print(error("       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"))
                 exit(1)
 
             # We compute the axis in the world frame
@@ -307,31 +252,14 @@ for feature in features:
                     + str(round(limits[1], 3))
                     + "]"
                 )
-            print(
-                Fore.GREEN
-                + "+ Found DOF: "
-                + name
-                + " "
-                + Style.DIM
-                + "("
-                + jointType
-                + ")"
-                + limitsStr
-                + Style.RESET_ALL
-            )
+            print(success(f"+ Found DOF: {name} ({jointType}) {limitsStr}"))
 
             if child in relations:
-                print(Fore.RED)
-                print(
-                    "Error, the relation "
-                    + name
-                    + " is connected a child that is already connected"
-                )
+                print(error(f"Error, the relation {name} is connecting a child that is already connected"))
                 print("Be sure you ordered properly your relations, see:")
                 print(
                     "https://onshape-to-robot.readthedocs.io/en/latest/design.html#specifying-degrees-of-freedom"
                 )
-                print(Style.RESET_ALL)
                 exit()
 
             relations[child] = {
@@ -346,14 +274,7 @@ for feature in features:
             assignParts(child, child)
             assignParts(parent, parent)
 
-print(
-    Fore.GREEN
-    + Style.BRIGHT
-    + "* Found total "
-    + str(len(relations))
-    + " DOFs"
-    + Style.RESET_ALL
-)
+print(success(f"* Found total {len(relations)} DOFs"))
 
 # If we have no DOF
 if len(relations) == 0:
@@ -426,7 +347,8 @@ while changed:
 # 2. Scan for orphaned parts (if you add something floating with no mate to anything)
 #    that are then assigned to trunk by default
 # 3. Collect all the pieces of the robot tree
-print("\n" + Style.BRIGHT + "* Building robot tree" + Style.RESET_ALL)
+print("")
+print(bright("* Building robot tree"))
 
 for childId in relations:
     entry = relations[childId]
@@ -434,19 +356,11 @@ for childId in relations:
         trunk = entry["parent"]
         break
 trunkOccurrence = getOccurrence([trunk])
-print(
-    Style.BRIGHT + "* Trunk is " + trunkOccurrence["instance"]["name"] + Style.RESET_ALL
-)
+print(bright(f"* Trunk is {trunkOccurrence['instance']['name']}"))
 
 for occurrence in occurrences.values():
     if occurrence["assignation"] is None:
-        print(
-            Fore.YELLOW
-            + "WARNING: part ("
-            + occurrence["instance"]["name"]
-            + ") has no assignation, connecting it with trunk"
-            + Style.RESET_ALL
-        )
+        print(warning(f"WARNING: part ({occurrence['instance']['name']}) has no assignation, connecting it with trunk"))
         child = occurrence["path"][0]
         connectParts(child, trunk)
 
