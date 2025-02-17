@@ -1,8 +1,45 @@
 import math
+import numpy as np
 from .config import Config
 from .message import error, info, bright, success, warning
 from .onshape_api.client import Client
 from .features import init as features_init, getLimits
+
+INSTANCE_IGNORE = -1
+INSTANCE_ROOT = 0
+
+
+class Frame:
+    """
+    Represents a frame attached
+    """
+
+    def __init__(self, body_id: int, name: str, T_world_frame: np.ndarray):
+        self.body_id: int = body_id
+        self.name: str = name
+        self.T_world_frame: np.ndarray = T_world_frame
+
+
+class DOF:
+    """
+    Represents a DOF
+    """
+
+    def __init__(
+        self,
+        body1_id: int,
+        body2_id: int,
+        name: str,
+        joint_type: str,
+        limits: tuple | None,
+    ):
+        if body1_id > body2_id:
+            body1_id, body2_id = body2_id, body1_id
+        self.body1_id: int = body1_id
+        self.body2_id: int = body2_id
+        self.name: str = name
+        self.joint_type: str = joint_type
+        self.limits: tuple | None = limits
 
 
 class Assembly:
@@ -27,7 +64,12 @@ class Assembly:
         # All (raw) data from assembly
         self.assembly_data: dict = {}
         # Map a (top-level) instance id to a body id
+        self.current_body_id: int = INSTANCE_ROOT
         self.instance_body: dict[str, int] = {}
+        # Frames object
+        self.frames: list[Frame] = []
+        # Degrees of freedom
+        self.dofs: list[DOF] = []
         # Features data
         self.features: dict = {}
         # Configuration values
@@ -38,8 +80,11 @@ class Assembly:
         self.retrieve_assembly()
         self.load_features()
         self.load_configuration()
-        self.preassign_instances()
-        self.merge_instances()
+
+        self.process_mates()
+        self.check_tree()
+        # TODO: Check that the robot is not a graph
+        # TODO: Check that the base instance has a dof
 
     def ensure_workspace_or_version(self):
         """
@@ -112,6 +157,10 @@ class Assembly:
             configuration=self.config.configuration,
         )
 
+        self.occurrences: dict = {}
+        for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
+            self.occurrences[tuple(occurrence["path"])] = occurrence
+
     def load_features(self):
         """
         Load features
@@ -147,20 +196,291 @@ class Assembly:
                 key, value = key_value
                 self.configuration_parameters[key] = value.replace("+", " ")
 
-    def preassign_instances(self):
+    def get_occurrence(self, path: list):
+        """
+        Retrieve occurrence from its path
+        """
+        return self.occurrences[tuple(path)]
+
+    def get_occurrence_transform(self, path: list) -> np.ndarray:
+        """
+        Retrieve occurrence transform from its path
+        """
+        T_world_part = np.array(self.get_occurrence(path)["transform"]).reshape(4, 4)
+
+        return T_world_part
+
+    def get_mate_transform(self, mated_entity: dict):
+        T_part_mate = np.eye(4)
+        T_part_mate[:3, :3] = np.stack(
+            (
+                np.array(mated_entity["matedCS"]["xAxis"]),
+                np.array(mated_entity["matedCS"]["yAxis"]),
+                np.array(mated_entity["matedCS"]["zAxis"]),
+            )
+        ).T
+        T_part_mate[:3, 3] = mated_entity["matedCS"]["origin"]
+
+        return T_part_mate
+
+    def make_body(self, id: str):
+        """
+        Make the given instance id a body
+        """
+        self.instance_body[id] = self.current_body_id
+        self.current_body_id += 1
+
+    def merge_bodies(self, occurrence_A: str, occurrence_B: str):
+        # Ensure occurrences are body
+        if occurrence_A not in self.instance_body:
+            self.make_body(occurrence_A)
+        if occurrence_B not in self.instance_body:
+            self.make_body(occurrence_B)
+
+        # Merging bodies
+        body1_id = self.instance_body[occurrence_A]
+        body2_id = self.instance_body[occurrence_B]
+        if body1_id > body2_id:
+            body1_id, body2_id = body2_id, body1_id
+
+        self.instance_body[occurrence_A] = body1_id
+        self.instance_body[occurrence_B] = body1_id
+
+        for dof in self.dofs:
+            if dof.body1_id == body2_id:
+                dof.body1_id = body1_id
+            if dof.body2_id == body2_id:
+                dof.body2_id = body1_id
+
+    def process_mates(self):
         """
         Pre-assign all top-level instances to a separate body id
         """
         top_level_instances = self.assembly_data["rootAssembly"]["instances"]
-        body_id = 0
-        for instance in top_level_instances:
-            self.instance_body[instance["id"]] = body_id
-            body_id += 1
+        self.base_instance: str = top_level_instances[0]["id"]
+        self.make_body(top_level_instances[0]["id"])
 
-    def merge_instances(self):
-        pass
+        print(
+            info(f"* First instance {top_level_instances[0]['name']} will be the base")
+        )
+
+        # We first search for DOFs
+        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+            if data["name"].startswith("dof_"):
+                # Process the DOF name, removing dof prefix and inv suffix
+                parts = data["name"].split("_")
+                del parts[0]
+                data["inverted"] = False
+                if parts[-1] == "inv" or parts[-1] == "inverted":
+                    data["inverted"] = True
+                    del parts[-1]
+                name = "_".join(parts)
+
+                if name == "":
+                    raise Exception(
+                        f"ERROR: the following dof should have a name {data['name']}"
+                    )
+
+                # Finding joint type and limits
+                limits = None
+                if data["mateType"] == "REVOLUTE" or data["mateType"] == "CYLINDRICAL":
+                    if "wheel" in parts or "continuous" in parts:
+                        joint_type = "continuous"
+                    else:
+                        joint_type = "revolute"
+
+                    if not self.config.ignore_limits:
+                        limits = self.get_limits(joint_type, data["name"])
+                elif data["mateType"] == "SLIDER":
+                    joint_type = "prismatic"
+                    if not self.config.ignore_limits:
+                        limits = self.get_limits(joint_type, data["name"])
+                elif data["mateType"] == "FASTENED":
+                    joint_type = "fixed"
+                else:
+                    raise Exception(
+                        f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
+                        + "       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"
+                    )
+
+                # We compute the axis in the world frame
+                mated_entity = data["matedEntities"][0]
+                T_world_part = self.get_occurrence_transform(
+                    mated_entity["matedOccurrence"]
+                )
+
+                # jointToPart is the (rotation only) matrix from joint to the part
+                # it is attached to
+                T_part_mate = self.get_mate_transform(mated_entity)
+
+                if data["inverted"]:
+                    if limits is not None:
+                        limits = (-limits[1], -limits[0])
+
+                    # Flipping the joint around X axis
+                    flip = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
+                    T_part_mate[:3, :3] = T_part_mate[:3, :3] @ flip
+
+                T_world_mate = T_world_part @ T_part_mate
+
+                limits_str = ""
+                if limits is not None:
+                    limits_str = f"[{round(limits[0], 3)}: {round(limits[1], 3)}]"
+                print(success(f"+ Found DOF: {name} ({joint_type}) {limits_str}"))
+
+                # Ensure occurrences are body
+                if occurrence_A not in self.instance_body:
+                    self.make_body(occurrence_A)
+                if occurrence_B not in self.instance_body:
+                    self.make_body(occurrence_B)
+
+                self.dofs.append(
+                    DOF(
+                        self.instance_body[occurrence_A],
+                        self.instance_body[occurrence_B],
+                        name,
+                        joint_type,
+                        limits,
+                    )
+                )
+
+        # Merging fixed links
+        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+            if data["name"].startswith("fix_"):
+                self.merge_bodies(occurrence_A, occurrence_B)
+
+        # Processing frames / closing loops
+        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+            if data["name"].startswith("closing_"):
+                for k in 0, 1:
+                    mated_entity = data["matedEntities"][k]
+                    occurrence = mated_entity["matedOccurrence"][0]
+
+                    T_world_part = self.get_occurrence_transform(
+                        mated_entity["matedOccurrence"]
+                    )
+                    T_part_mate = self.get_mate_transform(mated_entity)
+                    T_world_mate = T_world_part @ T_part_mate
+
+                    self.frames.append(
+                        Frame(
+                            self.instance_body[occurrence],
+                            f"{data['name']}_{k+1}",
+                            T_world_mate,
+                        )
+                    )
+            elif data["name"].startswith("frame_"):
+                name = "_".join(data["name"].split("_")[1:])
+                if (
+                    occurrence_A not in self.instance_body
+                    and occurrence_B in self.instance_body
+                ):
+                    parent, child = occurrence_B, occurrence_A
+                elif (
+                    occurrence_B not in self.instance_body
+                    and occurrence_A in self.instance_body
+                ):
+                    parent, child = occurrence_A, occurrence_B
+                else:
+                    raise Exception(
+                        f"Frame {name} should mate an orphan body to a body in the kinematics tree"
+                    )
+
+                T_world_part = self.get_occurrence_transform(
+                    mated_entity["matedOccurrence"]
+                )
+                T_part_mate = self.get_mate_transform(mated_entity)
+                T_world_mate = T_world_part @ T_part_mate
+
+                self.frames.append(
+                    Frame(self.instance_body[parent], name, T_world_mate)
+                )
+
+                if self.config.draw_frames:
+                    self.merge_bodies(parent, child)
+                else:
+                    self.instance_body[child] = INSTANCE_IGNORE
+
+        print(success(f"* Found total {len(self.dofs)} degrees of freedom"))
+
+    def check_tree(self):
+        """
+        Perform checks on the produced tree
+        """
+
+        # Checking that all intances are assigned to a body
+        for instance in self.assembly_data["rootAssembly"]["instances"]:
+            if instance["id"] not in self.instance_body:
+                print(
+                    warning(
+                        f"WARNING: Item {instance['name']} is not connected to the tree"
+                    )
+                )
+
+        # Checking that the graph is actually a tree (no loop)
+        exploring = [INSTANCE_ROOT]
+        explored = []
+        dofs = self.dofs.copy()
+        while len(exploring) > 0:
+            current = exploring.pop()
+            explored.append(current)
+
+            children = []
+            dofs_to_remove = []
+            for dof in dofs:
+                if dof.body1_id == current:
+                    children.append(dof.body2_id)
+                    dofs_to_remove.append(dof)
+                elif dof.body2_id == current:
+                    children.append(dof.body1_id)
+                    dofs_to_remove.append(dof)
+            for dof in dofs_to_remove:
+                dofs.remove(dof)
+
+            for child in children:
+                if child in explored:
+                    raise Exception(
+                        "The DOF graph is not a tree, check for loops in your DOFs"
+                    )
+                elif child not in exploring:
+                    exploring.append(child)
+
+        # Check that every body is part of the tree
+        for instance, body_id in self.instance_body.items():
+            if body_id != INSTANCE_IGNORE and body_id not in explored:
+                print(
+                    warning(
+                        f"WARNING: the DOF graph is not fully connected, some parts might be missing"
+                    )
+                )
+                break
+
+    def feature_mating_two_occurrences(self):
+        """
+        Iterate over all valid mating feature with two occurrences
+        """
+        for feature in self.assembly_data["rootAssembly"]["features"]:
+            if feature["featureType"] == "mate" and not feature["suppressed"]:
+                data = feature["featureData"]
+
+                if (
+                    "matedEntities" not in data
+                    or len(data["matedEntities"]) != 2
+                    or len(data["matedEntities"][0]["matedOccurrence"]) == 0
+                    or len(data["matedEntities"][1]["matedOccurrence"]) == 0
+                ):
+                    continue
+
+                occurrence_A = data["matedEntities"][0]["matedOccurrence"][0]
+                occurrence_B = data["matedEntities"][1]["matedOccurrence"][0]
+
+                yield data, occurrence_A, occurrence_B
 
     def read_parameter_value(self, parameter: str, name: str):
+        """
+        Try to read a parameter value from OnShape
+        """
+
         # This is an expression
         if parameter["typeName"] == "BTMParameterNullableQuantity":
             return self.read_expression(parameter["message"]["expression"])
