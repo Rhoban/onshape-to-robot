@@ -31,6 +31,7 @@ class DOF:
         body2_id: int,
         name: str,
         joint_type: str,
+        T_world_mate: np.ndarray,
         limits: tuple | None,
     ):
         if body1_id > body2_id:
@@ -39,6 +40,7 @@ class DOF:
         self.body2_id: int = body2_id
         self.name: str = name
         self.joint_type: str = joint_type
+        self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
 
 
@@ -74,17 +76,16 @@ class Assembly:
         self.features: dict = {}
         # Configuration values
         self.configuration_parameters: dict = {}
+        # Dictionnary mapping items to their children in the tree
+        self.tree_children: dict = {}
 
         self.ensure_workspace_or_version()
         self.find_assembly()
         self.retrieve_assembly()
         self.load_features()
         self.load_configuration()
-
         self.process_mates()
-        self.check_tree()
-        # TODO: Check that the robot is not a graph
-        # TODO: Check that the base instance has a dof
+        self.build_tree()
 
     def ensure_workspace_or_version(self):
         """
@@ -340,6 +341,7 @@ class Assembly:
                         self.instance_body[occurrence_B],
                         name,
                         joint_type,
+                        T_world_mate,
                         limits,
                     )
                 )
@@ -403,7 +405,7 @@ class Assembly:
 
         print(success(f"* Found total {len(self.dofs)} degrees of freedom"))
 
-    def check_tree(self):
+    def build_tree(self):
         """
         Perform checks on the produced tree
         """
@@ -437,6 +439,7 @@ class Assembly:
             for dof in dofs_to_remove:
                 dofs.remove(dof)
 
+            self.tree_children[current] = children
             for child in children:
                 if child in explored:
                     raise Exception(
@@ -602,3 +605,22 @@ class Assembly:
                     warning(f"WARNING: joint {name} of type {joint_type} has no limits")
                 )
             return None
+        
+    def body_instance(self, body_id: int):
+        """
+        Get the (first) instance associated with a given body
+        """
+        for instance in self.assembly_data["rootAssembly"]["instances"]:
+            if instance["id"] in self.instance_body and self.instance_body[instance["id"]] == body_id:
+                return instance
+            
+        return None
+
+    def body_occurrences(self, body_id: int):
+        """
+        Retrieve all occurrences associated to a given body id
+        """
+        for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
+            key = occurrence["path"][0]
+            if key in self.instance_body and self.instance_body[key] == body_id:
+                yield occurrence

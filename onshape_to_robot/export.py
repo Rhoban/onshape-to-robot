@@ -19,6 +19,8 @@ try:
     # Processing the assembly
     assembly = Assembly(config)
 
+    print(assembly.body_instance(0))
+
 except Exception as e:
     print(error(f"ERROR: {e}"))
     raise e
