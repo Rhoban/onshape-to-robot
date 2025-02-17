@@ -423,11 +423,13 @@ class Assembly:
                     and occurrence_B in self.instance_body
                 ):
                     parent, child = occurrence_B, occurrence_A
+                    mated_entity = data["matedEntities"][1]
                 elif (
                     occurrence_B not in self.instance_body
                     and occurrence_A in self.instance_body
                 ):
                     parent, child = occurrence_A, occurrence_B
+                    mated_entity = data["matedEntities"][0]
                 else:
                     raise Exception(
                         f"Frame {name} should mate an orphan body to a body in the kinematics tree"
@@ -448,7 +450,7 @@ class Assembly:
                 else:
                     self.instance_body[child] = INSTANCE_IGNORE
 
-        print(success(f"* Found total {len(self.dofs)} degrees of freedom"))
+        print(success(f"* Found total {len(self.dofs)} degrees of freedom\n"))
 
     def build_tree(self):
         """
@@ -460,9 +462,11 @@ class Assembly:
             if instance["id"] not in self.instance_body:
                 print(
                     warning(
-                        f"WARNING: Item {instance['name']} is not connected to the tree (ignoring)"
+                        f"WARNING: Item {instance['name']} is not connected to the tree, connecting to base\n"
+                        + '         (consider adding a "fix_..." mate to connect it)'
                     )
                 )
+                self.instance_body[instance["id"]] = INSTANCE_ROOT
 
         # Checking that the graph is actually a tree (no loop)
         exploring = [INSTANCE_ROOT]
