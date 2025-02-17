@@ -272,7 +272,7 @@ class RobotURDF(RobotDescription):
         self.addFixedJoint(self._link_name, name, matrix, name + "_frame")
 
     def addSTL(self, matrix, stl, color, name, node="visual"):
-        stl_file = self.packageName.strip("/") + "/" + stl
+        stl_file = self.packageName.strip("/") + stl
         stl_file = xml_escape(stl_file)
 
         material_name = name + "_material"
