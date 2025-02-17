@@ -7,6 +7,7 @@ from .onshape_api.client import Client
 from .config import config, configFile
 from .message import error, info, bright, success, warning
 
+
 # OnShape API client
 workspaceId = None
 client = Client(logging=False, creds=configFile)
@@ -29,9 +30,7 @@ else:
 print("")
 print(bright("* Retrieving elements in the document, searching for the assembly..."))
 if config["versionId"] != "":
-    elements = client.list_elements(
-        config["documentId"], config["versionId"], "v"
-    )
+    elements = client.list_elements(config["documentId"], config["versionId"], "v")
 else:
     elements = client.list_elements(config["documentId"], workspaceId)
 assemblyId = None
@@ -40,7 +39,9 @@ for element in elements:
     if element["type"] == "Assembly" and (
         config["assemblyName"] is False or element["name"] == config["assemblyName"]
     ):
-        print(success(f"+ Found assembly, id: {element['id']}, name: {element['name']}"))
+        print(
+            success(f"+ Found assembly, id: {element['id']}, name: {element['name']}")
+        )
         assemblyName = element["name"]
         assemblyId = element["id"]
 
@@ -49,7 +50,7 @@ if assemblyId == None:
     exit(1)
 
 # Retrieving the assembly
-print(bright(f"* Retrieving assembly \"{assemblyName}\" with id {assemblyId}"))
+print(bright(f'* Retrieving assembly "{assemblyName}" with id {assemblyId}'))
 if config["versionId"] != "":
     assembly = client.get_assembly(
         config["documentId"],
@@ -202,7 +203,11 @@ for feature in features:
                 del parts[-1]
             name = "_".join(parts)
             if name == "":
-                print(error(f"ERROR: a dof doesn't have any name ({data['name']} should be \"dof_...\")"))
+                print(
+                    error(
+                        f"ERROR: a dof doesn't have any name ({data['name']} should be \"dof_...\")"
+                    )
+                )
                 exit()
 
             limits = None
@@ -221,8 +226,16 @@ for feature in features:
             elif data["mateType"] == "FASTENED":
                 jointType = "fixed"
             else:
-                print(error(f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}"))
-                print(error("       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"))
+                print(
+                    error(
+                        f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}"
+                    )
+                )
+                print(
+                    error(
+                        "       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"
+                    )
+                )
                 exit(1)
 
             # We compute the axis in the world frame
@@ -255,7 +268,11 @@ for feature in features:
             print(success(f"+ Found DOF: {name} ({jointType}) {limitsStr}"))
 
             if child in relations:
-                print(error(f"Error, the relation {name} is connecting a child that is already connected"))
+                print(
+                    error(
+                        f"Error, the relation {name} is connecting a child that is already connected"
+                    )
+                )
                 print("Be sure you ordered properly your relations, see:")
                 print(
                     "https://onshape-to-robot.readthedocs.io/en/latest/design.html#specifying-degrees-of-freedom"
@@ -360,7 +377,11 @@ print(bright(f"* Trunk is {trunkOccurrence['instance']['name']}"))
 
 for occurrence in occurrences.values():
     if occurrence["assignation"] is None:
-        print(warning(f"WARNING: part ({occurrence['instance']['name']}) has no assignation, connecting it with trunk"))
+        print(
+            warning(
+                f"WARNING: part ({occurrence['instance']['name']}) has no assignation, connecting it with trunk"
+            )
+        )
         child = occurrence["path"][0]
         connectParts(child, trunk)
 
