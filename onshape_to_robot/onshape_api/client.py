@@ -1,25 +1,20 @@
-'''
+"""
 client
 ======
 
 Convenience functions for working with the Onshape API
-'''
+"""
 
 from .onshape import Onshape
+from .cache import cache_response
 
-import mimetypes
-import random
-import string
-import os
-import json
-import hashlib
-from pathlib import Path
 
-def escape_url(s):
-    return s.replace('/', '%2f').replace('+', '%2b')
+def escape(s):
+    return s.replace("/", "%2f").replace("+", "%2b")
 
-class Client():
-    '''
+
+class Client:
+    """
     Defines methods for testing the Onshape API. Comes with several methods:
 
     - Create a document
@@ -29,16 +24,18 @@ class Client():
     Attributes:
         - stack (str, default='https://cad.onshape.com'): Base URL
         - logging (bool, default=True): Turn logging on or off
-    '''
+    """
 
-    def __init__(self, stack='https://cad.onshape.com', logging=True, creds='./config.json'):
-        '''
+    def __init__(
+        self, stack="https://cad.onshape.com", logging=True, creds="./config.json"
+    ):
+        """
         Instantiates a new Onshape client.
 
         Args:
             - stack (str, default='https://cad.onshape.com'): Base URL
             - logging (bool, default=True): Turn logging on or off
-        '''
+        """
 
         self._metadata_cache = {}
         self._massproperties_cache = {}
@@ -46,68 +43,15 @@ class Client():
         self._api = Onshape(stack=stack, logging=logging, creds=creds)
         self.useCollisionsConfigurations = True
 
-    @staticmethod
-    def get_cache_path() -> Path:
-        """Return the path to the user cache."""
-        path = Path.home() / ".cache" / "onshape-to-robot"
-        path.mkdir(parents=True, exist_ok=True)
-        return path
+    def request(self, url, **kwargs):
+        return self._api.request("get", url, **kwargs).json()
+    
+    def request_binary(self, url, **kwargs):
+        return self._api.request("get", url, **kwargs).content
 
-
-    def new_document(self, name='Test Document', owner_type=0, public=False):
-        '''
-        Create a new document.
-
-        Args:
-            - name (str, default='Test Document'): The doc name
-            - owner_type (int, default=0): 0 for user, 1 for company, 2 for team
-            - public (bool, default=False): Whether or not to make doc public
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        payload = {
-            'name': name,
-            'ownerType': owner_type,
-            'isPublic': public
-        }
-
-        return self._api.request('post', '/api/documents', body=payload)
-
-    def rename_document(self, did, name):
-        '''
-        Renames the specified document.
-
-        Args:
-            - did (str): Document ID
-            - name (str): New document name
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        payload = {
-            'name': name
-        }
-
-        return self._api.request('post', '/api/documents/' + did, body=payload)
-
-    def del_document(self, did):
-        '''
-        Delete the specified document.
-
-        Args:
-            - did (str): Document ID
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        return self._api.request('delete', '/api/documents/' + did)
-
+    @cache_response
     def get_document(self, did):
-        '''
+        """
         Get details for a specified document.
 
         Args:
@@ -115,74 +59,37 @@ class Client():
 
         Returns:
             - requests.Response: Onshape response data
-        '''
-        return self._api.request('get', '/api/documents/' + did)
+        """
+        return self.request(f"/api/documents/{escape(did)}")
 
-    def cache_get(self, method, key, callback, isString = False):
-        if type(key) == tuple:
-            key = '_'.join(list(key))
-        fileName = method+'__'+key
-        dirName = self.get_cache_path()
-
-        m = hashlib.sha1()
-        m.update(fileName.encode('utf-8'))
-        fileName = m.hexdigest()
-        
-        fileName = dirName / fileName
-
-        if os.path.exists(fileName):
-            with open(fileName, "rb") as stream:
-                result = stream.read()
-        else:
-            result = callback().content
-            with open(fileName, 'wb') as stream:
-                stream.write(result)
-        if isString and type(result) == bytes:
-            result = result.decode('utf-8')
-        return result
-            
-
-    def list_documents(self):
-        '''
-        Get list of documents for current user.
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        return self._api.request('get', '/api/documents')
-
-    def list_elements(self, did, wid, type='w'):
-        '''
+    @cache_response
+    def list_elements(self, did, wid, wmv="w"):
+        """
         Get the list of elements in a given document
-        '''
+        """
 
-        return self._api.request('get', '/api/documents/d/'+did+'/'+type+'/'+wid+'/elements')
+        return self.request(
+            f"/api/documents/d/{escape(did)}/{escape(wmv)}/{escape(wid)}/elements"
+        )
 
-    def create_assembly(self, did, wid, name='My Assembly'):
-        '''
-        Creates a new assembly element in the specified document / workspace.
+    @cache_response
+    def get_assembly(self, did, wmvid, eid, wmv="w", configuration="default"):
+        """
+        Retrieve the assembly structure for a specified document / workspace / element.
+        """
+        return self.request(
+            f"/api/assemblies/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}",
+            query={
+                "includeMateFeatures": "true",
+                "includeMateConnectors": "true",
+                "includeNonSolids": "true",
+                "configuration": configuration,
+            },
+        )
 
-        Args:
-            - did (str): Document ID
-            - wid (str): Workspace ID
-            - name (str, default='My Assembly')
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        payload = {
-            'name': name
-        }
-
-        return self._api.request('post', '/api/assemblies/d/' + did + '/w/' + wid, body=payload)
-
-    def get_assembly(self, did, wid, eid, type='w', configuration='default'):
-        return self._api.request('get', '/api/assemblies/d/'+did+'/'+type+'/'+wid+'/e/'+eid, query={'includeMateFeatures': 'true', 'includeMateConnectors': 'true', 'includeNonSolids': 'true', 'configuration': configuration}).json()
-
-    def get_features(self, did, wvid, eid, type='w', configuration='default'):
-        '''
+    @cache_response
+    def get_features(self, did, wvid, eid, wmv="w", configuration="default"):
+        """
         Gets the feature list for specified document / workspace / part studio.
 
         Args:
@@ -192,173 +99,116 @@ class Client():
 
         Returns:
             - requests.Response: Onshape response data
-        '''
+        """
 
-        return self._api.request('get', '/api/assemblies/d/' + did + '/'+type+'/' + wvid + '/e/' + eid + '/features', {'configuration': configuration}).json()
+        return self.request(
+            f"/api/assemblies/d/{escape(did)}/{escape(wmv)}/{escape(wvid)}/e/{escape(eid)}/features",
+            query={"configuration": configuration},
+        )
 
-    def get_assembly_features(self, did, wid, eid):
-        '''
-        Gets the feature list for specified document / workspace / part studio.
-
-        Args:
-            - did (str): Document ID
-            - wid (str): Workspace ID
-            - eid (str): Element ID
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        return self._api.request('get', '/api/assemblies/d/' + did + '/w/' + wid + '/e/' + eid + '/features')
-
-    def get_partstudio_tessellatededges(self, did, wid, eid):
-        '''
-        Gets the tessellation of the edges of all parts in a part studio.
-
-        Args:
-            - did (str): Document ID
-            - wid (str): Workspace ID
-            - eid (str): Element ID
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/tessellatededges')
-
-    def upload_blob(self, did, wid, filepath='./blob.json'):
-        '''
-        Uploads a file to a new blob element in the specified doc.
-
-        Args:
-            - did (str): Document ID
-            - wid (str): Workspace ID
-            - filepath (str, default='./blob.json'): Blob element location
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        chars = string.ascii_letters + string.digits
-        boundary_key = ''.join(random.choice(chars) for i in range(8))
-
-        mimetype = mimetypes.guess_type(filepath)[0]
-        encoded_filename = os.path.basename(filepath)
-        file_content_length = str(os.path.getsize(filepath))
-        with open(filepath, "r", encoding="utf-8") as stream:
-            blob = stream.read()
-
-        req_headers = {
-            'Content-Type': 'multipart/form-data; boundary="%s"' % boundary_key
-        }
-
-        # build request body
-        payload = '--' + boundary_key + '\r\nContent-Disposition: form-data; name="encodedFilename"\r\n\r\n' + encoded_filename + '\r\n'
-        payload += '--' + boundary_key + '\r\nContent-Disposition: form-data; name="fileContentLength"\r\n\r\n' + file_content_length + '\r\n'
-        payload += '--' + boundary_key + '\r\nContent-Disposition: form-data; name="file"; filename="' + encoded_filename + '"\r\n'
-        payload += 'Content-Type: ' + mimetype + '\r\n\r\n'
-        payload += blob
-        payload += '\r\n--' + boundary_key + '--'
-
-        return self._api.request('post', '/api/blobelements/d/' + did + '/w/' + wid, headers=req_headers, body=payload)
-
-    def part_studio_stl(self, did, wid, eid):
-        '''
-        Exports STL export from a part studio
-
-        Args:
-            - did (str): Document ID
-            - wid (str): Workspace ID
-            - eid (str): Element ID
-
-        Returns:
-            - requests.Response: Onshape response data
-        '''
-
-        req_headers = {
-            'Accept': '*/*'
-        }
-        return self._api.request('get', '/api/partstudios/d/' + did + '/w/' + wid + '/e/' + eid + '/stl', headers=req_headers)
-
-    def hash_partid(self, data):
-        m = hashlib.sha1()
-        m.update(data.encode('utf-8'))
-        return m.hexdigest()
-
+    @cache_response
     def get_sketches(self, did, mid, eid, configuration):
-        def invoke():
-            return self._api.request('get', '/api/partstudios/d/' + did + '/m/' + mid + '/e/' + eid + '/sketches', 
-            query={'includeGeometry': 'true', 'configuration': configuration})
+        """
+        Get sketches for a given document / microversion / element.
+        """
+        return self.request(
+            f"/api/partstudios/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/sketches",
+            query={"includeGeometry": "true", "configuration": configuration},
+        )
 
-        return json.loads(self.cache_get('sketches', (did, mid, eid, configuration), invoke))
-
+    @cache_response
     def get_parts(self, did, mid, eid, configuration):
-        def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid, query=
-                {'configuration': configuration})
+        """
+        Get parts for a given document / microversion / element.
+        """
+        return self.request(
+            f"/api/parts/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}",
+            query={"configuration": configuration},
+        )
 
-        return json.loads(self.cache_get('parts_list', (did, mid, eid, configuration), invoke))
-
-    def find_new_partid(self, did, mid, eid, partid, configuration_before, configuration):
+    def find_new_partid(
+        self, did, mid, eid, partid, configuration_before, configuration
+    ):
         before = self.get_parts(did, mid, eid, configuration_before)
         name = None
         for entry in before:
-            if entry['partId'] == partid:
-                name = entry['name']
-        
+            if entry["partId"] == partid:
+                name = entry["name"]
+
         if name is not None:
             after = self.get_parts(did, mid, eid, configuration)
             for entry in after:
-                if entry['name'] == name:
-                    return entry['partId']
+                if entry["name"] == name:
+                    return entry["partId"]
         else:
-            print("OnShape ERROR: Can't find new partid for "+str(partid))
+            print("OnShape ERROR: Can't find new partid for " + str(partid))
 
         return partid
 
-    def part_studio_stl_m(self, did, mid, eid, partid, configuration = 'default'):
+    @cache_response
+    def part_studio_stl_m(self, did, mid, eid, partid, configuration="default"):
         if self.useCollisionsConfigurations:
             configuration_before = configuration
-            parts = configuration.split(';')
+            parts = configuration.split(";")
             partIdChanged = False
-            result = ''
             for k, part in enumerate(parts):
-                kv = part.split('=')
+                kv = part.split("=")
                 if len(kv) == 2:
-                    if kv[0] == 'collisions':
-                        kv[1] = 'true'
+                    if kv[0] == "collisions":
+                        kv[1] = "true"
                         partIdChanged = True
-                parts[k] = '='.join(kv)
-            configuration = ';'.join(parts)
+                parts[k] = "=".join(kv)
+            configuration = ";".join(parts)
 
             if partIdChanged:
-                partid = self.find_new_partid(did, mid, eid, partid, configuration_before, configuration)
-    
-        def invoke():
-            req_headers = {
-                'Accept': '*/*'
-            }
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_url(partid)+'/stl', query={'mode': 'binary', 'units': 'meter', 'configuration': configuration}, headers=req_headers)
+                partid = self.find_new_partid(
+                    did, mid, eid, partid, configuration_before, configuration
+                )
 
-        return self.cache_get('part_stl', (did, mid, eid, self.hash_partid(partid), configuration), invoke)
+        req_headers = {"Accept": "*/*"}
+        return self.request_binary(
+            f"/api/parts/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/stl",
+            query={
+                "mode": "binary",
+                "units": "meter",
+                "configuration": configuration,
+            },
+            headers=req_headers,
+        )
 
-    def matevalues(self, did, wid, eid, configuration = 'default'):
-        return self._api.request('get', '/api/assemblies/d/' + did + '/w/' + wid + '/e/' + eid + '/matevalues', query={'configuration': configuration}).json()
+    def matevalues(self, did, wid, eid, configuration="default"):
+        return self.request(
+            f"/api/assemblies/d/{escape(did)}/w/{escape(wid)}/e/{escape(eid)}/matevalues",
+            query={"configuration": configuration},
+        )
 
-    def part_get_metadata(self, did, mid, eid, partid, configuration = 'default'):
-        def invoke():
-            return self._api.request('get', '/api/metadata/d/' + did + '/m/' + mid + '/e/' + eid + '/p/'+escape_url(partid), query={'configuration': configuration})
+    @cache_response
+    def part_get_metadata(self, did, mid, eid, partid, configuration="default"):
+        return self.request(
+            f"/api/metadata/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/p/{escape(partid)}",
+            query={"configuration": configuration},
+        )
 
-        return json.loads(self.cache_get('metadata', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
+    @cache_response
+    def part_mass_properties(self, did, mid, eid, partid, configuration="default"):
+        return self.request(
+            f"/api/parts/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/massproperties",
+            query={
+                "configuration": configuration,
+                "useMassPropertyOverrides": True,
+            },
+        )
 
-    def part_mass_properties(self, did, mid, eid, partid, configuration = 'default'):
-        def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/m/' + mid + '/e/' + eid + '/partid/'+escape_url(partid)+'/massproperties', query={'configuration': configuration, 'useMassPropertyOverrides': True})
-
-        return json.loads(self.cache_get('part_massproperties', (did, mid, eid, self.hash_partid(partid), configuration), invoke, True))
-    
-    def standard_cont_mass_properties(self, did, vid, eid, partid, linkDocumentId, configuration):
-        def invoke():
-            return self._api.request('get', '/api/parts/d/' + did + '/v/' + vid + '/e/' + eid + '/partid/'+escape_url(partid)+'/massproperties', query={'configuration': configuration, 'useMassPropertyOverrides': True, "linkDocumentId": linkDocumentId, "inferMetadataOwner": True})
-
-        return json.loads(self.cache_get('standard_massproperties', (did, vid, eid, self.hash_partid(partid), configuration), invoke, True))
+    @cache_response
+    def standard_cont_mass_properties(
+        self, did, vid, eid, partid, linkDocumentId, configuration
+    ):
+        return self.request(
+            f"/api/parts/d/{escape(did)}/v/{escape(vid)}/e/{escape(eid)}/partid/{escape(partid)}/massproperties",
+            query={
+                "configuration": configuration,
+                "useMassPropertyOverrides": True,
+                "linkDocumentId": linkDocumentId,
+                "inferMetadataOwner": True,
+            },
+        )
