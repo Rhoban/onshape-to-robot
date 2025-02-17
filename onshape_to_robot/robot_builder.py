@@ -223,7 +223,6 @@ class RobotBuilder:
                             f"WARNING: part {instance['name']} has no mass, maybe you should assign a material to it ?"
                         )
                     )
-
         return mass, com, inertia
 
     def add_part(self, occurrence: dict, T_world_link: np.ndarray):

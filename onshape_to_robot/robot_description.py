@@ -106,12 +106,12 @@ class RobotDescription(object):
 
     def addLinkDynamics(self, matrix, mass, com, inertia):
         # Inertia
-        I = np.matrix(np.reshape(inertia[:9], (3, 3)))
+        I = np.reshape(inertia[:9], (3, 3))
         R = matrix[:3, :3]
         # Expressing COM in the link frame
-        com = np.array((matrix * np.matrix([com[0], com[1], com[2], 1]).T).T)[0][:3]
+        com = (matrix @ [com[0], com[1], com[2], 1])[:3]
         # Expressing inertia in the link frame
-        inertia = R * I * R.T
+        inertia = R @ I @ R.T
 
         self._dynamics.append({"mass": mass, "com": com, "inertia": inertia})
 
@@ -131,8 +131,8 @@ class RobotDescription(object):
     def linkDynamics(self):
         mass = 0
         com = np.array([0.0] * 3)
-        inertia = np.matrix(np.zeros((3, 3)))
-        identity = np.matrix(np.eye(3))
+        inertia = np.zeros((3, 3))
+        identity = np.eye(3)
 
         for dynamic in self._dynamics:
             mass += dynamic["mass"]
@@ -144,10 +144,10 @@ class RobotDescription(object):
         # https://pybullet.org/Bullet/phpBB3/viewtopic.php?t=246
         for dynamic in self._dynamics:
             r = dynamic["com"] - com
-            p = np.matrix(r)
+            p = np.array(r).reshape((1, 3))
             inertia += (
                 dynamic["inertia"]
-                + (np.dot(r, r) * identity - p.T * p) * dynamic["mass"]
+                + (np.dot(r, r) * identity - p.T @ p) * dynamic["mass"]
             )
 
         return mass, com, inertia

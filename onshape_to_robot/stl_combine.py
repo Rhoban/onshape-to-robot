@@ -21,11 +21,11 @@ def combine_meshes(m1, m2):
 
 
 def apply_matrix(mesh, matrix):
-    rotation = matrix[0:3, 0:3]
-    translation = matrix[0:3, 3:4].T.tolist()
+    rotation = matrix[:3, :3]
+    translation = matrix[:3, 3]
 
     def transform(points):
-        return (rotation*np.matrix(points).T).T + translation*len(points)
+        return (rotation @ points.T).T + translation
 
     mesh.v0 = transform(mesh.v0)
     mesh.v1 = transform(mesh.v1)
@@ -65,10 +65,10 @@ filter_script_mlx = """
 """
 
 
-def create_tmp_filter_file(filename='filter_file_tmp.mlx', reduction=0.9):
-    with open('/tmp/' + filename, 'w', encoding="utf-8") as stream:
-        stream.write(filter_script_mlx.replace('%reduction%', str(reduction)))
-    return '/tmp/' + filename
+def create_tmp_filter_file(filename="filter_file_tmp.mlx", reduction=0.9):
+    with open("/tmp/" + filename, "w", encoding="utf-8") as stream:
+        stream.write(filter_script_mlx.replace("%reduction%", str(reduction)))
+    return "/tmp/" + filename
 
 
 def reduce_faces(in_file, out_file, reduction=0.5):
@@ -78,21 +78,25 @@ def reduce_faces(in_file, out_file, reduction=0.5):
     # Add the filter script
     command += " -s " + filter_script_path
     # Add the output filename and output flags
-    command += " -o " + out_file 
+    command += " -o " + out_file
     command += " > /tmp/meshlab.log 2>&1"
     # Execute command
     # print("Going to execute: " + command)
     output = subprocess.check_output(command, shell=True)
     # last_line = output.splitlines()[-1]
     # print("Done:")
-    #print(in_file + " > " + out_file + ": " + last_line)
+    # print(in_file + " > " + out_file + ": " + last_line)
 
 
 def simplify_stl(stl_file, max_size=3):
-    size_M = os.path.getsize(stl_file)/(1024*1024)
+    size_M = os.path.getsize(stl_file) / (1024 * 1024)
 
     if size_M > max_size:
-        print(Fore.BLUE + '+ '+os.path.basename(stl_file) +
-              (' is %.2f M, running mesh simplification' % size_M))
-        shutil.copyfile(stl_file, '/tmp/simplify.stl')
-        reduce_faces('/tmp/simplify.stl', stl_file, max_size / size_M)
+        print(
+            Fore.BLUE
+            + "+ "
+            + os.path.basename(stl_file)
+            + (" is %.2f M, running mesh simplification" % size_M)
+        )
+        shutil.copyfile(stl_file, "/tmp/simplify.stl")
+        reduce_faces("/tmp/simplify.stl", stl_file, max_size / size_M)
