@@ -33,11 +33,12 @@ try:
         raise Exception(f"Unsupported output format: {config.output_format}")
 
     # Building the robot
-    # robot_builder = RobotBuilder(config)
-    # robot = robot_builder.robot
-
+    robot_builder = RobotBuilder(config)
+    robot = robot_builder.robot
+    
+    # Can be used for debugging
     # pickle.dump(robot, open("robot.pkl", "wb"))
-    robot = pickle.load(open("robot.pkl", "rb"))
+    # robot = pickle.load(open("robot.pkl", "rb"))
 
     # Applying processors
     for processor in processors:
