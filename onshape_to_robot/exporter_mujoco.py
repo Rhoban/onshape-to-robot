@@ -103,21 +103,6 @@ class ExporterMuJoCo(Exporter):
 
         self.append("</actuator>")
 
-        # TODO: Create actuators ?
-        # limits = ""
-        # if joint.max_effort is not None:
-        #     limits += 'effort="%.20g" ' % joint.max_effort
-        # if joint.max_velocity is not None:
-        #     limits += 'velocity="%.20g" ' % joint.max_velocity
-        # if joint.limits is not None:
-        #     limits += 'lower="%.20g" upper="%.20g" ' % joint.limits
-
-        # if limits:
-        #     self.append(f"<limit {limits}/>")
-
-        # self.append('<joint_properties friction="0.0"/>')
-        # self.append("</joint>")
-
     def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
         # Populating body inertial properties
         # https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-inertial
