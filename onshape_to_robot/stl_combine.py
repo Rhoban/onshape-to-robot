@@ -5,7 +5,7 @@ import subprocess
 import stl
 import os
 from stl import mesh
-from colorama import Fore, Back, Style
+from .message import info
 
 
 def load_mesh(stl_file):
@@ -93,10 +93,9 @@ def simplify_stl(stl_file, max_size=3):
 
     if size_M > max_size:
         print(
-            Fore.BLUE
-            + "+ "
-            + os.path.basename(stl_file)
-            + (" is %.2f M, running mesh simplification" % size_M)
+            info(
+                f"+ {os.path.basename(stl_file)} is {size_M:.2f} M, running mesh simplification"
+            )
         )
         shutil.copyfile(stl_file, "/tmp/simplify.stl")
         reduce_faces("/tmp/simplify.stl", stl_file, max_size / size_M)
