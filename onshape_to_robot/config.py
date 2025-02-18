@@ -47,6 +47,15 @@ class Config:
 
         return default
 
+    def printable_version(self) -> str:
+        version = f"document_id: {self.document_id}"
+        if self.version_id:
+            version += f" / version_id: {self.version_id}"
+        elif self.workspace_id:
+            version += f" / workspace_id: {self.workspace_id}"
+
+        return version
+
     def read_configuration(self):
         """
         Load and check configuration entries
@@ -64,7 +73,7 @@ class Config:
             raise Exception("You can't specify workspaceId and versionId")
 
         self.draw_frames: bool = self.get("drawFrames", False)
-        
+
         self.assembly_name: str = self.get("assemblyName", required=False)
         self.output_format: str = self.get("outputFormat", "urdf")
         self.configuration: str = self.get("configuration", "default")

@@ -1,27 +1,27 @@
 import numpy as np
 import os
+from .message import success
 from .robot import Robot, Link, Part, Joint
 from .config import Config
 from .shapes import Box, Cylinder, Sphere
 from .exporter import Exporter
 from .exporter_utils import xml_escape, rotation_matrix_to_rpy
+from transforms3d.quaternions import mat2quat
 
 
-class ExporterURDF(Exporter):
+class ExporterMuJoCo(Exporter):
     def __init__(self, config: Config | None = None):
         super().__init__()
         self.config: Config = config
 
-        self.ext: str = "urdf"
         self.draw_collisions: bool = False
         self.no_dynamics: bool = False
-        self.package_name: str = ""
         self.additional_xml: str = ""
+        self.meshes: dict = {}
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
             self.draw_collisions: bool = config.get("drawCollisions", False)
-            self.package_name: str = config.get("packageName", "")
             additional_xml_file = config.get("additionalUrdfFile", "")
             if additional_xml_file:
                 with open(additional_xml_file, "r") as file:
@@ -34,13 +34,44 @@ class ExporterURDF(Exporter):
         self.xml = ""
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
-        self.append(f'<robot name="{robot.name}">')
+        if self.config:
+            self.append(f"<!-- OnShape {self.config.printable_version()} -->")
+        self.append(f'<mujoco model="{robot.name}">')
+        self.append(f'<compiler angle="radian" meshdir="." />')
+        self.append(f'<option noslip_iterations="1"></option>')
+
+        # Boilerplate
+        self.append("<default>")
+        self.append('<joint frictionloss="0.1" armature="0.005"/>')
+        self.append('<position inheritrange="1" kp="75" kv="5"/>')
+        self.append('<default class="visual">')
+        self.append('<geom type="mesh" contype="0" conaffinity="0" group="2"/>')
+        self.append("</default>")
+        self.append('<default class="collision">')
+        self.append('<geom group="3"/>')
+        self.append("</default>")
+        self.append("</default>")
+
+        self.append("<worldbody>")
+
         self.add_link(robot, robot.get_base_link())
 
         if self.additional_xml:
             self.append(self.additional_xml)
 
-        self.append("</robot>")
+        self.append("</worldbody>")
+
+        self.append("<asset>")
+        for mesh_file in self.meshes:
+            entry = self.meshes[mesh_file]
+            color_str = "%.20g %.20g %.20g 1" % tuple(entry["color"])
+            self.append(
+                f'<material name="{entry["material_name"]}" rgba="{color_str}" />'
+            )
+            self.append(f'<mesh file="{mesh_file}" />')
+        self.append("</asset>")
+
+        self.append("</mujoco>")
 
         return self.xml
 
@@ -74,29 +105,30 @@ class ExporterURDF(Exporter):
         """
         Add a mesh node (e.g. STL) to the URDF file
         """
-        self.append(f"<{node}>")
-
-        T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
-        self.append(self.origin(T_link_part))
-
+        # Retrieving mesh file and material name
         mesh_file = os.path.basename(part.mesh_file)
-        if self.package_name:
-            mesh_file = self.package_name + "/" + mesh_file
+        mesh_file_no_ext = ".".join(mesh_file.split(".")[:-1])
+        material_name = mesh_file_no_ext + "_material"
 
-        self.append("<geometry>")
-        self.append(f'<mesh filename="package://{xml_escape(mesh_file)}" />')
-        self.append("</geometry>")
+        # Relative frame
+        T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
 
-        if node == "visual":
-            material_name = f"{part.name}_material"
-            self.append(f'<material name="{xml_escape(material_name)}">')
-            self.append(
-                '<color rgba="%.20g %.20g %.20g 1.0"/>'
-                % (part.color[0], part.color[1], part.color[2])
-            )
-            self.append("</material>")
+        # Adding the geom node
+        self.append(f"<!-- Mesh {part.name} -->")
+        geom = f'<geom type="mesh" class="{node}" '
+        geom += self.pos_quat(T_link_part) + " "
+        geom += f'mesh="{xml_escape(mesh_file_no_ext)}" '
+        geom += f'material="{xml_escape(material_name)}" '
+        geom += " />"
 
-        self.append(f"</{node}>")
+        # Adding the mesh and material to appear in the assets section
+        self.meshes[mesh_file] = {
+            "mesh": mesh_file,
+            "material_name": material_name,
+            "color": part.color,
+        }
+
+        self.append(geom)
 
     def add_shapes(self, part: Part, node: str, T_world_link: np.ndarray):
         """
@@ -141,7 +173,8 @@ class ExporterURDF(Exporter):
         Both can be "visual" or "collision"
         """
         if what == "collision" and part.shapes is not None:
-            self.add_shapes(part, node, T_world_link)
+            # self.add_shapes(part, node, T_world_link)
+            ...
         elif part.mesh_file:
             self.add_mesh(part, node, T_world_link)
 
@@ -208,11 +241,14 @@ class ExporterURDF(Exporter):
         Adds a link recursively to the URDF file
         """
         self.append(f"<!-- Link {link.name} -->")
-        self.append(f'<link name="{link.name}">')
+        self.append(f'<body name="{link.name}">')
 
-        # Adding inertial properties
-        mass, com, inertia = link.get_dynamics(T_world_link)
-        self.add_inertial(mass, com, inertia)
+        if link == robot.get_base_link():
+            self.append('<freejoint name="root" />')
+
+        # # Adding inertial properties
+        # mass, com, inertia = link.get_dynamics(T_world_link)
+        # self.add_inertial(mass, com, inertia)
 
         # Adding geometry objects
         for part in link.parts:
@@ -223,23 +259,37 @@ class ExporterURDF(Exporter):
                 "visual",
                 "collision" if self.draw_collisions else "visual",
             )
-            self.add_geometries(part, T_world_link, "collision", "collision")
+            # self.add_geometries(part, T_world_link, "collision", "collision")
 
-        self.append("</link>")
+        # # Adding frames attached to current link
+        # for frame, T_world_frame in link.frames.items():
+        #     self.add_frame(link, frame, T_world_link, T_world_frame)
 
-        # Adding frames attached to current link
-        for frame, T_world_frame in link.frames.items():
-            self.add_frame(link, frame, T_world_link, T_world_frame)
+        # # Adding joints and children links
+        # for joint in robot.get_link_joints(link):
+        #     self.add_link(robot, joint.child, joint.T_world_joint)
+        #     self.add_joint(joint, T_world_link)
 
-        # Adding joints and children links
-        for joint in robot.get_link_joints(link):
-            self.add_link(robot, joint.child, joint.T_world_joint)
-            self.add_joint(joint, T_world_link)
+        self.append("</body>")
 
-    def origin(self, matrix: np.ndarray):
+    def pos_quat(self, matrix: np.ndarray) -> str:
         """
-        Transforms a transformation matrix into a URDF origin tag
+        Turn a transformation matrix into 'pos="..." quat="..."' attributes
         """
-        urdf = '<origin xyz="%.20g %.20g %.20g" rpy="%.20g %.20g %.20g" />'
+        pos = matrix[:3, 3]
+        quat = mat2quat(matrix[:3, :3])
+        xml = 'pos="%.20g %.20g %.20g" quat="%.20g %.20g %.20g %.20g"' % (*pos, *quat)
 
-        return urdf % (*matrix[:3, 3], *rotation_matrix_to_rpy(matrix))
+        return xml
+
+    def write_xml(self, robot: Robot, filename: str) -> str:
+        scene_xml: str = (
+            os.path.dirname(os.path.realpath(__file__)) + "/assets/scene.xml"
+        )
+        scene_xml = open(scene_xml, "r").read()
+        super().write_xml(robot, filename)
+
+        dirname = os.path.dirname(filename)
+        with open(dirname + "/scene.xml", "w") as file:
+            file.write(scene_xml)
+            print(success(f"* Writing {dirname}/scene.xml"))

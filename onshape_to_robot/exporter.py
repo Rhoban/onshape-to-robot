@@ -6,6 +6,7 @@ from .robot import Robot
 class Exporter:
     def __init__(self):
         self.xml: str = ""
+        self.ext: str = "xml"
 
     def build(self):
         raise Exception("This exporter should implement build() method")
