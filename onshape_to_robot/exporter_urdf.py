@@ -22,9 +22,9 @@ class ExporterURDF(Exporter):
         if config is not None:
             self.no_dynamics = config.no_dynamics
             self.collisions_no_mesh = config.collisions_no_mesh
-            self.draw_collisions: bool = config.get("drawCollisions", False)
-            self.package_name: str = config.get("packageName", "")
-            additional_xml_file = config.get("additionalUrdfFile", "")
+            self.draw_collisions: bool = config.get("draw_collisions", False)
+            self.package_name: str = config.get("package_name", "")
+            additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
                 with open(
                     config.output_directory + "/" + additional_xml_file, "r"
@@ -60,16 +60,14 @@ class ExporterURDF(Exporter):
         )
         self.append('<mass value="%.20g" />' % mass)
         self.append(
-            (
-                '<inertia ixx="%.20g" ixy="%.20g"  ixz="%.20g" iyy="%.20g" iyz="%.20g" izz="%.20g" />'
-                % (
-                    inertia[0, 0],
-                    inertia[0, 1],
-                    inertia[0, 2],
-                    inertia[1, 1],
-                    inertia[1, 2],
-                    inertia[2, 2],
-                )
+            '<inertia ixx="%.20g" ixy="%.20g"  ixz="%.20g" iyy="%.20g" iyz="%.20g" izz="%.20g" />'
+            % (
+                inertia[0, 0],
+                inertia[0, 1],
+                inertia[0, 2],
+                inertia[1, 1],
+                inertia[1, 2],
+                inertia[2, 2],
             )
         )
         self.append("</inertial>")

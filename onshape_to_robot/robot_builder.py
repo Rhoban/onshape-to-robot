@@ -251,7 +251,9 @@ class RobotBuilder:
 
             child_link_name = self.build_robot(child_body)
 
+            default_properties = self.config.joint_properties.get("default", {})
             properties = self.config.joint_properties.get(dof.name, {})
+            properties = {**default_properties, **properties}
 
             joint = Joint(
                 dof.name,

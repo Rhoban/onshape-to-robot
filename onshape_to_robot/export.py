@@ -1,7 +1,7 @@
 import sys
 import pickle
 from .config import Config
-from .message import error
+from .message import error, info
 from .robot_builder import RobotBuilder
 from .processors import processors
 from .exporter_urdf import ExporterURDF
@@ -35,7 +35,7 @@ try:
     # Building the robot
     robot_builder = RobotBuilder(config)
     robot = robot_builder.robot
-    
+
     # Can be used for debugging
     # pickle.dump(robot, open("robot.pkl", "wb"))
     # robot = pickle.load(open("robot.pkl", "rb"))
@@ -45,6 +45,10 @@ try:
         processor.process(robot)
 
     exporter.write_xml(robot, config.output_directory + "/robot." + exporter.ext)
+
+    for command in config.post_import_commands:
+        print(info(f"* Running command: {command}"))
+        os.sytem(command)
 
 except Exception as e:
     print(error(f"ERROR: {e}"))

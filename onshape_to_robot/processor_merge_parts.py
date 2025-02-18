@@ -13,7 +13,7 @@ class ProcessorMergeParts(Processor):
 
     def __init__(self, config: Config):
         super().__init__(config)
-        self.merge_stls = config.get("mergeSTLs", False)
+        self.merge_stls = config.get("merge_stls", False)
 
     def process(self, robot: Robot):
         if self.merge_stls:

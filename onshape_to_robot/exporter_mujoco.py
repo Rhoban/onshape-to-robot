@@ -26,8 +26,8 @@ class ExporterMuJoCo(Exporter):
             self.no_dynamics = config.no_dynamics
             self.collisions_no_mesh = config.collisions_no_mesh
             self.freejoint = config.get("freejoint", True)
-            self.draw_collisions: bool = config.get("drawCollisions", False)
-            additional_xml_file = config.get("additionalXML", "")
+            self.draw_collisions: bool = config.get("draw_collisions", False)
+            additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
                 with open(
                     config.output_directory + "/" + additional_xml_file, "r"
@@ -98,8 +98,8 @@ class ExporterMuJoCo(Exporter):
                     if key in joint.properties:
                         actuator += f'{key}="{joint.properties[key]}" '
 
-                if "effort" in joint.properties:
-                    actuator += f'forcerange="-{joint.properties["effort"]} {joint.properties["effort"]}" '
+                if "max_effort" in joint.properties:
+                    actuator += f'forcerange="-{joint.properties["max_effort"]} {joint.properties["max_effort"]}" '
 
                 if joint.limits is not None and type == "position":
                     actuator += f'ctrlrange="{joint.limits[0]} {joint.limits[1]}" '

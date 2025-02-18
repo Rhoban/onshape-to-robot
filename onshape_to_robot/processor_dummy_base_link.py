@@ -14,7 +14,7 @@ class ProcessorDummyBaseLink(Processor):
         super().__init__(config)
 
         # Check if it is enabled in configuration
-        self.add_dummy_base_link: bool = config.get("addDummyBaseLink", False)
+        self.add_dummy_base_link: bool = config.get("add_dummy_base_link", False)
 
     def process(self, robot: Robot):
         if self.add_dummy_base_link:

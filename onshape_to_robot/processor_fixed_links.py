@@ -13,7 +13,7 @@ class ProcessorFixedLinks(Processor):
         super().__init__(config)
 
         # Check if it is enabled in configuration
-        self.use_fixed_links: bool = config.get("useFixedLinks", False)
+        self.use_fixed_links: bool = config.get("use_fixed_links", False)
 
     def process(self, robot: Robot):
         if self.use_fixed_links:
