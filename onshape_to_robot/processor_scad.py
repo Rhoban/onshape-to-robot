@@ -43,13 +43,14 @@ class ProcessorScad(Processor):
                 self.use_scads = False
 
     def process(self, robot: Robot):
-        for link in robot.links:
-            for part in link.parts:
-                # Import the SCAD files pure shapes
-                if part.mesh_file and self.use_scads:
-                    scad_file = part.mesh_file.replace(".stl", ".scad")
-                    if os.path.exists(scad_file):
-                        part.shapes = self.parse_scad(scad_file)
+        if self.use_scads:
+            for link in robot.links:
+                for part in link.parts:
+                    # Import the SCAD files pure shapes
+                    if part.mesh_file and self.use_scads:
+                        scad_file = part.mesh_file.replace(".stl", ".scad")
+                        if os.path.exists(scad_file):
+                            part.shapes = self.parse_scad(scad_file)
 
     def multmatrix_parse(self, parameters: str):
         matrix = np.matrix(json.loads(parameters), dtype=float)

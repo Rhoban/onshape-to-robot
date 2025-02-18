@@ -41,7 +41,6 @@ class Client:
         self._massproperties_cache = {}
         self._stack = stack
         self._api = Onshape(stack=stack, logging=logging, creds=creds)
-        self.useCollisionsConfigurations = True
 
     def request(self, url, **kwargs):
         return self._api.request("get", url, **kwargs).json()
@@ -147,24 +146,6 @@ class Client:
 
     @cache_response
     def part_studio_stl_m(self, did, mid, eid, partid, configuration="default"):
-        if self.useCollisionsConfigurations:
-            configuration_before = configuration
-            parts = configuration.split(";")
-            partIdChanged = False
-            for k, part in enumerate(parts):
-                kv = part.split("=")
-                if len(kv) == 2:
-                    if kv[0] == "collisions":
-                        kv[1] = "true"
-                        partIdChanged = True
-                parts[k] = "=".join(kv)
-            configuration = ";".join(parts)
-
-            if partIdChanged:
-                partid = self.find_new_partid(
-                    did, mid, eid, partid, configuration_before, configuration
-                )
-
         req_headers = {"Accept": "*/*"}
         return self.request_binary(
             f"/api/parts/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/stl",

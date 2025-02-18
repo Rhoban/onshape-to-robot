@@ -65,10 +65,6 @@ class Assembly:
 
         # Creating OnShape API client
         self.client = Client(logging=False, creds=self.config.config_file)
-        # TODO: Investigate on the use/clean-ness of this
-        self.client.useCollisionsConfigurations = (
-            self.config.use_collisions_configurations
-        )
 
         self.document_id: str = config.document_id
         self.workspace_id: str | None = config.workspace_id

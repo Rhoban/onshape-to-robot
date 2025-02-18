@@ -17,7 +17,6 @@ class Config:
             self.config: dict = json.load(stream)
 
         self.read_configuration()
-        self.check_tools()
 
         # Output directory, making it if it doesn't exists
         self.output_directory: str = robot_path
@@ -81,22 +80,8 @@ class Config:
         # Color override
         self.color: str | None = self.get("color", required=False)
 
-        # STL merge / simplification
-        self.merge_stls = self.get(
-            "mergeSTLs", "no", values_list=["no", "visual", "collision", "all"]
-        )
-        self.max_stl_size = self.get("maxSTLSize", 3)
-        self.simplify_stls = self.get(
-            "simplifySTLs", "no", values_list=["no", "visual", "collision", "all"]
-        )
-
         # Post-import commands
         self.post_import_commands: list[str] = self.get("postImportCommands", [])
-
-        # Whether to use collision configuration
-        self.use_collisions_configurations: bool = self.get(
-            "useCollisionsConfigurations", True
-        )
 
         # ROS support
         self.package_name: str = self.get("packageName", "")
@@ -125,16 +110,3 @@ class Config:
                 }
             else:
                 self.dynamics_override[key.lower()] = entry
-
-    def check_tools(self):
-        self.check_meshlab()
-
-    def check_meshlab(self):
-        print(bright("* Checking MeshLab presence..."))
-        if not os.path.exists("/usr/bin/meshlabserver") != 0:
-            print(
-                error("No /usr/bin/meshlabserver, disabling STL simplification support")
-            )
-            print(info("TIP: consider installing meshlab:"))
-            print(info("sudo apt-get install meshlab"))
-            self.simplify_stls = False
