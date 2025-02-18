@@ -61,7 +61,7 @@ class Config:
             raise Exception("You can't specify workspaceId and versionId")
 
         self.draw_frames: bool = self.get("drawFrames", False)
-        self.draw_collisions: bool = self.get("drawCollisions", False)
+        
         self.assembly_name: str = self.get("assemblyName", required=False)
         self.output_format: str = self.get("outputFormat", "urdf")
         self.use_fixed_links: bool = self.get("useFixedLinks", False)
@@ -84,19 +84,8 @@ class Config:
         self.post_import_commands: list[str] = self.get("postImportCommands", [])
 
         # ROS support
-        self.package_name: str = self.get("packageName", "")
         self.add_dummy_base_link: bool = self.get("addDummyBaseLink", False)
         self.robot_name: str = self.get("robotName", "onshape")
-
-        # Additional XML
-        self.additional_xml: str = ""
-        additional_xml_file: str = ""
-        if self.output_format == "urdf":
-            additional_xml_file = self.get("additionalUrdfFile", "")
-        else:
-            additional_xml_file = self.get("additionalSdfFile", "")
-        if additional_xml_file:
-            self.additional_xml = open(additional_xml_file, "r").read()
 
         # Dynamics override
         self.dynamics_override = {}

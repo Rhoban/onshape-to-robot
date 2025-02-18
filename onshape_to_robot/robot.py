@@ -55,7 +55,8 @@ class Link:
             com += com_frame * part.mass
             mass += part.mass
 
-        com /= mass
+        if mass > 1e-9:
+            com /= mass
 
         for part in self.parts:
             T_frame_part = T_frame_world @ part.T_world_part
@@ -105,11 +106,12 @@ class Joint:
 
 
 class Robot:
-    def __init__(self):
+    def __init__(self, name: str):
+        self.name: str = name
         self.links: list[Link] = []
         self.joints: list[Joint] = []
 
-    def get_root_link(self) -> Link:
+    def get_base_link(self) -> Link:
         return self.links[0]
 
     def get_link(self, name: str):
@@ -125,4 +127,4 @@ class Robot:
         raise ValueError(f"Joint {name} not found")
 
     def get_link_joints(self, link: Link):
-        return [joint for joint in self.joints if joint.child == link]
+        return [joint for joint in self.joints if joint.parent == link]

@@ -433,13 +433,13 @@ class Assembly:
                     and occurrence_B in self.instance_body
                 ):
                     parent, child = occurrence_B, occurrence_A
-                    mated_entity = data["matedEntities"][1]
+                    mated_entity = data["matedEntities"][0]
                 elif (
                     occurrence_B not in self.instance_body
                     and occurrence_A in self.instance_body
                 ):
                     parent, child = occurrence_A, occurrence_B
-                    mated_entity = data["matedEntities"][0]
+                    mated_entity = data["matedEntities"][1]
                 else:
                     raise Exception(
                         f"Frame {name} should mate an orphan body to a body in the kinematics tree"
@@ -448,11 +448,9 @@ class Assembly:
                 T_world_part = self.get_occurrence_transform(
                     mated_entity["matedOccurrence"]
                 )
-                T_part_mate = self.get_mate_transform(mated_entity)
-                T_world_mate = T_world_part @ T_part_mate
 
                 self.frames.append(
-                    Frame(self.instance_body[parent], name, T_world_mate)
+                    Frame(self.instance_body[parent], name, T_world_part)
                 )
 
                 if self.config.draw_frames:

@@ -58,9 +58,10 @@ class ProcessorSimplifySTLs(Processor):
             self.simplify_stls = False
 
     def process(self, robot: Robot):
-        for link in robot.links:
-            for part in link.parts:
-                self.simplify_stl(part.mesh_file)
+        if self.simplify_stls:
+            for link in robot.links:
+                for part in link.parts:
+                    self.simplify_stl(part.mesh_file)
 
     def create_tmp_filter_file(
         self, filename: str = "filter_file_tmp.mlx", reduction: float = 0.9

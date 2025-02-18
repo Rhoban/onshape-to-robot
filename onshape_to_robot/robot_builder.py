@@ -14,7 +14,7 @@ class RobotBuilder:
     def __init__(self, config: Config):
         self.config: Config = config
         self.assembly: Assembly = Assembly(config)
-        self.robot: Robot = Robot()
+        self.robot: Robot = Robot(config.robot_name)
         self.part_names = {}
 
         self.build_robot(INSTANCE_ROOT)
@@ -71,17 +71,9 @@ class RobotBuilder:
             )
 
         self.robot.drawCollisions = self.config.draw_collisions
-        self.robot.jointMaxEffort = self.config.joint_max_effort
-        self.robot.jointMaxVelocity = self.config.joint_max_velocity
-        self.robot.mergeSTLs = self.config.merge_stls
-        self.robot.maxSTLSize = self.config.max_stl_size
-        self.robot.simplifySTLs = self.config.simplify_stls
         self.robot.noDynamics = self.config.no_dynamics
         self.robot.packageName = self.config.package_name
-        self.robot.addDummyBaseLink = self.config.add_dummy_base_link
-        self.robot.robotName = self.config.robot_name
         self.robot.additionalXML = self.config.additional_xml
-        self.robot.useFixedLinks = self.config.use_fixed_links
         self.robot.meshDir = self.config.output_directory
 
     def part_name(self, part: dict):
@@ -147,7 +139,7 @@ class RobotBuilder:
         Retrieve the color of a part
         """
         if self.config.color is not None:
-            color = self.config.color
+            color = np.array(self.config.color)
         else:
             metadata = self.assembly.client.part_get_metadata(
                 instance["documentId"],
@@ -157,7 +149,7 @@ class RobotBuilder:
                 instance["configuration"],
             )
 
-            color = [0.5, 0.5, 0.5]
+            color = np.array([0.5, 0.5, 0.5])
 
             # XXX: There must be a better way to retrieve the part color
             for entry in metadata["properties"]:

@@ -1,8 +1,15 @@
 import sys
+import pickle
 from .config import Config
-from .message import error
+from .message import error, success
 from .assembly import Assembly
 from .robot_builder import RobotBuilder
+from .processor_merge_parts import ProcessorMergeParts
+from .processor_scad import ProcessorScad
+from .processor_simplify_stls import ProcessorSimplifySTLs
+from .exporter_urdf import ExporterURDF
+
+processors = [ProcessorScad, ProcessorMergeParts, ProcessorSimplifySTLs]
 
 try:
     # Retrieving robot path
@@ -17,11 +24,24 @@ try:
     # Loading configuration
     config = Config(robot_path)
 
-    # Retrieving and processing the assembly
-    assembly = Assembly(config)
+    # Initializing processors
+    for index, class_ in enumerate(processors):
+        processors[index] = class_(config)
 
-    # Building the robot
-    robot_builder = RobotBuilder(config, assembly)
+    # # Building the robot
+    robot_builder = RobotBuilder(config)
+    robot = robot_builder.robot
+
+    # pickle.dump(robot_builder.robot, open("robot.pkl", "wb"))
+    # # exit()
+    # robot = pickle.load(open("robot.pkl", "rb"))
+
+    # Applying processors
+    for processor in processors:
+        processor.process(robot)
+
+    exporter = ExporterURDF(robot, config)
+    exporter.write_xml(config.output_directory + "/robot.urdf")
 
 except Exception as e:
     print(error(f"ERROR: {e}"))
