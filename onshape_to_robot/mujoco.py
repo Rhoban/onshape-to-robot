@@ -19,7 +19,7 @@ def main():
 
     # Check for root existence
     try:
-        data.joint("roox").qpos[2] = 1
+        data.joint("root").qpos[2] = 1
     except KeyError:
         pass
 
