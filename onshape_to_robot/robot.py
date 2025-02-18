@@ -1,4 +1,5 @@
 import numpy as np
+from .shapes import Shape
 
 
 class Part:
@@ -14,8 +15,8 @@ class Part:
         mass: float,
         com: np.ndarray,
         inertia: np.ndarray,
-        color: tuple | None,
-        shapes: dict | None,
+        color: tuple | None = None,
+        shapes: list[Shape] | None = None,
     ):
         self.name: str = name
         self.T_world_part: np.ndarray = T_world_part
@@ -24,7 +25,7 @@ class Part:
         self.com: np.ndarray = com
         self.inertia: np.ndarray = inertia
         self.color: tuple | None = color
-        self.shapes: dict | None = shapes
+        self.shapes: list[Shape] | None = shapes
 
 
 class Link:

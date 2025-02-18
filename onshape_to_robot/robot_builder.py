@@ -256,16 +256,6 @@ class RobotBuilder:
         else:
             stl_file = self.get_stl(prefix, instance)
 
-        # Import the SCAD files pure shapes
-        shapes = None
-        if self.config.use_scads:
-            scad_file = prefix + ".scad"
-            if os.path.exists(self.config.output_directory + "/" + scad_file):
-                shapes = csg_process(
-                    self.config.output_directory + "/" + scad_file,
-                    self.config.pure_shape_dilatation,
-                )
-
         # Obtain metadatas about part to retrieve color
         color = self.get_color(instance)
 
@@ -274,7 +264,7 @@ class RobotBuilder:
 
         T_world_part = np.array(occurrence["transform"]).reshape(4, 4)
 
-        part = Part(prefix, T_world_part, stl_file, mass, com, inertia, color, shapes)
+        part = Part(prefix, T_world_part, stl_file, mass, com, inertia, color)
         self.robot.links[-1].parts.append(part)
 
     def build_robot(self, body_id: int):

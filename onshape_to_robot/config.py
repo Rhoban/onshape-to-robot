@@ -69,10 +69,6 @@ class Config:
         self.configuration: str = self.get("configuration", "default")
         self.ignore_limits: bool = self.get("ignoreLimits", False)
 
-        # OpenSCAD pure shapes
-        self.use_scads: bool = self.get("useScads", True)
-        self.pure_shape_dilatation: float = self.get("pureShapeDilatation", 0.0)
-
         # Joint efforts
         self.joint_max_effort: float | dict = self.get("jointMaxEffort", 1)
         self.joint_max_velocity: float | dict = self.get("jointMaxVelocity", 20)
@@ -131,24 +127,7 @@ class Config:
                 self.dynamics_override[key.lower()] = entry
 
     def check_tools(self):
-        self.check_openscad()
         self.check_meshlab()
-
-    def check_openscad(self):
-        if self.use_scads:
-            print(bright("* Checking OpenSCAD presence..."))
-            try:
-                subprocess.run(["openscad", "-v"])
-            except FileNotFoundError:
-                print(bright("Can't run openscad -v, disabling OpenSCAD support"))
-                print(info("TIP: consider installing openscad:"))
-                print(info("Linux:"))
-                print(info("sudo add-apt-repository ppa:openscad/releases"))
-                print(info("sudo apt-get update"))
-                print(info("sudo apt-get install openscad"))
-                print(info("Windows:"))
-                print(info("go to: https://openscad.org/downloads.html "))
-                self.use_scads = False
 
     def check_meshlab(self):
         print(bright("* Checking MeshLab presence..."))
