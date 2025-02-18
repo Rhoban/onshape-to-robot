@@ -3,7 +3,6 @@ import numpy as np
 from .config import Config
 from .message import error, info, bright, success, warning
 from .onshape_api.client import Client
-from .features import init as features_init, getLimits
 from .robot import Joint
 
 INSTANCE_IGNORE = -1

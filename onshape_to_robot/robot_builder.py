@@ -5,7 +5,6 @@ import json
 from .message import warning, info, success, error, dim, bright
 from .assembly import Assembly, INSTANCE_ROOT
 from .config import Config
-from .robot_description import RobotURDF, RobotSDF, RobotDescription
 from .robot import Part, Joint, Link, Robot
 from .csg import process as csg_process
 
@@ -34,26 +33,6 @@ class RobotBuilder:
         Turns a value into a slug
         """
         return "".join(c if c.isalnum() else "_" for c in value).strip("_")
-
-    def make_robot(self) -> RobotDescription:
-        """
-        Create the robot description
-        """
-        # Creating robot for output
-        if self.config.output_format == "urdf":
-            self.robot = RobotURDF(self.config.robot_name)
-        elif self.config.output_format == "sdf":
-            self.robot = RobotSDF(self.config.robot_name)
-        else:
-            raise Exception(
-                f"ERROR: Unknown output format: {self.config.output_format} (supported are urdf and sdf)"
-            )
-
-        self.robot.drawCollisions = self.config.draw_collisions
-        self.robot.noDynamics = self.config.no_dynamics
-        self.robot.packageName = self.config.package_name
-        self.robot.additionalXML = self.config.additional_xml
-        self.robot.meshDir = self.config.output_directory
 
     def part_name(self, part: dict):
         """
