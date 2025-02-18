@@ -156,18 +156,16 @@ class ExporterURDF(Exporter):
         self.append(f'<child link="{joint.child.name}" />')
         self.append('<axis xyz="%.20g %.20g %.20g"/>' % tuple(joint.z_axis))
 
-        lower_upper_limits = ""
+        limits = ""
+        if joint.max_effort is not None:
+            limits += 'effort="%.20g"' % joint.max_effort
+        if joint.max_velocity is not None:
+            limits += 'velocity="%.20g"' % joint.max_velocity
         if joint.limits is not None:
-            lower_upper_limits = 'lower="%.20g" upper="%.20g"' % joint.limits
+            limits += 'lower="%.20g" upper="%.20g"' % joint.limits
 
-        self.append(
-            '<limit effort="%.20g" velocity="%.20g" %s/>'
-            % (
-                joint.max_effort,
-                joint.max_velocity,
-                lower_upper_limits,
-            )
-        )
+        if limits:
+            self.append(f"<limit {limits}/>")
 
         self.append('<joint_properties friction="0.0"/>')
         self.append("</joint>")

@@ -64,7 +64,6 @@ class Config:
         
         self.assembly_name: str = self.get("assemblyName", required=False)
         self.output_format: str = self.get("outputFormat", "urdf")
-        self.use_fixed_links: bool = self.get("useFixedLinks", False)
         self.configuration: str = self.get("configuration", "default")
         self.ignore_limits: bool = self.get("ignoreLimits", False)
 

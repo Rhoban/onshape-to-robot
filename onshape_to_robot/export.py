@@ -4,12 +4,8 @@ from .config import Config
 from .message import error, success
 from .assembly import Assembly
 from .robot_builder import RobotBuilder
-from .processor_merge_parts import ProcessorMergeParts
-from .processor_scad import ProcessorScad
-from .processor_simplify_stls import ProcessorSimplifySTLs
+from .processors import processors
 from .exporter_urdf import ExporterURDF
-
-processors = [ProcessorScad, ProcessorMergeParts, ProcessorSimplifySTLs]
 
 try:
     # Retrieving robot path
@@ -31,9 +27,8 @@ try:
     # # Building the robot
     robot_builder = RobotBuilder(config)
     robot = robot_builder.robot
-
-    # pickle.dump(robot_builder.robot, open("robot.pkl", "wb"))
-    # # exit()
+    
+    # pickle.dump(robot, open("robot.pkl", "wb"))
     # robot = pickle.load(open("robot.pkl", "rb"))
 
     # Applying processors

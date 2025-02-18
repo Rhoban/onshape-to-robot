@@ -15,7 +15,7 @@ class RobotBuilder:
         self.config: Config = config
         self.assembly: Assembly = Assembly(config)
         self.robot: Robot = Robot(config.robot_name)
-        self.part_names = {}
+        self.unique_names = {}
 
         self.build_robot(INSTANCE_ROOT)
         self.export_robot()
@@ -95,18 +95,21 @@ class RobotBuilder:
 
         return base_part_name, "_".join(parts).lower()
 
-    def unique_part_name(self, part: dict):
+    def unique_name(self, part: dict, type: str):
         """
         Get unique part name (plate, plate_2, plate_3, ...)
         In the case where multiple parts have the same name in OnShape, they will result in different names in the URDF
         """
         _, name = self.part_name(part)
 
-        if name in self.part_names:
-            self.part_names[name] += 1
-            return f"{name}_{self.part_names[name]}"
+        if type not in self.unique_names:
+            self.unique_names[type] = {}
+
+        if name in self.unique_names[type]:
+            self.unique_names[type][name] += 1
+            return f"{name}_{self.unique_names[type][name]}"
         else:
-            self.part_names[name] = 1
+            self.unique_names[type][name] = 1
             return name
 
     def get_stl(self, prefix: str, instance: dict) -> str:
@@ -163,7 +166,7 @@ class RobotBuilder:
 
         return color
 
-    def get_dynamics(self, instance: dict, prefix: str) -> tuple:
+    def get_dynamics(self, instance: dict, part_name_config: str) -> tuple:
         """
         Retrieve the dynamics (mass, com, inertia) of a given instance
         """
@@ -172,8 +175,8 @@ class RobotBuilder:
             com = [0] * 3
             inertia = [0] * 12
         else:
-            if prefix in self.config.dynamics_override:
-                entry = self.config.dynamics_override[prefix]
+            if part_name_config in self.config.dynamics_override:
+                entry = self.config.dynamics_override[part_name_config]
                 mass = entry["mass"]
                 com = entry["com"]
                 inertia = entry["inertia"]
@@ -232,7 +235,7 @@ class RobotBuilder:
             print(warning(f"WARNING: Part '{instance['name']}' has no partId"))
             return
 
-        part_name, prefix = self.part_name(instance)
+        part_name, part_name_config = self.part_name(instance)
         extra = ""
         if instance["configuration"] != "default":
             extra = dim(" (configuration: " + instance["configuration"] + ")")
@@ -246,17 +249,19 @@ class RobotBuilder:
         if self.part_is_ignored(part_name):
             stl_file = None
         else:
-            stl_file = self.get_stl(prefix, instance)
+            stl_file = self.get_stl(part_name_config, instance)
 
         # Obtain metadatas about part to retrieve color
         color = self.get_color(instance)
 
         # Obtain the instance dynamics
-        mass, com, inertia = self.get_dynamics(instance, prefix)
+        mass, com, inertia = self.get_dynamics(instance, part_name_config)
 
         T_world_part = np.array(occurrence["transform"]).reshape(4, 4)
 
-        part = Part(prefix, T_world_part, stl_file, mass, com, inertia, color)
+        unique_part_name = self.unique_name(instance, "part")
+
+        part = Part(unique_part_name, T_world_part, stl_file, mass, com, inertia, color)
         self.robot.links[-1].parts.append(part)
 
     def build_robot(self, body_id: int):
@@ -264,7 +269,7 @@ class RobotBuilder:
         Add recursively body nodes to the robot description.
         """
         instance = self.assembly.body_instance(body_id)
-        link_name = self.unique_part_name(instance)
+        link_name = self.unique_name(instance, "link")
 
         # Adding all the parts in the current link
         self.robot.links.append(Link(link_name))
@@ -301,13 +306,13 @@ class RobotBuilder:
             joint = Joint(
                 dof.name,
                 dof.joint_type,
-                max_effort,
-                max_velocity,
                 self.robot.get_link(link_name),
                 self.robot.get_link(child_link_name),
+                T_world_axis,
+                max_effort,
+                max_velocity,
                 dof.limits,
                 dof.z_axis,
-                T_world_axis,
             )
             self.robot.joints.append(joint)
 

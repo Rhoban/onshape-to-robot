@@ -86,13 +86,13 @@ class Joint:
         self,
         name: str,
         joint_type: str,
-        max_effort: float | None,
-        max_velocity: float | None,
         parent: Link,
         child: Link,
-        limits: tuple[float, float] | None,
-        z_axis: np.ndarray,
         T_world_joint: np.ndarray,
+        max_effort: float | None = None,
+        max_velocity: float | None = None,
+        limits: tuple[float, float] | None = None,
+        z_axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
     ):
         self.name: str = name
         self.joint_type: str = joint_type
