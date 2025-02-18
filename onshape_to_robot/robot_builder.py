@@ -18,28 +18,6 @@ class RobotBuilder:
         self.unique_names = {}
 
         self.build_robot(INSTANCE_ROOT)
-        self.export_robot()
-
-    def export_robot(self):
-        """
-        Export the robot to the output file
-        """
-        pass
-        # self.robot.finalize()
-        # print(bright(f"* Writing {self.robot.ext.upper()} file"))
-
-        # with open(
-        #     self.config.output_directory + "/robot." + self.robot.ext,
-        #     "w",
-        #     encoding="utf-8",
-        # ) as stream:
-        #     stream.write(self.robot.xml)
-
-        # if len(self.config.post_import_commands):
-        #     print(bright(f"* Executing post-import commands"))
-        #     for command in self.config.post_import_commands:
-        #         print("* " + command)
-        #         os.system(command)
 
     def part_is_ignored(self, name: str) -> bool:
         """
@@ -293,19 +271,7 @@ class RobotBuilder:
 
             child_link_name = self.build_robot(child_body)
 
-            if isinstance(self.config.joint_max_effort, dict):
-                max_effort = self.config.joint_max_effort.get(
-                    dof.name, self.config.joint_max_effort["default"]
-                )
-            else:
-                max_effort = self.config.joint_max_effort
-
-            if isinstance(self.config.joint_max_velocity, dict):
-                max_velocity = self.config.joint_max_velocity.get(
-                    dof.name, self.config.joint_max_velocity["default"]
-                )
-            else:
-                max_velocity = self.config.joint_max_velocity
+            properties = self.config.joint_properties.get(link_name, {})
 
             joint = Joint(
                 dof.name,
@@ -313,8 +279,7 @@ class RobotBuilder:
                 self.robot.get_link(link_name),
                 self.robot.get_link(child_link_name),
                 T_world_axis,
-                max_effort,
-                max_velocity,
+                properties,
                 dof.limits,
                 dof.z_axis,
             )

@@ -17,14 +17,18 @@ class ExporterURDF(Exporter):
         self.no_dynamics: bool = False
         self.package_name: str = ""
         self.additional_xml: str = ""
+        self.collision_shapes_only: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
+            self.collision_shapes_only = config.collision_shapes_only
             self.draw_collisions: bool = config.get("drawCollisions", False)
             self.package_name: str = config.get("packageName", "")
             additional_xml_file = config.get("additionalUrdfFile", "")
             if additional_xml_file:
-                with open(additional_xml_file, "r") as file:
+                with open(
+                    config.output_directory + "/" + additional_xml_file, "r"
+                ) as file:
                     self.additional_xml = file.read()
 
     def append(self, line: str):
@@ -142,7 +146,7 @@ class ExporterURDF(Exporter):
         """
         if what == "collision" and part.shapes is not None:
             self.add_shapes(part, node, T_world_link)
-        elif part.mesh_file:
+        elif part.mesh_file and (what == "visual" or not self.collision_shapes_only):
             self.add_mesh(part, node, T_world_link)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
@@ -157,17 +161,18 @@ class ExporterURDF(Exporter):
         self.append('<axis xyz="%.20g %.20g %.20g"/>' % tuple(joint.z_axis))
 
         limits = ""
-        if joint.max_effort is not None:
-            limits += 'effort="%.20g" ' % joint.max_effort
-        if joint.max_velocity is not None:
-            limits += 'velocity="%.20g" ' % joint.max_velocity
+        if "max_effort" in joint.properties:
+            limits += 'effort="%.20g" ' % joint.properties["max_effort"]
+        if "max_velocity" in joint.properties:
+            limits += 'velocity="%.20g" ' % joint.properties["max_velocity"]
         if joint.limits is not None:
             limits += 'lower="%.20g" upper="%.20g" ' % joint.limits
 
         if limits:
             self.append(f"<limit {limits}/>")
 
-        self.append('<joint_properties friction="0.0"/>')
+        if "friction" in joint.properties:
+            self.append(f'<joint_properties friction="{joint.properties}"/>')
         self.append("</joint>")
 
     def add_frame(

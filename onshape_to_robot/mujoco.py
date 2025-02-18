@@ -1,12 +1,12 @@
 import time
 import mujoco
 import argparse
-import pybullet as p
 import mujoco.viewer
 
 
 def main():
     parser = argparse.ArgumentParser(prog="onshape-to-robot-mujoco")
+    parser.add_argument("--sim", action="store_true")
     parser.add_argument("directory")
     args = parser.parse_args()
 
@@ -17,11 +17,17 @@ def main():
     model: mujoco.MjModel = mujoco.MjModel.from_xml_path(robot_path)
     data: mujoco.MjData = mujoco.MjData(model)
 
+    data.joint("root").qpos[2] = 1
+
     viewer = mujoco.viewer.launch_passive(model, data)
-    while True:
+    while viewer.is_running():
+        step_start = time.time()
         mujoco.mj_step(model, data)
         viewer.sync()
-        time.sleep(model.opt.timestep)
+
+        time_until_next_step = model.opt.timestep - (time.time() - step_start)
+        if time_until_next_step > 0:
+            time.sleep(time_until_next_step)
 
 
 if __name__ == "__main__":

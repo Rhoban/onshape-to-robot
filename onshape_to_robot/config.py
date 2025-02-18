@@ -79,9 +79,11 @@ class Config:
         self.configuration: str = self.get("configuration", "default")
         self.ignore_limits: bool = self.get("ignoreLimits", False)
 
-        # Joint efforts
-        self.joint_max_effort: float | dict = self.get("jointMaxEffort", 1)
-        self.joint_max_velocity: float | dict = self.get("jointMaxVelocity", 20)
+        # Use only pure shapes for collision
+        self.collision_shapes_only: bool = self.get("collisionShapesOnly", False)
+
+        # Joint specs
+        self.joint_properties: dict = self.get("jointProperties", {})
         self.no_dynamics: bool = self.get("noDynamics", False)
 
         # Ignore / whitelists
