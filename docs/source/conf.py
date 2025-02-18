@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Onshape to robot'
-copyright = '2020, Rhoban'
+copyright = '2025, Rhoban'
 author = 'Rhoban'
 
 # The full version, including alpha/beta/rc tags
-release = '1'
+release = '0.3.27'
 
 
 # -- General configuration ---------------------------------------------------
