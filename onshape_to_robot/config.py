@@ -52,6 +52,9 @@ class Config:
         Load and check configuration entries
         """
 
+        # Robot name
+        self.robot_name: str = self.get("robotName", "onshape")
+
         # Main settings
         self.document_id: str = self.get("documentId")
         self.version_id: str | None = self.get("versionId", required=False)
@@ -81,10 +84,6 @@ class Config:
 
         # Post-import commands
         self.post_import_commands: list[str] = self.get("postImportCommands", [])
-
-        # ROS support
-        self.add_dummy_base_link: bool = self.get("addDummyBaseLink", False)
-        self.robot_name: str = self.get("robotName", "onshape")
 
         # Dynamics override
         self.dynamics_override = {}

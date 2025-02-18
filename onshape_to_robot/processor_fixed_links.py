@@ -12,7 +12,7 @@ class ProcessorFixedLinks(Processor):
     def __init__(self, config: Config):
         super().__init__(config)
 
-        # OpenSCAD pure shapes
+        # Check if it is enabled in configuration
         self.use_fixed_links: bool = config.get("useFixedLinks", False)
 
     def process(self, robot: Robot):
