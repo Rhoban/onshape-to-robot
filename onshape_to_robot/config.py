@@ -80,7 +80,7 @@ class Config:
         self.ignore_limits: bool = self.get("ignoreLimits", False)
 
         # Use only pure shapes for collision
-        self.collision_shapes_only: bool = self.get("collisionShapesOnly", False)
+        self.collisions_no_mesh: bool = self.get("collisionsNoMesh", False)
 
         # Joint specs
         self.joint_properties: dict = self.get("jointProperties", {})

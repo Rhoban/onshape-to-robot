@@ -17,11 +17,11 @@ class ExporterURDF(Exporter):
         self.no_dynamics: bool = False
         self.package_name: str = ""
         self.additional_xml: str = ""
-        self.collision_shapes_only: bool = False
+        self.collisions_no_mesh: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collision_shapes_only = config.collision_shapes_only
+            self.collisions_no_mesh = config.collisions_no_mesh
             self.draw_collisions: bool = config.get("drawCollisions", False)
             self.package_name: str = config.get("packageName", "")
             additional_xml_file = config.get("additionalUrdfFile", "")
@@ -146,7 +146,7 @@ class ExporterURDF(Exporter):
         """
         if what == "collision" and part.shapes is not None:
             self.add_shapes(part, node, T_world_link)
-        elif part.mesh_file and (what == "visual" or not self.collision_shapes_only):
+        elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
             self.add_mesh(part, node, T_world_link)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):

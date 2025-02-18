@@ -77,6 +77,8 @@ class Assembly:
         self.instance_body: dict[str, int] = {}
         # Frames object
         self.frames: list[Frame] = []
+        # Loop closure constraints
+        self.closures: list = []
         # Degrees of freedom
         self.dofs: list[DOF] = []
         # Features data
@@ -428,6 +430,12 @@ class Assembly:
                             T_world_mate,
                         )
                     )
+
+                if data["mateType"] == "FASTENED":
+                    self.closures.append(["fixed", f"{data['name']}_1", f"{data['name']}_2"])
+                else:
+                    self.closures.append(["point", f"{data['name']}_1", f"{data['name']}_2"])
+
             elif data["name"].startswith("frame_"):
                 name = "_".join(data["name"].split("_")[1:])
                 if (

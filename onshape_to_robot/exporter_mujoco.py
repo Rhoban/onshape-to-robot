@@ -14,16 +14,18 @@ class ExporterMuJoCo(Exporter):
         super().__init__()
         self.config: Config = config
 
+        self.freejoint: bool = True
         self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.additional_xml: str = ""
         self.meshes: list = []
         self.materials: dict = {}
-        self.collision_shapes_only: bool = False
+        self.collisions_no_mesh: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collision_shapes_only = config.collision_shapes_only
+            self.collisions_no_mesh = config.collisions_no_mesh
+            self.freejoint = config.get("freejoint", True)
             self.draw_collisions: bool = config.get("drawCollisions", False)
             additional_xml_file = config.get("additionalXML", "")
             if additional_xml_file:
@@ -60,12 +62,12 @@ class ExporterMuJoCo(Exporter):
         self.append("</default>")
         self.append("</default>")
 
+        # Adding robot links
         self.append("<worldbody>")
-
         self.add_link(robot, robot.get_base_link())
-
         self.append("</worldbody>")
 
+        # Asset (mesh & materials)
         self.append("<asset>")
         for mesh_file in set(self.meshes):
             self.append(f'<mesh file="{mesh_file}" />')
@@ -74,7 +76,11 @@ class ExporterMuJoCo(Exporter):
             self.append(f'<material name="{material_name}" rgba="{color_str}" />')
         self.append("</asset>")
 
+        # Adding actuators
         self.add_actuators(robot)
+
+        # Adding equalities (loop closure)
+        self.add_equalities(robot)
 
         self.append("</mujoco>")
 
@@ -102,6 +108,18 @@ class ExporterMuJoCo(Exporter):
                 self.append(actuator)
 
         self.append("</actuator>")
+
+    def add_equalities(self, robot: Robot):
+        self.append("<equality>")
+        for type, frame1, frame2 in robot.closures:
+            if type == "fixed":
+                self.append(f'<weld site1="{frame1}" site2="{frame2}" />')
+            elif type == "point":
+                self.append(f'<connect site1="{frame1}" site2="{frame2}" />')
+            else:
+                raise ValueError(f"Unknown closure type: {type}")
+
+        self.append("</equality>")
 
     def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
         # Populating body inertial properties
@@ -185,7 +203,7 @@ class ExporterMuJoCo(Exporter):
         """
         if what == "collision" and part.shapes is not None:
             self.add_shapes(part, class_, T_world_link)
-        elif part.mesh_file and (what == "visual" or not self.collision_shapes_only):
+        elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
             self.add_mesh(part, class_, T_world_link)
 
     def add_joint(self, joint: Joint):
@@ -252,7 +270,8 @@ class ExporterMuJoCo(Exporter):
         self.append(f'<body name="{link.name}" {self.pos_quat(T_parent_link)} >')
 
         if parent_joint is None:
-            self.append('<freejoint name="root" />')
+            if self.freejoint:
+                self.append('<freejoint name="root" />')
         else:
             self.add_joint(parent_joint)
 

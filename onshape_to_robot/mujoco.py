@@ -17,7 +17,11 @@ def main():
     model: mujoco.MjModel = mujoco.MjModel.from_xml_path(robot_path)
     data: mujoco.MjData = mujoco.MjData(model)
 
-    data.joint("root").qpos[2] = 1
+    # Check for root existence
+    try:
+        data.joint("roox").qpos[2] = 1
+    except KeyError:
+        pass
 
     viewer = mujoco.viewer.launch_passive(model, data)
     while viewer.is_running():

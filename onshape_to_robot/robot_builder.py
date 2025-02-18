@@ -15,6 +15,7 @@ class RobotBuilder:
         self.config: Config = config
         self.assembly: Assembly = Assembly(config)
         self.robot: Robot = Robot(config.robot_name)
+        self.robot.closures = self.assembly.closures
         self.unique_names = {}
 
         self.build_robot(INSTANCE_ROOT)
@@ -271,7 +272,7 @@ class RobotBuilder:
 
             child_link_name = self.build_robot(child_body)
 
-            properties = self.config.joint_properties.get(link_name, {})
+            properties = self.config.joint_properties.get(dof.name, {})
 
             joint = Joint(
                 dof.name,
