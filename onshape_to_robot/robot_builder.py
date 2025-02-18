@@ -269,7 +269,11 @@ class RobotBuilder:
         Add recursively body nodes to the robot description.
         """
         instance = self.assembly.body_instance(body_id)
-        link_name = self.unique_name(instance, "link")
+
+        if body_id in self.assembly.link_names:
+            link_name = self.assembly.link_names[body_id]
+        else:
+            link_name = self.unique_name(instance, "link")
 
         # Adding all the parts in the current link
         self.robot.links.append(Link(link_name))

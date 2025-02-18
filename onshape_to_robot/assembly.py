@@ -85,6 +85,8 @@ class Assembly:
         self.configuration_parameters: dict = {}
         # Dictionnary mapping items to their children in the tree
         self.tree_children: dict = {}
+        # Overriden link names
+        self.link_names: dict[int, str] = {}
 
         self.ensure_workspace_or_version()
         self.find_assembly()
@@ -458,13 +460,6 @@ class Assembly:
                 else:
                     self.instance_body[child] = INSTANCE_IGNORE
 
-        print(success(f"* Found total {len(self.dofs)} degrees of freedom\n"))
-
-    def build_tree(self):
-        """
-        Perform checks on the produced tree
-        """
-
         # Checking that all intances are assigned to a body
         for instance in self.assembly_data["rootAssembly"]["instances"]:
             if instance["id"] not in self.instance_body:
@@ -475,6 +470,22 @@ class Assembly:
                     )
                 )
                 self.instance_body[instance["id"]] = INSTANCE_ROOT
+
+        # Search for mate connector named "link_..." to override link names
+        for feature in self.assembly_data["rootAssembly"]["features"]:
+            if feature["featureType"] == "mateConnector" and feature["featureData"][
+                "name"
+            ].startswith("link_"):
+                link_name = "_".join(feature["featureData"]["name"].split("_")[1:])
+                body_id = self.instance_body[feature["featureData"]["occurrence"][0]]
+                self.link_names[body_id] = link_name
+
+        print(success(f"* Found total {len(self.dofs)} degrees of freedom\n"))
+
+    def build_tree(self):
+        """
+        Perform checks on the produced tree
+        """
 
         # Checking that the graph is actually a tree (no loop)
         exploring = [INSTANCE_ROOT]
