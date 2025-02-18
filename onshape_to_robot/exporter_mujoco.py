@@ -320,4 +320,4 @@ class ExporterMuJoCo(Exporter):
         dirname = os.path.dirname(filename)
         with open(dirname + "/scene.xml", "w") as file:
             file.write(scene_xml)
-            print(success(f"* Writing {dirname}/scene.xml"))
+            print(success(f"* Writing scene.xml"))

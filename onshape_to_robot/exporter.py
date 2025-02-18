@@ -1,3 +1,4 @@
+import os
 from .message import success
 import xml.dom.minidom
 from .robot import Robot
@@ -21,4 +22,4 @@ class Exporter:
             dom = xml.dom.minidom.parseString(self.xml)
             xml_output = dom.toprettyxml(indent="    ")
             file.write(xml_output)
-            print(success(f"* Writing {filename}"))
+            print(success(f"* Writing {os.path.basename(filename)}"))
