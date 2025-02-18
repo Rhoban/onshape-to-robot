@@ -24,10 +24,16 @@ try:
     for index, class_ in enumerate(processors):
         processors[index] = class_(config)
 
-    # # Building the robot
+    # Building exporter beforehand, so that the configuration gets checked
+    if config.output_format == "urdf":
+        exporter = ExporterURDF(config)
+    else:
+        raise Exception(f"Unsupported output format: {config.output_format}")
+
+    # Building the robot
     robot_builder = RobotBuilder(config)
     robot = robot_builder.robot
-    
+
     # pickle.dump(robot, open("robot.pkl", "wb"))
     # robot = pickle.load(open("robot.pkl", "rb"))
 
@@ -35,8 +41,7 @@ try:
     for processor in processors:
         processor.process(robot)
 
-    exporter = ExporterURDF(robot, config)
-    exporter.write_xml(config.output_directory + "/robot.urdf")
+    exporter.write_xml(robot, config.output_directory + "/robot.urdf")
 
 except Exception as e:
     print(error(f"ERROR: {e}"))

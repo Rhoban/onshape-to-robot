@@ -1,5 +1,6 @@
 from .message import success
 import xml.dom.minidom
+from .robot import Robot
 
 
 class Exporter:
@@ -9,13 +10,13 @@ class Exporter:
     def build(self):
         raise Exception("This exporter should implement build() method")
 
-    def get_xml(self) -> str:
-        self.build()
+    def get_xml(self, robot: Robot) -> str:
+        self.build(robot)
         return self.xml
 
-    def write_xml(self, filename: str) -> str:
+    def write_xml(self, robot: Robot, filename: str) -> str:
         with open(filename, "w") as file:
-            self.build()
+            self.build(robot)
             dom = xml.dom.minidom.parseString(self.xml)
             xml_output = dom.toprettyxml(indent="    ")
             file.write(xml_output)

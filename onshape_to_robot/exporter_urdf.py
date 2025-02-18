@@ -8,9 +8,8 @@ from .exporter_utils import xml_escape, rotation_matrix_to_rpy
 
 
 class ExporterURDF(Exporter):
-    def __init__(self, robot: Robot, config: Config | None = None):
+    def __init__(self, config: Config | None = None):
         super().__init__()
-        self.robot: Robot = robot
         self.config: Config = config
 
         self.draw_collisions: bool = False
@@ -30,12 +29,12 @@ class ExporterURDF(Exporter):
     def append(self, line: str):
         self.xml += line
 
-    def build(self):
+    def build(self, robot: Robot):
         self.xml = ""
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
-        self.append(f'<robot name="{self.robot.name}">')
-        self.add_link(self.robot.get_base_link())
+        self.append(f'<robot name="{robot.name}">')
+        self.add_link(robot, robot.get_base_link())
 
         if self.additional_xml:
             self.append(self.additional_xml)
@@ -203,7 +202,7 @@ class ExporterURDF(Exporter):
         self.append('<axis xyz="0 0 0"/>')
         self.append("</joint>")
 
-    def add_link(self, link: Link, T_world_link: np.ndarray = np.eye(4)):
+    def add_link(self, robot: Robot, link: Link, T_world_link: np.ndarray = np.eye(4)):
         """
         Adds a link recursively to the URDF file
         """
@@ -232,8 +231,8 @@ class ExporterURDF(Exporter):
             self.add_frame(link, frame, T_world_link, T_world_frame)
 
         # Adding joints and children links
-        for joint in self.robot.get_link_joints(link):
-            self.add_link(joint.child, joint.T_world_joint)
+        for joint in robot.get_link_joints(link):
+            self.add_link(robot, joint.child, joint.T_world_joint)
             self.add_joint(joint, T_world_link)
 
     def origin(self, matrix: np.ndarray):
