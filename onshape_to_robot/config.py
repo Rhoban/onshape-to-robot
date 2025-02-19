@@ -25,12 +25,21 @@ class Config:
         except OSError:
             pass
 
-    def to_camel_case(self, snake_str: str) -> str:
+    def to_snake_case(self, name: str) -> str:
         """
-        Converts a string to camel case
+        Convert configuration string to snake case for backward compatibility
         """
-        components = snake_str.split("_")
-        return components[0] + "".join(x.title() for x in components[1:])
+        name = name.replace("STLS", "Stls")
+        name = name.replace("STL", "Stl")
+        name = name.replace("URDFS", "Urdfs")
+
+        new_name = ""
+        for i, c in enumerate(name):
+            if c.isupper() and i > 0:
+                new_name += "_"
+            new_name += c.lower()
+
+        return new_name
 
     def get(self, name: str, default=None, required: bool = True, values_list=None):
         """
@@ -42,13 +51,10 @@ class Config:
             required (bool, optional): whether the configuration entry is required. Defaults to False.
             values_list: list of allowed values. Defaults to None.
         """
-        camel_name = self.to_camel_case(name)
+        name = self.to_snake_case(name)
 
-        if name in self.config or camel_name in self.config:
-            if name in self.config:
-                value = self.config[name]
-            else:
-                value = self.config[camel_name]
+        if name in self.config:
+            value = self.config[name]
 
             if values_list is not None and value not in values_list:
                 raise Exception(
