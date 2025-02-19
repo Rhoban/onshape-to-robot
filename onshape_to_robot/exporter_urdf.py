@@ -165,6 +165,8 @@ class ExporterURDF(Exporter):
             limits += 'velocity="%.20g" ' % joint.properties["max_velocity"]
         if joint.limits is not None:
             limits += 'lower="%.20g" upper="%.20g" ' % joint.limits
+        elif joint.joint_type == "revolute":
+            limits += f'lower="{-np.pi}" upper="{np.pi}" '
 
         if limits:
             self.append(f"<limit {limits}/>")
