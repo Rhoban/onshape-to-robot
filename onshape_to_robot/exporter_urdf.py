@@ -51,16 +51,16 @@ class ExporterURDF(Exporter):
     def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
         self.append("<inertial>")
         self.append(
-            '<origin xyz="%.20g %.20g %.20g" rpy="0 0 0"/>'
+            '<origin xyz="%g %g %g" rpy="0 0 0"/>'
             % (
                 com[0],
                 com[1],
                 com[2],
             )
         )
-        self.append('<mass value="%.20g" />' % mass)
+        self.append('<mass value="%g" />' % mass)
         self.append(
-            '<inertia ixx="%.20g" ixy="%.20g"  ixz="%.20g" iyy="%.20g" iyz="%.20g" izz="%.20g" />'
+            '<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />'
             % (
                 inertia[0, 0],
                 inertia[0, 1],
@@ -93,7 +93,7 @@ class ExporterURDF(Exporter):
             material_name = f"{part.name}_material"
             self.append(f'<material name="{xml_escape(material_name)}">')
             self.append(
-                '<color rgba="%.20g %.20g %.20g 1.0"/>'
+                '<color rgba="%g %g %g 1.0"/>'
                 % (part.color[0], part.color[1], part.color[2])
             )
             self.append("</material>")
@@ -114,21 +114,21 @@ class ExporterURDF(Exporter):
 
             self.append("<geometry>")
             if isinstance(shape, Box):
-                self.append('<box size="%.20g %.20g %.20g" />' % tuple(shape.size))
+                self.append('<box size="%g %g %g" />' % tuple(shape.size))
             elif isinstance(shape, Cylinder):
                 self.append(
-                    '<cylinder length="%.20g" radius="%.20g" />'
+                    '<cylinder length="%g" radius="%g" />'
                     % (shape.length, shape.radius)
                 )
             elif isinstance(shape, Sphere):
-                self.append('<sphere radius="%.20g" />' % shape.radius)
+                self.append('<sphere radius="%g" />' % shape.radius)
             self.append("</geometry>")
 
             if node == "visual":
                 material_name = f"{part.name}_material"
                 self.append(f'<material name="{xml_escape(material_name)}">')
                 self.append(
-                    '<color rgba="%.20g %.20g %.20g 1.0"/>'
+                    '<color rgba="%g %g %g 1.0"/>'
                     % (part.color[0], part.color[1], part.color[2])
                 )
                 self.append("</material>")
@@ -156,15 +156,15 @@ class ExporterURDF(Exporter):
 
         self.append(f'<parent link="{joint.parent.name}" />')
         self.append(f'<child link="{joint.child.name}" />')
-        self.append('<axis xyz="%.20g %.20g %.20g"/>' % tuple(joint.z_axis))
+        self.append('<axis xyz="%g %g %g"/>' % tuple(joint.z_axis))
 
         limits = ""
         if "max_effort" in joint.properties:
-            limits += 'effort="%.20g" ' % joint.properties["max_effort"]
+            limits += 'effort="%g" ' % joint.properties["max_effort"]
         if "max_velocity" in joint.properties:
-            limits += 'velocity="%.20g" ' % joint.properties["max_velocity"]
+            limits += 'velocity="%g" ' % joint.properties["max_velocity"]
         if joint.limits is not None:
-            limits += 'lower="%.20g" upper="%.20g" ' % joint.limits
+            limits += 'lower="%g" upper="%g" ' % joint.limits
         elif joint.joint_type == "revolute":
             limits += f'lower="{-np.pi}" upper="{np.pi}" '
 
@@ -245,6 +245,6 @@ class ExporterURDF(Exporter):
         """
         Transforms a transformation matrix into a URDF origin tag
         """
-        urdf = '<origin xyz="%.20g %.20g %.20g" rpy="%.20g %.20g %.20g" />'
+        urdf = '<origin xyz="%g %g %g" rpy="%g %g %g" />'
 
         return urdf % (*matrix[:3, 3], *rotation_matrix_to_rpy(matrix))

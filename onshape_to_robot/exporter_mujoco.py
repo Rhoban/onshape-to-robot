@@ -72,7 +72,7 @@ class ExporterMuJoCo(Exporter):
         for mesh_file in set(self.meshes):
             self.append(f'<mesh file="{mesh_file}" />')
         for material_name, color in self.materials.items():
-            color_str = "%.20g %.20g %.20g 1" % tuple(color)
+            color_str = "%g %g %g 1" % tuple(color)
             self.append(f'<material name="{material_name}" rgba="{color_str}" />')
         self.append("</asset>")
 
@@ -137,9 +137,9 @@ class ExporterMuJoCo(Exporter):
         # Populating body inertial properties
         # https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-inertial
         inertial: str = "<inertial "
-        inertial += 'pos="%.20g %.20g %.20g" ' % tuple(com)
-        inertial += 'mass="%.20g" ' % mass
-        inertial += 'fullinertia="%.20g %.20g %.20g %.20g %.20g %.20g" ' % (
+        inertial += 'pos="%g %g %g" ' % tuple(com)
+        inertial += 'mass="%g" ' % mass
+        inertial += 'fullinertia="%g %g %g %g %g %g" ' % (
             inertia[0, 0],
             inertia[1, 1],
             inertia[2, 2],
@@ -189,14 +189,14 @@ class ExporterMuJoCo(Exporter):
             geom += self.pos_quat(T_link_shape) + " "
 
             if isinstance(shape, Box):
-                geom += 'type="box" size="%.20g %.20g %.20g" ' % tuple(shape.size / 2)
+                geom += 'type="box" size="%g %g %g" ' % tuple(shape.size / 2)
             elif isinstance(shape, Cylinder):
-                geom += 'type="cylinder" size="%.20g %.20g" ' % (
+                geom += 'type="cylinder" size="%g %g" ' % (
                     shape.radius,
                     shape.length / 2,
                 )
             elif isinstance(shape, Sphere):
-                geom += 'type="sphere" size="%.20g" ' % shape.radius
+                geom += 'type="sphere" size="%g" ' % shape.radius
 
             if class_ == "visual":
                 material_name = f"{part.name}_material"
@@ -321,7 +321,7 @@ class ExporterMuJoCo(Exporter):
         """
         pos = matrix[:3, 3]
         quat = mat2quat(matrix[:3, :3])
-        xml = 'pos="%.20g %.20g %.20g" quat="%.20g %.20g %.20g %.20g"' % (*pos, *quat)
+        xml = 'pos="%g %g %g" quat="%g %g %g %g"' % (*pos, *quat)
 
         return xml
 
