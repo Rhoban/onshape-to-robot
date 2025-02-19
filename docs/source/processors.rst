@@ -17,4 +17,7 @@ Here is an overview of ``onshape-to-robot`` pipeline:
    :maxdepth: 2
    :caption: Processors:
 
+   processor_merge_parts
+   processor_simplify_stls
+   processor_scad
    processor_dummy_base_link
