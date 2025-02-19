@@ -133,50 +133,44 @@ class RobotBuilder:
             com = [0] * 3
             inertia = [0] * 12
         else:
-            if part_name_config in self.config.dynamics_override:
-                entry = self.config.dynamics_override[part_name_config]
-                mass = entry["mass"]
-                com = entry["com"]
-                inertia = entry["inertia"]
-            else:
-                if instance["isStandardContent"]:
-                    mass_properties = (
-                        self.assembly.client.standard_cont_mass_properties(
-                            instance["documentId"],
-                            instance["documentVersion"],
-                            instance["elementId"],
-                            instance["partId"],
-                            self.config.document_id,
-                            instance["configuration"],
-                        )
-                    )
-                else:
-                    mass_properties = self.assembly.client.part_mass_properties(
+            if instance["isStandardContent"]:
+                mass_properties = (
+                    self.assembly.client.standard_cont_mass_properties(
                         instance["documentId"],
-                        instance["documentMicroversion"],
+                        instance["documentVersion"],
                         instance["elementId"],
                         instance["partId"],
+                        self.config.document_id,
                         instance["configuration"],
                     )
+                )
+            else:
+                mass_properties = self.assembly.client.part_mass_properties(
+                    instance["documentId"],
+                    instance["documentMicroversion"],
+                    instance["elementId"],
+                    instance["partId"],
+                    instance["configuration"],
+                )
 
-                if instance["partId"] not in mass_properties["bodies"]:
-                    print(
-                        warning(
-                            f"WARNING: part {instance['name']} has no dynamics (maybe it is a surface)"
-                        )
+            if instance["partId"] not in mass_properties["bodies"]:
+                print(
+                    warning(
+                        f"WARNING: part {instance['name']} has no dynamics (maybe it is a surface)"
                     )
-                    return
-                mass_properties = mass_properties["bodies"][instance["partId"]]
-                mass = mass_properties["mass"][0]
-                com = mass_properties["centroid"]
-                inertia = mass_properties["inertia"]
+                )
+                return
+            mass_properties = mass_properties["bodies"][instance["partId"]]
+            mass = mass_properties["mass"][0]
+            com = mass_properties["centroid"]
+            inertia = mass_properties["inertia"]
 
-                if abs(mass) < 1e-9:
-                    print(
-                        warning(
-                            f"WARNING: part {instance['name']} has no mass, maybe you should assign a material to it ?"
-                        )
+            if abs(mass) < 1e-9:
+                print(
+                    warning(
+                        f"WARNING: part {instance['name']} has no mass, maybe you should assign a material to it ?"
                     )
+                )
 
         return mass, com[:3], np.reshape(inertia[:9], (3, 3))
 

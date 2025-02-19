@@ -92,9 +92,6 @@ class Config:
         self.configuration: str = self.get("configuration", "default")
         self.ignore_limits: bool = self.get("ignore_limits", False)
 
-        # Use only pure shapes for collision
-        self.collisions_no_mesh: bool = self.get("collisions_no_mesh", False)
-
         # Joint specs
         self.joint_properties: dict = self.get("joint_properties", {})
         self.no_dynamics: bool = self.get("no_dynamics", False)
@@ -108,16 +105,3 @@ class Config:
 
         # Post-import commands
         self.post_import_commands: list[str] = self.get("post_import_commands", [])
-
-        # Dynamics override
-        self.dynamics_override = {}
-        overrides = self.get("dynamics", {})
-        for key, entry in overrides.items():
-            if entry == "fixed":
-                self.dynamics_override[key.lower()] = {
-                    "com": [0, 0, 0],
-                    "mass": 0,
-                    "inertia": [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                }
-            else:
-                self.dynamics_override[key.lower()] = entry
