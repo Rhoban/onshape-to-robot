@@ -5,7 +5,7 @@ with open("README-pypi.md", "r", encoding="utf-8") as stream:
 
 setuptools.setup(
     name="onshape-to-robot",
-    version="1.0.2",
+    version="1.0.3",
     author="Rhoban team",
     author_email="team@rhoban.com",
     description="Converting OnShape assembly to robot definition (URDF or MuJoCo) through OnShape API ",
@@ -39,5 +39,5 @@ setuptools.setup(
     ],
     include_package_data=True,
     package_data={"": ["bullet/*", "assets/*", "README.md"]},
-    python_requires=">=3.6",
+    python_requires=">=3.9",
 )
