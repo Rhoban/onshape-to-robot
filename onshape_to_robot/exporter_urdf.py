@@ -21,7 +21,7 @@ class ExporterURDF(Exporter):
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collisions_no_mesh = config.collisions_no_mesh
+            self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
             self.draw_collisions: bool = config.get("draw_collisions", False)
             self.package_name: str = config.get("package_name", "")
             additional_xml_file = config.get("additional_xml", "")

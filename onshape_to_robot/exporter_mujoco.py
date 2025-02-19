@@ -24,7 +24,7 @@ class ExporterMuJoCo(Exporter):
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collisions_no_mesh = config.collisions_no_mesh
+            self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
             self.freejoint = config.get("freejoint", True)
             self.draw_collisions: bool = config.get("draw_collisions", False)
             additional_xml_file = config.get("additional_xml", "")
@@ -44,7 +44,7 @@ class ExporterMuJoCo(Exporter):
         if self.config:
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
         self.append(f'<mujoco model="{robot.name}">')
-        self.append(f'<compiler angle="radian" meshdir="." />')
+        self.append(f'<compiler angle="radian" meshdir="." autolimits="true" />')
         self.append(f'<option noslip_iterations="1"></option>')
 
         if self.additional_xml:
@@ -92,7 +92,7 @@ class ExporterMuJoCo(Exporter):
         for joint in robot.joints:
             if joint.joint_type == "fixed":
                 continue
-            
+
             if joint.properties.get("actuated", True):
                 type = joint.properties.get("type", "position")
                 actuator: str = f'<{type} name="{joint.name}" joint="{joint.name}" '
@@ -101,10 +101,13 @@ class ExporterMuJoCo(Exporter):
                     if key in joint.properties:
                         actuator += f'{key}="{joint.properties[key]}" '
 
-                if "max_effort" in joint.properties:
-                    actuator += f'forcerange="-{joint.properties["max_effort"]} {joint.properties["max_effort"]}" '
+                if "forcerange" in joint.properties:
+                    actuator += f'forcerange="-{joint.properties["forcerange"]} {joint.properties["forcerange"]}" '
 
-                if joint.limits is not None and type == "position":
+                if (
+                    joint.limits is not None
+                    and type == "position"
+                ):
                     actuator += f'ctrlrange="{joint.limits[0]} {joint.limits[1]}" '
 
                 actuator += "/>"
@@ -228,17 +231,20 @@ class ExporterMuJoCo(Exporter):
         elif joint.joint_type == Joint.PRISMATIC:
             joint_xml += 'type="slide" '
 
+        if (
+            joint.limits is not None
+            and joint.properties.get("range", True)
+        ):
+            joint_xml += f'range="{joint.limits[0]} {joint.limits[1]}" '
+
         for key in (
             "class",
-            "friction",
             "frictionloss",
             "armature",
             "damping",
             "stiffness",
         ):
             if key in joint.properties:
-                if key == "friction":
-                    key = "frictionloss"
                 joint_xml += f'{key}="{joint.properties[key]}" '
 
         joint_xml += " />"
