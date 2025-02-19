@@ -3,6 +3,7 @@ commentjson
 numpy
 numpy-stl
 pybullet
+mujoco
 requests
 sphinx
 sphinx-rtd-theme
