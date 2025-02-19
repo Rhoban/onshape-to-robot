@@ -4,7 +4,7 @@ Onshape-to-robot documentation
 .. raw:: html
 
     <center>
-    <video width="70%" controls autoplay muted>
+    <video width="70%" controls autoplay muted loop>
     <source src="https://github.com/Rhoban/onshape-to-robot-examples/raw/refs/heads/master/videos/sigmaban.mp4" type="video/mp4">
     </video>
     </center>
