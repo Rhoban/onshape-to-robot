@@ -1,40 +1,53 @@
 Design-time considerations
 ==========================
 
-.. note::
-    Try to make your robot assembly mostly based on sub pre-assembled components (avoid to have a lot of
-    constraints that are not relevant for the export). In this main assembly, do not use features
-    such as sub-assemblies network.
+Workflow overview
+-----------------
+
+In order to make your robot possible to export, you need to follow some conventions. The summary is as follows:
+
+* ``onshape-to-robot`` exports an **assembly** of the robot,
+* Be sure this assembly is a **top-level assembly**, where instances are robot links (they can be parts or sub-assemblies),
+* The **first instance** in the assembly list will be considered as the base link,
+* All the instances in the assembly will become links in the export
+* **Mate connectors** should have special names (see below for details):
+
+    * ``dof_name``: for degrees of freedom
+    * ``frame_name``: to create a frame (site in MuJoCo)
+    * ``fix_name``: fix two links together, causing ``onshape-to-robot`` to merge them
+    * ``closing_name``: to close a kinematic loop (see :ref:`kinematic-loops`)
+    * Other mates are not considered by ``onshape-to-robot``
+
+* Orphaned links (that are not part of the kinematic chain) will be **fixed to the base link**, with a warning
+
+.. image:: _static/img/design.png
+    :align: center
 
 Specifying degrees of freedom
 -----------------------------
 
-* Degree of freedoms should be slider, cylindrical or revolute mate connectors named ``dof_something``, where
-  ``something`` will be used to name the joint in the final document
+To create a degree of freedom, you should use the ``dof_`` prefix when placing a mate connector.
 
-  * If the mate connector is **cylindrical** or **revolute**, a ``revolute`` joint will be issued by default
-  
-    * To make a ``continuous`` joint, add ``continuous`` or ``wheel`` in the name of the joint. For instance, a **revolute** mate named
-      ``dof_front_left_wheel`` will result in a ``continuous`` joint named ``front_left_wheel`` in the resulting URDF.
-  * If the mate connector is a **slider**, a ``prismatic`` joint will be issued
-  * If the mate connector is **fastened**, a ``fixed`` joint will be issued
-* When doing this connection, click the children joint first. This will be used to find the trunk of the robot (part with children but no parent)
+* If the mate connector is **cylindrical** or **revolute**, a ``revolute`` joint will be issued 
+* If the mate connector is a **slider**, a ``prismatic`` joint will be issued
+* If the mate connector is **fastened**, a ``fixed`` joint will be issued
 
-.. image:: _static/img/smalls/design.png
-    :align: center
+.. note::
+
+    You can specify joint limits in Onshape, they will be understood and exported
 
 Inverting axis orientation
 --------------------------
 
-It is possible to invert the axis for convenience by adding ``_inv`` at the end of the name. For instance
-``dof_head_pitch_inv`` will result in a joint named ``head_pitch`` having the axis inverted with the one
-from the OnShape assembly.
+You sometime might want your robot joint to rotate in the opposite direction than the one in the Onshape assembly.
+
+To that end, use the ``inv`` suffix in the mate connector name. For instance, ``dof_head_pitch_inv`` will result in a joint named ``head_pitch`` having the axis inverted with the one from the Onshape assembly.
 
 Naming links
 ------------
 
-If you create a mate connector and name it ``link_something``, the link corresponding to the part
-on which it is attached will be named ``something`` in the resulting URDF.
+If you create a mate connector and name it ``link_something``, the link corresponding to the instance
+on which it is attached will be named ``something`` in the resulting export.
 
 .. _custom-frames:
 
@@ -45,23 +58,27 @@ If you want to track some frames on your robot, you can do the following:
 
 * Connect any part to your robot using mate relations in OnShape
 * Name one of these relations ``frame_something``, when ``something`` will be the name of
-  the frame (a link) in the resulting ``sdf`` or ``urdf``
+  the produced frame
 
-.. image:: _static/img/smalls/frame.png
+  * In URDF, it will produce a *dummy link* connected to the parent link with a fixed joint
+  * In MuJoCo, it will result in a *site*
+
+.. image:: _static/img/frames.png
     :align: center
 
-If you want to give it a try, you can use the ``onshape-to-robot-bullet`` in ``urdf`` mode, it will output the
-frames on standard output.
 
-Here is a `link <https://cad.onshape.com/documents/fadc07564402eea7b8d39250/w/afe354d59e4c06d33ce690d2/e/7406c5f00136aee43a4606cb>`_ of a document that can be used as a frame (note: the center cube is 5mm side, so
-you might need 2.5mm offset to center it).
+Here is a document that can be used (be sure to turn on "composite parts" when inserting it, use the ``frame`` composite part): `Onshape frame part <https://cad.onshape.com/documents/7adc786257f47ce24706bb32/w/774dd3de6bd5bfd65fb4462b/e/c60f72b9088ac4e5058b8904?renderMode=0&uiState=67b64076077d3a02bf5e1c0f>`_
+
+.. note::
+
+    The instance used for frame representation is only here for visualization purpose and is excluded from the robot.
+    You can however include it by setting :ref:`draw_frames <draw-frames>` to ``true`` in the :doc:`config <config>` file, mostly for debugging purposes.
 
 Joint frames
 ------------
 
 Joint frames are the ones you see in OnShape when you click on the joint in the tree on the left.
-Thus, they are always revolving around the z axis, or translating along the z axis, even if the
-``_inv`` suffix is added.
+Thus, they are always revolving around the z axis, or translating along the *z axis*.
 
 .. image:: _static/img/zaxis.png
     :align: center

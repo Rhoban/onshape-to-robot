@@ -5,7 +5,7 @@ with open("README-pypi.md", "r", encoding="utf-8") as stream:
 
 setuptools.setup(
     name="onshape-to-robot",
-    version="0.3.27",
+    version="1.0.0",
     author="Rhoban team",
     author_email="team@rhoban.com",
     description="Converting OnShape assembly to robot definition (SDF or URDF) through OnShape API ",
@@ -15,8 +15,9 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     entry_points={
         "console_scripts": [
-            "onshape-to-robot=onshape_to_robot:onshape_to_robot.main",
+            "onshape-to-robot=onshape_to_robot:export.main",
             "onshape-to-robot-bullet=onshape_to_robot:bullet.main",
+            "onshape-to-robot-mujoco=onshape_to_robot:mujoco.main",
             "onshape-to-robot-clear-cache=onshape_to_robot:clear_cache.main",
             "onshape-to-robot-edit-shape=onshape_to_robot:edit_shape.main",
             "onshape-to-robot-pure-sketch=onshape_to_robot:pure_sketch.main",
@@ -29,9 +30,15 @@ setuptools.setup(
     ],
     keywords="robot robotics cad design onshape bullet pybullet sdf urdf gazebo ros model kinematics",
     install_requires=[
-        "numpy", "pybullet", "requests", "commentjson", "colorama>=0.4.6", "numpy-stl", "transforms3d"
+        "numpy",
+        "pybullet",
+        "requests",
+        "commentjson",
+        "colorama>=0.4.6",
+        "numpy-stl",
+        "transforms3d",
     ],
     include_package_data=True,
-    package_data={'': ['bullet/*', 'README.md']},
-    python_requires='>=3.6',
+    package_data={"": ["bullet/*", "assets.*", "README.md"]},
+    python_requires=">=3.6",
 )

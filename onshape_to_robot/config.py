@@ -3,150 +3,105 @@ import sys
 import os
 import commentjson as json
 import subprocess
-from colorama import Fore, Back, Style, just_fix_windows_console
-
-just_fix_windows_console()
-config = {}
-
-# Loading configuration & parameters
-if len(sys.argv) <= 1:
-    print(Fore.RED +
-          'ERROR: usage: onshape-to-robot {robot_directory}' + Style.RESET_ALL)
-    print("Read documentation at https://onshape-to-robot.readthedocs.io/")
-    exit("")
-robot = sys.argv[1]
+from .message import error, bright, info
 
 
-def configGet(name, default=None, hasDefault=False, valuesList=None):
-    global config
-    hasDefault = hasDefault or (default is not None)
+class Config:
+    def __init__(self, robot_path: str):
+        self.config_file: str = robot_path + "/config.json"
 
-    if name in config:
-        value = config[name]
-        if valuesList is not None and value not in valuesList:
-            print(Fore.RED+"ERROR: Value for "+name +
-                  " should be one of: "+(','.join(valuesList))+Style.RESET_ALL)
-            exit()
-        return value
-    else:
-        if hasDefault:
-            return default
-        else:
-            print(Fore.RED + 'ERROR: missing key "' +
-                  name+'" in config' + Style.RESET_ALL)
-            exit()
+        # Loading JSON configuration
+        if not os.path.exists(self.config_file):
+            raise Exception(f"ERROR: The file {self.config_file} can't be found")
+        with open(self.config_file, "r", encoding="utf8") as stream:
+            self.config: dict = json.load(stream)
 
+        self.read_configuration()
 
-configFile = robot+'/config.json'
-if not os.path.exists(configFile):
-    print(Fore.RED+"ERROR: The file "+configFile+" can't be found"+Style.RESET_ALL)
-    exit()
-with open(configFile, "r", encoding="utf8") as stream:
-    config = json.load(stream)
+        # Output directory, making it if it doesn't exists
+        self.output_directory: str = robot_path
+        try:
+            os.makedirs(self.output_directory)
+        except OSError:
+            pass
 
-config['documentId'] = configGet('documentId')
-config['versionId'] = configGet('versionId', '')
-config['workspaceId'] = configGet('workspaceId', '')
-config['drawFrames'] = configGet('drawFrames', False)
-config['drawCollisions'] = configGet('drawCollisions', False)
-config['assemblyName'] = configGet('assemblyName', False)
-config['outputFormat'] = configGet('outputFormat', 'urdf')
-config['useFixedLinks'] = configGet('useFixedLinks', False)
-config['configuration'] = configGet('configuration', 'default')
-config['ignoreLimits'] = configGet('ignoreLimits', False)
+    def to_camel_case(self, snake_str: str) -> str:
+        """
+        Converts a string to camel case
+        """
+        components = snake_str.split("_")
+        return components[0] + "".join(x.title() for x in components[1:])
 
-# Using OpenSCAD for simplified geometry
-config['useScads'] = configGet('useScads', True)
-config['pureShapeDilatation'] = configGet('pureShapeDilatation', 0.0)
+    def get(self, name: str, default=None, required: bool = True, values_list=None):
+        """
+        Gets an entry from the configuration
 
-# Dynamics
-config['jointMaxEffort'] = configGet('jointMaxEffort', 1)
-config['jointMaxVelocity'] = configGet('jointMaxVelocity', 20)
-config['noDynamics'] = configGet('noDynamics', False)
+        Args:
+            name (str): entry name
+            default: default fallback value if the entry is not present. Defaults to None.
+            required (bool, optional): whether the configuration entry is required. Defaults to False.
+            values_list: list of allowed values. Defaults to None.
+        """
+        camel_name = self.to_camel_case(name)
 
-# Ignore list
-config['ignore'] = configGet('ignore', [])
-config['whitelist'] = configGet('whitelist', None, hasDefault=True)
+        if name in self.config or camel_name in self.config:
+            if name in self.config:
+                value = self.config[name]
+            else:
+                value = self.config[camel_name]
 
-# Color override
-config['color'] = configGet('color', None, hasDefault=True)
+            if values_list is not None and value not in values_list:
+                raise Exception(
+                    f"Value for {name} should be onf of: {','.join(values_list)}"
+                )
+            return value
+        elif required and default is None:
+            raise Exception(f"ERROR: missing required key {name} in config")
 
-# STLs merge and simplification
-config['mergeSTLs'] = configGet('mergeSTLs', 'no', valuesList=[
-                                'no', 'visual', 'collision', 'all'])
-config['maxSTLSize'] = configGet('maxSTLSize', 3)
-config['simplifySTLs'] = configGet('simplifySTLs', 'no', valuesList=[
-                                   'no', 'visual', 'collision', 'all'])
+        return default
 
-# Post-import commands to execute
-config['postImportCommands'] = configGet('postImportCommands', [])
+    def printable_version(self) -> str:
+        version = f"document_id: {self.document_id}"
+        if self.version_id:
+            version += f" / version_id: {self.version_id}"
+        elif self.workspace_id:
+            version += f" / workspace_id: {self.workspace_id}"
 
-config['outputDirectory'] = robot
-config['dynamicsOverride'] = {}
+        return version
 
-# Add collisions=true configuration on parts
-config['useCollisionsConfigurations'] = configGet(
-    'useCollisionsConfigurations', True)
+    def read_configuration(self):
+        """
+        Load and check configuration entries
+        """
 
-# ROS support
-config['packageName'] = configGet('packageName', '')
-config['addDummyBaseLink'] = configGet('addDummyBaseLink', False)
-config['robotName'] = configGet('robotName', 'onshape')
+        # Robot name
+        self.robot_name: str = self.get("robot_name", "onshape")
 
-# additional XML code to insert
-if config['outputFormat'] == 'urdf':
-    additionalFileName = configGet('additionalUrdfFile', '')
-else:
-    additionalFileName = configGet('additionalSdfFile', '')
+        # Main settings
+        self.document_id: str = self.get("document_id")
+        self.version_id: str | None = self.get("version_id", required=False)
+        self.workspace_id: str | None = self.get("workspace_id", required=False)
 
-if additionalFileName == '':
-    config['additionalXML'] = ''
-else:
-    with open(robot + additionalFileName, "r", encoding="utf-8") as stream:
-        config['additionalXML'] = stream.read()
+        if self.version_id and self.workspace_id:
+            raise Exception("You can't specify workspace_id and version_id")
 
+        self.draw_frames: bool = self.get("draw_frames", False)
 
-# Creating dynamics override array
-tmp = configGet('dynamics', {})
-for key in tmp:
-    if tmp[key] == 'fixed':
-        config['dynamicsOverride'][key.lower()] = {"com": [0, 0, 0], "mass": 0, "inertia": [
-            0, 0, 0, 0, 0, 0, 0, 0, 0]}
-    else:
-        config['dynamicsOverride'][key.lower()] = tmp[key]
+        self.assembly_name: str = self.get("assembly_name", required=False)
+        self.output_format: str = self.get("output_format", "urdf")
+        self.configuration: str = self.get("configuration", "default")
+        self.ignore_limits: bool = self.get("ignore_limits", False)
 
-# Output directory, making it if it doesn't exists
-try:
-    os.makedirs(config['outputDirectory'])
-except OSError:
-    pass
+        # Joint specs
+        self.joint_properties: dict = self.get("joint_properties", {})
+        self.no_dynamics: bool = self.get("no_dynamics", False)
 
-# Checking that OpenSCAD is present
-if config['useScads']:
-    print(Style.BRIGHT + '* Checking OpenSCAD presence...' + Style.RESET_ALL)
-    try:
-        subprocess.run(["openscad", "-v"])
-    except FileNotFoundError:
-        print(
-            Fore.RED + "Can't run openscad -v, disabling OpenSCAD support" + Style.RESET_ALL)
-        print(Fore.BLUE + "TIP: consider installing openscad:" + Style.RESET_ALL)
-        print(Fore.BLUE + "Linux:" + Style.RESET_ALL)
-        print(Fore.BLUE + "sudo add-apt-repository ppa:openscad/releases" + Style.RESET_ALL)
-        print(Fore.BLUE + "sudo apt-get update" + Style.RESET_ALL)
-        print(Fore.BLUE + "sudo apt-get install openscad" + Style.RESET_ALL)
-        print(Fore.BLUE + "Windows:" + Style.RESET_ALL)
-        print(Fore.BLUE + "go to: https://openscad.org/downloads.html " + Style.RESET_ALL)
-        config['useScads'] = False
+        # Ignore / whitelists
+        self.ignore: list[str] = self.get("ignore", [])
+        self.whitelist: list[str] | None = self.get("whitelist", required=False)
 
-# Checking that MeshLab is present
-if config['simplifySTLs']:
-    print(Style.BRIGHT + '* Checking MeshLab presence...' + Style.RESET_ALL)
-    if not os.path.exists('/usr/bin/meshlabserver') != 0:
-        print(Fore.RED + "No /usr/bin/meshlabserver, disabling STL simplification support" + Style.RESET_ALL)
-        print(Fore.BLUE + "TIP: consider installing meshlab:" + Style.RESET_ALL)
-        print(Fore.BLUE + "sudo apt-get install meshlab" + Style.RESET_ALL)
-        config['simplifySTLs'] = False
+        # Color override
+        self.color: str | None = self.get("color", required=False)
 
-# Checking that versionId and workspaceId are not set on same time
-if config['versionId'] != '' and config['workspaceId'] != '':
-    print(Style.RED + "You can't specify workspaceId AND versionId")
+        # Post-import commands
+        self.post_import_commands: list[str] = self.get("post_import_commands", [])
