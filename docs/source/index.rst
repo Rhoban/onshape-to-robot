@@ -1,10 +1,20 @@
 Onshape-to-robot documentation
 ==============================
 
-.. image:: _static/img/main.png
+.. raw:: html
+
+    <center>
+    <video width="70%" controls autoplay muted>
+    <source src="https://github.com/Rhoban/onshape-to-robot-examples/raw/refs/heads/master/videos/sigmaban.mp4" type="video/mp4">
+    </video>
+    </center>
+    <br/>
+
 
 What is this ?
 ~~~~~~~~~~~~~~
+
+.. image:: _static/img/main.png
 
 ``onshape-to-robot`` is a tool that allows you to export robots designed from the **Onshape CAD** software
 to descriptions format like **URDF** or **MuJoCo**, so that you can use them for physics simulation or in your running code
