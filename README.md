@@ -1,7 +1,7 @@
 # OnShape to Robot (URDF/MuJoCo)
 
 <p align="center">
-<img src="docs/source/_static/img/main.png" />
+<img src="docs/source/_static/img/main_white.png" />
 </p>
 
 This tool is based on the [OnShape API](https://dev-portal.onshape.com/) to retrieve
