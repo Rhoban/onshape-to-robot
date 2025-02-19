@@ -89,13 +89,13 @@ class Joint:
         parent: Link,
         child: Link,
         T_world_joint: np.ndarray,
-        properties: dict | None = None,
+        properties: dict = {},
         limits: tuple[float, float] | None = None,
         z_axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
     ):
         self.name: str = name
         self.joint_type: str = joint_type
-        self.properties: dict | None = properties
+        self.properties: dict = properties
         self.parent: Link = parent
         self.child: Link = child
         self.limits: tuple[float, float] | None = limits
