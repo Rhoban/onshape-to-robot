@@ -21,10 +21,11 @@ class ProcessorScad(Processor):
         super().__init__(config)
 
         # OpenSCAD pure shapes
-        self.use_scads: bool = config.get("use_scads", True)
+        self.use_scads: bool = config.get("use_scads", False)
         self.pure_shape_dilatation: float = config.get("pure_shape_dilatation", 0.0)
 
-        self.check_openscad()
+        if self.use_scads:
+            self.check_openscad()
 
     def check_openscad(self):
         if self.use_scads:

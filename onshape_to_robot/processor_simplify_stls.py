@@ -42,10 +42,11 @@ class ProcessorSimplifySTLs(Processor):
         super().__init__(config)
 
         # STL merge / simplification
-        self.max_stl_size = config.get("max_stl_size", 3)
         self.simplify_stls = config.get("simplify_stls", False)
+        self.max_stl_size = config.get("max_stl_size", 3)
 
-        self.check_meshlab()
+        if self.simplify_stls:
+            self.check_meshlab()
 
     def check_meshlab(self):
         print(bright("* Checking MeshLab presence..."))
