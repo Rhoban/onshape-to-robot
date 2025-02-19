@@ -104,6 +104,11 @@ class Joint:
 
 
 class Robot:
+    """
+    Robot representation produced after requesting Onshape API, and before
+    exporting (e.g URDF, MuJoCo).
+    """
+
     def __init__(self, name: str):
         self.name: str = name
         self.links: list[Link] = []

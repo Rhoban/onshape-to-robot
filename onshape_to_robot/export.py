@@ -8,6 +8,10 @@ from .exporter_urdf import ExporterURDF
 from .exporter_mujoco import ExporterMuJoCo
 
 def main():
+    """
+    This is the entry point of the export script, i.e the "onshape-to-robot" command.
+    """
+
     try:
         # Retrieving robot path
         if len(sys.argv) <= 1:
