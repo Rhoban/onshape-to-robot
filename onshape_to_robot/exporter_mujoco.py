@@ -90,6 +90,9 @@ class ExporterMuJoCo(Exporter):
         self.append("<actuator>")
 
         for joint in robot.joints:
+            if joint.joint_type == "fixed":
+                continue
+            
             if joint.properties.get("actuated", True):
                 type = joint.properties.get("type", "position")
                 actuator: str = f'<{type} name="{joint.name}" joint="{joint.name}" '
@@ -122,6 +125,12 @@ class ExporterMuJoCo(Exporter):
         self.append("</equality>")
 
     def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
+        # Ensuring epsilon masses and inertias
+        mass = max(1e-9, mass)
+        inertia[0, 0] = max(1e-9, inertia[0, 0])
+        inertia[1, 1] = max(1e-9, inertia[1, 1])
+        inertia[2, 2] = max(1e-9, inertia[2, 2])
+
         # Populating body inertial properties
         # https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-inertial
         inertial: str = "<inertial "
@@ -208,6 +217,9 @@ class ExporterMuJoCo(Exporter):
 
     def add_joint(self, joint: Joint):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
+        if joint.joint_type == "fixed":
+            self.append(f'<!-- Joint is "fixed", skipping it -->')
+            return
 
         joint_xml: str = "<joint "
         joint_xml += f'name="{joint.name}" '
@@ -215,9 +227,6 @@ class ExporterMuJoCo(Exporter):
             joint_xml += 'type="hinge" '
         elif joint.joint_type == Joint.PRISMATIC:
             joint_xml += 'type="slide" '
-        elif joint.joint_type == Joint.FIXED:
-            print(warning("Joint type is not supported in MuJoCo: fixed"))
-            joint_xml += 'type="free" '
 
         for key in (
             "class",
