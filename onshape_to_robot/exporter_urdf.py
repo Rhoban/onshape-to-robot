@@ -159,7 +159,12 @@ class ExporterURDF(Exporter):
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
-        self.append(f'<joint name="{joint.name}" type="{joint.joint_type}">')
+        
+        joint_type = joint.joint_type
+        if joint.properties.get("continuous", False):
+            joint_type = "continuous"
+
+        self.append(f'<joint name="{joint.name}" type="{joint_type}">')
 
         T_link_joint = np.linalg.inv(T_world_link) @ joint.T_world_joint
         self.append(self.origin(T_link_joint))
@@ -181,7 +186,7 @@ class ExporterURDF(Exporter):
 
         if joint.limits is not None:
             limits += 'lower="%g" upper="%g" ' % joint.limits
-        elif joint.joint_type == "revolute":
+        elif joint.joint_type == "revolute" and not joint.properties.get("continuous", False):
             limits += f'lower="{-np.pi}" upper="{np.pi}" '
         elif joint.joint_type == "prismatic":
             limits += 'lower="0" upper="1" '
