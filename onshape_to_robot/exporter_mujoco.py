@@ -104,11 +104,9 @@ class ExporterMuJoCo(Exporter):
                 if "forcerange" in joint.properties:
                     actuator += f'forcerange="-{joint.properties["forcerange"]} {joint.properties["forcerange"]}" '
 
-                if (
-                    joint.limits is not None
-                    and type == "position"
-                ):
-                    actuator += f'ctrlrange="{joint.limits[0]} {joint.limits[1]}" '
+                joint_limits = joint.properties.get("limits", joint.limits)
+                if joint_limits is not None and type == "position":
+                    actuator += f'ctrlrange="{joint_limits[0]} {joint_limits[1]}" '
 
                 actuator += "/>"
                 self.append(actuator)
@@ -231,10 +229,7 @@ class ExporterMuJoCo(Exporter):
         elif joint.joint_type == Joint.PRISMATIC:
             joint_xml += 'type="slide" '
 
-        if (
-            joint.limits is not None
-            and joint.properties.get("range", True)
-        ):
+        if joint.limits is not None and joint.properties.get("range", True):
             joint_xml += f'range="{joint.limits[0]} {joint.limits[1]}" '
 
         for key in (

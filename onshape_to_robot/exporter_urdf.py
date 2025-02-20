@@ -181,8 +181,9 @@ class ExporterURDF(Exporter):
         else:
             limits += 'velocity="10" '
 
-        if joint.limits is not None:
-            limits += 'lower="%g" upper="%g" ' % joint.limits
+        joint_limits = joint.properties.get("limits", joint.limits)
+        if joint_limits is not None:
+            limits += 'lower="%g" upper="%g" ' % (joint_limits[0], joint_limits[1])
         elif joint_type == "revolute":
             limits += f'lower="{-np.pi}" upper="{np.pi}" '
         elif joint_type == "prismatic":
