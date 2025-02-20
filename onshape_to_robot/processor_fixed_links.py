@@ -23,6 +23,7 @@ class ProcessorFixedLinks(Processor):
                     part_link = Link(f"{link.name}_{part.name}")
                     part_link.parts = [part]
                     new_links.append([link, part_link])
+                link.parts = []
 
             for parent_link, new_link in new_links:
                 robot.links.append(new_link)

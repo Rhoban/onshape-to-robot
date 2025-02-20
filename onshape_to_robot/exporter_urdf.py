@@ -49,6 +49,14 @@ class ExporterURDF(Exporter):
         return self.xml
 
     def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
+        # Unless "no_dynamics" is set, we make sure that mass and inertia
+        # are not zero
+        if not self.no_dynamics:
+            mass = max(1e-9, mass)
+            inertia[0, 0] = max(1e-9, inertia[0, 0])
+            inertia[1, 1] = max(1e-9, inertia[1, 1])
+            inertia[2, 2] = max(1e-9, inertia[2, 2])
+
         self.append("<inertial>")
         self.append(
             '<origin xyz="%g %g %g" rpy="0 0 0"/>'
