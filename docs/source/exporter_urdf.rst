@@ -34,7 +34,8 @@ Here is an example of complete ``config.json`` file, with details below:
             "joint_name": {
                 "max_effort": 20.0,
                 "max_velocity": 10.0,
-                "friction": 0.1
+                "friction": 0.1,
+                "limits": [0.5, 1.2]
             },
             "wheel": {
                 "type": "continuous"
@@ -62,6 +63,7 @@ Possible values are:
 * ``max_velocity``: The maximum velocity of the joint (added in the ``<joint velocity=...>`` tag)
 * ``friction``: The friction of the joint (added in the ``<joint_properties friction=...>`` tag)
 * ``type``: Sets the joint type (changing the ``<joint type="...">`` tag)
+* ``limits``: Override the joint limits, should be a list of two values (min, max)
 
 ``draw_collisions`` *(default: false)*
 ~~~~~~~~~~~~~~~~~~

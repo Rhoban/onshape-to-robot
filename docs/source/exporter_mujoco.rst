@@ -38,6 +38,7 @@ Here is an example of complete ``config.json`` file, with details below:
                 "actuated": true,
                 "max_effort": 10.0,
                 "friction": 0.5,
+                "limits": [0.5, 1.2]
                 // ...
             },
             // Set the properties for a specific joint
@@ -69,6 +70,7 @@ Possible values are:
 * ``class``: a ``class="..."`` to be added to the joint (and actuator) 
 * ``type`` *(default: position)* defines the actuator that will be produced
 * ``range`` *(default: true)*: if ``true``, the joint limits are reflected on the joint ``range`` attribute
+* ``limits``: Override the joint limits, should be a list of two values (min, max)
 
 * The following are reflected as ``<joint ...>`` attributes:
 
