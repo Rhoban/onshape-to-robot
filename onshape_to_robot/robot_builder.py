@@ -41,11 +41,18 @@ class RobotBuilder:
         configuration = instance["configuration"]
 
         if instance["configuration"] != "default":
+            if "documentVersion" in instance:
+                version = instance["documentVersion"]
+                wmv = "v"
+            else:
+                version = instance["documentMicroversion"]
+                wmv = "m"
             elements = self.assembly.client.elements_configuration(
                 instance["documentId"],
-                instance["documentMicroversion"],
+                version,
                 instance["elementId"],
-                wmv="m",
+                wmv=wmv,
+                linked_document_id=self.config.document_id,
             )
             for entry in elements["configurationParameters"]:
                 type_name = entry["typeName"]
@@ -101,12 +108,20 @@ class RobotBuilder:
         """
         filename = self.slugify(prefix) + ".stl"
 
+        if "documentVersion" in instance:
+            version = instance["documentVersion"]
+            wmv = "v"
+        else:
+            version = instance["documentMicroversion"]
+            wmv = "m"
         stl = self.assembly.client.part_studio_stl_m(
             instance["documentId"],
-            instance["documentMicroversion"],
+            version,
             instance["elementId"],
             instance["partId"],
-            instance["configuration"],
+            wmv=wmv,
+            configuration=instance["configuration"],
+            linked_document=self.config.document_id,
         )
         with open(self.config.output_directory + "/" + filename, "wb") as stream:
             stream.write(stl)
@@ -127,12 +142,20 @@ class RobotBuilder:
         if self.config.color is not None:
             color = np.array(self.config.color)
         else:
+            if "documentVersion" in instance:
+                version = instance["documentVersion"]
+                wmv = "v"
+            else:
+                version = instance["documentMicroversion"]
+                wmv = "m"
             metadata = self.assembly.client.part_get_metadata(
                 instance["documentId"],
-                instance["documentMicroversion"],
+                version,
                 instance["elementId"],
                 instance["partId"],
-                instance["configuration"],
+                wmv=wmv,
+                configuration=instance["configuration"],
+                linked_document_id=self.config.document_id,
             )
 
             color = np.array([0.5, 0.5, 0.5])
@@ -164,16 +187,24 @@ class RobotBuilder:
                     instance["documentVersion"],
                     instance["elementId"],
                     instance["partId"],
-                    self.config.document_id,
-                    instance["configuration"],
+                    configuration=instance["configuration"],
+                    linked_document_id=self.config.document_id,
                 )
             else:
+                if "documentVersion" in instance:
+                    version = instance["documentVersion"]
+                    wmv = "v"
+                else:
+                    version = instance["documentMicroversion"]
+                    wmv = "m"
                 mass_properties = self.assembly.client.part_mass_properties(
                     instance["documentId"],
-                    instance["documentMicroversion"],
+                    version,
                     instance["elementId"],
                     instance["partId"],
-                    instance["configuration"],
+                    wmv=wmv,
+                    configuration=instance["configuration"],
+                    linked_document_id=self.config.document_id,
                 )
 
             if instance["partId"] not in mass_properties["bodies"]:
@@ -213,7 +244,9 @@ class RobotBuilder:
         part_name, part_name_config = self.part_name(instance)
         extra = ""
         if instance["configuration"] != "default":
-            extra = dim(" (configuration: " + self.printable_configuration(instance) + ")")
+            extra = dim(
+                " (configuration: " + self.printable_configuration(instance) + ")"
+            )
         symbol = "+"
         if self.part_is_ignored(part_name):
             symbol = "-"

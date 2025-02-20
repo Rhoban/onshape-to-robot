@@ -145,15 +145,27 @@ class Client:
         return partid
 
     @cache_response
-    def part_studio_stl_m(self, did, mid, eid, partid, configuration="default"):
+    def part_studio_stl_m(
+        self,
+        did,
+        mid,
+        eid,
+        partid,
+        wmv="m",
+        configuration="default",
+        linked_document=None,
+    ):
         req_headers = {"Accept": "*/*"}
+        query = {
+            "mode": "binary",
+            "units": "meter",
+            "configuration": configuration,
+        }
+        if linked_document is not None:
+            query["linkDocumentId"] = linked_document
         return self.request_binary(
-            f"/api/parts/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/stl",
-            query={
-                "mode": "binary",
-                "units": "meter",
-                "configuration": configuration,
-            },
+            f"/api/parts/d/{escape(did)}/{escape(wmv)}/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/stl",
+            query=query,
             headers=req_headers,
         )
 
@@ -164,38 +176,59 @@ class Client:
         )
 
     @cache_response
-    def part_get_metadata(self, did, mid, eid, partid, configuration="default"):
+    def part_get_metadata(
+        self, did, mid, eid, partid, wmv="m", configuration="default", linked_document_id=None
+    ):
+        query = {"configuration": configuration}
+        if linked_document_id is not None:
+            query["linkDocumentId"] = linked_document_id
         return self.request(
-            f"/api/metadata/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/p/{escape(partid)}",
-            query={"configuration": configuration},
+            f"/api/metadata/d/{escape(did)}/{escape(wmv)}/{escape(mid)}/e/{escape(eid)}/p/{escape(partid)}",
+            query=query,
         )
 
     @cache_response
-    def part_mass_properties(self, did, mid, eid, partid, configuration="default"):
+    def part_mass_properties(
+        self,
+        did,
+        mid,
+        eid,
+        partid,
+        wmv="m",
+        configuration="default",
+        linked_document_id=None,
+    ):
+        query = {
+            "configuration": configuration,
+            "useMassPropertyOverrides": True,
+        }
+        if linked_document_id is not None:
+            query["linkDocumentId"] = linked_document_id
         return self.request(
-            f"/api/parts/d/{escape(did)}/m/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/massproperties",
-            query={
-                "configuration": configuration,
-                "useMassPropertyOverrides": True,
-            },
+            f"/api/parts/d/{escape(did)}/{escape(wmv)}/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/massproperties",
+            query=query,
         )
 
     @cache_response
     def standard_cont_mass_properties(
-        self, did, vid, eid, partid, linkDocumentId, configuration
+        self, did, vid, eid, partid, linked_document_id, configuration
     ):
         return self.request(
             f"/api/parts/d/{escape(did)}/v/{escape(vid)}/e/{escape(eid)}/partid/{escape(partid)}/massproperties",
             query={
                 "configuration": configuration,
                 "useMassPropertyOverrides": True,
-                "linkDocumentId": linkDocumentId,
+                "linkDocumentId": linked_document_id,
                 "inferMetadataOwner": True,
             },
         )
 
     @cache_response
-    def elements_configuration(self, did, wmvid, eid, wmv):
+    def elements_configuration(self, did, wmvid, eid, wmv, linked_document_id=None):
+        query = {}
+        if linked_document_id is not None:
+            query["linkDocumentId"] = linked_document_id
         return self.request(
-            f"/api/elements/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/configuration"
+            f"/api/elements/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/configuration",
+            query=query,
         )
