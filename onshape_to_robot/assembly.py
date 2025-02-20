@@ -91,6 +91,7 @@ class Assembly:
 
         self.ensure_workspace_or_version()
         self.find_assembly()
+        self.check_configuration()
         self.retrieve_assembly()
         self.find_instances()
         self.load_features()
@@ -164,6 +165,61 @@ class Assembly:
         if self.assembly_id == None:
             raise Exception(f"ERROR: Unable to find assembly in this document")
 
+    def check_configuration(self):
+        """
+        Retrieve configuration items for given assembly and parsing config configuration
+        """
+
+        if self.config.configuration != "default":
+            # Retrieving available config parameters
+            elements = self.client.elements_configuration(
+                self.document_id,
+                self.version_id if self.version_id else self.workspace_id,
+                self.assembly_id,
+                wmv=("v" if self.version_id else "w"),
+            )
+
+            parameters = {}
+            for entry in elements["configurationParameters"]:
+                type_name = entry["typeName"]
+                message = entry["message"]
+
+                if type_name.startswith("BTMConfigurationParameterEnum"):
+                    options = [
+                        option["message"]["optionName"] for option in message["options"]
+                    ]
+                    parameters[message["parameterName"]] = [
+                        "enum",
+                        message["parameterId"],
+                        options,
+                    ]
+                elif type_name.startswith("BTMConfigurationParameterBoolean"):
+                    parameters[message["parameterName"]] = ["bool"]
+                elif type_name.startswith("BTMConfigurationParameterQuantity"):
+                    parameters[message["parameterName"]] = ["quantity"]
+
+            # Parsing configuration
+            parts = self.config.configuration.split(";")
+            processed_configuration = []
+            for part in parts:
+                kv = part.split("=")
+                if len(kv) == 2:
+                    key, value = kv
+                    if key not in parameters:
+                        raise Exception(
+                            f'ERROR: Unknown configuration parameter "{key}" in the configuration'
+                        )
+                    if parameters[key][0] == "enum":
+                        if value not in parameters[key][2]:
+                            raise Exception(
+                                f'ERROR: Unknown value "{value}" for configuration parameter "{key}"'
+                            )
+                        key = parameters[key][1]
+                    processed_configuration.append(f"{key}={value.replace(' ', '+')}")
+
+            # Re-writing the configuration
+            self.config.configuration = ";".join(processed_configuration)
+
     def retrieve_assembly(self):
         """
         Retrieve all assembly data
@@ -178,7 +234,7 @@ class Assembly:
             self.document_id,
             self.version_id if self.version_id else self.workspace_id,
             self.assembly_id,
-            "v" if self.version_id else "w",
+            wmv=("v" if self.version_id else "w"),
             configuration=self.config.configuration,
         )
 

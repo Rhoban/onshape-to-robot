@@ -34,17 +34,42 @@ class RobotBuilder:
         """
         return "".join(c if c.isalnum() else "_" for c in value).strip("_")
 
+    def printable_configuration(self, instance: dict) -> str:
+        """
+        Retrieve configuration enums to replace "List_..." with proper enum names
+        """
+        configuration = instance["configuration"]
+
+        if instance["configuration"] != "default":
+            elements = self.assembly.client.elements_configuration(
+                instance["documentId"],
+                instance["documentMicroversion"],
+                instance["elementId"],
+                wmv="m",
+            )
+            for entry in elements["configurationParameters"]:
+                type_name = entry["typeName"]
+                message = entry["message"]
+
+                if type_name.startswith("BTMConfigurationParameterEnum"):
+                    parameter_name = message["parameterName"]
+                    parameter_id = message["parameterId"]
+                    configuration = configuration.replace(parameter_id, parameter_name)
+
+        return configuration
+
     def part_name(self, part: dict):
         """
         Retrieve the name from a part.
         i.e "Base link <1>" -> "base_link"
         """
-        name, configuration = part["name"], part["configuration"]
+        name = part["name"]
         parts = name.split(" ")
         del parts[-1]
         base_part_name = "_".join(parts).lower()
 
         # Only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
+        configuration = self.printable_configuration(part)
         if configuration != "default":
             if len(configuration) < 40:
                 parts += ["_" + configuration.replace("=", "_").replace(" ", "_")]
@@ -134,15 +159,13 @@ class RobotBuilder:
             inertia = [0] * 12
         else:
             if instance["isStandardContent"]:
-                mass_properties = (
-                    self.assembly.client.standard_cont_mass_properties(
-                        instance["documentId"],
-                        instance["documentVersion"],
-                        instance["elementId"],
-                        instance["partId"],
-                        self.config.document_id,
-                        instance["configuration"],
-                    )
+                mass_properties = self.assembly.client.standard_cont_mass_properties(
+                    instance["documentId"],
+                    instance["documentVersion"],
+                    instance["elementId"],
+                    instance["partId"],
+                    self.config.document_id,
+                    instance["configuration"],
                 )
             else:
                 mass_properties = self.assembly.client.part_mass_properties(
@@ -190,7 +213,7 @@ class RobotBuilder:
         part_name, part_name_config = self.part_name(instance)
         extra = ""
         if instance["configuration"] != "default":
-            extra = dim(" (configuration: " + instance["configuration"] + ")")
+            extra = dim(" (configuration: " + self.printable_configuration(instance) + ")")
         symbol = "+"
         if self.part_is_ignored(part_name):
             symbol = "-"

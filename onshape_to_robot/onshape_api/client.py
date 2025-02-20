@@ -44,7 +44,7 @@ class Client:
 
     def request(self, url, **kwargs):
         return self._api.request("get", url, **kwargs).json()
-    
+
     def request_binary(self, url, **kwargs):
         return self._api.request("get", url, **kwargs).content
 
@@ -192,4 +192,10 @@ class Client:
                 "linkDocumentId": linkDocumentId,
                 "inferMetadataOwner": True,
             },
+        )
+
+    @cache_response
+    def elements_configuration(self, did, wmvid, eid, wmv):
+        return self.request(
+            f"/api/elements/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/configuration"
         )

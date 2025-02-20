@@ -8,6 +8,7 @@ from .processors import processors
 from .exporter_urdf import ExporterURDF
 from .exporter_mujoco import ExporterMuJoCo
 
+
 def main():
     """
     This is the entry point of the export script, i.e the "onshape-to-robot" command.
@@ -50,7 +51,10 @@ def main():
         for processor in processors:
             processor.process(robot)
 
-        exporter.write_xml(robot, config.output_directory + "/robot." + exporter.ext)
+        exporter.write_xml(
+            robot,
+            config.output_directory + "/" + config.output_filename + "." + exporter.ext,
+        )
 
         for command in config.post_import_commands:
             print(info(f"* Running command: {command}"))
@@ -59,6 +63,7 @@ def main():
     except Exception as e:
         print(error(f"ERROR: {e}"))
         raise e
+
 
 if __name__ == "__main__":
     main()
