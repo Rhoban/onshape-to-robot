@@ -102,26 +102,36 @@ class RobotBuilder:
             self.unique_names[type][name] = 1
             return name
 
+    def instance_request_params(self, instance: dict) -> dict:
+        """
+        Build parameters to make an API call for a given instance
+        """
+        params = {}
+
+        if "documentVersion" in instance:
+            params["wmvid"] = instance["documentVersion"]
+            params["wmv"] = "v"
+        else:
+            params["wmvid"] = instance["documentMicroversion"]
+            params["wmv"] = "m"
+
+        params["did"] = instance["documentId"]
+        params["eid"] = instance["elementId"]
+        params["linked_document_id"] = self.config.document_id
+        params["configuration"] = instance["configuration"]
+
+        return params
+
     def get_stl(self, prefix: str, instance: dict) -> str:
         """
         Download and store STL file
         """
         filename = self.slugify(prefix) + ".stl"
 
-        if "documentVersion" in instance:
-            version = instance["documentVersion"]
-            wmv = "v"
-        else:
-            version = instance["documentMicroversion"]
-            wmv = "m"
+        params = self.instance_request_params(instance)
         stl = self.assembly.client.part_studio_stl_m(
-            instance["documentId"],
-            version,
-            instance["elementId"],
-            instance["partId"],
-            wmv=wmv,
-            configuration=instance["configuration"],
-            linked_document=self.config.document_id,
+            **params,
+            partid=instance["partId"],
         )
         with open(self.config.output_directory + "/" + filename, "wb") as stream:
             stream.write(stl)
@@ -142,20 +152,10 @@ class RobotBuilder:
         if self.config.color is not None:
             color = np.array(self.config.color)
         else:
-            if "documentVersion" in instance:
-                version = instance["documentVersion"]
-                wmv = "v"
-            else:
-                version = instance["documentMicroversion"]
-                wmv = "m"
+            params = self.instance_request_params(instance)
             metadata = self.assembly.client.part_get_metadata(
-                instance["documentId"],
-                version,
-                instance["elementId"],
-                instance["partId"],
-                wmv=wmv,
-                configuration=instance["configuration"],
-                linked_document_id=self.config.document_id,
+                **params,
+                partid=instance["partId"],
             )
 
             color = np.array([0.5, 0.5, 0.5])
@@ -191,20 +191,10 @@ class RobotBuilder:
                     linked_document_id=self.config.document_id,
                 )
             else:
-                if "documentVersion" in instance:
-                    version = instance["documentVersion"]
-                    wmv = "v"
-                else:
-                    version = instance["documentMicroversion"]
-                    wmv = "m"
+                params = self.instance_request_params(instance)
                 mass_properties = self.assembly.client.part_mass_properties(
-                    instance["documentId"],
-                    version,
-                    instance["elementId"],
-                    instance["partId"],
-                    wmv=wmv,
-                    configuration=instance["configuration"],
-                    linked_document_id=self.config.document_id,
+                    **params,
+                    partid=instance["partId"],
                 )
 
             if instance["partId"] not in mass_properties["bodies"]:

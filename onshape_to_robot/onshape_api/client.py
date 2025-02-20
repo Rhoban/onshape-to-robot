@@ -148,12 +148,12 @@ class Client:
     def part_studio_stl_m(
         self,
         did,
-        mid,
+        wmvid,
         eid,
-        partid,
+        partid="",
         wmv="m",
         configuration="default",
-        linked_document=None,
+        linked_document_id=None,
     ):
         req_headers = {"Accept": "*/*"}
         query = {
@@ -161,10 +161,10 @@ class Client:
             "units": "meter",
             "configuration": configuration,
         }
-        if linked_document is not None:
-            query["linkDocumentId"] = linked_document
+        if linked_document_id is not None:
+            query["linkDocumentId"] = linked_document_id
         return self.request_binary(
-            f"/api/parts/d/{escape(did)}/{escape(wmv)}/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/stl",
+            f"/api/parts/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/partid/{escape(partid)}/stl",
             query=query,
             headers=req_headers,
         )
@@ -177,13 +177,20 @@ class Client:
 
     @cache_response
     def part_get_metadata(
-        self, did, mid, eid, partid, wmv="m", configuration="default", linked_document_id=None
+        self,
+        did,
+        wmvid,
+        eid,
+        partid,
+        wmv="m",
+        configuration="default",
+        linked_document_id=None,
     ):
         query = {"configuration": configuration}
         if linked_document_id is not None:
             query["linkDocumentId"] = linked_document_id
         return self.request(
-            f"/api/metadata/d/{escape(did)}/{escape(wmv)}/{escape(mid)}/e/{escape(eid)}/p/{escape(partid)}",
+            f"/api/metadata/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/p/{escape(partid)}",
             query=query,
         )
 
@@ -191,7 +198,7 @@ class Client:
     def part_mass_properties(
         self,
         did,
-        mid,
+        wmvid,
         eid,
         partid,
         wmv="m",
@@ -205,7 +212,7 @@ class Client:
         if linked_document_id is not None:
             query["linkDocumentId"] = linked_document_id
         return self.request(
-            f"/api/parts/d/{escape(did)}/{escape(wmv)}/{escape(mid)}/e/{escape(eid)}/partid/{escape(partid)}/massproperties",
+            f"/api/parts/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/partid/{escape(partid)}/massproperties",
             query=query,
         )
 
@@ -224,7 +231,9 @@ class Client:
         )
 
     @cache_response
-    def elements_configuration(self, did, wmvid, eid, wmv, linked_document_id=None):
+    def elements_configuration(
+        self, did, wmvid, eid, wmv, linked_document_id=None, configuration=None
+    ):
         query = {}
         if linked_document_id is not None:
             query["linkDocumentId"] = linked_document_id
