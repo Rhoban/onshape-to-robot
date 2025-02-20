@@ -232,7 +232,7 @@ class Assembly:
             self.document_id,
             self.microversion_id,
             self.assembly_id,
-            "m",
+            wmv="m",
             configuration=self.config.configuration,
         )
 
