@@ -1,7 +1,0 @@
-Accessing your robot programmatically
-=====================================
-
-
-
-
-

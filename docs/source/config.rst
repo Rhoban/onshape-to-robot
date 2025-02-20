@@ -36,7 +36,7 @@ Here is an example of complete ``config.json`` file, with details below:
         // The workspace id (optional) 
         "workspace_id": "workspace-id",
         // Onshape configuration to use (default: "default")
-        "configuration": "big_robot",
+        "configuration": "Configuration=BigFoot;RodLength=50mm",
         // Robot name (default: "onshape")
         "robot_name": "robot",
 
@@ -124,11 +124,17 @@ The workspace ID can be found in URL, after the ``/w/`` part when selecting a sp
 ``configuration`` *(default: "default")*
 ~~~~~~~~~~~~~~~~~
 
-This is the robot configuration string that will be passed to Onshape. An example of format:
+This is the robot configuration string that will be passed to Onshape. Lists, booleans and quantities are allowed. For example:
 
-.. code-block:: js
+.. image:: ../_static/img/configuration.png
+    :width: 300px
+    :align: center
 
-    left_motor_angle=3+radian;enable_yaw=true
+Should be written as the following:
+
+.. code-block:: text
+
+    Configuration=Long;RemovePart=true;Length=30mm
 
 
 ``robot_name`` *(default: "onshape")*
