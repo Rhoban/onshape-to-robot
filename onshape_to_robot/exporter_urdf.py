@@ -171,12 +171,20 @@ class ExporterURDF(Exporter):
         limits = ""
         if "max_effort" in joint.properties:
             limits += 'effort="%g" ' % joint.properties["max_effort"]
+        else:
+            limits += 'effort="10" '
+
         if "max_velocity" in joint.properties:
             limits += 'velocity="%g" ' % joint.properties["max_velocity"]
+        else:
+            limits += 'velocity="10" '
+
         if joint.limits is not None:
             limits += 'lower="%g" upper="%g" ' % joint.limits
         elif joint.joint_type == "revolute":
             limits += f'lower="{-np.pi}" upper="{np.pi}" '
+        elif joint.joint_type == "prismatic":
+            limits += 'lower="0" upper="1" '
 
         if limits:
             self.append(f"<limit {limits}/>")
