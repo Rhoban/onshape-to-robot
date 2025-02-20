@@ -182,6 +182,9 @@ class Assembly:
             configuration=self.config.configuration,
         )
 
+        self.microversion_id: str = self.assembly_data["rootAssembly"][
+            "documentMicroversion"
+        ]
         self.occurrences: dict = {}
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
             self.occurrences[tuple(occurrence["path"])] = occurrence
@@ -227,13 +230,14 @@ class Assembly:
 
         self.features = self.client.get_features(
             self.document_id,
-            self.version_id if self.version_id else self.workspace_id,
+            self.microversion_id,
             self.assembly_id,
-            "v" if self.version_id else "w",
+            "m",
             configuration=self.config.configuration,
         )
 
         if not self.version_id:
+            # TODO: This should support microversion in the future
             self.matevalues = self.client.matevalues(
                 self.document_id,
                 self.workspace_id,
@@ -431,9 +435,13 @@ class Assembly:
                     )
 
                 if data["mateType"] == "FASTENED":
-                    self.closures.append(["fixed", f"{data['name']}_1", f"{data['name']}_2"])
+                    self.closures.append(
+                        ["fixed", f"{data['name']}_1", f"{data['name']}_2"]
+                    )
                 else:
-                    self.closures.append(["point", f"{data['name']}_1", f"{data['name']}_2"])
+                    self.closures.append(
+                        ["point", f"{data['name']}_1", f"{data['name']}_2"]
+                    )
 
             elif data["name"].startswith("frame_"):
                 name = "_".join(data["name"].split("_")[1:])
