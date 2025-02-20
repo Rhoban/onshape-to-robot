@@ -1,4 +1,4 @@
-# OnShape to Robot (URDF/MuJoCo)
+# Onshape to Robot (URDF/MuJoCo)
 
 <p align="center">
 <img src="docs/source/_static/img/main_white.png" />

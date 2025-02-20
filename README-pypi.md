@@ -1,6 +1,8 @@
-# Onshape to robot (URDF/SDF)
+# Onshape to robot (URDF/MuJoCo)
 
-This tool is based on the OnShape API to retrieve informations from an assembly and build an SDF or URDF model suitable for physics simulation (pyBullet, Gazebo...).
+This tool is based on the [OnShape API](https://dev-portal.onshape.com/) to retrieve
+informations from an assembly and build an URDF or MuJoCo model suitable for physics
+simulation.
 
 * Check out the [official documentation](https://onshape-to-robot.readthedocs.io/)
 * [GitHub repository](https://github.com/rhoban/onshape-to-robot/)
