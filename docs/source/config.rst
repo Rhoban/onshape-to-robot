@@ -126,7 +126,7 @@ The workspace ID can be found in URL, after the ``/w/`` part when selecting a sp
 
 This is the robot configuration string that will be passed to Onshape. Lists, booleans and quantities are allowed. For example:
 
-.. image:: ../_static/img/configuration.png
+.. image:: _static/img/configuration.png
     :width: 300px
     :align: center
 
