@@ -1,14 +1,15 @@
-General entries (config.json)
-=============================
+Configuration (config.json)
+===========================
 
 Specific entries
 ----------------
 
-Below are the global configuration entries. The following components also generate their own configuration entries:
+Below are the global configuration entries.
+You might also want to check out the following documentation for more specific entries:
 
 * :doc:`URDF specific entries <exporter_urdf>`
 * :doc:`MuJoCo specific entries <exporter_mujoco>`
-* :doc:`Processors can define their own specific entries <processors>`
+* :doc:`Processors <processors>` can define their own specific entries
 
 
 ``config.json`` entries
