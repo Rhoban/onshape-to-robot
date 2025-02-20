@@ -26,6 +26,9 @@ Here is an example of complete ``config.json`` file, with details below:
         "document_id": "document-id",
         // Output format: urdf or mujoco (required)
         "output_format": "urdf",
+        // Output filename (default: "robot")
+        // Extension (.urdf, .xml) will be added automatically
+        "output_filename": "robot",
         // Assembly name to use in the document (optional)
         "assembly_name": "robot",
         // The document version id (optional)

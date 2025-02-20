@@ -76,6 +76,7 @@ class Config:
 
         # Robot name
         self.robot_name: str = self.get("robot_name", "onshape")
+        self.output_filename: str = self.get("output_filename", "robot")
 
         # Main settings
         self.document_id: str = self.get("document_id")
