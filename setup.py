@@ -4,8 +4,8 @@ with open("README-pypi.md", "r", encoding="utf-8") as stream:
     long_description = stream.read()
 
 setuptools.setup(
-    name="onshape-to-robot",
-    version="1.0.10",
+    name="onshape_to_robot",
+    version="1.0.11",
     author="Rhoban team",
     author_email="team@rhoban.com",
     description="Converting OnShape assembly to robot definition (URDF or MuJoCo) through OnShape API ",
