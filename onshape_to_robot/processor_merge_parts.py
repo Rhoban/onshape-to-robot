@@ -14,11 +14,14 @@ class ProcessorMergeParts(Processor):
     def __init__(self, config: Config):
         super().__init__(config)
         self.merge_stls = config.get("merge_stls", False)
+        self.meshes_to_write = {}
 
     def process(self, robot: Robot):
         if self.merge_stls:
             for link in robot.links:
                 self.merge_parts(link)
+            for stl_file, mesh in self.meshes_to_write.items():
+                self.save_mesh(mesh, stl_file)
 
     def load_mesh(self, stl_file: str) -> mesh.Mesh:
         return mesh.Mesh.from_file(stl_file)
@@ -86,7 +89,7 @@ class ProcessorMergeParts(Processor):
                     mesh = self.combine_meshes(mesh, part_mesh)
 
         combined_stl_file = self.config.output_directory + "/" + link.name + ".stl"
-        self.save_mesh(mesh, combined_stl_file)
+        self.meshes_to_write[combined_stl_file] = mesh
 
         mass, com, inertia = link.get_dynamics(T_world_com)
 
