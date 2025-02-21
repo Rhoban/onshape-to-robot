@@ -90,17 +90,21 @@ class RobotBuilder:
         Get unique part name (plate, plate_2, plate_3, ...)
         In the case where multiple parts have the same name in OnShape, they will result in different names in the URDF
         """
-        _, name = self.part_name(part)
+        while True:
+            _, name = self.part_name(part)
 
-        if type not in self.unique_names:
-            self.unique_names[type] = {}
+            if type not in self.unique_names:
+                self.unique_names[type] = {}
+            
+            if name in self.unique_names[type]:
+                self.unique_names[type][name] += 1
+                name = f"{name}_{self.unique_names[type][name]}"
+            else:
+                self.unique_names[type][name] = 1
+                name = name
 
-        if name in self.unique_names[type]:
-            self.unique_names[type][name] += 1
-            return f"{name}_{self.unique_names[type][name]}"
-        else:
-            self.unique_names[type][name] = 1
-            return name
+            if name not in [frame.name for frame in self.assembly.frames]:
+                return name
 
     def instance_request_params(self, instance: dict) -> dict:
         """
