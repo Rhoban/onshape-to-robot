@@ -12,7 +12,7 @@ def main():
 
     robot_path = args.directory
     if not robot_path.endswith(".xml"):
-        robot_path += "/robot.xml"
+        robot_path += "/scene.xml"
 
     model: mujoco.MjModel = mujoco.MjModel.from_xml_path(robot_path)
     data: mujoco.MjData = mujoco.MjData(model)
