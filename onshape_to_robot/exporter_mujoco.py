@@ -54,6 +54,7 @@ class ExporterMuJoCo(Exporter):
         self.append("<default>")
         self.append('<joint frictionloss="0.1" armature="0.005"/>')
         self.append('<position kp="50" kv="5"/>')
+        self.append('<velocity kv="5"/>')
         self.append('<default class="visual">')
         self.append('<geom type="mesh" contype="0" conaffinity="0" group="2"/>')
         self.append("</default>")
@@ -105,7 +106,8 @@ class ExporterMuJoCo(Exporter):
                     actuator += f'forcerange="-{joint.properties["forcerange"]} {joint.properties["forcerange"]}" '
 
                 joint_limits = joint.properties.get("limits", joint.limits)
-                if joint_limits is not None and type == "position":
+                limits_are_set = joint.properties.get("limits", False) != False
+                if joint_limits and (type == "position" or limits_are_set):
                     actuator += f'ctrlrange="{joint_limits[0]} {joint_limits[1]}" '
 
                 actuator += "/>"
