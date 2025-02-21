@@ -19,6 +19,10 @@ class Config:
 
         # Output directory, making it if it doesn't exists
         self.output_directory: str = robot_path
+
+        if self.robot_name is None:
+            self.robot_name = os.path.dirname(os.path.abspath(self.output_directory)).split("/")[-1]
+
         try:
             os.makedirs(self.output_directory)
         except OSError:
@@ -93,7 +97,7 @@ class Config:
         """
 
         # Robot name
-        self.robot_name: str = self.get("robot_name", "onshape")
+        self.robot_name: str = self.get("robot_name", None, required=False)
         self.output_filename: str = self.get("output_filename", "robot")
 
         # Main settings

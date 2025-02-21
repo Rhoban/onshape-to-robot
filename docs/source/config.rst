@@ -152,10 +152,12 @@ Should be written as the following:
     Configuration=Long;RemovePart=true;Length=30mm
 
 
-``robot_name`` *(default: "onshape")*
+``robot_name`` *(default: "dirname")*
 ~~~~~~~~~~~~~
 
 Specifies the robot name. This value is typically present in the header of the exported files.
+
+If it is not specified, the directory name will be used.
 
 ``ignore_limits`` *(default: false)*
 ~~~~~~~~~~~~~~~~
