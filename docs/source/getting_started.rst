@@ -42,7 +42,7 @@ Then edit ``my-robot/config.json``, here is the minimum example:
 .. code-block:: json
 
     {
-        // Onshape URL ofthe assembly
+        // Onshape URL of the assembly
         "url": "https://cad.onshape.com/documents/11a7f59e37f711d732274fca/w/7807518dc67487ad405722c8/e/5233c6445c575366a6cc0d50",
         // Output format
         "output_format": "urdf"
