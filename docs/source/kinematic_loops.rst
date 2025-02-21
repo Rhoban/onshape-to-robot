@@ -50,8 +50,8 @@ For example, the above robot can be exported using the following ``config.json``
 .. code-block:: javascript
 
     {
-        // Document id, MuJoCo output
-        "document_id": "04b05c47de7576f35c0e99b3",
+        // Document URL, MuJoCo output
+        "url": "https://cad.onshape.com/documents/04b05c47de7576f35c0e99b3/w/68041f3f5c827a258b40039c/e/db543f501b01adf8144064e3",
         "output_format": "mujoco",
 
         // Disable the freejoint to fix the robot
