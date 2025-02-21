@@ -42,19 +42,15 @@ Then edit ``my-robot/config.json``, here is the minimum example:
 .. code-block:: json
 
     {
-        // Id of the Onshape document (see below)
-        "document_id": "document-id",
+        // Onshape URL ofthe assembly
+        "url": "https://cad.onshape.com/documents/11a7f59e37f711d732274fca/w/7807518dc67487ad405722c8/e/5233c6445c575366a6cc0d50",
         // Output format
         "output_format": "urdf"
     }
 
-The ``document-id`` is the token (below XXXXXXXXX) you can find in Onshape URL when editing your robot:
+.. note::
 
-.. code-block:: bash
-
-    https://cad.onshape.com/documents/XXXXXXXXX/w/YYYYYYYY/e/ZZZZZZZZ
-                                      ^^^^^^^^^
-                                This is the document id
+    The Onshape URL should be the one of your assembly. Be sure to be on the right tab when you copy it.
 
 Once this is done, run the following command:
 
@@ -78,8 +74,8 @@ Or (MuJoCo):
 
     onshape-to-robot-mujoco my-robot
 
-Head's up !
------------
+What's next ?
+-------------
 
 Before you can actually enjoy your export, you need to pay attention to the following:
 

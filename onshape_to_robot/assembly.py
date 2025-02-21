@@ -122,6 +122,13 @@ class Assembly:
         """
         Find the wanted assembly from the document
         """
+        if self.config.element_id:
+            print(
+                bright(f"* Using configuration element ID {self.config.element_id} ...")
+            )
+            self.element_id = self.config.element_id
+            return
+
         print(
             bright(
                 "\n* Retrieving elements in the document, searching for the assembly..."
@@ -134,8 +141,7 @@ class Assembly:
             "v" if self.version_id else "w",
         )
 
-        self.assembly_id = None
-        self.assembly_name = ""
+        self.element_id = None
         assemblies: dict = {}
         for element in elements:
             if element["type"] == "Assembly":
@@ -143,8 +149,7 @@ class Assembly:
 
         if self.config.assembly_name:
             if self.config.assembly_name in assemblies:
-                self.assembly_id = assemblies[self.config.assembly_name]
-                self.assembly_name = self.config.assembly_name
+                self.element_id = assemblies[self.config.assembly_name]
             else:
                 raise Exception(
                     f"ERROR: Unable to find required assembly {self.config.assembly_name} in this document"
@@ -153,8 +158,7 @@ class Assembly:
             if len(assemblies) == 0:
                 raise Exception("ERROR: No assembly found in this document\n")
             elif len(assemblies) == 1:
-                self.assembly_name = list(assemblies.keys())[0]
-                self.assembly_id = list(assemblies.values())[0]
+                self.element_id = list(assemblies.values())[0]
             else:
                 raise Exception(
                     f"ERROR: Multiple assemblies found, please specify the assembly name\n"
@@ -162,7 +166,7 @@ class Assembly:
                     + f"       Available assemblies: {', '.join(assemblies.keys())}"
                 )
 
-        if self.assembly_id == None:
+        if self.element_id == None:
             raise Exception(f"ERROR: Unable to find assembly in this document")
 
     def check_configuration(self):
@@ -175,7 +179,7 @@ class Assembly:
             elements = self.client.elements_configuration(
                 self.document_id,
                 self.version_id if self.version_id else self.workspace_id,
-                self.assembly_id,
+                self.element_id,
                 wmv=("v" if self.version_id else "w"),
             )
 
@@ -226,14 +230,14 @@ class Assembly:
         """
         print(
             bright(
-                f'* Retrieving assembly "{self.assembly_name}" with id {self.assembly_id}'
+                f'* Retrieving assembly with id {self.element_id}'
             )
         )
 
         self.assembly_data: dict = self.client.get_assembly(
             self.document_id,
             self.version_id if self.version_id else self.workspace_id,
-            self.assembly_id,
+            self.element_id,
             wmv=("v" if self.version_id else "w"),
             configuration=self.config.configuration,
         )
@@ -287,7 +291,7 @@ class Assembly:
         self.features = self.client.get_features(
             self.document_id,
             self.microversion_id,
-            self.assembly_id,
+            self.element_id,
             wmv="m",
             configuration=self.config.configuration,
         )
@@ -297,7 +301,7 @@ class Assembly:
             self.matevalues = self.client.matevalues(
                 self.document_id,
                 self.workspace_id,
-                self.assembly_id,
+                self.element_id,
                 configuration=self.config.configuration,
             )
         else:

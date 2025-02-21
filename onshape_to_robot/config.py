@@ -1,8 +1,7 @@
 from sys import exit
-import sys
+import re
 import os
 import commentjson as json
-import subprocess
 from .message import error, bright, info
 
 
@@ -61,13 +60,32 @@ class Config:
         return default
 
     def printable_version(self) -> str:
-        version = f"document_id: {self.document_id}"
-        if self.version_id:
-            version += f" / version_id: {self.version_id}"
-        elif self.workspace_id:
-            version += f" / workspace_id: {self.workspace_id}"
+        if self.url is not None:
+            return self.url
+        else:
+            version = f"document_id: {self.document_id}"
+            if self.version_id:
+                version += f" / version_id: {self.version_id}"
+            elif self.workspace_id:
+                version += f" / workspace_id: {self.workspace_id}"
 
-        return version
+            return version
+    
+    def parse_url(self):
+        pattern = "https://(.*)/(.*)/([wv])/(.*)/e/(.*)"
+        match = re.match(pattern, self.url)
+
+        if match is None:
+            raise Exception(f"Invalid URL: {self.url}")
+
+        match_groups = match.groups()
+        self.document_id = match_groups[1]
+        if match_groups[2] == "w":
+            self.workspace_id = match_groups[3]
+        elif match_groups[2] == "v":
+            self.version_id = match_groups[3]
+        self.element_id = match_groups[4]
+        
 
     def read_configuration(self):
         """
@@ -79,12 +97,20 @@ class Config:
         self.output_filename: str = self.get("output_filename", "robot")
 
         # Main settings
-        self.document_id: str = self.get("document_id")
+        self.document_id: str = self.get("document_id", required=False)
         self.version_id: str | None = self.get("version_id", required=False)
         self.workspace_id: str | None = self.get("workspace_id", required=False)
+        self.element_id: str | None = self.get("element_id", required=False)
 
         if self.version_id and self.workspace_id:
             raise Exception("You can't specify workspace_id and version_id")
+        
+        self.url: str = self.get("url", None)
+        if self.url is not None:
+            self.parse_url()
+
+        if self.url is None and self.document_id is None:
+            raise Exception("You need to specify either a url or a document_id")
 
         self.draw_frames: bool = self.get("draw_frames", False)
 

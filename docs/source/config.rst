@@ -22,19 +22,26 @@ Here is an example of complete ``config.json`` file, with details below:
     // config.json general options
     // for urdf or mujoco specific options, see documentation
     {
-        // The Onshape document id to parse, see "getting started" (required)
-        "document_id": "document-id",
+        // Onshape assembly URL
+        "url": "https://cad.onshape.com/documents/11a7f59e37f711d732274fca/w/7807518dc67487ad405722c8/e/5233c6445c575366a6cc0d50",
         // Output format: urdf or mujoco (required)
         "output_format": "urdf",
         // Output filename (default: "robot")
         // Extension (.urdf, .xml) will be added automatically
         "output_filename": "robot",
-        // Assembly name to use in the document (optional)
-        "assembly_name": "robot",
+
+        // If you don't use "url", you can alternatively specify the following
+        // The Onshape document id to parse, see "getting started" (optional)
+        "document_id": "document-id",
         // The document version id (optional)
         "version_id": "version-id",
         // The workspace id (optional) 
         "workspace_id": "workspace-id",
+        // Element id (optional)
+        "element_id": "element-id",
+        // Assembly name to use in the document (optional)
+        "assembly_name": "robot",
+
         // Onshape configuration to use (default: "default")
         "configuration": "Configuration=BigFoot;RodLength=50mm",
         // Robot name (default: "onshape")
@@ -75,20 +82,10 @@ Here is an example of complete ``config.json`` file, with details below:
     Since ``1.0.0``, all configuration entries are now snake case. For backward compatibility reasons, the old
     camel case entries are still supported. (for example, ``document_id`` and ``documentId`` are equivalent).
 
-``document_id`` *(required)*
-~~~~~~~~~~~~~~
+``url`` *(required)*
+~~~~~~~~~~~~~~~~
 
-**required**
-
-This is the onshape ID of the document to be imported. It can be found in the Onshape URL,
-just after ``document/``.
-
-.. code-block:: bash
-
-    https://cad.onshape.com/documents/XXXXXXXXX/w/YYYYYYYY/e/ZZZZZZZZ
-                                      ^^^^^^^^^
-                                This is the document id
-
+The Onshape URL of the assembly to be exported. Be sure you are on the correct tab when copying the URL.
 
 ``output_format`` *(required)*
 ~~~~~~~~~~~~~~~~
@@ -106,10 +103,22 @@ This can be used to specify the name of the assembly (in the Onshape document) t
 If this is not provided, ``onshape-to-robot`` will list the assemblies. If more than one assembly is found,
 an error will be raised.
 
+``document_id`` *(optional)*
+~~~~~~~~~~~~~~
+
+If you don't specify the URL, this is the onshape ID of the document to be imported. It can be found in the Onshape URL,
+just after ``document/``.
+
+.. code-block:: bash
+
+    https://cad.onshape.com/documents/XXXXXXXXX/w/YYYYYYYY/e/ZZZZZZZZ
+                                      ^^^^^^^^^
+                                This is the document id
+
 ``version_id`` *(optional)*
 ~~~~~~~~~~~~~
 
-This argument can be used to use a specific version of the document instead of the last one. The version ID
+If you don't specify the URL, this argument can be used to use a specific version of the document instead of the last one. The version ID
 can be found in URL, after the ``/v/`` part when selecting a specific version in the tree.
 
 If it is not specified, the workspace will be retrieved and the live version will be used.
@@ -117,9 +126,15 @@ If it is not specified, the workspace will be retrieved and the live version wil
 ``workspace_id`` *(optional)*
 ~~~~~~~~~~~~~~~
 
-This argument can be used to use a specific workspace of the document. This can be used for specific branches
+If you don't specify the URL, this argument can be used to use a specific workspace of the document. This can be used for specific branches
 ofr your robot without making a version.
 The workspace ID can be found in URL, after the ``/w/`` part when selecting a specific version in the tree.
+
+``element_id`` *(optional)*
+~~~~~~~~~~~~~~~
+
+If you don't specify the URL, this argument can be used to use a specific element of the document.
+The element ID can be found in URL, after the ``/e/`` part when selecting a specific version in the tree.
 
 ``configuration`` *(default: "default")*
 ~~~~~~~~~~~~~~~~~
