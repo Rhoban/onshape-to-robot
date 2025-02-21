@@ -33,6 +33,7 @@ to descriptions format like **URDF** or **MuJoCo**, so that you can use them for
    config
    exporter_urdf
    exporter_mujoco
+   exporter_sdf
    kinematic_loops
    processors
    cache

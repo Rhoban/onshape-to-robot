@@ -30,7 +30,6 @@ class ExporterSDF(Exporter):
         self.ext: str = "sdf"
         self.draw_collisions: bool = False
         self.no_dynamics: bool = False
-        self.package_name: str = ""
         self.additional_xml: str = ""
         self.collisions_no_mesh: bool = False
 
@@ -38,7 +37,6 @@ class ExporterSDF(Exporter):
             self.no_dynamics = config.no_dynamics
             self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
             self.draw_collisions: bool = config.get("draw_collisions", False)
-            self.package_name: str = config.get("package_name", "")
             additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
                 with open(
