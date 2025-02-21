@@ -7,6 +7,7 @@ from .message import error, info
 from .robot_builder import RobotBuilder
 from .processors import processors
 from .exporter_urdf import ExporterURDF
+from .exporter_sdf import ExporterSDF
 from .exporter_mujoco import ExporterMuJoCo
 
 
@@ -36,6 +37,8 @@ def main():
         # Building exporter beforehand, so that the configuration gets checked
         if config.output_format == "urdf":
             exporter = ExporterURDF(config)
+        elif config.output_format == "sdf":
+            exporter = ExporterSDF(config)
         elif config.output_format == "mujoco":
             exporter = ExporterMuJoCo(config)
         else:

@@ -1,18 +1,33 @@
 import numpy as np
 import os
+from .message import success
 from .robot import Robot, Link, Part, Joint
 from .config import Config
 from .shapes import Box, Cylinder, Sphere
 from .exporter import Exporter
 from .exporter_utils import xml_escape, rotation_matrix_to_rpy
 
+MODEL_CONFIG_XML = """
+<?xml version="1.0" ?>
+<model>
+    <name>%s</name>
+    <version>1.0</version>
+    <sdf version="1.7">%s</sdf>
+    <author>
+        <name></name>
+        <email></email>
+    </author>
+    <description></description>
+</model>
+"""
 
-class ExporterURDF(Exporter):
+
+class ExporterSDF(Exporter):
     def __init__(self, config: Config | None = None):
         super().__init__()
         self.config: Config = config
 
-        self.ext: str = "urdf"
+        self.ext: str = "sdf"
         self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.package_name: str = ""
@@ -40,17 +55,21 @@ class ExporterURDF(Exporter):
         self.append("<!-- Generated using onshape-to-robot -->")
         if self.config:
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
-        self.append(f'<robot name="{robot.name}">')
+        self.append('<sdf version="1.7">')
+        self.append(f'<model name="{xml_escape(robot.name)}">')
         self.add_link(robot, robot.get_base_link())
 
         if self.additional_xml:
             self.append(self.additional_xml)
 
-        self.append("</robot>")
+        self.append("</model>")
+        self.append("</sdf>")
 
         return self.xml
 
-    def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
+    def add_inertial(
+        self, mass: float, com: np.ndarray, inertia: np.ndarray, frame: str = ""
+    ):
         # Unless "no_dynamics" is set, we make sure that mass and inertia
         # are not zero
         if not self.no_dynamics:
@@ -61,16 +80,17 @@ class ExporterURDF(Exporter):
 
         self.append("<inertial>")
         self.append(
-            '<origin xyz="%g %g %g" rpy="0 0 0"/>'
+            '<pose relative_to="%s">%g %g %g 0 0 0</pose>'
             % (
+                frame,
                 com[0],
                 com[1],
                 com[2],
             )
         )
-        self.append('<mass value="%g" />' % mass)
+        self.append("<mass>%g</mass>" % mass)
         self.append(
-            '<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />'
+            "<inertia><ixx>%g</ixx><ixy>%g</ixy><ixz>%g</ixz><iyy>%g</iyy><iyz>%g</iyz><izz>%g</izz></inertia>"
             % (
                 inertia[0, 0],
                 inertia[0, 1],
@@ -82,118 +102,118 @@ class ExporterURDF(Exporter):
         )
         self.append("</inertial>")
 
-    def add_mesh(self, part: Part, node: str, T_world_link: np.ndarray):
+    def append_material(self, color: np.ndarray):
+        self.append(f"<material>")
+        self.append("<ambient>%g %g %g 1.0</ambient>" % (color[0], color[1], color[2]))
+        self.append("<diffuse>%g %g %g 1.0</diffuse>" % (color[0], color[1], color[2]))
+        self.append("<specular>0.1 0.1 0.1 1</specular>")
+        self.append("<emissive>0 0 0 0</emissive>")
+        self.append("</material>")
+
+    def add_mesh(self, link: Link, part: Part, node: str, T_world_link: np.ndarray):
         """
-        Add a mesh node (e.g. STL) to the URDF file
+        Add a mesh node (e.g. STL) to the SDF file
         """
-        self.append(f"<{node}>")
+        self.append(f'<{node} name="{part.name}_{node}_mesh">')
 
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
-        self.append(self.origin(T_link_part))
+        self.append(self.pose(T_link_part, relative_to=link.name))
 
         mesh_file = os.path.basename(part.mesh_file)
         if self.package_name:
             mesh_file = self.package_name + "/" + mesh_file
 
         self.append("<geometry>")
-        self.append(f'<mesh filename="package://{xml_escape(mesh_file)}" />')
+        self.append(
+            f"<mesh><uri>model://{self.config.robot_name}/{xml_escape(mesh_file)}</uri></mesh>"
+        )
         self.append("</geometry>")
 
         if node == "visual":
-            material_name = f"{part.name}_material"
-            self.append(f'<material name="{xml_escape(material_name)}">')
-            self.append(
-                '<color rgba="%g %g %g 1.0"/>'
-                % (part.color[0], part.color[1], part.color[2])
-            )
-            self.append("</material>")
+            self.append_material(part.color)
 
         self.append(f"</{node}>")
 
-    def add_shapes(self, part: Part, node: str, T_world_link: np.ndarray):
+    def add_shapes(self, link: Link, part: Part, node: str, T_world_link: np.ndarray):
         """
-        Add shapes (box, sphere and cylinder) nodes to the URDF.
+        Add shapes (box, sphere and cylinder) nodes to the SDF.
         """
+        shape_n = 1
         for shape in part.shapes:
-            self.append(f"<{node}>")
+            self.append(f'<{node} name="{part.name}_{node}_shapes_{shape_n}">')
+            shape_n += 1
 
             T_link_shape = (
                 np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
             )
-            self.append(self.origin(T_link_shape))
+            self.append(self.pose(T_link_shape, relative_to=link.name))
 
             self.append("<geometry>")
             if isinstance(shape, Box):
-                self.append('<box size="%g %g %g" />' % tuple(shape.size))
+                self.append("<box><size>%g %g %g</size></box>" % tuple(shape.size))
             elif isinstance(shape, Cylinder):
                 self.append(
-                    '<cylinder length="%g" radius="%g" />'
+                    "<cylinder><length>%g</length><radius>%g</radius></cylinder>"
                     % (shape.length, shape.radius)
                 )
             elif isinstance(shape, Sphere):
-                self.append('<sphere radius="%g" />' % shape.radius)
+                self.append("<sphere><radius>%g</radius></sphere>" % shape.radius)
             self.append("</geometry>")
 
             if node == "visual":
-                material_name = f"{part.name}_material"
-                self.append(f'<material name="{xml_escape(material_name)}">')
-                self.append(
-                    '<color rgba="%g %g %g 1.0"/>'
-                    % (part.color[0], part.color[1], part.color[2])
-                )
-                self.append("</material>")
+                self.append_material(part.color)
 
             self.append(f"</{node}>")
 
     def add_geometries(
-        self, part: Part, T_world_link: np.ndarray, node: str, what: str
+        self, link: Link, part: Part, T_world_link: np.ndarray, node: str, what: str
     ):
         """
         Add geometry nodes. "node" is the actual XML node produced, "what" is the logic used to produce it.
         Both can be "visual" or "collision"
         """
         if what == "collision" and part.shapes is not None:
-            self.add_shapes(part, node, T_world_link)
+            self.add_shapes(link, part, node, T_world_link)
         elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
-            self.add_mesh(part, node, T_world_link)
+            self.add_mesh(link, part, node, T_world_link)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
-        
+
         joint_type = joint.properties.get("type", joint.joint_type)
         self.append(f'<joint name="{joint.name}" type="{joint_type}">')
 
         T_link_joint = np.linalg.inv(T_world_link) @ joint.T_world_joint
-        self.append(self.origin(T_link_joint))
+        self.append(self.pose(T_link_joint, relative_to=joint.parent.name))
 
-        self.append(f'<parent link="{joint.parent.name}" />')
-        self.append(f'<child link="{joint.child.name}" />')
-        self.append('<axis xyz="%g %g %g"/>' % tuple(joint.z_axis))
+        self.append(f"<parent>{joint.parent.name}</parent>")
+        self.append(f"<child>{joint.child.name}</child>")
+        self.append("<axis>")
+        self.append("<xyz>%g %g %g</xyz>" % tuple(joint.z_axis))
 
-        limits = ""
+        self.append("<limit>")
         if "max_effort" in joint.properties:
-            limits += 'effort="%g" ' % joint.properties["max_effort"]
+            self.append(f"<effort>%g</effort>" % joint.properties["max_effort"])
         else:
-            limits += 'effort="10" '
+            self.append(f"<effort>10</effort>")
 
         if "max_velocity" in joint.properties:
-            limits += 'velocity="%g" ' % joint.properties["max_velocity"]
+            self.append(f"<velocity>%g</velocity>" % joint.properties["max_velocity"])
         else:
-            limits += 'velocity="10" '
+            self.append(f"<velocity>10</velocity>")
+        self.append("</limit>")
 
         joint_limits = joint.properties.get("limits", joint.limits)
-        if joint_limits is not None:
-            limits += 'lower="%g" upper="%g" ' % (joint_limits[0], joint_limits[1])
-        elif joint_type == "revolute":
-            limits += f'lower="{-np.pi}" upper="{np.pi}" '
-        elif joint_type == "prismatic":
-            limits += 'lower="-1" upper="1" '
+        if joint_limits is None:
+            if joint_type == "revolute":
+                joint_limits = [-np.pi, np.pi]
+            if joint_type == "prismatic":
+                joint_limits = [-1, 1]
 
-        if limits:
-            self.append(f"<limit {limits}/>")
+        self.append(f"<lower>{joint_limits[0]}</lower>")
+        self.append(f"<upper>{joint_limits[1]}</upper>")
+        self.append("</axis>")
 
-        if "friction" in joint.properties:
-            self.append(f'<joint_properties friction="{joint.properties}"/>')
         self.append("</joint>")
 
     def add_frame(
@@ -206,50 +226,41 @@ class ExporterURDF(Exporter):
         self.append(f"<!-- Frame {frame} (dummy link + fixed joint) -->")
         T_link_frame = np.linalg.inv(T_world_link) @ T_world_frame
 
-        # Adding a dummy link to the assembly
-        self.append(f'<link name="{frame}">')
-        self.append(self.origin(np.eye(4)))
+        self.append(f'<frame name="{frame}">')
+        self.append(self.pose(T_link_frame, relative_to=link.name))
+        self.append("</frame>")
 
-        self.append("<inertial>")
-        self.append('<origin xyz="0 0 0" rpy="0 0 0" />')
-        if self.no_dynamics:
-            self.append('<mass value="0" />')
-        else:
-            self.append('<mass value="1e-9" />')
-        self.append('<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />')
-        self.append("</inertial>")
-
-        self.append("</link>")
-
-        # Attaching this dummy link to the parent frame using a fixed joint
-        self.append(f'<joint name="{frame}_frame" type="fixed">')
-        self.append(self.origin(T_link_frame))
-        self.append(f'<parent link="{link.name}" />')
-        self.append(f'<child link="{frame}" />')
-        self.append('<axis xyz="0 0 0"/>')
-        self.append("</joint>")
-
-    def add_link(self, robot: Robot, link: Link, T_world_link: np.ndarray = np.eye(4)):
+    def add_link(self, robot: Robot, link: Link, joint: Joint = None):
         """
-        Adds a link recursively to the URDF file
+        Adds a link recursively to the SDF file
         """
         self.append(f"<!-- Link {link.name} -->")
         self.append(f'<link name="{link.name}">')
 
+        T_world_link = np.eye(4)
+        if joint is not None:
+            T_world_link = joint.T_world_joint
+
         # Adding inertial properties
         mass, com, inertia = link.get_dynamics(T_world_link)
-        self.add_inertial(mass, com, inertia)
+        self.add_inertial(mass, com, inertia, link.name)
+
+        relative_to = ""
+        if joint is not None:
+            relative_to = joint.name
+        self.append(self.pose(np.eye(4), relative_to=relative_to))
 
         # Adding geometry objects
         for part in link.parts:
             self.append(f"<!-- Part {part.name} -->")
             self.add_geometries(
+                link,
                 part,
                 T_world_link,
                 "visual",
                 "collision" if self.draw_collisions else "visual",
             )
-            self.add_geometries(part, T_world_link, "collision", "collision")
+            self.add_geometries(link, part, T_world_link, "collision", "collision")
 
         self.append("</link>")
 
@@ -259,13 +270,27 @@ class ExporterURDF(Exporter):
 
         # Adding joints and children links
         for joint in robot.get_link_joints(link):
-            self.add_link(robot, joint.child, joint.T_world_joint)
+            self.add_link(robot, joint.child, joint)
             self.add_joint(joint, T_world_link)
 
-    def origin(self, matrix: np.ndarray):
+    def pose(self, matrix: np.ndarray, relative_to: str = ""):
         """
-        Transforms a transformation matrix into a URDF origin tag
+        Transforms a transformation matrix into a SDF pose tag
         """
-        urdf = '<origin xyz="%g %g %g" rpy="%g %g %g" />'
+        relative = ""
+        if relative_to:
+            relative = f' relative_to="{relative_to}"'
 
-        return urdf % (*matrix[:3, 3], *rotation_matrix_to_rpy(matrix))
+        sdf = "<pose%s>%g %g %g %g %g %g</pose>"
+
+        return sdf % (relative, *matrix[:3, 3], *rotation_matrix_to_rpy(matrix))
+
+    def write_xml(self, robot: Robot, filename: str) -> str:
+        model_config = MODEL_CONFIG_XML % (robot.name, os.path.basename(filename))
+
+        super().write_xml(robot, filename)
+
+        dirname = os.path.dirname(filename)
+        with open(dirname + "/model.config", "w") as file:
+            file.write(model_config)
+            print(success(f"* Writing model.config"))
