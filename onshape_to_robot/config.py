@@ -109,7 +109,7 @@ class Config:
         if self.version_id and self.workspace_id:
             raise Exception("You can't specify workspace_id and version_id")
         
-        self.url: str = self.get("url", None)
+        self.url: str = self.get("url", None, required=False)
         if self.url is not None:
             self.parse_url()
 
