@@ -51,15 +51,17 @@ class ExporterMuJoCo(Exporter):
             self.append(self.additional_xml)
 
         # Boilerplate
+        self.default_class = robot.name
         self.append("<default>")
+        self.append(f'<default class="{self.default_class}">')
         self.append('<joint frictionloss="0.1" armature="0.005"/>')
         self.append('<position kp="50" kv="5"/>')
-        self.append('<velocity kv="5"/>')
         self.append('<default class="visual">')
         self.append('<geom type="mesh" contype="0" conaffinity="0" group="2"/>')
         self.append("</default>")
         self.append('<default class="collision">')
         self.append('<geom group="3"/>')
+        self.append("</default>")
         self.append("</default>")
         self.append("</default>")
 
@@ -96,7 +98,7 @@ class ExporterMuJoCo(Exporter):
 
             if joint.properties.get("actuated", True):
                 type = joint.properties.get("type", "position")
-                actuator: str = f'<{type} name="{joint.name}" joint="{joint.name}" '
+                actuator: str = f'<{type} class="{self.default_class}" name="{joint.name}" joint="{joint.name}" '
 
                 for key in "class", "kp", "kd", "ki":
                     if key in joint.properties:
@@ -277,9 +279,12 @@ class ExporterMuJoCo(Exporter):
         else:
             T_world_link = parent_joint.T_world_joint
 
+        childclass = ""
+        if parent_joint is None:
+            childclass = f'childclass="{self.default_class}" '
         self.append(f"<!-- Link {link.name} -->")
         T_parent_link = np.linalg.inv(T_world_parent) @ T_world_link
-        self.append(f'<body name="{link.name}" {self.pos_quat(T_parent_link)} >')
+        self.append(f'<body name="{link.name}" {self.pos_quat(T_parent_link)} {childclass}>')
 
         if parent_joint is None:
             if self.freejoint:
