@@ -18,15 +18,33 @@ Setting up your API key
 You will need to obtain API key and secret from the
 `Onshape developer portal <https://dev-portal.onshape.com/keys>`_
 
-We recommend you to store your API key and secret in environment variables, you can add something
-like this in your ``.bashrc``:
+API key must be set as environment variables.
+
+Using `.bashrc`
+~~~~~~~~~~~~~~~
+
+You can add something like this in your ``.bashrc``:
 
 .. code-block:: bash
 
+    # .bashrc
     # Obtained at https://dev-portal.onshape.com/keys
     export ONSHAPE_API=https://cad.onshape.com
     export ONSHAPE_ACCESS_KEY=Your_Access_Key
     export ONSHAPE_SECRET_KEY=Your_Secret_Key
+
+Using `.env` file
+~~~~~~~~~~~~~~~~~
+
+Alternatively, you can also create a ``.env`` file in the root of your project:
+
+.. code-block:: bash
+
+    # .env
+    # Obtained at https://dev-portal.onshape.com/keys
+    ONSHAPE_API=https://cad.onshape.com
+    ONSHAPE_ACCESS_KEY=Your_Access_Key
+    ONSHAPE_SECRET_KEY=Your_Secret_Key
 
 Setting up your export
 ----------------------

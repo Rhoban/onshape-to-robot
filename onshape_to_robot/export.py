@@ -1,6 +1,7 @@
 import os
 import sys
 import pickle
+from dotenv import load_dotenv, find_dotenv
 from .config import Config
 from .message import error, info
 from .robot_builder import RobotBuilder
@@ -13,6 +14,7 @@ def main():
     """
     This is the entry point of the export script, i.e the "onshape-to-robot" command.
     """
+    load_dotenv(find_dotenv(usecwd=True))
 
     try:
         # Retrieving robot path

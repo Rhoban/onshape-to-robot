@@ -8,3 +8,4 @@ requests
 sphinx
 sphinx-rtd-theme
 transforms3d
+python-dotenv

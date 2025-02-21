@@ -3,10 +3,13 @@ import math
 import commentjson as json
 import os
 import sys, os
+from dotenv import load_dotenv, find_dotenv
 from colorama import Fore, Back, Style
 
 
 def main():
+    load_dotenv(find_dotenv(usecwd=True))
+
     if len(sys.argv) < 2:
         print("Usage: onshape-to-robot-pure-shape {STL file} [prefix=PureShapes]")
     else:

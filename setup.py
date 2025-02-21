@@ -36,6 +36,7 @@ setuptools.setup(
         "colorama>=0.4.6",
         "numpy-stl",
         "transforms3d",
+        "python-dotenv"
     ],
     include_package_data=True,
     package_data={"": ["bullet/*", "assets/*", "README.md"]},
