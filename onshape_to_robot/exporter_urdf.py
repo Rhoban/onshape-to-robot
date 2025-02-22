@@ -59,6 +59,7 @@ class ExporterURDF(Exporter):
             inertia[1, 1] = max(1e-9, inertia[1, 1])
             inertia[2, 2] = max(1e-9, inertia[2, 2])
         if fixed:
+            # To mark an object as fixed in the world, sets its dynamics to zero
             mass = 0
             com = np.zeros(3)
             inertia = np.zeros((3, 3))
