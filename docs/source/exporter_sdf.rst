@@ -22,6 +22,13 @@ Here is an example of complete ``config.json`` file, with details below:
         // General import options (see config.json documentation)
         // ...
 
+        // Whether the collisions should be used in visual as well (default: false)
+        "draw_collisions": true,
+        // Use only pure shapes (when available) for collisions
+        "collisions_no_mesh": true,
+        // Additional XML file to be included in the URDF (default: "")
+        "additional_xml": "my_custom_file.xml",
+
         // Override joint properties (default: {})
         "joint_properties": {
             // Default properties for all joints
@@ -41,13 +48,6 @@ Here is an example of complete ``config.json`` file, with details below:
                 "type": "continuous"
             }
         },
-
-        // Whether the collisions should be used in visual as well (default: false)
-        "draw_collisions": true,
-        // Use only pure shapes (when available) for collisions
-        "collisions_no_mesh": true,
-        // Additional XML file to be included in the URDF (default: "")
-        "additional_xml": "my_custom_file.xml",
     }
 
 ``joint_properties`` *(default: {})*
