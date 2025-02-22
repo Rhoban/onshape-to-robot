@@ -36,8 +36,6 @@ Here is an example of complete ``config.json`` file, with details below:
         "draw_collisions": true,
         // Use only pure shapes (when available) for collisions
         "collisions_no_mesh": true,
-        // Whether to add a free joint to the root link (default: true)
-        "freejoint": false,
         // Additional XML file to be included in the URDF (default: "")
         "additional_xml": "my_custom_file.xml",
 
@@ -94,11 +92,6 @@ If this flag is set to ``true``, the same items that are used for collisions wil
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If this flag is set to ``true``, only pure shapes will be used for collisions, and not the mesh. This is useful for performance reasons.
-
-``freejoint`` *(default: true)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If this flag is set to ``false``, a free joint will not be added to the root link. This will result in a fixed robot.
 
 ``additional_xml`` *(default: "")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

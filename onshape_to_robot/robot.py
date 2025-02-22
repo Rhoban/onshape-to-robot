@@ -37,6 +37,7 @@ class Link:
         self.name = name
         self.parts: list[Part] = []
         self.frames: dict[str, np.ndarray] = {}
+        self.fixed: bool = False
 
     def get_dynamics(self, T_world_frame: np.ndarray = np.eye(4)):
         """

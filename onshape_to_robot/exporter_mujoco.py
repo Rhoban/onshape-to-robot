@@ -14,7 +14,6 @@ class ExporterMuJoCo(Exporter):
         super().__init__()
         self.config: Config = config
 
-        self.freejoint: bool = True
         self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.additional_xml: str = ""
@@ -25,7 +24,6 @@ class ExporterMuJoCo(Exporter):
         if config is not None:
             self.no_dynamics = config.no_dynamics
             self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
-            self.freejoint = config.get("freejoint", True)
             self.draw_collisions: bool = config.get("draw_collisions", False)
             additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
@@ -287,7 +285,7 @@ class ExporterMuJoCo(Exporter):
         self.append(f'<body name="{link.name}" {self.pos_quat(T_parent_link)} {childclass}>')
 
         if parent_joint is None:
-            if self.freejoint:
+            if not link.fixed:
                 self.append('<freejoint name="root" />')
         else:
             self.add_joint(parent_joint)

@@ -285,10 +285,13 @@ class RobotBuilder:
             link_name = self.unique_name(instance, "link")
 
         # Adding all the parts in the current link
-        self.robot.links.append(Link(link_name))
+        link = Link(link_name)
+        self.robot.links.append(link)
         for occurrence in self.assembly.body_occurrences(body_id):
             if occurrence["instance"]["type"] == "Part":
                 self.add_part(occurrence)
+            if occurrence["fixed"]:
+                link.fixed = True
 
         # Adding frames to the link
         for frame in self.assembly.frames:

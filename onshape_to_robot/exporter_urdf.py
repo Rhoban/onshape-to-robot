@@ -50,7 +50,7 @@ class ExporterURDF(Exporter):
 
         return self.xml
 
-    def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
+    def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray, fixed: str = False):
         # Unless "no_dynamics" is set, we make sure that mass and inertia
         # are not zero
         if not self.no_dynamics:
@@ -58,6 +58,10 @@ class ExporterURDF(Exporter):
             inertia[0, 0] = max(1e-9, inertia[0, 0])
             inertia[1, 1] = max(1e-9, inertia[1, 1])
             inertia[2, 2] = max(1e-9, inertia[2, 2])
+        if fixed:
+            mass = 0
+            com = np.zeros(3)
+            inertia = np.zeros((3, 3))
 
         self.append("<inertial>")
         self.append(
@@ -238,7 +242,7 @@ class ExporterURDF(Exporter):
 
         # Adding inertial properties
         mass, com, inertia = link.get_dynamics(T_world_link)
-        self.add_inertial(mass, com, inertia)
+        self.add_inertial(mass, com, inertia, link.fixed)
 
         # Adding geometry objects
         for part in link.parts:

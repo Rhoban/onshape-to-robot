@@ -260,6 +260,12 @@ class ExporterSDF(Exporter):
 
         self.append("</link>")
 
+        if link.fixed:
+            self.append(f'<joint name="{link.name}_fixed_world" type="fixed">')
+            self.append(f"<parent>world</parent>")
+            self.append(f"<child>{link.name}</child>")
+            self.append("</joint>")
+
         # Adding frames attached to current link
         for frame, T_world_frame in link.frames.items():
             self.add_frame(link, frame, T_world_link, T_world_frame)
