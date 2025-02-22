@@ -2,6 +2,7 @@ import numpy as np
 import os
 import hashlib
 import json
+import fnmatch
 from .message import warning, info, success, error, dim, bright
 from .assembly import Assembly, INSTANCE_ROOT
 from .config import Config
@@ -24,9 +25,15 @@ class RobotBuilder:
         Checks if a given part should be ignored by config
         """
         if self.config.whitelist is None:
-            return name in self.config.ignore
+            for entry in self.config.ignore:
+                if fnmatch.fnmatch(name, entry):
+                    return True
+            return False
         else:
-            return name not in self.config.whitelist
+            for entry in self.config.whitelist:
+                if fnmatch.fnmatch(name, entry):
+                    return False
+            return True
 
     def slugify(self, value: str) -> str:
         """
@@ -95,7 +102,7 @@ class RobotBuilder:
 
             if type not in self.unique_names:
                 self.unique_names[type] = {}
-            
+
             if name in self.unique_names[type]:
                 self.unique_names[type][name] += 1
                 name = f"{name}_{self.unique_names[type][name]}"
