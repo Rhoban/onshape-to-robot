@@ -55,7 +55,9 @@ class ExporterSDF(Exporter):
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
         self.append('<sdf version="1.7">')
         self.append(f'<model name="{xml_escape(robot.name)}">')
-        self.add_link(robot, robot.get_base_link())
+
+        for base_link in robot.base_links:
+            self.add_link(robot, base_link)
 
         if self.additional_xml:
             self.append(self.additional_xml)

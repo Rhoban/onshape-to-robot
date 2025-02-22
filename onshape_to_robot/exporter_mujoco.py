@@ -65,7 +65,8 @@ class ExporterMuJoCo(Exporter):
 
         # Adding robot links
         self.append("<worldbody>")
-        self.add_link(robot, robot.get_base_link())
+        for base_link in robot.base_links:
+            self.add_link(robot, base_link)
         self.append("</worldbody>")
 
         # Asset (mesh & materials)

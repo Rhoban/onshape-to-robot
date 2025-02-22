@@ -6,7 +6,6 @@ from .onshape_api.client import Client
 from .robot import Joint
 
 INSTANCE_IGNORE = -1
-INSTANCE_ROOT = 0
 
 
 class Frame:
@@ -72,7 +71,7 @@ class Assembly:
         # All (raw) data from assembly
         self.assembly_data: dict = {}
         # Map a (top-level) instance id to a body id
-        self.current_body_id: int = INSTANCE_ROOT
+        self.current_body_id: int = 0
         self.instance_body: dict[str, int] = {}
         # Frames object
         self.frames: list[Frame] = []
@@ -86,6 +85,8 @@ class Assembly:
         self.configuration_parameters: dict = {}
         # Dictionnary mapping items to their children in the tree
         self.tree_children: dict = {}
+        # Root nodes
+        self.root_nodes: list = []
         # Overriden link names
         self.link_names: dict[int, str] = {}
 
@@ -97,7 +98,7 @@ class Assembly:
         self.load_features()
         self.load_configuration()
         self.process_mates()
-        self.build_tree()
+        self.build_trees()
 
     def ensure_workspace_or_version(self):
         """
@@ -538,13 +539,7 @@ class Assembly:
         # Checking that all intances are assigned to a body
         for instance in self.assembly_data["rootAssembly"]["instances"]:
             if instance["id"] not in self.instance_body:
-                print(
-                    warning(
-                        f"WARNING: Item {instance['name']} is not connected to the tree, connecting to base\n"
-                        + '         (consider adding a "fix_..." mate to connect it)'
-                    )
-                )
-                self.instance_body[instance["id"]] = INSTANCE_ROOT
+                self.make_body(instance["id"])
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
@@ -557,18 +552,30 @@ class Assembly:
 
         print(success(f"* Found total {len(self.dofs)} degrees of freedom\n"))
 
-    def build_tree(self):
+    def build_trees(self):
         """
         Perform checks on the produced tree
         """
 
+        self.body_in_tree = []
+        for body_id in self.instance_body.values():
+            if body_id != INSTANCE_IGNORE and body_id not in self.body_in_tree:
+                self.build_tree(body_id)
+
+    def build_tree(self, root_node: int):
+        """
+        Building a tree starting a root_node
+        """
+
+        # Append the root node
+        self.root_nodes.append(root_node)
+
         # Checking that the graph is actually a tree (no loop)
-        exploring = [INSTANCE_ROOT]
-        explored = []
+        exploring = [root_node]
         dofs = self.dofs.copy()
         while len(exploring) > 0:
             current = exploring.pop()
-            explored.append(current)
+            self.body_in_tree.append(current)
 
             children = []
             dofs_to_remove = []
@@ -584,22 +591,12 @@ class Assembly:
 
             self.tree_children[current] = children
             for child in children:
-                if child in explored:
+                if child in self.body_in_tree:
                     raise Exception(
                         "The DOF graph is not a tree, check for loops in your DOFs"
                     )
                 elif child not in exploring:
                     exploring.append(child)
-
-        # Check that every body is part of the tree
-        for instance, body_id in self.instance_body.items():
-            if body_id != INSTANCE_IGNORE and body_id not in explored:
-                print(
-                    warning(
-                        f"WARNING: the DOF graph is not fully connected, some parts might be missing"
-                    )
-                )
-                break
 
     def feature_mating_two_occurrences(self):
         """

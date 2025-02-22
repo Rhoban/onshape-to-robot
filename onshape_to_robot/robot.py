@@ -113,11 +113,9 @@ class Robot:
     def __init__(self, name: str):
         self.name: str = name
         self.links: list[Link] = []
+        self.base_links: list[Link] = []
         self.joints: list[Joint] = []
         self.closures: list = []
-
-    def get_base_link(self) -> Link:
-        return self.links[0]
 
     def get_link(self, name: str):
         for link in self.links:

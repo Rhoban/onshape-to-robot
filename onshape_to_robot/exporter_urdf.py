@@ -1,5 +1,6 @@
 import numpy as np
 import os
+from .message import warning
 from .robot import Robot, Link, Part, Joint
 from .config import Config
 from .shapes import Box, Cylinder, Sphere
@@ -41,7 +42,17 @@ class ExporterURDF(Exporter):
         if self.config:
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
         self.append(f'<robot name="{robot.name}">')
-        self.add_link(robot, robot.get_base_link())
+
+        if len(robot.base_links) > 1:
+            print(
+                warning(
+                    "WARNING: Multiple base links detected, which is not supported by URDF."
+                )
+            )
+            print(warning("Only the first base link will be considered."))
+
+        if len(robot.base_links) > 0:
+            self.add_link(robot, robot.base_links[0])
 
         if self.additional_xml:
             self.append(self.additional_xml)
@@ -50,7 +61,9 @@ class ExporterURDF(Exporter):
 
         return self.xml
 
-    def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray, fixed: str = False):
+    def add_inertial(
+        self, mass: float, com: np.ndarray, inertia: np.ndarray, fixed: str = False
+    ):
         # Unless "no_dynamics" is set, we make sure that mass and inertia
         # are not zero
         if not self.no_dynamics:
@@ -164,7 +177,7 @@ class ExporterURDF(Exporter):
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
-        
+
         joint_type = joint.properties.get("type", joint.joint_type)
         self.append(f'<joint name="{joint.name}" type="{joint_type}">')
 

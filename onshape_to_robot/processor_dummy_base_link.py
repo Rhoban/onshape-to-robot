@@ -18,10 +18,19 @@ class ProcessorDummyBaseLink(Processor):
 
     def process(self, robot: Robot):
         if self.add_dummy_base_link:
-            base_link = robot.get_base_link()
-            new_base = Link("base_link")
+            new_base_link = Link("base_link")
+            new_base_link.fixed = True
+            robot.links.append(new_base_link)
 
-            robot.links = [new_base] + robot.links
-            robot.joints.append(
-                Joint("base_link_to_base", "fixed", new_base, base_link, np.eye(4))
-            )
+            for base_link in robot.base_links:
+                robot.joints.append(
+                    Joint(
+                        "base_link_to_" + base_link.name,
+                        "fixed",
+                        new_base_link,
+                        base_link,
+                        np.eye(4),
+                    )
+                )
+
+            robot.base_links = [new_base_link]

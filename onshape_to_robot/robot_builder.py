@@ -4,7 +4,7 @@ import hashlib
 import json
 import fnmatch
 from .message import warning, info, success, error, dim, bright
-from .assembly import Assembly, INSTANCE_ROOT
+from .assembly import Assembly
 from .config import Config
 from .robot import Part, Joint, Link, Robot
 from .csg import process as csg_process
@@ -18,7 +18,9 @@ class RobotBuilder:
         self.robot.closures = self.assembly.closures
         self.unique_names = {}
 
-        self.build_robot(INSTANCE_ROOT)
+        for node in self.assembly.root_nodes:
+            link = self.build_robot(node)
+            self.robot.base_links.append(link)
 
     def part_is_ignored(self, name: str) -> bool:
         """
@@ -303,7 +305,7 @@ class RobotBuilder:
             child_body = dof.other_body(body_id)
             T_world_axis = dof.T_world_mate.copy()
 
-            child_link_name = self.build_robot(child_body)
+            child_link = self.build_robot(child_body)
 
             default_properties = self.config.joint_properties.get("default", {})
             properties = self.config.joint_properties.get(dof.name, {})
@@ -312,8 +314,8 @@ class RobotBuilder:
             joint = Joint(
                 dof.name,
                 dof.joint_type,
-                self.robot.get_link(link_name),
-                self.robot.get_link(child_link_name),
+                self.robot.get_link(link.name),
+                self.robot.get_link(child_link.name),
                 T_world_axis,
                 properties,
                 dof.limits,
@@ -321,4 +323,4 @@ class RobotBuilder:
             )
             self.robot.joints.append(joint)
 
-        return link_name
+        return link
