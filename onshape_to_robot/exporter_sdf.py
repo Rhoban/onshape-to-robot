@@ -118,8 +118,6 @@ class ExporterSDF(Exporter):
         self.append(self.pose(T_link_part, relative_to=link.name))
 
         mesh_file = os.path.basename(part.mesh_file)
-        if self.package_name:
-            mesh_file = self.package_name + "/" + mesh_file
 
         self.append("<geometry>")
         self.append(
