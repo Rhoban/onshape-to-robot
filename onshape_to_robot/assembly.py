@@ -99,6 +99,7 @@ class Assembly:
         self.load_configuration()
         self.process_mates()
         self.build_trees()
+        print("")
 
     def ensure_workspace_or_version(self):
         """
@@ -384,10 +385,6 @@ class Assembly:
         self.base_instance: str = top_level_instances[0]["id"]
         self.make_body(top_level_instances[0]["id"])
 
-        print(
-            info(f"* First instance {top_level_instances[0]['name']} will be the base")
-        )
-
         # We first search for DOFs
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("dof_"):
@@ -550,7 +547,7 @@ class Assembly:
                 body_id = self.instance_body[feature["featureData"]["occurrence"][0]]
                 self.link_names[body_id] = link_name
 
-        print(success(f"* Found total {len(self.dofs)} degrees of freedom\n"))
+        print(success(f"* Found total {len(self.dofs)} degrees of freedom"))
 
     def build_trees(self):
         """
@@ -561,6 +558,10 @@ class Assembly:
         for body_id in self.instance_body.values():
             if body_id != INSTANCE_IGNORE and body_id not in self.body_in_tree:
                 self.build_tree(body_id)
+
+        print(success(f"* Found {len(self.root_nodes)} root nodes:"))
+        for root_node in self.root_nodes:
+            print(success(f"  - {self.body_instance(root_node)['name']}"))
 
     def build_tree(self, root_node: int):
         """
