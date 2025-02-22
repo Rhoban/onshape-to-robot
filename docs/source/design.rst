@@ -83,3 +83,21 @@ Thus, they are always revolving around the z axis, or translating along the *z a
 .. image:: _static/img/zaxis.png
     :align: center
 
+Fixed robot
+-----------
+
+If you want to export a robot that is not fixed to the ground, use the "Fixed" feture of Onshape:
+
+.. image:: _static/img/fixed.png
+    :align: center 
+
+Robot with multiple base links
+------------------------------
+
+The robot can have multiple links. In that case, the first instance appearing on the list will be considered as a separate base link.
+
+.. note::
+
+    MuJoCo and SDF both supports multiple base links, while URDF doesn't.
+
+    In that case, you might consider using multiple URDF files, or :ref:`adding a dummy base link<processor_dummy_base_link>`. However, this will fix all the base links to the base link without freedom.

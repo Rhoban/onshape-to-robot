@@ -1,5 +1,5 @@
-Architecture and processors
-===========================
+Robot processors
+================
 
 Here is an overview of ``onshape-to-robot`` pipeline:
 

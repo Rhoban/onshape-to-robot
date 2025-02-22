@@ -1,3 +1,4 @@
+.. _processor_dummy_base_link:
 
 Adding dummy base link
 ======================
