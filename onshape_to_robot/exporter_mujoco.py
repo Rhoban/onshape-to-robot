@@ -287,7 +287,7 @@ class ExporterMuJoCo(Exporter):
 
         if parent_joint is None:
             if not link.fixed:
-                self.append('<freejoint name="root" />')
+                self.append(f'<freejoint name="{link.name}_freejoint" />')
         else:
             self.add_joint(parent_joint)
 

@@ -7,6 +7,9 @@ import mujoco.viewer
 def main():
     parser = argparse.ArgumentParser(prog="onshape-to-robot-mujoco")
     parser.add_argument("--sim", action="store_true")
+    parser.add_argument("--x", type=float, default=0)
+    parser.add_argument("--y", type=float, default=0)
+    parser.add_argument("--z", type=float, default=0.5)
     parser.add_argument("directory")
     args = parser.parse_args()
 
@@ -18,10 +21,8 @@ def main():
     data: mujoco.MjData = mujoco.MjData(model)
 
     # Check for root existence
-    try:
-        data.joint("root").qpos[2] = 1
-    except KeyError:
-        pass
+    if model.jnt_type[0] == mujoco.mjtJoint.mjJNT_FREE:
+        data.qpos[:3] = [args.x, args.y, args.z]
 
     viewer = mujoco.viewer.launch_passive(model, data)
     while viewer.is_running():
