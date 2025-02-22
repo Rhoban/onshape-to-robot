@@ -4,9 +4,12 @@ SDF
 Introduction
 -------------
 
-When using SDF, frames will be exported as ``<frame>`` items.
+The `SDF format <http://sdformat.org/>`_ is an extension of URDF extensively used in ROS.
 
-The links and joints always using ``relative_to`` attribute to specify the parent frame, keeping the same coordinates system as in URDF.
+
+* When using SDF, frames will be exported as ``<frame>`` items.
+* The links and joints always using ``relative_to`` attribute to specify the parent frame, keeping the same coordinates system as in URDF.
+* Additionally to the ``robot.sdf`` file, a ``model.config`` file will be produced, adding metadata useful for Gazebo.
 
 ``config.json`` entries (SDF)
 -----------------------------
