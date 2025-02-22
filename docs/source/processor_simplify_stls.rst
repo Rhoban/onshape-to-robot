@@ -33,11 +33,11 @@ For this processor to work, you need to install the Meshlab package:
     }
 
 ``simplify_stls`` *(default: false)*
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If set to ``true``, the STL files will be simplified.
 
 ``max_stl_size`` *(default: 3)*
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The maximum size of the STL files in MB. If the size of a file exceeds this limit, it will be simplified.

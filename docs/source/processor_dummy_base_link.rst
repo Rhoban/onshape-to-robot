@@ -22,6 +22,6 @@ If enabling this processor, a dummy base called ``base_link`` will be added in y
     }
 
 ``add_dummy_base_link`` *(default: false)*
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If set to ``true``, a dummy base link will be added to the robot. 

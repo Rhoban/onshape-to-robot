@@ -1,5 +1,5 @@
 OpenSCAD pure shapes approximation
-==============
+==================================
 
 Introduction
 ------------
@@ -55,12 +55,12 @@ Editing the ``.scad`` file with the same name as the ``.stl`` file. Pure shapes 
     }
 
 ``use_scads`` *(default: false)*
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If set to ``true``, the processor will use OpenSCAD pure shapes approximation (see above)
 
 ``pure_shape_dilatation`` *(default: 0.0)*
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A float that can be used to enlarge or shrink the pure shapes. This can be useful to avoid collisions between parts.
 

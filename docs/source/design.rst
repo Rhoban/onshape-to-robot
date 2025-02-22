@@ -82,4 +82,4 @@ Thus, they are always revolving around the z axis, or translating along the *z a
 
 .. image:: _static/img/zaxis.png
     :align: center
-    :
+

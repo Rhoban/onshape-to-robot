@@ -9,7 +9,7 @@ URDF is a very standard format that can be exported by ``onshape-to-robot``. Bel
 When using this exporter, frames will be added as a *dummy links* attached to their body using a fixed joint
 
 ``config.json`` entries (URDF)
------------------------
+------------------------------
 
 Here is an example of complete ``config.json`` file, with details below:
 

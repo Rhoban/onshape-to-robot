@@ -6,7 +6,7 @@ Handling kinematic loops
 Some robots have *kinematic loops*, meaning that the kinematic chain is not a tree but a graph.
 
 Introduction
--------
+------------
 
 Here is a 2D planar robot with kinematic loop, we assume the two first joints to be actuated and the others to
 be passive:
@@ -29,7 +29,7 @@ However, robot description are usually **trees**. To model this type of robot, w
 
 
 Specifying closing constraints
----------------------
+------------------------------
 
 While you could manually add :ref:`frames <custom-frames>`, ``onshape-to-robot`` provides a more convenient way to handle kinematic loops: **mate connectors**.
 
@@ -41,7 +41,7 @@ To achieve that, add a **mate** with the name ``closing_something``:
 
 
 Support for ``<equality>`` in MuJoCo
----------------------
+------------------------------------
 
 When using the :ref:`MuJoCo <exporter-mujoco>` format, ``onshape-to-robot`` will add ``<equality>`` constraints to enforce the kinematic loop.
 

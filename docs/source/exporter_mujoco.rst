@@ -1,7 +1,7 @@
 .. _exporter-mujoco:
 
 MuJoCo
-====
+======
 
 Introduction
 -------------
@@ -18,7 +18,7 @@ MuJoCo is a standard physics simulator, coming with an extensive description for
 * Additionally to the ``robot.xml`` file, a ``scene.xml`` file will be produced, adding floor and lighting useful for testing purpose.
 
 ``config.json`` entries (MuJoCo)
--------------------------------
+--------------------------------
 
 Here is an example of complete ``config.json`` file, with details below:
 
@@ -90,7 +90,7 @@ Possible values are:
 If this flag is set to ``true``, the same items that are used for collisions will be used for visuals as well. If you have pure shape approximations, this is useful for debugging purposes.
 
 ``collisions_no_mesh`` *(default: false)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If this flag is set to ``true``, only pure shapes will be used for collisions, and not the mesh. This is useful for performance reasons.
 
