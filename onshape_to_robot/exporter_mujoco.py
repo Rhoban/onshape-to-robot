@@ -55,7 +55,7 @@ class ExporterMuJoCo(Exporter):
         self.append("<default>")
         self.append(f'<default class="{self.default_class}">')
         self.append('<joint frictionloss="0.1" armature="0.005"/>')
-        self.append('<position kp="50" kv="5"/>')
+        self.append('<position kp="50" dampratio="1" />')
         self.append('<default class="visual">')
         self.append('<geom type="mesh" contype="0" conaffinity="0" group="2"/>')
         self.append("</default>")
@@ -100,7 +100,7 @@ class ExporterMuJoCo(Exporter):
                 type = joint.properties.get("type", "position")
                 actuator: str = f'<{type} class="{self.default_class}" name="{joint.name}" joint="{joint.name}" '
 
-                for key in "class", "kp", "kd", "ki":
+                for key in "class", "kp", "kv", "dampratio":
                     if key in joint.properties:
                         actuator += f'{key}="{joint.properties[key]}" '
 

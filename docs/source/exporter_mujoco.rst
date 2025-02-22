@@ -82,7 +82,7 @@ Possible values are:
 
 * The following are reflected as actuator (``<position ...>`` or other) attributes:
 
-    * ``kp``, ``kd`` and ``ki`` gains
+    * ``kp``, ``kv`` and ``dampratio`` gains
     * ``forcerange``
 
 ``draw_collisions`` *(default: false)*
