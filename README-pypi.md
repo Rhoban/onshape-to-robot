@@ -1,7 +1,7 @@
-# Onshape to robot (URDF/MuJoCo)
+# Onshape to robot (URDF, SDF, MuJoCo)
 
 This tool is based on the [OnShape API](https://dev-portal.onshape.com/) to retrieve
-informations from an assembly and build an URDF or MuJoCo model suitable for physics
+informations from an assembly and build a robot description (URDF, SDF, MuJoCo) suitable for physics
 simulation.
 
 * Check out the [official documentation](https://onshape-to-robot.readthedocs.io/)

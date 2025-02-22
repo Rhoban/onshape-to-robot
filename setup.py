@@ -5,10 +5,10 @@ with open("README-pypi.md", "r", encoding="utf-8") as stream:
 
 setuptools.setup(
     name="onshape_to_robot",
-    version="1.0.17",
+    version="1.1.0",
     author="Rhoban team",
     author_email="team@rhoban.com",
-    description="Converting OnShape assembly to robot definition (URDF or MuJoCo) through OnShape API ",
+    description="Converting OnShape assembly to robot definition (URDF, SDF, MuJoCo) through OnShape API ",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/rhoban/onshape-to-robot/",
@@ -28,7 +28,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    keywords="robot robotics cad design onshape bullet pybullet mujoco urdf gazebo ros model kinematics",
+    keywords="robot robotics cad design onshape bullet pybullet mujoco urdf sdf gazebo ros model kinematics",
     install_requires=[
         "numpy",
         "requests",
@@ -36,7 +36,7 @@ setuptools.setup(
         "colorama>=0.4.6",
         "numpy-stl",
         "transforms3d",
-        "python-dotenv"
+        "python-dotenv",
     ],
     include_package_data=True,
     package_data={"": ["bullet/*", "assets/*", "README.md"]},
