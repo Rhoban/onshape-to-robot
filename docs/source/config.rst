@@ -83,12 +83,12 @@ Here is an example of complete ``config.json`` file, with details below:
     camel case entries are still supported. (for example, ``document_id`` and ``documentId`` are equivalent).
 
 ``url`` *(required)*
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 The Onshape URL of the assembly to be exported. Be sure you are on the correct tab when copying the URL.
 
 ``output_format`` *(required)*
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **required**
 
@@ -96,7 +96,7 @@ This should be either ``urdf`` or ``mujoco`` to specify which output format is w
 created by the export.
 
 ``assembly_name`` *(optional)*
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This can be used to specify the name of the assembly (in the Onshape document) to be used for robot export.
 
@@ -104,7 +104,7 @@ If this is not provided, ``onshape-to-robot`` will list the assemblies. If more 
 an error will be raised.
 
 ``document_id`` *(optional)*
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you don't specify the URL, this is the onshape ID of the document to be imported. It can be found in the Onshape URL,
 just after ``document/``.
@@ -116,7 +116,7 @@ just after ``document/``.
                                 This is the document id
 
 ``version_id`` *(optional)*
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you don't specify the URL, this argument can be used to use a specific version of the document instead of the last one. The version ID
 can be found in URL, after the ``/v/`` part when selecting a specific version in the tree.
@@ -124,20 +124,20 @@ can be found in URL, after the ``/v/`` part when selecting a specific version in
 If it is not specified, the workspace will be retrieved and the live version will be used.
 
 ``workspace_id`` *(optional)*
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you don't specify the URL, this argument can be used to use a specific workspace of the document. This can be used for specific branches
 ofr your robot without making a version.
 The workspace ID can be found in URL, after the ``/w/`` part when selecting a specific version in the tree.
 
 ``element_id`` *(optional)*
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you don't specify the URL, this argument can be used to use a specific element of the document.
 The element ID can be found in URL, after the ``/e/`` part when selecting a specific version in the tree.
 
 ``configuration`` *(default: "default")*
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is the robot configuration string that will be passed to Onshape. Lists, booleans and quantities are allowed. For example:
 
@@ -153,19 +153,19 @@ Should be written as the following:
 
 
 ``robot_name`` *(default: "dirname")*
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Specifies the robot name. This value is typically present in the header of the exported files.
 
 If it is not specified, the directory name will be used.
 
 ``ignore_limits`` *(default: false)*
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If set to ``true``, the joint limits coming from Onshape will be ignored during export.
 
 ``ignore`` *(default: [])*
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This can be a list of parts that you want to be ignored during the export.
 
@@ -174,7 +174,7 @@ This can be a list of parts that you want to be ignored during the export.
     The dynamics of the part will not be ignored, but the visual and collision aspect will.
 
 ``whitelist`` *(default: None)*
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This can be used as the opposed of ``ignore``, to import only some items listed in the configuration
 (all items not listed in ``whitelist`` will be ignored if it is not ``None``)
@@ -190,26 +190,26 @@ This can be used as the opposed of ``ignore``, to import only some items listed 
 .. _draw-frames:
 
 ``draw_frames`` *(default: false)*
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When , the part that is used for positionning the frame is
 by default excluded from the output description (a dummy link is kept instead). Passing this option to ``true`` will
 keep it instead.
 
 ``no_dynamics`` *(default: false)*
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This flag can be set if there is no dynamics. In that case all masses and inertia will be set to 0.
 In pyBullet, this will result in static object (think of some environment for example).
 
 
 ``color`` *(default: None)*
-~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Can override the color for parts (should be an array: ``[r, g, b]`` with numbers from 0 to 1)
 
 ``post_import_commands`` *(default: [])*
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is an array of commands that will be executed after the import is done. It can be used to be sure that
 some processing scripts are run everytime you run onshape-to-robot.

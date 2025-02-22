@@ -53,7 +53,7 @@ Here is an example of complete ``config.json`` file, with details below:
     }
 
 ``joint_properties`` *(default: {})*
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Allow to specify the properties of the joints produced in the URDF output. The key should be joint names. The special ``default`` key will set default values for each joints.
 
@@ -66,22 +66,22 @@ Possible values are:
 * ``limits``: Override the joint limits, should be a list of two values (min, max)
 
 ``draw_collisions`` *(default: false)*
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If this flag is set to ``true``, the same items that are used for collisions will be used for visuals as well. If you have pure shape approximations, this is useful for debugging purposes.
 
 ``collisions_no_mesh`` *(default: false)*
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If this flag is set to ``true``, only pure shapes will be used for collisions, and not the mesh. This is useful for performance reasons.
 
 ``package_name`` *(default: "")*
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you are exporting a URDF for ROS, you can specify the package name here. This will be used in the ``<robot>`` tag.
 
 ``additional_xml`` *(default: "")*
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to include additional XML in the URDF, you can specify the path to the file here. This file will be included at the end of the URDF file.
 
