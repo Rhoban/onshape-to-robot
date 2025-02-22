@@ -535,7 +535,7 @@ class Assembly:
 
         # Checking that all intances are assigned to a body
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body:
+            if instance["id"] not in self.instance_body and not instance["suppressed"]:
                 self.make_body(instance["id"])
 
         # Search for mate connector named "link_..." to override link names
