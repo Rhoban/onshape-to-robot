@@ -172,6 +172,7 @@ This can be a list of parts that you want to be ignored during the export.
 .. note::
 
     The dynamics of the part will not be ignored, but the visual and collision aspect will.
+    You can use wildcard, like ``screw_*`` to ignore all parts starting with ``screw_``.
 
 ``whitelist`` *(default: None)*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -186,6 +187,7 @@ This can be used as the opposed of ``ignore``, to import only some items listed 
 .. note::
 
     The dynamics of the part will not be ignored, but the visual and collision aspect will.
+    You can use wildcard, like ``plate_*`` to import all parts starting with ``plate_``.
 
 .. _draw-frames:
 
