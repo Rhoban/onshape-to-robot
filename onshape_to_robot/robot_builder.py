@@ -155,17 +155,15 @@ class RobotBuilder:
             part_name_config = self.part_name(instance, True)
             stl_filename = part_name_config
             k = 1
-            has_conflict = False
             while stl_filename in self.stl_filenames.values():
-                if not has_conflict:
-                    has_conflict = True
-                    print(
-                        warning(
-                            f'WARNING: Parts with same name "{part_name_config}", incrementing STL name'
-                        )
-                    )
                 k += 1
-                stl_filename = part_name_config + f"_{k}"
+                stl_filename = part_name_config + f".{k}"
+            if k != 1:
+                print(
+                    warning(
+                        f'WARNING: Parts with same name "{part_name_config}", incrementing STL name to "{stl_filename}"'
+                    )
+                )
             self.stl_filenames[exact_instance] = stl_filename
 
         return self.stl_filenames[exact_instance]
