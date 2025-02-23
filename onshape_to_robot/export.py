@@ -63,7 +63,7 @@ def main():
 
         for command in config.post_import_commands:
             print(info(f"* Running command: {command}"))
-            os.sytem(command)
+            os.system(command)
 
     except Exception as e:
         print(error(f"ERROR: {e}"))
