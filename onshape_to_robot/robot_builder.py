@@ -17,6 +17,7 @@ class RobotBuilder:
         self.robot: Robot = Robot(config.robot_name)
         self.robot.closures = self.assembly.closures
         self.unique_names = {}
+        self.stl_filenames: dict = {}
 
         for node in self.assembly.root_nodes:
             link = self.build_robot(node)
@@ -74,7 +75,7 @@ class RobotBuilder:
 
         return configuration
 
-    def part_name(self, part: dict):
+    def part_name(self, part: dict, include_configuration: bool = False) -> str:
         """
         Retrieve the name from a part.
         i.e "Base link <1>" -> "base_link"
@@ -82,7 +83,10 @@ class RobotBuilder:
         name = part["name"]
         parts = name.split(" ")
         del parts[-1]
-        base_part_name = "_".join(parts).lower()
+        base_part_name = self.slugify("_".join(parts).lower())
+
+        if not include_configuration:
+            return base_part_name
 
         # Only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
         configuration = self.printable_configuration(part)
@@ -92,7 +96,7 @@ class RobotBuilder:
             else:
                 parts += ["_" + hashlib.md5(configuration.encode("utf-8")).hexdigest()]
 
-        return base_part_name, "_".join(parts).lower()
+        return self.slugify("_".join(parts).lower())
 
     def unique_name(self, part: dict, type: str):
         """
@@ -100,7 +104,7 @@ class RobotBuilder:
         In the case where multiple parts have the same name in OnShape, they will result in different names in the URDF
         """
         while True:
-            _, name = self.part_name(part)
+            name = self.part_name(part, include_configuration=True)
 
             if type not in self.unique_names:
                 self.unique_names[type] = {}
@@ -135,11 +139,43 @@ class RobotBuilder:
 
         return params
 
-    def get_stl(self, prefix: str, instance: dict) -> str:
+    def get_stl_filename(self, instance: dict) -> str:
+        """
+        Get a STL filename unique to the instance
+        """
+        exact_instance = (
+            instance["documentId"],
+            instance["documentMicroversion"],
+            instance["elementId"],
+            instance["configuration"],
+            instance["partId"],
+        )
+
+        if exact_instance not in self.stl_filenames:
+            part_name_config = self.part_name(instance, True)
+            stl_filename = part_name_config
+            k = 1
+            has_conflict = False
+            while stl_filename in self.stl_filenames.values():
+                if not has_conflict:
+                    has_conflict = True
+                    print(
+                        warning(
+                            f'WARNING: Parts with same name "{part_name_config}", incrementing STL name'
+                        )
+                    )
+                k += 1
+                stl_filename = part_name_config + f"_{k}"
+            self.stl_filenames[exact_instance] = stl_filename
+
+        return self.stl_filenames[exact_instance]
+
+    def get_stl(self, instance: dict) -> str:
         """
         Download and store STL file
         """
-        filename = self.slugify(prefix) + ".stl"
+        stl_filename = self.get_stl_filename(instance)
+        filename = stl_filename + ".stl"
 
         params = self.instance_request_params(instance)
         stl = self.assembly.client.part_studio_stl_m(
@@ -150,7 +186,7 @@ class RobotBuilder:
             stream.write(stl)
 
         # Storing metadata for imported instances in the .part file
-        stl_metadata = self.slugify(prefix) + ".part"
+        stl_metadata = stl_filename + ".part"
         with open(
             self.config.output_directory + "/" + stl_metadata, "w", encoding="utf-8"
         ) as stream:
@@ -185,7 +221,7 @@ class RobotBuilder:
 
         return color
 
-    def get_dynamics(self, instance: dict, part_name_config: str) -> tuple:
+    def get_dynamics(self, instance: dict) -> tuple:
         """
         Retrieve the dynamics (mass, com, inertia) of a given instance
         """
@@ -244,7 +280,7 @@ class RobotBuilder:
             print(warning(f"WARNING: Part '{instance['name']}' has no partId"))
             return
 
-        part_name, part_name_config = self.part_name(instance)
+        part_name = self.part_name(instance)
         extra = ""
         if instance["configuration"] != "default":
             extra = dim(
@@ -260,13 +296,13 @@ class RobotBuilder:
         if self.part_is_ignored(part_name):
             stl_file = None
         else:
-            stl_file = self.get_stl(part_name_config, instance)
+            stl_file = self.get_stl(instance)
 
         # Obtain metadatas about part to retrieve color
         color = self.get_color(instance)
 
         # Obtain the instance dynamics
-        mass, com, inertia = self.get_dynamics(instance, part_name_config)
+        mass, com, inertia = self.get_dynamics(instance)
 
         T_world_part = np.array(occurrence["transform"]).reshape(4, 4)
 
