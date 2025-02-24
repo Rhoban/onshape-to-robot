@@ -29,6 +29,8 @@ Here is an example of complete ``config.json`` file, with details below:
         // Output filename (default: "robot")
         // Extension (.urdf, .xml) will be added automatically
         "output_filename": "robot",
+        // Assets directory (default: "assets")
+        "assets_dir": "assets",
 
         // If you don't use "url", you can alternatively specify the following
         // The Onshape document id to parse, see "getting started" (optional)
@@ -94,6 +96,11 @@ The Onshape URL of the assembly to be exported. Be sure you are on the correct t
 
 This should be either ``urdf`` or ``mujoco`` to specify which output format is wanted for robot description
 created by the export.
+
+``assets_dir`` *(default: "assets")*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is the directory where the assets (like meshes) will be stored.
 
 ``assembly_name`` *(optional)*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

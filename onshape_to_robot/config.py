@@ -89,7 +89,9 @@ class Config:
         elif match_groups[2] == "v":
             self.version_id = match_groups[3]
         self.element_id = match_groups[4]
-        
+
+    def asset_path(self, asset_name: str) -> str:
+        return f"{self.output_directory}/{self.assets_directory}/{asset_name}"
 
     def read_configuration(self):
         """
@@ -99,6 +101,7 @@ class Config:
         # Robot name
         self.robot_name: str = self.get("robot_name", None, required=False)
         self.output_filename: str = self.get("output_filename", "robot")
+        self.assets_directory: str = self.get("assets_directory", "assets")
 
         # Main settings
         self.document_id: str = self.get("document_id", required=False)

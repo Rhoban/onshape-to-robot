@@ -172,6 +172,8 @@ class RobotBuilder:
         """
         Download and store STL file
         """
+        os.makedirs(self.config.asset_path(""), exist_ok=True)
+
         stl_filename = self.get_stl_filename(instance)
         filename = stl_filename + ".stl"
 
@@ -180,17 +182,17 @@ class RobotBuilder:
             **params,
             partid=instance["partId"],
         )
-        with open(self.config.output_directory + "/" + filename, "wb") as stream:
+        with open(self.config.asset_path(filename), "wb") as stream:
             stream.write(stl)
 
         # Storing metadata for imported instances in the .part file
         stl_metadata = stl_filename + ".part"
         with open(
-            self.config.output_directory + "/" + stl_metadata, "w", encoding="utf-8"
+            self.config.asset_path(stl_metadata), "w", encoding="utf-8"
         ) as stream:
             json.dump(instance, stream, indent=4, sort_keys=True)
 
-        return self.config.output_directory + "/" + filename
+        return self.config.asset_path(filename)
 
     def get_color(self, instance: dict) -> np.ndarray:
         """

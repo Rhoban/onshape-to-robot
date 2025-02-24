@@ -109,7 +109,7 @@ class ExporterURDF(Exporter):
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
         self.append(self.origin(T_link_part))
 
-        mesh_file = os.path.basename(part.mesh_file)
+        mesh_file = os.path.relpath(part.mesh_file, self.config.output_directory)
         if self.package_name:
             mesh_file = self.package_name + "/" + mesh_file
 

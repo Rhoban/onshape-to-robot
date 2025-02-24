@@ -42,7 +42,7 @@ class ExporterMuJoCo(Exporter):
         if self.config:
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
         self.append(f'<mujoco model="{robot.name}">')
-        self.append(f'<compiler angle="radian" meshdir="." autolimits="true" />')
+        self.append(f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />')
         self.append(f'<option noslip_iterations="1"></option>')
 
         if self.additional_xml:
@@ -156,8 +156,8 @@ class ExporterMuJoCo(Exporter):
         Add a mesh node (e.g. STL) to the URDF file
         """
         # Retrieving mesh file and material name
-        mesh_file = os.path.basename(part.mesh_file)
-        mesh_file_no_ext = ".".join(mesh_file.split(".")[:-1])
+        mesh_file = os.path.relpath(part.mesh_file, self.config.asset_path(""))
+        mesh_file_no_ext = ".".join(os.path.basename(mesh_file).split(".")[:-1])
         material_name = mesh_file_no_ext + "_material"
 
         # Relative frame

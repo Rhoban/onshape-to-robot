@@ -1,4 +1,5 @@
 import numpy as np
+import os
 from .config import Config
 from .robot import Robot, Link, Part
 from .processor import Processor
@@ -18,6 +19,7 @@ class ProcessorMergeParts(Processor):
 
     def process(self, robot: Robot):
         if self.merge_stls:
+            os.makedirs(self.config.asset_path("merged"), exist_ok=True)
             for link in robot.links:
                 self.merge_parts(link)
             for stl_file, mesh in self.meshes_to_write.items():
@@ -88,7 +90,7 @@ class ProcessorMergeParts(Processor):
                 else:
                     mesh = self.combine_meshes(mesh, part_mesh)
 
-        combined_stl_file = self.config.output_directory + "/" + link.name + ".stl"
+        combined_stl_file = self.config.asset_path("merged/" + "/" + link.name + ".stl")
         self.meshes_to_write[combined_stl_file] = mesh
 
         mass, com, inertia = link.get_dynamics(T_world_com)

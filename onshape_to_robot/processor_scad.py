@@ -45,6 +45,7 @@ class ProcessorScad(Processor):
 
     def process(self, robot: Robot):
         if self.use_scads:
+            print(info("+ Parsing OpenSCAD files..."))
             for link in robot.links:
                 for part in link.parts:
                     # Import the SCAD files pure shapes
