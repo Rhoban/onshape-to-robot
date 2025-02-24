@@ -21,7 +21,7 @@ def main():
     data: mujoco.MjData = mujoco.MjData(model)
 
     # Check for root existence
-    if model.jnt_type[0] == mujoco.mjtJoint.mjJNT_FREE:
+    if len(model.jnt_type) and model.jnt_type[0] == mujoco.mjtJoint.mjJNT_FREE:
         data.qpos[:3] = [args.x, args.y, args.z]
 
     viewer = mujoco.viewer.launch_passive(model, data)
