@@ -151,13 +151,13 @@ class ExporterMuJoCo(Exporter):
         inertial += " />"
         self.append(inertial)
 
-    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray):
+    def add_mesh_geom(self, part: Part, class_: str, T_world_link: np.ndarray, mesh_file: str):
         """
-        Add a mesh node (e.g. STL) to the URDF file
+        Add a mesh node (e.g. STL) to the MuJoCo file
         """
         # Retrieving mesh file and material name
-        mesh_file = os.path.basename(part.mesh_file)
-        mesh_file_no_ext = ".".join(mesh_file.split(".")[:-1])
+        mesh_file = os.path.relpath(mesh_file, self.config.output_directory)
+        mesh_file_no_ext = ".".join(os.path.basename(mesh_file).split(".")[:-1])
         material_name = mesh_file_no_ext + "_material"
 
         # Relative frame
@@ -176,6 +176,16 @@ class ExporterMuJoCo(Exporter):
         self.materials[material_name] = part.color
 
         self.append(geom)
+
+    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, what: str):
+        """
+        Adds meshes for the given node
+        """
+        if what == "collision" and part.collision_mesh_files is not None:
+            for mesh_file in part.collision_mesh_files:
+                self.add_mesh_geom(part, class_, T_world_link, mesh_file)
+        else:
+            self.add_mesh_geom(part, class_, T_world_link, part.mesh_file)
 
     def add_shapes(self, part: Part, class_: str, T_world_link: np.ndarray):
         """
@@ -217,7 +227,7 @@ class ExporterMuJoCo(Exporter):
         if what == "collision" and part.shapes is not None:
             self.add_shapes(part, class_, T_world_link)
         elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
-            self.add_mesh(part, class_, T_world_link)
+            self.add_mesh(part, class_, T_world_link, what)
 
     def add_joint(self, joint: Joint):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")

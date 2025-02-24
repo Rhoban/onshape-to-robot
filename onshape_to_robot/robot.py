@@ -26,6 +26,7 @@ class Part:
         self.inertia: np.ndarray = inertia
         self.color: tuple | None = color
         self.shapes: list[Shape] | None = shapes
+        self.collision_mesh_files: list[str] | None = None
 
 
 class Link:

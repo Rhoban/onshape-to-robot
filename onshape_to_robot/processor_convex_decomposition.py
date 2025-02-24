@@ -1,0 +1,95 @@
+import subprocess
+import hashlib
+import fnmatch
+import re
+import json
+import os
+from pathlib import Path
+from .message import bright, info, error
+from .processor import Processor
+from .config import Config
+from .robot import Robot, Part
+import numpy as np
+import coacd
+import trimesh
+import pickle
+
+
+class ProcessorConvexDecomposition(Processor):
+    """
+    Scad processor. This processor will parse OpenSCAD files to create pure shapes when available.
+
+    The code is a naive parser of the intermediate CSG file produced by OpenSCAD, gathering Box, Sphere and Cylinders.
+    """
+
+    def __init__(self, config: Config):
+        super().__init__(config)
+
+        # OpenSCAD pure shapes
+        self.convex_decomposition: bool = config.get("convex_decomposition", False)
+
+        self.convex_decomposition_ignore: bool = config.get("convex_decomposition_ignore", [])
+
+        self.output_directory = config.output_directory + "/convex_decomposition"
+
+        self.check_coacd()
+
+    def get_cache_path(self) -> Path:
+        """
+        Return the path to the user cache.
+        """
+        path = Path.home() / ".cache" / "onshape-to-robot-convex-decomposition"
+        path.mkdir(parents=True, exist_ok=True)
+        return path
+
+    def check_coacd(self):
+        if self.convex_decomposition:
+            print(bright("* Checking CoACD presence..."))
+            try:
+                import coacd
+                import trimesh
+            except ImportError:
+                print(bright("Can't import CoACD, disabling convex decomposition."))
+                print(info("TIP: consider installing CoACD:"))
+                print(info("pip install coacd trimesh"))
+                self.convex_decomposition = False
+
+    def process(self, robot: Robot):
+        if self.convex_decomposition:
+            os.makedirs(self.output_directory, exist_ok=True)
+            
+            for link in robot.links:
+                for part in link.parts:
+                    self.convex_decompose(part)
+
+    def convex_decompose(self, part: Part):
+        import coacd
+        import trimesh
+
+        if part.mesh_file:
+            # Retrieving file SHA1
+            sha1 = hashlib.sha1(open(part.mesh_file, "rb").read()).hexdigest()
+            cache_filename = f"{self.get_cache_path()}/{sha1}.pkl"
+
+            if os.path.exists(cache_filename):
+                print(info(f"* Loading cached CoACD decomposition cache for part {part.name}"))
+                with open(cache_filename, "rb") as f:
+                    meshes = pickle.load(f)
+            else:
+                mesh = trimesh.load(part.mesh_file, force="mesh")
+                mesh = coacd.Mesh(mesh.vertices, mesh.faces)
+                meshes = coacd.run_coacd(mesh, max_convex_hull=16)
+                with open(cache_filename, "wb") as f:
+                    pickle.dump(meshes, f)
+
+            part.collision_mesh_files = []
+            filename = f"{self.output_directory}/{part.name}_%05d.stl"
+            for k, mesh in enumerate(meshes):
+                mesh = trimesh.Trimesh(vertices=mesh[0], faces=mesh[1])    
+                mesh.export(filename % k)
+                part.collision_mesh_files.append(filename % k)
+
+            print(info(f"* Decomposed part {part.name} into {len(meshes)} convex shapes."))
+
+            
+            
