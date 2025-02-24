@@ -29,6 +29,13 @@ class ProcessorMergeParts(Processor):
         return mesh.Mesh.from_file(stl_file)
 
     def save_mesh(self, mesh: mesh.Mesh, stl_file: str):
+        # Tweaking STL header to avoid timestamp
+        # This ensures that same process will result in same STL file
+        def get_header(name):
+            header = "onshape-to-robot"
+            return header[:80].ljust(80, ' ')
+        
+        mesh.get_header = get_header
         mesh.save(stl_file, mode=Mode.BINARY)
 
     def transform_mesh(self, mesh: mesh.Mesh, matrix: np.ndarray):
