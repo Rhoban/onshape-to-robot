@@ -471,6 +471,11 @@ class Assembly:
             if data["name"].startswith("fix_"):
                 self.merge_bodies(occurrence_A, occurrence_B)
 
+        # Checking that all intances are assigned to a body
+        for instance in self.assembly_data["rootAssembly"]["instances"]:
+            if instance["id"] not in self.instance_body and not instance["suppressed"]:
+                self.make_body(instance["id"])
+
         # Processing frames / closing loops
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("closing_"):
@@ -532,11 +537,6 @@ class Assembly:
                     self.merge_bodies(parent, child)
                 else:
                     self.instance_body[child] = INSTANCE_IGNORE
-
-        # Checking that all intances are assigned to a body
-        for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body and not instance["suppressed"]:
-                self.make_body(instance["id"])
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
@@ -735,10 +735,17 @@ class Assembly:
                         if parameter["message"]["parameterId"] == "limitZMax":
                             maximum = self.read_parameter_value(parameter, name)
                     elif joint_type == Joint.BALL:
-                        if parameter["message"]["parameterId"] == "limitEulerConeAngleMax":
+                        if (
+                            parameter["message"]["parameterId"]
+                            == "limitEulerConeAngleMax"
+                        ):
                             maximum = self.read_parameter_value(parameter, name)
                     else:
-                        print(warning(f"WARNING: Can't read limits for a joint of type {joint_type}"))
+                        print(
+                            warning(
+                                f"WARNING: Can't read limits for a joint of type {joint_type}"
+                            )
+                        )
                         print(parameter)
         if enabled:
             offset = self.get_offset(name)
