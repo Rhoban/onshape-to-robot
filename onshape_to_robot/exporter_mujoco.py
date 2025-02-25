@@ -42,7 +42,9 @@ class ExporterMuJoCo(Exporter):
         if self.config:
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
         self.append(f'<mujoco model="{robot.name}">')
-        self.append(f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />')
+        self.append(
+            f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />'
+        )
         self.append(f'<option noslip_iterations="1"></option>')
 
         if self.additional_xml:
@@ -95,9 +97,14 @@ class ExporterMuJoCo(Exporter):
             if joint.joint_type == "fixed":
                 continue
 
-            if joint.properties.get("actuated", True):
+            if (
+                joint.properties.get("actuated", True)
+                and joint.joint_type != Joint.BALL
+            ):
                 type = joint.properties.get("type", "position")
-                actuator: str = f'<{type} class="{self.default_class}" name="{joint.name}" joint="{joint.name}" '
+                actuator: str = (
+                    f'<{type} class="{self.default_class}" name="{joint.name}" joint="{joint.name}" '
+                )
 
                 for key in "class", "kp", "kv", "dampratio":
                     if key in joint.properties:
@@ -231,6 +238,10 @@ class ExporterMuJoCo(Exporter):
             joint_xml += 'type="hinge" '
         elif joint.joint_type == Joint.PRISMATIC:
             joint_xml += 'type="slide" '
+        elif joint.joint_type == Joint.BALL:
+            joint_xml += 'type="ball" '
+        else:
+            print(warning(f"Unknown joint type: {joint.joint_type}"))
 
         if joint.limits is not None and joint.properties.get("range", True):
             joint_xml += f'range="{joint.limits[0]} {joint.limits[1]}" '
@@ -283,7 +294,9 @@ class ExporterMuJoCo(Exporter):
             childclass = f'childclass="{self.default_class}" '
         self.append(f"<!-- Link {link.name} -->")
         T_parent_link = np.linalg.inv(T_world_parent) @ T_world_link
-        self.append(f'<body name="{link.name}" {self.pos_quat(T_parent_link)} {childclass}>')
+        self.append(
+            f'<body name="{link.name}" {self.pos_quat(T_parent_link)} {childclass}>'
+        )
 
         if parent_joint is None:
             if not link.fixed:

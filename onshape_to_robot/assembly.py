@@ -230,11 +230,7 @@ class Assembly:
         """
         Retrieve all assembly data
         """
-        print(
-            bright(
-                f'* Retrieving assembly with id {self.element_id}'
-            )
-        )
+        print(bright(f"* Retrieving assembly with id {self.element_id}"))
 
         self.assembly_data: dict = self.client.get_assembly(
             self.document_id,
@@ -418,6 +414,10 @@ class Assembly:
                         limits = self.get_limits(joint_type, data["name"])
                 elif data["mateType"] == "FASTENED":
                     joint_type = Joint.FIXED
+                elif data["mateType"] == "BALL":
+                    joint_type = Joint.BALL
+                    if not self.config.ignore_limits:
+                        limits = self.get_limits(joint_type, data["name"])
                 else:
                     raise Exception(
                         f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
@@ -734,6 +734,12 @@ class Assembly:
                             minimum = self.read_parameter_value(parameter, name)
                         if parameter["message"]["parameterId"] == "limitZMax":
                             maximum = self.read_parameter_value(parameter, name)
+                    elif joint_type == Joint.BALL:
+                        if parameter["message"]["parameterId"] == "limitEulerConeAngleMax":
+                            maximum = self.read_parameter_value(parameter, name)
+                    else:
+                        print(warning(f"WARNING: Can't read limits for a joint of type {joint_type}"))
+                        print(parameter)
         if enabled:
             offset = self.get_offset(name)
             if offset is not None:
