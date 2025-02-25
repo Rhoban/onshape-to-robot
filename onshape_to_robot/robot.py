@@ -83,6 +83,7 @@ class Joint:
     REVOLUTE = "revolute"
     PRISMATIC = "prismatic"
     CONTINUOUS = "continuous"
+    BALL = "ball"
 
     def __init__(
         self,

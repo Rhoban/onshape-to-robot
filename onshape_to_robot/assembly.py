@@ -230,11 +230,7 @@ class Assembly:
         """
         Retrieve all assembly data
         """
-        print(
-            bright(
-                f'* Retrieving assembly with id {self.element_id}'
-            )
-        )
+        print(bright(f"* Retrieving assembly with id {self.element_id}"))
 
         self.assembly_data: dict = self.client.get_assembly(
             self.document_id,
@@ -418,6 +414,10 @@ class Assembly:
                         limits = self.get_limits(joint_type, data["name"])
                 elif data["mateType"] == "FASTENED":
                     joint_type = Joint.FIXED
+                elif data["mateType"] == "BALL":
+                    joint_type = Joint.BALL
+                    if not self.config.ignore_limits:
+                        limits = self.get_limits(joint_type, data["name"])
                 else:
                     raise Exception(
                         f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
@@ -470,6 +470,11 @@ class Assembly:
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("fix_"):
                 self.merge_bodies(occurrence_A, occurrence_B)
+
+        # Checking that all intances are assigned to a body
+        for instance in self.assembly_data["rootAssembly"]["instances"]:
+            if instance["id"] not in self.instance_body and not instance["suppressed"]:
+                self.make_body(instance["id"])
 
         # Processing frames / closing loops
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -532,11 +537,6 @@ class Assembly:
                     self.merge_bodies(parent, child)
                 else:
                     self.instance_body[child] = INSTANCE_IGNORE
-
-        # Checking that all intances are assigned to a body
-        for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body and not instance["suppressed"]:
-                self.make_body(instance["id"])
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
@@ -734,11 +734,26 @@ class Assembly:
                             minimum = self.read_parameter_value(parameter, name)
                         if parameter["message"]["parameterId"] == "limitZMax":
                             maximum = self.read_parameter_value(parameter, name)
+                    elif joint_type == Joint.BALL:
+                        if (
+                            parameter["message"]["parameterId"]
+                            == "limitEulerConeAngleMax"
+                        ):
+                            minimum = 0
+                            maximum = self.read_parameter_value(parameter, name)
+                    else:
+                        print(
+                            warning(
+                                f"WARNING: Can't read limits for a joint of type {joint_type}"
+                            )
+                        )
+                        print(parameter)
         if enabled:
-            offset = self.get_offset(name)
-            if offset is not None:
-                minimum -= offset
-                maximum -= offset
+            if joint_type != Joint.BALL:
+                offset = self.get_offset(name)
+                if offset is not None:
+                    minimum -= offset
+                    maximum -= offset
             return (minimum, maximum)
         else:
             if joint_type != Joint.CONTINUOUS:
