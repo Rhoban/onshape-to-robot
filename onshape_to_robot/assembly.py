@@ -739,6 +739,7 @@ class Assembly:
                             parameter["message"]["parameterId"]
                             == "limitEulerConeAngleMax"
                         ):
+                            minimum = 0
                             maximum = self.read_parameter_value(parameter, name)
                     else:
                         print(
@@ -748,10 +749,11 @@ class Assembly:
                         )
                         print(parameter)
         if enabled:
-            offset = self.get_offset(name)
-            if offset is not None:
-                minimum -= offset
-                maximum -= offset
+            if joint_type != Joint.BALL:
+                offset = self.get_offset(name)
+                if offset is not None:
+                    minimum -= offset
+                    maximum -= offset
             return (minimum, maximum)
         else:
             if joint_type != Joint.CONTINUOUS:
