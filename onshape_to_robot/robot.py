@@ -11,7 +11,8 @@ class Part:
         self,
         name: str,
         T_world_part: np.ndarray,
-        mesh_file: str,
+        visual_meshes: list[str],
+        collision_meshes: list[str],
         mass: float,
         com: np.ndarray,
         inertia: np.ndarray,
@@ -20,13 +21,13 @@ class Part:
     ):
         self.name: str = name
         self.T_world_part: np.ndarray = T_world_part
-        self.mesh_file: str = mesh_file
+        self.visual_meshes: list[str] = visual_meshes
+        self.collision_meshes: list[str] = collision_meshes
         self.mass: float = mass
         self.com: np.ndarray = com
         self.inertia: np.ndarray = inertia
         self.color: tuple | None = color
         self.shapes: list[Shape] | None = shapes
-        self.collision_mesh_files: list[str] | None = None
 
 
 class Link:

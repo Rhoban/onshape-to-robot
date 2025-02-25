@@ -49,8 +49,8 @@ class ProcessorScad(Processor):
             for link in robot.links:
                 for part in link.parts:
                     # Import the SCAD files pure shapes
-                    if part.mesh_file and self.use_scads:
-                        scad_file = part.mesh_file.replace(".stl", ".scad")
+                    for mesh_file in part.collision_meshes:
+                        scad_file = mesh_file.replace(".stl", ".scad")
                         if os.path.exists(scad_file):
                             part.shapes = self.parse_scad(scad_file)
 

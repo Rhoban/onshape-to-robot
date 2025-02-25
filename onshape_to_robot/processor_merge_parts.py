@@ -15,15 +15,12 @@ class ProcessorMergeParts(Processor):
     def __init__(self, config: Config):
         super().__init__(config)
         self.merge_stls = config.get("merge_stls", False)
-        self.meshes_to_write = {}
 
     def process(self, robot: Robot):
         if self.merge_stls:
             os.makedirs(self.config.asset_path("merged"), exist_ok=True)
             for link in robot.links:
                 self.merge_parts(link)
-            for stl_file, mesh in self.meshes_to_write.items():
-                self.save_mesh(mesh, stl_file)
 
     def load_mesh(self, stl_file: str) -> mesh.Mesh:
         return mesh.Mesh.from_file(stl_file)
@@ -33,8 +30,8 @@ class ProcessorMergeParts(Processor):
         # This ensures that same process will result in same STL file
         def get_header(name):
             header = "onshape-to-robot"
-            return header[:80].ljust(80, ' ')
-        
+            return header[:80].ljust(80, " ")
+
         mesh.get_header = get_header
         mesh.save(stl_file, mode=Mode.BINARY)
 
@@ -82,23 +79,41 @@ class ProcessorMergeParts(Processor):
                     shapes.append(shape)
 
         # Merging STL files
-        mesh = None
-        for part in link.parts:
-            if part.mesh_file:
-                # Retrieving meshes
-                part_mesh = self.load_mesh(part.mesh_file)
+        def accumulate_meshes(which: str):
+            mesh = None
+            for part in link.parts:
+                meshlist = (
+                    part.visual_meshes if which == "visual" else part.collision_meshes
+                )
+                for mesh_file in meshlist:
+                    # Retrieving meshes
+                    part_mesh = self.load_mesh(mesh_file)
 
-                # Expressing meshes in the merged frame
-                T_com_part = np.linalg.inv(T_world_com) @ part.T_world_part
-                self.transform_mesh(part_mesh, T_com_part)
+                    # Expressing meshes in the merged frame
+                    T_com_part = np.linalg.inv(T_world_com) @ part.T_world_part
+                    self.transform_mesh(part_mesh, T_com_part)
 
-                if mesh is None:
-                    mesh = part_mesh
-                else:
-                    mesh = self.combine_meshes(mesh, part_mesh)
+                    if mesh is None:
+                        mesh = part_mesh
+                    else:
+                        mesh = self.combine_meshes(mesh, part_mesh)
+            return mesh
 
-        combined_stl_file = self.config.asset_path("merged/" + "/" + link.name + ".stl")
-        self.meshes_to_write[combined_stl_file] = mesh
+        visual_mesh = accumulate_meshes("visual")
+        merged_visual_meshes = []
+        if visual_mesh is not None:
+            merged_visual_meshes = [
+                self.config.asset_path("merged/" + "/" + link.name + "_visual.stl")
+            ]
+            self.save_mesh(visual_mesh, merged_visual_meshes[0])
+
+        collision_mesh = accumulate_meshes("collision")
+        merged_collision_meshes = []
+        if collision_mesh is not None:
+            merged_collision_meshes = [
+                self.config.asset_path("merged/" + "/" + link.name + "_collision.stl")
+            ]
+            self.save_mesh(collision_mesh, merged_collision_meshes[0])
 
         mass, com, inertia = link.get_dynamics(T_world_com)
 
@@ -107,7 +122,8 @@ class ProcessorMergeParts(Processor):
             Part(
                 link.name,
                 T_world_com,
-                combined_stl_file,
+                merged_visual_meshes,
+                merged_collision_meshes,
                 mass,
                 com,
                 inertia,

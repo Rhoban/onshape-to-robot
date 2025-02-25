@@ -23,19 +23,25 @@ class RobotBuilder:
             link = self.build_robot(node)
             self.robot.base_links.append(link)
 
-    def part_is_ignored(self, name: str) -> bool:
+    def part_is_ignored(self, name: str, what: str) -> bool:
         """
         Checks if a given part should be ignored by config
         """
         if self.config.whitelist is None:
             for entry in self.config.ignore:
                 if fnmatch.fnmatch(name, entry):
-                    return True
+                    return (
+                        self.config.ignore[entry] == "all"
+                        or self.config.ignore[entry] == what
+                    )
             return False
         else:
             for entry in self.config.whitelist:
                 if fnmatch.fnmatch(name, entry):
-                    return False
+                    return not (
+                        self.config.ignore[entry] == "all"
+                        or self.config.ignore[entry] == what
+                    )
             return True
 
     def slugify(self, value: str) -> str:
@@ -287,13 +293,21 @@ class RobotBuilder:
                 " (configuration: " + self.printable_configuration(instance) + ")"
             )
         symbol = "+"
-        if self.part_is_ignored(part_name):
+        if self.part_is_ignored(part_name, "visual") or self.part_is_ignored(
+            part_name, "collision"
+        ):
             symbol = "-"
-            extra += dim(" / ignoring visual and collision")
+            extra += dim(" / ")
+            if self.part_is_ignored(part_name, "visual"):
+                extra += dim("(ignoring visual)")
+            if self.part_is_ignored(part_name, "collision"):
+                extra += dim(" (ignoring collision)")
 
         print(success(f"{symbol} Adding part {instance['name']}{extra}"))
 
-        if self.part_is_ignored(part_name):
+        if self.part_is_ignored(part_name, "visual") and self.part_is_ignored(
+            part_name, "collision"
+        ):
             stl_file = None
         else:
             stl_file = self.get_stl(instance)
@@ -308,7 +322,23 @@ class RobotBuilder:
 
         unique_part_name = self.unique_name(instance, "part")
 
-        part = Part(unique_part_name, T_world_part, stl_file, mass, com, inertia, color)
+        # Adding non-ignored meshes
+        visual_meshes = [] if self.part_is_ignored(part_name, "visual") else [stl_file]
+        collision_meshes = (
+            [] if self.part_is_ignored(part_name, "collision") else [stl_file]
+        )
+
+        part = Part(
+            unique_part_name,
+            T_world_part,
+            visual_meshes,
+            collision_meshes,
+            mass,
+            com,
+            inertia,
+            color,
+        )
+
         self.robot.links[-1].parts.append(part)
 
     def build_robot(self, body_id: int):

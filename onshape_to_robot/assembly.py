@@ -471,42 +471,9 @@ class Assembly:
             if data["name"].startswith("fix_"):
                 self.merge_bodies(occurrence_A, occurrence_B)
 
-        # Checking that all intances are assigned to a body
-        for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body and not instance["suppressed"]:
-                self.make_body(instance["id"])
-
-        # Processing frames / closing loops
+        # Processing frame mates
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
-            if data["name"].startswith("closing_"):
-                for k in 0, 1:
-                    mated_entity = data["matedEntities"][k]
-                    occurrence = mated_entity["matedOccurrence"][0]
-
-                    T_world_part = self.get_occurrence_transform(
-                        mated_entity["matedOccurrence"]
-                    )
-                    T_part_mate = self.get_mate_transform(mated_entity)
-                    T_world_mate = T_world_part @ T_part_mate
-
-                    self.frames.append(
-                        Frame(
-                            self.instance_body[occurrence],
-                            f"{data['name']}_{k+1}",
-                            T_world_mate,
-                        )
-                    )
-
-                if data["mateType"] == "FASTENED":
-                    self.closures.append(
-                        ["fixed", f"{data['name']}_1", f"{data['name']}_2"]
-                    )
-                else:
-                    self.closures.append(
-                        ["point", f"{data['name']}_1", f"{data['name']}_2"]
-                    )
-
-            elif data["name"].startswith("frame_"):
+            if data["name"].startswith("frame_"):
                 name = "_".join(data["name"].split("_")[1:])
                 if (
                     occurrence_A not in self.instance_body
@@ -537,6 +504,41 @@ class Assembly:
                     self.merge_bodies(parent, child)
                 else:
                     self.instance_body[child] = INSTANCE_IGNORE
+
+        # Checking that all intances are assigned to a body
+        for instance in self.assembly_data["rootAssembly"]["instances"]:
+            if instance["id"] not in self.instance_body and not instance["suppressed"]:
+                self.make_body(instance["id"])
+
+        # Processing loop closing frames
+        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+            if data["name"].startswith("closing_"):
+                for k in 0, 1:
+                    mated_entity = data["matedEntities"][k]
+                    occurrence = mated_entity["matedOccurrence"][0]
+
+                    T_world_part = self.get_occurrence_transform(
+                        mated_entity["matedOccurrence"]
+                    )
+                    T_part_mate = self.get_mate_transform(mated_entity)
+                    T_world_mate = T_world_part @ T_part_mate
+
+                    self.frames.append(
+                        Frame(
+                            self.instance_body[occurrence],
+                            f"{data['name']}_{k+1}",
+                            T_world_mate,
+                        )
+                    )
+
+                if data["mateType"] == "FASTENED":
+                    self.closures.append(
+                        ["fixed", f"{data['name']}_1", f"{data['name']}_2"]
+                    )
+                else:
+                    self.closures.append(
+                        ["point", f"{data['name']}_1", f"{data['name']}_2"]
+                    )
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:

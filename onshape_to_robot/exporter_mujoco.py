@@ -158,7 +158,14 @@ class ExporterMuJoCo(Exporter):
         inertial += " />"
         self.append(inertial)
 
-    def add_mesh_geom(self, part: Part, class_: str, T_world_link: np.ndarray, mesh_file: str):
+    def add_mesh_geom(
+        self,
+        part: Part,
+        class_: str,
+        T_world_link: np.ndarray,
+        mesh_file: str,
+        random_color: bool = False,
+    ):
         """
         Add a mesh node (e.g. STL) to the MuJoCo file
         """
@@ -180,7 +187,9 @@ class ExporterMuJoCo(Exporter):
 
         # Adding the mesh and material to appear in the assets section
         self.meshes.append(mesh_file)
-        self.materials[material_name] = part.color
+        self.materials[material_name] = (
+            np.random.rand(3) if random_color else part.color
+        )
 
         self.append(geom)
 
@@ -188,11 +197,12 @@ class ExporterMuJoCo(Exporter):
         """
         Adds meshes for the given node
         """
-        if what == "collision" and part.collision_mesh_files is not None:
-            for mesh_file in part.collision_mesh_files:
-                self.add_mesh_geom(part, class_, T_world_link, mesh_file)
+        if what == "collision":
+            for mesh_file in part.collision_meshes:
+                self.add_mesh_geom(part, class_, T_world_link, mesh_file, True)
         else:
-            self.add_mesh_geom(part, class_, T_world_link, part.mesh_file)
+            for mesh_file in part.visual_meshes:
+                self.add_mesh_geom(part, class_, T_world_link, mesh_file)
 
     def add_shapes(self, part: Part, class_: str, T_world_link: np.ndarray):
         """
@@ -233,7 +243,7 @@ class ExporterMuJoCo(Exporter):
         """
         if what == "collision" and part.shapes is not None:
             self.add_shapes(part, class_, T_world_link)
-        elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
+        elif what == "visual" or not self.collisions_no_mesh:
             self.add_mesh(part, class_, T_world_link, what)
 
     def add_joint(self, joint: Joint):

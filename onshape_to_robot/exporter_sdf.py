@@ -110,7 +110,14 @@ class ExporterSDF(Exporter):
         self.append("<emissive>0 0 0 0</emissive>")
         self.append("</material>")
 
-    def add_mesh_geom(self, link: Link, part: Part, node: str, T_world_link: np.ndarray, mesh_file : str):
+    def add_mesh_geom(
+        self,
+        link: Link,
+        part: Part,
+        node: str,
+        T_world_link: np.ndarray,
+        mesh_file: str,
+    ):
         """
         Add a mesh node (e.g. STL) to the SDF file
         """
@@ -133,11 +140,12 @@ class ExporterSDF(Exporter):
         self.append(f"</{node}>")
 
     def add_mesh(self, part: Part, node: str, T_world_link: np.ndarray, what):
-        if what == "collision" and part.collision_mesh_files is not None:
-            for mesh in part.collision_mesh_files:
-                self.add_mesh_geom(part, node, T_world_link, mesh)
+        if what == "collision":
+            for mesh_file in part.collision_meshes:
+                self.add_mesh_geom(part, node, T_world_link, mesh_file)
         else:
-            self.add_mesh_geom(part, node, T_world_link, part.mesh_file)
+            for mesh_file in part.visual_meshes:
+                self.add_mesh_geom(part, node, T_world_link, mesh_file)
 
     def add_shapes(self, link: Link, part: Part, node: str, T_world_link: np.ndarray):
         """
@@ -179,7 +187,7 @@ class ExporterSDF(Exporter):
         """
         if what == "collision" and part.shapes is not None:
             self.add_shapes(link, part, node, T_world_link)
-        elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
+        elif what == "visual" or not self.collisions_no_mesh:
             self.add_mesh(link, part, node, T_world_link, what)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):

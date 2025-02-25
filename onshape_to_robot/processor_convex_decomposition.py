@@ -5,7 +5,7 @@ import re
 import json
 import os
 from pathlib import Path
-from .message import bright, info, error
+from .message import bright, info, error, warning
 from .processor import Processor
 from .config import Config
 from .robot import Robot, Part
@@ -28,7 +28,9 @@ class ProcessorConvexDecomposition(Processor):
         # OpenSCAD pure shapes
         self.convex_decomposition: bool = config.get("convex_decomposition", False)
 
-        self.convex_decomposition_ignore: bool = config.get("convex_decomposition_ignore", [])
+        self.convex_decomposition_ignore: bool = config.get(
+            "convex_decomposition_ignore", []
+        )
 
         self.check_coacd()
 
@@ -55,7 +57,7 @@ class ProcessorConvexDecomposition(Processor):
     def process(self, robot: Robot):
         if self.convex_decomposition:
             os.makedirs(self.config.asset_path("convex_decomposition"), exist_ok=True)
-            
+
             for link in robot.links:
                 for part in link.parts:
                     self.convex_decompose(part)
@@ -64,30 +66,44 @@ class ProcessorConvexDecomposition(Processor):
         import coacd
         import trimesh
 
-        if part.mesh_file:
+        if len(part.collision_meshes) > 0:
+            if len(part.collision_meshes) > 1:
+                print(
+                    warning(
+                        f"* Skipping convex decomposition for part {part.name} as it already has multiple collision meshes."
+                    )
+                )
+
+            mesh_files = part.collision_meshes[0]
+
             # Retrieving file SHA1
-            sha1 = hashlib.sha1(open(part.mesh_file, "rb").read()).hexdigest()
+            sha1 = hashlib.sha1(open(mesh_files, "rb").read()).hexdigest()
             cache_filename = f"{self.get_cache_path()}/{sha1}.pkl"
 
             if os.path.exists(cache_filename):
-                print(info(f"* Loading cached CoACD decomposition cache for part {part.name}"))
+                print(
+                    info(
+                        f"* Loading cached CoACD decomposition cache for part {part.name}"
+                    )
+                )
                 with open(cache_filename, "rb") as f:
                     meshes = pickle.load(f)
             else:
-                mesh = trimesh.load(part.mesh_file, force="mesh")
+                mesh = trimesh.load(mesh_files, force="mesh")
                 mesh = coacd.Mesh(mesh.vertices, mesh.faces)
                 meshes = coacd.run_coacd(mesh, max_convex_hull=16)
                 with open(cache_filename, "wb") as f:
                     pickle.dump(meshes, f)
 
-            part.collision_mesh_files = []
-            filename = self.config.asset_path(f"convex_decomposition/{part.name}_%05d.stl")
+            part.collision_meshes = []
+            filename = self.config.asset_path(
+                f"convex_decomposition/{part.name}_%05d.stl"
+            )
             for k, mesh in enumerate(meshes):
-                mesh = trimesh.Trimesh(vertices=mesh[0], faces=mesh[1])    
+                mesh = trimesh.Trimesh(vertices=mesh[0], faces=mesh[1])
                 mesh.export(filename % k)
-                part.collision_mesh_files.append(filename % k)
+                part.collision_meshes.append(filename % k)
 
-            print(info(f"* Decomposed part {part.name} into {len(meshes)} convex shapes."))
-
-            
-            
+            print(
+                info(f"* Decomposed part {part.name} into {len(meshes)} convex shapes.")
+            )
