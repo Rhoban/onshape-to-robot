@@ -42,7 +42,7 @@ class ExporterMuJoCo(Exporter):
         if self.config:
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
         self.append(f'<mujoco model="{robot.name}">')
-        self.append(f'<compiler angle="radian" meshdir="." autolimits="true" />')
+        self.append(f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />')
         self.append(f'<option noslip_iterations="1"></option>')
 
         if self.additional_xml:
