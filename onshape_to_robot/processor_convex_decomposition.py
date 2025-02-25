@@ -30,8 +30,6 @@ class ProcessorConvexDecomposition(Processor):
 
         self.convex_decomposition_ignore: bool = config.get("convex_decomposition_ignore", [])
 
-        self.output_directory = config.output_directory + "/convex_decomposition"
-
         self.check_coacd()
 
     def get_cache_path(self) -> Path:
@@ -56,7 +54,7 @@ class ProcessorConvexDecomposition(Processor):
 
     def process(self, robot: Robot):
         if self.convex_decomposition:
-            os.makedirs(self.output_directory, exist_ok=True)
+            os.makedirs(self.config.asset_path("convex_decomposition"), exist_ok=True)
             
             for link in robot.links:
                 for part in link.parts:
@@ -83,7 +81,7 @@ class ProcessorConvexDecomposition(Processor):
                     pickle.dump(meshes, f)
 
             part.collision_mesh_files = []
-            filename = f"{self.output_directory}/{part.name}_%05d.stl"
+            filename = self.config.asset_path(f"convex_decomposition/{part.name}_%05d.stl")
             for k, mesh in enumerate(meshes):
                 mesh = trimesh.Trimesh(vertices=mesh[0], faces=mesh[1])    
                 mesh.export(filename % k)
