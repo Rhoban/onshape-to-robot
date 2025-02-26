@@ -26,3 +26,4 @@ class ProcessorNoCollisionMeshes(Processor):
                 for part in link.parts:
                     for mesh in part.meshes:
                         mesh.collision = False
+                    part.prune_unused_geometry()

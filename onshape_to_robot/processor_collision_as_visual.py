@@ -32,3 +32,4 @@ class ProcessorCollisionAsVisual(Processor):
                         mesh.visual = mesh.collision
                     for shape in part.shapes:
                         shape.visual = shape.collision
+                    part.prune_unused_geometry()

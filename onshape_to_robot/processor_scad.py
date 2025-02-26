@@ -58,8 +58,7 @@ class ProcessorScad(Processor):
 
                     for converted_mesh in converted_meshes:
                         converted_mesh.collision = False
-                        if not converted_mesh.visual:
-                            part.meshes.remove(converted_mesh)
+                        part.prune_unused_geometry()
 
     def multmatrix_parse(self, parameters: str):
         matrix = np.matrix(json.loads(parameters), dtype=float)

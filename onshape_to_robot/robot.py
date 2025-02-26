@@ -26,6 +26,15 @@ class Part:
         self.meshes: list[Mesh] = deepcopy(meshes)
         self.shapes: list[Shape] = deepcopy(shapes)
 
+    def prune_unused_geometry(self):
+        """
+        Remove meshes or shapes that are neither visual nor collision.
+        """
+        self.meshes = [mesh for mesh in self.meshes if (mesh.visual or mesh.collision)]
+        self.shapes = [
+            shape for shape in self.shapes if (shape.visual or shape.collision)
+        ]
+
 
 class Link:
     """
