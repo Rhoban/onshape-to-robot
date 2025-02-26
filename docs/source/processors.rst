@@ -1,5 +1,5 @@
-Robot processors
-================
+Processors
+==========
 
 Here is an overview of ``onshape-to-robot`` pipeline:
 
@@ -21,3 +21,6 @@ Here is an overview of ``onshape-to-robot`` pipeline:
    processor_simplify_stls
    processor_scad
    processor_dummy_base_link
+   processor_no_collision_meshes
+   processor_collision_as_visual
+   processor_convex_decomposition

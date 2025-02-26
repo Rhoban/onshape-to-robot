@@ -22,10 +22,6 @@ Here is an example of complete ``config.json`` file, with details below:
         // General import options (see config.json documentation)
         // ...
 
-        // Whether the collisions should be used in visual as well (default: false)
-        "draw_collisions": true,
-        // Use only pure shapes (when available) for collisions
-        "collisions_no_mesh": true,
         // Package name (for ROS) (default: "")
         "package_name": "my_robot",
         // Additional XML file to be included in the URDF (default: "")
@@ -64,16 +60,6 @@ Possible values are:
 * ``friction``: The friction of the joint (added in the ``<joint_properties friction=...>`` tag)
 * ``type``: Sets the joint type (changing the ``<joint type="...">`` tag)
 * ``limits``: Override the joint limits, should be a list of two values (min, max)
-
-``draw_collisions`` *(default: false)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If this flag is set to ``true``, the same items that are used for collisions will be used for visuals as well. If you have pure shape approximations, this is useful for debugging purposes.
-
-``collisions_no_mesh`` *(default: false)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If this flag is set to ``true``, only pure shapes will be used for collisions, and not the mesh. This is useful for performance reasons.
 
 ``package_name`` *(default: "")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

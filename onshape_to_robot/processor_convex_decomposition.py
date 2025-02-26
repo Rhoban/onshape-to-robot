@@ -20,10 +20,6 @@ class ProcessorConvexDecomposition(Processor):
 
         # Enable convex decomposition
         self.convex_decomposition: bool = config.get("convex_decomposition", False)
-
-        self.convex_decomposition_ignore: bool = config.get(
-            "convex_decomposition_ignore", []
-        )
         self.rainbow_color: bool = config.get("rainbow_color", False)
 
         self.check_coacd()
