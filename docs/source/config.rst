@@ -193,8 +193,9 @@ You can prefix the part name with ``!`` to exclude it from the rule. For example
 .. code-block:: json
 
     {
-        // Ignore visual for visual
+        // Ignore everything from visual
         "*": "collision",
+        // Except the leg part
         "!leg": "collision"
     }
 
