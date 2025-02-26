@@ -136,9 +136,6 @@ class Config:
         self.ignore: list[str] = self.get("ignore", {})
         if isinstance(self.ignore, list):
             self.ignore = {entry: "all" for entry in self.ignore}
-        self.whitelist: list[str] | None = self.get("whitelist", required=False)
-        if isinstance(self.whitelist, list):
-            self.whitelist = {entry: "all" for entry in self.whitelist}
 
         # Color override
         self.color: str | None = self.get("color", required=False)

@@ -27,22 +27,23 @@ class RobotBuilder:
         """
         Checks if a given part should be ignored by config
         """
-        if self.config.whitelist is None:
-            for entry in self.config.ignore:
-                if fnmatch.fnmatch(name, entry):
-                    return (
-                        self.config.ignore[entry] == "all"
-                        or self.config.ignore[entry] == what
-                    )
-            return False
-        else:
-            for entry in self.config.whitelist:
-                if fnmatch.fnmatch(name, entry):
-                    return not (
-                        self.config.ignore[entry] == "all"
-                        or self.config.ignore[entry] == what
-                    )
-            return True
+        ignored = False
+
+        for entry in self.config.ignore:
+            to_ignore = True
+            match_entry = entry
+            if entry[0] == "!":
+                to_ignore = False
+                match_entry = entry[1:]
+
+            if fnmatch.fnmatch(name, match_entry):
+                if (
+                    self.config.ignore[entry] == "all"
+                    or self.config.ignore[entry] == what
+                ):
+                    ignored = to_ignore
+
+        return ignored
 
     def slugify(self, value: str) -> str:
         """
