@@ -14,6 +14,6 @@ processors = [
     ProcessorFixedLinks,
     ProcessorDummyBaseLink,
     ProcessorConvexDecomposition,
-    ProcessorCollisionAsVisual,
     ProcessorNoCollisionMeshes,
+    ProcessorCollisionAsVisual,
 ]
