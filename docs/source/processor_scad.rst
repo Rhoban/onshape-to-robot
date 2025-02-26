@@ -6,6 +6,8 @@ Introduction
 
 This processor provides you a way to manually approximate your robot into pure shapes.
 
+You can follow the following `video tutorial <https://www.youtube.com/watch?v=C8oK4uUmbRw>`_. Some of the steps are outdated, but the general idea is still the same.
+
 Requirements
 ------------
 
