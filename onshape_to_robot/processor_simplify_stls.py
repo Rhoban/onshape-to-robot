@@ -19,12 +19,13 @@ class ProcessorSimplifySTLs(Processor):
         # STL merge / simplification
         self.simplify_stls = config.get("simplify_stls", False)
         self.max_stl_size = config.get("max_stl_size", 3)
+        self.out_folder = config.asset_path("")
 
     def process(self, robot: Robot):
         if self.simplify_stls:
             for link in robot.links:
                 for part in link.parts:
-                    self.simplify_stl(part.mesh_file)
+                    self.simplify_stl(part.mesh_file, self.out_folder + part.name + ".stl")
 
     def reduce_faces(self, in_file: str, out_file: str, reduction: float = 0.9):
         ms = pymeshlab.MeshSet()
@@ -51,14 +52,13 @@ class ProcessorSimplifySTLs(Processor):
         # save mesh
         ms.save_current_mesh(out_file)
 
-    def simplify_stl(self, stl_file: str):
-        size_M = os.path.getsize(stl_file) / (1024 * 1024)
+    def simplify_stl(self, in_file: str, out_file: str):
+        size_M = os.path.getsize(in_file) / (1024 * 1024)
 
         if size_M > self.max_stl_size:
             print(
                 info(
-                    f"+ {os.path.basename(stl_file)} is {size_M:.2f} M, running mesh simplification"
+                    f"+ {os.path.basename(in_file)} is {size_M:.2f} M, running mesh simplification"
                 )
             )
-            shutil.copyfile(stl_file, "/tmp/simplify.stl")
-            self.reduce_faces("/tmp/simplify.stl", stl_file, self.max_stl_size / size_M)
+            self.reduce_faces(in_file, out_file, self.max_stl_size / size_M)
