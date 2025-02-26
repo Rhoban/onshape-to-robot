@@ -159,12 +159,7 @@ class ExporterMuJoCo(Exporter):
         self.append(inertial)
 
     def add_mesh_geom(
-        self,
-        part: Part,
-        class_: str,
-        T_world_link: np.ndarray,
-        mesh_file: str,
-        random_color: bool = False,
+        self, part: Part, class_: str, T_world_link: np.ndarray, mesh_file: str
     ):
         """
         Add a mesh node (e.g. STL) to the MuJoCo file
@@ -187,9 +182,7 @@ class ExporterMuJoCo(Exporter):
 
         # Adding the mesh and material to appear in the assets section
         self.meshes.append(mesh_file)
-        self.materials[material_name] = (
-            np.random.rand(3) if random_color else part.color
-        )
+        self.materials[material_name] = part.color
 
         self.append(geom)
 
@@ -199,7 +192,7 @@ class ExporterMuJoCo(Exporter):
         """
         if what == "collision":
             for mesh_file in part.collision_meshes:
-                self.add_mesh_geom(part, class_, T_world_link, mesh_file, True)
+                self.add_mesh_geom(part, class_, T_world_link, mesh_file)
         else:
             for mesh_file in part.visual_meshes:
                 self.add_mesh_geom(part, class_, T_world_link, mesh_file)

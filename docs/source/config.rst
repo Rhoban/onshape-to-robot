@@ -56,6 +56,7 @@ Here is an example of complete ``config.json`` file, with details below:
         "ignore": {
             // Ignore visual for visual
             "part1": "visual",
+            "screw*": "visual",
 
             // Ignore everything expect "leg" for collision
             "*" : "collision"
