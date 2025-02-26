@@ -7,8 +7,10 @@ Specific entries
 Below are the global configuration entries.
 You might also want to check out the following documentation for more specific entries:
 
-* :doc:`URDF specific entries <exporter_urdf>`
-* :doc:`MuJoCo specific entries <exporter_mujoco>`
+* Exporters
+    * :doc:`URDF specific entries <exporter_urdf>`
+    * :doc:`MuJoCo specific entries <exporter_mujoco>`
+    * :doc:`SDF specific entries <exporter_sdf>`
 * :doc:`Processors <processors>` can define their own specific entries
 
 
