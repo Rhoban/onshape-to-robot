@@ -4,6 +4,8 @@ from .processor_simplify_stls import ProcessorSimplifySTLs
 from .processor_fixed_links import ProcessorFixedLinks
 from .processor_dummy_base_link import ProcessorDummyBaseLink
 from .processor_convex_decomposition import ProcessorConvexDecomposition
+from .processor_collision_as_visual import ProcessorCollisionAsVisual
+from .processor_no_collision_meshes import ProcessorNoCollisionMeshes
 
 processors = [
     ProcessorScad,
@@ -11,5 +13,7 @@ processors = [
     ProcessorSimplifySTLs,
     ProcessorFixedLinks,
     ProcessorDummyBaseLink,
-    ProcessorConvexDecomposition
+    ProcessorConvexDecomposition,
+    ProcessorCollisionAsVisual,
+    ProcessorNoCollisionMeshes,
 ]

@@ -12,15 +12,13 @@ import pickle
 
 class ProcessorConvexDecomposition(Processor):
     """
-    Scad processor. This processor will parse OpenSCAD files to create pure shapes when available.
-
-    The code is a naive parser of the intermediate CSG file produced by OpenSCAD, gathering Box, Sphere and Cylinders.
+    Convex decomposition processor. Runs CoACD algorithm on collision meshes to use a convex approximation.
     """
 
     def __init__(self, config: Config):
         super().__init__(config)
 
-        # OpenSCAD pure shapes
+        # Enable convex decomposition
         self.convex_decomposition: bool = config.get("convex_decomposition", False)
 
         self.convex_decomposition_ignore: bool = config.get(

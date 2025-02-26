@@ -14,16 +14,12 @@ class ExporterURDF(Exporter):
         self.config: Config = config
 
         self.ext: str = "urdf"
-        self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.package_name: str = ""
         self.additional_xml: str = ""
-        self.collisions_no_mesh: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
-            self.draw_collisions: bool = config.get("draw_collisions", False)
             self.package_name: str = config.get("package_name", "")
             additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
@@ -155,28 +151,27 @@ class ExporterURDF(Exporter):
             self.append(f'<material name="{xml_escape(material_name)}">')
             self.append(
                 '<color rgba="%g %g %g 1.0"/>'
-                % (part.color[0], part.color[1], part.color[2])
+                % (shape.color[0], shape.color[1], shape.color[2])
             )
             self.append("</material>")
 
         self.append(f"</{node}>")
 
-    def add_geometries(
-        self, part: Part, T_world_link: np.ndarray, class_: str, what: str
-    ):
+    def add_geometries(self, part: Part, T_world_link: np.ndarray):
         """
-        Add geometry nodes. "class_" is the class that will be used, "what" is the logic used to produce it.
-        Both can be "visual" or "collision"
+        Add a part geometries
         """
         for shape in part.shapes:
-            if shape.is_type(what):
-                self.add_shape(part, class_, T_world_link, shape)
+            if shape.visual:
+                self.add_shape(part, "visual", T_world_link, shape)
+            if shape.collision:
+                self.add_shape(part, "collision", T_world_link, shape)
 
         for mesh in part.meshes:
-            if mesh.is_type(what):
-                if what == "collision" and self.collisions_no_mesh:
-                    continue
-                self.add_mesh(part, class_, T_world_link, mesh)
+            if mesh.visual:
+                self.add_mesh(part, "visual", T_world_link, mesh)
+            if mesh.collision:
+                self.add_mesh(part, "collision", T_world_link, mesh)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
@@ -264,13 +259,7 @@ class ExporterURDF(Exporter):
         # Adding geometry objects
         for part in link.parts:
             self.append(f"<!-- Part {part.name} -->")
-            self.add_geometries(
-                part,
-                T_world_link,
-                "visual",
-                "collision" if self.draw_collisions else "visual",
-            )
-            self.add_geometries(part, T_world_link, "collision", "collision")
+            self.add_geometries(part, T_world_link)
 
         self.append("</link>")
 

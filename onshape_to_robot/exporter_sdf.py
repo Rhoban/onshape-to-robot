@@ -28,15 +28,11 @@ class ExporterSDF(Exporter):
         self.config: Config = config
 
         self.ext: str = "sdf"
-        self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.additional_xml: str = ""
-        self.collisions_no_mesh: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
-            self.draw_collisions: bool = config.get("draw_collisions", False)
             additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
                 with open(
@@ -117,11 +113,12 @@ class ExporterSDF(Exporter):
         node: str,
         T_world_link: np.ndarray,
         mesh: Mesh,
+        mesh_n: int,
     ):
         """
         Add a mesh node (e.g. STL) to the SDF file
         """
-        self.append(f'<{node} name="{part.name}_{node}_mesh">')
+        self.append(f'<{node} name="{part.name}_{node}_mesh_{mesh_n}">')
 
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
         self.append(self.pose(T_link_part, relative_to=link.name))
@@ -173,28 +170,31 @@ class ExporterSDF(Exporter):
         self.append("</geometry>")
 
         if node == "visual":
-            self.append_material(part.color)
+            self.append_material(shape.color)
 
         self.append(f"</{node}>")
 
-    def add_geometries(
-        self, link: Link, part: Part, T_world_link: np.ndarray, class_: str, what: str
-    ):
+    def add_geometries(self, link: Link, part: Part, T_world_link: np.ndarray):
         """
-        Add geometry nodes. "class_" is the class that will be used, "what" is the logic used to produce it.
-        Both can be "visual" or "collision"
+        Add a part geometries
         """
         shape_n = 0
         for shape in part.shapes:
-            if shape.is_type(what):
+            if shape.visual:
                 shape_n += 1
-                self.add_shape(link, part, class_, T_world_link, shape, shape_n)
+                self.add_shape(link, part, "visual", T_world_link, shape, shape_n)
+            if shape.collision:
+                shape_n += 1
+                self.add_shape(link, part, "collision", T_world_link, shape, shape_n)
 
+        mesh_n = 0
         for mesh in part.meshes:
-            if mesh.is_type(what):
-                if what == "collision" and self.collisions_no_mesh:
-                    continue
-                self.add_mesh(link, part, class_, T_world_link, mesh)
+            if mesh.visual:
+                mesh_n += 1
+                self.add_mesh(link, part, "visual", T_world_link, mesh, mesh_n)
+            if mesh.collision:
+                mesh_n += 1
+                self.add_mesh(link, part, "collision", T_world_link, mesh, mesh_n)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
@@ -272,14 +272,7 @@ class ExporterSDF(Exporter):
         # Adding geometry objects
         for part in link.parts:
             self.append(f"<!-- Part {part.name} -->")
-            self.add_geometries(
-                link,
-                part,
-                T_world_link,
-                "visual",
-                "collision" if self.draw_collisions else "visual",
-            )
-            self.add_geometries(link, part, T_world_link, "collision", "collision")
+            self.add_geometries(link, part, T_world_link)
 
         self.append("</link>")
 
