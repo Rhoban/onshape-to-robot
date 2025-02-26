@@ -186,6 +186,8 @@ This can be a list of parts that you want to be ignored during the export.
 
 Alternatively, you can use a dict, where the values are either ``all``, ``visual`` or ``collision``. The rules will apply in order of appearance.
 
+You can use wildcards ``*`` to match multiple parts.
+
 You can prefix the part name with ``!`` to exclude it from the rule. For example, the following will ignore all parts for visual, except the ``leg`` part, turning the ignore list to a whitelist:
 
 .. code-block:: json
@@ -199,7 +201,6 @@ You can prefix the part name with ``!`` to exclude it from the rule. For example
 .. note::
 
     The dynamics of the part will not be ignored, but the visual and collision aspect will.
-    You can use wildcard, like ``screw_*`` to ignore all parts starting with ``screw_``.
 
 .. _draw-frames:
 
