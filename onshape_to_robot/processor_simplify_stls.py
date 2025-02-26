@@ -33,7 +33,7 @@ class ProcessorSimplifySTLs(Processor):
 
         # apply filter
         ms.apply_filter(
-            'simplification_quadric_edge_collapse_decimation', 
+            'meshing_decimation_quadric_edge_collapse', 
             targetperc=reduction,
             qualitythr=0.5,
             preserveboundary=False,
