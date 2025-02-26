@@ -310,12 +310,34 @@ class Assembly:
         Load configuration parameters
         """
 
+        self.variable_values = None
+
+        # Extracting configuration v ariables
         parts = self.assembly_data["rootAssembly"]["fullConfiguration"].split(";")
         for part in parts:
             key_value = part.split("=")
             if len(key_value) == 2:
                 key, value = key_value
                 self.configuration_parameters[key] = value.replace("+", " ")
+
+    def get_variable_value(self, name: str):
+        if name in self.configuration_parameters:
+            return self.configuration_parameters[name]
+        else:
+            if self.variable_values is None:
+                self.variable_values = {}
+                variables = self.client.get_variables(
+                    self.document_id,
+                    self.version_id if self.version_id else self.workspace_id,
+                    self.element_id,
+                    "v" if self.version_id else "w",
+                    configuration=self.config.configuration,
+                )
+                for entry in variables:
+                    for variable in entry["variables"]:
+                        self.variable_values[variable["name"]] = variable["value"]
+
+            return self.variable_values[name]
 
     def get_occurrence(self, path: list):
         """
@@ -664,9 +686,9 @@ class Assembly:
         # Expression can itself be a variable from configuration
         # XXX: This doesn't handle all expression, only values and variables
         if expression[0] == "#":
-            expression = self.configuration_parameters[expression[1:]]
+            expression = self.get_variable_value(expression[1:])
         if expression[0:2] == "-#":
-            expression = "-" + self.configuration_parameters[expression[2:]]
+            expression = "-" + self.get_variable_value(expression[2:])
 
         parts = expression.split(" ")
 
@@ -674,14 +696,10 @@ class Assembly:
         if parts[1] == "deg":
             return math.radians(float(parts[0]))
         elif parts[1] in ["radian", "rad"]:
-            # looking for PI
-            if isinstance(parts[0], str):
-                if parts[0] == "(PI)":
-                    value = math.pi
-                else:
-                    raise ValueError(f"{parts[0]} variable isn't supported")
-            else:
-                value = parts[0]
+            try:
+                value = float(parts[0])
+            except ValueError:
+                raise ValueError(f"{parts[0]} variable isn't supported")
             return float(value)
         elif parts[1] == "mm":
             return float(parts[0]) / 1000.0

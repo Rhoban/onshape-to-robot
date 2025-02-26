@@ -241,3 +241,13 @@ class Client:
             f"/api/elements/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/configuration",
             query=query,
         )
+
+    @cache_response
+    def get_variables(self, did, wvid, eid, wmv, configuration):
+        return self.request(
+            f"/api/variables/d/{escape(did)}/{escape(wmv)}/{escape(wvid)}/e/{escape(eid)}/variables",
+            query={
+                "configuration": configuration,
+                "includeValuesAndReferencedVariables": True,
+            },
+        )
