@@ -17,7 +17,7 @@ What is this ?
 .. image:: _static/img/main.png
 
 ``onshape-to-robot`` is a tool that allows you to export robots designed from the **Onshape CAD** software
-to descriptions format like **URDF** or **MuJoCo**, so that you can use them for physics simulation or in your running code
+to descriptions format like **URDF**, **SDF** or **MuJoCo**, so that you can use them for physics simulation or in your running code
 (requesting frames, computing dynamics etc.)
 
 * `onshape-to-robot GitHub repository <https://github.com/rhoban/onshape-to-robot/>`_
@@ -32,8 +32,8 @@ to descriptions format like **URDF** or **MuJoCo**, so that you can use them for
    design
    config
    exporter_urdf
-   exporter_mujoco
    exporter_sdf
+   exporter_mujoco
    kinematic_loops
    processors
    cache

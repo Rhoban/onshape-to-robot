@@ -9,8 +9,8 @@ You might also want to check out the following documentation for more specific e
 
 * Exporters
     * :doc:`URDF specific entries <exporter_urdf>`
-    * :doc:`MuJoCo specific entries <exporter_mujoco>`
     * :doc:`SDF specific entries <exporter_sdf>`
+    * :doc:`MuJoCo specific entries <exporter_mujoco>`
 * :doc:`Processors <processors>` can define their own specific entries
 
 
@@ -79,7 +79,7 @@ Here is an example of complete ``config.json`` file, with details below:
             "echo 'Do something else'"
         ]
 
-        // More options available in specific exporters (URDF, MuJoCo)
+        // More options available in specific exporters (URDF, SDF, MuJoCo)
         // More options available in processors
     }
 
