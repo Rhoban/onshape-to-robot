@@ -3,6 +3,7 @@ import os
 import hashlib
 import json
 import fnmatch
+from .geometry import Mesh
 from .message import warning, info, success, error, dim, bright
 from .assembly import Assembly
 from .config import Config
@@ -319,25 +320,26 @@ class RobotBuilder:
         # Obtain the instance dynamics
         mass, com, inertia = self.get_dynamics(instance)
 
+        # Obtain part pose
         T_world_part = np.array(occurrence["transform"]).reshape(4, 4)
 
-        unique_part_name = self.unique_name(instance, "part")
-
         # Adding non-ignored meshes
-        visual_meshes = [] if self.part_is_ignored(part_name, "visual") else [stl_file]
-        collision_meshes = (
-            [] if self.part_is_ignored(part_name, "collision") else [stl_file]
-        )
+        meshes = []
+        mesh = Mesh(stl_file, color)
+        if self.part_is_ignored(part_name, "visual"):
+            mesh.visual = False
+        if self.part_is_ignored(part_name, "collision"):
+            mesh.collision = False
+        if mesh.visual or mesh.collision:
+            meshes.append(mesh)
 
         part = Part(
-            unique_part_name,
+            self.unique_name(instance, "part"),
             T_world_part,
-            visual_meshes,
-            collision_meshes,
             mass,
             com,
             inertia,
-            color,
+            meshes,
         )
 
         self.robot.links[-1].parts.append(part)

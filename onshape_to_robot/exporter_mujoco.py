@@ -3,7 +3,7 @@ import os
 from .message import success, warning
 from .robot import Robot, Link, Part, Joint
 from .config import Config
-from .shapes import Box, Cylinder, Sphere
+from .geometry import Box, Cylinder, Sphere, Mesh, Shape
 from .exporter import Exporter
 from .exporter_utils import xml_escape, rotation_matrix_to_rpy
 from transforms3d.quaternions import mat2quat
@@ -158,14 +158,14 @@ class ExporterMuJoCo(Exporter):
         inertial += " />"
         self.append(inertial)
 
-    def add_mesh_geom(
-        self, part: Part, class_: str, T_world_link: np.ndarray, mesh_file: str
+    def add_mesh(
+        self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh
     ):
         """
         Add a mesh node (e.g. STL) to the MuJoCo file
         """
         # Retrieving mesh file and material name
-        mesh_file = os.path.relpath(mesh_file, self.config.asset_path(""))
+        mesh_file = os.path.relpath(mesh.filename, self.config.asset_path(""))
         mesh_file_no_ext = ".".join(os.path.basename(mesh_file).split(".")[:-1])
         material_name = mesh_file_no_ext + "_material"
 
@@ -182,50 +182,38 @@ class ExporterMuJoCo(Exporter):
 
         # Adding the mesh and material to appear in the assets section
         self.meshes.append(mesh_file)
-        self.materials[material_name] = part.color
+        self.materials[material_name] = mesh.color
 
         self.append(geom)
 
-    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, what: str):
-        """
-        Adds meshes for the given node
-        """
-        if what == "collision":
-            for mesh_file in part.collision_meshes:
-                self.add_mesh_geom(part, class_, T_world_link, mesh_file)
-        else:
-            for mesh_file in part.visual_meshes:
-                self.add_mesh_geom(part, class_, T_world_link, mesh_file)
-
-    def add_shapes(self, part: Part, class_: str, T_world_link: np.ndarray):
+    def add_shape(self, part: Part, class_: str, T_world_link: np.ndarray, shape: Shape):
         """
         Add pure shape geometry.
         """
-        for shape in part.shapes:
-            geom = f'<geom class="{class_}" '
+        geom = f'<geom class="{class_}" '
 
-            T_link_shape = (
-                np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        T_link_shape = (
+            np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        )
+        geom += self.pos_quat(T_link_shape) + " "
+
+        if isinstance(shape, Box):
+            geom += 'type="box" size="%g %g %g" ' % tuple(shape.size / 2)
+        elif isinstance(shape, Cylinder):
+            geom += 'type="cylinder" size="%g %g" ' % (
+                shape.radius,
+                shape.length / 2,
             )
-            geom += self.pos_quat(T_link_shape) + " "
+        elif isinstance(shape, Sphere):
+            geom += 'type="sphere" size="%g" ' % shape.radius
 
-            if isinstance(shape, Box):
-                geom += 'type="box" size="%g %g %g" ' % tuple(shape.size / 2)
-            elif isinstance(shape, Cylinder):
-                geom += 'type="cylinder" size="%g %g" ' % (
-                    shape.radius,
-                    shape.length / 2,
-                )
-            elif isinstance(shape, Sphere):
-                geom += 'type="sphere" size="%g" ' % shape.radius
+        if class_ == "visual":
+            material_name = f"{part.name}_material"
+            self.materials[material_name] = part.color
+            geom += f'material="{xml_escape(material_name)}" '
 
-            if class_ == "visual":
-                material_name = f"{part.name}_material"
-                self.materials[material_name] = part.color
-                geom += f'material="{xml_escape(material_name)}" '
-
-            geom += " />"
-            self.append(geom)
+        geom += " />"
+        self.append(geom)
 
     def add_geometries(
         self, part: Part, T_world_link: np.ndarray, class_: str, what: str
@@ -234,10 +222,15 @@ class ExporterMuJoCo(Exporter):
         Add geometry nodes. "class_" is the class that will be used, "what" is the logic used to produce it.
         Both can be "visual" or "collision"
         """
-        if what == "collision" and part.shapes is not None:
-            self.add_shapes(part, class_, T_world_link)
-        elif what == "visual" or not self.collisions_no_mesh:
-            self.add_mesh(part, class_, T_world_link, what)
+        for shape in part.shapes:
+            if shape.is_type(what):
+                self.add_shape(part, class_, T_world_link, shape)
+
+        for mesh in part.meshes:
+            if mesh.is_type(what):
+                if what == "collision" and self.collisions_no_mesh:
+                    continue
+                self.add_mesh(part, class_, T_world_link, mesh)
 
     def add_joint(self, joint: Joint):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")

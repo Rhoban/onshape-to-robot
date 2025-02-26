@@ -6,7 +6,7 @@ from .message import bright, info, error
 from .processor import Processor
 from .config import Config
 from .robot import Robot
-from .shapes import Box, Cylinder, Sphere, Shape
+from .geometry import Box, Cylinder, Sphere, Shape
 import numpy as np
 
 
@@ -48,11 +48,18 @@ class ProcessorScad(Processor):
             print(info("+ Parsing OpenSCAD files..."))
             for link in robot.links:
                 for part in link.parts:
-                    # Import the SCAD files pure shapes
-                    for mesh_file in part.collision_meshes:
-                        scad_file = mesh_file.replace(".stl", ".scad")
-                        if os.path.exists(scad_file):
-                            part.shapes = self.parse_scad(scad_file)
+                    converted_meshes = []
+                    for mesh in part.meshes:
+                        if mesh.collision:
+                            scad_file = mesh.filename.replace(".stl", ".scad")
+                            if os.path.exists(scad_file):
+                                part.shapes += self.parse_scad(scad_file, mesh.color)
+                            converted_meshes.append(mesh)
+
+                    for converted_mesh in converted_meshes:
+                        converted_mesh.collision = False
+                        if not converted_mesh.visual:
+                            part.meshes.remove(converted_mesh)
 
     def multmatrix_parse(self, parameters: str):
         matrix = np.matrix(json.loads(parameters), dtype=float)
@@ -109,7 +116,7 @@ class ProcessorScad(Processor):
 
         return m
 
-    def parse_csg(self, csg_data: str):
+    def parse_csg(self, csg_data: str, color):
         shapes: list[Shape] = []
         lines = csg_data.split("\n")
         matrices = []
@@ -139,24 +146,43 @@ class ProcessorScad(Processor):
                             transform = transform @ self.translation(
                                 size[0] / 2.0, size[1] / 2.0, size[2] / 2.0
                             )
-                        shapes.append(Box(transform, size))
+                        shapes.append(
+                            Box(transform, size, color, visual=False, collision=True)
+                        )
                     if node == "cylinder":
                         size, center = self.cylinder_parse(parameters)
                         if not center:
                             transform = transform @ self.translation(
                                 0, 0, size[0] / 2.0
                             )
-                        shapes.append(Cylinder(transform, size[0], size[1]))
+                        shapes.append(
+                            Cylinder(
+                                transform,
+                                size[0],
+                                size[1],
+                                color,
+                                visual=False,
+                                collision=True,
+                            )
+                        )
                     if node == "sphere":
-                        shapes.append(Sphere(transform, self.sphere_parse(parameters)))
+                        shapes.append(
+                            Sphere(
+                                transform,
+                                self.sphere_parse(parameters),
+                                color,
+                                visual=False,
+                                collision=True,
+                            )
+                        )
 
         return shapes
 
-    def parse_scad(self, scad_file: str):
+    def parse_scad(self, scad_file: str, color: np.ndarray):
         tmp_data = os.getcwd() + "/_tmp_data.csg"
         os.system("openscad " + scad_file + " -o " + tmp_data)
         with open(tmp_data, "r", encoding="utf-8") as stream:
             data = stream.read()
         os.system("rm " + tmp_data)
 
-        return self.parse_csg(data)
+        return self.parse_csg(data, color)

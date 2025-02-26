@@ -1,5 +1,6 @@
+from copy import deepcopy
 import numpy as np
-from .shapes import Shape
+from .geometry import Shape, Mesh
 
 
 class Part:
@@ -11,23 +12,19 @@ class Part:
         self,
         name: str,
         T_world_part: np.ndarray,
-        visual_meshes: list[str],
-        collision_meshes: list[str],
         mass: float,
         com: np.ndarray,
         inertia: np.ndarray,
-        color: tuple | None = None,
-        shapes: list[Shape] | None = None,
+        meshes: list[Mesh] = [],
+        shapes: list[Shape] = [],
     ):
         self.name: str = name
         self.T_world_part: np.ndarray = T_world_part
-        self.visual_meshes: list[str] = visual_meshes
-        self.collision_meshes: list[str] = collision_meshes
         self.mass: float = mass
         self.com: np.ndarray = com
         self.inertia: np.ndarray = inertia
-        self.color: tuple | None = color
-        self.shapes: list[Shape] | None = shapes
+        self.meshes: list[Mesh] = deepcopy(meshes)
+        self.shapes: list[Shape] = deepcopy(shapes)
 
 
 class Link:

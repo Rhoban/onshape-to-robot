@@ -3,6 +3,7 @@ import os
 from .config import Config
 from .robot import Robot, Link, Part
 from .processor import Processor
+from .geometry import Mesh
 from .message import bright, info, error
 from stl import mesh, Mode
 
@@ -62,72 +63,64 @@ class ProcessorMergeParts(Processor):
         color = np.zeros(3)
         total_mass = 0
         for part in link.parts:
-            color += part.color * part.mass
+            if len(part.meshes):
+                meshes_color = np.mean([mesh.color for mesh in part.meshes], axis=0)
+                color += meshes_color * part.mass
             total_mass += part.mass
+        
         color /= total_mass
 
-        # Gathering shapes
-        shapes = None
+        # Changing shapes frame
+        merged_shapes = []
         for part in link.parts:
             if part.shapes is not None:
-                if shapes is None:
-                    shapes = []
                 for shape in part.shapes:
                     # Changing the shape frame
                     T_world_shape = part.T_world_part @ shape.T_part_shape
                     shape.T_part_shape = np.linalg.inv(T_world_com) @ T_world_shape
-                    shapes.append(shape)
+                    merged_shapes.append(shape)
 
         # Merging STL files
         def accumulate_meshes(which: str):
             mesh = None
             for part in link.parts:
-                meshlist = (
-                    part.visual_meshes if which == "visual" else part.collision_meshes
-                )
-                for mesh_file in meshlist:
-                    # Retrieving meshes
-                    part_mesh = self.load_mesh(mesh_file)
+                for part_mesh in part.meshes:
+                    if part_mesh.is_type(which):
+                        # Retrieving meshes
+                        part_mesh = self.load_mesh(part_mesh.filename)
 
-                    # Expressing meshes in the merged frame
-                    T_com_part = np.linalg.inv(T_world_com) @ part.T_world_part
-                    self.transform_mesh(part_mesh, T_com_part)
+                        # Expressing meshes in the merged frame
+                        T_com_part = np.linalg.inv(T_world_com) @ part.T_world_part
+                        self.transform_mesh(part_mesh, T_com_part)
 
-                    if mesh is None:
-                        mesh = part_mesh
-                    else:
-                        mesh = self.combine_meshes(mesh, part_mesh)
+                        if mesh is None:
+                            mesh = part_mesh
+                        else:
+                            mesh = self.combine_meshes(mesh, part_mesh)
             return mesh
 
+        merged_meshes = []
         visual_mesh = accumulate_meshes("visual")
-        merged_visual_meshes = []
         if visual_mesh is not None:
-            merged_visual_meshes = [
-                self.config.asset_path("merged/" + "/" + link.name + "_visual.stl")
-            ]
-            self.save_mesh(visual_mesh, merged_visual_meshes[0])
+            filename = self.config.asset_path(
+                "merged/" + "/" + link.name + "_visual.stl"
+            )
+            self.save_mesh(visual_mesh, filename)
+            merged_meshes.append(Mesh(filename, color, visual=True, collision=False))
 
         collision_mesh = accumulate_meshes("collision")
-        merged_collision_meshes = []
         if collision_mesh is not None:
-            merged_collision_meshes = [
-                self.config.asset_path("merged/" + "/" + link.name + "_collision.stl")
-            ]
-            self.save_mesh(collision_mesh, merged_collision_meshes[0])
+            filename = self.config.asset_path(
+                "merged/" + "/" + link.name + "_collision.stl"
+            )
+            self.save_mesh(collision_mesh, filename)
+            merged_meshes.append(Mesh(filename, color, visual=False, collision=True))
 
         mass, com, inertia = link.get_dynamics(T_world_com)
 
         # Replacing parts with a single one
         link.parts = [
             Part(
-                link.name,
-                T_world_com,
-                merged_visual_meshes,
-                merged_collision_meshes,
-                mass,
-                com,
-                inertia,
-                color,
-                shapes,
+                link.name, T_world_com, mass, com, inertia, merged_meshes, merged_shapes
             )
         ]

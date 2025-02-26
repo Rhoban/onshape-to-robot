@@ -1,17 +1,12 @@
-import subprocess
 import hashlib
-import fnmatch
-import re
-import json
 import os
 from pathlib import Path
 from .message import bright, info, error, warning
 from .processor import Processor
 from .config import Config
 from .robot import Robot, Part
+from .geometry import Mesh
 import numpy as np
-import coacd
-import trimesh
 import pickle
 
 
@@ -66,18 +61,19 @@ class ProcessorConvexDecomposition(Processor):
         import coacd
         import trimesh
 
-        if len(part.collision_meshes) > 0:
-            if len(part.collision_meshes) > 1:
+        collision_meshes = [mesh for mesh in part.meshes if mesh.collision]
+        if len(collision_meshes) > 0:
+            if len(collision_meshes) > 1:
                 print(
                     warning(
                         f"* Skipping convex decomposition for part {part.name} as it already has multiple collision meshes."
                     )
                 )
 
-            mesh_files = part.collision_meshes[0]
+            mesh_file = collision_meshes[0]
 
             # Retrieving file SHA1
-            sha1 = hashlib.sha1(open(mesh_files, "rb").read()).hexdigest()
+            sha1 = hashlib.sha1(open(mesh_file, "rb").read()).hexdigest()
             cache_filename = f"{self.get_cache_path()}/{sha1}.pkl"
 
             if os.path.exists(cache_filename):
@@ -89,7 +85,7 @@ class ProcessorConvexDecomposition(Processor):
                 with open(cache_filename, "rb") as f:
                     meshes = pickle.load(f)
             else:
-                mesh = trimesh.load(mesh_files, force="mesh")
+                mesh = trimesh.load(mesh_file, force="mesh")
                 mesh = coacd.Mesh(mesh.vertices, mesh.faces)
                 meshes = coacd.run_coacd(mesh, max_convex_hull=16)
                 with open(cache_filename, "wb") as f:
@@ -102,7 +98,16 @@ class ProcessorConvexDecomposition(Processor):
             for k, mesh in enumerate(meshes):
                 mesh = trimesh.Trimesh(vertices=mesh[0], faces=mesh[1])
                 mesh.export(filename % k)
+                part.meshes.append(
+                    Mesh(
+                        filename % k,
+                        collision_meshes[0].color,
+                        visual=False,
+                        collision=True,
+                    )
+                )
                 part.collision_meshes.append(filename % k)
+            part.meshes.remove(collision_meshes[0])
 
             print(
                 info(f"* Decomposed part {part.name} into {len(meshes)} convex shapes.")
