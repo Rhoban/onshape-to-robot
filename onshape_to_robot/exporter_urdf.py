@@ -100,9 +100,7 @@ class ExporterURDF(Exporter):
         )
         self.append("</inertial>")
 
-    def add_mesh(
-        self, part: Part, node: str, T_world_link: np.ndarray, mesh: Mesh
-    ):
+    def add_mesh(self, part: Part, node: str, T_world_link: np.ndarray, mesh: Mesh):
         """
         Add a mesh node (e.g. STL) to the URDF file
         """
@@ -146,8 +144,7 @@ class ExporterURDF(Exporter):
             self.append('<box size="%g %g %g" />' % tuple(shape.size))
         elif isinstance(shape, Cylinder):
             self.append(
-                '<cylinder length="%g" radius="%g" />'
-                % (shape.length, shape.radius)
+                '<cylinder length="%g" radius="%g" />' % (shape.length, shape.radius)
             )
         elif isinstance(shape, Sphere):
             self.append('<sphere radius="%g" />' % shape.radius)
