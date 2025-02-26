@@ -54,7 +54,7 @@ Here is an example of complete ``config.json`` file, with details below:
         // Ignore limits (default: false)
         "ignore_limits": true,
 
-        // Parts to ignore (default: [])
+        // Parts to ignore (default: {})
         "ignore": {
             // Ignore visual for visual
             "part1": "visual",
@@ -179,7 +179,7 @@ If it is not specified, the directory name will be used.
 
 If set to ``true``, the joint limits coming from Onshape will be ignored during export.
 
-``ignore`` *(default: [])*
+``ignore`` *(default: {})*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This can be a list of parts that you want to be ignored during the export.
