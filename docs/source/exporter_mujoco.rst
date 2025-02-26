@@ -25,8 +25,8 @@ Here is an example of complete ``config.json`` file, with details below:
 .. code-block:: javascript
 
     {
-        "document_id": "document-id",
-        "output_format": "urdf",
+        "url": "document-url",
+        "output_format": "mujoco",
         // ...
         // General import options (see config.json documentation)
         // ...
