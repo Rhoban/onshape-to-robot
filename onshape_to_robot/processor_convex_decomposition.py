@@ -107,8 +107,7 @@ class ProcessorConvexDecomposition(Processor):
                 part.collision_meshes.append(filename % k)
 
             collision_mesh.collision = False
-            if not collision_mesh.visual:
-                part.meshes.remove(collision_mesh)
+            part.prune_unused_geometry()
 
             print(
                 info(f"* Decomposed part {part.name} into {len(meshes)} convex shapes.")
