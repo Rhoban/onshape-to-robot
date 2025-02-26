@@ -20,7 +20,7 @@ class ProcessorConvexDecomposition(Processor):
 
         # Enable convex decomposition
         self.convex_decomposition: bool = config.get("convex_decomposition", False)
-        self.rainbow_color: bool = config.get("rainbow_color", False)
+        self.rainbow_colors: bool = config.get("rainbow_colors", False)
 
         self.check_coacd()
 
@@ -94,7 +94,7 @@ class ProcessorConvexDecomposition(Processor):
                 mesh = trimesh.Trimesh(vertices=mesh[0], faces=mesh[1])
                 mesh.export(filename % k)
                 color = (
-                    np.random.rand(3) if self.rainbow_color else collision_mesh.color
+                    np.random.rand(3) if self.rainbow_colors else collision_mesh.color
                 )
                 part.meshes.append(
                     Mesh(
