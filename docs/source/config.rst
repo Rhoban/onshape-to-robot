@@ -53,9 +53,14 @@ Here is an example of complete ``config.json`` file, with details below:
         "ignore_limits": true,
 
         // Parts to ignore (default: [])
-        "ignore": ["part1", "part2"],
-        // Parts to keep, overrides ignore if set (default: None)
-        "whitelist": ["body", "foot", "head"],
+        "ignore": {
+            // Ignore visual for visual
+            "part1": "visual",
+
+            // Ignore everything expect "leg" for collision
+            "*" : "collision"
+            "!leg": "collision"
+        },
 
         // Whether to keep frame links (default: false)
         "draw_frames": true,
@@ -176,25 +181,22 @@ If set to ``true``, the joint limits coming from Onshape will be ignored during 
 
 This can be a list of parts that you want to be ignored during the export.
 
+Alternatively, you can use a dict, where the values are either ``all``, ``visual`` or ``collision``. The rules will apply in order of appearance.
+
+You can prefix the part name with ``!`` to exclude it from the rule. For example, the following will ignore all parts for visual, except the ``leg`` part, turning the ignore list to a whitelist:
+
+.. code-block:: json
+
+    {
+        // Ignore visual for visual
+        "*": "collision",
+        "!leg": "collision"
+    }
+
 .. note::
 
     The dynamics of the part will not be ignored, but the visual and collision aspect will.
     You can use wildcard, like ``screw_*`` to ignore all parts starting with ``screw_``.
-
-``whitelist`` *(default: None)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This can be used as the opposed of ``ignore``, to import only some items listed in the configuration
-(all items not listed in ``whitelist`` will be ignored if it is not ``None``)
-
-.. note::
-
-    If ``whitelist`` is used, ``ignore`` will not be taken into account.
-
-.. note::
-
-    The dynamics of the part will not be ignored, but the visual and collision aspect will.
-    You can use wildcard, like ``plate_*`` to import all parts starting with ``plate_``.
 
 .. _draw-frames:
 
