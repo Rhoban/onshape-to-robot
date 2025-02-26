@@ -99,3 +99,4 @@ Before you can actually enjoy your export, you need to pay attention to the foll
 
 * ``onshape-to-robot`` comes with some conventions to follow, in order to understand what in your robot is a degree of freedom, a link, a frame, etc. Make sure to read the :doc:`design-time considerations <design>`.
 * There are some options you might want to specify in the :doc:`config.json <config>` file.
+* Have a look at the `examples <https://github.com/rhoban/onshape-to-robot-examples>`_ available on GitHub.
