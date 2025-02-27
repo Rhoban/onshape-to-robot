@@ -1,3 +1,4 @@
+# Core dependencies
 colorama>=0.4.6
 commentjson
 numpy
@@ -9,3 +10,6 @@ sphinx
 sphinx-rtd-theme
 transforms3d
 python-dotenv
+
+# Optional dependencies
+# pymeshlab

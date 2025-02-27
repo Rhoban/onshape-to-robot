@@ -10,11 +10,11 @@ Used with :ref:`processor-merge-parts`, it will simplify the merged STLs.
 Requirements
 ------------
 
-For this processor to work, you need to install the Meshlab package:
+For this processor to work, ensure pymeshlab is installed:
 
 .. code-block:: bash
 
-    sudo apt-get install meshlab
+    pip install pymeshlab
 
 ``config.json`` entries
 -----------------------
