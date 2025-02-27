@@ -4,6 +4,7 @@ from .robot import Robot
 from .processor import Processor
 from .message import bright, info, error
 
+
 class ProcessorSimplifySTLs(Processor):
     """
     Allow for mesh simplifications using MeshLab
@@ -18,36 +19,35 @@ class ProcessorSimplifySTLs(Processor):
 
         if self.simplify_stls:
             self.pymeshlab = self.check_meshlab()
-    
+
     def check_meshlab(self):
         print(bright("* Checking pymeshlab presence..."))
         try:
             import pymeshlab
+
             return pymeshlab
         except ImportError:
             self.simplify_stls = False
-            print(
-                error("No pymeshlab, disabling STL simplification support")
-            )
+            print(error("No pymeshlab, disabling STL simplification support"))
             print(info("TIP: consider installing pymeshlab:"))
             print(info("pip install pymeshlab"))
-            
 
     def process(self, robot: Robot):
         if self.simplify_stls:
             for link in robot.links:
                 for part in link.parts:
-                  for mesh in part.meshes:
+                    for mesh in part.meshes:
                         self.simplify_stl(mesh.filename)
 
     def reduce_faces(self, filename: str, reduction: float = 0.9):
-        ms = self.pymeshlab.MeshSet()
-        # Add input mesh
-        ms.load_new_mesh(filename)
+        mesh_set = self.pymeshlab.MeshSet()
 
-        # apply filter
-        ms.apply_filter(
-            'meshing_decimation_quadric_edge_collapse', 
+        # Add input mesh
+        mesh_set.load_new_mesh(filename)
+
+        # Apply filter
+        mesh_set.apply_filter(
+            "meshing_decimation_quadric_edge_collapse",
             targetperc=reduction,
             qualitythr=0.5,
             preserveboundary=False,
@@ -59,11 +59,11 @@ class ProcessorSimplifySTLs(Processor):
             qualityweight=False,
             planarweight=0.001,
             autoclean=True,
-            selected=False
+            selected=False,
         )
 
-        # save mesh
-        ms.save_current_mesh(filename)
+        # Save mesh
+        mesh_set.save_current_mesh(filename)
 
     def simplify_stl(self, filename: str):
         size_M = os.path.getsize(filename) / (1024 * 1024)
