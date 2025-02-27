@@ -54,17 +54,23 @@ on which it is attached will be named ``something`` in the resulting export.
 Adding custom frames in your model
 ----------------------------------
 
-If you want to track some frames on your robot, you can do the following:
+You can add your own custom frames (such as the end effector or the tip of a leg) to your model.
 
-* Connect any part to your robot using mate relations in OnShape
-* Name one of these relations ``frame_something``, when ``something`` will be the name of
-  the produced frame
+* In URDF, it will produce a *dummy link* connected to the parent link with a fixed joint
+* In SDF, a ``frame`` element will be added
+* In MuJoCo, it will result in a *site*
 
-  * In URDF, it will produce a *dummy link* connected to the parent link with a fixed joint
-  * In MuJoCo, it will result in a *site*
+To do so, either:
+
+* Add a mate connector where you want your frame to be, and name it ``frame_something``, where ``something`` is the name of your frame
+
+**OR**
+
+* Add any relation between a body representing your frame and the body you want to attach it to. Name this relation ``frame_something``.
 
 .. image:: _static/img/frames.png
     :align: center
+    :class: padding
 
 
 Here is a document that can be used (be sure to turn on "composite parts" when inserting it, use the ``frame`` composite part): `Onshape frame part <https://cad.onshape.com/documents/7adc786257f47ce24706bb32/w/774dd3de6bd5bfd65fb4462b/e/c60f72b9088ac4e5058b8904?renderMode=0&uiState=67b64076077d3a02bf5e1c0f>`_
