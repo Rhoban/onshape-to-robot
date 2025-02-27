@@ -80,6 +80,16 @@ class Link:
         return mass, com, inertia
 
 
+class Relation:
+    """
+    Represents a relation (for example a gear) with a source joint
+    """
+
+    def __init__(self, source_joint: str, ratio: float):
+        self.source_joint: str = source_joint
+        self.ratio: float = ratio
+
+
 class Joint:
     """
     A joint connects two links.
@@ -111,6 +121,7 @@ class Joint:
         self.limits: tuple[float, float] | None = limits
         self.z_axis: np.ndarray = z_axis
         self.T_world_joint: np.ndarray = T_world_joint
+        self.relation: Relation | None = None
 
 
 class Robot:

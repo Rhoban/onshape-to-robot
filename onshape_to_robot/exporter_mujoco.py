@@ -93,8 +93,11 @@ class ExporterMuJoCo(Exporter):
             if joint.joint_type == "fixed":
                 continue
 
+            # Suppose joints with relation equality is not actuated, unless specified
+            guess_actuated = joint.relation is None
+
             if (
-                joint.properties.get("actuated", True)
+                joint.properties.get("actuated", guess_actuated)
                 and joint.joint_type != Joint.BALL
             ):
                 type = joint.properties.get("type", "position")
@@ -128,6 +131,12 @@ class ExporterMuJoCo(Exporter):
                 self.append(f'<connect site1="{frame1}" site2="{frame2}" />')
             else:
                 raise ValueError(f"Unknown closure type: {type}")
+
+        for joint in robot.joints:
+            if joint.relation is not None:
+                self.append(
+                    f'<joint joint1="{joint.name}" joint2="{joint.relation.source_joint}" polycoef="0 {joint.relation.ratio} 0 0 0" />'
+                )
 
         self.append("</equality>")
 

@@ -231,6 +231,12 @@ class ExporterSDF(Exporter):
 
         self.append(f"<lower>{joint_limits[0]}</lower>")
         self.append(f"<upper>{joint_limits[1]}</upper>")
+
+        if joint.relation is not None:
+            self.append(
+                f'<mimic joint="{joint.relation.source_joint}"><multiplier>{joint.relation.ratio}</multiplier></mimic>'
+            )
+
         self.append("</axis>")
 
         self.append("</joint>")

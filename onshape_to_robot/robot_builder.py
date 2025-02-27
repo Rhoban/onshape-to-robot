@@ -7,7 +7,7 @@ from .geometry import Mesh
 from .message import warning, info, success, error, dim, bright
 from .assembly import Assembly
 from .config import Config
-from .robot import Part, Joint, Link, Robot
+from .robot import Part, Joint, Link, Robot, Relation
 from .csg import process as csg_process
 
 
@@ -390,6 +390,10 @@ class RobotBuilder:
                 dof.limits,
                 dof.z_axis,
             )
+            if dof.name in self.assembly.relations:
+                source, ratio = self.assembly.relations[dof.name]
+                joint.relation = Relation(source, ratio)
+
             self.robot.joints.append(joint)
 
         return link

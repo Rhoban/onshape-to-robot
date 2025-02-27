@@ -210,6 +210,12 @@ class ExporterURDF(Exporter):
 
         if "friction" in joint.properties:
             self.append(f'<joint_properties friction="{joint.properties}"/>')
+
+        if joint.relation is not None:
+            self.append(
+                f'<mimic joint="{joint.relation.source_joint}" multiplier="{joint.relation.ratio}" />'
+            )
+
         self.append("</joint>")
 
     def add_frame(

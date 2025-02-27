@@ -34,8 +34,6 @@ class DOF:
         limits: tuple | None,
         z_axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
     ):
-        if body1_id > body2_id:
-            body1_id, body2_id = body2_id, body1_id
         self.body1_id: int = body1_id
         self.body2_id: int = body2_id
         self.name: str = name
@@ -43,6 +41,14 @@ class DOF:
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
         self.z_axis: np.ndarray = z_axis
+
+    def flip(self, flip_limits: bool = True):
+        if flip_limits and self.limits is not None:
+            self.limits = (-self.limits[1], -self.limits[0])
+
+        # Flipping the joint around X axis
+        flip = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
+        self.T_world_mate[:3, :3] = self.T_world_mate[:3, :3] @ flip
 
     def other_body(self, body_id: int):
         if body_id == self.body1_id:
@@ -89,6 +95,8 @@ class Assembly:
         self.root_nodes: list = []
         # Overriden link names
         self.link_names: dict[int, str] = {}
+        # Relation indexed by target joints, values are [source joint, ratio]
+        self.relations: dict = {}
 
         self.ensure_workspace_or_version()
         self.find_assembly()
@@ -99,6 +107,7 @@ class Assembly:
         self.load_configuration()
         self.process_mates()
         self.build_trees()
+        self.find_relations()
         print("")
 
     def ensure_workspace_or_version(self):
@@ -456,14 +465,6 @@ class Assembly:
                 # it is attached to
                 T_part_mate = self.get_mate_transform(mated_entity)
 
-                if data["inverted"]:
-                    if limits is not None:
-                        limits = (-limits[1], -limits[0])
-
-                    # Flipping the joint around X axis
-                    flip = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
-                    T_part_mate[:3, :3] = T_part_mate[:3, :3] @ flip
-
                 T_world_mate = T_world_part @ T_part_mate
 
                 limits_str = ""
@@ -477,16 +478,19 @@ class Assembly:
                 if occurrence_B not in self.instance_body:
                     self.make_body(occurrence_B)
 
-                self.dofs.append(
-                    DOF(
-                        self.instance_body[occurrence_A],
-                        self.instance_body[occurrence_B],
-                        name,
-                        joint_type,
-                        T_world_mate,
-                        limits,
-                    )
+                dof = DOF(
+                    self.instance_body[occurrence_A],
+                    self.instance_body[occurrence_B],
+                    name,
+                    joint_type,
+                    T_world_mate,
+                    limits,
                 )
+
+                if data["inverted"]:
+                    dof.flip()
+
+                self.dofs.append(dof)
 
         # Merging fixed links
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -606,6 +610,7 @@ class Assembly:
             dofs_to_remove = []
             for dof in dofs:
                 if dof.body1_id == current:
+                    dof.flip(flip_limits=False)
                     children.append(dof.body2_id)
                     dofs_to_remove.append(dof)
                 elif dof.body2_id == current:
@@ -643,6 +648,62 @@ class Assembly:
                 occurrence_B = data["matedEntities"][1]["matedOccurrence"][0]
 
                 yield data, occurrence_A, occurrence_B
+
+    def get_feature_by_id(self, feature_id: str):
+        """
+        Find a specific feature by its ID
+        """
+        for feature in self.features["features"]:
+            if feature["message"]["featureId"] == feature_id:
+                return feature
+
+        return None
+
+    def find_relations(self):
+        """
+        Finding relations features in the assembly
+        """
+        for feature in self.features["features"]:
+            if feature["typeName"] == "BTMMateRelation":
+                relation_name = feature["message"]["name"]
+
+                mated_dofs = None
+                ratio = None
+                reverse = None
+                for parameter in feature["message"]["parameters"]:
+                    if parameter["message"]["parameterId"] == "matesQuery":
+                        queries = parameter["message"]["queries"]
+                        if len(queries) == 2:
+                            dof1 = self.get_feature_by_id(
+                                queries[0]["message"]["featureId"]
+                            )["message"]["name"]
+                            dof2 = self.get_feature_by_id(
+                                queries[1]["message"]["featureId"]
+                            )["message"]["name"]
+                            if dof1.startswith("dof_") and dof2.startswith("dof_"):
+                                mated_dofs = [dof1[4:], dof2[4:]]
+                    elif parameter["message"]["parameterId"] == "relationRatio":
+                        ratio = self.read_expression(parameter["message"]["expression"])
+                    elif parameter["message"]["parameterId"] == "reverseDirection":
+                        reverse = parameter["message"]["value"]
+
+                if mated_dofs is not None and ratio is not None and reverse is not None:
+                    if not reverse:
+                        ratio = -ratio
+
+                    print(
+                        success(
+                            f"+ Found relation {relation_name} mating {mated_dofs} with ratio {ratio}"
+                        )
+                    )
+                    if mated_dofs[1] in self.relations:
+                        print(
+                            warning(
+                                f"Multiple relations found with {mated_dofs[1]} as target"
+                            )
+                        )
+
+                    self.relations[mated_dofs[1]] = [mated_dofs[0], ratio]
 
     def read_parameter_value(self, parameter: str, name: str):
         """
@@ -693,7 +754,9 @@ class Assembly:
         parts = expression.split(" ")
 
         # Checking the unit, returning only radians and meters
-        if parts[1] == "deg":
+        if len(parts) == 1:
+            return float(parts[0])
+        elif parts[1] == "deg":
             return math.radians(float(parts[0]))
         elif parts[1] in ["radian", "rad"]:
             try:
