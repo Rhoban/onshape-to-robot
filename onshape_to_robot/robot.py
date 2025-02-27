@@ -1,5 +1,6 @@
+from copy import deepcopy
 import numpy as np
-from .shapes import Shape
+from .geometry import Shape, Mesh
 
 
 class Part:
@@ -11,21 +12,28 @@ class Part:
         self,
         name: str,
         T_world_part: np.ndarray,
-        mesh_file: str,
         mass: float,
         com: np.ndarray,
         inertia: np.ndarray,
-        color: tuple | None = None,
-        shapes: list[Shape] | None = None,
+        meshes: list[Mesh] = [],
+        shapes: list[Shape] = [],
     ):
         self.name: str = name
         self.T_world_part: np.ndarray = T_world_part
-        self.mesh_file: str = mesh_file
         self.mass: float = mass
         self.com: np.ndarray = com
         self.inertia: np.ndarray = inertia
-        self.color: tuple | None = color
-        self.shapes: list[Shape] | None = shapes
+        self.meshes: list[Mesh] = deepcopy(meshes)
+        self.shapes: list[Shape] = deepcopy(shapes)
+
+    def prune_unused_geometry(self):
+        """
+        Remove meshes or shapes that are neither visual nor collision.
+        """
+        self.meshes = [mesh for mesh in self.meshes if (mesh.visual or mesh.collision)]
+        self.shapes = [
+            shape for shape in self.shapes if (shape.visual or shape.collision)
+        ]
 
 
 class Link:
@@ -72,6 +80,16 @@ class Link:
         return mass, com, inertia
 
 
+class Relation:
+    """
+    Represents a relation (for example a gear) with a source joint
+    """
+
+    def __init__(self, source_joint: str, ratio: float):
+        self.source_joint: str = source_joint
+        self.ratio: float = ratio
+
+
 class Joint:
     """
     A joint connects two links.
@@ -82,6 +100,7 @@ class Joint:
     REVOLUTE = "revolute"
     PRISMATIC = "prismatic"
     CONTINUOUS = "continuous"
+    BALL = "ball"
 
     def __init__(
         self,
@@ -102,6 +121,7 @@ class Joint:
         self.limits: tuple[float, float] | None = limits
         self.z_axis: np.ndarray = z_axis
         self.T_world_joint: np.ndarray = T_world_joint
+        self.relation: Relation | None = None
 
 
 class Robot:

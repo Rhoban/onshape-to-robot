@@ -3,7 +3,7 @@ import os
 from .message import success, warning
 from .robot import Robot, Link, Part, Joint
 from .config import Config
-from .shapes import Box, Cylinder, Sphere
+from .geometry import Box, Cylinder, Sphere, Mesh, Shape
 from .exporter import Exporter
 from .exporter_utils import xml_escape, rotation_matrix_to_rpy
 from transforms3d.quaternions import mat2quat
@@ -14,17 +14,13 @@ class ExporterMuJoCo(Exporter):
         super().__init__()
         self.config: Config = config
 
-        self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.additional_xml: str = ""
         self.meshes: list = []
         self.materials: dict = {}
-        self.collisions_no_mesh: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
-            self.draw_collisions: bool = config.get("draw_collisions", False)
             additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
                 with open(
@@ -42,7 +38,9 @@ class ExporterMuJoCo(Exporter):
         if self.config:
             self.append(f"<!-- OnShape {self.config.printable_version()} -->")
         self.append(f'<mujoco model="{robot.name}">')
-        self.append(f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />')
+        self.append(
+            f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />'
+        )
         self.append(f'<option noslip_iterations="1"></option>')
 
         if self.additional_xml:
@@ -95,9 +93,17 @@ class ExporterMuJoCo(Exporter):
             if joint.joint_type == "fixed":
                 continue
 
-            if joint.properties.get("actuated", True):
+            # Suppose joints with relation equality is not actuated, unless specified
+            guess_actuated = joint.relation is None
+
+            if (
+                joint.properties.get("actuated", guess_actuated)
+                and joint.joint_type != Joint.BALL
+            ):
                 type = joint.properties.get("type", "position")
-                actuator: str = f'<{type} class="{self.default_class}" name="{joint.name}" joint="{joint.name}" '
+                actuator: str = (
+                    f'<{type} class="{self.default_class}" name="{joint.name}" joint="{joint.name}" '
+                )
 
                 for key in "class", "kp", "kv", "dampratio":
                     if key in joint.properties:
@@ -126,6 +132,12 @@ class ExporterMuJoCo(Exporter):
             else:
                 raise ValueError(f"Unknown closure type: {type}")
 
+        for joint in robot.joints:
+            if joint.relation is not None:
+                self.append(
+                    f'<joint joint1="{joint.name}" joint2="{joint.relation.source_joint}" polycoef="0 {joint.relation.ratio} 0 0 0" />'
+                )
+
         self.append("</equality>")
 
     def add_inertial(self, mass: float, com: np.ndarray, inertia: np.ndarray):
@@ -151,12 +163,12 @@ class ExporterMuJoCo(Exporter):
         inertial += " />"
         self.append(inertial)
 
-    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray):
+    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh):
         """
-        Add a mesh node (e.g. STL) to the URDF file
+        Add a mesh node (e.g. STL) to the MuJoCo file
         """
         # Retrieving mesh file and material name
-        mesh_file = os.path.relpath(part.mesh_file, self.config.asset_path(""))
+        mesh_file = os.path.relpath(mesh.filename, self.config.asset_path(""))
         mesh_file_no_ext = ".".join(os.path.basename(mesh_file).split(".")[:-1])
         material_name = mesh_file_no_ext + "_material"
 
@@ -173,51 +185,56 @@ class ExporterMuJoCo(Exporter):
 
         # Adding the mesh and material to appear in the assets section
         self.meshes.append(mesh_file)
-        self.materials[material_name] = part.color
+        self.materials[material_name] = mesh.color
 
         self.append(geom)
 
-    def add_shapes(self, part: Part, class_: str, T_world_link: np.ndarray):
+    def add_shape(
+        self, part: Part, class_: str, T_world_link: np.ndarray, shape: Shape
+    ):
         """
         Add pure shape geometry.
         """
-        for shape in part.shapes:
-            geom = f'<geom class="{class_}" '
+        geom = f'<geom class="{class_}" '
 
-            T_link_shape = (
-                np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        T_link_shape = (
+            np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        )
+        geom += self.pos_quat(T_link_shape) + " "
+
+        if isinstance(shape, Box):
+            geom += 'type="box" size="%g %g %g" ' % tuple(shape.size / 2)
+        elif isinstance(shape, Cylinder):
+            geom += 'type="cylinder" size="%g %g" ' % (
+                shape.radius,
+                shape.length / 2,
             )
-            geom += self.pos_quat(T_link_shape) + " "
+        elif isinstance(shape, Sphere):
+            geom += 'type="sphere" size="%g" ' % shape.radius
 
-            if isinstance(shape, Box):
-                geom += 'type="box" size="%g %g %g" ' % tuple(shape.size / 2)
-            elif isinstance(shape, Cylinder):
-                geom += 'type="cylinder" size="%g %g" ' % (
-                    shape.radius,
-                    shape.length / 2,
-                )
-            elif isinstance(shape, Sphere):
-                geom += 'type="sphere" size="%g" ' % shape.radius
+        if class_ == "visual":
+            material_name = f"{part.name}_material"
+            self.materials[material_name] = shape.color
+            geom += f'material="{xml_escape(material_name)}" '
 
-            if class_ == "visual":
-                material_name = f"{part.name}_material"
-                self.materials[material_name] = part.color
-                geom += f'material="{xml_escape(material_name)}" '
+        geom += " />"
+        self.append(geom)
 
-            geom += " />"
-            self.append(geom)
-
-    def add_geometries(
-        self, part: Part, T_world_link: np.ndarray, class_: str, what: str
-    ):
+    def add_geometries(self, part: Part, T_world_link: np.ndarray):
         """
-        Add geometry nodes. "class_" is the class that will be used, "what" is the logic used to produce it.
-        Both can be "visual" or "collision"
+        Add a part geometries
         """
-        if what == "collision" and part.shapes is not None:
-            self.add_shapes(part, class_, T_world_link)
-        elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
-            self.add_mesh(part, class_, T_world_link)
+        for shape in part.shapes:
+            if shape.visual:
+                self.add_shape(part, "visual", T_world_link, shape)
+            if shape.collision:
+                self.add_shape(part, "collision", T_world_link, shape)
+
+        for mesh in part.meshes:
+            if mesh.visual:
+                self.add_mesh(part, "visual", T_world_link, mesh)
+            if mesh.collision:
+                self.add_mesh(part, "collision", T_world_link, mesh)
 
     def add_joint(self, joint: Joint):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
@@ -231,6 +248,10 @@ class ExporterMuJoCo(Exporter):
             joint_xml += 'type="hinge" '
         elif joint.joint_type == Joint.PRISMATIC:
             joint_xml += 'type="slide" '
+        elif joint.joint_type == Joint.BALL:
+            joint_xml += 'type="ball" '
+        else:
+            print(warning(f"Unknown joint type: {joint.joint_type}"))
 
         if joint.limits is not None and joint.properties.get("range", True):
             joint_xml += f'range="{joint.limits[0]} {joint.limits[1]}" '
@@ -283,7 +304,9 @@ class ExporterMuJoCo(Exporter):
             childclass = f'childclass="{self.default_class}" '
         self.append(f"<!-- Link {link.name} -->")
         T_parent_link = np.linalg.inv(T_world_parent) @ T_world_link
-        self.append(f'<body name="{link.name}" {self.pos_quat(T_parent_link)} {childclass}>')
+        self.append(
+            f'<body name="{link.name}" {self.pos_quat(T_parent_link)} {childclass}>'
+        )
 
         if parent_joint is None:
             if not link.fixed:
@@ -298,13 +321,7 @@ class ExporterMuJoCo(Exporter):
         # Adding geometry objects
         for part in link.parts:
             self.append(f"<!-- Part {part.name} -->")
-            self.add_geometries(
-                part,
-                T_world_link,
-                "visual",
-                "collision" if self.draw_collisions else "visual",
-            )
-            self.add_geometries(part, T_world_link, "collision", "collision")
+            self.add_geometries(part, T_world_link)
 
         # Adding frames attached to current link
         for frame, T_world_frame in link.frames.items():

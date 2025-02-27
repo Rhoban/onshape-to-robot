@@ -6,7 +6,7 @@ Adding dummy base link
 Introduction
 ------------
 
-If enabling this processor, a dummy base called ``base_link`` will be added in your robot. The base will be attached to this link using a ``fixed`` joint.
+If this processor is enabled, a dummy base called ``base_link`` will be added in your robot. The base will be attached to this link using a ``fixed`` joint.
 
 ``config.json`` entries
 -----------------------

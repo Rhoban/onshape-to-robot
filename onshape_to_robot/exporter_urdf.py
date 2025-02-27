@@ -3,7 +3,7 @@ import os
 from .message import warning
 from .robot import Robot, Link, Part, Joint
 from .config import Config
-from .shapes import Box, Cylinder, Sphere
+from .geometry import Box, Cylinder, Sphere, Shape, Mesh
 from .exporter import Exporter
 from .exporter_utils import xml_escape, rotation_matrix_to_rpy
 
@@ -14,16 +14,12 @@ class ExporterURDF(Exporter):
         self.config: Config = config
 
         self.ext: str = "urdf"
-        self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.package_name: str = ""
         self.additional_xml: str = ""
-        self.collisions_no_mesh: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
-            self.draw_collisions: bool = config.get("draw_collisions", False)
             self.package_name: str = config.get("package_name", "")
             additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
@@ -100,7 +96,7 @@ class ExporterURDF(Exporter):
         )
         self.append("</inertial>")
 
-    def add_mesh(self, part: Part, node: str, T_world_link: np.ndarray):
+    def add_mesh(self, part: Part, node: str, T_world_link: np.ndarray, mesh: Mesh):
         """
         Add a mesh node (e.g. STL) to the URDF file
         """
@@ -109,7 +105,7 @@ class ExporterURDF(Exporter):
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
         self.append(self.origin(T_link_part))
 
-        mesh_file = os.path.relpath(part.mesh_file, self.config.output_directory)
+        mesh_file = os.path.relpath(mesh.filename, self.config.output_directory)
         if self.package_name:
             mesh_file = self.package_name + "/" + mesh_file
 
@@ -122,58 +118,60 @@ class ExporterURDF(Exporter):
             self.append(f'<material name="{xml_escape(material_name)}">')
             self.append(
                 '<color rgba="%g %g %g 1.0"/>'
-                % (part.color[0], part.color[1], part.color[2])
+                % (mesh.color[0], mesh.color[1], mesh.color[2])
             )
             self.append("</material>")
 
         self.append(f"</{node}>")
 
-    def add_shapes(self, part: Part, node: str, T_world_link: np.ndarray):
+    def add_shape(self, part: Part, node: str, T_world_link: np.ndarray, shape: Shape):
         """
         Add shapes (box, sphere and cylinder) nodes to the URDF.
         """
-        for shape in part.shapes:
-            self.append(f"<{node}>")
+        self.append(f"<{node}>")
 
-            T_link_shape = (
-                np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        T_link_shape = (
+            np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        )
+        self.append(self.origin(T_link_shape))
+
+        self.append("<geometry>")
+        if isinstance(shape, Box):
+            self.append('<box size="%g %g %g" />' % tuple(shape.size))
+        elif isinstance(shape, Cylinder):
+            self.append(
+                '<cylinder length="%g" radius="%g" />' % (shape.length, shape.radius)
             )
-            self.append(self.origin(T_link_shape))
+        elif isinstance(shape, Sphere):
+            self.append('<sphere radius="%g" />' % shape.radius)
+        self.append("</geometry>")
 
-            self.append("<geometry>")
-            if isinstance(shape, Box):
-                self.append('<box size="%g %g %g" />' % tuple(shape.size))
-            elif isinstance(shape, Cylinder):
-                self.append(
-                    '<cylinder length="%g" radius="%g" />'
-                    % (shape.length, shape.radius)
-                )
-            elif isinstance(shape, Sphere):
-                self.append('<sphere radius="%g" />' % shape.radius)
-            self.append("</geometry>")
+        if node == "visual":
+            material_name = f"{part.name}_material"
+            self.append(f'<material name="{xml_escape(material_name)}">')
+            self.append(
+                '<color rgba="%g %g %g 1.0"/>'
+                % (shape.color[0], shape.color[1], shape.color[2])
+            )
+            self.append("</material>")
 
-            if node == "visual":
-                material_name = f"{part.name}_material"
-                self.append(f'<material name="{xml_escape(material_name)}">')
-                self.append(
-                    '<color rgba="%g %g %g 1.0"/>'
-                    % (part.color[0], part.color[1], part.color[2])
-                )
-                self.append("</material>")
+        self.append(f"</{node}>")
 
-            self.append(f"</{node}>")
-
-    def add_geometries(
-        self, part: Part, T_world_link: np.ndarray, node: str, what: str
-    ):
+    def add_geometries(self, part: Part, T_world_link: np.ndarray):
         """
-        Add geometry nodes. "node" is the actual XML node produced, "what" is the logic used to produce it.
-        Both can be "visual" or "collision"
+        Add a part geometries
         """
-        if what == "collision" and part.shapes is not None:
-            self.add_shapes(part, node, T_world_link)
-        elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
-            self.add_mesh(part, node, T_world_link)
+        for shape in part.shapes:
+            if shape.visual:
+                self.add_shape(part, "visual", T_world_link, shape)
+            if shape.collision:
+                self.add_shape(part, "collision", T_world_link, shape)
+
+        for mesh in part.meshes:
+            if mesh.visual:
+                self.add_mesh(part, "visual", T_world_link, mesh)
+            if mesh.collision:
+                self.add_mesh(part, "collision", T_world_link, mesh)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
@@ -212,6 +210,12 @@ class ExporterURDF(Exporter):
 
         if "friction" in joint.properties:
             self.append(f'<joint_properties friction="{joint.properties}"/>')
+
+        if joint.relation is not None:
+            self.append(
+                f'<mimic joint="{joint.relation.source_joint}" multiplier="{joint.relation.ratio}" />'
+            )
+
         self.append("</joint>")
 
     def add_frame(
@@ -261,13 +265,7 @@ class ExporterURDF(Exporter):
         # Adding geometry objects
         for part in link.parts:
             self.append(f"<!-- Part {part.name} -->")
-            self.add_geometries(
-                part,
-                T_world_link,
-                "visual",
-                "collision" if self.draw_collisions else "visual",
-            )
-            self.add_geometries(part, T_world_link, "collision", "collision")
+            self.add_geometries(part, T_world_link)
 
         self.append("</link>")
 

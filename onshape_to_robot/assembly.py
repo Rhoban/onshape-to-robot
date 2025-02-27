@@ -34,8 +34,6 @@ class DOF:
         limits: tuple | None,
         z_axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
     ):
-        if body1_id > body2_id:
-            body1_id, body2_id = body2_id, body1_id
         self.body1_id: int = body1_id
         self.body2_id: int = body2_id
         self.name: str = name
@@ -43,6 +41,14 @@ class DOF:
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
         self.z_axis: np.ndarray = z_axis
+
+    def flip(self, flip_limits: bool = True):
+        if flip_limits and self.limits is not None:
+            self.limits = (-self.limits[1], -self.limits[0])
+
+        # Flipping the joint around X axis
+        flip = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
+        self.T_world_mate[:3, :3] = self.T_world_mate[:3, :3] @ flip
 
     def other_body(self, body_id: int):
         if body_id == self.body1_id:
@@ -89,6 +95,8 @@ class Assembly:
         self.root_nodes: list = []
         # Overriden link names
         self.link_names: dict[int, str] = {}
+        # Relation indexed by target joints, values are [source joint, ratio]
+        self.relations: dict = {}
 
         self.ensure_workspace_or_version()
         self.find_assembly()
@@ -99,6 +107,7 @@ class Assembly:
         self.load_configuration()
         self.process_mates()
         self.build_trees()
+        self.find_relations()
         print("")
 
     def ensure_workspace_or_version(self):
@@ -230,11 +239,7 @@ class Assembly:
         """
         Retrieve all assembly data
         """
-        print(
-            bright(
-                f'* Retrieving assembly with id {self.element_id}'
-            )
-        )
+        print(bright(f"* Retrieving assembly with id {self.element_id}"))
 
         self.assembly_data: dict = self.client.get_assembly(
             self.document_id,
@@ -314,12 +319,34 @@ class Assembly:
         Load configuration parameters
         """
 
+        self.variable_values = None
+
+        # Extracting configuration v ariables
         parts = self.assembly_data["rootAssembly"]["fullConfiguration"].split(";")
         for part in parts:
             key_value = part.split("=")
             if len(key_value) == 2:
                 key, value = key_value
                 self.configuration_parameters[key] = value.replace("+", " ")
+
+    def get_variable_value(self, name: str):
+        if name in self.configuration_parameters:
+            return self.configuration_parameters[name]
+        else:
+            if self.variable_values is None:
+                self.variable_values = {}
+                variables = self.client.get_variables(
+                    self.document_id,
+                    self.version_id if self.version_id else self.workspace_id,
+                    self.element_id,
+                    "v" if self.version_id else "w",
+                    configuration=self.config.configuration,
+                )
+                for entry in variables:
+                    for variable in entry["variables"]:
+                        self.variable_values[variable["name"]] = variable["value"]
+
+            return self.variable_values[name]
 
     def get_occurrence(self, path: list):
         """
@@ -418,6 +445,10 @@ class Assembly:
                         limits = self.get_limits(joint_type, data["name"])
                 elif data["mateType"] == "FASTENED":
                     joint_type = Joint.FIXED
+                elif data["mateType"] == "BALL":
+                    joint_type = Joint.BALL
+                    if not self.config.ignore_limits:
+                        limits = self.get_limits(joint_type, data["name"])
                 else:
                     raise Exception(
                         f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
@@ -434,14 +465,6 @@ class Assembly:
                 # it is attached to
                 T_part_mate = self.get_mate_transform(mated_entity)
 
-                if data["inverted"]:
-                    if limits is not None:
-                        limits = (-limits[1], -limits[0])
-
-                    # Flipping the joint around X axis
-                    flip = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
-                    T_part_mate[:3, :3] = T_part_mate[:3, :3] @ flip
-
                 T_world_mate = T_world_part @ T_part_mate
 
                 limits_str = ""
@@ -455,53 +478,28 @@ class Assembly:
                 if occurrence_B not in self.instance_body:
                     self.make_body(occurrence_B)
 
-                self.dofs.append(
-                    DOF(
-                        self.instance_body[occurrence_A],
-                        self.instance_body[occurrence_B],
-                        name,
-                        joint_type,
-                        T_world_mate,
-                        limits,
-                    )
+                dof = DOF(
+                    self.instance_body[occurrence_A],
+                    self.instance_body[occurrence_B],
+                    name,
+                    joint_type,
+                    T_world_mate,
+                    limits,
                 )
+
+                if data["inverted"]:
+                    dof.flip()
+
+                self.dofs.append(dof)
 
         # Merging fixed links
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("fix_"):
                 self.merge_bodies(occurrence_A, occurrence_B)
 
-        # Processing frames / closing loops
+        # Processing frame mates
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
-            if data["name"].startswith("closing_"):
-                for k in 0, 1:
-                    mated_entity = data["matedEntities"][k]
-                    occurrence = mated_entity["matedOccurrence"][0]
-
-                    T_world_part = self.get_occurrence_transform(
-                        mated_entity["matedOccurrence"]
-                    )
-                    T_part_mate = self.get_mate_transform(mated_entity)
-                    T_world_mate = T_world_part @ T_part_mate
-
-                    self.frames.append(
-                        Frame(
-                            self.instance_body[occurrence],
-                            f"{data['name']}_{k+1}",
-                            T_world_mate,
-                        )
-                    )
-
-                if data["mateType"] == "FASTENED":
-                    self.closures.append(
-                        ["fixed", f"{data['name']}_1", f"{data['name']}_2"]
-                    )
-                else:
-                    self.closures.append(
-                        ["point", f"{data['name']}_1", f"{data['name']}_2"]
-                    )
-
-            elif data["name"].startswith("frame_"):
+            if data["name"].startswith("frame_"):
                 name = "_".join(data["name"].split("_")[1:])
                 if (
                     occurrence_A not in self.instance_body
@@ -537,6 +535,36 @@ class Assembly:
         for instance in self.assembly_data["rootAssembly"]["instances"]:
             if instance["id"] not in self.instance_body and not instance["suppressed"]:
                 self.make_body(instance["id"])
+
+        # Processing loop closing frames
+        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+            if data["name"].startswith("closing_"):
+                for k in 0, 1:
+                    mated_entity = data["matedEntities"][k]
+                    occurrence = mated_entity["matedOccurrence"][0]
+
+                    T_world_part = self.get_occurrence_transform(
+                        mated_entity["matedOccurrence"]
+                    )
+                    T_part_mate = self.get_mate_transform(mated_entity)
+                    T_world_mate = T_world_part @ T_part_mate
+
+                    self.frames.append(
+                        Frame(
+                            self.instance_body[occurrence],
+                            f"{data['name']}_{k+1}",
+                            T_world_mate,
+                        )
+                    )
+
+                if data["mateType"] == "FASTENED":
+                    self.closures.append(
+                        ["fixed", f"{data['name']}_1", f"{data['name']}_2"]
+                    )
+                else:
+                    self.closures.append(
+                        ["point", f"{data['name']}_1", f"{data['name']}_2"]
+                    )
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
@@ -582,6 +610,7 @@ class Assembly:
             dofs_to_remove = []
             for dof in dofs:
                 if dof.body1_id == current:
+                    dof.flip(flip_limits=False)
                     children.append(dof.body2_id)
                     dofs_to_remove.append(dof)
                 elif dof.body2_id == current:
@@ -619,6 +648,62 @@ class Assembly:
                 occurrence_B = data["matedEntities"][1]["matedOccurrence"][0]
 
                 yield data, occurrence_A, occurrence_B
+
+    def get_feature_by_id(self, feature_id: str):
+        """
+        Find a specific feature by its ID
+        """
+        for feature in self.features["features"]:
+            if feature["message"]["featureId"] == feature_id:
+                return feature
+
+        return None
+
+    def find_relations(self):
+        """
+        Finding relations features in the assembly
+        """
+        for feature in self.features["features"]:
+            if feature["typeName"] == "BTMMateRelation":
+                relation_name = feature["message"]["name"]
+
+                mated_dofs = None
+                ratio = None
+                reverse = None
+                for parameter in feature["message"]["parameters"]:
+                    if parameter["message"]["parameterId"] == "matesQuery":
+                        queries = parameter["message"]["queries"]
+                        if len(queries) == 2:
+                            dof1 = self.get_feature_by_id(
+                                queries[0]["message"]["featureId"]
+                            )["message"]["name"]
+                            dof2 = self.get_feature_by_id(
+                                queries[1]["message"]["featureId"]
+                            )["message"]["name"]
+                            if dof1.startswith("dof_") and dof2.startswith("dof_"):
+                                mated_dofs = [dof1[4:], dof2[4:]]
+                    elif parameter["message"]["parameterId"] == "relationRatio":
+                        ratio = self.read_expression(parameter["message"]["expression"])
+                    elif parameter["message"]["parameterId"] == "reverseDirection":
+                        reverse = parameter["message"]["value"]
+
+                if mated_dofs is not None and ratio is not None and reverse is not None:
+                    if not reverse:
+                        ratio = -ratio
+
+                    print(
+                        success(
+                            f"+ Found relation {relation_name} mating {mated_dofs} with ratio {ratio}"
+                        )
+                    )
+                    if mated_dofs[1] in self.relations:
+                        print(
+                            warning(
+                                f"Multiple relations found with {mated_dofs[1]} as target"
+                            )
+                        )
+
+                    self.relations[mated_dofs[1]] = [mated_dofs[0], ratio]
 
     def read_parameter_value(self, parameter: str, name: str):
         """
@@ -662,24 +747,22 @@ class Assembly:
         # Expression can itself be a variable from configuration
         # XXX: This doesn't handle all expression, only values and variables
         if expression[0] == "#":
-            expression = self.configuration_parameters[expression[1:]]
+            expression = self.get_variable_value(expression[1:])
         if expression[0:2] == "-#":
-            expression = "-" + self.configuration_parameters[expression[2:]]
+            expression = "-" + self.get_variable_value(expression[2:])
 
         parts = expression.split(" ")
 
         # Checking the unit, returning only radians and meters
-        if parts[1] == "deg":
+        if len(parts) == 1:
+            return float(parts[0])
+        elif parts[1] == "deg":
             return math.radians(float(parts[0]))
         elif parts[1] in ["radian", "rad"]:
-            # looking for PI
-            if isinstance(parts[0], str):
-                if parts[0] == "(PI)":
-                    value = math.pi
-                else:
-                    raise ValueError(f"{parts[0]} variable isn't supported")
-            else:
-                value = parts[0]
+            try:
+                value = float(parts[0])
+            except ValueError:
+                raise ValueError(f"{parts[0]} variable isn't supported")
             return float(value)
         elif parts[1] == "mm":
             return float(parts[0]) / 1000.0
@@ -734,11 +817,26 @@ class Assembly:
                             minimum = self.read_parameter_value(parameter, name)
                         if parameter["message"]["parameterId"] == "limitZMax":
                             maximum = self.read_parameter_value(parameter, name)
+                    elif joint_type == Joint.BALL:
+                        if (
+                            parameter["message"]["parameterId"]
+                            == "limitEulerConeAngleMax"
+                        ):
+                            minimum = 0
+                            maximum = self.read_parameter_value(parameter, name)
+                    else:
+                        print(
+                            warning(
+                                f"WARNING: Can't read limits for a joint of type {joint_type}"
+                            )
+                        )
+                        print(parameter)
         if enabled:
-            offset = self.get_offset(name)
-            if offset is not None:
-                minimum -= offset
-                maximum -= offset
+            if joint_type != Joint.BALL:
+                offset = self.get_offset(name)
+                if offset is not None:
+                    minimum -= offset
+                    maximum -= offset
             return (minimum, maximum)
         else:
             if joint_type != Joint.CONTINUOUS:

@@ -7,8 +7,10 @@ Specific entries
 Below are the global configuration entries.
 You might also want to check out the following documentation for more specific entries:
 
-* :doc:`URDF specific entries <exporter_urdf>`
-* :doc:`MuJoCo specific entries <exporter_mujoco>`
+* Exporters
+    * :doc:`URDF specific entries <exporter_urdf>`
+    * :doc:`SDF specific entries <exporter_sdf>`
+    * :doc:`MuJoCo specific entries <exporter_mujoco>`
 * :doc:`Processors <processors>` can define their own specific entries
 
 
@@ -52,10 +54,16 @@ Here is an example of complete ``config.json`` file, with details below:
         // Ignore limits (default: false)
         "ignore_limits": true,
 
-        // Parts to ignore (default: [])
-        "ignore": ["part1", "part2"],
-        // Parts to keep, overrides ignore if set (default: None)
-        "whitelist": ["body", "foot", "head"],
+        // Parts to ignore (default: {})
+        "ignore": {
+            // Ignore visual for visual
+            "part1": "visual",
+            "screw*": "visual",
+
+            // Ignore everything expect "leg" for collision
+            "*" : "collision"
+            "!leg": "collision"
+        },
 
         // Whether to keep frame links (default: false)
         "draw_frames": true,
@@ -71,7 +79,7 @@ Here is an example of complete ``config.json`` file, with details below:
             "echo 'Do something else'"
         ]
 
-        // More options available in specific exporters (URDF, MuJoCo)
+        // More options available in specific exporters (URDF, SDF, MuJoCo)
         // More options available in processors
     }
 
@@ -171,30 +179,29 @@ If it is not specified, the directory name will be used.
 
 If set to ``true``, the joint limits coming from Onshape will be ignored during export.
 
-``ignore`` *(default: [])*
+``ignore`` *(default: {})*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This can be a list of parts that you want to be ignored during the export.
 
+Alternatively, you can use a dict, where the values are either ``all``, ``visual`` or ``collision``. The rules will apply in order of appearance.
+
+You can use wildcards ``*`` to match multiple parts.
+
+You can prefix the part name with ``!`` to exclude it from the rule. For example, the following will ignore all parts for visual, except the ``leg`` part, turning the ignore list to a whitelist:
+
+.. code-block:: json
+
+    {
+        // Ignore everything from visual
+        "*": "collision",
+        // Except the leg part
+        "!leg": "collision"
+    }
+
 .. note::
 
     The dynamics of the part will not be ignored, but the visual and collision aspect will.
-    You can use wildcard, like ``screw_*`` to ignore all parts starting with ``screw_``.
-
-``whitelist`` *(default: None)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This can be used as the opposed of ``ignore``, to import only some items listed in the configuration
-(all items not listed in ``whitelist`` will be ignored if it is not ``None``)
-
-.. note::
-
-    If ``whitelist`` is used, ``ignore`` will not be taken into account.
-
-.. note::
-
-    The dynamics of the part will not be ignored, but the visual and collision aspect will.
-    You can use wildcard, like ``plate_*`` to import all parts starting with ``plate_``.
 
 .. _draw-frames:
 

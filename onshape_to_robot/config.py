@@ -21,7 +21,9 @@ class Config:
         self.output_directory: str = robot_path
 
         if self.robot_name is None:
-            self.robot_name = os.path.dirname(os.path.abspath(self.config_file)).split("/")[-1]
+            self.robot_name = os.path.dirname(os.path.abspath(self.config_file)).split(
+                "/"
+            )[-1]
 
         try:
             os.makedirs(self.output_directory)
@@ -74,7 +76,7 @@ class Config:
                 version += f" / workspace_id: {self.workspace_id}"
 
             return version
-    
+
     def parse_url(self):
         pattern = "https://(.*)/(.*)/([wv])/(.*)/e/(.*)"
         match = re.match(pattern, self.url)
@@ -111,7 +113,7 @@ class Config:
 
         if self.version_id and self.workspace_id:
             raise Exception("You can't specify workspace_id and version_id")
-        
+
         self.url: str = self.get("url", None, required=False)
         if self.url is not None:
             self.parse_url()
@@ -131,8 +133,9 @@ class Config:
         self.no_dynamics: bool = self.get("no_dynamics", False)
 
         # Ignore / whitelists
-        self.ignore: list[str] = self.get("ignore", [])
-        self.whitelist: list[str] | None = self.get("whitelist", required=False)
+        self.ignore: list[str] = self.get("ignore", {})
+        if isinstance(self.ignore, list):
+            self.ignore = {entry: "all" for entry in self.ignore}
 
         # Color override
         self.color: str | None = self.get("color", required=False)

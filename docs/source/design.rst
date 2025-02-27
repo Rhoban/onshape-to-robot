@@ -90,6 +90,7 @@ If you want to export a robot that is not fixed to the ground, use the "Fixed" f
 
 .. image:: _static/img/fixed.png
     :align: center 
+    :class: padding
 
 Robot with multiple base links
 ------------------------------
@@ -101,3 +102,11 @@ The robot can have multiple links. In that case, the first instance appearing on
     MuJoCo and SDF both supports multiple base links, while URDF doesn't.
 
     In that case, you might consider using multiple URDF files, or :ref:`adding a dummy base link<processor_dummy_base_link>`. However, this will fix all the base links to the base link without freedom.
+
+Gear relations
+--------------
+
+Gear relations are exported by onshape-to-robot. Be sure to click the **source joint** first, and then the **target joint**. They will be exported as ``<mimic>`` in :doc:`URDF <exporter_urdf>` and :doc:`SDF <exporter_sdf>` formats, and as equality constraints in :doc:`MuJoCo <exporter_mujoco>`.
+
+.. image:: _static/img/gear.png
+    :align: center

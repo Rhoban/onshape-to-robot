@@ -3,10 +3,11 @@ import os
 import hashlib
 import json
 import fnmatch
+from .geometry import Mesh
 from .message import warning, info, success, error, dim, bright
 from .assembly import Assembly
 from .config import Config
-from .robot import Part, Joint, Link, Robot
+from .robot import Part, Joint, Link, Robot, Relation
 from .csg import process as csg_process
 
 
@@ -23,20 +24,27 @@ class RobotBuilder:
             link = self.build_robot(node)
             self.robot.base_links.append(link)
 
-    def part_is_ignored(self, name: str) -> bool:
+    def part_is_ignored(self, name: str, what: str) -> bool:
         """
         Checks if a given part should be ignored by config
         """
-        if self.config.whitelist is None:
-            for entry in self.config.ignore:
-                if fnmatch.fnmatch(name, entry):
-                    return True
-            return False
-        else:
-            for entry in self.config.whitelist:
-                if fnmatch.fnmatch(name, entry):
-                    return False
-            return True
+        ignored = False
+
+        for entry in self.config.ignore:
+            to_ignore = True
+            match_entry = entry
+            if entry[0] == "!":
+                to_ignore = False
+                match_entry = entry[1:]
+
+            if fnmatch.fnmatch(name, match_entry):
+                if (
+                    self.config.ignore[entry] == "all"
+                    or self.config.ignore[entry] == what
+                ):
+                    ignored = to_ignore
+
+        return ignored
 
     def slugify(self, value: str) -> str:
         """
@@ -287,13 +295,21 @@ class RobotBuilder:
                 " (configuration: " + self.printable_configuration(instance) + ")"
             )
         symbol = "+"
-        if self.part_is_ignored(part_name):
+        if self.part_is_ignored(part_name, "visual") or self.part_is_ignored(
+            part_name, "collision"
+        ):
             symbol = "-"
-            extra += dim(" / ignoring visual and collision")
+            extra += dim(" / ")
+            if self.part_is_ignored(part_name, "visual"):
+                extra += dim("(ignoring visual)")
+            if self.part_is_ignored(part_name, "collision"):
+                extra += dim(" (ignoring collision)")
 
         print(success(f"{symbol} Adding part {instance['name']}{extra}"))
 
-        if self.part_is_ignored(part_name):
+        if self.part_is_ignored(part_name, "visual") and self.part_is_ignored(
+            part_name, "collision"
+        ):
             stl_file = None
         else:
             stl_file = self.get_stl(instance)
@@ -304,11 +320,28 @@ class RobotBuilder:
         # Obtain the instance dynamics
         mass, com, inertia = self.get_dynamics(instance)
 
+        # Obtain part pose
         T_world_part = np.array(occurrence["transform"]).reshape(4, 4)
 
-        unique_part_name = self.unique_name(instance, "part")
+        # Adding non-ignored meshes
+        meshes = []
+        mesh = Mesh(stl_file, color)
+        if self.part_is_ignored(part_name, "visual"):
+            mesh.visual = False
+        if self.part_is_ignored(part_name, "collision"):
+            mesh.collision = False
+        if mesh.visual or mesh.collision:
+            meshes.append(mesh)
 
-        part = Part(unique_part_name, T_world_part, stl_file, mass, com, inertia, color)
+        part = Part(
+            self.unique_name(instance, "part"),
+            T_world_part,
+            mass,
+            com,
+            inertia,
+            meshes,
+        )
+
         self.robot.links[-1].parts.append(part)
 
     def build_robot(self, body_id: int):
@@ -357,6 +390,10 @@ class RobotBuilder:
                 dof.limits,
                 dof.z_axis,
             )
+            if dof.name in self.assembly.relations:
+                source, ratio = self.assembly.relations[dof.name]
+                joint.relation = Relation(source, ratio)
+
             self.robot.joints.append(joint)
 
         return link

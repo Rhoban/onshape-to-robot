@@ -3,6 +3,7 @@ import os
 from .config import Config
 from .robot import Robot, Link, Part
 from .processor import Processor
+from .geometry import Mesh
 from .message import bright, info, error
 from stl import mesh, Mode
 
@@ -15,15 +16,12 @@ class ProcessorMergeParts(Processor):
     def __init__(self, config: Config):
         super().__init__(config)
         self.merge_stls = config.get("merge_stls", False)
-        self.meshes_to_write = {}
 
     def process(self, robot: Robot):
         if self.merge_stls:
             os.makedirs(self.config.asset_path("merged"), exist_ok=True)
             for link in robot.links:
                 self.merge_parts(link)
-            for stl_file, mesh in self.meshes_to_write.items():
-                self.save_mesh(mesh, stl_file)
 
     def load_mesh(self, stl_file: str) -> mesh.Mesh:
         return mesh.Mesh.from_file(stl_file)
@@ -33,8 +31,8 @@ class ProcessorMergeParts(Processor):
         # This ensures that same process will result in same STL file
         def get_header(name):
             header = "onshape-to-robot"
-            return header[:80].ljust(80, ' ')
-        
+            return header[:80].ljust(80, " ")
+
         mesh.get_header = get_header
         mesh.save(stl_file, mode=Mode.BINARY)
 
@@ -65,53 +63,64 @@ class ProcessorMergeParts(Processor):
         color = np.zeros(3)
         total_mass = 0
         for part in link.parts:
-            color += part.color * part.mass
+            if len(part.meshes):
+                meshes_color = np.mean([mesh.color for mesh in part.meshes], axis=0)
+                color += meshes_color * part.mass
             total_mass += part.mass
+        
         color /= total_mass
 
-        # Gathering shapes
-        shapes = None
+        # Changing shapes frame
+        merged_shapes = []
         for part in link.parts:
             if part.shapes is not None:
-                if shapes is None:
-                    shapes = []
                 for shape in part.shapes:
                     # Changing the shape frame
                     T_world_shape = part.T_world_part @ shape.T_part_shape
                     shape.T_part_shape = np.linalg.inv(T_world_com) @ T_world_shape
-                    shapes.append(shape)
+                    merged_shapes.append(shape)
 
         # Merging STL files
-        mesh = None
-        for part in link.parts:
-            if part.mesh_file:
-                # Retrieving meshes
-                part_mesh = self.load_mesh(part.mesh_file)
+        def accumulate_meshes(which: str):
+            mesh = None
+            for part in link.parts:
+                for part_mesh in part.meshes:
+                    if part_mesh.is_type(which):
+                        # Retrieving meshes
+                        part_mesh = self.load_mesh(part_mesh.filename)
 
-                # Expressing meshes in the merged frame
-                T_com_part = np.linalg.inv(T_world_com) @ part.T_world_part
-                self.transform_mesh(part_mesh, T_com_part)
+                        # Expressing meshes in the merged frame
+                        T_com_part = np.linalg.inv(T_world_com) @ part.T_world_part
+                        self.transform_mesh(part_mesh, T_com_part)
 
-                if mesh is None:
-                    mesh = part_mesh
-                else:
-                    mesh = self.combine_meshes(mesh, part_mesh)
+                        if mesh is None:
+                            mesh = part_mesh
+                        else:
+                            mesh = self.combine_meshes(mesh, part_mesh)
+            return mesh
 
-        combined_stl_file = self.config.asset_path("merged/" + "/" + link.name + ".stl")
-        self.meshes_to_write[combined_stl_file] = mesh
+        merged_meshes = []
+        visual_mesh = accumulate_meshes("visual")
+        if visual_mesh is not None:
+            filename = self.config.asset_path(
+                "merged/" + "/" + link.name + "_visual.stl"
+            )
+            self.save_mesh(visual_mesh, filename)
+            merged_meshes.append(Mesh(filename, color, visual=True, collision=False))
+
+        collision_mesh = accumulate_meshes("collision")
+        if collision_mesh is not None:
+            filename = self.config.asset_path(
+                "merged/" + "/" + link.name + "_collision.stl"
+            )
+            self.save_mesh(collision_mesh, filename)
+            merged_meshes.append(Mesh(filename, color, visual=False, collision=True))
 
         mass, com, inertia = link.get_dynamics(T_world_com)
 
         # Replacing parts with a single one
         link.parts = [
             Part(
-                link.name,
-                T_world_com,
-                combined_stl_file,
-                mass,
-                com,
-                inertia,
-                color,
-                shapes,
+                link.name, T_world_com, mass, com, inertia, merged_meshes, merged_shapes
             )
         ]

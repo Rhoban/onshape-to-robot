@@ -3,7 +3,7 @@ import os
 from .message import success
 from .robot import Robot, Link, Part, Joint
 from .config import Config
-from .shapes import Box, Cylinder, Sphere
+from .geometry import Box, Cylinder, Sphere, Mesh, Shape
 from .exporter import Exporter
 from .exporter_utils import xml_escape, rotation_matrix_to_rpy
 
@@ -28,15 +28,11 @@ class ExporterSDF(Exporter):
         self.config: Config = config
 
         self.ext: str = "sdf"
-        self.draw_collisions: bool = False
         self.no_dynamics: bool = False
         self.additional_xml: str = ""
-        self.collisions_no_mesh: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            self.collisions_no_mesh: bool = config.get("collisions_no_mesh", False)
-            self.draw_collisions: bool = config.get("draw_collisions", False)
             additional_xml_file = config.get("additional_xml", "")
             if additional_xml_file:
                 with open(
@@ -110,16 +106,24 @@ class ExporterSDF(Exporter):
         self.append("<emissive>0 0 0 0</emissive>")
         self.append("</material>")
 
-    def add_mesh(self, link: Link, part: Part, node: str, T_world_link: np.ndarray):
+    def add_mesh(
+        self,
+        link: Link,
+        part: Part,
+        node: str,
+        T_world_link: np.ndarray,
+        mesh: Mesh,
+        mesh_n: int,
+    ):
         """
         Add a mesh node (e.g. STL) to the SDF file
         """
-        self.append(f'<{node} name="{part.name}_{node}_mesh">')
+        self.append(f'<{node} name="{part.name}_{node}_mesh_{mesh_n}">')
 
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
         self.append(self.pose(T_link_part, relative_to=link.name))
 
-        mesh_file = os.path.relpath(part.mesh_file, self.config.output_directory)
+        mesh_file = os.path.relpath(mesh.filename, self.config.output_directory)
 
         self.append("<geometry>")
         self.append(
@@ -128,52 +132,69 @@ class ExporterSDF(Exporter):
         self.append("</geometry>")
 
         if node == "visual":
-            self.append_material(part.color)
+            self.append_material(mesh.color)
 
         self.append(f"</{node}>")
 
-    def add_shapes(self, link: Link, part: Part, node: str, T_world_link: np.ndarray):
+    def add_shape(
+        self,
+        link: Link,
+        part: Part,
+        node: str,
+        T_world_link: np.ndarray,
+        shape: Shape,
+        shape_n: int,
+    ):
         """
         Add shapes (box, sphere and cylinder) nodes to the SDF.
         """
         shape_n = 1
-        for shape in part.shapes:
-            self.append(f'<{node} name="{part.name}_{node}_shapes_{shape_n}">')
-            shape_n += 1
+        self.append(f'<{node} name="{part.name}_{node}_shapes_{shape_n}">')
+        shape_n += 1
 
-            T_link_shape = (
-                np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        T_link_shape = (
+            np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
+        )
+        self.append(self.pose(T_link_shape, relative_to=link.name))
+
+        self.append("<geometry>")
+        if isinstance(shape, Box):
+            self.append("<box><size>%g %g %g</size></box>" % tuple(shape.size))
+        elif isinstance(shape, Cylinder):
+            self.append(
+                "<cylinder><length>%g</length><radius>%g</radius></cylinder>"
+                % (shape.length, shape.radius)
             )
-            self.append(self.pose(T_link_shape, relative_to=link.name))
+        elif isinstance(shape, Sphere):
+            self.append("<sphere><radius>%g</radius></sphere>" % shape.radius)
+        self.append("</geometry>")
 
-            self.append("<geometry>")
-            if isinstance(shape, Box):
-                self.append("<box><size>%g %g %g</size></box>" % tuple(shape.size))
-            elif isinstance(shape, Cylinder):
-                self.append(
-                    "<cylinder><length>%g</length><radius>%g</radius></cylinder>"
-                    % (shape.length, shape.radius)
-                )
-            elif isinstance(shape, Sphere):
-                self.append("<sphere><radius>%g</radius></sphere>" % shape.radius)
-            self.append("</geometry>")
+        if node == "visual":
+            self.append_material(shape.color)
 
-            if node == "visual":
-                self.append_material(part.color)
+        self.append(f"</{node}>")
 
-            self.append(f"</{node}>")
-
-    def add_geometries(
-        self, link: Link, part: Part, T_world_link: np.ndarray, node: str, what: str
-    ):
+    def add_geometries(self, link: Link, part: Part, T_world_link: np.ndarray):
         """
-        Add geometry nodes. "node" is the actual XML node produced, "what" is the logic used to produce it.
-        Both can be "visual" or "collision"
+        Add a part geometries
         """
-        if what == "collision" and part.shapes is not None:
-            self.add_shapes(link, part, node, T_world_link)
-        elif part.mesh_file and (what == "visual" or not self.collisions_no_mesh):
-            self.add_mesh(link, part, node, T_world_link)
+        shape_n = 0
+        for shape in part.shapes:
+            if shape.visual:
+                shape_n += 1
+                self.add_shape(link, part, "visual", T_world_link, shape, shape_n)
+            if shape.collision:
+                shape_n += 1
+                self.add_shape(link, part, "collision", T_world_link, shape, shape_n)
+
+        mesh_n = 0
+        for mesh in part.meshes:
+            if mesh.visual:
+                mesh_n += 1
+                self.add_mesh(link, part, "visual", T_world_link, mesh, mesh_n)
+            if mesh.collision:
+                mesh_n += 1
+                self.add_mesh(link, part, "collision", T_world_link, mesh, mesh_n)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
@@ -210,6 +231,12 @@ class ExporterSDF(Exporter):
 
         self.append(f"<lower>{joint_limits[0]}</lower>")
         self.append(f"<upper>{joint_limits[1]}</upper>")
+
+        if joint.relation is not None:
+            self.append(
+                f'<mimic joint="{joint.relation.source_joint}"><multiplier>{joint.relation.ratio}</multiplier></mimic>'
+            )
+
         self.append("</axis>")
 
         self.append("</joint>")
@@ -251,14 +278,7 @@ class ExporterSDF(Exporter):
         # Adding geometry objects
         for part in link.parts:
             self.append(f"<!-- Part {part.name} -->")
-            self.add_geometries(
-                link,
-                part,
-                T_world_link,
-                "visual",
-                "collision" if self.draw_collisions else "visual",
-            )
-            self.add_geometries(link, part, T_world_link, "collision", "collision")
+            self.add_geometries(link, part, T_world_link)
 
         self.append("</link>")
 
