@@ -2,7 +2,6 @@ import os
 import subprocess
 import shutil
 import numpy as np
-import pymeshlab
 from .config import Config
 from .robot import Robot, Link, Part
 from .processor import Processor
@@ -21,6 +20,23 @@ class ProcessorSimplifySTLs(Processor):
         self.max_stl_size = config.get("max_stl_size", 3)
         self.out_folder = config.asset_path("")
 
+        if self.simplify_stls:
+            self.pymeshlab = self.check_meshlab()
+    
+    def check_meshlab(self):
+        print(bright("* Checking pymeshlab presence..."))
+        try:
+            import pymeshlab
+            return pymeshlab
+        except ImportError:
+            self.simplify_stls = False
+            print(
+                error("No pymeshlab, disabling STL simplification support")
+            )
+            print(info("TIP: consider installing pymeshlab:"))
+            print(info("pip install pymeshlab"))
+            
+
     def process(self, robot: Robot):
         if self.simplify_stls:
             for link in robot.links:
@@ -28,7 +44,7 @@ class ProcessorSimplifySTLs(Processor):
                     self.simplify_stl(part.mesh_file, self.out_folder + part.name + ".stl")
 
     def reduce_faces(self, in_file: str, out_file: str, reduction: float = 0.9):
-        ms = pymeshlab.MeshSet()
+        ms = self.pymeshlab.MeshSet()
         # Add input mesh
         ms.load_new_mesh(in_file)
 
