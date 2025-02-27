@@ -362,18 +362,24 @@ class Assembly:
 
         return T_world_part
 
-    def get_mate_transform(self, mated_entity: dict):
-        T_part_mate = np.eye(4)
-        T_part_mate[:3, :3] = np.stack(
+    def cs_to_transformation(self, cs: dict) -> np.ndarray:
+        """
+        Convert a coordinate system to a transformation matrix
+        """
+        T = np.eye(4)
+        T[:3, :3] = np.stack(
             (
-                np.array(mated_entity["matedCS"]["xAxis"]),
-                np.array(mated_entity["matedCS"]["yAxis"]),
-                np.array(mated_entity["matedCS"]["zAxis"]),
+                np.array(cs["xAxis"]),
+                np.array(cs["yAxis"]),
+                np.array(cs["zAxis"]),
             )
         ).T
-        T_part_mate[:3, 3] = mated_entity["matedCS"]["origin"]
+        T[:3, 3] = cs["origin"]
 
-        return T_part_mate
+        return T
+
+    def get_mate_transform(self, mated_entity: dict):
+        return self.cs_to_transformation(mated_entity["matedCS"])
 
     def make_body(self, id: str):
         """
@@ -574,6 +580,19 @@ class Assembly:
                 link_name = "_".join(feature["featureData"]["name"].split("_")[1:])
                 body_id = self.instance_body[feature["featureData"]["occurrence"][0]]
                 self.link_names[body_id] = link_name
+
+            if feature["featureType"] == "mateConnector" and feature["featureData"][
+                "name"
+            ].startswith("frame_"):
+                name = "_".join(feature["featureData"]["name"].split("_")[1:])
+                occurrence = feature["featureData"]["occurrence"]
+                T_world_occurrence = self.get_occurrence_transform(occurrence)
+                body_id = self.instance_body[occurrence[0]]
+                T_occurrence_mate = self.cs_to_transformation(
+                    feature["featureData"]["mateConnectorCS"]
+                )
+                T_world_mate = T_world_occurrence @ T_occurrence_mate
+                self.frames.append(Frame(body_id, name, T_world_mate))
 
         print(success(f"* Found total {len(self.dofs)} degrees of freedom"))
 
