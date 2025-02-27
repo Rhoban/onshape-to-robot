@@ -1,7 +1,4 @@
 import os
-import subprocess
-import shutil
-import numpy as np
 from .config import Config
 from .robot import Robot, Link, Part
 from .processor import Processor
