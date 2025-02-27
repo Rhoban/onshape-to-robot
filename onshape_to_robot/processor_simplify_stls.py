@@ -1,6 +1,6 @@
 import os
 from .config import Config
-from .robot import Robot, Link, Part
+from .robot import Robot
 from .processor import Processor
 from .message import bright, info, error
 
