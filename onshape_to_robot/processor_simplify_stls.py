@@ -74,7 +74,7 @@ class ProcessorSimplifySTLs(Processor):
         if size_M > self.max_stl_size:
             print(
                 info(
-                    f"+ {os.path.basename(in_file)} is {size_M:.2f} M, running mesh simplification"
+                    f"+ {os.path.basename(filename)} is {size_M:.2f} M, running mesh simplification"
                 )
             )
-            self.reduce_faces(filename, filename, self.max_stl_size / size_M)
+            self.reduce_faces(filename, self.max_stl_size / size_M)
