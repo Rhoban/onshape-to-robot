@@ -209,7 +209,7 @@ class ExporterURDF(Exporter):
             self.append(f"<limit {limits}/>")
 
         if "friction" in joint.properties:
-            self.append(f'<joint_properties friction="{joint.properties}"/>')
+            self.append(f'<joint_properties friction="{joint.properties["friction"]}"/>')
 
         if joint.relation is not None:
             self.append(
