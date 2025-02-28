@@ -401,8 +401,9 @@ class Assembly:
         if body1_id > body2_id:
             body1_id, body2_id = body2_id, body1_id
 
-        self.instance_body[occurrence_A] = body1_id
-        self.instance_body[occurrence_B] = body1_id
+        for occurrence in self.instance_body:
+            if self.instance_body[occurrence] == body2_id:
+                self.instance_body[occurrence] = body1_id
 
         for dof in self.dofs:
             if dof.body1_id == body2_id:
@@ -600,7 +601,6 @@ class Assembly:
         """
         Perform checks on the produced tree
         """
-
         self.body_in_tree = []
         for body_id in self.instance_body.values():
             if body_id != INSTANCE_IGNORE and body_id not in self.body_in_tree:
@@ -614,7 +614,6 @@ class Assembly:
         """
         Building a tree starting a root_node
         """
-
         # Append the root node
         self.root_nodes.append(root_node)
 
