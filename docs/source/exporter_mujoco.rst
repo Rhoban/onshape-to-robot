@@ -39,15 +39,15 @@ Here is an example of complete ``config.json`` file, with details below:
             // Default properties for all joints
             "default": {
                 "actuated": true,
-                "max_effort": 10.0,
-                "friction": 0.5,
+                "forcerange": 10.0,
+                "frictionloss": 0.5,
                 "limits": [0.5, 1.2]
                 // ...
             },
             // Set the properties for a specific joint
             "joint_name": {
-                "max_effort": 20.0,
-                "friction": 0.1
+                "forcerange": 20.0,
+                "frictionloss": 0.1
                 // ...
             }
         }
