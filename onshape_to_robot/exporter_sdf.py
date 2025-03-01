@@ -237,6 +237,11 @@ class ExporterSDF(Exporter):
                 f'<mimic joint="{joint.relation.source_joint}"><multiplier>{joint.relation.ratio}</multiplier></mimic>'
             )
 
+        self.append("<dynamics>")
+        self.append(f"<friction>{joint.properties.get('friction', 0.)}</friction>")
+        self.append(f"<damping>{joint.properties.get('damping', 0.)}</damping>")
+        self.append("</dynamics>")
+
         self.append("</axis>")
 
         self.append("</joint>")
