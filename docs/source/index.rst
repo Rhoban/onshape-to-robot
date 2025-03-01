@@ -23,6 +23,7 @@ to descriptions format like **URDF**, **SDF** or **MuJoCo**, so that you can use
 * `onshape-to-robot GitHub repository <https://github.com/rhoban/onshape-to-robot/>`_
 * `Robots examples GitHub repository <https://github.com/rhoban/onshape-to-robot-examples/>`_
 * `onshape-to-robot on pypi <https://pypi.org/project/onshape-to-robot/>`_
+* `video tutorial <https://www.youtube.com/watch?v=C8oK4uUmbRw>`_ (some information may be outdated)
 
 .. toctree::
    :maxdepth: 2
