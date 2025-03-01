@@ -253,7 +253,7 @@ class ExporterSDF(Exporter):
         T_world_link: np.ndarray,
         T_world_frame: np.ndarray,
     ):
-        self.append(f"<!-- Frame {frame} (dummy link + fixed joint) -->")
+        self.append(f"<!-- Frame {frame} -->")
         T_link_frame = np.linalg.inv(T_world_link) @ T_world_frame
 
         self.append(f'<frame name="{frame}">')
