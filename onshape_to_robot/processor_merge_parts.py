@@ -54,6 +54,10 @@ class ProcessorMergeParts(Processor):
     def merge_parts(self, link: Link):
         print(info(f"+ Merging parts for {link.name}"))
 
+        merge_everything = (
+            self.merge_stls != "collision" and self.merge_stls != "visual"
+        )
+
         # Computing the frame where the new part will be located at
         _, com, __ = link.get_dynamics()
         T_world_com = np.eye(4)
@@ -67,7 +71,7 @@ class ProcessorMergeParts(Processor):
                 meshes_color = np.mean([mesh.color for mesh in part.meshes], axis=0)
                 color += meshes_color * part.mass
             total_mass += part.mass
-        
+
         color /= total_mass
 
         # Changing shapes frame
@@ -75,10 +79,11 @@ class ProcessorMergeParts(Processor):
         for part in link.parts:
             if part.shapes is not None:
                 for shape in part.shapes:
-                    # Changing the shape frame
-                    T_world_shape = part.T_world_part @ shape.T_part_shape
-                    shape.T_part_shape = np.linalg.inv(T_world_com) @ T_world_shape
-                    merged_shapes.append(shape)
+                    if merge_everything or shape.is_type(self.merge_stls):
+                        # Changing the shape frame
+                        T_world_shape = part.T_world_part @ shape.T_part_shape
+                        shape.T_part_shape = np.linalg.inv(T_world_com) @ T_world_shape
+                        merged_shapes.append(shape)
 
         # Merging STL files
         def accumulate_meshes(which: str):
@@ -86,6 +91,11 @@ class ProcessorMergeParts(Processor):
             for part in link.parts:
                 for part_mesh in part.meshes:
                     if part_mesh.is_type(which):
+                        if which == "visual":
+                            part_mesh.visual = False
+                        else:
+                            part_mesh.collision = False
+                            
                         # Retrieving meshes
                         part_mesh = self.load_mesh(part_mesh.filename)
 
@@ -100,27 +110,47 @@ class ProcessorMergeParts(Processor):
             return mesh
 
         merged_meshes = []
-        visual_mesh = accumulate_meshes("visual")
-        if visual_mesh is not None:
-            filename = self.config.asset_path(
-                "merged/" + "/" + link.name + "_visual.stl"
-            )
-            self.save_mesh(visual_mesh, filename)
-            merged_meshes.append(Mesh(filename, color, visual=True, collision=False))
 
-        collision_mesh = accumulate_meshes("collision")
-        if collision_mesh is not None:
-            filename = self.config.asset_path(
-                "merged/" + "/" + link.name + "_collision.stl"
-            )
-            self.save_mesh(collision_mesh, filename)
-            merged_meshes.append(Mesh(filename, color, visual=False, collision=True))
+        if self.merge_stls != "collision":
+            visual_mesh = accumulate_meshes("visual")
+            if visual_mesh is not None:
+                filename = self.config.asset_path(
+                    "merged/" + "/" + link.name + "_visual.stl"
+                )
+                self.save_mesh(visual_mesh, filename)
+                merged_meshes.append(
+                    Mesh(filename, color, visual=True, collision=False)
+                )
+
+        if self.merge_stls != "visual":
+            collision_mesh = accumulate_meshes("collision")
+            if collision_mesh is not None:
+                filename = self.config.asset_path(
+                    "merged/" + "/" + link.name + "_collision.stl"
+                )
+                self.save_mesh(collision_mesh, filename)
+                merged_meshes.append(
+                    Mesh(filename, color, visual=False, collision=True)
+                )
 
         mass, com, inertia = link.get_dynamics(T_world_com)
+        if merge_everything:
+            # Remove all parts
+            link.parts = []
+        else:
+            # We keep the existing parts and add a massless part with merged meshes
+            mass = 0
+            inertia *= 0
 
         # Replacing parts with a single one
-        link.parts = [
+        link.parts.append(
             Part(
-                link.name, T_world_com, mass, com, inertia, merged_meshes, merged_shapes
+                f"{link.name}_parts",
+                T_world_com,
+                mass,
+                com,
+                inertia,
+                merged_meshes,
+                merged_shapes,
             )
-        ]
+        )

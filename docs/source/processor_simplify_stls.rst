@@ -41,3 +41,5 @@ If set to ``true``, the STL files will be simplified.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The maximum size of the STL files in MB. If the size of a file exceeds this limit, it will be simplified.
+
+You can also set it to ``"visual"`` to simplify only the visual parts, or to ``"collision"`` to simplify only the collision parts.

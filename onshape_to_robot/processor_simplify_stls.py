@@ -34,10 +34,14 @@ class ProcessorSimplifySTLs(Processor):
 
     def process(self, robot: Robot):
         if self.simplify_stls:
+            simplify_all = (
+                self.simplify_stls != "vision" and self.simplify_stls != "collision"
+            )
             for link in robot.links:
                 for part in link.parts:
                     for mesh in part.meshes:
-                        self.simplify_stl(mesh.filename)
+                        if simplify_all or mesh.is_type(self.simplify_stls):
+                            self.simplify_stl(mesh.filename)
 
     def reduce_faces(self, filename: str, reduction: float = 0.9):
         mesh_set = self.pymeshlab.MeshSet()
