@@ -83,7 +83,7 @@ Here is a document that can be used (be sure to turn on "composite parts" when i
 Joint frames
 ------------
 
-Joint frames are the ones you see in OnShape when you click on the joint in the tree on the left.
+Joint frames are the ones you see in Onshape when you click on the joint in the tree on the left.
 Thus, they are always revolving around the z axis, or translating along the *z axis*.
 
 .. image:: _static/img/zaxis.png

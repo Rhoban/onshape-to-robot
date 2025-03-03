@@ -140,7 +140,7 @@ class Client:
                 if entry["name"] == name:
                     return entry["partId"]
         else:
-            print("OnShape ERROR: Can't find new partid for " + str(partid))
+            print("Onshape ERROR: Can't find new partid for " + str(partid))
 
         return partid
 

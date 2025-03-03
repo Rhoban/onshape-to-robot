@@ -67,7 +67,7 @@ class Assembly:
     def __init__(self, config: Config):
         self.config: Config = config
 
-        # Creating OnShape API client
+        # Creating Onshape API client
         self.client = Client(logging=False, creds=self.config.config_file)
 
         self.document_id: str = config.document_id
@@ -731,7 +731,7 @@ class Assembly:
 
     def read_parameter_value(self, parameter: str, name: str):
         """
-        Try to read a parameter value from OnShape
+        Try to read a parameter value from Onshape
         """
 
         # This is an expression
@@ -766,7 +766,7 @@ class Assembly:
 
     def read_expression(self, expression: str):
         """
-        Reading an expression from OnShape
+        Reading an expression from Onshape
         """
         # Expression can itself be a variable from configuration
         # XXX: This doesn't handle all expression, only values and variables

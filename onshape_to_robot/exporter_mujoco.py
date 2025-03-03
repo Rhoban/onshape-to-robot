@@ -36,7 +36,7 @@ class ExporterMuJoCo(Exporter):
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
         if self.config:
-            self.append(f"<!-- OnShape {self.config.printable_version()} -->")
+            self.append(f"<!-- Onshape {self.config.printable_version()} -->")
         self.append(f'<mujoco model="{robot.name}">')
         self.append(
             f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />'

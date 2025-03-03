@@ -78,7 +78,7 @@ class Onshape():
             self._secret_key = os.getenv('ONSHAPE_SECRET_KEY')
 
             if self._url is None or self._access_key is None or self._secret_key is None:
-                print(Fore.RED + 'ERROR: No OnShape API access key are set' + Style.RESET_ALL)
+                print(Fore.RED + 'ERROR: No Onshape API access key are set' + Style.RESET_ALL)
                 print()
                 print(Fore.BLUE + 'TIP: Connect to https://dev-portal.onshape.com/keys, and edit your .bashrc file:' + Style.RESET_ALL)
                 print(Fore.BLUE + 'export ONSHAPE_API=https://cad.onshape.com' + Style.RESET_ALL)
@@ -224,7 +224,7 @@ class Onshape():
             return self.request(method, location.path, query=new_query, headers=headers, base_url=new_base_url)
         elif not 200 <= res.status_code <= 206:
             print(url)
-            print('! ERROR ('+str(res.status_code)+') while using OnShape API')
+            print('! ERROR ('+str(res.status_code)+') while using Onshape API')
             if res.text:
                 print('! '+res.text)
 

@@ -11,7 +11,7 @@ import re
 
 class Simulation:
     """
-    A Bullet simulation involving OnShape to robot model
+    A Bullet simulation involving Onshape to robot model
     """
 
     def __init__(self, robotPath, floor=True, fixed=False, transparent=False, gui=True, ignore_self_collisions=False,

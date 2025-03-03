@@ -4,7 +4,7 @@
 <img src="docs/source/_static/img/main.png" />
 </p>
 
-This tool is based on the [OnShape API](https://dev-portal.onshape.com/) to retrieve
+This tool is based on the [Onshape API](https://dev-portal.onshape.com/) to retrieve
 informations from an assembly and build a robot description (URDF, SDF, MuJoCo ) suitable
 for physics simulation.
 

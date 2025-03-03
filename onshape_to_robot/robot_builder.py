@@ -112,7 +112,7 @@ class RobotBuilder:
     def unique_name(self, part: dict, type: str):
         """
         Get unique part name (plate, plate_2, plate_3, ...)
-        In the case where multiple parts have the same name in OnShape, they will result in different names in the URDF
+        In the case where multiple parts have the same name in Onshape, they will result in different names in the URDF
         """
         while True:
             name = self.part_name(part, include_configuration=True)

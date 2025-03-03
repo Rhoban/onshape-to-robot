@@ -36,7 +36,7 @@ class ExporterURDF(Exporter):
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
         if self.config:
-            self.append(f"<!-- OnShape {self.config.printable_version()} -->")
+            self.append(f"<!-- Onshape {self.config.printable_version()} -->")
         self.append(f'<robot name="{robot.name}">')
 
         if len(robot.base_links) > 1:

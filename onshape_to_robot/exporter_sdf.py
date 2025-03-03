@@ -48,7 +48,7 @@ class ExporterSDF(Exporter):
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
         if self.config:
-            self.append(f"<!-- OnShape {self.config.printable_version()} -->")
+            self.append(f"<!-- Onshape {self.config.printable_version()} -->")
         self.append('<sdf version="1.7">')
         self.append(f'<model name="{xml_escape(robot.name)}">')
 

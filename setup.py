@@ -8,7 +8,7 @@ setuptools.setup(
     version="1.4.0",
     author="Rhoban team",
     author_email="team@rhoban.com",
-    description="Converting OnShape assembly to robot definition (URDF, SDF, MuJoCo) through OnShape API ",
+    description="Converting Onshape assembly to robot definition (URDF, SDF, MuJoCo) through Onshape API ",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/rhoban/onshape-to-robot/",

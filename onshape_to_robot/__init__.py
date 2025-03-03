@@ -1,1 +1,1 @@
-"""Export models from OnShape to other robotics formats."""
+"""Export models from Onshape to other robotics formats."""
