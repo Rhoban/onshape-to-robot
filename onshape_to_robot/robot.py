@@ -124,6 +124,22 @@ class Joint:
         self.relation: Relation | None = None
 
 
+class Closure:
+    """
+    A kinematics closure
+    """
+
+    FIXED = "fixed"
+    REVOLUTE = "revolute"
+    BALL = "ball"
+    SLIDER = "slider"
+
+    def __init__(self, closure_type: str, frame1: str, frame2: str):
+        self.closure_type: str = closure_type
+        self.frame1: str = frame1
+        self.frame2: str = frame2
+
+
 class Robot:
     """
     Robot representation produced after requesting Onshape API, and before
@@ -135,7 +151,7 @@ class Robot:
         self.links: list[Link] = []
         self.base_links: list[Link] = []
         self.joints: list[Joint] = []
-        self.closures: list = []
+        self.closures: list[Closure] = []
 
     def get_link(self, name: str):
         for link in self.links:

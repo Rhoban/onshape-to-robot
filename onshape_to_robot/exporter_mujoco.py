@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from .message import success, warning
-from .robot import Robot, Link, Part, Joint
+from .robot import Robot, Link, Part, Joint, Closure
 from .config import Config
 from .geometry import Box, Cylinder, Sphere, Mesh, Shape
 from .exporter import Exporter
@@ -122,15 +122,33 @@ class ExporterMuJoCo(Exporter):
 
         self.append("</actuator>")
 
+    def translate_z(self, T: np.ndarray, z: float) -> np.ndarray:
+        return T @ np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, z], [0, 0, 0, 1]])
+
     def add_equalities(self, robot: Robot):
         self.append("<equality>")
-        for type, frame1, frame2 in robot.closures:
-            if type == "fixed":
-                self.append(f'<weld site1="{frame1}" site2="{frame2}" />')
-            elif type == "point":
-                self.append(f'<connect site1="{frame1}" site2="{frame2}" />')
+        for closure in robot.closures:
+            if closure.closure_type == Closure.FIXED:
+                self.append(
+                    f'<weld site1="{closure.frame1}" site2="{closure.frame2}" />'
+                )
+            elif closure.closure_type == Closure.REVOLUTE:
+                self.append(
+                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" />'
+                )
+                self.append(
+                    f'<connect site1="{closure.frame1}_z" site2="{closure.frame2}_z" />'
+                )
+            elif closure.closure_type == Closure.BALL:
+                self.append(
+                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" />'
+                )
             else:
-                raise ValueError(f"Unknown closure type: {type}")
+                print(
+                    warning(
+                        f"Closure type: {closure.closure_type} is not supported with MuJoCo equality constraints"
+                    )
+                )
 
         for joint in robot.joints:
             if joint.relation is not None:
@@ -326,6 +344,16 @@ class ExporterMuJoCo(Exporter):
         # Adding frames attached to current link
         for frame, T_world_frame in link.frames.items():
             self.add_frame(link, frame, T_world_link, T_world_frame)
+            is_hinge_closure = False
+            for closure in robot.closures:
+                if closure.closure_type == Closure.REVOLUTE and (
+                    closure.frame1 == frame or closure.frame2 == frame
+                ):
+                    is_hinge_closure = True
+                    break
+            if is_hinge_closure:
+                T_world_frame = self.translate_z(T_world_frame, 0.1)
+                self.add_frame(link, frame + "_z", T_world_link, T_world_frame)
 
         # Adding joints and children links
         for joint in robot.get_link_joints(link):

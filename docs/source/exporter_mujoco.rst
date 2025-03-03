@@ -13,7 +13,8 @@ MuJoCo is a standard physics simulator, coming with an extensive description for
 * When :ref:`kinematic loops <kinematic-loops>` are present, they will be enforced using equality constraints.
 
   * If the loop is achieved using a ``fixed`` connector, a ``weld`` constraint will be added.
-  * Else, a ``connect`` constraint will be added.
+  * If a ``ball`` joint is used, a ``connect`` constraint will be added
+  * If a ``revolute`` joint is used, two ``connect`` constraints will be used
 
 * Additionally to the ``robot.xml`` file, a ``scene.xml`` file will be produced, adding floor and lighting useful for testing purpose.
 

@@ -7,7 +7,7 @@ from .geometry import Mesh
 from .message import warning, info, success, error, dim, bright
 from .assembly import Assembly
 from .config import Config
-from .robot import Part, Joint, Link, Robot, Relation
+from .robot import Part, Joint, Link, Robot, Relation, Closure
 from .csg import process as csg_process
 
 
@@ -16,7 +16,10 @@ class RobotBuilder:
         self.config: Config = config
         self.assembly: Assembly = Assembly(config)
         self.robot: Robot = Robot(config.robot_name)
-        self.robot.closures = self.assembly.closures
+
+        for closure_type, frame1, frame2 in self.assembly.closures:
+            self.robot.closures.append(Closure(closure_type, frame1, frame2))
+
         self.unique_names = {}
         self.stl_filenames: dict = {}
 

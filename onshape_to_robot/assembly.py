@@ -564,14 +564,20 @@ class Assembly:
                         )
                     )
 
-                if data["mateType"] == "FASTENED":
-                    self.closures.append(
-                        ["fixed", f"{data['name']}_1", f"{data['name']}_2"]
-                    )
-                else:
-                    self.closures.append(
-                        ["point", f"{data['name']}_1", f"{data['name']}_2"]
-                    )
+                closure_types = {
+                    "FASTENED": "fixed",
+                    "REVOLUTE": "revolute",
+                    "BALL": "ball",
+                    "SLIDER": "slider",
+                }
+
+                self.closures.append(
+                    [
+                        closure_types.get(data["mateType"], "unknown"),
+                        f"{data['name']}_1",
+                        f"{data['name']}_2",
+                    ]
+                )
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
