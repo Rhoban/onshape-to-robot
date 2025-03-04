@@ -289,15 +289,15 @@ class ExporterMuJoCo(Exporter):
 
     def add_frame(
         self,
-        link: Link,
         frame: str,
         T_world_link: np.ndarray,
         T_world_frame: np.ndarray,
+        group: int = 0,
     ):
         self.append(f"<!-- Frame {frame} (dummy link + fixed joint) -->")
         T_link_frame = np.linalg.inv(T_world_link) @ T_world_frame
 
-        site: str = f'<site name="{frame}" '
+        site: str = f'<site group="{group}" name="{frame}" '
         site += self.pos_quat(T_link_frame) + " "
         site += " />"
         self.append(site)
@@ -343,7 +343,6 @@ class ExporterMuJoCo(Exporter):
 
         # Adding frames attached to current link
         for frame, T_world_frame in link.frames.items():
-            self.add_frame(link, frame, T_world_link, T_world_frame)
             is_hinge_closure = False
             for closure in robot.closures:
                 if closure.closure_type == Closure.REVOLUTE and (
@@ -351,9 +350,13 @@ class ExporterMuJoCo(Exporter):
                 ):
                     is_hinge_closure = True
                     break
+
             if is_hinge_closure:
+                self.add_frame(frame, T_world_link, T_world_frame, group=3)
                 T_world_frame = self.translate_z(T_world_frame, 0.1)
-                self.add_frame(link, frame + "_z", T_world_link, T_world_frame)
+                self.add_frame(frame + "_z", T_world_link, T_world_frame, group=3)
+            else:
+                self.add_frame(frame, T_world_link, T_world_frame)
 
         # Adding joints and children links
         for joint in robot.get_link_joints(link):
