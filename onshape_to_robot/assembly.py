@@ -4,6 +4,7 @@ from .config import Config
 from .message import error, info, bright, success, warning
 from .onshape_api.client import Client
 from .robot import Joint
+from .expression import ExpressionParser
 
 INSTANCE_IGNORE = -1
 
@@ -69,6 +70,8 @@ class Assembly:
 
         # Creating Onshape API client
         self.client = Client(logging=False, creds=self.config.config_file)
+        self.expression_parser = ExpressionParser()
+        self.expression_parser.variables_lazy_loading = self.load_variables
 
         self.document_id: str = config.document_id
         self.workspace_id: str | None = config.workspace_id
@@ -327,26 +330,30 @@ class Assembly:
             key_value = part.split("=")
             if len(key_value) == 2:
                 key, value = key_value
-                self.configuration_parameters[key] = value.replace("+", " ")
+                value = value.replace("+", " ")
+                self.configuration_parameters[key] = value
+                try:
+                    param_value = self.expression_parser.eval_expr(value)
+                    self.expression_parser.variables[key] = param_value
+                except ValueError:
+                    pass
 
-    def get_variable_value(self, name: str):
-        if name in self.configuration_parameters:
-            return self.configuration_parameters[name]
-        else:
-            if self.variable_values is None:
-                self.variable_values = {}
-                variables = self.client.get_variables(
-                    self.document_id,
-                    self.version_id if self.version_id else self.workspace_id,
-                    self.element_id,
-                    "v" if self.version_id else "w",
-                    configuration=self.config.configuration,
+    def load_variables(self):
+        """
+        Load variables values (only if needed) in the expression parser
+        """
+        variables = self.client.get_variables(
+            self.document_id,
+            self.version_id if self.version_id else self.workspace_id,
+            self.element_id,
+            wmv="v" if self.version_id else "w",
+            configuration=self.config.configuration,
+        )
+        for entry in variables:
+            for variable in entry["variables"]:
+                self.expression_parser.variables[variable["name"]] = (
+                    self.expression_parser.eval_expr(variable["value"])
                 )
-                for entry in variables:
-                    for variable in entry["variables"]:
-                        self.variable_values[variable["name"]] = variable["value"]
-
-            return self.variable_values[name]
 
     def get_occurrence(self, path: list):
         """
@@ -768,36 +775,7 @@ class Assembly:
         """
         Reading an expression from Onshape
         """
-        # Expression can itself be a variable from configuration
-        # XXX: This doesn't handle all expression, only values and variables
-        if expression[0] == "#":
-            expression = self.get_variable_value(expression[1:])
-        if expression[0:2] == "-#":
-            expression = "-" + self.get_variable_value(expression[2:])
-
-        parts = expression.split(" ")
-
-        # Checking the unit, returning only radians and meters
-        if len(parts) == 1:
-            return float(parts[0])
-        elif parts[1] == "deg":
-            return math.radians(float(parts[0]))
-        elif parts[1] in ["radian", "rad"]:
-            try:
-                value = float(parts[0])
-            except ValueError:
-                raise ValueError(f"{parts[0]} variable isn't supported")
-            return float(value)
-        elif parts[1] == "mm":
-            return float(parts[0]) / 1000.0
-        elif parts[1] == "cm":
-            return float(parts[0]) / 100.0
-        elif parts[1] == "m":
-            return float(parts[0])
-        elif parts[1] == "in":
-            return float(parts[0]) * 0.0254
-        else:
-            raise Exception(f"Unknown unit: {parts[1]}")
+        return self.expression_parser.eval_expr(expression)
 
     def get_offset(self, name: str):
         """
