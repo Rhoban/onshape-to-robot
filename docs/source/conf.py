@@ -22,7 +22,7 @@ copyright = '2025, Rhoban'
 author = 'Rhoban'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3.27'
+release = 'latest'
 
 
 # -- General configuration ---------------------------------------------------
