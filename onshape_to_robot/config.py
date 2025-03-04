@@ -125,8 +125,13 @@ class Config:
 
         self.assembly_name: str = self.get("assembly_name", required=False)
         self.output_format: str = self.get("output_format", "urdf")
-        self.configuration: str = self.get("configuration", "default")
+        self.configuration: str | dict = self.get("configuration", "default")
         self.ignore_limits: bool = self.get("ignore_limits", False)
+
+        if isinstance(self.configuration, dict):
+            self.configuration = ";".join(
+                [f"{k}={v}" for k, v in self.configuration.items()]
+            )
 
         # Joint specs
         self.joint_properties: dict = self.get("joint_properties", {})

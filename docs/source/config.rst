@@ -166,6 +166,21 @@ Should be written as the following:
 
     Configuration=Long;RemovePart=true;Length=30mm
 
+.. note::
+
+    Alternatively, you can specify the configuration as a dictionary:
+
+    .. code-block:: json
+
+        {
+            // ...
+            "configuration": {
+                "Configuration": "Long",
+                "RemovePart": true,
+                "Length": "30mm"
+            }
+        }
+
 
 ``robot_name`` *(default: "dirname")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
