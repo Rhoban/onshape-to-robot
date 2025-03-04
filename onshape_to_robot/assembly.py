@@ -809,30 +809,32 @@ class Assembly:
                     if parameter["message"]["parameterId"] == "limitsEnabled":
                         enabled = parameter["message"]["value"]
 
-                    if joint_type == Joint.REVOLUTE:
-                        if parameter["message"]["parameterId"] == "limitAxialZMin":
-                            minimum = self.read_parameter_value(parameter, name)
-                        if parameter["message"]["parameterId"] == "limitAxialZMax":
-                            maximum = self.read_parameter_value(parameter, name)
-                    elif joint_type == Joint.PRISMATIC:
-                        if parameter["message"]["parameterId"] == "limitZMin":
-                            minimum = self.read_parameter_value(parameter, name)
-                        if parameter["message"]["parameterId"] == "limitZMax":
-                            maximum = self.read_parameter_value(parameter, name)
-                    elif joint_type == Joint.BALL:
-                        if (
-                            parameter["message"]["parameterId"]
-                            == "limitEulerConeAngleMax"
-                        ):
-                            minimum = 0
-                            maximum = self.read_parameter_value(parameter, name)
-                    else:
-                        print(
-                            warning(
-                                f"WARNING: Can't read limits for a joint of type {joint_type}"
+                if enabled:
+                    for parameter in feature["message"]["parameters"]:
+                        if joint_type == Joint.REVOLUTE:
+                            if parameter["message"]["parameterId"] == "limitAxialZMin":
+                                minimum = self.read_parameter_value(parameter, name)
+                            if parameter["message"]["parameterId"] == "limitAxialZMax":
+                                maximum = self.read_parameter_value(parameter, name)
+                        elif joint_type == Joint.PRISMATIC:
+                            if parameter["message"]["parameterId"] == "limitZMin":
+                                minimum = self.read_parameter_value(parameter, name)
+                            if parameter["message"]["parameterId"] == "limitZMax":
+                                maximum = self.read_parameter_value(parameter, name)
+                        elif joint_type == Joint.BALL:
+                            if (
+                                parameter["message"]["parameterId"]
+                                == "limitEulerConeAngleMax"
+                            ):
+                                minimum = 0
+                                maximum = self.read_parameter_value(parameter, name)
+                        else:
+                            print(
+                                warning(
+                                    f"WARNING: Can't read limits for a joint of type {joint_type}"
+                                )
                             )
-                        )
-                        print(parameter)
+                            print(parameter)
         if enabled:
             if joint_type != Joint.BALL:
                 offset = self.get_offset(name)
