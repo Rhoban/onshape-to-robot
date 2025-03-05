@@ -102,7 +102,7 @@ class Simulation:
             jointInfo = p.getJointInfo(self.robot, k)
             name = jointInfo[1].decode('utf-8')
             
-            if name.endswith('_passive'):
+            if 'passive' in name:
                 self.passive_joints[name] = k
             elif not name.endswith('_fixing'):
                 if '_frame' in name:
