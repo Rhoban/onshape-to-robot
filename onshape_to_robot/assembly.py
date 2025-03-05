@@ -259,7 +259,7 @@ class Assembly:
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
             self.occurrences[tuple(occurrence["path"])] = occurrence
 
-    def find_instances(self, prefix: list = [], instances=None, labels=[]):
+    def find_instances(self, prefix: list = [], instances=None):
         """
         Walking all the instances and associating them with their occurrences
         """
@@ -272,9 +272,6 @@ class Assembly:
                 self.get_occurrence(path)["instance"] = instance
 
                 if instance["type"] == "Assembly":
-                    path = prefix + [instance["id"]]
-                    self.get_occurrence(path)["instance"] = instance
-
                     if not instance["suppressed"]:
                         d = instance["documentId"]
                         m = instance["documentMicroversion"]
@@ -288,9 +285,7 @@ class Assembly:
                                 and sub_assembly["configuration"] == c
                             ):
                                 self.find_instances(
-                                    prefix + [instance["id"]],
-                                    sub_assembly["instances"],
-                                    labels + [instance["name"]],
+                                    prefix + [instance["id"]], sub_assembly["instances"]
                                 )
 
     def load_features(self):
