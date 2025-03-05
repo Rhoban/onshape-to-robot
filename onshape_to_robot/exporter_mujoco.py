@@ -194,7 +194,6 @@ class ExporterMuJoCo(Exporter):
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
 
         # Adding the geom node
-        self.append(f"<!-- Mesh {part.name} -->")
         geom = f'<geom type="mesh" class="{class_}" '
         geom += self.pos_quat(T_link_part) + " "
         geom += f'mesh="{xml_escape(mesh_file_no_ext)}" '
