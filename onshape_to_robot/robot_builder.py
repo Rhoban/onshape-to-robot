@@ -168,7 +168,7 @@ class RobotBuilder:
             k = 1
             while stl_filename in self.stl_filenames.values():
                 k += 1
-                stl_filename = part_name_config + f".{k}"
+                stl_filename = part_name_config + f"__{k}"
             if k != 1:
                 print(
                     warning(
