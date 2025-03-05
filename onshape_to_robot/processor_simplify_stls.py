@@ -37,10 +37,14 @@ class ProcessorSimplifySTLs(Processor):
             simplify_all = (
                 self.simplify_stls != "vision" and self.simplify_stls != "collision"
             )
+            simplified = set()
             for link in robot.links:
                 for part in link.parts:
                     for mesh in part.meshes:
-                        if simplify_all or mesh.is_type(self.simplify_stls):
+                        if (
+                            simplify_all or mesh.is_type(self.simplify_stls)
+                        ) and mesh.filename not in simplified:
+                            simplified.add(mesh.filename)
                             self.simplify_stl(mesh.filename)
 
     def reduce_faces(self, filename: str, reduction: float = 0.9):
