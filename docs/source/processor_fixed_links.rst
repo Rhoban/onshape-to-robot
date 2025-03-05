@@ -28,3 +28,5 @@ If this processor is enabled, all parts will be separated in a link, associated 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If set to ``true``, a dummy base link will be added to the robot. 
+
+Alternatively, ``use_fixed_links`` can be a list of the links for which you want the fixed links to be added.

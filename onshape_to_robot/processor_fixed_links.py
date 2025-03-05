@@ -1,6 +1,7 @@
 from .processor import Processor
 from .config import Config
 from .robot import Robot, Link, Joint
+from .message import info
 
 
 class ProcessorFixedLinks(Processor):
@@ -13,17 +14,22 @@ class ProcessorFixedLinks(Processor):
         super().__init__(config)
 
         # Check if it is enabled in configuration
-        self.use_fixed_links: bool = config.get("use_fixed_links", False)
+        self.use_fixed_links: bool | list = config.get("use_fixed_links", False)
 
     def process(self, robot: Robot):
         if self.use_fixed_links:
+            print(info(f"Using fixed links ({self.use_fixed_links})"))
             new_links = []
             for link in robot.links:
-                for part in link.parts:
-                    part_link = Link(f"{link.name}_{part.name}")
-                    part_link.parts = [part]
-                    new_links.append([link, part_link])
-                link.parts = []
+                if (
+                    isinstance(self.use_fixed_links, bool)
+                    or link.name in self.use_fixed_links
+                ):
+                    for part in link.parts:
+                        part_link = Link(f"{link.name}_{part.name}")
+                        part_link.parts = [part]
+                        new_links.append([link, part_link])
+                    link.parts = []
 
             for parent_link, new_link in new_links:
                 robot.links.append(new_link)
