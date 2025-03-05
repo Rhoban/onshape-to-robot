@@ -418,7 +418,6 @@ class Assembly:
         Pre-assign all top-level instances to a separate body id
         """
         top_level_instances = self.assembly_data["rootAssembly"]["instances"]
-        self.base_instance: str = top_level_instances[0]["id"]
         self.make_body(top_level_instances[0]["id"])
 
         # We first search for DOFs
