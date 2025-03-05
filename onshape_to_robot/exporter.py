@@ -20,6 +20,6 @@ class Exporter:
         with open(filename, "w") as file:
             self.build(robot)
             dom = xml.dom.minidom.parseString(self.xml)
-            xml_output = dom.toprettyxml(indent="    ")
+            xml_output = dom.toprettyxml(indent="  ")
             file.write(xml_output)
             print(success(f"* Writing {os.path.basename(filename)}"))
