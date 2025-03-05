@@ -104,7 +104,7 @@ class Simulation:
             
             if 'passive' in name:
                 self.passive_joints[name] = k
-            elif not name.endswith('_fixing'):
+            elif not name.endswith('_fixed'):
                 if '_frame' in name:
                     self.frames[name] = k
                 else:
