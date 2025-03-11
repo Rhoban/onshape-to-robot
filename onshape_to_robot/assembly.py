@@ -502,7 +502,12 @@ class Assembly:
 
         # Merging fixed links
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
-            if data["name"].startswith("fix_"):
+            if data["name"].startswith("fix_") or (
+                data["mateType"] == "FASTENED"
+                and not data["name"].startswith("dof_")
+                and not data["name"].startswith("closing_")
+                and not data["name"].startswith("frame_")
+            ):
                 self.merge_bodies(occurrence_A, occurrence_B)
 
         # Processing frame mates
