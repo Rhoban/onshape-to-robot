@@ -32,6 +32,9 @@ class RobotBuilder:
         Checks if a given part should be ignored by config
         """
         ignored = False
+        
+        # Removing <1>, <2> etc. suffix
+        name = '<'.join(name.split('<')[:-1]).strip()
 
         for entry in self.config.ignore:
             to_ignore = True
@@ -40,7 +43,7 @@ class RobotBuilder:
                 to_ignore = False
                 match_entry = entry[1:]
 
-            if fnmatch.fnmatch(name, match_entry):
+            if fnmatch.fnmatch(name.lower(), match_entry.lower()):
                 if (
                     self.config.ignore[entry] == "all"
                     or self.config.ignore[entry] == what
@@ -291,7 +294,7 @@ class RobotBuilder:
             print(warning(f"WARNING: Part '{instance['name']}' has no partId"))
             return
 
-        part_name = self.part_name(instance)
+        part_name = instance["name"]
         extra = ""
         if instance["configuration"] != "default":
             extra = dim(
@@ -308,7 +311,7 @@ class RobotBuilder:
             if self.part_is_ignored(part_name, "collision"):
                 extra += dim(" (ignoring collision)")
 
-        print(success(f"{symbol} Adding part {instance['name']}{extra}"))
+        print(success(f"{symbol} Adding part {part_name}{extra}"))
 
         if self.part_is_ignored(part_name, "visual") and self.part_is_ignored(
             part_name, "collision"
