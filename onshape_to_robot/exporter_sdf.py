@@ -33,7 +33,7 @@ class ExporterSDF(Exporter):
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
-            additional_xml_file = config.get("additional_xml", "")
+            additional_xml_file = config.get("additional_xml", None, required=False)
             if isinstance(additional_xml_file, str):
                 self.add_additional_xml(additional_xml_file)
             elif isinstance(additional_xml_file, list):
