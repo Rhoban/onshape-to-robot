@@ -121,7 +121,7 @@ class ExporterMuJoCo(Exporter):
                 joint_limits = joint.properties.get("limits", joint.limits)
                 limits_are_set = joint.properties.get("limits", False) != False
                 if joint_limits and (type == "position" or limits_are_set):
-                    if joint.properties.get("range", True):
+                    if joint.properties.get("range", True) and type == "position":
                         actuator += f'inheritrange="1" '
                     else:
                         actuator += f'ctrlrange="{joint_limits[0]} {joint_limits[1]}" '
