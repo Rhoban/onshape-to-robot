@@ -65,5 +65,9 @@ Possible values are:
 ``additional_xml`` *(default: "")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to include additional XML in the URDF, you can specify the path to the file here. This file will be included at the end of the URDF file.
+If you want to include additional XML in the URDF, you can specify the path to the file here. This file will be included in the produced SDF file.
+
+.. note::
+
+    Alternatively, ``additional_xml`` can be a list of files
 

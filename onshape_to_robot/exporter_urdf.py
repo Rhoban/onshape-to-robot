@@ -22,11 +22,16 @@ class ExporterURDF(Exporter):
             self.no_dynamics = config.no_dynamics
             self.package_name: str = config.get("package_name", "")
             additional_xml_file = config.get("additional_xml", "")
-            if additional_xml_file:
-                with open(
-                    config.output_directory + "/" + additional_xml_file, "r"
-                ) as file:
-                    self.additional_xml = file.read()
+            if isinstance(additional_xml_file, str):
+                self.add_additional_xml(additional_xml_file)
+            elif isinstance(additional_xml_file, list):
+                for filename in additional_xml_file:
+                    self.add_additional_xml(filename)
+
+    def add_additional_xml(self, xml_file: str):
+        self.additional_xml += f"<!-- Additional {xml_file} -->"
+        with open(self.config.output_directory + "/" + xml_file, "r") as file:
+            self.additional_xml += file.read()
 
     def append(self, line: str):
         self.xml += line

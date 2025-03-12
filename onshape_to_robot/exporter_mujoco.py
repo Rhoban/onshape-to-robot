@@ -22,11 +22,16 @@ class ExporterMuJoCo(Exporter):
         if config is not None:
             self.no_dynamics = config.no_dynamics
             additional_xml_file = config.get("additional_xml", "")
-            if additional_xml_file:
-                with open(
-                    config.output_directory + "/" + additional_xml_file, "r"
-                ) as file:
-                    self.additional_xml = file.read()
+            if isinstance(additional_xml_file, str):
+                self.add_additional_xml(additional_xml_file)
+            elif isinstance(additional_xml_file, list):
+                for filename in additional_xml_file:
+                    self.add_additional_xml(filename)
+
+    def add_additional_xml(self, xml_file: str):
+        self.additional_xml += f"<!-- Additional {xml_file} -->"
+        with open(self.config.output_directory + "/" + xml_file, "r") as file:
+            self.additional_xml += file.read()
 
     def append(self, line: str):
         self.xml += line
@@ -101,11 +106,12 @@ class ExporterMuJoCo(Exporter):
                 and joint.joint_type != Joint.BALL
             ):
                 type = joint.properties.get("type", "position")
+                actuator_class = joint.properties.get("class", self.default_class)
                 actuator: str = (
-                    f'<{type} class="{self.default_class}" name="{joint.name}" joint="{joint.name}" '
+                    f'<{type} class="{actuator_class}" name="{joint.name}" joint="{joint.name}" '
                 )
 
-                for key in "class", "kp", "kv", "dampratio":
+                for key in "kp", "kv", "dampratio":
                     if key in joint.properties:
                         actuator += f'{key}="{joint.properties[key]}" '
 
