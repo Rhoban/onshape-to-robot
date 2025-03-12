@@ -48,9 +48,6 @@ class ExporterMuJoCo(Exporter):
         )
         self.append(f'<option noslip_iterations="1"></option>')
 
-        if self.additional_xml:
-            self.append(self.additional_xml)
-
         # Boilerplate
         self.default_class = robot.name
         self.append("<default>")
@@ -65,6 +62,9 @@ class ExporterMuJoCo(Exporter):
         self.append("</default>")
         self.append("</default>")
         self.append("</default>")
+
+        if self.additional_xml:
+            self.append(self.additional_xml)
 
         # Adding robot links
         self.append("<worldbody>")
