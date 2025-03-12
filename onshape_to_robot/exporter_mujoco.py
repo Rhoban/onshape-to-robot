@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from .message import success, warning
+from .message import success, warning, info
 from .robot import Robot, Link, Part, Joint, Closure
 from .config import Config
 from .geometry import Box, Cylinder, Sphere, Mesh, Shape
@@ -384,13 +384,18 @@ class ExporterMuJoCo(Exporter):
         return xml
 
     def write_xml(self, robot: Robot, filename: str) -> str:
-        scene_xml: str = (
-            os.path.dirname(os.path.realpath(__file__)) + "/assets/scene.xml"
-        )
-        scene_xml = open(scene_xml, "r").read()
         super().write_xml(robot, filename)
 
         dirname = os.path.dirname(filename)
-        with open(dirname + "/scene.xml", "w") as file:
-            file.write(scene_xml)
-            print(success(f"* Writing scene.xml"))
+        scene_filename = dirname + "/scene.xml"
+        if not os.path.exists(scene_filename):    
+            scene_xml: str = (
+                os.path.dirname(os.path.realpath(__file__)) + "/assets/scene.xml"
+            )
+            scene_xml = open(scene_xml, "r").read()
+            scene_xml = scene_xml.format(robot_filename=os.path.basename(filename))
+            with open(scene_filename, "w") as file:
+                file.write(scene_xml)
+                print(success(f"* Writing scene.xml"))
+        else:
+            print(info(f"* scene.xml already exists, not over-writing it"))

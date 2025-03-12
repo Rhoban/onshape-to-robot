@@ -105,6 +105,11 @@ The Onshape URL of the assembly to be exported. Be sure you are on the correct t
 This should be either ``urdf`` or ``mujoco`` to specify which output format is wanted for robot description
 created by the export.
 
+``output_filename`` *(default: robot)*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is the name of the output file without extension. By default "robot" (for example: ``robot.urdf``, ``robot.sdf`` or ``robot.xml``).
+
 ``assets_dir`` *(default: "assets")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
