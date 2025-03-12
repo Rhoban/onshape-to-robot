@@ -279,8 +279,9 @@ class ExporterMuJoCo(Exporter):
         else:
             print(warning(f"Unknown joint type: {joint.joint_type}"))
 
-        if joint.limits is not None and joint.properties.get("range", True):
-            joint_xml += f'range="{joint.limits[0]} {joint.limits[1]}" '
+        joint_limits = joint.properties.get("limits", joint.limits)
+        if joint_limits is not None and joint.properties.get("range", True):
+            joint_xml += f'range="{joint_limits[0]} {joint_limits[1]}" '
 
         for key in (
             "class",
