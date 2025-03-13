@@ -32,9 +32,9 @@ class RobotBuilder:
         Checks if a given part should be ignored by config
         """
         ignored = False
-        
+
         # Removing <1>, <2> etc. suffix
-        name = '<'.join(name.split('<')[:-1]).strip()
+        name = "<".join(name.split("<")[:-1]).strip()
 
         for entry in self.config.ignore:
             to_ignore = True
@@ -380,8 +380,6 @@ class RobotBuilder:
             child_body = dof.other_body(body_id)
             T_world_axis = dof.T_world_mate.copy()
 
-            child_link = self.build_robot(child_body)
-
             properties = self.config.joint_properties.get("default", {})
             for joint_name in self.config.joint_properties:
                 if fnmatch.fnmatch(dof.name, joint_name):
@@ -393,8 +391,8 @@ class RobotBuilder:
             joint = Joint(
                 dof.name,
                 dof.joint_type,
-                self.robot.get_link(link.name),
-                self.robot.get_link(child_link.name),
+                link,
+                None,
                 T_world_axis,
                 properties,
                 dof.limits,
@@ -404,6 +402,10 @@ class RobotBuilder:
                 source, ratio = self.assembly.relations[dof.name]
                 joint.relation = Relation(source, ratio)
 
+            # The joint is added before the recursive call, ensuring items in robot.joints has the
+            # same order as recursive calls on the tree
             self.robot.joints.append(joint)
+
+            joint.child = self.build_robot(child_body)
 
         return link
