@@ -46,7 +46,6 @@ class ExporterMuJoCo(Exporter):
         self.append(
             f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />'
         )
-        self.append(f'<option noslip_iterations="1"></option>')
 
         # Boilerplate
         self.default_class = robot.name
