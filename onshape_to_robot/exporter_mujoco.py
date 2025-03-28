@@ -268,6 +268,7 @@ class ExporterMuJoCo(Exporter):
             return
 
         joint_xml: str = "<joint "
+        joint_xml += 'axis="%g %g %g" ' % tuple(joint.axis)
         joint_xml += f'name="{joint.name}" '
         if joint.joint_type == Joint.REVOLUTE:
             joint_xml += 'type="hinge" '

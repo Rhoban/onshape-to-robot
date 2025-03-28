@@ -396,7 +396,7 @@ class RobotBuilder:
                 T_world_axis,
                 properties,
                 dof.limits,
-                dof.z_axis,
+                dof.axis,
             )
             if dof.name in self.assembly.relations:
                 source, ratio = self.assembly.relations[dof.name]

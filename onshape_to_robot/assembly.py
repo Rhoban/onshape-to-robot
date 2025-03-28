@@ -33,7 +33,7 @@ class DOF:
         joint_type: str,
         T_world_mate: np.ndarray,
         limits: tuple | None,
-        z_axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
+        axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
     ):
         self.body1_id: int = body1_id
         self.body2_id: int = body2_id
@@ -41,7 +41,7 @@ class DOF:
         self.joint_type: str = joint_type
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
-        self.z_axis: np.ndarray = z_axis
+        self.axis: np.ndarray = axis
 
     def flip(self, flip_limits: bool = True):
         if flip_limits and self.limits is not None:

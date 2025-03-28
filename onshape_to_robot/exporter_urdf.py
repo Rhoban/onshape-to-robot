@@ -189,7 +189,7 @@ class ExporterURDF(Exporter):
 
         self.append(f'<parent link="{joint.parent.name}" />')
         self.append(f'<child link="{joint.child.name}" />')
-        self.append('<axis xyz="%g %g %g"/>' % tuple(joint.z_axis))
+        self.append('<axis xyz="%g %g %g"/>' % tuple(joint.axis))
 
         limits = ""
         if "max_effort" in joint.properties:

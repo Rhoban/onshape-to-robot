@@ -213,7 +213,7 @@ class ExporterSDF(Exporter):
         self.append(f"<parent>{joint.parent.name}</parent>")
         self.append(f"<child>{joint.child.name}</child>")
         self.append("<axis>")
-        self.append("<xyz>%g %g %g</xyz>" % tuple(joint.z_axis))
+        self.append("<xyz>%g %g %g</xyz>" % tuple(joint.axis))
 
         self.append("<limit>")
         if "max_effort" in joint.properties:

@@ -111,7 +111,7 @@ class Joint:
         T_world_joint: np.ndarray,
         properties: dict = {},
         limits: tuple[float, float] | None = None,
-        z_axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
+        axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
     ):
         self.name: str = name
         self.joint_type: str = joint_type
@@ -119,7 +119,7 @@ class Joint:
         self.parent: Link = parent
         self.child: Link = child
         self.limits: tuple[float, float] | None = limits
-        self.z_axis: np.ndarray = z_axis
+        self.axis: np.ndarray = axis
         self.T_world_joint: np.ndarray = T_world_joint
         self.relation: Relation | None = None
 
