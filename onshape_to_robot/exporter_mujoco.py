@@ -130,9 +130,6 @@ class ExporterMuJoCo(Exporter):
 
         self.append("</actuator>")
 
-    def translate_z(self, T: np.ndarray, z: float) -> np.ndarray:
-        return T @ np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, z], [0, 0, 0, 1]])
-
     def add_equalities(self, robot: Robot):
         self.append("<equality>")
         for closure in robot.closures:
@@ -143,9 +140,6 @@ class ExporterMuJoCo(Exporter):
             elif closure.closure_type == Closure.REVOLUTE:
                 self.append(
                     f'<connect site1="{closure.frame1}" site2="{closure.frame2}" />'
-                )
-                self.append(
-                    f'<connect site1="{closure.frame1}_z" site2="{closure.frame2}_z" />'
                 )
             elif closure.closure_type == Closure.BALL:
                 self.append(
@@ -352,20 +346,7 @@ class ExporterMuJoCo(Exporter):
 
         # Adding frames attached to current link
         for frame, T_world_frame in link.frames.items():
-            is_hinge_closure = False
-            for closure in robot.closures:
-                if closure.closure_type == Closure.REVOLUTE and (
-                    closure.frame1 == frame or closure.frame2 == frame
-                ):
-                    is_hinge_closure = True
-                    break
-
-            if is_hinge_closure:
-                self.add_frame(frame, T_world_link, T_world_frame, group=3)
-                T_world_frame = self.translate_z(T_world_frame, 0.1)
-                self.add_frame(frame + "_z", T_world_link, T_world_frame, group=3)
-            else:
-                self.add_frame(frame, T_world_link, T_world_frame)
+            self.add_frame(frame, T_world_link, T_world_frame, group=3)
 
         # Adding joints and children links
         for joint in robot.get_link_joints(link):

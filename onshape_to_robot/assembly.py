@@ -413,6 +413,12 @@ class Assembly:
             if dof.body2_id == body2_id:
                 dof.body2_id = body1_id
 
+    def translation(self, x: float, y: float, z: float) -> np.ndarray:
+        return np.array([[1, 0, 0, x],  
+                         [0, 1, 0, y],
+                         [0, 0, 1, z],
+                         [0, 0, 0, 1]])
+
     def process_mates(self):
         """
         Pre-assign all top-level instances to a separate body id
@@ -551,6 +557,8 @@ class Assembly:
 
         # Processing loop closing frames
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+            is_hinge_closure = data["mateType"]== "REVOLUTE"
+
             if data["name"].startswith("closing_"):
                 for k in 0, 1:
                     mated_entity = data["matedEntities"][k]
@@ -570,6 +578,15 @@ class Assembly:
                         )
                     )
 
+                    if is_hinge_closure:
+                        self.frames.append(
+                            Frame(
+                                self.instance_body[occurrence],
+                                f"{data['name']}_{k+1}_z",
+                                T_world_mate @ self.translation(0, 0, 0.1),
+                            )
+                        )
+
                 closure_types = {
                     "FASTENED": "fixed",
                     "REVOLUTE": "revolute",
@@ -584,6 +601,14 @@ class Assembly:
                         f"{data['name']}_2",
                     ]
                 )
+                if is_hinge_closure:
+                    self.closures.append(
+                        [
+                            closure_types.get(data["mateType"], "unknown"),
+                            f"{data['name']}_1_z",
+                            f"{data['name']}_2_z",
+                        ]
+                    )
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
