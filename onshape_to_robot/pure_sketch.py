@@ -1,13 +1,12 @@
-import numpy as np
-import math
-import commentjson as json
-import os
-import sys, os
-from dotenv import load_dotenv, find_dotenv
-from colorama import Fore, Back, Style
-
-
 def main():
+    import numpy as np
+    import math
+    import commentjson as json
+    import os
+    import sys, os
+    from dotenv import load_dotenv, find_dotenv
+    from colorama import Fore, Back, Style
+
     load_dotenv(find_dotenv(usecwd=True))
 
     if len(sys.argv) < 2:

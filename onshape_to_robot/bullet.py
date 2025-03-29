@@ -1,13 +1,12 @@
-import math
-import sys
-import os
-import time
-import argparse
-import pybullet as p
-from .simulation import Simulation
-
-
 def main():
+    import math
+    import sys
+    import os
+    import time
+    import argparse
+    import pybullet as p
+    from .simulation import Simulation
+
     parser = argparse.ArgumentParser(prog="onshape-to-robot-bullet")
     parser.add_argument('-f', '--fixed', action='store_true')
     parser.add_argument('-n', '--no-self-collisions', action='store_true')

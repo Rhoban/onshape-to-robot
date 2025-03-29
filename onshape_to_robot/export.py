@@ -1,17 +1,16 @@
-import os
-import sys
-import pickle
-from dotenv import load_dotenv, find_dotenv
-from .config import Config
-from .message import error, info
-from .robot_builder import RobotBuilder
-from .processors import processors
-from .exporter_urdf import ExporterURDF
-from .exporter_sdf import ExporterSDF
-from .exporter_mujoco import ExporterMuJoCo
-
-
 def main():
+    import os
+    import sys
+    import pickle
+    from dotenv import load_dotenv, find_dotenv
+    from .config import Config
+    from .message import error, info
+    from .robot_builder import RobotBuilder
+    from .processors import processors
+    from .exporter_urdf import ExporterURDF
+    from .exporter_sdf import ExporterSDF
+    from .exporter_mujoco import ExporterMuJoCo
+
     """
     This is the entry point of the export script, i.e the "onshape-to-robot" command.
     """

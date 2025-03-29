@@ -1,8 +1,7 @@
-import os
-import sys
-
-
 def main():
+    import os
+    import sys
+
     if len(sys.argv) < 2:
         print("Usage: onshape-to-robot-edit-shape {STL file}")
     else:
