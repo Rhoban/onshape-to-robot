@@ -94,7 +94,7 @@ Thus, they are always revolving around the z axis, or translating along the *z a
 Fixed robot
 -----------
 
-If you want to export a robot that is not fixed to the ground, use the "Fixed" feture of Onshape:
+If you want to export a robot that is fixed to the ground, use the "Fixed" feture of Onshape:
 
 .. image:: _static/img/fixed.png
     :align: center 
