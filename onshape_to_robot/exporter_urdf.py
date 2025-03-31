@@ -17,10 +17,12 @@ class ExporterURDF(Exporter):
         self.no_dynamics: bool = False
         self.package_name: str = ""
         self.additional_xml: str = ""
+        self.fixed_no_inertia: bool = False
 
         if config is not None:
             self.no_dynamics = config.no_dynamics
             self.package_name: str = config.get("package_name", "")
+            self.fixed_no_inertia: bool = config.get("fixed_no_inertia", False)
             additional_xml_file = config.get("additional_xml", None, required=False)
             if isinstance(additional_xml_file, str):
                 self.add_additional_xml(additional_xml_file)
@@ -72,11 +74,6 @@ class ExporterURDF(Exporter):
             inertia[0, 0] = max(1e-9, inertia[0, 0])
             inertia[1, 1] = max(1e-9, inertia[1, 1])
             inertia[2, 2] = max(1e-9, inertia[2, 2])
-        if fixed:
-            # To mark an object as fixed in the world, sets its dynamics to zero
-            mass = 0
-            com = np.zeros(3)
-            inertia = np.zeros((3, 3))
 
         self.append("<inertial>")
         self.append(
