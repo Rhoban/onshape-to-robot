@@ -26,6 +26,8 @@ Here is an example of complete ``config.json`` file, with details below:
         "package_name": "my_robot",
         // Additional XML file to be included in the URDF (default: "")
         "additional_xml": "my_custom_file.xml",
+        // Exclude inertial data for fixed bodies (default: false)
+        "set_zero_mass_to_fixed": true,
 
         // Override joint properties (default: {})
         "joint_properties": {
@@ -74,3 +76,12 @@ If you want to include additional XML in the URDF, you can specify the path to t
 .. note::
 
     Alternatively, ``additional_xml`` can be a list of files
+
+``set_zero_mass_to_fixed`` *(default: false)*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This option sets the mass to 0 for bodies that are :ref:`fixed <fixed-robot>` to the world.
+
+.. note::
+
+    In PyBullet, such bodies are indeed recognized as fixed
