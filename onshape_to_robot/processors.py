@@ -6,8 +6,10 @@ from .processor_dummy_base_link import ProcessorDummyBaseLink
 from .processor_convex_decomposition import ProcessorConvexDecomposition
 from .processor_collision_as_visual import ProcessorCollisionAsVisual
 from .processor_no_collision_meshes import ProcessorNoCollisionMeshes
+from .processor_ball_to_euler import ProcessorBallToEuler
 
 processors = [
+    ProcessorBallToEuler,
     ProcessorScad,
     ProcessorMergeParts,
     ProcessorSimplifySTLs,
