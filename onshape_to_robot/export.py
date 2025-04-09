@@ -6,7 +6,6 @@ def main():
     from .config import Config
     from .message import error, info
     from .robot_builder import RobotBuilder
-    from .processors import processors
     from .exporter_urdf import ExporterURDF
     from .exporter_sdf import ExporterSDF
     from .exporter_mujoco import ExporterMuJoCo
@@ -29,10 +28,6 @@ def main():
         # Loading configuration
         config = Config(robot_path)
 
-        # Initializing processors
-        for index, class_ in enumerate(processors):
-            processors[index] = class_(config)
-
         # Building exporter beforehand, so that the configuration gets checked
         if config.output_format == "urdf":
             exporter = ExporterURDF(config)
@@ -52,7 +47,7 @@ def main():
         # robot = pickle.load(open("robot.pkl", "rb"))
 
         # Applying processors
-        for processor in processors:
+        for processor in config.processors:
             processor.process(robot)
 
         exporter.write_xml(

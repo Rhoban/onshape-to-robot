@@ -1,5 +1,3 @@
-.. _processor_dummy_base_link:
-
 Ball to Euler
 =============
 

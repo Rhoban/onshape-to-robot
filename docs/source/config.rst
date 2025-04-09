@@ -77,6 +77,11 @@ Here is an example of complete ``config.json`` file, with details below:
         "post_import_commands" [
             "echo 'Import done'",
             "echo 'Do something else'"
+        ],
+
+        // Custom processors
+        "processors": [
+            "my_project.my_custom_processor:MyCustomProcessor"
         ]
 
         // More options available in specific exporters (URDF, SDF, MuJoCo)
@@ -249,3 +254,8 @@ Can override the color for parts (should be an array: ``[r, g, b]`` with numbers
 
 This is an array of commands that will be executed after the import is done. It can be used to be sure that
 some processing scripts are run everytime you run onshape-to-robot.
+
+``processors`` *(default: None)*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+See :ref:`custom processors <custom_processors>` for more information.

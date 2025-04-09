@@ -8,7 +8,7 @@ from .processor_collision_as_visual import ProcessorCollisionAsVisual
 from .processor_no_collision_meshes import ProcessorNoCollisionMeshes
 from .processor_ball_to_euler import ProcessorBallToEuler
 
-processors = [
+default_processors = [
     ProcessorBallToEuler,
     ProcessorScad,
     ProcessorMergeParts,

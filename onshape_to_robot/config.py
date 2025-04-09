@@ -15,6 +15,9 @@ class Config:
         with open(self.config_file, "r", encoding="utf8") as stream:
             self.config: dict = json.load(stream)
 
+        # Loaded processors
+        self.processors: list = []
+
         self.read_configuration()
 
         # Output directory, making it if it doesn't exists
@@ -147,3 +150,27 @@ class Config:
 
         # Post-import commands
         self.post_import_commands: list[str] = self.get("post_import_commands", [])
+
+        # Loading processors
+        from . import processors
+
+        loaded_modules = {}
+        processors_list: list[str] | None = self.get("processors", None, required=False)
+        if processors_list is None:
+            self.processors = [processor(self) for processor in processors.default_processors]
+        else:
+            for entry in processors_list:
+                parts = entry.split(":")
+
+                if len(parts) == 1:
+                    processor = eval(f"processors.{entry}")
+                else:
+                    module, cls = parts
+                    if module not in loaded_modules:
+                        loaded_modules[module] = __import__(module, fromlist=[cls])
+                    processor = getattr(loaded_modules[module], cls)
+
+                if processor is None:
+                    raise Exception(f"ERROR: Processor {entry} not found")
+
+                self.processors.append(processor(self))

@@ -26,3 +26,4 @@ Here is an overview of ``onshape-to-robot`` pipeline:
    processor_collision_as_visual
    processor_convex_decomposition
    processor_fixed_links
+   custom_processors
