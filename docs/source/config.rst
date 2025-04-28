@@ -191,6 +191,42 @@ Should be written as the following:
             }
         }
 
+``clean_config_suffix`` *(default: false)*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When set to ``true``, any Onshape “configuration” suffixes in part or link names
+will be stripped away during export.  This is useful when you want your
+mesh-/link-names to omit the verbose configuration tokens that Onshape
+automatically appends (e.g. for assemblies with multiple configurations).
+
+Suffixes of the forms:
+
+  - ``__configuration_<name>``
+  - ``__configuration_<name>_<number>``
+  - ``_configuration_<name>``
+
+will all be removed.  
+
+For example, with
+
+.. code-block:: text
+
+    clean_config_suffix: true
+
+these names…
+
+.. code-block:: text
+
+    part_name__configuration_default
+    part_name__configuration_screwless_2
+    part_name_configuration_default
+
+…will become…
+
+.. code-block:: text
+
+    part_name
+
 
 ``robot_name`` *(default: "dirname")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
