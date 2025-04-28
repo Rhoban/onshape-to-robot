@@ -94,8 +94,6 @@ class Assembly:
         self.configuration_parameters: dict = {}
         # Dictionnary mapping items to their children in the tree
         self.tree_children: dict = {}
-        # Inverted map: each child -> its single parent
-        self.tree_parent: dict[int, int] = {}
         # Root nodes
         self.root_nodes: list = []
         # Overriden link names
@@ -644,12 +642,6 @@ class Assembly:
         for body_id in self.instance_body.values():
             if body_id != INSTANCE_IGNORE and body_id not in self.body_in_tree:
                 self.build_tree(body_id)
-            
-        self.tree_parent = {
-            child: parent
-            for parent, children in self.tree_children.items()
-            for child in children
-        }
 
         print(success(f"* Found {len(self.root_nodes)} root nodes:"))
         for root_node in self.root_nodes:

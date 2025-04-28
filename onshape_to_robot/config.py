@@ -147,7 +147,6 @@ class Config:
 
         # Naming
         self.clean_config_suffix: bool = self.get("clean_config_suffix", False, required=False)
-        self.remove_parent_prefix: bool = self.get("remove_parent_prefix", False, required=False)
 
         # Color override
         self.color: str | None = self.get("color", required=False)
