@@ -73,6 +73,9 @@ Here is an example of complete ``config.json`` file, with details below:
         // Disable dynamics retrieval (default: false)
         "no_dynamics": true,
 
+        // Whether to include configuration suffix to part (stl) files (default: true)
+        "include_configuration_suffix": false,
+
         // Post import commands (default: [])
         "post_import_commands" [
             "echo 'Import done'",
@@ -248,6 +251,11 @@ In pyBullet, this will result in static object (think of some environment for ex
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Can override the color for parts (should be an array: ``[r, g, b]`` with numbers from 0 to 1)
+
+``include_configuration_suffix`` *(default: true)*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When this flag is set to ``true`` (default), configurations will be added as a suffix to the part names and STL files.
 
 ``post_import_commands`` *(default: [])*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

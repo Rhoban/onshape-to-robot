@@ -151,13 +151,20 @@ class Config:
         # Post-import commands
         self.post_import_commands: list[str] = self.get("post_import_commands", [])
 
+        # Whether to include configuration suffix in part names
+        self.include_configuration_suffix: bool = self.get(
+            "include_configuration_suffix", True
+        )
+
         # Loading processors
         from . import processors
 
         loaded_modules = {}
         processors_list: list[str] | None = self.get("processors", None, required=False)
         if processors_list is None:
-            self.processors = [processor(self) for processor in processors.default_processors]
+            self.processors = [
+                processor(self) for processor in processors.default_processors
+            ]
         else:
             for entry in processors_list:
                 parts = entry.split(":")

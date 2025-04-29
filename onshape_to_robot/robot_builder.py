@@ -104,7 +104,7 @@ class RobotBuilder:
 
         # Only add configuration to name if its not default and not a very long configuration (which happens for library parts like screws)
         configuration = self.printable_configuration(part)
-        if configuration != "default":
+        if configuration != "default" and self.config.include_configuration_suffix:
             if len(configuration) < 40:
                 parts += ["_" + configuration.replace("=", "_").replace(" ", "_")]
             else:
