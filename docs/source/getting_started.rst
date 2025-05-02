@@ -76,6 +76,17 @@ Once this is done, run the following command:
 
     onshape-to-robot my-robot
 
+If you encounter the error ``TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'``, it may be because your system's Python version is lower than 3.9. To resolve this issue, you can create a Python virtual environment:
+
+.. code-block:: bash
+
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt update
+    sudo apt install python3.10 python3.10-venv python3.10-dev
+    python3.10 -m venv onshape_venv
+    source onshape_venv/bin/activate
+    pip install onshape-to-robot
+    onshape-to-robot my-robot
 
 Testing your export
 -------------------
