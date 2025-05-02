@@ -84,29 +84,30 @@ class ExpressionParser:
         return self.eval_(ast.parse(expr, mode="eval").body)
 
     def eval_(self, node):
-        match node:
-            case ast.Constant(value):
-                return float(value)
-            case ast.BinOp(left, op, right):
-                return self.operators[type(op)](self.eval_(left), self.eval_(right))
-            case ast.UnaryOp(op, operand):  # e.g., -1
-                return self.operators[type(op)](self.eval_(operand))
-            case ast.Name(value):
-                if (
-                    value.lower() not in self.variables
-                    and self.variables_lazy_loading is not None
-                ):
-                    self.variables_lazy_loading()
-                    self.variables_lazy_loading = None
-                if value.lower() not in self.variables:
-                    raise ValueError(f"Unknown variable in expression: {value}")
-                return self.variables[value.lower()]
-            case ast.Call(func, args):
-                if func.id not in self.functions:
-                    raise ValueError(f"Unknown function in expression: {func.id}")
-                return self.functions[func.id](*[self.eval_(arg) for arg in args])
-            case _:
-                raise TypeError(node)
+        if isinstance(node, ast.Constant):
+            return float(node.value)
+        elif isinstance(node, ast.BinOp):
+            return self.operators[type(node.op)](
+                self.eval_(node.left), self.eval_(node.right)
+            )
+        elif isinstance(node, ast.UnaryOp):  # e.g., -1
+            return self.operators[type(node.op)](self.eval_(node.operand))
+        elif isinstance(node, ast.Name):
+            if (
+                node.id.lower() not in self.variables
+                and self.variables_lazy_loading is not None
+            ):
+                self.variables_lazy_loading()
+                self.variables_lazy_loading = None
+            if node.id.lower() not in self.variables:
+                raise ValueError(f"Unknown variable in expression: {node.id}")
+            return self.variables[node.id.lower()]
+        elif isinstance(node, ast.Call):
+            if node.func.id not in self.functions:
+                raise ValueError(f"Unknown function in expression: {node.func.id}")
+            return self.functions[node.func.id](*[self.eval_(arg) for arg in node.args])
+        else:
+            raise TypeError(node)
 
 
 if __name__ == "__main__":
@@ -114,4 +115,4 @@ if __name__ == "__main__":
     ep.variables["x"] = 5
 
     print(ep.eval_expr("(cos(5 deg)) mm + #x inch"))
-    print(ep.eval_expr("sin(3/(2^2) deg)"))
+    print(ep.eval_expr("-sin(3/(2^2) deg)"))

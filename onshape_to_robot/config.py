@@ -1,3 +1,4 @@
+from __future__ import annotations
 from sys import exit
 import re
 import os
