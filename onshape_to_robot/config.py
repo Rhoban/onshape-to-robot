@@ -146,6 +146,9 @@ class Config:
         if isinstance(self.ignore, list):
             self.ignore = {entry: "all" for entry in self.ignore}
 
+        # Naming
+        self.clean_config_suffix: bool = self.get("clean_config_suffix", False, required=False)
+
         # Color override
         self.color: str | None = self.get("color", required=False)
 
