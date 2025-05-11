@@ -301,16 +301,13 @@ class Assembly:
             configuration=self.config.configuration,
         )
 
-        if not self.version_id:
-            # TODO: This should support microversion in the future
-            self.matevalues = self.client.matevalues(
-                self.document_id,
-                self.workspace_id,
-                self.element_id,
-                configuration=self.config.configuration,
-            )
-        else:
-            self.matevalues = None
+        self.matevalues = self.client.matevalues(
+            self.document_id,
+            self.version_id if self.version_id else self.workspace_id,
+            self.element_id,
+            wmv="v" if self.version_id else "w",
+            configuration=self.config.configuration,
+        )
 
     def load_configuration(self):
         """

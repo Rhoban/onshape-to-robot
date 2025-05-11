@@ -169,9 +169,10 @@ class Client:
             headers=req_headers,
         )
 
-    def matevalues(self, did, wid, eid, configuration="default"):
+    @cache_response
+    def matevalues(self, did, wmvid, eid, wmv="w", configuration="default"):
         return self.request(
-            f"/api/assemblies/d/{escape(did)}/w/{escape(wid)}/e/{escape(eid)}/matevalues",
+            f"/api/assemblies/d/{escape(did)}/{wmv}/{escape(wmvid)}/e/{escape(eid)}/matevalues",
             query={"configuration": configuration},
         )
 
