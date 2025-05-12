@@ -232,6 +232,9 @@ class Assembly:
                             raise Exception(
                                 f'ERROR: Unknown value "{value}" for configuration parameter "{key}"'
                             )
+                        elif value == parameters[key][2][0]:
+                            # Workaround, see issue #59
+                            value = "Default"
                         key = parameters[key][1]
                     processed_configuration.append(f"{key}={value.replace(' ', '+')}")
 
