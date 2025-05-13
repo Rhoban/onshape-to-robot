@@ -203,13 +203,19 @@ class Assembly:
                 message = entry["message"]
 
                 if type_name.startswith("BTMConfigurationParameterEnum"):
-                    options = [
+                    # The very first label typed is kept as the internal name for the enum, under the "option"
+                    # key. However, the user label that can be changed later is "optionName"
+                    option_names = [
                         option["message"]["optionName"] for option in message["options"]
+                    ]
+                    options = [
+                        option["message"]["option"] for option in message["options"]
                     ]
                     parameters[message["parameterName"]] = [
                         "enum",
                         message["parameterId"],
-                        options,
+                        option_names,
+                        options
                     ]
                 elif type_name.startswith("BTMConfigurationParameterBoolean"):
                     parameters[message["parameterName"]] = ["bool"]
@@ -232,9 +238,8 @@ class Assembly:
                             raise Exception(
                                 f'ERROR: Unknown value "{value}" for configuration parameter "{key}"'
                             )
-                        elif value == parameters[key][2][0]:
-                            # Workaround, see issue #59
-                            value = "Default"
+
+                        value = parameters[key][3][parameters[key][2].index(value)]
                         key = parameters[key][1]
                     processed_configuration.append(f"{key}={value.replace(' ', '+')}")
 
