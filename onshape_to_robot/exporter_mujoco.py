@@ -134,14 +134,18 @@ class ExporterMuJoCo(Exporter):
         self.append("</actuator>")
 
     def get_equality_attributes(self, closure: Closure) -> str:
+        all_attributes = {}
         for name, attributes in self.equalities.items():
             if fnmatch.fnmatch(closure.frame1, name) and fnmatch.fnmatch(
                 closure.frame2, name
             ):
-                return (
-                    " ".join([f'{key}="{value}"' for key, value in attributes.items()])
-                    + " "
-                )
+                all_attributes.update(attributes)
+
+        if len(all_attributes) > 0:
+            return (
+                " ".join([f'{key}="{value}"' for key, value in all_attributes.items()])
+                + " "
+            )
 
         return ""
 
