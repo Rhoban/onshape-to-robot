@@ -136,15 +136,15 @@ class ExporterMuJoCo(Exporter):
         for closure in robot.closures:
             if closure.closure_type == Closure.FIXED:
                 self.append(
-                    f'<weld site1="{closure.frame1}" site2="{closure.frame2}" />'
+                    f'<weld class="{self.default_class}" site1="{closure.frame1}" site2="{closure.frame2}" />'
                 )
             elif closure.closure_type == Closure.REVOLUTE:
                 self.append(
-                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" />'
+                    f'<connect class="{self.default_class}" site1="{closure.frame1}" site2="{closure.frame2}" />'
                 )
             elif closure.closure_type == Closure.BALL:
                 self.append(
-                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" />'
+                    f'<connect class="{self.default_class}" site1="{closure.frame1}" site2="{closure.frame2}" />'
                 )
             else:
                 print(
