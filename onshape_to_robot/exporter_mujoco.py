@@ -1,6 +1,7 @@
 from __future__ import annotations
 import numpy as np
 import os
+import fnmatch
 from .message import success, warning, info
 from .robot import Robot, Link, Part, Joint, Closure
 from .config import Config
@@ -21,6 +22,7 @@ class ExporterMuJoCo(Exporter):
         self.materials: dict = {}
 
         if config is not None:
+            self.equalities = self.config.get("equalities", {})
             self.no_dynamics = config.no_dynamics
             additional_xml_file = config.get("additional_xml", None, required=False)
             if isinstance(additional_xml_file, str):
@@ -131,20 +133,34 @@ class ExporterMuJoCo(Exporter):
 
         self.append("</actuator>")
 
+    def get_equality_attributes(self, closure: Closure) -> str:
+        for name, attributes in self.equalities.items():
+            if fnmatch.fnmatch(closure.frame1, name) and fnmatch.fnmatch(
+                closure.frame2, name
+            ):
+                return (
+                    " ".join([f'{key}="{value}"' for key, value in attributes.items()])
+                    + " "
+                )
+
+        return ""
+
     def add_equalities(self, robot: Robot):
         self.append("<equality>")
         for closure in robot.closures:
+            attributes = self.get_equality_attributes(closure)
+
             if closure.closure_type == Closure.FIXED:
                 self.append(
-                    f'<weld class="{self.default_class}" site1="{closure.frame1}" site2="{closure.frame2}" />'
+                    f'<weld site1="{closure.frame1}" site2="{closure.frame2}" {attributes}/>'
                 )
             elif closure.closure_type == Closure.REVOLUTE:
                 self.append(
-                    f'<connect class="{self.default_class}" site1="{closure.frame1}" site2="{closure.frame2}" />'
+                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" {attributes}/>'
                 )
             elif closure.closure_type == Closure.BALL:
                 self.append(
-                    f'<connect class="{self.default_class}" site1="{closure.frame1}" site2="{closure.frame2}" />'
+                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" {attributes}/>'
                 )
             else:
                 print(
@@ -370,7 +386,7 @@ class ExporterMuJoCo(Exporter):
 
         dirname = os.path.dirname(filename)
         scene_filename = dirname + "/scene.xml"
-        if not os.path.exists(scene_filename):    
+        if not os.path.exists(scene_filename):
             scene_xml: str = (
                 os.path.dirname(os.path.realpath(__file__)) + "/assets/scene.xml"
             )

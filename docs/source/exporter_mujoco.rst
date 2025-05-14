@@ -51,6 +51,14 @@ Here is an example of complete ``config.json`` file, with details below:
                 "frictionloss": 0.1
                 // ...
             }
+        },
+
+        // Override equality attributes
+        "equalities": {
+            "closing_branch*": {
+                "solref": "0.002 1",
+                "solimp": "0.99 0.999 0.0005 0.5 2"
+            }
         }
     }
 
@@ -78,6 +86,13 @@ Possible values are:
 
     * ``kp``, ``kv`` and ``dampratio`` gains
     * ``forcerange``
+
+``equalities`` *(default: {})*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This entry allows to override the equality attributes of the MuJoCo XML file. The key should be the equality name (which might contains wildcards ``*``), and the value should be a dictionary of attributes.
+
+This can be used to adjust the ``solref`` and ``solimp`` attributes of the equality constraints.
 
 ``additional_xml`` *(default: "")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
