@@ -38,7 +38,7 @@ Here is an example of complete ``config.json`` file, with details below:
         // Override joint properties (default: {})
         "joint_properties": {
             // Default properties for all joints
-            "default": {
+            "*": {
                 "actuated": true,
                 "forcerange": 10.0,
                 "frictionloss": 0.5,

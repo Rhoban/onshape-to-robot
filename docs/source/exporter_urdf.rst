@@ -32,7 +32,7 @@ Here is an example of complete ``config.json`` file, with details below:
         // Override joint properties (default: {})
         "joint_properties": {
             // Default properties for all joints
-            "default": {
+            "*": {
                 "max_effort": 10.0,
                 "max_velocity": 6.0,
                 "friction": 0.5
