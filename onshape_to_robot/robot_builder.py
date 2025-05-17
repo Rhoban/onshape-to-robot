@@ -9,6 +9,7 @@ from .assembly import Assembly
 from .config import Config
 from .robot import Part, Joint, Link, Robot, Relation, Closure
 from .csg import process as csg_process
+from .name_utils import clean_name
 
 
 class RobotBuilder:
@@ -119,6 +120,12 @@ class RobotBuilder:
         """
         while True:
             name = self.part_name(part, include_configuration=True)
+            
+            # Apply name cleaning if configured
+            name = clean_name(
+                name, 
+                clean_config=self.config.clean_config_suffix,
+            )
 
             if type not in self.unique_names:
                 self.unique_names[type] = {}
@@ -358,6 +365,13 @@ class RobotBuilder:
 
         if body_id in self.assembly.link_names:
             link_name = self.assembly.link_names[body_id]
+            
+            # Apply name cleaning to named links if configured
+            if self.config.clean_config_suffix:
+                link_name = clean_name(
+                    link_name, 
+                    clean_config=self.config.clean_config_suffix,
+                )
         else:
             link_name = self.unique_name(instance, "link")
 
@@ -373,7 +387,14 @@ class RobotBuilder:
         # Adding frames to the link
         for frame in self.assembly.frames:
             if frame.body_id == body_id:
-                self.robot.links[-1].frames[frame.name] = frame.T_world_frame
+                frame_name = frame.name
+                # Apply name cleaning to frames if configured
+                if self.config.clean_config_suffix:
+                    frame_name = clean_name(
+                        frame_name,
+                        clean_config=self.config.clean_config_suffix,
+                    )
+                self.robot.links[-1].frames[frame_name] = frame.T_world_frame
 
         for children_body in self.assembly.tree_children[body_id]:
             dof = self.assembly.get_dof(body_id, children_body)
@@ -387,9 +408,17 @@ class RobotBuilder:
                         **properties,
                         **self.config.joint_properties[joint_name],
                     }
+                    
+            # Apply name cleaning to joint name if configured
+            joint_name = dof.name
+            if self.config.clean_config_suffix:
+                joint_name = clean_name(
+                    joint_name,
+                    clean_config=self.config.clean_config_suffix,
+                )
 
             joint = Joint(
-                dof.name,
+                joint_name,
                 dof.joint_type,
                 link,
                 None,
@@ -400,6 +429,13 @@ class RobotBuilder:
             )
             if dof.name in self.assembly.relations:
                 source, ratio = self.assembly.relations[dof.name]
+                
+                # Apply name cleaning to relation source if configured
+                if self.config.clean_config_suffix:
+                    source = clean_name(
+                        source,
+                        clean_config=self.config.clean_config_suffix,
+                    )
                 joint.relation = Relation(source, ratio)
 
             # The joint is added before the recursive call, ensuring items in robot.joints has the
