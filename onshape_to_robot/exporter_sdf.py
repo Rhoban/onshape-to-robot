@@ -226,7 +226,6 @@ class ExporterSDF(Exporter):
             self.append(f"<velocity>%g</velocity>" % joint.properties["max_velocity"])
         else:
             self.append(f"<velocity>10</velocity>")
-        self.append("</limit>")
 
         joint_limits = joint.properties.get("limits", joint.limits)
         if joint_limits is None:
@@ -237,6 +236,7 @@ class ExporterSDF(Exporter):
 
         self.append(f"<lower>{joint_limits[0]}</lower>")
         self.append(f"<upper>{joint_limits[1]}</upper>")
+        self.append("</limit>")
 
         if joint.relation is not None:
             self.append(
