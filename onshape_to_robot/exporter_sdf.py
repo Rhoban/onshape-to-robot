@@ -82,9 +82,8 @@ class ExporterSDF(Exporter):
 
         self.append("<inertial>")
         self.append(
-            '<pose>%g %g %g 0 0 0</pose>'
+            '<pose relative_to="%s">%g %g %g 0 0 0</pose>'
             % (
-                frame,
                 com[0],
                 com[1],
                 com[2],
