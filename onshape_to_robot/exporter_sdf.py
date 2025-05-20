@@ -154,9 +154,7 @@ class ExporterSDF(Exporter):
         """
         Add shapes (box, sphere and cylinder) nodes to the SDF.
         """
-        shape_n = 1
         self.append(f'<{node} name="{part.name}_{node}_shapes_{shape_n}">')
-        shape_n += 1
 
         T_link_shape = (
             np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
