@@ -42,6 +42,6 @@ setuptools.setup(
         "pymeshlab": ["pymeshlab"],
     },
     include_package_data=True,
-    package_data={"": ["bullet/*", "assets/*", "README.md"]},
+    package_data={"": ["bullet/*", "assets/*", "README*.md"]},
     python_requires=">=3.9",
 )
