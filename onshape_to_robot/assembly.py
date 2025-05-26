@@ -521,6 +521,14 @@ class Assembly:
             ):
                 self.merge_bodies(occurrence_A, occurrence_B)
 
+        # Merging mate gorups
+        for group in self.feature_mate_groups():
+            for k in range(1, len(group)):
+                occurrence_A = group[0]
+                occurrence_B = group[k]
+
+                self.merge_bodies(occurrence_A, occurrence_B)
+
         # Processing frame mates
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("frame_"):
@@ -708,6 +716,23 @@ class Assembly:
                 occurrence_B = data["matedEntities"][1]["matedOccurrence"][0]
 
                 yield data, occurrence_A, occurrence_B
+
+    def feature_mate_groups(self):
+        """
+        Find mate groups in the assembly
+        """
+        groups = []
+
+        for feature in self.assembly_data["rootAssembly"]["features"]:
+            group = []
+            if feature["featureType"] == "mateGroup" and not feature["suppressed"]:
+                data = feature["featureData"]
+
+                for occurrence in data["occurrences"]:
+                    group.append(occurrence["occurrence"][0])
+            groups.append(group)
+
+        return groups
 
     def get_feature_by_id(self, feature_id: str):
         """
