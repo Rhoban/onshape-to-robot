@@ -215,7 +215,7 @@ class Assembly:
                         "enum",
                         message["parameterId"],
                         option_names,
-                        options
+                        options,
                     ]
                 elif type_name.startswith("BTMConfigurationParameterBoolean"):
                     parameters[message["parameterName"]] = ["bool"]
@@ -419,10 +419,14 @@ class Assembly:
                 dof.body2_id = body1_id
 
     def translation(self, x: float, y: float, z: float) -> np.ndarray:
-        return np.array([[1, 0, 0, x],  
-                         [0, 1, 0, y],
-                         [0, 0, 1, z],
-                         [0, 0, 0, 1]])
+        return np.array(
+            [
+                [1, 0, 0, x],
+                [0, 1, 0, y],
+                [0, 0, 1, z],
+                [0, 0, 0, 1],
+            ]
+        )
 
     def process_mates(self):
         """
@@ -570,7 +574,7 @@ class Assembly:
 
         # Processing loop closing frames
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
-            is_hinge_closure = data["mateType"]== "REVOLUTE"
+            is_hinge_closure = data["mateType"] == "REVOLUTE"
 
             if data["name"].startswith("closing_"):
                 for k in 0, 1:

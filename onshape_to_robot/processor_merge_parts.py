@@ -95,7 +95,7 @@ class ProcessorMergeParts(Processor):
                             part_mesh.visual = False
                         else:
                             part_mesh.collision = False
-                            
+
                         # Retrieving meshes
                         part_mesh = self.load_mesh(part_mesh.filename)
 

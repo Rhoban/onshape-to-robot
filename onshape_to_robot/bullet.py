@@ -8,36 +8,41 @@ def main():
     from .simulation import Simulation
 
     parser = argparse.ArgumentParser(prog="onshape-to-robot-bullet")
-    parser.add_argument('-f', '--fixed', action='store_true')
-    parser.add_argument('-n', '--no-self-collisions', action='store_true')
-    parser.add_argument('-x', '--x', type=float, default=0)
-    parser.add_argument('-y', '--y', type=float, default=0)
-    parser.add_argument('-z', '--z', type=float, default=0)
-    parser.add_argument('directory')
+    parser.add_argument("-f", "--fixed", action="store_true")
+    parser.add_argument("-n", "--no-self-collisions", action="store_true")
+    parser.add_argument("-x", "--x", type=float, default=0)
+    parser.add_argument("-y", "--y", type=float, default=0)
+    parser.add_argument("-z", "--z", type=float, default=0)
+    parser.add_argument("directory")
     args = parser.parse_args()
 
     robotPath = args.directory
-    if not robotPath.endswith('.urdf'):
-        robotPath += '/robot.urdf'
+    if not robotPath.endswith(".urdf"):
+        robotPath += "/robot.urdf"
 
-    sim = Simulation(robotPath, gui=True, panels=True, fixed=args.fixed, ignore_self_collisions=args.no_self_collisions)
+    sim = Simulation(
+        robotPath,
+        gui=True,
+        panels=True,
+        fixed=args.fixed,
+        ignore_self_collisions=args.no_self_collisions,
+    )
     pos, rpy = sim.getRobotPose()
     _, orn = p.getBasePositionAndOrientation(sim.robot)
     sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], orn)
 
     controls = {}
     for name in sim.getJoints():
-        if name.endswith('_speed'):
-            controls[name] = p.addUserDebugParameter(
-                name, -math.pi*3, math.pi*3, 0)
+        if name.endswith("_speed"):
+            controls[name] = p.addUserDebugParameter(name, -math.pi * 3, math.pi * 3, 0)
         else:
             infos = sim.getJointsInfos(name)
             low = -math.pi
             high = math.pi
-            if 'lowerLimit' in infos:
-                low = infos['lowerLimit']
-            if 'upperLimit' in infos:
-                high = infos['upperLimit']
+            if "lowerLimit" in infos:
+                low = infos["lowerLimit"]
+            if "upperLimit" in infos:
+                high = infos["upperLimit"]
             controls[name] = p.addUserDebugParameter(name, low, high, 0)
 
     lastPrint = 0
