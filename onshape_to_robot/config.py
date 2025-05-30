@@ -128,7 +128,7 @@ class Config:
         self.draw_frames: bool = self.get("draw_frames", False)
 
         self.assembly_name: str = self.get("assembly_name", required=False)
-        self.output_format: str = self.get("output_format", "urdf")
+        self.output_format: str = self.get("output_format")
         self.configuration: str | dict = self.get("configuration", "default")
         self.ignore_limits: bool = self.get("ignore_limits", False)
 
