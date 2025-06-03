@@ -8,7 +8,13 @@ from .message import error, bright, info
 
 class Config:
     def __init__(self, robot_path: str):
-        self.config_file: str = robot_path + "/config.json"
+
+        self.config_file: str = robot_path
+        if not robot_path.endswith(".json"):
+            self.config_file: str = robot_path + "/config.json"
+            self.robot_root_path = robot_path
+        else:
+            self.robot_root_path = os.path.dirname(os.path.abspath(robot_path))
 
         # Loading JSON configuration
         if not os.path.exists(self.config_file):
@@ -22,7 +28,7 @@ class Config:
         self.read_configuration()
 
         # Output directory, making it if it doesn't exists
-        self.output_directory: str = robot_path
+        self.output_directory: str = self.robot_root_path
 
         if self.robot_name is None:
             self.robot_name = os.path.dirname(os.path.abspath(self.config_file)).split(
