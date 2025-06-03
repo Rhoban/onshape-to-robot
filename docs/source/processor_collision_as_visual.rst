@@ -27,6 +27,6 @@ This can be used for:
     }
 
 ``collisions_as_visual`` *(default: false)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If set to ``true``, collision will be used as visual.

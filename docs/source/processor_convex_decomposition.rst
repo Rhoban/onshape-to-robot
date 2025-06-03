@@ -24,7 +24,7 @@ If this processor is enabled, the collision meshes will be decomposed using `CoA
     }
 
 ``convex_decomposition`` *(default: false)*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If set to ``true``, collision meshes will be decomposed using CoACD.
 
