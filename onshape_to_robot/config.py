@@ -25,7 +25,7 @@ class Config:
         self.read_configuration()
 
         # Output directory, making it if it doesn't exists
-        self.output_directory: str = os.path.dirname(os.path.abspath(robot_path))
+        self.output_directory: str = os.path.dirname(os.path.abspath(self.config_file))
 
         if self.robot_name is None:
             self.robot_name = os.path.dirname(os.path.abspath(self.config_file)).split(
