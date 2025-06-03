@@ -8,8 +8,10 @@ from .message import error, bright, info
 
 class Config:
     def __init__(self, robot_path: str):
+        self.config_file: str = robot_path
+
         if os.path.isdir(robot_path):
-            robot_path += os.path.sep + "config.json"
+            self.config_file += os.path.sep + "config.json"
 
         # Loading JSON configuration
         if not os.path.exists(self.config_file):
