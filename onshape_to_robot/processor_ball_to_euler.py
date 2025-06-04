@@ -62,6 +62,7 @@ class ProcessorBallToEuler(Processor):
                             parent=parent,
                             child=children[letter],
                             T_world_joint=joint.T_world_joint,
+                            properties=joint.properties,
                             axis=axis,
                         )
                         robot.joints.append(new_joint)
