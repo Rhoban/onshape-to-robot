@@ -4,7 +4,7 @@ import numpy as np
 class Geometry:
     def __init__(
         self,
-        color: np.ndarray = np.array([0.5, 0.5, 0.5]),
+        color: np.ndarray = np.array([0.5, 0.5, 0.5, 1.0]),
         visual: bool = True,
         collision: bool = True,
     ):
@@ -24,7 +24,7 @@ class Mesh(Geometry):
     def __init__(
         self,
         filename: str,
-        color: np.ndarray = np.array([0.5, 0.5, 0.5]),
+        color: np.ndarray = np.array([0.5, 0.5, 0.5, 1.0]),
         visual: bool = True,
         collision: bool = True,
     ):
@@ -36,7 +36,7 @@ class Shape(Geometry):
     def __init__(
         self,
         T_part_shape: np.ndarray,
-        color: np.ndarray = np.array([0.5, 0.5, 0.5]),
+        color: np.ndarray = np.array([0.5, 0.5, 0.5, 1.0]),
         visual: bool = True,
         collision: bool = True,
     ):
@@ -49,7 +49,7 @@ class Box(Shape):
         self,
         T_part_shape: np.ndarray,
         size: np.ndarray,
-        color: np.ndarray = np.array([0.5, 0.5, 0.5]),
+        color: np.ndarray = np.array([0.5, 0.5, 0.5, 1.0]),
         visual: bool = True,
         collision: bool = True,
     ):
@@ -63,7 +63,7 @@ class Cylinder(Shape):
         T_part_shape: np.ndarray,
         length: float,
         radius: float,
-        color: np.ndarray = np.array([0.5, 0.5, 0.5]),
+        color: np.ndarray = np.array([0.5, 0.5, 0.5, 1.0]),
         visual: bool = True,
         collision: bool = True,
     ):
@@ -77,7 +77,7 @@ class Sphere(Shape):
         self,
         T_part_shape: np.ndarray,
         radius: float,
-        color: np.ndarray = np.array([0.5, 0.5, 0.5]),
+        color: np.ndarray = np.array([0.5, 0.5, 0.5, 1.0]),
         visual: bool = True,
         collision: bool = True,
     ):

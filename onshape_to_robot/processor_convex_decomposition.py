@@ -94,7 +94,7 @@ class ProcessorConvexDecomposition(Processor):
                 mesh = trimesh.Trimesh(vertices=mesh[0], faces=mesh[1])
                 mesh.export(filename % k)
                 color = (
-                    np.random.rand(3) if self.rainbow_colors else collision_mesh.color
+                    np.concatenate([np.random.rand(3), [1.0]]) if self.rainbow_colors else collision_mesh.color
                 )
                 part.meshes.append(
                     Mesh(

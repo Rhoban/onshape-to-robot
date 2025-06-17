@@ -125,8 +125,8 @@ class ExporterURDF(Exporter):
             material_name = f"{part.name}_material"
             self.append(f'<material name="{xml_escape(material_name)}">')
             self.append(
-                '<color rgba="%g %g %g 1.0"/>'
-                % (mesh.color[0], mesh.color[1], mesh.color[2])
+                '<color rgba="%g %g %g %g"/>'
+                % (mesh.color[0], mesh.color[1], mesh.color[2], mesh.color[3])
             )
             self.append("</material>")
 
@@ -158,8 +158,8 @@ class ExporterURDF(Exporter):
             material_name = f"{part.name}_material"
             self.append(f'<material name="{xml_escape(material_name)}">')
             self.append(
-                '<color rgba="%g %g %g 1.0"/>'
-                % (shape.color[0], shape.color[1], shape.color[2])
+                '<color rgba="%g %g %g %g"/>'
+                % (shape.color[0], shape.color[1], shape.color[2], shape.color[3])
             )
             self.append("</material>")
 
