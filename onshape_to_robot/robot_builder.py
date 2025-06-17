@@ -221,7 +221,7 @@ class RobotBuilder:
                 partid=instance["partId"],
             )
 
-            color = np.array([0.5, 0.5, 0.5])
+            color = np.array([0.5, 0.5, 0.5, 1.0])
 
             # XXX: There must be a better way to retrieve the part color
             for entry in metadata["properties"]:
@@ -231,7 +231,8 @@ class RobotBuilder:
                     and "color" in entry["value"]
                 ):
                     rgb = entry["value"]["color"]
-                    color = np.array([rgb["red"], rgb["green"], rgb["blue"]]) / 255.0
+                    a = entry["value"]["opacity"]
+                    color = np.array([rgb["red"], rgb["green"], rgb["blue"], a]) / 255.0
 
         return color
 

@@ -105,8 +105,8 @@ class ExporterSDF(Exporter):
 
     def append_material(self, color: np.ndarray):
         self.append(f"<material>")
-        self.append("<ambient>%g %g %g 1.0</ambient>" % (color[0], color[1], color[2]))
-        self.append("<diffuse>%g %g %g 1.0</diffuse>" % (color[0], color[1], color[2]))
+        self.append("<ambient>%g %g %g %g</ambient>" % (color[0], color[1], color[2], color[3]))
+        self.append("<diffuse>%g %g %g %g</diffuse>" % (color[0], color[1], color[2], color[3]))
         self.append("<specular>0.1 0.1 0.1 1</specular>")
         self.append("<emissive>0 0 0 0</emissive>")
         self.append("</material>")

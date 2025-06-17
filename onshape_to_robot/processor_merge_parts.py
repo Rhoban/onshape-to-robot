@@ -64,7 +64,7 @@ class ProcessorMergeParts(Processor):
         T_world_com[:3, 3] = com
 
         # Computing a new color, weighting by masses
-        color = np.zeros(3)
+        color = np.zeros(4)
         total_mass = 0
         for part in link.parts:
             if len(part.meshes):
