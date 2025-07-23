@@ -32,7 +32,7 @@ Here is an example of complete ``config.json`` file, with details below:
         // Extension (.urdf, .xml) will be added automatically
         "output_filename": "robot",
         // Assets directory (default: "assets")
-        "assets_dir": "assets",
+        "assets_directory": "assets",
 
         // If you don't use "url", you can alternatively specify the following
         // The Onshape document id to parse, see "getting started" (optional)
@@ -118,7 +118,7 @@ created by the export.
 
 This is the name of the output file without extension. By default "robot" (for example: ``robot.urdf``, ``robot.sdf`` or ``robot.xml``).
 
-``assets_dir`` *(default: "assets")*
+``assets_directory`` *(default: "assets")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is the directory where the assets (like meshes) will be stored.
