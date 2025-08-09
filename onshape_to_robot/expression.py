@@ -16,6 +16,7 @@ class ExpressionParser:
         self.variables = {
             "pi": np.pi,
         }
+        self.assembly_variables = {}  # Store assembly-specific variables
 
     # Supported operators
     operators = {
@@ -56,6 +57,25 @@ class ExpressionParser:
         "log10": np.log10,
     }
 
+    def add_assembly_variable(self, name: str, value):
+        """
+        Add a variable from the assembly context
+        """
+        self.assembly_variables[name] = value
+
+    def add_assembly_variables(self, variables_dict: dict):
+        """
+        Add multiple variables from the assembly context
+        """
+        for name, value in variables_dict.items():
+            self.add_assembly_variable(name, value)
+
+    def get_assembly_variable(self, name: str):
+        """
+        Get a variable from the assembly context
+        """
+        return self.assembly_variables.get(name)
+
     def eval_expr(self, expr):
         # Length units. Converting everything to meter / radian
         units = {
@@ -93,15 +113,20 @@ class ExpressionParser:
         elif isinstance(node, ast.UnaryOp):  # e.g., -1
             return self.operators[type(node.op)](self.eval_(node.operand))
         elif isinstance(node, ast.Name):
+            # First check assembly variables
+            if node.id in self.assembly_variables:
+                return self.assembly_variables[node.id]
+            
+            # Then check regular variables
             if (
-                node.id.lower() not in self.variables
+                node.id not in self.variables
                 and self.variables_lazy_loading is not None
             ):
                 self.variables_lazy_loading()
                 self.variables_lazy_loading = None
-            if node.id.lower() not in self.variables:
+            if node.id not in self.variables:
                 raise ValueError(f"Unknown variable in expression: {node.id}")
-            return self.variables[node.id.lower()]
+            return self.variables[node.id]
         elif isinstance(node, ast.Call):
             if node.func.id not in self.functions:
                 raise ValueError(f"Unknown function in expression: {node.func.id}")

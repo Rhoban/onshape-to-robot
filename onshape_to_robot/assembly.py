@@ -113,6 +113,7 @@ class Assembly:
         self.find_relations()
         print("")
 
+
     def ensure_workspace_or_version(self):
         """
         Ensure either a workspace id or a version id is set
@@ -324,19 +325,39 @@ class Assembly:
 
         self.variable_values = None
 
-        # Extracting configuration v ariables
+        # Extracting configuration variables
         parts = self.assembly_data["rootAssembly"]["fullConfiguration"].split(";")
+        print(bright(f"* Loading configuration parameters from: {self.assembly_data['rootAssembly']['fullConfiguration']}"))
+        
         for part in parts:
             key_value = part.split("=")
             if len(key_value) == 2:
                 key, value = key_value
                 value = value.replace("+", " ")
                 self.configuration_parameters[key] = value
+                
+                # Try to evaluate the expression and store as assembly variable
                 try:
                     param_value = self.expression_parser.eval_expr(value)
                     self.expression_parser.variables[key] = param_value
-                except ValueError:
-                    pass
+                    
+                    # Also store in assembly variables for enhanced access
+                    self.expression_parser.add_assembly_variable(key, param_value)
+                    print(success(f"+ Added assembly variable: {key} = {param_value}"))
+                except ValueError as e:
+                    # If evaluation fails, store the raw string value
+                    print(warning(f"! Could not evaluate expression '{value}' for parameter '{key}': {e}"))
+                    print(warning(f"  Storing raw value: {key} = '{value}'"))
+                    self.expression_parser.variables[key] = value
+                    self.expression_parser.add_assembly_variable(key, value)
+                except Exception as e:
+                    print(error(f"! Unexpected error evaluating '{value}' for parameter '{key}': {e}"))
+                    # Store the raw value as fallback
+                    self.expression_parser.variables[key] = value
+                    self.expression_parser.add_assembly_variable(key, value)
+        
+        print(success(f"* Loaded {len(self.configuration_parameters)} configuration parameters"))
+        print(success(f"* Assembly variables available: {list(self.expression_parser.assembly_variables.keys())}"))
 
     def load_variables(self):
         """
@@ -349,11 +370,38 @@ class Assembly:
             wmv="v" if self.version_id else "w",
             configuration=self.config.configuration,
         )
+
+        variable_count = 0
+        
+        # Load variables into both regular variables and assembly variables
         for entry in variables:
             for variable in entry["variables"]:
-                self.expression_parser.variables[variable["name"]] = (
-                    self.expression_parser.eval_expr(variable["value"])
-                )
+                variable_name = variable["name"]
+                try:
+                    variable_value = self.expression_parser.eval_expr(variable["value"])
+                    
+                    # Store in regular variables for backward compatibility
+                    self.expression_parser.variables[variable_name] = variable_value
+                    
+                    # Store in assembly variables for enhanced access
+                    self.expression_parser.add_assembly_variable(variable_name, variable_value)
+                    # print(success(f"+ Added variable: {variable_name} = {variable_value}"))
+                    variable_count += 1
+                except ValueError as e:
+                    print(warning(f"! Could not evaluate variable '{variable_name}' with value '{variable['value']}': {e}"))
+                    # Store the raw value as fallback
+                    self.expression_parser.variables[variable_name] = variable["value"]
+                    self.expression_parser.add_assembly_variable(variable_name, variable["value"])
+                    variable_count += 1
+                except Exception as e:
+                    print(error(f"! Unexpected error loading variable '{variable_name}': {e}"))
+                    # Store the raw value as fallback
+                    self.expression_parser.variables[variable_name] = variable["value"]
+                    self.expression_parser.add_assembly_variable(variable_name, variable["value"])
+                    variable_count += 1
+        
+        print(success(f"* Loaded {variable_count} variables from Onshape"))
+        print(success(f"* Total assembly variables available: {list(self.expression_parser.assembly_variables.keys())}"))
 
     def get_occurrence(self, path: list):
         """
@@ -940,3 +988,44 @@ class Assembly:
                 return dof
 
         raise Exception(f"ERROR: no DOF found between {body1_id} and {body2_id}")
+
+    def add_assembly_variable(self, name: str, value):
+        """
+        Add a custom variable to the assembly context that can be used in expressions
+        """
+        self.expression_parser.add_assembly_variable(name, value)
+
+    def get_assembly_variable(self, name: str):
+        """
+        Get a variable from the assembly context
+        """
+        return self.expression_parser.get_assembly_variable(name)
+
+    def get_all_assembly_variables(self):
+        """
+        Get all available assembly variables
+        """
+        return self.expression_parser.assembly_variables.copy()
+
+    def evaluate_expression_with_assembly_context(self, expression: str):
+        """
+        Evaluate an expression using the current assembly context (variables, configuration, etc.)
+        """
+        return self.expression_parser.eval_expr(expression)
+
+    def debug_joint_variables(self, joint_name: str):
+        """
+        Debug method to show what variables are available for a specific joint
+        """
+        print(bright(f"Debug info for joint: {joint_name}"))
+        print(f"Available assembly variables: {list(self.expression_parser.assembly_variables.keys())}")
+        print(f"Available configuration parameters: {list(self.configuration_parameters.keys())}")
+        
+        # Check if this joint has any specific variables
+        joint_vars = [var for var in self.expression_parser.assembly_variables.keys() 
+                     if joint_name.lower() in var.lower()]
+        if joint_vars:
+            print(f"Joint-specific variables: {joint_vars}")
+            for var in joint_vars:
+                value = self.expression_parser.assembly_variables[var]
+                print(f"  {var} = {value}")
