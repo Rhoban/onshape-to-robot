@@ -355,9 +355,6 @@ class Assembly:
                     # Store the raw value as fallback
                     self.expression_parser.variables[key] = value
                     self.expression_parser.add_assembly_variable(key, value)
-        
-        print(success(f"* Loaded {len(self.configuration_parameters)} configuration parameters"))
-        print(success(f"* Assembly variables available: {list(self.expression_parser.assembly_variables.keys())}"))
 
     def load_variables(self):
         """
@@ -385,7 +382,6 @@ class Assembly:
                     
                     # Store in assembly variables for enhanced access
                     self.expression_parser.add_assembly_variable(variable_name, variable_value)
-                    # print(success(f"+ Added variable: {variable_name} = {variable_value}"))
                     variable_count += 1
                 except ValueError as e:
                     print(warning(f"! Could not evaluate variable '{variable_name}' with value '{variable['value']}': {e}"))
@@ -991,19 +987,19 @@ class Assembly:
 
     def add_assembly_variable(self, name: str, value):
         """
-        Add a custom variable to the assembly context that can be used in expressions
+        Add a custom variable to the expression parser assembly context.
         """
         self.expression_parser.add_assembly_variable(name, value)
 
     def get_assembly_variable(self, name: str):
         """
-        Get a variable from the assembly context
+        Get a variable from the expression parser assembly context.
         """
         return self.expression_parser.get_assembly_variable(name)
 
     def get_all_assembly_variables(self):
         """
-        Get all available assembly variables
+        Get all available assembly variables from the expression parser assembly context.
         """
         return self.expression_parser.assembly_variables.copy()
 
@@ -1012,20 +1008,3 @@ class Assembly:
         Evaluate an expression using the current assembly context (variables, configuration, etc.)
         """
         return self.expression_parser.eval_expr(expression)
-
-    def debug_joint_variables(self, joint_name: str):
-        """
-        Debug method to show what variables are available for a specific joint
-        """
-        print(bright(f"Debug info for joint: {joint_name}"))
-        print(f"Available assembly variables: {list(self.expression_parser.assembly_variables.keys())}")
-        print(f"Available configuration parameters: {list(self.configuration_parameters.keys())}")
-        
-        # Check if this joint has any specific variables
-        joint_vars = [var for var in self.expression_parser.assembly_variables.keys() 
-                     if joint_name.lower() in var.lower()]
-        if joint_vars:
-            print(f"Joint-specific variables: {joint_vars}")
-            for var in joint_vars:
-                value = self.expression_parser.assembly_variables[var]
-                print(f"  {var} = {value}")
