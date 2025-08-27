@@ -35,7 +35,7 @@ class ProcessorSimplifySTLs(Processor):
     def process(self, robot: Robot):
         if self.simplify_stls:
             simplify_all = (
-                self.simplify_stls != "vision" and self.simplify_stls != "collision"
+                self.simplify_stls != "visual" and self.simplify_stls != "collision"
             )
             simplified = set()
             for link in robot.links:
