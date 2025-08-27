@@ -351,9 +351,10 @@ class Assembly:
         )
         for entry in variables:
             for variable in entry["variables"]:
-                self.expression_parser.variables[variable["name"]] = (
-                    self.expression_parser.eval_expr(variable["value"])
-                )
+                if variable["value"] is not None:
+                    self.expression_parser.variables[variable["name"]] = (
+                        self.expression_parser.eval_expr(variable["value"])
+                    )
 
     def get_occurrence(self, path: list):
         """

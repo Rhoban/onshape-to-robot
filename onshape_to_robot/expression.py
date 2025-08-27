@@ -14,7 +14,7 @@ class ExpressionParser:
     def __init__(self):
         self.variables_lazy_loading = None
         self.variables = {
-            "pi": np.pi,
+            "pi": np.pi, "Pi": np.pi, "PI": np.pi
         }
 
     # Supported operators
@@ -94,14 +94,14 @@ class ExpressionParser:
             return self.operators[type(node.op)](self.eval_(node.operand))
         elif isinstance(node, ast.Name):
             if (
-                node.id.lower() not in self.variables
+                node.id not in self.variables
                 and self.variables_lazy_loading is not None
             ):
                 self.variables_lazy_loading()
                 self.variables_lazy_loading = None
-            if node.id.lower() not in self.variables:
+            if node.id not in self.variables:
                 raise ValueError(f"Unknown variable in expression: {node.id}")
-            return self.variables[node.id.lower()]
+            return self.variables[node.id]
         elif isinstance(node, ast.Call):
             if node.func.id not in self.functions:
                 raise ValueError(f"Unknown function in expression: {node.func.id}")
