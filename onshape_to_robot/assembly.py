@@ -324,7 +324,7 @@ class Assembly:
 
         self.variable_values = None
 
-        # Extracting configuration v ariables
+        # Extracting configuration variables
         parts = self.assembly_data["rootAssembly"]["fullConfiguration"].split(";")
         for part in parts:
             key_value = part.split("=")
