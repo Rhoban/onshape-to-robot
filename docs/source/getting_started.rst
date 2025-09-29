@@ -16,7 +16,7 @@ Setting up your API key
 -----------------------
 
 You will need to obtain API key and secret from the
-`My Account > Developper menu <https://cad.onshape.com/user/developer/apiKeys>`_
+`My Account > Developer menu <https://cad.onshape.com/user/developer/apiKeys>`_
 
 API key must be set as environment variables.
 
