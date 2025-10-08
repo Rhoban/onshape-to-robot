@@ -200,7 +200,15 @@ class ExporterURDF(Exporter):
 
         self.append(f'<parent link="{joint.parent.name}" />')
         self.append(f'<child link="{joint.child.name}" />')
-        self.append('<axis xyz="%g %g %g"/>' % tuple(joint.axis))
+        # Transform axis from world to parent link frame to match URDF semantics
+        axis_parent = (np.linalg.inv(T_world_link)[:3, :3] @ joint.axis).astype(float)
+        # Normalize to ensure unit axis
+        norm = np.linalg.norm(axis_parent)
+        if norm > 0:
+            axis_parent = axis_parent / norm
+        # Zero-out tiny numerical components
+        axis_parent[np.abs(axis_parent) < 1e-6] = 0.0
+        self.append('<axis xyz="%g %g %g"/>' % tuple(axis_parent))
 
         limits = ""
         if "max_effort" in joint.properties:
