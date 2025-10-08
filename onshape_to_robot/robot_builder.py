@@ -379,7 +379,25 @@ class RobotBuilder:
         for children_body in self.assembly.tree_children[body_id]:
             dof = self.assembly.get_dof(body_id, children_body)
             child_body = dof.other_body(body_id)
-            T_world_axis = dof.T_world_mate.copy()
+            # Choose the joint frame based on the parent side to ensure the axis is correct
+            if (
+                hasattr(dof, "T_world_mate_by_body")
+                and body_id in dof.T_world_mate_by_body
+            ):
+                T_world_axis = dof.T_world_mate_by_body[body_id].copy()
+            else:
+                # Fallback for backward compatibility
+                T_world_axis = dof.T_world_mate.copy()
+
+            # Compute axis direction in world from the joint frame Z axis
+            axis_world = (T_world_axis[:3, :3] @ np.array([0.0, 0.0, 1.0])).astype(
+                float
+            )
+            norm = np.linalg.norm(axis_world)
+            if norm > 0:
+                axis_world = axis_world / norm
+            # Zero-out tiny numerical components
+            axis_world[np.abs(axis_world) < 1e-6] = 0.0
 
             properties = self.config.joint_properties.get("default", {})
             for joint_name in self.config.joint_properties:
@@ -397,7 +415,7 @@ class RobotBuilder:
                 T_world_axis,
                 properties,
                 dof.limits,
-                dof.axis,
+                axis_world,
             )
             if dof.name in self.assembly.relations:
                 source, ratio = self.assembly.relations[dof.name]
