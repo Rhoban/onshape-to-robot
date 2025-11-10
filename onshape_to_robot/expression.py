@@ -74,6 +74,7 @@ class ExpressionParser:
             "rad": 1.0,
             "degree": np.pi / 180,
             "deg": np.pi / 180,
+            "m": 1.0
         }
         for unit, factor in units.items():
             expr = expr.replace(f" {unit}", f"*{factor}")
