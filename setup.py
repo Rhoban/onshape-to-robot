@@ -21,6 +21,7 @@ setuptools.setup(
             "onshape-to-robot-clear-cache=onshape_to_robot:clear_cache.main",
             "onshape-to-robot-edit-shape=onshape_to_robot:edit_shape.main",
             "onshape-to-robot-pure-sketch=onshape_to_robot:pure_sketch.main",
+            "onshape-to-robot-check-rate=onshape_to_robot:check_rate.main",
         ]
     },
     classifiers=[
