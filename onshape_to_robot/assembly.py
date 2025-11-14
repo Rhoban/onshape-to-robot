@@ -42,6 +42,8 @@ class DOF:
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
         self.axis: np.ndarray = axis
+        # Mapping of body id -> world joint frame for that body's mated entity
+        self.T_world_mate_by_body: dict[int, np.ndarray] = {}
 
     def flip(self, flip_limits: bool = True):
         if flip_limits and self.limits is not None:
@@ -50,6 +52,10 @@ class DOF:
         # Flipping the joint around X axis
         flip = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
         self.T_world_mate[:3, :3] = self.T_world_mate[:3, :3] @ flip
+        # Apply same flip to all stored per-body joint frames
+        for body_id in list(self.T_world_mate_by_body.keys()):
+            T = self.T_world_mate_by_body[body_id]
+            T[:3, :3] = T[:3, :3] @ flip
 
     def other_body(self, body_id: int):
         if body_id == self.body1_id:
@@ -479,17 +485,26 @@ class Assembly:
                         + "       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"
                     )
 
-                # We compute the axis in the world frame
-                mated_entity = data["matedEntities"][0]
-                T_world_part = self.get_occurrence_transform(
-                    mated_entity["matedOccurrence"]
+                # Compute joint frames in world for both mated entities
+                mated_entity_A = data["matedEntities"][0]
+                mated_entity_B = data["matedEntities"][1]
+
+                T_world_part_A = self.get_occurrence_transform(
+                    mated_entity_A["matedOccurrence"]
+                )
+                T_world_part_B = self.get_occurrence_transform(
+                    mated_entity_B["matedOccurrence"]
                 )
 
-                # jointToPart is the (rotation only) matrix from joint to the part
-                # it is attached to
-                T_part_mate = self.get_mate_transform(mated_entity)
+                # jointToPart is the (rotation only) matrix from joint to the part it is attached to
+                T_part_mate_A = self.get_mate_transform(mated_entity_A)
+                T_part_mate_B = self.get_mate_transform(mated_entity_B)
 
-                T_world_mate = T_world_part @ T_part_mate
+                T_world_mate_A = T_world_part_A @ T_part_mate_A
+                T_world_mate_B = T_world_part_B @ T_part_mate_B
+
+                # Keep backward-compatible single frame (entity A) but also store per-body frames later
+                T_world_mate = T_world_mate_A
 
                 limits_str = ""
                 if limits is not None:
@@ -509,6 +524,13 @@ class Assembly:
                     joint_type,
                     T_world_mate,
                     limits,
+                )
+                # Store per-body joint frames for correct parent/child selection later
+                dof.T_world_mate_by_body[self.instance_body[occurrence_A]] = (
+                    T_world_mate_A
+                )
+                dof.T_world_mate_by_body[self.instance_body[occurrence_B]] = (
+                    T_world_mate_B
                 )
 
                 if data["inverted"]:
