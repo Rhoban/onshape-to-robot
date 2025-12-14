@@ -332,8 +332,11 @@ class ExporterMuJoCo(Exporter):
         """
         self.append(f"<!-- Camera {camera.name} -->")
 
+        # Convert from world frame to link-relative frame
+        T_link_camera = np.linalg.inv(T_world_link) @ camera.T_link_camera
+
         camera_xml: str = f'<camera name="{camera.name}" '
-        camera_xml += self.pos_quat(camera.T_link_camera) + " "
+        camera_xml += self.pos_quat(T_link_camera) + " "
         camera_xml += f'fovy="{camera.fovy}" '
         camera_xml += f'mode="{camera.mode}" '
         camera_xml += f'resolution="{camera.resolution[0]} {camera.resolution[1]}" '
