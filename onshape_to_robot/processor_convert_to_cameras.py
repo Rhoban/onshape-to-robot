@@ -17,6 +17,6 @@ class ProcessorConvertToCameras(Processor):
     for camera_name, frame_name in self.cameras.items():
       for link in robot.links:
         if frame_name in link.frames:
-          print(f"  Creating camera '{camera_name}' from frame '{frame_name}' on link '{link.name}'")
+          print(info(f"Creating camera '{camera_name}' from frame '{frame_name}' on link '{link.name}'"))
           robot.cameras.append(Camera(camera_name, link.name, link.frames.pop(frame_name)))
           break
