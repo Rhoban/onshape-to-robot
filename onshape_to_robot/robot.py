@@ -141,6 +141,28 @@ class Closure:
         self.frame2: str = frame2
 
 
+class Camera:
+    """
+    A camera attached to a link.
+    """
+
+    def __init__(
+        self,
+        name: str,
+        link_name: str,
+        T_link_camera: np.ndarray,
+        fovy: float = 45.0,
+        mode: str = "fixed",
+        resolution: tuple[int, int] = (640, 480),
+    ):
+        self.name: str = name
+        self.link_name: str = link_name
+        self.T_link_camera: np.ndarray = T_link_camera
+        self.fovy: float = fovy
+        self.mode: str = mode
+        self.resolution: tuple[int, int] = resolution
+
+
 class Robot:
     """
     Robot representation produced after requesting Onshape API, and before
@@ -153,6 +175,7 @@ class Robot:
         self.base_links: list[Link] = []
         self.joints: list[Joint] = []
         self.closures: list[Closure] = []
+        self.cameras: list[Camera] = []
 
     def get_link(self, name: str):
         for link in self.links:

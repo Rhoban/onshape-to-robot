@@ -3,7 +3,7 @@ import numpy as np
 import os
 import fnmatch
 from .message import success, warning, info
-from .robot import Robot, Link, Part, Joint, Closure
+from .robot import Robot, Link, Part, Joint, Closure, Camera
 from .config import Config
 from .geometry import Box, Cylinder, Sphere, Mesh, Shape
 from .exporter import Exporter
@@ -326,6 +326,24 @@ class ExporterMuJoCo(Exporter):
         site += " />"
         self.append(site)
 
+    def add_camera(self, camera: Camera, T_world_link: np.ndarray):
+        """
+        Add a camera element to the body
+        """
+        self.append(f"<!-- Camera {camera.name} -->")
+
+        # Convert from world frame to link-relative frame
+        T_link_camera = np.linalg.inv(T_world_link) @ camera.T_link_camera
+
+        camera_xml: str = f'<camera name="{camera.name}" '
+        camera_xml += self.pos_quat(T_link_camera) + " "
+        camera_xml += f'fovy="{camera.fovy}" '
+        camera_xml += f'mode="{camera.mode}" '
+        camera_xml += f'resolution="{camera.resolution[0]} {camera.resolution[1]}" '
+        camera_xml += " />"
+
+        self.append(camera_xml)
+
     def add_link(
         self,
         robot: Robot,
@@ -368,6 +386,11 @@ class ExporterMuJoCo(Exporter):
         # Adding frames attached to current link
         for frame, T_world_frame in link.frames.items():
             self.add_frame(frame, T_world_link, T_world_frame, group=3)
+
+        # Adding cameras attached to current link
+        for camera in robot.cameras:
+            if camera.link_name == link.name:
+                self.add_camera(camera, T_world_link)
 
         # Adding joints and children links
         for joint in robot.get_link_joints(link):
