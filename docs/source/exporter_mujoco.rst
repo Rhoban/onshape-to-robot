@@ -9,7 +9,7 @@ Introduction
 MuJoCo is a standard physics simulator, coming with an extensive description format.
 
 * Frames will be added as ``site`` tags in the MuJoCo XML file.
-* *Cameras* can be added using custom processors (see :ref:`Cameras <cameras>` section below).
+* *Cameras* can be added by mapping frame names to camera names in the configuration (see :ref:`Cameras <cameras>` section below).
 * *Actuators* will be created for all actuated joints (see below).
 * When :ref:`kinematic loops <kinematic-loops>` are present, they will be enforced using equality constraints.
 
@@ -106,19 +106,15 @@ If you want to include additional XML in the URDF, you can specify the path to t
 
 .. _cameras:
 
-Cameras
--------
+``cameras`` *(default: {})*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Camera support allows you to add camera elements to your MuJoCo model. Cameras are typically added through custom processors that convert frame references to camera elements.
+Camera support allows you to add camera elements to your MuJoCo model. Frames are automatically converted to cameras using the built-in ``ProcessorConvertToCameras`` processor.
 
-Basic camera usage
-~~~~~~~~~~~~~~~~~~
-
-To add cameras to your robot, you need to:
+To add cameras to your robot:
 
 1. Define camera frame references in your Onshape assembly using mate connectors
 2. Configure camera mappings in ``config.json``
-3. Use a custom processor to convert frames to cameras
 
 .. important::
 
@@ -140,65 +136,10 @@ Example ``config.json`` entry:
         "cameras": {
             "wrist_camera": "wrist_camera_frame",
             "head_camera": "head_camera_frame"
-        },
-        "processors": [
-            "my_processors.convert_to_cameras:ProcessorConvertToCameras",
-            // ... other processors
-        ]
+        }
     }
 
-Camera processor example
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Here's an example processor that converts frames to cameras:
-
-.. code-block:: python
-
-    from onshape_to_robot.processor import Processor
-    from onshape_to_robot.config import Config
-    from onshape_to_robot.robot import Robot, Camera
-
-    class ProcessorConvertToCameras(Processor):
-        """Convert frames to camera elements."""
-
-        def __init__(self, config: Config):
-            super().__init__(config)
-            self.cameras = config.get("cameras", {})
-
-        def process(self, robot: Robot):
-            for camera_name, frame_name in self.cameras.items():
-                for link in robot.links:
-                    if frame_name in link.frames:
-                        print(f"Creating camera '{camera_name}' from frame '{frame_name}'")
-                        robot.cameras.append(
-                            Camera(camera_name, link.name, link.frames.pop(frame_name))
-                        )
-                        break
-
-Camera properties
-~~~~~~~~~~~~~~~~~
-
-The ``Camera`` class supports the following optional properties:
-
-* ``fovy`` *(default: 45.0)*: Vertical field of view in degrees
-* ``mode`` *(default: "fixed")*: Camera mode (``fixed``, ``track``, etc.)
-* ``resolution`` *(default: (640, 480))*: Image resolution as a tuple
-
-Example with custom properties:
-
-.. code-block:: python
-
-    from onshape_to_robot.robot import Camera
-
-    camera = Camera(
-        name="my_camera",
-        link_name="head_link",
-        T_link_camera=transform_matrix,
-        fovy=60.0,
-        mode="fixed",
-        resolution=(1280, 720)
-    )
-    robot.cameras.append(camera)
+The keys are the camera names that will appear in the MuJoCo XML, and the values are the frame names defined in your Onshape assembly.
 
 Generated MuJoCo XML
 ~~~~~~~~~~~~~~~~~~~~
