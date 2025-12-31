@@ -7,7 +7,6 @@ from . import bullet, clear_cache, edit_shape, export, mujoco, pure_sketch
 
 
 def main():
-    print("onshape-to-robot command line interface")
     parser = argparse.ArgumentParser(
         prog="onshape-to-robot",
         description="Unified entry point for Onshape-to-Robot tools. Use a subcommand to access each tool."
