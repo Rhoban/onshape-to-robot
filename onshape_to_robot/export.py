@@ -1,14 +1,15 @@
-def main():
+def main(robot_directory=None):
     import os
-    import sys
     import pickle
-    from dotenv import load_dotenv, find_dotenv
+
+    from dotenv import find_dotenv, load_dotenv
+
     from .config import Config
+    from .exporter_mujoco import ExporterMuJoCo
+    from .exporter_sdf import ExporterSDF
+    from .exporter_urdf import ExporterURDF
     from .message import error, info
     from .robot_builder import RobotBuilder
-    from .exporter_urdf import ExporterURDF
-    from .exporter_sdf import ExporterSDF
-    from .exporter_mujoco import ExporterMuJoCo
 
     """
     This is the entry point of the export script, i.e the "onshape-to-robot" command.
@@ -16,14 +17,8 @@ def main():
     load_dotenv(find_dotenv(usecwd=True))
 
     try:
-        # Retrieving robot path
-        if len(sys.argv) <= 1:
-            raise Exception(
-                "ERROR: usage: onshape-to-robot {robot_directory}\n"
-                + "Read documentation at https://onshape-to-robot.readthedocs.io/"
-            )
-
-        robot_path: str = sys.argv[1]
+        #retrieving robot path
+        robot_path: str = robot_directory
 
         # Loading configuration
         config = Config(robot_path)
@@ -65,4 +60,15 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    import argcomplete
+
+    parser = argparse.ArgumentParser(
+    prog="onshape-to-robot",
+        description="Convert Onshape assembly to robot definition (URDF, SDF, MuJoCo) through Onshape API."
+    )
+    parser.add_argument("robot_directory", help="Path to robot directory")
+    argcomplete.autocomplete(parser)
+    args = parser.parse_args()
+    robot_directory = args.robot_directory
