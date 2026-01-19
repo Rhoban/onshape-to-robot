@@ -139,6 +139,10 @@ class ExporterSDF(Exporter):
         if node == "visual":
             self.append_material(mesh.color)
 
+        # Apply properties from mesh.properties
+        for key, value in mesh.properties.items():
+            self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
+
         self.append(f"</{node}>")
 
     def add_shape(
@@ -174,6 +178,10 @@ class ExporterSDF(Exporter):
 
         if node == "visual":
             self.append_material(shape.color)
+
+        # Apply properties from shape.properties
+        for key, value in shape.properties.items():
+            self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
 
         self.append(f"</{node}>")
 

@@ -340,6 +340,29 @@ class RobotBuilder:
         if mesh.visual or mesh.collision:
             meshes.append(mesh)
 
+        # Apply geom_properties based on link name pattern matching
+        link_name = self.robot.links[-1].name
+        for mesh in meshes:
+            properties = {}
+
+            for pattern_name in self.config.geom_properties:
+                if fnmatch.fnmatch(link_name, pattern_name):
+                    pattern_props = self.config.geom_properties[pattern_name]
+
+                    # Check for nested visual/collision structure
+                    has_nested = "visual" in pattern_props or "collision" in pattern_props
+
+                    if has_nested:
+                        if mesh.visual and "visual" in pattern_props:
+                            properties = {**properties, **pattern_props["visual"]}
+                        if mesh.collision and "collision" in pattern_props:
+                            properties = {**properties, **pattern_props["collision"]}
+                    else:
+                        # Apply to both if not nested
+                        properties = {**properties, **pattern_props}
+
+            mesh.properties = properties
+
         part = Part(
             self.unique_name(instance, "part"),
             T_world_part,

@@ -130,6 +130,10 @@ class ExporterURDF(Exporter):
             )
             self.append("</material>")
 
+        # Apply properties from mesh.properties
+        for key, value in mesh.properties.items():
+            self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
+
         self.append(f"</{node}>")
 
     def add_shape(self, part: Part, node: str, T_world_link: np.ndarray, shape: Shape):
@@ -162,6 +166,10 @@ class ExporterURDF(Exporter):
                 % (shape.color[0], shape.color[1], shape.color[2], shape.color[3])
             )
             self.append("</material>")
+
+        # Apply properties from shape.properties
+        for key, value in shape.properties.items():
+            self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
 
         self.append(f"</{node}>")
 

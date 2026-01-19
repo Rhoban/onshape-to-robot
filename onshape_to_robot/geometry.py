@@ -11,6 +11,7 @@ class Geometry:
         self.color: np.ndarray = color
         self.visual: bool = visual
         self.collision: bool = collision
+        self.properties: dict = {}
 
     def is_type(self, what: str):
         if what == "visual":

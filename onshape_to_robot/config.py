@@ -142,6 +142,7 @@ class Config:
 
         # Joint specs
         self.joint_properties: dict = self.get("joint_properties", {})
+        self.geom_properties: dict = self.get("geom_properties", {})
         self.no_dynamics: bool = self.get("no_dynamics", False)
 
         # Ignore / whitelists
