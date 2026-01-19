@@ -47,6 +47,24 @@ Here is an example of complete ``config.json`` file, with details below:
                 "type": "continuous"
             }
         },
+
+        // Override geometry properties (default: {})
+        "geom_properties": {
+            // Set properties for specific links using pattern matching
+            "tibia": {
+                "collision": {
+                    "mu": "1.2",
+                    "mu2": "0.8"
+                }
+            },
+            // Wildcard patterns are supported
+            "leg_*": {
+                "collision": {
+                    "bounce": "0.5",
+                    "max_contacts": "10"
+                }
+            }
+        },
     }
 
 ``joint_properties`` *(default: {})*
@@ -61,6 +79,22 @@ Possible values are:
 * ``friction``: The friction of the joint (added in the ``<joint_properties friction=...>`` tag)
 * ``type``: Sets the joint type (changing the ``<joint type="...">`` tag)
 * ``limits``: Override the joint limits, should be a list of two values (min, max)
+
+``geom_properties`` *(default: {})*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Allow to specify the properties of the geometries (collision and visual) produced in the SDF output. The key should be link names with support for wildcard pattern matching.
+
+Properties can be specified separately for ``visual`` and ``collision`` geometries, or applied to both if not nested.
+
+Wildcard patterns (``*``, ``?``, ``[seq]``) are supported for matching link names. When multiple patterns match, properties are merged in order with later matches overriding earlier ones.
+
+All properties are added as nested XML elements within the ``<visual>`` or ``<collision>`` tags. Common SDF geometry properties include:
+
+* ``mu``, ``mu2``: Friction coefficients for collision geometries
+* ``bounce``: Restitution coefficient for collision geometries
+* ``max_contacts``: Maximum number of contact points for collision geometries
+* ``kp``, ``kd``: Contact stiffness and damping parameters
 
 ``additional_xml`` *(default: "")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
