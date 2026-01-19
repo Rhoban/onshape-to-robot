@@ -343,7 +343,8 @@ class RobotBuilder:
         # Apply geom_properties based on link name pattern matching
         link_name = self.robot.links[-1].name
         for mesh in meshes:
-            properties = {}
+            visual_properties = {}
+            collision_properties = {}
 
             for pattern_name in self.config.geom_properties:
                 if fnmatch.fnmatch(link_name, pattern_name):
@@ -353,15 +354,17 @@ class RobotBuilder:
                     has_nested = "visual" in pattern_props or "collision" in pattern_props
 
                     if has_nested:
-                        if mesh.visual and "visual" in pattern_props:
-                            properties = {**properties, **pattern_props["visual"]}
-                        if mesh.collision and "collision" in pattern_props:
-                            properties = {**properties, **pattern_props["collision"]}
+                        if "visual" in pattern_props:
+                            visual_properties = {**visual_properties, **pattern_props["visual"]}
+                        if "collision" in pattern_props:
+                            collision_properties = {**collision_properties, **pattern_props["collision"]}
                     else:
                         # Apply to both if not nested
-                        properties = {**properties, **pattern_props}
+                        visual_properties = {**visual_properties, **pattern_props}
+                        collision_properties = {**collision_properties, **pattern_props}
 
-            mesh.properties = properties
+            mesh.visual_properties = visual_properties
+            mesh.collision_properties = collision_properties
 
         part = Part(
             self.unique_name(instance, "part"),

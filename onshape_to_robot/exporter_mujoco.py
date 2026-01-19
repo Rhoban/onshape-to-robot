@@ -222,8 +222,9 @@ class ExporterMuJoCo(Exporter):
         geom += f'mesh="{xml_escape(mesh_file_no_ext)}" '
         geom += f'material="{xml_escape(material_name)}" '
 
-        # Apply properties from mesh.properties
-        for key, value in mesh.properties.items():
+        # Apply properties based on class (visual or collision)
+        properties = mesh.visual_properties if class_ == "visual" else mesh.collision_properties
+        for key, value in properties.items():
             geom += f'{key}="{xml_escape(str(value))}" '
 
         geom += " />"
@@ -262,8 +263,9 @@ class ExporterMuJoCo(Exporter):
             self.materials[material_name] = shape.color
             geom += f'material="{xml_escape(material_name)}" '
 
-        # Apply properties from shape.properties
-        for key, value in shape.properties.items():
+        # Apply properties based on class (visual or collision)
+        properties = shape.visual_properties if class_ == "visual" else shape.collision_properties
+        for key, value in properties.items():
             geom += f'{key}="{xml_escape(str(value))}" '
 
         geom += " />"

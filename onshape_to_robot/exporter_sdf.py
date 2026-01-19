@@ -139,8 +139,9 @@ class ExporterSDF(Exporter):
         if node == "visual":
             self.append_material(mesh.color)
 
-        # Apply properties from mesh.properties
-        for key, value in mesh.properties.items():
+        # Apply properties based on node type (visual or collision)
+        properties = mesh.visual_properties if node == "visual" else mesh.collision_properties
+        for key, value in properties.items():
             self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
 
         self.append(f"</{node}>")
@@ -179,8 +180,9 @@ class ExporterSDF(Exporter):
         if node == "visual":
             self.append_material(shape.color)
 
-        # Apply properties from shape.properties
-        for key, value in shape.properties.items():
+        # Apply properties based on node type (visual or collision)
+        properties = shape.visual_properties if node == "visual" else shape.collision_properties
+        for key, value in properties.items():
             self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
 
         self.append(f"</{node}>")
