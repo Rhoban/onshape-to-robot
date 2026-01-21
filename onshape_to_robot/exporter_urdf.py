@@ -114,11 +114,19 @@ class ExporterURDF(Exporter):
         self.append(self.origin(T_link_part))
 
         mesh_file = os.path.relpath(mesh.filename, self.config.output_directory)
-        if self.package_name:
-            mesh_file = self.package_name + "/" + mesh_file
+
+        # Build mesh URI according to configuration
+        if getattr(self.config, "use_package_uris", True):
+            # Preserve existing behavior, optionally prefix with package name
+            if self.package_name:
+                mesh_file = self.package_name + "/" + mesh_file
+            mesh_uri = f"package://{xml_escape(mesh_file)}"
+        else:
+            # Emit plain relative path without package:// and without package name
+            mesh_uri = xml_escape(mesh_file)
 
         self.append("<geometry>")
-        self.append(f'<mesh filename="package://{xml_escape(mesh_file)}" />')
+        self.append(f'<mesh filename="{mesh_uri}" />')
         self.append("</geometry>")
 
         if node == "visual":
@@ -192,7 +200,15 @@ class ExporterURDF(Exporter):
 
         self.append(f'<parent link="{joint.parent.name}" />')
         self.append(f'<child link="{joint.child.name}" />')
-        self.append('<axis xyz="%g %g %g"/>' % tuple(joint.axis))
+        # Transform axis from world to parent link frame to match URDF semantics
+        axis_parent = (np.linalg.inv(T_world_link)[:3, :3] @ joint.axis).astype(float)
+        # Normalize to ensure unit axis
+        norm = np.linalg.norm(axis_parent)
+        if norm > 0:
+            axis_parent = axis_parent / norm
+        # Zero-out tiny numerical components
+        axis_parent[np.abs(axis_parent) < 1e-6] = 0.0
+        self.append('<axis xyz="%g %g %g"/>' % tuple(axis_parent))
 
         limits = ""
         if "max_effort" in joint.properties:

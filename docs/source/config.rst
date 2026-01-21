@@ -77,7 +77,7 @@ Here is an example of complete ``config.json`` file, with details below:
         "include_configuration_suffix": false,
 
         // Post import commands (default: [])
-        "post_import_commands" [
+        "post_import_commands": [
             "echo 'Import done'",
             "echo 'Do something else'"
         ],

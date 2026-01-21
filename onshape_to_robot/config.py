@@ -160,6 +160,9 @@ class Config:
             "include_configuration_suffix", True
         )
 
+        # Whether to use package:// URIs in URDF mesh filenames
+        self.use_package_uris: bool = self.get("use_package_uris", True)
+
         # Loading processors
         from . import processors
 
