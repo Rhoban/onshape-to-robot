@@ -111,11 +111,11 @@ Possible values are:
 ``geom_properties`` *(default: {})*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Allow to specify the properties of the geometries (collision and visual) produced in the MuJoCo output. The key should be link (body) names with support for wildcard pattern matching.
+Allow to specify the properties of the geometries (collision and visual) produced in the MuJoCo output. The key should be part names with support for wildcard pattern matching.
 
 Properties can be specified separately for ``visual`` and ``collision`` geometries, or applied to both if not nested.
 
-Wildcard patterns (``*``, ``?``, ``[seq]``) are supported for matching link names. When multiple patterns match, properties are merged in order with later matches overriding earlier ones.
+Wildcard patterns (``*``, ``?``, ``[seq]``) are supported for matching part names. When multiple patterns match, properties are merged in order with later matches overriding earlier ones.
 
 All properties are added as XML attributes to the ``<geom ...>`` tag. Common MuJoCo geom attributes include:
 
