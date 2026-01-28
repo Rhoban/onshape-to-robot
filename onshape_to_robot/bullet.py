@@ -1,22 +1,13 @@
-def main():
+def main(directory, fixed=False, no_self_collisions=False, x=0, y=0, z=0):
     import math
-    import sys
     import os
     import time
-    import argparse
+
     import pybullet as p
+
     from .simulation import Simulation
 
-    parser = argparse.ArgumentParser(prog="onshape-to-robot-bullet")
-    parser.add_argument("-f", "--fixed", action="store_true")
-    parser.add_argument("-n", "--no-self-collisions", action="store_true")
-    parser.add_argument("-x", "--x", type=float, default=0)
-    parser.add_argument("-y", "--y", type=float, default=0)
-    parser.add_argument("-z", "--z", type=float, default=0)
-    parser.add_argument("directory")
-    args = parser.parse_args()
-
-    robotPath = args.directory
+    robotPath = directory
     if not robotPath.endswith(".urdf"):
         robotPath += "/robot.urdf"
 
@@ -24,12 +15,12 @@ def main():
         robotPath,
         gui=True,
         panels=True,
-        fixed=args.fixed,
-        ignore_self_collisions=args.no_self_collisions,
+        fixed=fixed,
+        ignore_self_collisions=no_self_collisions,
     )
     pos, rpy = sim.getRobotPose()
     _, orn = p.getBasePositionAndOrientation(sim.robot)
-    sim.setRobotPose([pos[0] + args.x, pos[1] + args.y, pos[2] + args.z], orn)
+    sim.setRobotPose([pos[0] + x, pos[1] + y, pos[2] + z], orn)
 
     controls = {}
     for name in sim.getJoints():
@@ -68,4 +59,17 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    import argcomplete
+
+    parser = argparse.ArgumentParser(prog="onshape-to-robot-bullet")
+    parser.add_argument("-f", "--fixed", action="store_true")
+    parser.add_argument("-n", "--no-self-collisions", action="store_true")
+    parser.add_argument("-x", type=float, default=0)
+    parser.add_argument("-y", type=float, default=0)
+    parser.add_argument("-z", type=float, default=0)
+    parser.add_argument("directory")
+    argcomplete.autocomplete(parser)
+    args = parser.parse_args()
+    main(args.directory, fixed=args.fixed, no_self_collisions=args.no_self_collisions, x=args.x, y=args.y, z=args.z)
