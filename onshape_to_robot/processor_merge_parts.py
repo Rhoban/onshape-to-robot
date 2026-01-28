@@ -35,7 +35,16 @@ class ProcessorMergeParts(Processor):
 
                 for entry in patterns:
                     exclude = False
-                    if entry.startwith("!"):
+
+                    if patterns[entry] not in ["visual", "collision", "both"]:
+                        print(
+                            error(
+                                f"Invalid merge_stls option '{patterns[entry]}' for pattern '{entry}'"
+                            )
+                        )
+                        continue
+
+                    if entry.startswith("!"):
                         exclude = True
                         entry = entry[1:]
 
@@ -53,6 +62,9 @@ class ProcessorMergeParts(Processor):
                             merge_visual = which == "visual" or which == "both"
                             merge_collision = which == "collision" or which == "both"
 
+                print(
+                    f"Link {link.name}: merge_visual={merge_visual}, merge_collision={merge_collision}"
+                )
                 if merge_visual or merge_collision:
                     self.merge_parts(link, merge_visual, merge_collision)
 
