@@ -353,13 +353,19 @@ class RobotBuilder:
                     pattern_props = self.config.geom_properties[pattern_name]
 
                     # Check for nested visual/collision structure
-                    has_nested = "visual" in pattern_props or "collision" in pattern_props
+                    has_nested = any(
+                        type(item) is dict for item in pattern_props.values()
+                    )
 
                     if has_nested:
-                        if "visual" in pattern_props:
-                            visual_properties = {**visual_properties, **pattern_props["visual"]}
-                        if "collision" in pattern_props:
-                            collision_properties = {**collision_properties, **pattern_props["collision"]}
+                        visual_properties = {
+                            **visual_properties,
+                            **pattern_props.get("visual", {}),
+                        }
+                        collision_properties = {
+                            **collision_properties,
+                            **pattern_props.get("collision", {}),
+                        }
                     else:
                         # Apply to both if not nested
                         visual_properties = {**visual_properties, **pattern_props}
