@@ -1,9 +1,8 @@
 from __future__ import annotations
-from sys import exit
+import numpy as np
 import re
 import os
 import commentjson as json
-from .message import error, bright, info
 
 
 class Config:
@@ -160,6 +159,9 @@ class Config:
             "include_configuration_suffix", True
         )
 
+        # Number of decimals to keep for small numbers
+        self.round_decimals = self.get("round_decimals", 12)
+
         # Loading processors
         from . import processors
 
@@ -185,3 +187,15 @@ class Config:
                     raise Exception(f"ERROR: Processor {entry} not found")
 
                 self.processors.append(processor(self))
+
+    def round(self, object: float | list | tuple | np.ndarray):
+        """
+        Round the given number or list of numbers using the configuration decimals
+        """
+        if isinstance(object, float):
+            return round(object, self.round_decimals)
+        elif isinstance(object, np.ndarray):
+            return object.round(self.round_decimals)
+        else:
+            original_type = type(object)
+            return original_type(np.array(object).round(self.round_decimals))

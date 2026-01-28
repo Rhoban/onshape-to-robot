@@ -83,30 +83,30 @@ class ExporterSDF(Exporter):
         self.append("<inertial>")
         self.append(
             '<pose>%g %g %g 0 0 0</pose>'
-            % (
+            % self.config.round((
                 com[0],
                 com[1],
                 com[2],
-            )
+            ))
         )
-        self.append("<mass>%g</mass>" % mass)
+        self.append("<mass>%g</mass>" % self.config.round(mass))
         self.append(
             "<inertia><ixx>%g</ixx><ixy>%g</ixy><ixz>%g</ixz><iyy>%g</iyy><iyz>%g</iyz><izz>%g</izz></inertia>"
-            % (
+            % self.config.round((
                 inertia[0, 0],
                 inertia[0, 1],
                 inertia[0, 2],
                 inertia[1, 1],
                 inertia[1, 2],
                 inertia[2, 2],
-            )
+            ))
         )
         self.append("</inertial>")
 
     def append_material(self, color: np.ndarray):
         self.append(f"<material>")
-        self.append("<ambient>%g %g %g %g</ambient>" % (color[0], color[1], color[2], color[3]))
-        self.append("<diffuse>%g %g %g %g</diffuse>" % (color[0], color[1], color[2], color[3]))
+        self.append("<ambient>%g %g %g %g</ambient>" % self.config.round((color[0], color[1], color[2], color[3])))
+        self.append("<diffuse>%g %g %g %g</diffuse>" % self.config.round((color[0], color[1], color[2], color[3])))
         self.append("<specular>0.1 0.1 0.1 1</specular>")
         self.append("<emissive>0 0 0 0</emissive>")
         self.append("</material>")
@@ -162,14 +162,14 @@ class ExporterSDF(Exporter):
 
         self.append("<geometry>")
         if isinstance(shape, Box):
-            self.append("<box><size>%g %g %g</size></box>" % tuple(shape.size))
+            self.append("<box><size>%g %g %g</size></box>" % self.config.round(tuple(shape.size)))
         elif isinstance(shape, Cylinder):
             self.append(
                 "<cylinder><length>%g</length><radius>%g</radius></cylinder>"
-                % (shape.length, shape.radius)
+                % self.config.round((shape.length, shape.radius))
             )
         elif isinstance(shape, Sphere):
-            self.append("<sphere><radius>%g</radius></sphere>" % shape.radius)
+            self.append("<sphere><radius>%g</radius></sphere>" % self.config.round((shape.radius,)))
         self.append("</geometry>")
 
         if node == "visual":
@@ -211,18 +211,18 @@ class ExporterSDF(Exporter):
         self.append(f"<parent>{joint.parent.name}</parent>")
         self.append(f"<child>{joint.child.name}</child>")
         self.append("<axis>")
-        self.append("<xyz>%g %g %g</xyz>" % tuple(joint.axis))
+        self.append("<xyz>%g %g %g</xyz>" % self.config.round(tuple(joint.axis)))
 
         self.append("<limit>")
         if "max_effort" in joint.properties:
-            self.append(f"<effort>%g</effort>" % joint.properties["max_effort"])
+            self.append("<effort>%g</effort>" % self.config.round(joint.properties["max_effort"]))
         else:
-            self.append(f"<effort>10</effort>")
+            self.append("<effort>10</effort>")
 
         if "max_velocity" in joint.properties:
-            self.append(f"<velocity>%g</velocity>" % joint.properties["max_velocity"])
+            self.append("<velocity>%g</velocity>" % self.config.round(joint.properties["max_velocity"]))
         else:
-            self.append(f"<velocity>10</velocity>")
+            self.append("<velocity>10</velocity>")
 
         joint_limits = joint.properties.get("limits", joint.limits)
         if joint_limits is None:
@@ -315,7 +315,7 @@ class ExporterSDF(Exporter):
 
         sdf = "<pose%s>%g %g %g %g %g %g</pose>"
 
-        return sdf % (relative, *matrix[:3, 3], *rotation_matrix_to_rpy(matrix))
+        return sdf % self.config.round((relative, *matrix[:3, 3], *rotation_matrix_to_rpy(matrix)))
 
     def write_xml(self, robot: Robot, filename: str) -> str:
         model_config = MODEL_CONFIG_XML % (robot.name, os.path.basename(filename))
