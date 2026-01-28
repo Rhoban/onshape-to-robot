@@ -221,6 +221,12 @@ class ExporterMuJoCo(Exporter):
         geom += self.pos_quat(T_link_part) + " "
         geom += f'mesh="{xml_escape(mesh_file_no_ext)}" '
         geom += f'material="{xml_escape(material_name)}" '
+
+        # Apply properties based on class (visual or collision)
+        properties = mesh.visual_properties if class_ == "visual" else mesh.collision_properties
+        for key, value in properties.items():
+            geom += f'{key}="{xml_escape(str(value))}" '
+
         geom += " />"
 
         # Adding the mesh and material to appear in the assets section
@@ -256,6 +262,11 @@ class ExporterMuJoCo(Exporter):
             material_name = f"{part.name}_material"
             self.materials[material_name] = shape.color
             geom += f'material="{xml_escape(material_name)}" '
+
+        # Apply properties based on class (visual or collision)
+        properties = shape.visual_properties if class_ == "visual" else shape.collision_properties
+        for key, value in properties.items():
+            geom += f'{key}="{xml_escape(str(value))}" '
 
         geom += " />"
         self.append(geom)

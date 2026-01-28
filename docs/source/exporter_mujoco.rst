@@ -53,6 +53,27 @@ Here is an example of complete ``config.json`` file, with details below:
             }
         },
 
+        // Override geometry properties (default: {})
+        "geom_properties": {
+            // Set properties for specific links using pattern matching
+            "foot": {
+                "collision": {
+                    "name": "left_foot_collision",
+                    "friction": "1.2 0.005 0.0001"
+                }
+            },
+            // Wildcard patterns are supported
+            "leg_*": {
+                "collision": {
+                    "solimp": "0.9 0.95 0.001",
+                    "solref": "0.02 1"
+                },
+                "visual": {
+                    "rgba": "1 0 0 1"
+                }
+            }
+        },
+
         // Override equality attributes
         "equalities": {
             "closing_branch*": {
@@ -86,6 +107,25 @@ Possible values are:
 
     * ``kp``, ``kv`` and ``dampratio`` gains
     * ``forcerange``
+
+``geom_properties`` *(default: {})*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Allow to specify the properties of the geometries (collision and visual) produced in the MuJoCo output. The key should be part names with support for wildcard pattern matching.
+
+Properties can be specified separately for ``visual`` and ``collision`` geometries, or applied to both if not nested.
+
+Wildcard patterns (``*``, ``?``, ``[seq]``) are supported for matching part names. When multiple patterns match, properties are merged in order with later matches overriding earlier ones.
+
+All properties are added as XML attributes to the ``<geom ...>`` tag. Common MuJoCo geom attributes include:
+
+* ``name``: Override the geometry name
+* ``friction``: Friction coefficients (e.g., ``"1.2 0.005 0.0001"``)
+* ``solimp``: Solver impedance parameters (e.g., ``"0.9 0.95 0.001"``)
+* ``solref``: Solver reference parameters (e.g., ``"0.02 1"``)
+* ``contype``: Contact type bitmask (e.g., ``"1"``)
+* ``conaffinity``: Contact affinity bitmask (e.g., ``"1"``)
+* ``rgba``: Color and transparency (e.g., ``"1 0 0 1"``)
 
 ``equalities`` *(default: {})*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
