@@ -62,9 +62,6 @@ class ProcessorMergeParts(Processor):
                             merge_visual = which == "visual" or which == "both"
                             merge_collision = which == "collision" or which == "both"
 
-                print(
-                    f"Link {link.name}: merge_visual={merge_visual}, merge_collision={merge_collision}"
-                )
                 if merge_visual or merge_collision:
                     self.merge_parts(link, merge_visual, merge_collision)
 
