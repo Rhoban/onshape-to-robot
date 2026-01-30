@@ -55,11 +55,24 @@ Here is an example of complete ``config.json`` file, with details below:
 
         // Override geometry properties (default: {})
         "geom_properties": {
-            // Set properties for specific links using pattern matching
+            // Replace mesh collision with capsule geometry at body origin
             "foot": {
                 "collision": {
-                    "name": "left_foot_collision",
+                    "type": "capsule",
+                    "size": "0.005",
+                    "fromto": "0 0 -0.01 0 0 0.01",
+                    "pos": null,
+                    "quat": null,
                     "friction": "1.2 0.005 0.0001"
+                }
+            },
+            "foot_2": {
+                "collision": {
+                    "type": "capsule",
+                    "size": "0.005",
+                    "fromto": "0 0 -0.01 0 0 0.01",
+                    "pos": null,
+                    "quat": null
                 }
             },
             // Wildcard patterns are supported
@@ -117,8 +130,12 @@ Properties can be specified separately for ``visual`` and ``collision`` geometri
 
 Wildcard patterns (``*``, ``?``, ``[seq]``) are supported for matching part names. When multiple patterns match, properties are merged in order with later matches overriding earlier ones.
 
-All properties are added as XML attributes to the ``<geom ...>`` tag. Common MuJoCo geom attributes include:
+All properties are added as XML attributes to the ``<geom ...>`` tag. **Properties specified in the config take priority and will override default values**, including the geometry type.
 
+Common MuJoCo geom attributes include:
+
+* ``type``: Override the geometry type (e.g., ``"capsule"``, ``"box"``, ``"sphere"``, ``"cylinder"``)
+* ``size``: Size parameters for the geometry type (e.g., ``"0.005"`` for capsule radius when using ``fromto``)
 * ``name``: Override the geometry name
 * ``friction``: Friction coefficients (e.g., ``"1.2 0.005 0.0001"``)
 * ``solimp``: Solver impedance parameters (e.g., ``"0.9 0.95 0.001"``)
@@ -126,6 +143,30 @@ All properties are added as XML attributes to the ``<geom ...>`` tag. Common MuJ
 * ``contype``: Contact type bitmask (e.g., ``"1"``)
 * ``conaffinity``: Contact affinity bitmask (e.g., ``"1"``)
 * ``rgba``: Color and transparency (e.g., ``"1 0 0 1"``)
+
+.. note::
+
+    You can replace mesh geometries with primitive shapes (capsule, box, sphere, cylinder) by setting the ``type`` and ``size`` attributes. When the type is overridden, mesh-specific attributes are automatically excluded.
+
+.. note::
+
+    To remove default attributes (such as ``pos`` or ``quat``), set them to ``null`` in the JSON config. For example:
+
+    .. code-block:: javascript
+
+        "geom_properties": {
+            "foot": {
+                "collision": {
+                    "type": "capsule",
+                    "size": "0.005",
+                    "fromto": "0 0 -0.01 0 0 0.01",
+                    "pos": null,
+                    "quat": null
+                }
+            }
+        }
+
+    This is useful when replacing mesh geometries with primitives and you want the geometry at the body origin.
 
 ``equalities`` *(default: {})*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
