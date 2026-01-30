@@ -2,6 +2,7 @@ def main():
     import os
     import sys
     import pickle
+    import argparse
     from dotenv import load_dotenv, find_dotenv
     from .config import Config
     from .message import error, info
@@ -15,15 +16,25 @@ def main():
     """
     load_dotenv(find_dotenv(usecwd=True))
 
+    def get_version():
+        # Get version from package
+        try:
+            from importlib.metadata import version, PackageNotFoundError
+
+            return version("onshape-to-robot")
+        except PackageNotFoundError:
+            return "unknown"
+
     try:
         # Retrieving robot path
-        if len(sys.argv) <= 1:
-            raise Exception(
-                "ERROR: usage: onshape-to-robot {robot_directory}\n"
-                + "Read documentation at https://onshape-to-robot.readthedocs.io/"
-            )
+        arg_parser = argparse.ArgumentParser()
+        arg_parser.add_argument(
+            "robot_path", type=str, help="Path to the robot directory"
+        )
+        arg_parser.add_argument("--version", action="version", version=f"onshape-to-robot {get_version()}")
+        args = arg_parser.parse_args()
 
-        robot_path: str = sys.argv[1]
+        robot_path: str = args.robot_path
 
         # Loading configuration
         config = Config(robot_path)
