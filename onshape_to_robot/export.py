@@ -31,7 +31,19 @@ def main():
         arg_parser.add_argument(
             "robot_path", type=str, help="Path to the robot directory"
         )
-        arg_parser.add_argument("--version", action="version", version=f"onshape-to-robot {get_version()}")
+        arg_parser.add_argument(
+            "--version", action="version", version=f"onshape-to-robot {get_version()}"
+        )
+        arg_parser.add_argument(
+            "--retrieve",
+            action="store_true",
+            help="Only retrieve data and produce robot.pkl",
+        )
+        arg_parser.add_argument(
+            "--convert",
+            action="store_true",
+            help="Only convert robot.pkl to the desired format",
+        )
         args = arg_parser.parse_args()
 
         robot_path: str = args.robot_path
@@ -49,26 +61,38 @@ def main():
         else:
             raise Exception(f"Unsupported output format: {config.output_format}")
 
-        # Building the robot
-        robot_builder = RobotBuilder(config)
-        robot = robot_builder.robot
+        if not args.convert:
+            # Building the robot
+            robot_builder = RobotBuilder(config)
+            robot = robot_builder.robot
 
         # Can be used for debugging
-        # pickle.dump(robot, open("robot.pkl", "wb"))
-        # robot = pickle.load(open("robot.pkl", "rb"))
+        pkl_filename = config.output_directory + "/robot.pkl"
+        if args.retrieve:
+            pickle.dump(robot, open(pkl_filename, "wb"))
+            print(info(f"* Robot data saved to {pkl_filename}"))
 
-        # Applying processors
-        for processor in config.processors:
-            processor.process(robot)
+        if args.convert:
+            print(info(f"* Loading robot data from {pkl_filename}"))
+            robot = pickle.load(open(pkl_filename, "rb"))
 
-        exporter.write_xml(
-            robot,
-            config.output_directory + "/" + config.output_filename + "." + exporter.ext,
-        )
+        if not args.retrieve:
+            # Applying processors
+            for processor in config.processors:
+                processor.process(robot)
 
-        for command in config.post_import_commands:
-            print(info(f"* Running command: {command}"))
-            os.system(command)
+            exporter.write_xml(
+                robot,
+                config.output_directory
+                + "/"
+                + config.output_filename
+                + "."
+                + exporter.ext,
+            )
+
+            for command in config.post_import_commands:
+                print(info(f"* Running command: {command}"))
+                os.system(command)
 
     except Exception as e:
         print(error(f"ERROR: {e}"))
