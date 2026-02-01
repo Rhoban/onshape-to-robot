@@ -49,12 +49,17 @@ def main():
             action="store_true",
             help="Only convert robot.pkl to the desired format",
         )
+        arg_parser.add_argument(
+            "--safe",
+            action="store_true",
+            help="Disable features involving custom commands or imports",
+        )
         args = arg_parser.parse_args()
 
         robot_path: str = args.robot_path
 
         # Loading configuration
-        config = Config(robot_path)
+        config = Config(robot_path, safe=args.safe)
 
         # Building exporter beforehand, so that the configuration gets checked
         if config.output_format == "urdf":
@@ -95,9 +100,11 @@ def main():
                 + exporter.ext,
             )
 
-            for command in config.post_import_commands:
-                print(info(f"* Running command: {command}"))
-                os.system(command)
+            if not args.safe:
+                # Executing post-import commands
+                for command in config.post_import_commands:
+                    print(info(f"* Running command: {command}"))
+                    os.system(command)
 
     except Exception as e:
         print(error(f"ERROR: {e}"))
