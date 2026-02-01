@@ -23,6 +23,8 @@ It is possible to only execute the retrieval step **(1)**, by passing the ``--re
 
 Similarly, steps **(2)** and **(3)** can be executed by passing the ``--convert`` argument, which will load the robot from the ``robot.pkl`` file. Processors will then be executed and the exported will produce the final output. This can be convenient to avoid sending API requests to Onshape while tweaking processors or exporters.
 
+You can also use the ``--save-pickle`` argument to save the robot data after retrieval while still proceeding to conversion.
+
 .. toctree::
    :maxdepth: 2
    :caption: Processors:

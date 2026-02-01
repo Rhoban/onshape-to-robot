@@ -40,6 +40,11 @@ def main():
             help="Only retrieve data and produce robot.pkl",
         )
         arg_parser.add_argument(
+            "--save-pickle",
+            action="store_true",
+            help="Save the robot data to robot.pkl",
+        )
+        arg_parser.add_argument(
             "--convert",
             action="store_true",
             help="Only convert robot.pkl to the desired format",
@@ -68,7 +73,7 @@ def main():
 
         # Can be used for debugging
         pkl_filename = config.output_directory + "/robot.pkl"
-        if args.retrieve:
+        if args.retrieve or args.save_pickle:
             pickle.dump(robot, open(pkl_filename, "wb"))
             print(info(f"* Robot data saved to {pkl_filename}"))
 
