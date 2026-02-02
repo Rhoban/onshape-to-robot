@@ -110,6 +110,10 @@ class Config:
         # Robot name
         self.robot_name: str = self.get("robot_name", None, required=False)
         self.output_filename: str = self.get("output_filename", "robot")
+        # Securing filename
+        self.output_filename = "".join(
+            c for c in self.output_filename if c.isalnum() or c in ("_", "-")
+        ).rstrip()
         self.assets_directory: str = self.get("assets_directory", "assets")
 
         # Main settings
