@@ -56,6 +56,8 @@ def main():
         )
         args = arg_parser.parse_args()
 
+        print(info(f"* onshape-to-robot version {get_version()}"))
+
         robot_path: str = args.robot_path
 
         # Loading configuration
