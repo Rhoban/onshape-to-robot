@@ -79,7 +79,7 @@ class ExporterMuJoCo(Exporter):
         for mesh_file in set(self.meshes):
             self.append(f'<mesh file="{mesh_file}" />')
         for material_name, color in self.materials.items():
-            color_str = "%g %g %g %g" % tuple(color)
+            color_str = "%g %g %g %g" % self.config.round(tuple(color))
             self.append(f'<material name="{material_name}" rgba="{color_str}" />')
         self.append("</asset>")
 
@@ -109,9 +109,7 @@ class ExporterMuJoCo(Exporter):
             ):
                 type = joint.properties.get("type", "position")
                 actuator_class = joint.properties.get("class", self.default_class)
-                actuator: str = (
-                    f'<{type} class="{actuator_class}" name="{joint.name}" joint="{joint.name}" '
-                )
+                actuator: str = f'<{type} class="{actuator_class}" name="{joint.name}" joint="{joint.name}" '
 
                 for key in "kp", "kv", "dampratio":
                     if key in joint.properties:
@@ -191,15 +189,17 @@ class ExporterMuJoCo(Exporter):
         # Populating body inertial properties
         # https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-inertial
         inertial: str = "<inertial "
-        inertial += 'pos="%g %g %g" ' % tuple(com)
-        inertial += 'mass="%g" ' % mass
-        inertial += 'fullinertia="%g %g %g %g %g %g" ' % (
-            inertia[0, 0],
-            inertia[1, 1],
-            inertia[2, 2],
-            inertia[0, 1],
-            inertia[0, 2],
-            inertia[1, 2],
+        inertial += 'pos="%g %g %g" ' % self.config.round(tuple(com))
+        inertial += 'mass="%g" ' % self.config.round(mass)
+        inertial += 'fullinertia="%g %g %g %g %g %g" ' % self.config.round(
+            (
+                inertia[0, 0],
+                inertia[1, 1],
+                inertia[2, 2],
+                inertia[0, 1],
+                inertia[0, 2],
+                inertia[1, 2],
+            )
         )
         inertial += " />"
         self.append(inertial)
@@ -249,14 +249,14 @@ class ExporterMuJoCo(Exporter):
         geom += self.pos_quat(T_link_shape) + " "
 
         if isinstance(shape, Box):
-            geom += 'type="box" size="%g %g %g" ' % tuple(shape.size / 2)
+            geom += 'type="box" size="%g %g %g" ' % self.config.round(tuple(shape.size / 2))
         elif isinstance(shape, Cylinder):
             geom += 'type="cylinder" size="%g %g" ' % (
                 shape.radius,
                 shape.length / 2,
             )
         elif isinstance(shape, Sphere):
-            geom += 'type="sphere" size="%g" ' % shape.radius
+            geom += 'type="sphere" size="%g" ' % self.config.round(shape.radius)
 
         if class_ == "visual":
             material_name = f"{part.name}_material"
@@ -294,7 +294,7 @@ class ExporterMuJoCo(Exporter):
             return
 
         joint_xml: str = "<joint "
-        joint_xml += 'axis="%g %g %g" ' % tuple(joint.axis)
+        joint_xml += 'axis="%g %g %g" ' % self.config.round(tuple(joint.axis))
         joint_xml += f'name="{joint.name}" '
         if joint.joint_type == Joint.REVOLUTE:
             joint_xml += 'type="hinge" '
@@ -392,7 +392,7 @@ class ExporterMuJoCo(Exporter):
         """
         pos = matrix[:3, 3]
         quat = mat2quat(matrix[:3, :3])
-        xml = 'pos="%g %g %g" quat="%g %g %g %g"' % (*pos, *quat)
+        xml = 'pos="%g %g %g" quat="%g %g %g %g"' % self.config.round((*pos, *quat))
 
         return xml
 
