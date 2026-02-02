@@ -128,7 +128,7 @@ class ExporterSDF(Exporter):
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
         self.append(self.pose(T_link_part, relative_to=link.name))
 
-        mesh_file = os.path.relpath(mesh.filename, self.config.output_directory)
+        mesh_file = mesh.filename
 
         self.append("<geometry>")
         self.append(

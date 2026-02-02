@@ -332,7 +332,7 @@ class RobotBuilder:
 
         # Adding non-ignored meshes
         meshes = []
-        mesh = Mesh(stl_file, color)
+        mesh = Mesh(os.path.relpath(stl_file, self.config.output_directory), color)
         if self.part_is_ignored(part_name, "visual"):
             mesh.visual = False
         if self.part_is_ignored(part_name, "collision"):

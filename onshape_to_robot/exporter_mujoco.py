@@ -209,7 +209,7 @@ class ExporterMuJoCo(Exporter):
         Add a mesh node (e.g. STL) to the MuJoCo file
         """
         # Retrieving mesh file and material name
-        mesh_file = os.path.relpath(mesh.filename, self.config.asset_path(""))
+        mesh_file = os.path.relpath(self.config.output_directory + "/" + mesh.filename, self.config.asset_path(""))
         mesh_file_no_ext = ".".join(os.path.basename(mesh_file).split(".")[:-1])
         material_name = mesh_file_no_ext + "_material"
 
