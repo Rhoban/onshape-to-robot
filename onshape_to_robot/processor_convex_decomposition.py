@@ -15,6 +15,8 @@ class ProcessorConvexDecomposition(Processor):
     Convex decomposition processor. Runs CoACD algorithm on collision meshes to use a convex approximation.
     """
 
+    is_safe: bool = False
+
     def __init__(self, config: Config):
         super().__init__(config)
 

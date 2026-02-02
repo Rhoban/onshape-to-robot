@@ -17,6 +17,8 @@ class ProcessorScad(Processor):
     The code is a naive parser of the intermediate CSG file produced by OpenSCAD, gathering Box, Sphere and Cylinders.
     """
 
+    is_safe: bool = False
+
     def __init__(self, config: Config):
         super().__init__(config)
 

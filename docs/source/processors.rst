@@ -1,6 +1,9 @@
 Processors
 ==========
 
+Introduction
+~~~~~~~~~~~~
+
 Here is an overview of ``onshape-to-robot`` pipeline:
 
 .. image:: _static/img/architecture.png
@@ -12,6 +15,15 @@ Here is an overview of ``onshape-to-robot`` pipeline:
 .. note::
 
     If you want to tweak your robot in the process, do not hesitate to have a look at the `export.py <https://github.com/Rhoban/onshape-to-robot/blob/master/onshape_to_robot/export.py>`_ script, which is the entry point of the ``onshape-to-robot`` command, and summarize the above-listed steps.
+
+Retrieve and Convert Modes
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is possible to only execute the retrieval step **(1)**, by passing the ``--retrieve`` argument to the ``onshape-to-robot`` command. This will save the intermediate representation of the robot to a file named ``robot.pkl`` in the output directory.
+
+Similarly, steps **(2)** and **(3)** can be executed by passing the ``--convert`` argument, which will load the robot from the ``robot.pkl`` file. Processors will then be executed and the exported will produce the final output. This can be convenient to avoid sending API requests to Onshape while tweaking processors or exporters.
+
+You can also use the ``--save-pickle`` argument to save the robot data after retrieval while still proceeding to conversion.
 
 .. toctree::
    :maxdepth: 2

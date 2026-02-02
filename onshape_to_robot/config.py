@@ -6,7 +6,8 @@ import commentjson as json
 
 
 class Config:
-    def __init__(self, robot_path: str):
+    def __init__(self, robot_path: str, safe: bool = False):
+        self.safe: bool = safe
         self.config_file: str = robot_path
 
         if os.path.isdir(robot_path):
@@ -168,9 +169,11 @@ class Config:
 
         loaded_modules = {}
         processors_list: list[str] | None = self.get("processors", None, required=False)
-        if processors_list is None:
+        if processors_list is None or self.safe:
             self.processors = [
-                processor(self) for processor in processors.default_processors
+                processor(self)
+                for processor in processors.default_processors
+                if (processor.is_safe or not self.safe)
             ]
         else:
             for entry in processors_list:
