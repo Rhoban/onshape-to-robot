@@ -360,10 +360,18 @@ class RobotBuilder:
                             **visual_properties,
                             **pattern_props.get("visual", {}),
                         }
-                        collision_properties = {
-                            **collision_properties,
-                            **pattern_props.get("collision", {}),
-                        }
+
+                        # Handle collision as dict or list
+                        collision_value = pattern_props.get("collision", {})
+                        if isinstance(collision_value, list):
+                            # Multiple colliders - store list directly
+                            collision_properties = collision_value
+                        else:
+                            # Single collider - merge dicts
+                            collision_properties = {
+                                **collision_properties,
+                                **collision_value,
+                            }
                     else:
                         # Apply to both if not nested
                         visual_properties = {**visual_properties, **pattern_props}

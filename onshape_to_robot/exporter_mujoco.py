@@ -215,9 +215,11 @@ class ExporterMuJoCo(Exporter):
             "quat": "%g %g %g %g" % tuple(quat)
         }
 
-    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh):
+    def add_mesh_with_properties(
+        self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh, properties: dict
+    ):
         """
-        Add a mesh node (e.g. STL) to the MuJoCo file
+        Add a mesh node with explicit properties (helper for multiple colliders)
         """
         # Retrieving mesh file and material name
         mesh_file = os.path.relpath(self.config.output_directory + "/" + mesh.filename, self.config.asset_path(""))
@@ -226,9 +228,6 @@ class ExporterMuJoCo(Exporter):
 
         # Relative frame
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
-
-        # Apply properties based on class (visual or collision)
-        properties = mesh.visual_properties if class_ == "visual" else mesh.collision_properties
 
         # Build attributes dict to allow config to override defaults
         attributes = {"class": class_, "type": "mesh"}
@@ -257,6 +256,14 @@ class ExporterMuJoCo(Exporter):
             self.materials[material_name] = mesh.color
 
         self.append(geom)
+
+    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh):
+        """
+        Add a mesh node (e.g. STL) to the MuJoCo file
+        """
+        # Get properties based on class (visual or collision)
+        properties = mesh.visual_properties if class_ == "visual" else mesh.collision_properties
+        self.add_mesh_with_properties(part, class_, T_world_link, mesh, properties)
 
     def add_shape(
         self, part: Part, class_: str, T_world_link: np.ndarray, shape: Shape
@@ -316,7 +323,15 @@ class ExporterMuJoCo(Exporter):
             if mesh.visual:
                 self.add_mesh(part, "visual", T_world_link, mesh)
             if mesh.collision:
-                self.add_mesh(part, "collision", T_world_link, mesh)
+                # Support multiple colliders via array
+                collision_props = mesh.collision_properties
+                if isinstance(collision_props, list):
+                    # Multiple colliders - generate one geom per entry
+                    for props in collision_props:
+                        self.add_mesh_with_properties(part, "collision", T_world_link, mesh, props)
+                else:
+                    # Single collider (backward compatible)
+                    self.add_mesh(part, "collision", T_world_link, mesh)
 
     def add_joint(self, joint: Joint):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")

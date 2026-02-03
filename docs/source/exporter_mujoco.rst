@@ -66,14 +66,23 @@ Here is an example of complete ``config.json`` file, with details below:
                     "friction": "1.2 0.005 0.0001"
                 }
             },
+            // Multiple colliders - approximate complex shape with primitives
             "foot_2": {
-                "collision": {
-                    "type": "capsule",
-                    "size": "0.005",
-                    "fromto": "0 0 -0.01 0 0 0.01",
-                    "pos": null,
-                    "quat": null
-                }
+                "collision": [
+                    {
+                        "type": "capsule",
+                        "size": "0.005",
+                        "fromto": "0 0 -0.01 0 0 0",
+                        "pos": null,
+                        "quat": null
+                    },
+                    {
+                        "type": "sphere",
+                        "size": "0.008",
+                        "pos": "0 0 0.01",
+                        "quat": null
+                    }
+                ]
             },
             // Wildcard patterns are supported
             "leg_*": {
@@ -130,6 +139,8 @@ Properties can be specified separately for ``visual`` and ``collision`` geometri
 
 Wildcard patterns (``*``, ``?``, ``[seq]``) are supported for matching part names. When multiple patterns match, properties are merged in order with later matches overriding earlier ones.
 
+**Multiple Colliders:** The ``collision`` property can be an array to define multiple collision geometries for a single part. This is useful for approximating complex mesh shapes with multiple primitives for better physics performance.
+
 All properties are added as XML attributes to the ``<geom ...>`` tag. **Properties specified in the config take priority and will override default values**, including the geometry type.
 
 Common MuJoCo geom attributes include:
@@ -167,6 +178,36 @@ Common MuJoCo geom attributes include:
         }
 
     This is useful when replacing mesh geometries with primitives and you want the geometry at the body origin.
+
+.. note::
+
+    **Multiple Colliders** - You can approximate complex shapes with multiple primitives by providing an array:
+
+    .. code-block:: javascript
+
+        "geom_properties": {
+            "hand": {
+                "collision": [
+                    {
+                        "type": "box",
+                        "size": "0.02 0.04 0.01",
+                        "pos": "0 0 0"
+                    },
+                    {
+                        "type": "sphere",
+                        "size": "0.015",
+                        "pos": "0 0.02 0"
+                    },
+                    {
+                        "type": "sphere",
+                        "size": "0.015",
+                        "pos": "0 -0.02 0"
+                    }
+                ]
+            }
+        }
+
+    Each array entry generates a separate ``<geom>`` tag, allowing you to build complex collision shapes from primitives. This often provides better simulation performance than mesh collisions.
 
 ``equalities`` *(default: {})*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
