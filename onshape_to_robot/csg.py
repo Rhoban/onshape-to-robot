@@ -10,7 +10,7 @@ produced by OpenSCAD, containing no loop, variables etc.
 
 
 def multmatrix_parse(parameters):
-    matrix = np.matrix(json.loads(parameters), dtype=float)
+    matrix = np.array(json.loads(parameters), dtype=float)
     matrix[0, 3] /= 1000.0
     matrix[1, 3] /= 1000.0
     matrix[2, 3] /= 1000.0
@@ -58,7 +58,7 @@ def extract_node_parameters(line):
 
 
 def T(x, y, z):
-    m = np.matrix(np.eye(4))
+    m = np.eye(4)
     m.T[3, :3] = [x, y, z]
 
     return m
@@ -76,19 +76,19 @@ def parse_csg(data, dilatation):
                 if node == 'multmatrix':
                     matrix = multmatrix_parse(parameters)
                 else:
-                    matrix = np.matrix(np.identity(4))
+                    matrix = np.array(np.identity(4))
                 matrices.append(matrix)
             elif line[-1] == '}':
                 matrices.pop()
             else:
                 node, parameters = extract_node_parameters(line)
-                transform = np.matrix(np.identity(4))
+                transform = np.array(np.identity(4))
                 for entry in matrices:
-                    transform = transform*entry
+                    transform = transform@entry
                 if node == 'cube':
                     size, center = cube_parse(parameters, dilatation)
                     if not center:
-                        transform = transform * \
+                        transform = transform @ \
                             T(size[0]/2.0, size[1]/2.0, size[2]/2.0)
                     shapes.append({
                         'type': 'cube',
@@ -98,7 +98,7 @@ def parse_csg(data, dilatation):
                 if node == 'cylinder':
                     size, center = cylinder_parse(parameters, dilatation)
                     if not center:
-                        transform = transform * T(0, 0, size[0]/2.0)
+                        transform = transform @ T(0, 0, size[0]/2.0)
                     shapes.append({
                         'type': 'cylinder',
                         'parameters': size,
