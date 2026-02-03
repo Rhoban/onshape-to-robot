@@ -332,13 +332,14 @@ class RobotBuilder:
 
         # Adding non-ignored meshes
         meshes = []
-        mesh = Mesh(os.path.relpath(stl_file, self.config.output_directory), color)
-        if self.part_is_ignored(part_name, "visual"):
-            mesh.visual = False
-        if self.part_is_ignored(part_name, "collision"):
-            mesh.collision = False
-        if mesh.visual or mesh.collision:
-            meshes.append(mesh)
+        if stl_file is not None:
+            mesh = Mesh(os.path.relpath(stl_file, self.config.output_directory), color)
+            if self.part_is_ignored(part_name, "visual"):
+                mesh.visual = False
+            if self.part_is_ignored(part_name, "collision"):
+                mesh.collision = False
+            if mesh.visual or mesh.collision:
+                meshes.append(mesh)
 
         # Get unique part name (with _2, _3 suffixes for duplicates)
         unique_part_name = self.unique_name(instance, "part")
