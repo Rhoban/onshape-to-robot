@@ -332,13 +332,14 @@ class RobotBuilder:
 
         # Adding non-ignored meshes
         meshes = []
-        mesh = Mesh(os.path.relpath(stl_file, self.config.output_directory), color)
-        if self.part_is_ignored(part_name, "visual"):
-            mesh.visual = False
-        if self.part_is_ignored(part_name, "collision"):
-            mesh.collision = False
-        if mesh.visual or mesh.collision:
-            meshes.append(mesh)
+        if stl_file is not None:
+            mesh = Mesh(os.path.relpath(stl_file, self.config.output_directory), color)
+            if self.part_is_ignored(part_name, "visual"):
+                mesh.visual = False
+            if self.part_is_ignored(part_name, "collision"):
+                mesh.collision = False
+            if mesh.visual or mesh.collision:
+                meshes.append(mesh)
 
         # Get unique part name (with _2, _3 suffixes for duplicates)
         unique_part_name = self.unique_name(instance, "part")
@@ -360,10 +361,18 @@ class RobotBuilder:
                             **visual_properties,
                             **pattern_props.get("visual", {}),
                         }
-                        collision_properties = {
-                            **collision_properties,
-                            **pattern_props.get("collision", {}),
-                        }
+
+                        # Handle collision as dict or list
+                        collision_value = pattern_props.get("collision", {})
+                        if isinstance(collision_value, list):
+                            # Multiple colliders - store list directly
+                            collision_properties = collision_value
+                        else:
+                            # Single collider - merge dicts
+                            collision_properties = {
+                                **collision_properties,
+                                **collision_value,
+                            }
                     else:
                         # Apply to both if not nested
                         visual_properties = {**visual_properties, **pattern_props}

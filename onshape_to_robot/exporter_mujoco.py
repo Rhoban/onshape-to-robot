@@ -204,9 +204,22 @@ class ExporterMuJoCo(Exporter):
         inertial += " />"
         self.append(inertial)
 
-    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh):
+    def pos_quat_dict(self, matrix: np.ndarray) -> dict:
         """
-        Add a mesh node (e.g. STL) to the MuJoCo file
+        Turn a transformation matrix into pos and quat values as a dict
+        """
+        pos = matrix[:3, 3]
+        quat = mat2quat(matrix[:3, :3])
+        return {
+            "pos": "%g %g %g" % tuple(pos),
+            "quat": "%g %g %g %g" % tuple(quat)
+        }
+
+    def add_mesh_with_properties(
+        self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh, properties: dict
+    ):
+        """
+        Add a mesh node with explicit properties (helper for multiple colliders)
         """
         # Retrieving mesh file and material name
         mesh_file = os.path.relpath(self.config.output_directory + "/" + mesh.filename, self.config.asset_path(""))
@@ -216,24 +229,41 @@ class ExporterMuJoCo(Exporter):
         # Relative frame
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
 
+        # Build attributes dict to allow config to override defaults
+        attributes = {"class": class_, "type": "mesh"}
+        attributes.update(self.pos_quat_dict(T_link_part))
+
+        # Only add mesh/material if type will remain "mesh" after config override
+        if properties.get("type", "mesh") == "mesh":
+            attributes["mesh"] = xml_escape(mesh_file_no_ext)
+            attributes["material"] = xml_escape(material_name)
+
+        # Config properties override defaults
+        attributes.update(properties)
+
+        # Remove None values (allows null in config to remove attributes)
+        attributes = {k: v for k, v in attributes.items() if v is not None}
+
         # Adding the geom node
-        geom = f'<geom type="mesh" class="{class_}" '
-        geom += self.pos_quat(T_link_part) + " "
-        geom += f'mesh="{xml_escape(mesh_file_no_ext)}" '
-        geom += f'material="{xml_escape(material_name)}" '
-
-        # Apply properties based on class (visual or collision)
-        properties = mesh.visual_properties if class_ == "visual" else mesh.collision_properties
-        for key, value in properties.items():
+        geom = "<geom "
+        for key, value in attributes.items():
             geom += f'{key}="{xml_escape(str(value))}" '
-
         geom += " />"
 
         # Adding the mesh and material to appear in the assets section
-        self.meshes.append(mesh_file)
-        self.materials[material_name] = mesh.color
+        if attributes.get("type") == "mesh":
+            self.meshes.append(mesh_file)
+            self.materials[material_name] = mesh.color
 
         self.append(geom)
+
+    def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh):
+        """
+        Add a mesh node (e.g. STL) to the MuJoCo file
+        """
+        # Get properties based on class (visual or collision)
+        properties = mesh.visual_properties if class_ == "visual" else mesh.collision_properties
+        self.add_mesh_with_properties(part, class_, T_world_link, mesh, properties)
 
     def add_shape(
         self, part: Part, class_: str, T_world_link: np.ndarray, shape: Shape
@@ -241,33 +271,41 @@ class ExporterMuJoCo(Exporter):
         """
         Add pure shape geometry.
         """
-        geom = f'<geom class="{class_}" '
-
         T_link_shape = (
             np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
         )
-        geom += self.pos_quat(T_link_shape) + " "
+
+        # Apply properties based on class (visual or collision)
+        properties = shape.visual_properties if class_ == "visual" else shape.collision_properties
+
+        # Build attributes dict to allow config to override defaults
+        attributes = {"class": class_}
+        attributes.update(self.pos_quat_dict(T_link_shape))
 
         if isinstance(shape, Box):
-            geom += 'type="box" size="%g %g %g" ' % self.config.round(tuple(shape.size / 2))
+            attributes["type"] = "box"
+            attributes["size"] = "%g %g %g" % self.config.round(tuple(shape.size / 2))
         elif isinstance(shape, Cylinder):
-            geom += 'type="cylinder" size="%g %g" ' % (
-                shape.radius,
-                shape.length / 2,
-            )
+            attributes["type"] = "cylinder"
+            attributes["size"] = "%g %g" % self.config.round((shape.radius, shape.length / 2))
         elif isinstance(shape, Sphere):
-            geom += 'type="sphere" size="%g" ' % self.config.round(shape.radius)
+            attributes["type"] = "sphere"
+            attributes["size"] = "%g" % self.config.round(shape.radius)
 
         if class_ == "visual":
             material_name = f"{part.name}_material"
             self.materials[material_name] = shape.color
-            geom += f'material="{xml_escape(material_name)}" '
+            attributes["material"] = xml_escape(material_name)
 
-        # Apply properties based on class (visual or collision)
-        properties = shape.visual_properties if class_ == "visual" else shape.collision_properties
-        for key, value in properties.items():
+        # Config properties override defaults
+        attributes.update(properties)
+
+        # Remove None values (allows null in config to remove attributes)
+        attributes = {k: v for k, v in attributes.items() if v is not None}
+
+        geom = "<geom "
+        for key, value in attributes.items():
             geom += f'{key}="{xml_escape(str(value))}" '
-
         geom += " />"
         self.append(geom)
 
@@ -285,7 +323,15 @@ class ExporterMuJoCo(Exporter):
             if mesh.visual:
                 self.add_mesh(part, "visual", T_world_link, mesh)
             if mesh.collision:
-                self.add_mesh(part, "collision", T_world_link, mesh)
+                # Support multiple colliders via array
+                collision_props = mesh.collision_properties
+                if isinstance(collision_props, list):
+                    # Multiple colliders - generate one geom per entry
+                    for props in collision_props:
+                        self.add_mesh_with_properties(part, "collision", T_world_link, mesh, props)
+                else:
+                    # Single collider (backward compatible)
+                    self.add_mesh(part, "collision", T_world_link, mesh)
 
     def add_joint(self, joint: Joint):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
