@@ -1,4 +1,5 @@
 import numpy as np
+import fnmatch
 import os
 from .config import Config
 from .robot import Robot, Link, Part
@@ -20,8 +21,49 @@ class ProcessorMergeParts(Processor):
     def process(self, robot: Robot):
         if self.merge_stls:
             os.makedirs(self.config.asset_path("merged"), exist_ok=True)
+
+            if self.merge_stls is True:
+                patterns = {"*": "both"}
+            elif type(self.merge_stls) is str:
+                patterns = {"*": self.merge_stls}
+            else:
+                patterns = self.merge_stls
+
             for link in robot.links:
-                self.merge_parts(link)
+                merge_visual = False
+                merge_collision = False
+
+                for entry in patterns:
+                    exclude = False
+
+                    if patterns[entry] not in ["visual", "collision", "both"]:
+                        print(
+                            error(
+                                f"Invalid merge_stls option '{patterns[entry]}' for pattern '{entry}'"
+                            )
+                        )
+                        continue
+
+                    if entry.startswith("!"):
+                        exclude = True
+                        entry = entry[1:]
+
+                    if fnmatch.fnmatch(link.name, entry):
+                        which = patterns[entry]
+                        if exclude:
+                            if which == "visual":
+                                merge_visual = False
+                            elif which == "collision":
+                                merge_collision = False
+                            else:
+                                merge_visual = False
+                                merge_collision = False
+                        else:
+                            merge_visual = which == "visual" or which == "both"
+                            merge_collision = which == "collision" or which == "both"
+
+                if merge_visual or merge_collision:
+                    self.merge_parts(link, merge_visual, merge_collision)
 
     def load_mesh(self, stl_file: str) -> mesh.Mesh:
         return mesh.Mesh.from_file(stl_file)
@@ -51,12 +93,10 @@ class ProcessorMergeParts(Processor):
     def combine_meshes(self, m1: mesh.Mesh, m2: mesh.Mesh):
         return mesh.Mesh(np.concatenate([m1.data, m2.data]))
 
-    def merge_parts(self, link: Link):
+    def merge_parts(self, link: Link, merge_visual: bool, merge_collision: bool):
         print(info(f"+ Merging parts for {link.name}"))
 
-        merge_everything = (
-            self.merge_stls != "collision" and self.merge_stls != "visual"
-        )
+        merge_everything = merge_visual and merge_collision
 
         # Computing the frame where the new part will be located at
         _, com, __ = link.get_dynamics()
@@ -79,7 +119,9 @@ class ProcessorMergeParts(Processor):
         for part in link.parts:
             if part.shapes is not None:
                 for shape in part.shapes:
-                    if merge_everything or shape.is_type(self.merge_stls):
+                    if (shape.collision and merge_collision) or (
+                        shape.visual and merge_visual
+                    ):
                         # Changing the shape frame
                         T_world_shape = part.T_world_part @ shape.T_part_shape
                         shape.T_part_shape = np.linalg.inv(T_world_com) @ T_world_shape
@@ -111,7 +153,7 @@ class ProcessorMergeParts(Processor):
 
         merged_meshes = []
 
-        if self.merge_stls != "collision":
+        if merge_visual:
             visual_mesh = accumulate_meshes("visual")
             if visual_mesh is not None:
                 filename = self.config.asset_path(
@@ -122,7 +164,7 @@ class ProcessorMergeParts(Processor):
                     Mesh(filename, color, visual=True, collision=False)
                 )
 
-        if self.merge_stls != "visual":
+        if merge_collision:
             collision_mesh = accumulate_meshes("collision")
             if collision_mesh is not None:
                 filename = self.config.asset_path(
