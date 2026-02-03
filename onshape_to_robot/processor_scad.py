@@ -63,7 +63,7 @@ class ProcessorScad(Processor):
                         part.prune_unused_geometry()
 
     def multmatrix_parse(self, parameters: str):
-        matrix = np.matrix(json.loads(parameters), dtype=float)
+        matrix = np.array(json.loads(parameters), dtype=float)
         matrix[0, 3] /= 1000.0
         matrix[1, 3] /= 1000.0
         matrix[2, 3] /= 1000.0
