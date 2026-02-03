@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "onshape_to_robot"
-version = "1.8.0"
+version = "1.8.1"
 description = "Converting Onshape assembly to robot definition (URDF, SDF, MuJoCo) through Onshape API"
 readme = "README.md"
 requires-python = ">=3.9"
