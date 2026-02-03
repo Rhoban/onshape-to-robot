@@ -47,6 +47,8 @@ class ProcessorScad(Processor):
 
     def process(self, robot: Robot):
         if self.use_scads:
+            getcwd = os.getcwd()
+            os.chdir(self.config.output_directory)
             print(info("+ Parsing OpenSCAD files..."))
             for link in robot.links:
                 for part in link.parts:
@@ -61,6 +63,7 @@ class ProcessorScad(Processor):
                     for converted_mesh in converted_meshes:
                         converted_mesh.collision = False
                         part.prune_unused_geometry()
+            os.chdir(getcwd)
 
     def multmatrix_parse(self, parameters: str):
         matrix = np.array(json.loads(parameters), dtype=float)

@@ -49,10 +49,14 @@ class ProcessorConvexDecomposition(Processor):
     def process(self, robot: Robot):
         if self.convex_decomposition:
             os.makedirs(self.config.asset_path("convex_decomposition"), exist_ok=True)
+            getcwd = os.getcwd()
+            os.chdir(self.config.output_directory)
 
             for link in robot.links:
                 for part in link.parts:
                     self.convex_decompose(part)
+
+            os.chdir(getcwd)
 
     def convex_decompose(self, part: Part):
         import coacd
