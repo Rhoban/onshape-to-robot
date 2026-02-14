@@ -9,7 +9,7 @@ Introduction
 MuJoCo is a standard physics simulator, coming with an extensive description format.
 
 * Frames will be added as ``site`` tags in the MuJoCo XML file.
-* *Cameras* can be added by mapping frame names to camera names in the configuration (see :ref:`Cameras <cameras>` section below).
+* *Cameras* can be added by mapping frame names to camera names in the configuration (see :ref:`processor-convert-to-cameras`).
 * *Actuators* will be created for all actuated joints (see below).
 * When :ref:`kinematic loops <kinematic-loops>` are present, they will be enforced using equality constraints.
 
@@ -106,51 +106,7 @@ If you want to include additional XML in the URDF, you can specify the path to t
 
 .. _cameras:
 
-``cameras`` *(default: {})*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``cameras``
+~~~~~~~~~~~
 
-Camera support allows you to add camera elements to your MuJoCo model. Frames are automatically converted to cameras using the built-in ``ProcessorConvertToCameras`` processor.
-
-To add cameras to your robot:
-
-1. Define camera frame references in your Onshape assembly using mate connectors
-2. Configure camera mappings in ``config.json``
-
-.. important::
-
-    **Camera Frame Orientation in MuJoCo**
-
-    When creating mate connectors in Onshape for cameras, ensure the frame orientation follows MuJoCo's camera convention:
-
-    * The camera looks along the **-Z axis** (negative Z direction)
-    * The **+X axis** points to the right
-    * The **+Y axis** points up
-
-    This means your mate connector's Z-axis should point **into** the camera (opposite of the viewing direction).
-
-Example ``config.json`` entry:
-
-.. code-block:: javascript
-
-    {
-        "cameras": {
-            "wrist_camera": "wrist_camera_frame",
-            "head_camera": "head_camera_frame"
-        }
-    }
-
-The keys are the camera names that will appear in the MuJoCo XML, and the values are the frame names defined in your Onshape assembly.
-
-Generated MuJoCo XML
-~~~~~~~~~~~~~~~~~~~~
-
-Cameras will be exported as ``<camera>`` elements within the appropriate body tags:
-
-.. code-block:: xml
-
-    <body name="wrist_link" ...>
-        <!-- ... body content ... -->
-
-        <!-- Camera wrist_camera -->
-        <camera name="wrist_camera" pos="0 0.04 0" quat="0 0 1 0" fovy="45" mode="fixed" resolution="640 480" />
-    </body>
+See :ref:`processor-convert-to-cameras` in the Processors section.
