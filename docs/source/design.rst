@@ -28,9 +28,9 @@ Specifying degrees of freedom
 
 To create a degree of freedom, you should use the ``dof_`` prefix when placing a mate connector.
 
-* If the mate is **cylindrical** or **revolute**, a ``revolute`` joint will be issued 
-* If the mate is a **slider**, a ``prismatic`` joint will be issued
-* If the mate is **fastened**, a ``fixed`` joint will be issued
+* If the mate connector is **cylindrical** or **revolute**, a ``revolute`` joint will be issued 
+* If the mate connector is a **slider**, a ``prismatic`` joint will be issued
+* If the mate connector is **fastened**, a ``fixed`` joint will be issued
 
 .. note::
 
