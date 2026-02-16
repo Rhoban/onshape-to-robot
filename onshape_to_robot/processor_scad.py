@@ -17,6 +17,8 @@ class ProcessorScad(Processor):
     The code is a naive parser of the intermediate CSG file produced by OpenSCAD, gathering Box, Sphere and Cylinders.
     """
 
+    is_safe: bool = False
+
     def __init__(self, config: Config):
         super().__init__(config)
 
@@ -45,6 +47,8 @@ class ProcessorScad(Processor):
 
     def process(self, robot: Robot):
         if self.use_scads:
+            getcwd = os.getcwd()
+            os.chdir(self.config.output_directory)
             print(info("+ Parsing OpenSCAD files..."))
             for link in robot.links:
                 for part in link.parts:
@@ -59,9 +63,10 @@ class ProcessorScad(Processor):
                     for converted_mesh in converted_meshes:
                         converted_mesh.collision = False
                         part.prune_unused_geometry()
+            os.chdir(getcwd)
 
     def multmatrix_parse(self, parameters: str):
-        matrix = np.matrix(json.loads(parameters), dtype=float)
+        matrix = np.array(json.loads(parameters), dtype=float)
         matrix[0, 3] /= 1000.0
         matrix[1, 3] /= 1000.0
         matrix[2, 3] /= 1000.0

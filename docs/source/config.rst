@@ -85,7 +85,10 @@ Here is an example of complete ``config.json`` file, with details below:
         // Custom processors
         "processors": [
             "my_project.my_custom_processor:MyCustomProcessor"
-        ]
+        ],
+
+        // Number of decimals to round numerical values (default: 12)
+        "round_decimals": 12
 
         // More options available in specific exporters (URDF, SDF, MuJoCo)
         // More options available in processors
@@ -267,3 +270,8 @@ some processing scripts are run everytime you run onshape-to-robot.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 See :ref:`custom processors <custom_processors>` for more information.
+
+``round_decimals`` *(default: 12)*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Numbers displayed in export will be rounded up using `round()` method. The number of decimals that are kept can be controlled using this parameters.

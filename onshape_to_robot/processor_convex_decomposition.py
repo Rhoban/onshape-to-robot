@@ -15,6 +15,8 @@ class ProcessorConvexDecomposition(Processor):
     Convex decomposition processor. Runs CoACD algorithm on collision meshes to use a convex approximation.
     """
 
+    is_safe: bool = False
+
     def __init__(self, config: Config):
         super().__init__(config)
 
@@ -47,10 +49,14 @@ class ProcessorConvexDecomposition(Processor):
     def process(self, robot: Robot):
         if self.convex_decomposition:
             os.makedirs(self.config.asset_path("convex_decomposition"), exist_ok=True)
+            getcwd = os.getcwd()
+            os.chdir(self.config.output_directory)
 
             for link in robot.links:
                 for part in link.parts:
                     self.convex_decompose(part)
+
+            os.chdir(getcwd)
 
     def convex_decompose(self, part: Part):
         import coacd

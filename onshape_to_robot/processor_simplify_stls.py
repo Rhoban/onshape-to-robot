@@ -38,6 +38,9 @@ class ProcessorSimplifySTLs(Processor):
                 self.simplify_stls != "visual" and self.simplify_stls != "collision"
             )
             simplified = set()
+            getcwd = os.getcwd()
+            # Changing directory to output to have relative paths working
+            os.chdir(self.config.output_directory)
             for link in robot.links:
                 for part in link.parts:
                     for mesh in part.meshes:
@@ -46,6 +49,7 @@ class ProcessorSimplifySTLs(Processor):
                         ) and mesh.filename not in simplified:
                             simplified.add(mesh.filename)
                             self.simplify_stl(mesh.filename)
+            os.chdir(getcwd)
 
     def reduce_faces(self, filename: str, reduction: float = 0.9):
         mesh_set = self.pymeshlab.MeshSet()

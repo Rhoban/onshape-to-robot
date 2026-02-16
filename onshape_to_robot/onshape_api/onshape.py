@@ -69,28 +69,31 @@ class Onshape():
                 raise ValueError('%s is not valid json' % creds) from ex
 
         try:
+            # Trying to retrieve from config.json, this is deprecated but kept for backwards compatibility
             self._url = config["onshape_api"]
             self._access_key = config['onshape_access_key'].encode('utf-8')
             self._secret_key = config['onshape_secret_key'].encode('utf-8')
+
+            print(Fore.YELLOW + 'WARNING: Storing Onshape credentials in config.json is deprecated, please use environment variables instead' + Style.RESET_ALL)
         except KeyError:
             self._url = os.getenv('ONSHAPE_API')
+            self._secret_bearer = os.getenv('ONSHAPE_SECRET_BEARER')
             self._access_key = os.getenv('ONSHAPE_ACCESS_KEY')
             self._secret_key = os.getenv('ONSHAPE_SECRET_KEY')
 
-            if self._url is None or self._access_key is None or self._secret_key is None:
-                print(Fore.RED + 'ERROR: No Onshape API access key are set' + Style.RESET_ALL)
-                print()
-                print(Fore.BLUE + 'TIP: Connect to https://dev-portal.onshape.com/keys, and edit your .bashrc file:' + Style.RESET_ALL)
-                print(Fore.BLUE + 'export ONSHAPE_API=https://cad.onshape.com' + Style.RESET_ALL)
-                print(Fore.BLUE + 'export ONSHAPE_ACCESS_KEY=Your_Access_Key' + Style.RESET_ALL)
-                print(Fore.BLUE + 'export ONSHAPE_SECRET_KEY=Your_Secret_Key' + Style.RESET_ALL)
-                exit(1)
-
+        if self._url and self._secret_bearer:
+            self._secret_bearer = self._secret_bearer.encode('utf-8')
+        elif self._url and self._access_key and self._secret_key:
             self._access_key = self._access_key.encode('utf-8')
             self._secret_key = self._secret_key.encode('utf-8')
-
-            if self._url is None or self._access_key is None or self._secret_key is None:
-                exit('No key in config.json, and environment variables not set')
+        else:
+            print(Fore.RED + 'ERROR: No Onshape API access key are set' + Style.RESET_ALL)
+            print()
+            print(Fore.BLUE + 'TIP: Connect to https://dev-portal.onshape.com/keys, and edit your .bashrc file:' + Style.RESET_ALL)
+            print(Fore.BLUE + 'export ONSHAPE_API=https://cad.onshape.com' + Style.RESET_ALL)
+            print(Fore.BLUE + 'export ONSHAPE_ACCESS_KEY=Your_Access_Key' + Style.RESET_ALL)
+            print(Fore.BLUE + 'export ONSHAPE_SECRET_KEY=Your_Secret_Key' + Style.RESET_ALL)
+            exit(1)
 
         if self._logging:
             utils.log('onshape instance created: url = %s, access key = %s' % (self._url, self._access_key))
@@ -111,7 +114,7 @@ class Onshape():
 
         return nonce
 
-    def _make_auth(self, method, date, nonce, path, query={}, ctype='application/json'):
+    def _append_auth(self, output_headers: dict, method, date, path, query={}, ctype='application/json'):
         '''
         Create the request signature to authenticate
 
@@ -124,23 +127,30 @@ class Onshape():
             - ctype (str, default='application/json'): HTTP Content-Type
         '''
 
-        query = urllib.parse.urlencode(query)
+        if self._secret_bearer:
+            # Access using simple bearer token
+            output_headers['Authorization'] = 'Bearer ' + self._secret_bearer.decode('utf-8')
+        else:
+            # Access using API key
+            nonce = self._make_nonce()
+            query = urllib.parse.urlencode(query)
 
-        hmac_str = (method + '\n' + nonce + '\n' + date + '\n' + ctype + '\n' + path +
-                    '\n' + query + '\n').lower().encode('utf-8')
+            hmac_str = (method + '\n' + nonce + '\n' + date + '\n' + ctype + '\n' + path +
+                        '\n' + query + '\n').lower().encode('utf-8')
 
-        signature = base64.b64encode(hmac.new(self._secret_key, hmac_str, digestmod=hashlib.sha256).digest())
-        auth = 'On ' + self._access_key.decode('utf-8') + ':HmacSHA256:' + signature.decode('utf-8')
+            signature = base64.b64encode(hmac.new(self._secret_key, hmac_str, digestmod=hashlib.sha256).digest())
+            auth = 'On ' + self._access_key.decode('utf-8') + ':HmacSHA256:' + signature.decode('utf-8')
 
-        if self._logging:
-            utils.log({
-                'query': query,
-                'hmac_str': hmac_str,
-                'signature': signature,
-                'auth': auth
-            })
+            if self._logging:
+                utils.log({
+                    'query': query,
+                    'hmac_str': hmac_str,
+                    'signature': signature,
+                    'auth': auth
+                })
 
-        return auth
+            output_headers['On-Nonce'] = nonce
+            output_headers['Authorization'] = auth
 
     def _make_headers(self, method, path, query={}, headers={}):
         '''
@@ -157,19 +167,16 @@ class Onshape():
         '''
 
         date = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')
-        nonce = self._make_nonce()
         ctype = headers.get('Content-Type') if headers.get('Content-Type') else 'application/json'
-
-        auth = self._make_auth(method, date, nonce, path, query=query, ctype=ctype)
 
         req_headers = {
             'Content-Type': 'application/json',
             'Date': date,
-            'On-Nonce': nonce,
-            'Authorization': auth,
             'User-Agent': 'Onshape Python Sample App',
             'Accept': 'application/json'
         }
+
+        self._append_auth(req_headers, method, date, path, query=query, ctype=ctype)
 
         # add in user-defined headers
         for h in headers:

@@ -1,13 +1,13 @@
 from __future__ import annotations
-from sys import exit
+import numpy as np
 import re
 import os
 import commentjson as json
-from .message import error, bright, info
 
 
 class Config:
-    def __init__(self, robot_path: str):
+    def __init__(self, robot_path: str, safe: bool = False):
+        self.safe: bool = safe
         self.config_file: str = robot_path
 
         if os.path.isdir(robot_path):
@@ -110,6 +110,10 @@ class Config:
         # Robot name
         self.robot_name: str = self.get("robot_name", None, required=False)
         self.output_filename: str = self.get("output_filename", "robot")
+        # Securing filename
+        self.output_filename = "".join(
+            c for c in self.output_filename if c.isalnum() or c in ("_", "-")
+        ).rstrip()
         self.assets_directory: str = self.get("assets_directory", "assets")
 
         # Main settings
@@ -142,6 +146,7 @@ class Config:
 
         # Joint specs
         self.joint_properties: dict = self.get("joint_properties", {})
+        self.geom_properties: dict = self.get("geom_properties", {})
         self.no_dynamics: bool = self.get("no_dynamics", False)
 
         # Ignore / whitelists
@@ -160,14 +165,19 @@ class Config:
             "include_configuration_suffix", True
         )
 
+        # Number of decimals to keep for small numbers
+        self.round_decimals = self.get("round_decimals", 12)
+
         # Loading processors
         from . import processors
 
         loaded_modules = {}
         processors_list: list[str] | None = self.get("processors", None, required=False)
-        if processors_list is None:
+        if processors_list is None or self.safe:
             self.processors = [
-                processor(self) for processor in processors.default_processors
+                processor(self)
+                for processor in processors.default_processors
+                if (processor.is_safe or not self.safe)
             ]
         else:
             for entry in processors_list:
@@ -185,3 +195,15 @@ class Config:
                     raise Exception(f"ERROR: Processor {entry} not found")
 
                 self.processors.append(processor(self))
+
+    def round(self, object: float | list | tuple | np.ndarray):
+        """
+        Round the given number or list of numbers using the configuration decimals
+        """
+        if isinstance(object, float):
+            return round(object, self.round_decimals)
+        elif isinstance(object, np.ndarray):
+            return object.round(self.round_decimals)
+        else:
+            original_type = type(object)
+            return original_type(np.array(object).round(self.round_decimals))
