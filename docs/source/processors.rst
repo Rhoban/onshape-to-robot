@@ -38,4 +38,5 @@ You can also use the ``--save-pickle`` argument to save the robot data after ret
    processor_collision_as_visual
    processor_convex_decomposition
    processor_fixed_links
+   processor_merge_base_links
    custom_processors
