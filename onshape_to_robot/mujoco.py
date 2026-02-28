@@ -26,7 +26,7 @@ def main():
     viewer = mujoco.viewer.launch_passive(model, data)
     while viewer.is_running():
         step_start = time.time()
-        # mujoco.mj_step(model, data)
+        mujoco.mj_step(model, data)
         viewer.sync()
 
         time_until_next_step = model.opt.timestep - (time.time() - step_start)
