@@ -23,7 +23,9 @@ class ExporterURDF(Exporter):
         if config is not None:
             self.no_dynamics = config.no_dynamics
             self.package_name: str = config.get("package_name", "")
-            self.set_zero_mass_to_fixed: bool = config.get("set_zero_mass_to_fixed", False)
+            self.set_zero_mass_to_fixed: bool = config.get(
+                "set_zero_mass_to_fixed", False
+            )
             additional_xml_file = config.get("additional_xml", None, required=False)
             if isinstance(additional_xml_file, str):
                 self.add_additional_xml(additional_xml_file)
@@ -84,22 +86,26 @@ class ExporterURDF(Exporter):
         self.append("<inertial>")
         self.append(
             '<origin xyz="%g %g %g" rpy="0 0 0"/>'
-            % (
-                com[0],
-                com[1],
-                com[2],
+            % self.config.round(
+                (
+                    com[0],
+                    com[1],
+                    com[2],
+                )
             )
         )
-        self.append('<mass value="%g" />' % mass)
+        self.append('<mass value="%g" />' % self.config.round(mass))
         self.append(
             '<inertia ixx="%g" ixy="%g"  ixz="%g" iyy="%g" iyz="%g" izz="%g" />'
-            % (
-                inertia[0, 0],
-                inertia[0, 1],
-                inertia[0, 2],
-                inertia[1, 1],
-                inertia[1, 2],
-                inertia[2, 2],
+            % self.config.round(
+                (
+                    inertia[0, 0],
+                    inertia[0, 1],
+                    inertia[0, 2],
+                    inertia[1, 1],
+                    inertia[1, 2],
+                    inertia[2, 2],
+                )
             )
         )
         self.append("</inertial>")
@@ -113,7 +119,7 @@ class ExporterURDF(Exporter):
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
         self.append(self.origin(T_link_part))
 
-        mesh_file = os.path.relpath(mesh.filename, self.config.output_directory)
+        mesh_file = mesh.filename
         if self.package_name:
             mesh_file = self.package_name + "/" + mesh_file
 
@@ -126,9 +132,16 @@ class ExporterURDF(Exporter):
             self.append(f'<material name="{xml_escape(material_name)}">')
             self.append(
                 '<color rgba="%g %g %g %g"/>'
-                % (mesh.color[0], mesh.color[1], mesh.color[2], mesh.color[3])
+                % self.config.round(
+                    (mesh.color[0], mesh.color[1], mesh.color[2], mesh.color[3])
+                )
             )
             self.append("</material>")
+
+        # Apply properties based on node type (visual or collision)
+        properties = mesh.visual_properties if node == "visual" else mesh.collision_properties
+        for key, value in properties.items():
+            self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
 
         self.append(f"</{node}>")
 
@@ -145,13 +158,16 @@ class ExporterURDF(Exporter):
 
         self.append("<geometry>")
         if isinstance(shape, Box):
-            self.append('<box size="%g %g %g" />' % tuple(shape.size))
+            self.append(
+                '<box size="%g %g %g" />' % self.config.round(tuple(shape.size))
+            )
         elif isinstance(shape, Cylinder):
             self.append(
-                '<cylinder length="%g" radius="%g" />' % (shape.length, shape.radius)
+                '<cylinder length="%g" radius="%g" />'
+                % self.config.round((shape.length, shape.radius))
             )
         elif isinstance(shape, Sphere):
-            self.append('<sphere radius="%g" />' % shape.radius)
+            self.append('<sphere radius="%g" />' % self.config.round((shape.radius,)))
         self.append("</geometry>")
 
         if node == "visual":
@@ -159,9 +175,16 @@ class ExporterURDF(Exporter):
             self.append(f'<material name="{xml_escape(material_name)}">')
             self.append(
                 '<color rgba="%g %g %g %g"/>'
-                % (shape.color[0], shape.color[1], shape.color[2], shape.color[3])
+                % self.config.round(
+                    (shape.color[0], shape.color[1], shape.color[2], shape.color[3])
+                )
             )
             self.append("</material>")
+
+        # Apply properties based on node type (visual or collision)
+        properties = shape.visual_properties if node == "visual" else shape.collision_properties
+        for key, value in properties.items():
+            self.append(f'<{key}>{xml_escape(str(value))}</{key}>')
 
         self.append(f"</{node}>")
 
@@ -192,22 +215,26 @@ class ExporterURDF(Exporter):
 
         self.append(f'<parent link="{joint.parent.name}" />')
         self.append(f'<child link="{joint.child.name}" />')
-        self.append('<axis xyz="%g %g %g"/>' % tuple(joint.axis))
+        self.append('<axis xyz="%g %g %g"/>' % self.config.round(tuple(joint.axis)))
 
         limits = ""
         if "max_effort" in joint.properties:
-            limits += 'effort="%g" ' % joint.properties["max_effort"]
+            limits += 'effort="%g" ' % self.config.round(joint.properties["max_effort"])
         else:
             limits += 'effort="10" '
 
         if "max_velocity" in joint.properties:
-            limits += 'velocity="%g" ' % joint.properties["max_velocity"]
+            limits += 'velocity="%g" ' % self.config.round(
+                joint.properties["max_velocity"]
+            )
         else:
             limits += 'velocity="10" '
 
         joint_limits = joint.properties.get("limits", joint.limits)
         if joint_limits is not None:
-            limits += 'lower="%g" upper="%g" ' % (joint_limits[0], joint_limits[1])
+            limits += 'lower="%g" upper="%g" ' % self.config.round(
+                (joint_limits[0], joint_limits[1])
+            )
         elif joint_type == "revolute":
             limits += f'lower="{-np.pi}" upper="{np.pi}" '
         elif joint_type == "prismatic":
@@ -217,7 +244,9 @@ class ExporterURDF(Exporter):
             self.append(f"<limit {limits}/>")
 
         if "friction" in joint.properties:
-            self.append(f'<joint_properties friction="{joint.properties["friction"]}"/>')
+            self.append(
+                f'<joint_properties friction="{joint.properties["friction"]}"/>'
+            )
 
         if joint.relation is not None:
             self.append(
@@ -292,4 +321,6 @@ class ExporterURDF(Exporter):
         """
         urdf = '<origin xyz="%g %g %g" rpy="%g %g %g" />'
 
-        return urdf % (*matrix[:3, 3], *rotation_matrix_to_rpy(matrix))
+        return urdf % self.config.round(
+            (*matrix[:3, 3], *rotation_matrix_to_rpy(matrix))
+        )

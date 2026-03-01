@@ -19,7 +19,33 @@ def main():
         help="Convert Onshape assembly to robot definition (URDF, SDF, MuJoCo)"
     )
     export_parser.add_argument("robot_directory", help="Path to robot directory")
-    export_parser.set_defaults(func=lambda args: export.main(args.robot_directory))
+    export_parser.add_argument(
+        "--retrieve",
+        action="store_true",
+        help="Only retrieve data and produce robot.pkl",
+    )
+    export_parser.add_argument(
+        "--save-pickle",
+        action="store_true",
+        help="Save the robot data to robot.pkl",
+    )
+    export_parser.add_argument(
+        "--convert",
+        action="store_true",
+        help="Only convert robot.pkl to the desired format",
+    )
+    export_parser.add_argument(
+        "--safe",
+        action="store_true",
+        help="Disable features involving custom commands or imports",
+    )
+    export_parser.set_defaults(func=lambda args: export.main(
+        robot_path=args.robot_directory,
+        retrieve=args.retrieve,
+        save_pickle=args.save_pickle,
+        convert=args.convert,
+        safe=args.safe,
+    ))
 
     # Bullet
     bullet_parser = subparsers.add_parser(

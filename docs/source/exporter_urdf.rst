@@ -48,6 +48,23 @@ Here is an example of complete ``config.json`` file, with details below:
                 "type": "continuous"
             }
         },
+
+        // Override geometry properties (default: {})
+        "geom_properties": {
+            // Set properties for specific links using pattern matching
+            "tibia": {
+                "collision": {
+                    "mu1": "1.2",
+                    "mu2": "0.8"
+                }
+            },
+            // Wildcard patterns are supported
+            "leg_*": {
+                "visual": {
+                    "material": "leg_material"
+                }
+            }
+        },
     }
 
 ``joint_properties`` *(default: {})*
@@ -62,6 +79,21 @@ Possible values are:
 * ``friction``: The friction of the joint (added in the ``<joint_properties friction=...>`` tag)
 * ``type``: Sets the joint type (changing the ``<joint type="...">`` tag)
 * ``limits``: Override the joint limits, should be a list of two values (min, max)
+
+``geom_properties`` *(default: {})*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Allow to specify the properties of the geometries (collision and visual) produced in the URDF output. The key should be part names with support for wildcard pattern matching.
+
+Properties can be specified separately for ``visual`` and ``collision`` geometries, or applied to both if not nested.
+
+Wildcard patterns (``*``, ``?``, ``[seq]``) are supported for matching part names. When multiple patterns match, properties are merged in order with later matches overriding earlier ones.
+
+All properties are added as nested XML elements within the ``<visual>`` or ``<collision>`` tags. Common URDF geometry properties include:
+
+* ``mu1``, ``mu2``: Friction coefficients for collision geometries
+* ``kp``, ``kd``: Contact stiffness and damping parameters
+* ``material``: Material reference for visual geometries
 
 ``package_name`` *(default: "")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

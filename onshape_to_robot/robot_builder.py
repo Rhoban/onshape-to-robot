@@ -332,7 +332,7 @@ class RobotBuilder:
 
         # Adding non-ignored meshes
         meshes = []
-        mesh = Mesh(stl_file, color)
+        mesh = Mesh(os.path.relpath(stl_file, self.config.output_directory), color)
         if self.part_is_ignored(part_name, "visual"):
             mesh.visual = False
         if self.part_is_ignored(part_name, "collision"):
@@ -340,8 +340,40 @@ class RobotBuilder:
         if mesh.visual or mesh.collision:
             meshes.append(mesh)
 
+        # Get unique part name (with _2, _3 suffixes for duplicates)
+        unique_part_name = self.unique_name(instance, "part")
+
+        # Apply geom_properties based on unique part name pattern matching
+        for mesh in meshes:
+            visual_properties = {}
+            collision_properties = {}
+
+            for pattern_name in self.config.geom_properties:
+                if fnmatch.fnmatch(unique_part_name, pattern_name):
+                    pattern_props = self.config.geom_properties[pattern_name]
+
+                    # Check for nested visual/collision structure
+                    has_nested = "visual" in pattern_props or "collision" in pattern_props
+
+                    if has_nested:
+                        visual_properties = {
+                            **visual_properties,
+                            **pattern_props.get("visual", {}),
+                        }
+                        collision_properties = {
+                            **collision_properties,
+                            **pattern_props.get("collision", {}),
+                        }
+                    else:
+                        # Apply to both if not nested
+                        visual_properties = {**visual_properties, **pattern_props}
+                        collision_properties = {**collision_properties, **pattern_props}
+
+            mesh.visual_properties = visual_properties
+            mesh.collision_properties = collision_properties
+
         part = Part(
-            self.unique_name(instance, "part"),
+            unique_part_name,
             T_world_part,
             mass,
             com,

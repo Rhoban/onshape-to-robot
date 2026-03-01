@@ -20,8 +20,11 @@ class ProcessorMergeParts(Processor):
     def process(self, robot: Robot):
         if self.merge_stls:
             os.makedirs(self.config.asset_path("merged"), exist_ok=True)
+            getcwd = os.getcwd()
+            os.chdir(self.config.output_directory)
             for link in robot.links:
                 self.merge_parts(link)
+            os.chdir(getcwd)
 
     def load_mesh(self, stl_file: str) -> mesh.Mesh:
         return mesh.Mesh.from_file(stl_file)
@@ -119,7 +122,7 @@ class ProcessorMergeParts(Processor):
                 )
                 self.save_mesh(visual_mesh, filename)
                 merged_meshes.append(
-                    Mesh(filename, color, visual=True, collision=False)
+                    Mesh(os.path.relpath(filename, self.config.output_directory), color, visual=True, collision=False)
                 )
 
         if self.merge_stls != "visual":
@@ -130,7 +133,7 @@ class ProcessorMergeParts(Processor):
                 )
                 self.save_mesh(collision_mesh, filename)
                 merged_meshes.append(
-                    Mesh(filename, color, visual=False, collision=True)
+                    Mesh(os.path.relpath(filename, self.config.output_directory), color, visual=False, collision=True)
                 )
 
         mass, com, inertia = link.get_dynamics(T_world_com)
