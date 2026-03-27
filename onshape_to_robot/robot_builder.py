@@ -332,7 +332,12 @@ class RobotBuilder:
 
         # Adding non-ignored meshes
         meshes = []
-        mesh = Mesh(os.path.relpath(stl_file, self.config.output_directory), color)
+        stl_relpath = (
+            os.path.relpath(stl_file, self.config.output_directory)
+            if stl_file is not None
+            else None
+        )
+        mesh = Mesh(stl_relpath, color)
         if self.part_is_ignored(part_name, "visual"):
             mesh.visual = False
         if self.part_is_ignored(part_name, "collision"):
@@ -353,7 +358,9 @@ class RobotBuilder:
                     pattern_props = self.config.geom_properties[pattern_name]
 
                     # Check for nested visual/collision structure
-                    has_nested = "visual" in pattern_props or "collision" in pattern_props
+                    has_nested = (
+                        "visual" in pattern_props or "collision" in pattern_props
+                    )
 
                     if has_nested:
                         visual_properties = {
