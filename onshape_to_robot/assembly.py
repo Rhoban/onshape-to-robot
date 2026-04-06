@@ -764,14 +764,17 @@ class Assembly:
                     if parameter["message"]["parameterId"] == "matesQuery":
                         queries = parameter["message"]["queries"]
                         if len(queries) == 2:
-                            dof1 = self.get_feature_by_id(
+                            dof1_feature = self.get_feature_by_id(
                                 queries[0]["message"]["featureId"]
-                            )["message"]["name"]
-                            dof2 = self.get_feature_by_id(
+                            )
+                            dof2_feature = self.get_feature_by_id(
                                 queries[1]["message"]["featureId"]
-                            )["message"]["name"]
-                            if dof1.startswith("dof_") and dof2.startswith("dof_"):
-                                mated_dofs = [dof1[4:], dof2[4:]]
+                            )
+                            if dof1_feature is not None and dof2_feature is not None:
+                                dof1 = dof1_feature["message"]["name"]
+                                dof2 = dof2_feature["message"]["name"]
+                                if dof1.startswith("dof_") and dof2.startswith("dof_"):
+                                    mated_dofs = [dof1[4:], dof2[4:]]
                     elif parameter["message"]["parameterId"] == "relationRatio":
                         ratio = self.read_expression(parameter["message"]["expression"])
                     elif parameter["message"]["parameterId"] == "reverseDirection":
