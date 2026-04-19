@@ -212,4 +212,5 @@ class Config:
                     result.append(item)
                 else:
                     result.append(round(float(item), self.round_decimals))
+                    
             return original_type(result)
