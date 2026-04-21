@@ -206,11 +206,4 @@ class Config:
             return object.round(self.round_decimals)
         else:
             original_type = type(object)
-            result = []
-            for item in object:
-                if isinstance(item, str):
-                    result.append(item)
-                else:
-                    result.append(round(float(item), self.round_decimals))
-                    
-            return original_type(result)
+            return original_type(np.array(object).round(self.round_decimals))
