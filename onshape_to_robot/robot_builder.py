@@ -284,7 +284,9 @@ class RobotBuilder:
 
     def add_part(self, occurrence: dict):
         """
-        Add a part to the current link
+        Add a part to the current link.
+        If assembly_dynamics is enabled, part-level dynamics are skipped to save API calls.
+        Assembly-level dynamics will be fetched in build_robot() instead.
         """
         instance = occurrence["instance"]
 
@@ -324,8 +326,11 @@ class RobotBuilder:
         # Obtain metadatas about part to retrieve color
         color = self.get_color(instance)
 
-        # Obtain the instance dynamics
-        mass, com, inertia = self.get_dynamics(instance)
+        # Obtain the instance dynamics (skip if using assembly-level dynamics)
+        if self.config.assembly_dynamics:
+            mass, com, inertia = 0, [0, 0, 0], np.zeros((3, 3))
+        else:
+            mass, com, inertia = self.get_dynamics(instance)
 
         # Obtain part pose
         T_world_part = np.array(occurrence["transform"]).reshape(4, 4)
@@ -410,6 +415,10 @@ class RobotBuilder:
             if occurrence["fixed"]:
                 link.fixed = True
 
+        # Fetch assembly-level dynamics if enabled and instance is an Assembly
+        if self.config.assembly_dynamics and instance.get("type") == "Assembly":
+            self._fetch_assembly_dynamics(link, instance, body_id)
+
         # Adding frames to the link
         for frame in self.assembly.frames:
             if frame.body_id == body_id:
@@ -445,7 +454,34 @@ class RobotBuilder:
             # The joint is added before the recursive call, ensuring items in robot.joints has the
             # same order as recursive calls on the tree
             self.robot.joints.append(joint)
-
             joint.child = self.build_robot(child_body)
-
         return link
+
+    def _fetch_assembly_dynamics(
+        self, link: Link, instance: dict, body_id: int
+    ):
+        """
+        Fetch dynamics (mass, com, inertia) from assembly-level Onshape API.
+        This captures user-overridden masses and saves API calls compared to part-level accumulation.
+
+        Args:
+            link: The link to set dynamics for
+            instance: The assembly instance
+            body_id: The body ID for finding the assembly occurrence
+        """
+        # Find the assembly occurrence to get its world transform
+        all_occurrences = list(self.assembly.body_occurrences(body_id))
+        T_world_assembly = np.eye(4)
+        for occurrence in all_occurrences:
+            occ_instance = occurrence["instance"]
+            occ_type = occ_instance.get("type", "Unknown")
+            occ_id = occ_instance["id"]
+            occ_transform = occurrence["transform"]
+            if occ_id == instance["id"] and occ_type == "Assembly":
+                T_world_assembly = occ_transform
+                break
+
+        if not found:
+            print(warning(f"No matching occurrence found for {link.name}, using identity transform"))
+
+        self._fetch_assembly_dynamics(link, instance, T_world_assembly, body_id)

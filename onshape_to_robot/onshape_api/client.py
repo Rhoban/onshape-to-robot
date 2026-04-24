@@ -244,6 +244,32 @@ class Client:
         )
 
     @cache_response
+    def assembly_mass_properties(
+        self,
+        did,
+        wmvid,
+        eid,
+        wmv="w",
+        configuration="default",
+        linked_document_id=None,
+    ):
+        """
+        Get mass properties for an assembly (including user-overridden masses).
+        This API returns the mass, center of mass, and inertia for the entire assembly,
+        respecting any mass property overrides set in Onshape.
+        """
+        query = {
+            "configuration": configuration,
+            "useMassPropertyOverrides": True,
+        }
+        if linked_document_id is not None:
+            query["linkDocumentId"] = linked_document_id
+        return self.request(
+            f"/api/assemblies/d/{escape(did)}/{escape(wmv)}/{escape(wmvid)}/e/{escape(eid)}/massproperties",
+            query=query,
+        )
+
+    @cache_response
     def get_variables(self, did, wvid, eid, wmv, configuration):
         return self.request(
             f"/api/variables/d/{escape(did)}/{escape(wmv)}/{escape(wvid)}/e/{escape(eid)}/variables",
