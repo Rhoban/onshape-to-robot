@@ -10,14 +10,21 @@ def main():
     load_dotenv(find_dotenv(usecwd=True))
 
     if len(sys.argv) < 2:
-        print("Usage: onshape-to-robot-pure-shape {STL file} [prefix=PureShapes]")
+        print("Usage: onshape-to-robot-pure-shape {STL file} [prefix=PureShapes] [--quiet]")
     else:
         fileName = sys.argv[1]
         robotDir = os.path.dirname(fileName)
         configFile = os.path.join(robotDir, "config.json")
         prefix = "PureShapes"
-        if len(sys.argv) > 2:
-            prefix = sys.argv[2]
+        quiet = False
+
+        argv = sys.argv[2:]  # work on a copy (args after the STL file)
+        if "--quiet" in argv:
+            quiet = True
+            argv.remove("--quiet")
+
+        if len(argv) >= 1:
+            prefix = argv[0]
 
         from .onshape_api.client import Client
 
@@ -141,10 +148,11 @@ def main():
             with open(scadFileName, "w", encoding="utf-8") as stream:
                 stream.write(scad)
 
-            directory = os.path.dirname(fileName)
-            os.system(
-                "cd " + directory + "; openscad " + os.path.basename(scadFileName)
-            )
+            if not quiet:
+                directory = os.path.dirname(fileName)
+                os.system(
+                    "cd " + directory + "; openscad " + os.path.basename(scadFileName)
+                )
         else:
             print(
                 Fore.RED
