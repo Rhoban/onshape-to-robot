@@ -12,8 +12,11 @@ Run the following to install onshape-to-robot from `pypi <https://pypi.org/proje
 
 .. _api-key:
 
-Setting up your API key
------------------------
+Setting up your Authentication
+------------------------------
+
+Developer Keys
+^^^^^^^^^^^^^^
 
 You will need to obtain API key and secret from the
 `My Account > Developer menu <https://cad.onshape.com/user/developer/apiKeys>`_
@@ -45,6 +48,17 @@ Alternatively, you can also create a ``.env`` file in the root of your project:
     ONSHAPE_API=https://cad.onshape.com
     ONSHAPE_ACCESS_KEY=Your_Access_Key
     ONSHAPE_SECRET_KEY=Your_Secret_Key
+
+OAuth2
+^^^^^^
+
+Onshape alternatively supports `OAuth2 authentication <https://onshape-public.github.io/docs/auth/oauth/>`_. To authenticate this app with an OAuth token, you 
+can instead set the following in `.barshrc` or `.env`:
+
+.. code-block:: bash
+
+    ONSHAPE_API=https://cad.onshape.com
+    ONSHAPE_SECRET_BEARER=Your_Access_Key
 
 Setting up your export
 ----------------------
