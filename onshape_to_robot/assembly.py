@@ -1,4 +1,6 @@
 from __future__ import annotations
+import copy
+import re
 import numpy as np
 from .config import Config
 from .message import error, info, bright, success, warning
@@ -100,6 +102,9 @@ class Assembly:
         self.link_names: dict[int, str] = {}
         # Relation indexed by target joints, values are [source joint, ratio]
         self.relations: dict = {}
+        # List of (prefix_path, subassembly_data, instance_name) for each
+        # subassembly instance encountered during find_instances.
+        self.subassembly_instances: list[tuple[list[str], dict, str]] = []
 
         self.ensure_workspace_or_version()
         self.find_assembly()
@@ -292,8 +297,11 @@ class Assembly:
                                 and sub_assembly["elementId"] == e
                                 and sub_assembly["configuration"] == c
                             ):
+                                self.subassembly_instances.append(
+                                    (path, sub_assembly, instance["name"])
+                                )
                                 self.find_instances(
-                                    prefix + [instance["id"]], sub_assembly["instances"]
+                                    path, sub_assembly["instances"]
                                 )
 
     def load_features(self):
@@ -369,6 +377,48 @@ class Assembly:
         T_world_part = np.array(self.get_occurrence(path)["transform"]).reshape(4, 4)
 
         return T_world_part
+
+    @staticmethod
+    def _path_key(path: list[str]) -> str:
+        """Convert an occurrence path list to a flat instance_body key."""
+        return "/".join(path)
+
+    @staticmethod
+    def _slugify_instance_name(name: str) -> str:
+        """Produce a safe underscore-delimited prefix from an OnShape instance name.
+
+        Strips the trailing angle-bracket index (e.g. ' <1>') that OnShape appends,
+        lowercases, and replaces non-alphanumeric runs with underscores.
+        """
+        name = re.sub(r"\s*<\d+>\s*$", "", name)
+        name = name.lower()
+        name = re.sub(r"[^a-z0-9]+", "_", name)
+        return name.strip("_")
+
+    def _prefix_feature_data(
+        self, data: dict, prefix: list[str], name_slug: str
+    ) -> dict:
+        """Return a shallow copy of feature data with occurrence paths and name prefixed.
+
+        The matedOccurrence lists are extended with *prefix* so that
+        get_occurrence_transform works from root scope. The feature name is
+        prefixed with *name_slug* so that DOF names are disambiguated across
+        multiple instances of the same subassembly.
+        """
+        patched = copy.copy(data)
+        patched["matedEntities"] = []
+        for entity in data["matedEntities"]:
+            patched_entity = copy.copy(entity)
+            patched_entity["matedOccurrence"] = prefix + entity["matedOccurrence"]
+            patched["matedEntities"].append(patched_entity)
+
+        raw_name = data["name"]
+        for known_prefix in ("dof_", "fix_", "closing_", "frame_"):
+            if raw_name.startswith(known_prefix):
+                patched["name"] = f"{known_prefix}{name_slug}_{raw_name[len(known_prefix):]}"
+                return patched
+        patched["name"] = f"{name_slug}_{raw_name}"
+        return patched
 
     def cs_to_transformation(self, cs: dict) -> np.ndarray:
         """
@@ -580,17 +630,16 @@ class Assembly:
             if data["name"].startswith("closing_"):
                 for k in 0, 1:
                     mated_entity = data["matedEntities"][k]
-                    occurrence = mated_entity["matedOccurrence"][0]
+                    occ_path = mated_entity["matedOccurrence"]
+                    body_id = self._occurrence_body(occ_path)
 
-                    T_world_part = self.get_occurrence_transform(
-                        mated_entity["matedOccurrence"]
-                    )
+                    T_world_part = self.get_occurrence_transform(occ_path)
                     T_part_mate = self.get_mate_transform(mated_entity)
                     T_world_mate = T_world_part @ T_part_mate
 
                     self.frames.append(
                         Frame(
-                            self.instance_body[occurrence],
+                            body_id,
                             f"{data['name']}_{k+1}",
                             T_world_mate,
                         )
@@ -599,7 +648,7 @@ class Assembly:
                     if is_hinge_closure:
                         self.frames.append(
                             Frame(
-                                self.instance_body[occurrence],
+                                body_id,
                                 f"{data['name']}_{k+1}_z",
                                 T_world_mate @ self.translation(0, 0, 0.1),
                             )
@@ -650,6 +699,34 @@ class Assembly:
                 T_world_mate = T_world_occurrence @ T_occurrence_mate
                 self.frames.append(Frame(body_id, name, T_world_mate))
 
+        # Process link_/frame_ mate connectors inside subassemblies
+        for prefix, sub_asm, instance_name in self.subassembly_instances:
+            slug = self._slugify_instance_name(instance_name)
+            for feature in sub_asm.get("features", []):
+                if feature["featureType"] != "mateConnector":
+                    continue
+                feat_name = feature["featureData"]["name"]
+                occurrence = prefix + feature["featureData"]["occurrence"]
+
+                if feat_name.startswith("link_"):
+                    raw_link_name = "_".join(feat_name.split("_")[1:])
+                    link_name = f"{slug}_{raw_link_name}"
+                    body_id = self._occurrence_body(occurrence)
+                    if body_id is not None:
+                        self.link_names[body_id] = link_name
+
+                elif feat_name.startswith("frame_"):
+                    raw_frame_name = "_".join(feat_name.split("_")[1:])
+                    frame_name = f"{slug}_{raw_frame_name}"
+                    T_world_occurrence = self.get_occurrence_transform(occurrence)
+                    body_id = self._occurrence_body(occurrence)
+                    if body_id is not None:
+                        T_occurrence_mate = self.cs_to_transformation(
+                            feature["featureData"]["mateConnectorCS"]
+                        )
+                        T_world_mate = T_world_occurrence @ T_occurrence_mate
+                        self.frames.append(Frame(body_id, frame_name, T_world_mate))
+
         print(success(f"* Found total {len(self.dofs)} degrees of freedom"))
 
     def build_trees(self):
@@ -663,7 +740,9 @@ class Assembly:
 
         print(success(f"* Found {len(self.root_nodes)} root nodes:"))
         for root_node in self.root_nodes:
-            print(success(f"  - {self.body_instance(root_node)['name']}"))
+            instance = self.body_instance(root_node)
+            label = instance["name"] if instance else f"body_{root_node}"
+            print(success(f"  - {label}"))
 
     def build_tree(self, root_node: int):
         """
@@ -703,7 +782,10 @@ class Assembly:
 
     def feature_mating_two_occurrences(self):
         """
-        Iterate over all valid mating feature with two occurrences
+        Iterate over all valid mating features with two occurrences.
+
+        Yields root-level mates first, then internal mates from each
+        subassembly instance (with occurrence paths prefixed to root scope).
         """
         for feature in self.assembly_data["rootAssembly"]["features"]:
             if feature["featureType"] == "mate" and not feature["suppressed"]:
@@ -722,9 +804,33 @@ class Assembly:
 
                 yield data, occurrence_A, occurrence_B
 
+        for prefix, sub_asm, instance_name in self.subassembly_instances:
+            slug = self._slugify_instance_name(instance_name)
+            for feature in sub_asm.get("features", []):
+                if feature["featureType"] == "mate" and not feature["suppressed"]:
+                    data = feature["featureData"]
+
+                    if (
+                        "matedEntities" not in data
+                        or len(data["matedEntities"]) != 2
+                        or len(data["matedEntities"][0]["matedOccurrence"]) == 0
+                        or len(data["matedEntities"][1]["matedOccurrence"]) == 0
+                    ):
+                        continue
+
+                    prefixed_data = self._prefix_feature_data(data, prefix, slug)
+                    occ_A = self._path_key(
+                        prefix + [data["matedEntities"][0]["matedOccurrence"][0]]
+                    )
+                    occ_B = self._path_key(
+                        prefix + [data["matedEntities"][1]["matedOccurrence"][0]]
+                    )
+
+                    yield prefixed_data, occ_A, occ_B
+
     def feature_mate_groups(self):
         """
-        Find mate groups in the assembly
+        Find mate groups in the assembly (root-level and inside subassemblies).
         """
         groups = []
 
@@ -736,6 +842,18 @@ class Assembly:
                 for occurrence in data["occurrences"]:
                     group.append(occurrence["occurrence"][0])
             groups.append(group)
+
+        for prefix, sub_asm, _instance_name in self.subassembly_instances:
+            for feature in sub_asm.get("features", []):
+                group = []
+                if feature["featureType"] == "mateGroup" and not feature["suppressed"]:
+                    data = feature["featureData"]
+                    for occurrence in data["occurrences"]:
+                        group.append(
+                            self._path_key(prefix + [occurrence["occurrence"][0]])
+                        )
+                if group:
+                    groups.append(group)
 
         return groups
 
@@ -913,7 +1031,10 @@ class Assembly:
 
     def body_instance(self, body_id: int):
         """
-        Get the (first) instance associated with a given body
+        Get the (first) instance associated with a given body.
+
+        Searches root-level instances first, then internal subassembly
+        instances for bodies created by internal DOFs.
         """
         for instance in self.assembly_data["rootAssembly"]["instances"]:
             if (
@@ -922,15 +1043,41 @@ class Assembly:
             ):
                 return instance
 
+        for key, mapped_body_id in self.instance_body.items():
+            if mapped_body_id != body_id:
+                continue
+            if "/" not in key:
+                continue
+            path = key.split("/")
+            if tuple(path) in self.occurrences:
+                return self.occurrences[tuple(path)].get("instance")
+
+        return None
+
+    def _occurrence_body(self, path: list[str]) -> int | None:
+        """Resolve the body for an occurrence using longest-prefix matching.
+
+        Tries progressively shorter prefixes of *path* as keys in
+        instance_body, returning the first match. This allows nested
+        instances split by internal DOFs to be correctly resolved while
+        unsplit internal instances fall back to their parent subassembly body.
+        """
+        for depth in range(len(path), 0, -1):
+            key = self._path_key(path[:depth])
+            if key in self.instance_body:
+                return self.instance_body[key]
         return None
 
     def body_occurrences(self, body_id: int):
         """
-        Retrieve all occurrences associated to a given body id
+        Retrieve all occurrences associated to a given body id.
+
+        Uses longest-prefix matching so that internal instances split by
+        subassembly DOFs resolve to their own body rather than the parent.
         """
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
-            key = occurrence["path"][0]
-            if key in self.instance_body and self.instance_body[key] == body_id:
+            resolved = self._occurrence_body(occurrence["path"])
+            if resolved == body_id:
                 yield occurrence
 
     def get_dof(self, body1_id: int, body2_id: int):
