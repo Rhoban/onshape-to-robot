@@ -8,3 +8,8 @@ build
 onshape_to_robot.egg-info
 .env
 uv.lock
+
+# Local robot export outputs
+my-robot/
+my-robot-*/
+my-robot*.zip

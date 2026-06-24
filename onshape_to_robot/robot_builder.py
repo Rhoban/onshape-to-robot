@@ -333,7 +333,9 @@ class RobotBuilder:
         # Adding non-ignored meshes
         meshes = []
         stl_relpath = (
-            os.path.relpath(stl_file, self.config.output_directory)
+            os.path.relpath(stl_file, self.config.output_directory).replace(
+                os.sep, "/"
+            )
             if stl_file is not None
             else None
         )
@@ -398,8 +400,10 @@ class RobotBuilder:
 
         if body_id in self.assembly.link_names:
             link_name = self.assembly.link_names[body_id]
-        else:
+        elif instance is not None:
             link_name = self.unique_name(instance, "link")
+        else:
+            link_name = f"body_{body_id}"
 
         # Adding all the parts in the current link
         link = Link(link_name)
