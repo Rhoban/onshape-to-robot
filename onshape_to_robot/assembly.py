@@ -362,11 +362,13 @@ class Assembly:
         """
         return self.occurrences[tuple(path)]
 
-    def get_occurrence_transform(self, path: list) -> np.ndarray:
+    def get_occurrence_transform(self, path: list, context: str = "") -> np.ndarray:
         """
         Retrieve occurrence transform from its path
         """
-        T_world_part = np.array(self.get_occurrence(path)["transform"]).reshape(4, 4)
+        T_world_part = np.array(
+            self.get_occurrence(path, context=context)["transform"]
+        ).reshape(4, 4)
 
         return T_world_part
 
@@ -630,6 +632,11 @@ class Assembly:
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
+            # Suppressed mate connectors reference occurrences that may no longer
+            # exist in the assembly, so skip them like mates and mate groups do.
+            if feature.get("suppressed"):
+                continue
+
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("link_"):
@@ -642,7 +649,10 @@ class Assembly:
             ].startswith("frame_"):
                 name = "_".join(feature["featureData"]["name"].split("_")[1:])
                 occurrence = feature["featureData"]["occurrence"]
-                T_world_occurrence = self.get_occurrence_transform(occurrence)
+                T_world_occurrence = self.get_occurrence_transform(
+                    occurrence,
+                    context=f"frame mate connector '{feature['featureData']['name']}'",
+                )
                 body_id = self.instance_body[occurrence[0]]
                 T_occurrence_mate = self.cs_to_transformation(
                     feature["featureData"]["mateConnectorCS"]
