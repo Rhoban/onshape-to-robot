@@ -261,17 +261,22 @@ class RobotBuilder:
                     partid=instance["partId"],
                 )
 
-            if instance["partId"] not in mass_properties["bodies"]:
+            body = mass_properties["bodies"].get(instance["partId"])
+
+            # Surfaces (sheet bodies) have no volume and thus no dynamics. Onshape
+            # reports them with "hasMass": false (and may omit them from "bodies"
+            # entirely), so relying on presence in "bodies" alone misses them.
+            if body is None or not body.get("hasMass", True):
                 print(
                     warning(
                         f"WARNING: part {instance['name']} has no dynamics (maybe it is a surface)"
                     )
                 )
-                return
-            mass_properties = mass_properties["bodies"][instance["partId"]]
-            mass = mass_properties["mass"][0]
-            com = mass_properties["centroid"]
-            inertia = mass_properties["inertia"]
+                return 0.0, np.zeros(3), np.zeros((3, 3))
+
+            mass = body["mass"][0]
+            com = body["centroid"]
+            inertia = body["inertia"]
 
             if abs(mass) < 1e-9:
                 print(
