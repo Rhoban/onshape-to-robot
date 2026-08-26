@@ -630,6 +630,11 @@ class Assembly:
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
+            # Suppressed mate connectors reference occurrences that may no longer
+            # exist in the assembly, so skip them like mates and mate groups do.
+            if feature.get("suppressed"):
+                continue
+
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("link_"):
