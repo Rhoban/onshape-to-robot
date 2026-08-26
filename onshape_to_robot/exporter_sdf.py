@@ -325,7 +325,7 @@ class ExporterSDF(Exporter):
 
         sdf = "<pose%s>%g %g %g %g %g %g</pose>"
 
-        return sdf % self.config.round((relative, *matrix[:3, 3], *rotation_matrix_to_rpy(matrix)))
+        return sdf % (relative, *self.config.round((*matrix[:3, 3], *rotation_matrix_to_rpy(matrix))))
 
     def write_xml(self, robot: Robot, filename: str) -> str:
         model_config = MODEL_CONFIG_XML % (robot.name, os.path.basename(filename))
