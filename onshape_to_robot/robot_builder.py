@@ -22,10 +22,23 @@ class RobotBuilder:
 
         self.unique_names = {}
         self.stl_filenames: dict = {}
+        # Maps a DOF's identity (id(dof)) to the Joint built from it, filled
+        # in as joints are created below. Needed because self.assembly.relations
+        # is keyed by DOF identity too (not name), and a relation's source
+        # joint may not have been built/given its final disambiguated name
+        # yet at the point its target is -- so relations are applied in a
+        # second pass, once every joint that could be a source has one.
+        self.joint_for_dof_id: dict = {}
 
         for node in self.assembly.root_nodes:
             link = self.build_robot(node)
             self.robot.base_links.append(link)
+
+        for target_dof_id, (source_dof_id, ratio) in self.assembly.relations.items():
+            target_joint = self.joint_for_dof_id.get(target_dof_id)
+            source_joint = self.joint_for_dof_id.get(source_dof_id)
+            if target_joint is not None and source_joint is not None:
+                target_joint.relation = Relation(source_joint.name, ratio)
 
     def part_is_ignored(self, name: str, what: str) -> bool:
         """
@@ -132,6 +145,27 @@ class RobotBuilder:
 
             if name not in [frame.name for frame in self.assembly.frames]:
                 return name
+
+    def unique_joint_name(self, name: str) -> str:
+        """
+        Get a unique joint name (hip, hip_2, hip_3, ...). Joints discovered
+        from a sub-assembly that is itself instanced multiple times (e.g.
+        three copies of the same leg) would otherwise all share the exact
+        same base name, since the underlying mate is only defined once in
+        the sub-assembly's own document. Matching against config-driven
+        joint_properties patterns and gear/mimic relations still uses the
+        original (pre-disambiguation) name, so those keep working the same
+        way they did before this only mattered for repeated sub-assemblies.
+        """
+        if "joint" not in self.unique_names:
+            self.unique_names["joint"] = {}
+
+        if name in self.unique_names["joint"]:
+            self.unique_names["joint"][name] += 1
+            return f"{name}_{self.unique_names['joint'][name]}"
+        else:
+            self.unique_names["joint"][name] = 1
+            return name
 
     def instance_request_params(self, instance: dict) -> dict:
         """
@@ -434,7 +468,7 @@ class RobotBuilder:
                     }
 
             joint = Joint(
-                dof.name,
+                self.unique_joint_name(dof.name),
                 dof.joint_type,
                 link,
                 None,
@@ -443,9 +477,7 @@ class RobotBuilder:
                 dof.limits,
                 dof.axis,
             )
-            if dof.name in self.assembly.relations:
-                source, ratio = self.assembly.relations[dof.name]
-                joint.relation = Relation(source, ratio)
+            self.joint_for_dof_id[id(dof)] = joint
 
             # The joint is added before the recursive call, ensuring items in robot.joints has the
             # same order as recursive calls on the tree

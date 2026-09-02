@@ -34,6 +34,7 @@ class DOF:
         T_world_mate: np.ndarray,
         limits: tuple | None,
         axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
+        prefix: tuple = (),
     ):
         self.body1_id: int = body1_id
         self.body2_id: int = body2_id
@@ -42,6 +43,12 @@ class DOF:
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
         self.axis: np.ndarray = axis
+        # Occurrence path leading to the sub-assembly instance this DOF was
+        # discovered in (empty at the top level). Needed to correctly pair a
+        # gear/mimic relation with the matching DOFs when the sub-assembly
+        # defining both is itself instanced more than once (e.g. three legs
+        # sharing one leg sub-assembly, each with its own master/follower).
+        self.prefix: tuple = prefix
 
     def flip(self, flip_limits: bool = True):
         if flip_limits and self.limits is not None:
@@ -338,6 +345,12 @@ class Assembly:
         Load features, also fetching the parametric features of every nested
         sub-assembly so mate limits and gear/mimic relations defined inside a
         sub-assembly's own tab (not just the top-level assembly) are found.
+        Kept both as one flat merged list (self.features, used by
+        get_limits()/get_offset(), which only need to find a mate's own
+        properties by name and don't care which physical instance is asking)
+        and indexed per sub-assembly document (self.features_by_key, used by
+        find_relations() to correctly pair a gear/mimic relation with the
+        matching DOFs when a sub-assembly is instanced more than once).
         """
 
         self.features = self.client.get_features(
@@ -348,6 +361,14 @@ class Assembly:
             configuration=self.config.configuration,
         )
 
+        top_key = (
+            self.document_id,
+            self.element_id,
+            self.microversion_id,
+            self.config.configuration,
+        )
+        self.features_by_key: dict = {top_key: self.features}
+
         for sub_assembly in self.assembly_data["subAssemblies"]:
             sub_features = self.client.get_features(
                 sub_assembly["documentId"],
@@ -356,6 +377,13 @@ class Assembly:
                 wmv="m",
                 configuration=sub_assembly["configuration"],
             )
+            sub_key = (
+                sub_assembly["documentId"],
+                sub_assembly["elementId"],
+                sub_assembly["documentMicroversion"],
+                sub_assembly["configuration"],
+            )
+            self.features_by_key[sub_key] = sub_features
             self.features["features"] += sub_features["features"]
 
         self.matevalues = self.client.matevalues(
@@ -576,6 +604,7 @@ class Assembly:
                     joint_type,
                     T_world_mate,
                     limits,
+                    prefix=tuple(prefix),
                 )
 
                 if data["inverted"]:
@@ -886,21 +915,79 @@ class Assembly:
 
         return groups
 
-    def get_feature_by_id(self, feature_id: str):
+    def iter_all_parametric_features(
+        self, prefix: list = [], key: tuple = None, instances: list = None
+    ):
         """
-        Find a specific feature by its ID
+        Recursively yield (prefix, features_list, feature) for every
+        parametric feature (as returned by the Onshape "features" endpoint --
+        distinct from the mate/occurrence data iter_all_features walks)
+        found in the top-level assembly and every nested sub-assembly
+        instance, mirroring iter_all_features' recursion. `features_list` is
+        the full list `feature` came from, so a feature-id lookup (feature
+        ids are only unique within one document) can be scoped to the
+        correct document instead of colliding across sub-assemblies.
         """
-        for feature in self.features["features"]:
+        if key is None:
+            key = (
+                self.document_id,
+                self.element_id,
+                self.microversion_id,
+                self.config.configuration,
+            )
+        if instances is None:
+            instances = self.assembly_data["rootAssembly"]["instances"]
+
+        features = self.features_by_key.get(key, {"features": []})["features"]
+        for feature in features:
+            yield prefix, features, feature
+
+        for instance in instances:
+            if instance.get("type") == "Assembly" and not instance["suppressed"]:
+                sub_assembly = self.find_sub_assembly(instance)
+                if sub_assembly is not None:
+                    sub_key = (
+                        sub_assembly["documentId"],
+                        sub_assembly["elementId"],
+                        sub_assembly["documentMicroversion"],
+                        sub_assembly["configuration"],
+                    )
+                    yield from self.iter_all_parametric_features(
+                        prefix + [instance["id"]], sub_key, sub_assembly["instances"]
+                    )
+
+    def get_feature_by_id(self, features: list, feature_id: str):
+        """
+        Find a specific feature by its ID within a given features list (a
+        feature id is only unique within the one document it came from).
+        """
+        for feature in features:
             if feature["message"]["featureId"] == feature_id:
                 return feature
 
         return None
 
+    def find_dof(self, prefix: tuple, name: str):
+        """
+        Find the DOF discovered at an exact prefix (sub-assembly instance)
+        with a given (dof_-stripped) name.
+        """
+        for dof in self.dofs:
+            if dof.prefix == prefix and dof.name == name:
+                return dof
+        return None
+
     def find_relations(self):
         """
-        Finding relations features in the assembly
+        Finding relations features in the assembly, anywhere in the document
+        tree. A relation is resolved against the DOFs found at the exact same
+        prefix (sub-assembly instance) it was itself found in, so that a
+        sub-assembly instanced more than once (e.g. three legs sharing one
+        leg sub-assembly) gets one independently-correct relation per
+        instance, instead of every instance's target mimicking the same
+        single (first-found) source joint.
         """
-        for feature in self.features["features"]:
+        for prefix, features, feature in self.iter_all_parametric_features():
             if feature["typeName"] == "BTMMateRelation":
                 relation_name = feature["message"]["name"]
 
@@ -912,10 +999,10 @@ class Assembly:
                         queries = parameter["message"]["queries"]
                         if len(queries) == 2:
                             dof1_feature = self.get_feature_by_id(
-                                queries[0]["message"]["featureId"]
+                                features, queries[0]["message"]["featureId"]
                             )
                             dof2_feature = self.get_feature_by_id(
-                                queries[1]["message"]["featureId"]
+                                features, queries[1]["message"]["featureId"]
                             )
                             if dof1_feature is not None and dof2_feature is not None:
                                 dof1 = dof1_feature["message"]["name"]
@@ -931,19 +1018,27 @@ class Assembly:
                     if not reverse:
                         ratio = -ratio
 
+                    prefix_tuple = tuple(prefix)
+                    source_dof = self.find_dof(prefix_tuple, mated_dofs[0])
+                    target_dof = self.find_dof(prefix_tuple, mated_dofs[1])
+
+                    if source_dof is None or target_dof is None:
+                        continue
+
                     print(
                         success(
-                            f"+ Found relation {relation_name} mating {mated_dofs} with ratio {ratio}"
+                            f"+ Found relation {relation_name} mating {mated_dofs} "
+                            f"with ratio {ratio} (prefix {prefix_tuple})"
                         )
                     )
-                    if mated_dofs[1] in self.relations:
+                    if id(target_dof) in self.relations:
                         print(
                             warning(
                                 f"Multiple relations found with {mated_dofs[1]} as target"
                             )
                         )
 
-                    self.relations[mated_dofs[1]] = [mated_dofs[0], ratio]
+                    self.relations[id(target_dof)] = (id(source_dof), ratio)
 
     def read_parameter_value(self, parameter: str, name: str):
         """
