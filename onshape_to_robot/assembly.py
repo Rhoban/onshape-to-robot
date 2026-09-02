@@ -298,7 +298,9 @@ class Assembly:
 
     def load_features(self):
         """
-        Load features
+        Load features, also fetching the parametric features of every nested
+        sub-assembly so mate limits and gear/mimic relations defined inside a
+        sub-assembly's own tab (not just the top-level assembly) are found.
         """
 
         self.features = self.client.get_features(
@@ -308,6 +310,16 @@ class Assembly:
             wmv="m",
             configuration=self.config.configuration,
         )
+
+        for sub_assembly in self.assembly_data["subAssemblies"]:
+            sub_features = self.client.get_features(
+                sub_assembly["documentId"],
+                sub_assembly["documentMicroversion"],
+                sub_assembly["elementId"],
+                wmv="m",
+                configuration=sub_assembly["configuration"],
+            )
+            self.features["features"] += sub_features["features"]
 
         self.matevalues = self.client.matevalues(
             self.document_id,
@@ -453,7 +465,7 @@ class Assembly:
         self.make_body((top_level_instances[0]["id"],))
 
         # We first search for DOFs
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("dof_"):
                 # Process the DOF name, removing dof prefix and inv suffix
                 parts = data["name"].split("_")
@@ -498,7 +510,7 @@ class Assembly:
                 # We compute the axis in the world frame
                 mated_entity = data["matedEntities"][0]
                 T_world_part = self.get_occurrence_transform(
-                    mated_entity["matedOccurrence"]
+                    prefix + mated_entity["matedOccurrence"]
                 )
 
                 # jointToPart is the (rotation only) matrix from joint to the part
@@ -533,7 +545,7 @@ class Assembly:
                 self.dofs.append(dof)
 
         # Merging fixed links
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("fix_") or (
                 data["mateType"] == "FASTENED"
                 and not data["name"].startswith("dof_")
@@ -551,7 +563,7 @@ class Assembly:
                 self.merge_bodies(occurrence_A, occurrence_B)
 
         # Processing frame mates
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("frame_"):
                 name = "_".join(data["name"].split("_")[1:])
                 if (
@@ -572,7 +584,7 @@ class Assembly:
                     )
 
                 T_world_part = self.get_occurrence_transform(
-                    mated_entity["matedOccurrence"]
+                    prefix + mated_entity["matedOccurrence"]
                 )
 
                 self.frames.append(
@@ -590,16 +602,16 @@ class Assembly:
                 self.make_body((instance["id"],))
 
         # Processing loop closing frames
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             is_hinge_closure = data["mateType"] == "REVOLUTE"
 
             if data["name"].startswith("closing_"):
                 for k in 0, 1:
                     mated_entity = data["matedEntities"][k]
-                    body_id = self.resolve_body_id(mated_entity["matedOccurrence"])
+                    body_id = self.resolve_body_id(prefix + mated_entity["matedOccurrence"])
 
                     T_world_part = self.get_occurrence_transform(
-                        mated_entity["matedOccurrence"]
+                        prefix + mated_entity["matedOccurrence"]
                     )
                     T_part_mate = self.get_mate_transform(mated_entity)
                     T_world_mate = T_world_part @ T_part_mate
@@ -645,7 +657,7 @@ class Assembly:
                     )
 
         # Search for mate connector named "link_..." to override link names
-        for feature in self.assembly_data["rootAssembly"]["features"]:
+        for prefix, feature in self.iter_all_features():
             # Suppressed mate connectors reference occurrences that may no longer
             # exist in the assembly, so skip them like mates and mate groups do.
             if feature.get("suppressed"):
@@ -655,14 +667,15 @@ class Assembly:
                 "name"
             ].startswith("link_"):
                 link_name = "_".join(feature["featureData"]["name"].split("_")[1:])
-                body_id = self.resolve_body_id(feature["featureData"]["occurrence"])
+                occurrence = prefix + feature["featureData"]["occurrence"]
+                body_id = self.resolve_body_id(occurrence)
                 self.link_names[body_id] = link_name
 
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("frame_"):
                 name = "_".join(feature["featureData"]["name"].split("_")[1:])
-                occurrence = feature["featureData"]["occurrence"]
+                occurrence = prefix + feature["featureData"]["occurrence"]
                 T_world_occurrence = self.get_occurrence_transform(occurrence)
                 body_id = self.resolve_body_id(occurrence)
                 T_occurrence_mate = self.cs_to_transformation(
@@ -737,11 +750,63 @@ class Assembly:
                 elif child not in exploring:
                     exploring.append(child)
 
+    def find_sub_assembly(self, instance: dict):
+        """
+        Find the subAssemblies[] entry matching a given Assembly-type instance
+        """
+        d = instance["documentId"]
+        m = instance["documentMicroversion"]
+        e = instance["elementId"]
+        c = instance["configuration"]
+        for sub_assembly in self.assembly_data["subAssemblies"]:
+            if (
+                sub_assembly["documentId"] == d
+                and sub_assembly["documentMicroversion"] == m
+                and sub_assembly["elementId"] == e
+                and sub_assembly["configuration"] == c
+            ):
+                return sub_assembly
+        return None
+
+    def iter_all_features(self, prefix: list = [], features: list = None, instances: list = None):
+        """
+        Recursively yield (prefix, feature) for every feature (mate,
+        mateConnector, mateGroup) found either directly in the given
+        assembly-like context or in any nested sub-assembly instance
+        underneath it. Called with no arguments, this walks the whole
+        document tree starting at the exported top-level assembly, so mates
+        authored inside a nested sub-assembly's own tab are discovered the
+        same way as ones authored at the top level -- letting a sub-assembly
+        stay independently articulable/testable on its own without needing
+        its mates duplicated at the top level for export. `prefix` is the
+        occurrence path leading to the sub-assembly instance a given feature
+        was found in (empty at the top level), needed to turn that feature's
+        own locally-relative occurrence references into full, unique paths.
+        """
+        if features is None:
+            features = self.assembly_data["rootAssembly"]["features"]
+        if instances is None:
+            instances = self.assembly_data["rootAssembly"]["instances"]
+
+        for feature in features:
+            yield prefix, feature
+
+        for instance in instances:
+            if instance.get("type") == "Assembly" and not instance["suppressed"]:
+                sub_assembly = self.find_sub_assembly(instance)
+                if sub_assembly is not None:
+                    yield from self.iter_all_features(
+                        prefix + [instance["id"]],
+                        sub_assembly["features"],
+                        sub_assembly["instances"],
+                    )
+
     def feature_mating_two_occurrences(self):
         """
-        Iterate over all valid mating feature with two occurrences
+        Iterate over all valid mating feature with two occurrences, anywhere
+        in the document tree (top-level assembly or any nested sub-assembly)
         """
-        for feature in self.assembly_data["rootAssembly"]["features"]:
+        for prefix, feature in self.iter_all_features():
             if feature["featureType"] == "mate" and not feature["suppressed"]:
                 data = feature["featureData"]
 
@@ -753,24 +818,24 @@ class Assembly:
                 ):
                     continue
 
-                occurrence_A = tuple(data["matedEntities"][0]["matedOccurrence"])
-                occurrence_B = tuple(data["matedEntities"][1]["matedOccurrence"])
+                occurrence_A = tuple(prefix + data["matedEntities"][0]["matedOccurrence"])
+                occurrence_B = tuple(prefix + data["matedEntities"][1]["matedOccurrence"])
 
-                yield data, occurrence_A, occurrence_B
+                yield prefix, data, occurrence_A, occurrence_B
 
     def feature_mate_groups(self):
         """
-        Find mate groups in the assembly
+        Find mate groups in the assembly, anywhere in the document tree
         """
         groups = []
 
-        for feature in self.assembly_data["rootAssembly"]["features"]:
+        for prefix, feature in self.iter_all_features():
             group = []
             if feature["featureType"] == "mateGroup" and not feature["suppressed"]:
                 data = feature["featureData"]
 
                 for occurrence in data["occurrences"]:
-                    group.append(tuple(occurrence["occurrence"]))
+                    group.append(tuple(prefix + occurrence["occurrence"]))
             groups.append(group)
 
         return groups
