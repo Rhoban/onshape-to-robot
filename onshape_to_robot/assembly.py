@@ -100,11 +100,18 @@ class Assembly:
         self.link_names: dict[int, str] = {}
         # Relation indexed by target joints, values are [source joint, ratio]
         self.relations: dict = {}
+        # Maps a pattern-generated instance id to the seed instance id it was
+        # patterned from, so patterned copies (which have no mate of their
+        # own -- only a geometric transform) can inherit their seed's body
+        # membership for connectivity purposes, while still using their own
+        # real position for geometry.
+        self.pattern_seed_of: dict[str, str] = {}
 
         self.ensure_workspace_or_version()
         self.find_assembly()
         self.check_configuration()
         self.retrieve_assembly()
+        self.load_patterns()
         self.find_instances()
         self.load_features()
         self.load_configuration()
@@ -266,6 +273,36 @@ class Assembly:
         self.occurrences: dict = {}
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
             self.occurrences[tuple(occurrence["path"])] = occurrence
+
+    def load_patterns(self):
+        """
+        Build a pattern-copy -> seed instance id map from every "patterns"
+        list in the document (top-level assembly and every sub-assembly), so
+        patterned instances can inherit their seed's body membership.
+        """
+        assemblies = [self.assembly_data["rootAssembly"]] + self.assembly_data[
+            "subAssemblies"
+        ]
+        for assembly_like in assemblies:
+            for pattern in assembly_like.get("patterns", []):
+                if pattern.get("suppressed"):
+                    continue
+                for seed_id, copy_ids in pattern.get(
+                    "seedToPatternInstances", {}
+                ).items():
+                    for copy_id in copy_ids:
+                        self.pattern_seed_of[copy_id] = seed_id
+
+    def canonicalize_occurrence(self, path: list) -> tuple:
+        """
+        Replace any pattern-generated instance id in an occurrence path with
+        its seed instance id, so a patterned copy resolves to the same body
+        as the instance it was patterned from (a rigid pattern replicates a
+        rigid relationship, not an independently-connected new part).
+        Geometry/transform lookups must keep using the real, un-substituted
+        path -- only body-membership resolution should use this.
+        """
+        return tuple(self.pattern_seed_of.get(part, part) for part in path)
 
     def find_instances(self, prefix: list = [], instances=None):
         """
@@ -438,9 +475,11 @@ class Assembly:
         registered ancestor. This lets occurrences never individually
         merged/mated (e.g. unmated fasteners nested inside a sub-assembly)
         inherit the body of whichever ancestor occurrence they belong to,
-        instead of only ever matching a bare top-level instance id.
+        instead of only ever matching a bare top-level instance id. Pattern
+        copies are canonicalized to their seed id first, so a copy resolves
+        to the same body as whatever its seed is connected to.
         """
-        path = tuple(path)
+        path = self.canonicalize_occurrence(path)
         for length in range(len(path), 0, -1):
             key = path[:length]
             if key in self.instance_body:
@@ -462,7 +501,7 @@ class Assembly:
         Pre-assign all top-level instances to a separate body id
         """
         top_level_instances = self.assembly_data["rootAssembly"]["instances"]
-        self.make_body((top_level_instances[0]["id"],))
+        self.make_body(self.canonicalize_occurrence([top_level_instances[0]["id"]]))
 
         # We first search for DOFs
         for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -598,8 +637,9 @@ class Assembly:
 
         # Checking that all intances are assigned to a body
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if (instance["id"],) not in self.instance_body and not instance["suppressed"]:
-                self.make_body((instance["id"],))
+            canonical = self.canonicalize_occurrence([instance["id"]])
+            if canonical not in self.instance_body and not instance["suppressed"]:
+                self.make_body(canonical)
 
         # Processing loop closing frames
         for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -818,8 +858,12 @@ class Assembly:
                 ):
                     continue
 
-                occurrence_A = tuple(prefix + data["matedEntities"][0]["matedOccurrence"])
-                occurrence_B = tuple(prefix + data["matedEntities"][1]["matedOccurrence"])
+                occurrence_A = self.canonicalize_occurrence(
+                    prefix + data["matedEntities"][0]["matedOccurrence"]
+                )
+                occurrence_B = self.canonicalize_occurrence(
+                    prefix + data["matedEntities"][1]["matedOccurrence"]
+                )
 
                 yield prefix, data, occurrence_A, occurrence_B
 
@@ -835,7 +879,9 @@ class Assembly:
                 data = feature["featureData"]
 
                 for occurrence in data["occurrences"]:
-                    group.append(tuple(prefix + occurrence["occurrence"]))
+                    group.append(
+                        self.canonicalize_occurrence(prefix + occurrence["occurrence"])
+                    )
             groups.append(group)
 
         return groups
