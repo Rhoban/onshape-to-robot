@@ -419,6 +419,22 @@ class Assembly:
             if dof.body2_id == body2_id:
                 dof.body2_id = body1_id
 
+    def resolve_body_id(self, path: list):
+        """
+        Resolve the body id owning a given occurrence path, walking from the
+        most specific (full path) to the least specific (top-level only)
+        registered ancestor. This lets occurrences never individually
+        merged/mated (e.g. unmated fasteners nested inside a sub-assembly)
+        inherit the body of whichever ancestor occurrence they belong to,
+        instead of only ever matching a bare top-level instance id.
+        """
+        path = tuple(path)
+        for length in range(len(path), 0, -1):
+            key = path[:length]
+            if key in self.instance_body:
+                return self.instance_body[key]
+        return None
+
     def translation(self, x: float, y: float, z: float) -> np.ndarray:
         return np.array(
             [
@@ -434,7 +450,7 @@ class Assembly:
         Pre-assign all top-level instances to a separate body id
         """
         top_level_instances = self.assembly_data["rootAssembly"]["instances"]
-        self.make_body(top_level_instances[0]["id"])
+        self.make_body((top_level_instances[0]["id"],))
 
         # We first search for DOFs
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -570,8 +586,8 @@ class Assembly:
 
         # Checking that all intances are assigned to a body
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body and not instance["suppressed"]:
-                self.make_body(instance["id"])
+            if (instance["id"],) not in self.instance_body and not instance["suppressed"]:
+                self.make_body((instance["id"],))
 
         # Processing loop closing frames
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -580,7 +596,7 @@ class Assembly:
             if data["name"].startswith("closing_"):
                 for k in 0, 1:
                     mated_entity = data["matedEntities"][k]
-                    occurrence = mated_entity["matedOccurrence"][0]
+                    body_id = self.resolve_body_id(mated_entity["matedOccurrence"])
 
                     T_world_part = self.get_occurrence_transform(
                         mated_entity["matedOccurrence"]
@@ -590,7 +606,7 @@ class Assembly:
 
                     self.frames.append(
                         Frame(
-                            self.instance_body[occurrence],
+                            body_id,
                             f"{data['name']}_{k+1}",
                             T_world_mate,
                         )
@@ -599,7 +615,7 @@ class Assembly:
                     if is_hinge_closure:
                         self.frames.append(
                             Frame(
-                                self.instance_body[occurrence],
+                                body_id,
                                 f"{data['name']}_{k+1}_z",
                                 T_world_mate @ self.translation(0, 0, 0.1),
                             )
@@ -639,7 +655,7 @@ class Assembly:
                 "name"
             ].startswith("link_"):
                 link_name = "_".join(feature["featureData"]["name"].split("_")[1:])
-                body_id = self.instance_body[feature["featureData"]["occurrence"][0]]
+                body_id = self.resolve_body_id(feature["featureData"]["occurrence"])
                 self.link_names[body_id] = link_name
 
             if feature["featureType"] == "mateConnector" and feature["featureData"][
@@ -648,7 +664,7 @@ class Assembly:
                 name = "_".join(feature["featureData"]["name"].split("_")[1:])
                 occurrence = feature["featureData"]["occurrence"]
                 T_world_occurrence = self.get_occurrence_transform(occurrence)
-                body_id = self.instance_body[occurrence[0]]
+                body_id = self.resolve_body_id(occurrence)
                 T_occurrence_mate = self.cs_to_transformation(
                     feature["featureData"]["mateConnectorCS"]
                 )
@@ -665,6 +681,21 @@ class Assembly:
         for body_id in self.instance_body.values():
             if body_id != INSTANCE_IGNORE and body_id not in self.body_in_tree:
                 self.build_tree(body_id)
+
+        # Drop root nodes that carry no real geometry and have no children --
+        # these are the bare wrapper occurrence of a sub-assembly instance
+        # (an "Assembly" has no geometry of its own, only the parts nested
+        # inside it do), and would otherwise spuriously compete as separate
+        # "multiple base links" against the real, connected robot tree.
+        self.root_nodes = [
+            root
+            for root in self.root_nodes
+            if self.tree_children.get(root)
+            or any(
+                occurrence["instance"]["type"] == "Part"
+                for occurrence in self.body_occurrences(root)
+            )
+        ]
 
         print(success(f"* Found {len(self.root_nodes)} root nodes:"))
         for root_node in self.root_nodes:
@@ -722,8 +753,8 @@ class Assembly:
                 ):
                     continue
 
-                occurrence_A = data["matedEntities"][0]["matedOccurrence"][0]
-                occurrence_B = data["matedEntities"][1]["matedOccurrence"][0]
+                occurrence_A = tuple(data["matedEntities"][0]["matedOccurrence"])
+                occurrence_B = tuple(data["matedEntities"][1]["matedOccurrence"])
 
                 yield data, occurrence_A, occurrence_B
 
@@ -739,7 +770,7 @@ class Assembly:
                 data = feature["featureData"]
 
                 for occurrence in data["occurrences"]:
-                    group.append(occurrence["occurrence"][0])
+                    group.append(tuple(occurrence["occurrence"]))
             groups.append(group)
 
         return groups
@@ -920,12 +951,9 @@ class Assembly:
         """
         Get the (first) instance associated with a given body
         """
-        for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if (
-                instance["id"] in self.instance_body
-                and self.instance_body[instance["id"]] == body_id
-            ):
-                return instance
+        for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
+            if self.resolve_body_id(occurrence["path"]) == body_id:
+                return self.get_occurrence(occurrence["path"])["instance"]
 
         return None
 
@@ -934,8 +962,7 @@ class Assembly:
         Retrieve all occurrences associated to a given body id
         """
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
-            key = occurrence["path"][0]
-            if key in self.instance_body and self.instance_body[key] == body_id:
+            if self.resolve_body_id(occurrence["path"]) == body_id:
                 yield occurrence
 
     def get_dof(self, body1_id: int, body2_id: int):
