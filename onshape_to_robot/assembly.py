@@ -113,6 +113,14 @@ class Assembly:
         # membership for connectivity purposes, while still using their own
         # real position for geometry.
         self.pattern_seed_of: dict[str, str] = {}
+        # Tracks how many times a given name has been used across every
+        # user-named "frame_"/"closing_"/"link_" mate or mate connector, so
+        # repeated sub-assembly instances (e.g. three legs sharing one leg
+        # sub-assembly) don't collide on the same name -- which would
+        # otherwise produce duplicate <link> elements in the exported URDF,
+        # since frames and link-name overrides share the same link
+        # namespace as regular body links.
+        self._global_name_count: dict[str, int] = {}
 
         self.ensure_workspace_or_version()
         self.find_assembly()
@@ -126,6 +134,16 @@ class Assembly:
         self.build_trees()
         self.find_relations()
         print("")
+
+    def unique_global_name(self, name: str) -> str:
+        """
+        Returns a name guaranteed to be unique across all frame/link names created
+        so far, disambiguating repeated names (e.g. from repeated sub-assembly
+        instances) by appending "_2", "_3", etc.
+        """
+        count = self._global_name_count.get(name, 0) + 1
+        self._global_name_count[name] = count
+        return name if count == 1 else f"{name}_{count}"
 
     def ensure_workspace_or_version(self):
         """
@@ -633,7 +651,7 @@ class Assembly:
         # Processing frame mates
         for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("frame_"):
-                name = "_".join(data["name"].split("_")[1:])
+                name = self.unique_global_name("_".join(data["name"].split("_")[1:]))
                 if (
                     occurrence_A not in self.instance_body
                     and occurrence_B in self.instance_body
@@ -675,6 +693,9 @@ class Assembly:
             is_hinge_closure = data["mateType"] == "REVOLUTE"
 
             if data["name"].startswith("closing_"):
+                frame_names: dict[int, str] = {}
+                z_names: dict[int, str] = {}
+
                 for k in 0, 1:
                     mated_entity = data["matedEntities"][k]
                     body_id = self.resolve_body_id(prefix + mated_entity["matedOccurrence"])
@@ -685,19 +706,17 @@ class Assembly:
                     T_part_mate = self.get_mate_transform(mated_entity)
                     T_world_mate = T_world_part @ T_part_mate
 
-                    self.frames.append(
-                        Frame(
-                            body_id,
-                            f"{data['name']}_{k+1}",
-                            T_world_mate,
-                        )
-                    )
+                    frame_name = self.unique_global_name(f"{data['name']}_{k+1}")
+                    frame_names[k] = frame_name
+                    self.frames.append(Frame(body_id, frame_name, T_world_mate))
 
                     if is_hinge_closure:
+                        z_name = f"{frame_name}_z"
+                        z_names[k] = z_name
                         self.frames.append(
                             Frame(
                                 body_id,
-                                f"{data['name']}_{k+1}_z",
+                                z_name,
                                 T_world_mate @ self.translation(0, 0, 0.1),
                             )
                         )
@@ -712,16 +731,16 @@ class Assembly:
                 self.closures.append(
                     [
                         closure_types.get(data["mateType"], "unknown"),
-                        f"{data['name']}_1",
-                        f"{data['name']}_2",
+                        frame_names[0],
+                        frame_names[1],
                     ]
                 )
                 if is_hinge_closure:
                     self.closures.append(
                         [
                             closure_types.get(data["mateType"], "unknown"),
-                            f"{data['name']}_1_z",
-                            f"{data['name']}_2_z",
+                            z_names[0],
+                            z_names[1],
                         ]
                     )
 
@@ -735,7 +754,9 @@ class Assembly:
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("link_"):
-                link_name = "_".join(feature["featureData"]["name"].split("_")[1:])
+                link_name = self.unique_global_name(
+                    "_".join(feature["featureData"]["name"].split("_")[1:])
+                )
                 occurrence = prefix + feature["featureData"]["occurrence"]
                 body_id = self.resolve_body_id(occurrence)
                 self.link_names[body_id] = link_name
@@ -743,7 +764,9 @@ class Assembly:
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("frame_"):
-                name = "_".join(feature["featureData"]["name"].split("_")[1:])
+                name = self.unique_global_name(
+                    "_".join(feature["featureData"]["name"].split("_")[1:])
+                )
                 occurrence = prefix + feature["featureData"]["occurrence"]
                 T_world_occurrence = self.get_occurrence_transform(occurrence)
                 body_id = self.resolve_body_id(occurrence)
