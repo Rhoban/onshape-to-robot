@@ -34,6 +34,7 @@ class DOF:
         T_world_mate: np.ndarray,
         limits: tuple | None,
         axis: np.ndarray = np.array([0.0, 0.0, 1.0]),
+        prefix: tuple = (),
     ):
         self.body1_id: int = body1_id
         self.body2_id: int = body2_id
@@ -42,6 +43,12 @@ class DOF:
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
         self.axis: np.ndarray = axis
+        # Occurrence path leading to the sub-assembly instance this DOF was
+        # discovered in (empty at the top level). Needed to correctly pair a
+        # gear/mimic relation with the matching DOFs when the sub-assembly
+        # defining both is itself instanced more than once (e.g. three legs
+        # sharing one leg sub-assembly, each with its own master/follower).
+        self.prefix: tuple = prefix
 
     def flip(self, flip_limits: bool = True):
         if flip_limits and self.limits is not None:
@@ -100,11 +107,26 @@ class Assembly:
         self.link_names: dict[int, str] = {}
         # Relation indexed by target joints, values are [source joint, ratio]
         self.relations: dict = {}
+        # Maps a pattern-generated instance id to the seed instance id it was
+        # patterned from, so patterned copies (which have no mate of their
+        # own -- only a geometric transform) can inherit their seed's body
+        # membership for connectivity purposes, while still using their own
+        # real position for geometry.
+        self.pattern_seed_of: dict[str, str] = {}
+        # Tracks how many times a given name has been used across every
+        # user-named "frame_"/"closing_"/"link_" mate or mate connector, so
+        # repeated sub-assembly instances (e.g. three legs sharing one leg
+        # sub-assembly) don't collide on the same name -- which would
+        # otherwise produce duplicate <link> elements in the exported URDF,
+        # since frames and link-name overrides share the same link
+        # namespace as regular body links.
+        self._global_name_count: dict[str, int] = {}
 
         self.ensure_workspace_or_version()
         self.find_assembly()
         self.check_configuration()
         self.retrieve_assembly()
+        self.load_patterns()
         self.find_instances()
         self.load_features()
         self.load_configuration()
@@ -112,6 +134,16 @@ class Assembly:
         self.build_trees()
         self.find_relations()
         print("")
+
+    def unique_global_name(self, name: str) -> str:
+        """
+        Returns a name guaranteed to be unique across all frame/link names created
+        so far, disambiguating repeated names (e.g. from repeated sub-assembly
+        instances) by appending "_2", "_3", etc.
+        """
+        count = self._global_name_count.get(name, 0) + 1
+        self._global_name_count[name] = count
+        return name if count == 1 else f"{name}_{count}"
 
     def ensure_workspace_or_version(self):
         """
@@ -267,6 +299,36 @@ class Assembly:
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
             self.occurrences[tuple(occurrence["path"])] = occurrence
 
+    def load_patterns(self):
+        """
+        Build a pattern-copy -> seed instance id map from every "patterns"
+        list in the document (top-level assembly and every sub-assembly), so
+        patterned instances can inherit their seed's body membership.
+        """
+        assemblies = [self.assembly_data["rootAssembly"]] + self.assembly_data[
+            "subAssemblies"
+        ]
+        for assembly_like in assemblies:
+            for pattern in assembly_like.get("patterns", []):
+                if pattern.get("suppressed"):
+                    continue
+                for seed_id, copy_ids in pattern.get(
+                    "seedToPatternInstances", {}
+                ).items():
+                    for copy_id in copy_ids:
+                        self.pattern_seed_of[copy_id] = seed_id
+
+    def canonicalize_occurrence(self, path: list) -> tuple:
+        """
+        Replace any pattern-generated instance id in an occurrence path with
+        its seed instance id, so a patterned copy resolves to the same body
+        as the instance it was patterned from (a rigid pattern replicates a
+        rigid relationship, not an independently-connected new part).
+        Geometry/transform lookups must keep using the real, un-substituted
+        path -- only body-membership resolution should use this.
+        """
+        return tuple(self.pattern_seed_of.get(part, part) for part in path)
+
     def find_instances(self, prefix: list = [], instances=None):
         """
         Walking all the instances and associating them with their occurrences
@@ -298,7 +360,15 @@ class Assembly:
 
     def load_features(self):
         """
-        Load features
+        Load features, also fetching the parametric features of every nested
+        sub-assembly so mate limits and gear/mimic relations defined inside a
+        sub-assembly's own tab (not just the top-level assembly) are found.
+        Kept both as one flat merged list (self.features, used by
+        get_limits()/get_offset(), which only need to find a mate's own
+        properties by name and don't care which physical instance is asking)
+        and indexed per sub-assembly document (self.features_by_key, used by
+        find_relations() to correctly pair a gear/mimic relation with the
+        matching DOFs when a sub-assembly is instanced more than once).
         """
 
         self.features = self.client.get_features(
@@ -308,6 +378,31 @@ class Assembly:
             wmv="m",
             configuration=self.config.configuration,
         )
+
+        top_key = (
+            self.document_id,
+            self.element_id,
+            self.microversion_id,
+            self.config.configuration,
+        )
+        self.features_by_key: dict = {top_key: self.features}
+
+        for sub_assembly in self.assembly_data["subAssemblies"]:
+            sub_features = self.client.get_features(
+                sub_assembly["documentId"],
+                sub_assembly["documentMicroversion"],
+                sub_assembly["elementId"],
+                wmv="m",
+                configuration=sub_assembly["configuration"],
+            )
+            sub_key = (
+                sub_assembly["documentId"],
+                sub_assembly["elementId"],
+                sub_assembly["documentMicroversion"],
+                sub_assembly["configuration"],
+            )
+            self.features_by_key[sub_key] = sub_features
+            self.features["features"] += sub_features["features"]
 
         self.matevalues = self.client.matevalues(
             self.document_id,
@@ -419,6 +514,24 @@ class Assembly:
             if dof.body2_id == body2_id:
                 dof.body2_id = body1_id
 
+    def resolve_body_id(self, path: list):
+        """
+        Resolve the body id owning a given occurrence path, walking from the
+        most specific (full path) to the least specific (top-level only)
+        registered ancestor. This lets occurrences never individually
+        merged/mated (e.g. unmated fasteners nested inside a sub-assembly)
+        inherit the body of whichever ancestor occurrence they belong to,
+        instead of only ever matching a bare top-level instance id. Pattern
+        copies are canonicalized to their seed id first, so a copy resolves
+        to the same body as whatever its seed is connected to.
+        """
+        path = self.canonicalize_occurrence(path)
+        for length in range(len(path), 0, -1):
+            key = path[:length]
+            if key in self.instance_body:
+                return self.instance_body[key]
+        return None
+
     def translation(self, x: float, y: float, z: float) -> np.ndarray:
         return np.array(
             [
@@ -434,10 +547,10 @@ class Assembly:
         Pre-assign all top-level instances to a separate body id
         """
         top_level_instances = self.assembly_data["rootAssembly"]["instances"]
-        self.make_body(top_level_instances[0]["id"])
+        self.make_body(self.canonicalize_occurrence([top_level_instances[0]["id"]]))
 
         # We first search for DOFs
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("dof_"):
                 # Process the DOF name, removing dof prefix and inv suffix
                 parts = data["name"].split("_")
@@ -482,7 +595,7 @@ class Assembly:
                 # We compute the axis in the world frame
                 mated_entity = data["matedEntities"][0]
                 T_world_part = self.get_occurrence_transform(
-                    mated_entity["matedOccurrence"]
+                    prefix + mated_entity["matedOccurrence"]
                 )
 
                 # jointToPart is the (rotation only) matrix from joint to the part
@@ -509,6 +622,7 @@ class Assembly:
                     joint_type,
                     T_world_mate,
                     limits,
+                    prefix=tuple(prefix),
                 )
 
                 if data["inverted"]:
@@ -517,7 +631,7 @@ class Assembly:
                 self.dofs.append(dof)
 
         # Merging fixed links
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("fix_") or (
                 data["mateType"] == "FASTENED"
                 and not data["name"].startswith("dof_")
@@ -535,9 +649,9 @@ class Assembly:
                 self.merge_bodies(occurrence_A, occurrence_B)
 
         # Processing frame mates
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("frame_"):
-                name = "_".join(data["name"].split("_")[1:])
+                name = self.unique_global_name("_".join(data["name"].split("_")[1:]))
                 if (
                     occurrence_A not in self.instance_body
                     and occurrence_B in self.instance_body
@@ -556,7 +670,7 @@ class Assembly:
                     )
 
                 T_world_part = self.get_occurrence_transform(
-                    mated_entity["matedOccurrence"]
+                    prefix + mated_entity["matedOccurrence"]
                 )
 
                 self.frames.append(
@@ -570,37 +684,39 @@ class Assembly:
 
         # Checking that all intances are assigned to a body
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body and not instance["suppressed"]:
-                self.make_body(instance["id"])
+            canonical = self.canonicalize_occurrence([instance["id"]])
+            if canonical not in self.instance_body and not instance["suppressed"]:
+                self.make_body(canonical)
 
         # Processing loop closing frames
-        for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
+        for prefix, data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             is_hinge_closure = data["mateType"] == "REVOLUTE"
 
             if data["name"].startswith("closing_"):
+                frame_names: dict[int, str] = {}
+                z_names: dict[int, str] = {}
+
                 for k in 0, 1:
                     mated_entity = data["matedEntities"][k]
-                    occurrence = mated_entity["matedOccurrence"][0]
+                    body_id = self.resolve_body_id(prefix + mated_entity["matedOccurrence"])
 
                     T_world_part = self.get_occurrence_transform(
-                        mated_entity["matedOccurrence"]
+                        prefix + mated_entity["matedOccurrence"]
                     )
                     T_part_mate = self.get_mate_transform(mated_entity)
                     T_world_mate = T_world_part @ T_part_mate
 
-                    self.frames.append(
-                        Frame(
-                            self.instance_body[occurrence],
-                            f"{data['name']}_{k+1}",
-                            T_world_mate,
-                        )
-                    )
+                    frame_name = self.unique_global_name(f"{data['name']}_{k+1}")
+                    frame_names[k] = frame_name
+                    self.frames.append(Frame(body_id, frame_name, T_world_mate))
 
                     if is_hinge_closure:
+                        z_name = f"{frame_name}_z"
+                        z_names[k] = z_name
                         self.frames.append(
                             Frame(
-                                self.instance_body[occurrence],
-                                f"{data['name']}_{k+1}_z",
+                                body_id,
+                                z_name,
                                 T_world_mate @ self.translation(0, 0, 0.1),
                             )
                         )
@@ -615,21 +731,21 @@ class Assembly:
                 self.closures.append(
                     [
                         closure_types.get(data["mateType"], "unknown"),
-                        f"{data['name']}_1",
-                        f"{data['name']}_2",
+                        frame_names[0],
+                        frame_names[1],
                     ]
                 )
                 if is_hinge_closure:
                     self.closures.append(
                         [
                             closure_types.get(data["mateType"], "unknown"),
-                            f"{data['name']}_1_z",
-                            f"{data['name']}_2_z",
+                            z_names[0],
+                            z_names[1],
                         ]
                     )
 
         # Search for mate connector named "link_..." to override link names
-        for feature in self.assembly_data["rootAssembly"]["features"]:
+        for prefix, feature in self.iter_all_features():
             # Suppressed mate connectors reference occurrences that may no longer
             # exist in the assembly, so skip them like mates and mate groups do.
             if feature.get("suppressed"):
@@ -638,17 +754,22 @@ class Assembly:
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("link_"):
-                link_name = "_".join(feature["featureData"]["name"].split("_")[1:])
-                body_id = self.instance_body[feature["featureData"]["occurrence"][0]]
+                link_name = self.unique_global_name(
+                    "_".join(feature["featureData"]["name"].split("_")[1:])
+                )
+                occurrence = prefix + feature["featureData"]["occurrence"]
+                body_id = self.resolve_body_id(occurrence)
                 self.link_names[body_id] = link_name
 
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("frame_"):
-                name = "_".join(feature["featureData"]["name"].split("_")[1:])
-                occurrence = feature["featureData"]["occurrence"]
+                name = self.unique_global_name(
+                    "_".join(feature["featureData"]["name"].split("_")[1:])
+                )
+                occurrence = prefix + feature["featureData"]["occurrence"]
                 T_world_occurrence = self.get_occurrence_transform(occurrence)
-                body_id = self.instance_body[occurrence[0]]
+                body_id = self.resolve_body_id(occurrence)
                 T_occurrence_mate = self.cs_to_transformation(
                     feature["featureData"]["mateConnectorCS"]
                 )
@@ -665,6 +786,21 @@ class Assembly:
         for body_id in self.instance_body.values():
             if body_id != INSTANCE_IGNORE and body_id not in self.body_in_tree:
                 self.build_tree(body_id)
+
+        # Drop root nodes that carry no real geometry and have no children --
+        # these are the bare wrapper occurrence of a sub-assembly instance
+        # (an "Assembly" has no geometry of its own, only the parts nested
+        # inside it do), and would otherwise spuriously compete as separate
+        # "multiple base links" against the real, connected robot tree.
+        self.root_nodes = [
+            root
+            for root in self.root_nodes
+            if self.tree_children.get(root)
+            or any(
+                occurrence["instance"]["type"] == "Part"
+                for occurrence in self.body_occurrences(root)
+            )
+        ]
 
         print(success(f"* Found {len(self.root_nodes)} root nodes:"))
         for root_node in self.root_nodes:
@@ -706,11 +842,63 @@ class Assembly:
                 elif child not in exploring:
                     exploring.append(child)
 
+    def find_sub_assembly(self, instance: dict):
+        """
+        Find the subAssemblies[] entry matching a given Assembly-type instance
+        """
+        d = instance["documentId"]
+        m = instance["documentMicroversion"]
+        e = instance["elementId"]
+        c = instance["configuration"]
+        for sub_assembly in self.assembly_data["subAssemblies"]:
+            if (
+                sub_assembly["documentId"] == d
+                and sub_assembly["documentMicroversion"] == m
+                and sub_assembly["elementId"] == e
+                and sub_assembly["configuration"] == c
+            ):
+                return sub_assembly
+        return None
+
+    def iter_all_features(self, prefix: list = [], features: list = None, instances: list = None):
+        """
+        Recursively yield (prefix, feature) for every feature (mate,
+        mateConnector, mateGroup) found either directly in the given
+        assembly-like context or in any nested sub-assembly instance
+        underneath it. Called with no arguments, this walks the whole
+        document tree starting at the exported top-level assembly, so mates
+        authored inside a nested sub-assembly's own tab are discovered the
+        same way as ones authored at the top level -- letting a sub-assembly
+        stay independently articulable/testable on its own without needing
+        its mates duplicated at the top level for export. `prefix` is the
+        occurrence path leading to the sub-assembly instance a given feature
+        was found in (empty at the top level), needed to turn that feature's
+        own locally-relative occurrence references into full, unique paths.
+        """
+        if features is None:
+            features = self.assembly_data["rootAssembly"]["features"]
+        if instances is None:
+            instances = self.assembly_data["rootAssembly"]["instances"]
+
+        for feature in features:
+            yield prefix, feature
+
+        for instance in instances:
+            if instance.get("type") == "Assembly" and not instance["suppressed"]:
+                sub_assembly = self.find_sub_assembly(instance)
+                if sub_assembly is not None:
+                    yield from self.iter_all_features(
+                        prefix + [instance["id"]],
+                        sub_assembly["features"],
+                        sub_assembly["instances"],
+                    )
+
     def feature_mating_two_occurrences(self):
         """
-        Iterate over all valid mating feature with two occurrences
+        Iterate over all valid mating feature with two occurrences, anywhere
+        in the document tree (top-level assembly or any nested sub-assembly)
         """
-        for feature in self.assembly_data["rootAssembly"]["features"]:
+        for prefix, feature in self.iter_all_features():
             if feature["featureType"] == "mate" and not feature["suppressed"]:
                 data = feature["featureData"]
 
@@ -722,43 +910,107 @@ class Assembly:
                 ):
                     continue
 
-                occurrence_A = data["matedEntities"][0]["matedOccurrence"][0]
-                occurrence_B = data["matedEntities"][1]["matedOccurrence"][0]
+                occurrence_A = self.canonicalize_occurrence(
+                    prefix + data["matedEntities"][0]["matedOccurrence"]
+                )
+                occurrence_B = self.canonicalize_occurrence(
+                    prefix + data["matedEntities"][1]["matedOccurrence"]
+                )
 
-                yield data, occurrence_A, occurrence_B
+                yield prefix, data, occurrence_A, occurrence_B
 
     def feature_mate_groups(self):
         """
-        Find mate groups in the assembly
+        Find mate groups in the assembly, anywhere in the document tree
         """
         groups = []
 
-        for feature in self.assembly_data["rootAssembly"]["features"]:
+        for prefix, feature in self.iter_all_features():
             group = []
             if feature["featureType"] == "mateGroup" and not feature["suppressed"]:
                 data = feature["featureData"]
 
                 for occurrence in data["occurrences"]:
-                    group.append(occurrence["occurrence"][0])
+                    group.append(
+                        self.canonicalize_occurrence(prefix + occurrence["occurrence"])
+                    )
             groups.append(group)
 
         return groups
 
-    def get_feature_by_id(self, feature_id: str):
+    def iter_all_parametric_features(
+        self, prefix: list = [], key: tuple = None, instances: list = None
+    ):
         """
-        Find a specific feature by its ID
+        Recursively yield (prefix, features_list, feature) for every
+        parametric feature (as returned by the Onshape "features" endpoint --
+        distinct from the mate/occurrence data iter_all_features walks)
+        found in the top-level assembly and every nested sub-assembly
+        instance, mirroring iter_all_features' recursion. `features_list` is
+        the full list `feature` came from, so a feature-id lookup (feature
+        ids are only unique within one document) can be scoped to the
+        correct document instead of colliding across sub-assemblies.
         """
-        for feature in self.features["features"]:
+        if key is None:
+            key = (
+                self.document_id,
+                self.element_id,
+                self.microversion_id,
+                self.config.configuration,
+            )
+        if instances is None:
+            instances = self.assembly_data["rootAssembly"]["instances"]
+
+        features = self.features_by_key.get(key, {"features": []})["features"]
+        for feature in features:
+            yield prefix, features, feature
+
+        for instance in instances:
+            if instance.get("type") == "Assembly" and not instance["suppressed"]:
+                sub_assembly = self.find_sub_assembly(instance)
+                if sub_assembly is not None:
+                    sub_key = (
+                        sub_assembly["documentId"],
+                        sub_assembly["elementId"],
+                        sub_assembly["documentMicroversion"],
+                        sub_assembly["configuration"],
+                    )
+                    yield from self.iter_all_parametric_features(
+                        prefix + [instance["id"]], sub_key, sub_assembly["instances"]
+                    )
+
+    def get_feature_by_id(self, features: list, feature_id: str):
+        """
+        Find a specific feature by its ID within a given features list (a
+        feature id is only unique within the one document it came from).
+        """
+        for feature in features:
             if feature["message"]["featureId"] == feature_id:
                 return feature
 
         return None
 
+    def find_dof(self, prefix: tuple, name: str):
+        """
+        Find the DOF discovered at an exact prefix (sub-assembly instance)
+        with a given (dof_-stripped) name.
+        """
+        for dof in self.dofs:
+            if dof.prefix == prefix and dof.name == name:
+                return dof
+        return None
+
     def find_relations(self):
         """
-        Finding relations features in the assembly
+        Finding relations features in the assembly, anywhere in the document
+        tree. A relation is resolved against the DOFs found at the exact same
+        prefix (sub-assembly instance) it was itself found in, so that a
+        sub-assembly instanced more than once (e.g. three legs sharing one
+        leg sub-assembly) gets one independently-correct relation per
+        instance, instead of every instance's target mimicking the same
+        single (first-found) source joint.
         """
-        for feature in self.features["features"]:
+        for prefix, features, feature in self.iter_all_parametric_features():
             if feature["typeName"] == "BTMMateRelation":
                 relation_name = feature["message"]["name"]
 
@@ -770,10 +1022,10 @@ class Assembly:
                         queries = parameter["message"]["queries"]
                         if len(queries) == 2:
                             dof1_feature = self.get_feature_by_id(
-                                queries[0]["message"]["featureId"]
+                                features, queries[0]["message"]["featureId"]
                             )
                             dof2_feature = self.get_feature_by_id(
-                                queries[1]["message"]["featureId"]
+                                features, queries[1]["message"]["featureId"]
                             )
                             if dof1_feature is not None and dof2_feature is not None:
                                 dof1 = dof1_feature["message"]["name"]
@@ -789,19 +1041,27 @@ class Assembly:
                     if not reverse:
                         ratio = -ratio
 
+                    prefix_tuple = tuple(prefix)
+                    source_dof = self.find_dof(prefix_tuple, mated_dofs[0])
+                    target_dof = self.find_dof(prefix_tuple, mated_dofs[1])
+
+                    if source_dof is None or target_dof is None:
+                        continue
+
                     print(
                         success(
-                            f"+ Found relation {relation_name} mating {mated_dofs} with ratio {ratio}"
+                            f"+ Found relation {relation_name} mating {mated_dofs} "
+                            f"with ratio {ratio} (prefix {prefix_tuple})"
                         )
                     )
-                    if mated_dofs[1] in self.relations:
+                    if id(target_dof) in self.relations:
                         print(
                             warning(
                                 f"Multiple relations found with {mated_dofs[1]} as target"
                             )
                         )
 
-                    self.relations[mated_dofs[1]] = [mated_dofs[0], ratio]
+                    self.relations[id(target_dof)] = (id(source_dof), ratio)
 
     def read_parameter_value(self, parameter: str, name: str):
         """
@@ -920,12 +1180,9 @@ class Assembly:
         """
         Get the (first) instance associated with a given body
         """
-        for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if (
-                instance["id"] in self.instance_body
-                and self.instance_body[instance["id"]] == body_id
-            ):
-                return instance
+        for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
+            if self.resolve_body_id(occurrence["path"]) == body_id:
+                return self.get_occurrence(occurrence["path"])["instance"]
 
         return None
 
@@ -934,8 +1191,7 @@ class Assembly:
         Retrieve all occurrences associated to a given body id
         """
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
-            key = occurrence["path"][0]
-            if key in self.instance_body and self.instance_body[key] == body_id:
+            if self.resolve_body_id(occurrence["path"]) == body_id:
                 yield occurrence
 
     def get_dof(self, body1_id: int, body2_id: int):
