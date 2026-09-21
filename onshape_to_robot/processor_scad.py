@@ -58,7 +58,7 @@ class ProcessorScad(Processor):
                             scad_file = mesh.filename.replace(".stl", ".scad")
                             if os.path.exists(scad_file):
                                 part.shapes += self.parse_scad(scad_file, mesh.color)
-                            converted_meshes.append(mesh)
+                                converted_meshes.append(mesh)
 
                     for converted_mesh in converted_meshes:
                         converted_mesh.collision = False
