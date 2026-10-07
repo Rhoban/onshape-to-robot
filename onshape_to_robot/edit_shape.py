@@ -18,7 +18,7 @@ def main():
             scad += "// sphere(10);\n"
             with open(fileName, "w", encoding="utf-8") as stream:
                 stream.write(scad)
-        directory = os.path.dirname(fileName)
+        directory = os.path.dirname(os.path.abspath(fileName))
         os.system("cd " + directory + "; openscad " + os.path.basename(fileName))
 
 
