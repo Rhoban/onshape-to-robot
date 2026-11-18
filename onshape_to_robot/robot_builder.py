@@ -293,7 +293,7 @@ class RobotBuilder:
         """
         instance = occurrence["instance"]
 
-        if instance["suppressed"]:
+        if instance.get("suppressed", False):
             return
 
         if instance["partId"] == "":
@@ -410,7 +410,7 @@ class RobotBuilder:
         link = Link(link_name)
         self.robot.links.append(link)
         for occurrence in self.assembly.body_occurrences(body_id):
-            if occurrence["instance"]["type"] == "Part":
+            if occurrence.get("instance", {}).get("type") == "Part":
                 self.add_part(occurrence)
             if occurrence["fixed"]:
                 link.fixed = True

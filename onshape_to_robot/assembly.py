@@ -280,7 +280,7 @@ class Assembly:
                 self.get_occurrence(path)["instance"] = instance
 
                 if instance["type"] == "Assembly":
-                    if not instance["suppressed"]:
+                    if not instance.get("suppressed", False):
                         d = instance["documentId"]
                         m = instance["documentMicroversion"]
                         e = instance["elementId"]
@@ -429,12 +429,23 @@ class Assembly:
             ]
         )
 
+    def is_active_instance(self, instance: dict) -> bool:
+        """
+        An instance is active if it is resolved (unresolved instances, for example
+        referencing a deleted element, have no type) and not suppressed
+        """
+        return "type" in instance and not instance.get("suppressed", False)
+
     def process_mates(self):
         """
         Pre-assign all top-level instances to a separate body id
         """
         top_level_instances = self.assembly_data["rootAssembly"]["instances"]
-        self.make_body(top_level_instances[0]["id"])
+        first_instance = next(
+            filter(self.is_active_instance, top_level_instances),
+            top_level_instances[0],
+        )
+        self.make_body(first_instance["id"])
 
         # We first search for DOFs
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -570,7 +581,20 @@ class Assembly:
 
         # Checking that all intances are assigned to a body
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body and not instance["suppressed"]:
+            if "type" not in instance:
+                # Unresolved instance (e.g. referencing a deleted element), the API
+                # only returns a stub for it, with no type or suppressed status
+                name = instance.get("name", instance["id"])
+                status = instance.get("status", "unknown")
+                print(
+                    warning(
+                        f"WARNING: ignoring unresolved instance {name} (status: {status})"
+                    )
+                )
+            elif (
+                self.is_active_instance(instance)
+                and instance["id"] not in self.instance_body
+            ):
                 self.make_body(instance["id"])
 
         # Processing loop closing frames
