@@ -300,7 +300,7 @@ class Assembly:
                 self.get_occurrence(path)["instance"] = instance
 
                 if instance["type"] == "Assembly":
-                    if not instance["suppressed"]:
+                    if not instance.get("suppressed", False):
                         d = instance["documentId"]
                         m = instance["documentMicroversion"]
                         e = instance["elementId"]
@@ -587,7 +587,7 @@ class Assembly:
             child_keys = [
                 self._path_key(prefix + [instance["id"]])
                 for instance in subassembly["instances"]
-                if not instance["suppressed"]
+                if self.is_active_instance(instance)
                 and self._path_key(prefix + [instance["id"]])
                 in self.instance_body
             ]
@@ -615,12 +615,23 @@ class Assembly:
             ]
         )
 
+    def is_active_instance(self, instance: dict) -> bool:
+        """
+        An instance is active if it is resolved (unresolved instances, for example
+        referencing a deleted element, have no type) and not suppressed
+        """
+        return "type" in instance and not instance.get("suppressed", False)
+
     def process_mates(self):
         """
         Pre-assign all top-level instances to a separate body id
         """
         top_level_instances = self.assembly_data["rootAssembly"]["instances"]
-        self.make_body(top_level_instances[0]["id"])
+        first_instance = next(
+            filter(self.is_active_instance, top_level_instances),
+            top_level_instances[0],
+        )
+        self.make_body(first_instance["id"])
 
         # We first search for DOFs
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -774,7 +785,21 @@ class Assembly:
         # Top-level instances already split by nested DOFs must not become extra
         # empty roots (e.g. Right_arm after fix_r_arm merged its children).
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["suppressed"] or instance["id"] in self.instance_body:
+            if "type" not in instance:
+                # Unresolved instance (e.g. referencing a deleted element), the API
+                # only returns a stub for it, with no type or suppressed status
+                name = instance.get("name", instance["id"])
+                status = instance.get("status", "unknown")
+                print(
+                    warning(
+                        f"WARNING: ignoring unresolved instance {name} (status: {status})"
+                    )
+                )
+                continue
+            if (
+                not self.is_active_instance(instance)
+                or instance["id"] in self.instance_body
+            ):
                 continue
             nested_prefix = instance["id"] + "/"
             if any(key.startswith(nested_prefix) for key in self.instance_body):
@@ -839,6 +864,11 @@ class Assembly:
 
         # Search for mate connector named "link_..." to override link names
         for feature in self.assembly_data["rootAssembly"]["features"]:
+            # Suppressed mate connectors reference occurrences that may no longer
+            # exist in the assembly, so skip them like mates and mate groups do.
+            if feature.get("suppressed"):
+                continue
+
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
             ].startswith("link_"):
