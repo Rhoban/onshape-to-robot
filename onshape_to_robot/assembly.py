@@ -1,5 +1,6 @@
 from __future__ import annotations
 import copy
+from dataclasses import dataclass
 import re
 import numpy as np
 from .config import Config
@@ -9,6 +10,16 @@ from .robot import Joint
 from .expression import ExpressionParser
 
 INSTANCE_IGNORE = -1
+
+
+@dataclass(frozen=True)
+class _FeatureContext:
+    """Feature and expression data for one assembly element."""
+
+    features: dict
+    expression_parser: ExpressionParser
+    configuration_parameters: dict[str, str]
+    matevalues: dict | None
 
 
 class Frame:
@@ -92,6 +103,10 @@ class Assembly:
         self.dofs: list[DOF] = []
         # Features data
         self.features: dict = {}
+        # Feature data for nested assembly elements
+        self._feature_contexts: dict[
+            tuple[str, str, str, str, str], _FeatureContext
+        ] = {}
         # Configuration values
         self.configuration_parameters: dict = {}
         # Dictionnary mapping items to their children in the tree
@@ -383,29 +398,44 @@ class Assembly:
         """Convert an occurrence path list to a flat instance_body key."""
         return "/".join(path)
 
-    def _subassembly_dof_key(self, prefix: list[str], path: list[str]) -> str:
-        """Body key for a DOF endpoint inside a sub-assembly.
+    def _body_key_for_path(
+        self, path: list[str], scope: list[str] | None = None
+    ) -> str:
+        """Return the articulated body key containing an occurrence path.
 
-        Uses the first instance level below the sub-assembly root, matching how
-        master treats mates with two-level occurrence paths.
+        A feature defined in an articulated subassembly assigns each endpoint
+        to an immediate child of that subassembly. Features defined above or
+        inside rigid subassemblies use the deepest articulated ancestor.
         """
-        if len(path) <= 1:
-            return self._path_key(prefix + path)
-        return self._path_key(prefix + path[:1])
+        def has_active_dof(prefix: list[str], subassembly: dict) -> bool:
+            return any(
+                feature["featureType"] == "mate"
+                and not feature["suppressed"]
+                and feature["featureData"]["name"].startswith("dof_")
+                for feature in subassembly.get("features", [])
+            )
 
-    def _subassembly_scope_key(self, path: list[str]) -> str:
-        """Return the body key for a path, collapsing no-DOF sub-assemblies."""
-        for prefix, sub_asm, _instance_name in self.subassembly_instances:
-            if len(path) >= len(prefix) and path[: len(prefix)] == prefix:
-                sub_has_dof = any(
-                    feature["featureType"] == "mate"
-                    and not feature["suppressed"]
-                    and feature["featureData"]["name"].startswith("dof_")
-                    for feature in sub_asm.get("features", [])
-                )
-                if not sub_has_dof:
-                    return self._path_key(prefix)
-        return self._path_key(path) if len(path) > 1 else path[0]
+        if scope is not None:
+            scope_is_articulated = any(
+                prefix == scope and has_active_dof(prefix, subassembly)
+                for prefix, subassembly, _instance_name in self.subassembly_instances
+            )
+            if scope_is_articulated and len(path) > len(scope):
+                return self._path_key(path[: len(scope) + 1])
+
+        articulated_prefixes = [
+            prefix
+            for prefix, subassembly, _instance_name in self.subassembly_instances
+            if len(path) > len(prefix)
+            and path[: len(prefix)] == prefix
+            and (scope is None or len(prefix) < len(scope))
+            and has_active_dof(prefix, subassembly)
+        ]
+        if not articulated_prefixes:
+            return path[0]
+
+        prefix = max(articulated_prefixes, key=len)
+        return self._path_key(path[: len(prefix) + 1])
 
     @staticmethod
     def _slugify_instance_name(name: str) -> str:
@@ -470,6 +500,33 @@ class Assembly:
         self.instance_body[id] = self.current_body_id
         self.current_body_id += 1
 
+    def _drop_empty_wrapper_instances(self) -> None:
+        """Ignore bodies that contain neither a DOF endpoint nor a leaf part.
+
+        Nested assemblies can leave wrapper bodies after their children have
+        been assigned to articulated bodies. Empty wrappers must not become
+        floating roots in the exported model.
+        """
+        dof_bodies = {dof.body1_id for dof in self.dofs} | {
+            dof.body2_id for dof in self.dofs
+        }
+        part_bodies = {
+            body_id
+            for path, occurrence in self.occurrences.items()
+            if occurrence.get("instance", {}).get("type") == "Part"
+            if (body_id := self._occurrence_body(list(path))) is not None
+        }
+        empty_bodies = {
+            body_id
+            for body_id in self.instance_body.values()
+            if body_id != INSTANCE_IGNORE
+            and body_id not in dof_bodies
+            and body_id not in part_bodies
+        }
+        for instance_key, body_id in self.instance_body.items():
+            if body_id in empty_bodies:
+                self.instance_body[instance_key] = INSTANCE_IGNORE
+
     def merge_body_ids(self, body1_id: int, body2_id: int):
         """Merge two bodies by id (lower id is kept)."""
         if body1_id == body2_id:
@@ -509,6 +566,44 @@ class Assembly:
                 dof.body1_id = body1_id
             if dof.body2_id == body2_id:
                 dof.body2_id = body1_id
+
+    def _merge_articulated_wrappers(self) -> None:
+        """Attach each articulated assembly wrapper to its base child body."""
+        assemblies = sorted(
+            self.subassembly_instances,
+            key=lambda entry: len(entry[0]),
+            reverse=True,
+        )
+        for prefix, subassembly, _instance_name in assemblies:
+            has_dof = any(
+                feature["featureType"] == "mate"
+                and not feature["suppressed"]
+                and feature["featureData"]["name"].startswith("dof_")
+                for feature in subassembly.get("features", [])
+            )
+            if not has_dof:
+                continue
+
+            child_keys = [
+                self._path_key(prefix + [instance["id"]])
+                for instance in subassembly["instances"]
+                if not instance["suppressed"]
+                and self._path_key(prefix + [instance["id"]])
+                in self.instance_body
+            ]
+            if not child_keys:
+                continue
+
+            wrapper_key = self._path_key(prefix)
+            base_key = child_keys[0]
+            if wrapper_key not in self.instance_body:
+                self.instance_body[wrapper_key] = self.instance_body[base_key]
+                continue
+
+            self.merge_body_ids(
+                self.instance_body[wrapper_key],
+                self.instance_body[base_key],
+            )
 
     def translation(self, x: float, y: float, z: float) -> np.ndarray:
         return np.array(
@@ -553,17 +648,32 @@ class Assembly:
                         joint_type = Joint.REVOLUTE
 
                     if not self.config.ignore_limits:
-                        limits = self.get_limits(joint_type, data["name"])
+                        limits = self.get_limits(
+                            joint_type,
+                            data["name"],
+                            data.get("_source_name"),
+                            data.get("_subassembly"),
+                        )
                 elif data["mateType"] == "SLIDER":
                     joint_type = Joint.PRISMATIC
                     if not self.config.ignore_limits:
-                        limits = self.get_limits(joint_type, data["name"])
+                        limits = self.get_limits(
+                            joint_type,
+                            data["name"],
+                            data.get("_source_name"),
+                            data.get("_subassembly"),
+                        )
                 elif data["mateType"] == "FASTENED":
                     joint_type = Joint.FIXED
                 elif data["mateType"] == "BALL":
                     joint_type = Joint.BALL
                     if not self.config.ignore_limits:
-                        limits = self.get_limits(joint_type, data["name"])
+                        limits = self.get_limits(
+                            joint_type,
+                            data["name"],
+                            data.get("_source_name"),
+                            data.get("_subassembly"),
+                        )
                 else:
                     raise Exception(
                         f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
@@ -607,9 +717,7 @@ class Assembly:
 
                 self.dofs.append(dof)
 
-        # Merging fixed links (two passes: internal fixes first, then cross sub-assembly
-        # attachments so e.g. shoulder hardware is grouped before arm-to-torso mates).
-        fix_mates = []
+        # Merge rigid mate endpoints into their containing articulated bodies.
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
             if data["name"].startswith("fix_") or (
                 data["mateType"] == "FASTENED"
@@ -617,64 +725,7 @@ class Assembly:
                 and not data["name"].startswith("closing_")
                 and not data["name"].startswith("frame_")
             ):
-                path_a = data["matedEntities"][0]["matedOccurrence"]
-                path_b = data["matedEntities"][1]["matedOccurrence"]
-                is_cross_attach = (
-                    path_a
-                    and path_b
-                    and path_a[0] != path_b[0]
-                    and len(path_a) > 1
-                    and len(path_b) > 1
-                ) or (
-                    path_a
-                    and path_b
-                    and path_a[0] != path_b[0]
-                    and len(path_a) == 1
-                    and len(path_b) > 1
-                    and not data["name"].endswith("_Motor_Attach")
-                )
-                fix_mates.append(
-                    (data, occurrence_A, occurrence_B, path_a, path_b, is_cross_attach)
-                )
-
-        for _data, occurrence_A, occurrence_B, _pa, _pb, is_cross in fix_mates:
-            if not is_cross:
                 self.merge_bodies(occurrence_A, occurrence_B)
-
-        for _data, occurrence_A, occurrence_B, path_a, path_b, is_cross in fix_mates:
-            if not is_cross:
-                continue
-            if (
-                path_a[0] != path_b[0]
-                and len(path_a) > 1
-                and len(path_b) > 1
-            ):
-                torso_key = self._subassembly_scope_key(path_b)
-                self.merge_bodies(self._path_key(path_a), torso_key)
-                torso_body = self.instance_body[torso_key]
-                arm_slug = self._slugify_instance_name(
-                    next(
-                        inst["name"]
-                        for inst in self.assembly_data["rootAssembly"]["instances"]
-                        if inst["id"] == path_a[0]
-                    )
-                )
-                for dof in self.dofs:
-                    if (
-                        dof.name.startswith(f"{arm_slug}_shoulder_pitch")
-                        and dof.body2_id != torso_body
-                    ):
-                        self.merge_body_ids(dof.body2_id, torso_body)
-            elif (
-                path_a[0] != path_b[0]
-                and len(path_a) == 1
-                and len(path_b) > 1
-                and not _data["name"].endswith("_Motor_Attach")
-            ):
-                self.merge_bodies(
-                    path_a[0],
-                    self._subassembly_scope_key(path_b),
-                )
 
         # Merging mate gorups
         for group in self.feature_mate_groups():
@@ -683,6 +734,8 @@ class Assembly:
                 occurrence_B = group[k]
 
                 self.merge_bodies(occurrence_A, occurrence_B)
+
+        self._merge_articulated_wrappers()
 
         # Processing frame mates
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -718,10 +771,17 @@ class Assembly:
                 else:
                     self.instance_body[child] = INSTANCE_IGNORE
 
-        # Checking that all intances are assigned to a body
+        # Top-level instances already split by nested DOFs must not become extra
+        # empty roots (e.g. Right_arm after fix_r_arm merged its children).
         for instance in self.assembly_data["rootAssembly"]["instances"]:
-            if instance["id"] not in self.instance_body and not instance["suppressed"]:
-                self.make_body(instance["id"])
+            if instance["suppressed"] or instance["id"] in self.instance_body:
+                continue
+            nested_prefix = instance["id"] + "/"
+            if any(key.startswith(nested_prefix) for key in self.instance_body):
+                continue
+            self.make_body(instance["id"])
+
+        self._drop_empty_wrapper_instances()
 
         # Processing loop closing frames
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -899,19 +959,15 @@ class Assembly:
                 ):
                     continue
 
-                occurrence_A = data["matedEntities"][0]["matedOccurrence"][0]
-                occurrence_B = data["matedEntities"][1]["matedOccurrence"][0]
+                path_a = data["matedEntities"][0]["matedOccurrence"]
+                path_b = data["matedEntities"][1]["matedOccurrence"]
+                occurrence_A = self._body_key_for_path(path_a)
+                occurrence_B = self._body_key_for_path(path_b)
 
                 yield data, occurrence_A, occurrence_B
 
         for prefix, sub_asm, instance_name in self.subassembly_instances:
             slug = self._slugify_instance_name(instance_name)
-            sub_has_dof = any(
-                feature["featureType"] == "mate"
-                and not feature["suppressed"]
-                and feature["featureData"]["name"].startswith("dof_")
-                for feature in sub_asm.get("features", [])
-            )
             for feature in sub_asm.get("features", []):
                 if feature["featureType"] == "mate" and not feature["suppressed"]:
                     data = feature["featureData"]
@@ -925,25 +981,12 @@ class Assembly:
                         continue
 
                     prefixed_data = self._prefix_feature_data(data, prefix, slug)
+                    prefixed_data["_source_name"] = data["name"]
+                    prefixed_data["_subassembly"] = sub_asm
                     path_a = prefixed_data["matedEntities"][0]["matedOccurrence"]
                     path_b = prefixed_data["matedEntities"][1]["matedOccurrence"]
-
-                    if data["name"].startswith("dof_"):
-                        occ_A = self._subassembly_dof_key(
-                            prefix, data["matedEntities"][0]["matedOccurrence"]
-                        )
-                        occ_B = self._subassembly_dof_key(
-                            prefix, data["matedEntities"][1]["matedOccurrence"]
-                        )
-                    elif not sub_has_dof:
-                        # Sub-assemblies without internal DOFs (e.g. torso) keep all
-                        # parts on the sub-assembly instance body, like master.
-                        occ_A = self._path_key(prefix)
-                        occ_B = self._path_key(prefix)
-                    else:
-                        occ_A = self._path_key(path_a)
-                        occ_B = self._path_key(path_b)
-
+                    occ_A = self._body_key_for_path(path_a)
+                    occ_B = self._body_key_for_path(path_b)
                     yield prefixed_data, occ_A, occ_B
 
     def feature_mate_groups(self):
@@ -958,27 +1001,20 @@ class Assembly:
                 data = feature["featureData"]
 
                 for occurrence in data["occurrences"]:
-                    group.append(occurrence["occurrence"][0])
-            groups.append(group)
+                    group.append(
+                        self._body_key_for_path(occurrence["occurrence"])
+                    )
+            if group:
+                groups.append(group)
 
         for prefix, sub_asm, _instance_name in self.subassembly_instances:
-            sub_has_dof = any(
-                feature["featureType"] == "mate"
-                and not feature["suppressed"]
-                and feature["featureData"]["name"].startswith("dof_")
-                for feature in sub_asm.get("features", [])
-            )
             for feature in sub_asm.get("features", []):
                 group = []
                 if feature["featureType"] == "mateGroup" and not feature["suppressed"]:
                     data = feature["featureData"]
                     for occurrence in data["occurrences"]:
-                        if sub_has_dof:
-                            group.append(
-                                self._path_key(prefix + occurrence["occurrence"])
-                            )
-                        else:
-                            group.append(self._path_key(prefix))
+                        path = prefix + occurrence["occurrence"]
+                        group.append(self._body_key_for_path(path))
                 if group:
                     groups.append(group)
 
@@ -1043,17 +1079,29 @@ class Assembly:
 
                     self.relations[mated_dofs[1]] = [mated_dofs[0], ratio]
 
-    def read_parameter_value(self, parameter: str, name: str):
+    def read_parameter_value(
+        self,
+        parameter: dict,
+        name: str,
+        expression_parser: ExpressionParser | None = None,
+        configuration_parameters: dict[str, str] | None = None,
+    ) -> float | None:
         """
         Try to read a parameter value from Onshape
         """
+        parser = expression_parser or self.expression_parser
+        configured_values = (
+            configuration_parameters
+            if configuration_parameters is not None
+            else self.configuration_parameters
+        )
 
         # This is an expression
         if parameter["typeName"] == "BTMParameterNullableQuantity":
-            return self.read_expression(parameter["message"]["expression"])
+            return parser.eval_expr(parameter["message"]["expression"])
         if parameter["typeName"] == "BTMParameterConfigured":
             message = parameter["message"]
-            parameterValue = self.configuration_parameters[
+            parameterValue = configured_values[
                 message["configurationParameterId"]
             ]
 
@@ -1061,12 +1109,12 @@ class Assembly:
                 if value["typeName"] == "BTMConfiguredValueByBoolean":
                     booleanValue = parameterValue == "true"
                     if value["message"]["booleanValue"] == booleanValue:
-                        return self.read_expression(
+                        return parser.eval_expr(
                             value["message"]["value"]["message"]["expression"]
                         )
                 elif value["typeName"] == "BTMConfiguredValueByEnum":
                     if value["message"]["enumValue"] == parameterValue:
-                        return self.read_expression(
+                        return parser.eval_expr(
                             value["message"]["value"]["message"]["expression"]
                         )
                 else:
@@ -1102,15 +1150,123 @@ class Assembly:
                     print(warning(f"Unknown offset type for {name}"))
         return None
 
-    def get_limits(self, joint_type: str, name: str):
+    @staticmethod
+    def _configuration_values(configuration: str) -> dict[str, str]:
+        """Parse an Onshape full-configuration string."""
+        values = {}
+        for item in configuration.split(";"):
+            parts = item.split("=", maxsplit=1)
+            if len(parts) != 2:
+                continue
+            values[parts[0]] = parts[1].replace("+", " ")
+        return values
+
+    def _load_feature_context(self, subassembly: dict) -> _FeatureContext:
+        """Load and cache feature data for a nested assembly."""
+        version_id = subassembly.get("documentVersion")
+        wmv = "v" if version_id is not None else "m"
+        element_version_id = version_id or subassembly["documentMicroversion"]
+        key = (
+            subassembly["documentId"],
+            element_version_id,
+            subassembly["elementId"],
+            subassembly["configuration"],
+            wmv,
+        )
+        cached = self._feature_contexts.get(key)
+        if cached is not None:
+            return cached
+
+        parser = ExpressionParser()
+        pending_variables = [
+            variable
+            for entry in self.client.get_variables(
+                key[0],
+                key[1],
+                key[2],
+                wmv=key[4],
+                configuration=key[3],
+            )
+            for variable in entry["variables"]
+            if variable["value"] is not None
+        ]
+        while pending_variables:
+            unresolved = []
+            for variable in pending_variables:
+                try:
+                    parser.variables[variable["name"]] = parser.eval_expr(
+                        variable["value"]
+                    )
+                except ValueError:
+                    unresolved.append(variable)
+            if len(unresolved) == len(pending_variables):
+                break
+            pending_variables = unresolved
+
+        context = _FeatureContext(
+            features=self.client.get_features(
+                key[0],
+                key[1],
+                key[2],
+                wmv=key[4],
+                configuration=key[3],
+            ),
+            expression_parser=parser,
+            configuration_parameters=self._configuration_values(
+                subassembly.get("fullConfiguration", key[3])
+            ),
+            matevalues=self.client.matevalues(
+                key[0],
+                key[1],
+                key[2],
+                wmv=key[4],
+                configuration=key[3],
+            ),
+        )
+        self._feature_contexts[key] = context
+        return context
+
+    @staticmethod
+    def _mate_offset(matevalues: dict | None, name: str) -> float | None:
+        """Return the current rotation or translation for a mate."""
+        if matevalues is None:
+            return None
+        for entry in matevalues["mateValues"]:
+            if entry["mateName"] != name:
+                continue
+            if "rotationZ" in entry:
+                return entry["rotationZ"]
+            if "translationZ" in entry:
+                return entry["translationZ"]
+        return None
+
+    def get_limits(
+        self,
+        joint_type: str,
+        name: str,
+        source_name: str | None = None,
+        subassembly: dict | None = None,
+    ) -> tuple[float, float] | None:
         """
         Retrieve (low, high) limits for a given joint, if any
         """
+        feature_name = source_name or name
+        features = self.features
+        parser = self.expression_parser
+        configured_values = self.configuration_parameters
+        matevalues = self.matevalues
+        if subassembly is not None:
+            context = self._load_feature_context(subassembly)
+            features = context.features
+            parser = context.expression_parser
+            configured_values = context.configuration_parameters
+            matevalues = context.matevalues
+
         enabled = False
         minimum, maximum = 0, 0
-        for feature in self.features["features"]:
+        for feature in features["features"]:
             # Find coresponding joint
-            if name == feature["message"]["name"]:
+            if feature_name == feature["message"]["name"]:
                 # Find min and max values
                 for parameter in feature["message"]["parameters"]:
                     if parameter["message"]["parameterId"] == "limitsEnabled":
@@ -1120,21 +1276,46 @@ class Assembly:
                     for parameter in feature["message"]["parameters"]:
                         if joint_type == Joint.REVOLUTE:
                             if parameter["message"]["parameterId"] == "limitAxialZMin":
-                                minimum = self.read_parameter_value(parameter, name)
+                                minimum = self.read_parameter_value(
+                                    parameter,
+                                    feature_name,
+                                    parser,
+                                    configured_values,
+                                )
                             if parameter["message"]["parameterId"] == "limitAxialZMax":
-                                maximum = self.read_parameter_value(parameter, name)
+                                maximum = self.read_parameter_value(
+                                    parameter,
+                                    feature_name,
+                                    parser,
+                                    configured_values,
+                                )
                         elif joint_type == Joint.PRISMATIC:
                             if parameter["message"]["parameterId"] == "limitZMin":
-                                minimum = self.read_parameter_value(parameter, name)
+                                minimum = self.read_parameter_value(
+                                    parameter,
+                                    feature_name,
+                                    parser,
+                                    configured_values,
+                                )
                             if parameter["message"]["parameterId"] == "limitZMax":
-                                maximum = self.read_parameter_value(parameter, name)
+                                maximum = self.read_parameter_value(
+                                    parameter,
+                                    feature_name,
+                                    parser,
+                                    configured_values,
+                                )
                         elif joint_type == Joint.BALL:
                             if (
                                 parameter["message"]["parameterId"]
                                 == "limitEulerConeAngleMax"
                             ):
                                 minimum = 0
-                                maximum = self.read_parameter_value(parameter, name)
+                                maximum = self.read_parameter_value(
+                                    parameter,
+                                    feature_name,
+                                    parser,
+                                    configured_values,
+                                )
                         else:
                             print(
                                 warning(
@@ -1144,7 +1325,7 @@ class Assembly:
                             print(parameter)
         if enabled:
             if joint_type != Joint.BALL:
-                offset = self.get_offset(name)
+                offset = self._mate_offset(matevalues, feature_name)
                 if offset is not None:
                     minimum -= offset
                     maximum -= offset
@@ -1161,7 +1342,8 @@ class Assembly:
         Get the (first) instance associated with a given body.
 
         Searches root-level instances first, then internal subassembly
-        instances for bodies created by internal DOFs.
+        instances for bodies created by internal DOFs. Path keys are matched
+        without splitting on ``/`` because Onshape IDs may contain slashes.
         """
         for instance in self.assembly_data["rootAssembly"]["instances"]:
             if (
@@ -1173,9 +1355,10 @@ class Assembly:
         for key, mapped_body_id in self.instance_body.items():
             if mapped_body_id != body_id:
                 continue
-            path = key.split("/")
-            occurrence = self.occurrences.get(tuple(path))
-            if occurrence is not None:
+            # Do not split keys on "/": Onshape instance IDs can contain slashes.
+            for occ_path, occurrence in self.occurrences.items():
+                if self._path_key(list(occ_path)) != key:
+                    continue
                 instance = occurrence.get("instance")
                 if instance is not None:
                     return instance
@@ -1202,8 +1385,12 @@ class Assembly:
 
         Uses longest-prefix matching so that internal instances split by
         subassembly DOFs resolve to their own body rather than the parent.
+        Occurrences below a suppressed sub-assembly have no instance and are
+        skipped.
         """
         for occurrence in self.assembly_data["rootAssembly"]["occurrences"]:
+            if "instance" not in occurrence:
+                continue
             resolved = self._occurrence_body(occurrence["path"])
             if resolved == body_id:
                 yield occurrence
