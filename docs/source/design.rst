@@ -43,6 +43,18 @@ You sometime might want your robot joint to rotate in the opposite direction tha
 
 To that end, use the ``inv`` suffix in the mate connector name. For instance, ``dof_head_pitch_inv`` will result in a joint named ``head_pitch`` having the axis inverted with the one from the Onshape assembly.
 
+Degrees of freedom in sub-assemblies
+------------------------------------
+
+``dof_`` mates can also be placed inside sub-assemblies, at any depth. Such a sub-assembly is split into
+one link per instance it contains, and its mates and mate connectors are processed like the top-level ones.
+Sub-assemblies that contain no ``dof_`` mate are still exported as a single rigid link.
+
+Names coming from a sub-assembly are prefixed with the names of the instances leading to it. For instance,
+``dof_elbow`` in a sub-assembly instance named ``Right arm <1>`` results in a joint named ``right_arm_elbow``.
+The ``<1>`` suffix is dropped, so instances that only differ by it (``Arm <1>`` and ``Arm <2>``) should be
+renamed.
+
 Naming links
 ------------
 

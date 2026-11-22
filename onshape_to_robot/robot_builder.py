@@ -338,9 +338,7 @@ class RobotBuilder:
         # Adding non-ignored meshes
         meshes = []
         stl_relpath = (
-            os.path.relpath(stl_file, self.config.output_directory).replace(
-                os.sep, "/"
-            )
+            os.path.relpath(stl_file, self.config.output_directory)
             if stl_file is not None
             else None
         )
