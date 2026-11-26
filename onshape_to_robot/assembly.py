@@ -55,6 +55,8 @@ class DOF:
         self.joint_type: str = joint_type
         self.T_world_mate: np.ndarray = T_world_mate
         self.limits: tuple | None = limits
+        # Path of the sub-assembly instance the DOF comes from (None at the root)
+        self.source_path: list[str] | None = None
         self.axis: np.ndarray = axis
 
     def flip(self, flip_limits: bool = True):
@@ -133,6 +135,7 @@ class Assembly:
         self.process_mates()
         self.build_trees()
         self.find_relations()
+        self.finalize_dof_names()
         print("")
 
     def ensure_workspace_or_version(self):
@@ -701,16 +704,9 @@ class Assembly:
                 if data["inverted"]:
                     dof.flip()
 
+                # Sub-assembly instance path the DOF comes from (None at the root)
+                dof.source_path = data.get("_path")
                 self.dofs.append(dof)
-
-        dof_names = Counter(dof.name for dof in self.dofs)
-        duplicates = [name for name, count in dof_names.items() if count > 1]
-        if duplicates:
-            raise Exception(
-                f"ERROR: several DOFs are named {', '.join(duplicates)}\n"
-                + "       If they come from sub-assemblies, rename their instances so that\n"
-                + '       their names differ (the "<1>" suffix is not used)'
-            )
 
         # Merging fixed links
         for data, occurrence_A, occurrence_B in self.feature_mating_two_occurrences():
@@ -973,6 +969,7 @@ class Assembly:
             prefixed_data = self._prefix_feature_data(data, path, name_prefix)
             prefixed_data["_source_name"] = data["name"]
             prefixed_data["_subassembly"] = subassembly
+            prefixed_data["_path"] = path
             path_a = prefixed_data["matedEntities"][0]["matedOccurrence"]
             path_b = prefixed_data["matedEntities"][1]["matedOccurrence"]
             occurrence_A = self._body_key_for_path(path_a)
@@ -1086,6 +1083,115 @@ class Assembly:
                         )
 
                     self.relations[mated_dofs[1]] = [mated_dofs[0], ratio]
+
+    def _duplicate_suffixes(self, group: list[DOF]) -> list[str]:
+        """
+        Suffixes telling apart DOFs that share a name: the "<n>" of the
+        instances they come from, at the levels where they differ (Leg <4>
+        gives "4"), or 1, 2, 3, ... in the order found if that doesn't work.
+        """
+
+        def instance_numbers(dof: DOF) -> list[str]:
+            path = dof.source_path or []
+            numbers = []
+            for depth in range(1, len(path) + 1):
+                name = self.get_occurrence(path[:depth])["instance"]["name"]
+                match = re.search(r"<(\d+)>\s*$", name)
+                numbers.append(match.group(1) if match else "")
+            return numbers
+
+        numbers = [instance_numbers(dof) for dof in group]
+        if all(numbers) and len({len(n) for n in numbers}) == 1:
+            differing = [
+                depth
+                for depth in range(len(numbers[0]))
+                if len({n[depth] for n in numbers}) > 1
+            ]
+            suffixes = ["_".join(n[depth] for depth in differing) for n in numbers]
+            if (
+                differing
+                and all(all(n[depth] for depth in differing) for n in numbers)
+                and len(set(suffixes)) == len(suffixes)
+            ):
+                return suffixes
+        return [str(index) for index in range(1, len(group) + 1)]
+
+    def finalize_dof_names(self):
+        """
+        Give every DOF its final, unique name.
+
+        - DOFs sharing the same name (e.g. the same articulated sub-assembly
+          instantiated several times) are all numbered: as soon as there is a
+          "_1", there is a "_2". The number is the "<n>" of the Onshape instance
+          they come from (Arm <2> gives arm_elbow_2). If that doesn't tell them
+          apart (e.g. at the root), they are numbered in the order found.
+        - The "rename_dofs" config entry is then applied: each key is a regular
+          expression matched against the whole DOF name, and the first matching
+          key gives the new name (groups like \\1 can be used). A plain name
+          simply renames that DOF.
+        """
+        final_names = {}
+        groups: dict[str, list[DOF]] = {}
+        for dof in self.dofs:
+            groups.setdefault(dof.name, []).append(dof)
+
+        for name, group in groups.items():
+            if len(group) < 2:
+                continue
+            for dof, suffix in zip(group, self._duplicate_suffixes(group)):
+                dof.name = f"{name}_{suffix}"
+                print(
+                    info(f"* Several DOFs are named {name}, renaming one to {dof.name}")
+                )
+
+        if not isinstance(self.config.rename_dofs, dict):
+            raise Exception(
+                'ERROR: "rename_dofs" should be a dict {"name or pattern": "new name"}'
+            )
+        rules = []
+        for pattern, replacement in self.config.rename_dofs.items():
+            try:
+                rules.append([re.compile(pattern), replacement, False])
+            except re.error as e:
+                raise Exception(f"ERROR: invalid rename_dofs pattern {pattern!r}: {e}")
+
+        for dof in self.dofs:
+            for rule in rules:
+                match = rule[0].fullmatch(dof.name)
+                if match:
+                    new_name = match.expand(rule[1])
+                    print(success(f"+ Renaming DOF {dof.name} to {new_name}"))
+                    final_names[dof.name] = new_name
+                    dof.name = new_name
+                    rule[2] = True
+                    break
+
+        for pattern, _, used in rules:
+            if not used:
+                print(
+                    warning(
+                        f"WARNING: rename_dofs entry {pattern.pattern!r} matched no DOF"
+                    )
+                )
+
+        duplicates = [
+            n for n, c in Counter(dof.name for dof in self.dofs).items() if c > 1
+        ]
+        if duplicates:
+            raise Exception(
+                f"ERROR: several DOFs are named {', '.join(duplicates)}\n"
+                + '       Use the "rename_dofs" entry of config.json to give them distinct names'
+            )
+
+        # Relations refer to DOFs by name
+        if final_names:
+            self.relations = {
+                final_names.get(target, target): [
+                    final_names.get(source, source),
+                    ratio,
+                ]
+                for target, (source, ratio) in self.relations.items()
+            }
 
     def read_parameter_value(
         self,

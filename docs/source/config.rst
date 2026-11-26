@@ -54,6 +54,11 @@ Here is an example of complete ``config.json`` file, with details below:
         // Ignore limits (default: false)
         "ignore_limits": true,
 
+        // Rename joints at export time (default: {})
+        "rename_dofs": {
+            "leg_1_knee": "front_left_knee"
+        },
+
         // Parts to ignore (default: {})
         "ignore": {
             // Ignore visual for visual
@@ -233,6 +238,31 @@ You can prefix the part name with ``!`` to exclude it from the rule. For example
 .. note::
 
     The dynamics of the part will not be ignored, but the visual and collision aspect will.
+
+.. _rename-dofs:
+
+``rename_dofs`` *(default: {})*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Renames joints at export time. Each key is matched against the whole name of a DOF (as it would be exported
+otherwise) and the value is the new name. The first matching key applies.
+
+Keys are regular expressions, so a plain name renames exactly that DOF, and groups can be reused in the new
+name with ``\1``, ``\2``, ... (written ``"\\1"`` in ``config.json``, where backslashes are escaped):
+
+.. code-block:: javascript
+
+    "rename_dofs": {
+        // Rename one DOF
+        "leg_1_knee": "front_left_knee",
+        // Shorten the names coming from nested sub-assemblies
+        "left_leg_left_shin_(.*)": "left_\\1"
+    }
+
+Renaming happens after duplicated names have been numbered (see :ref:`dof-names`), so the numbered names
+(``leg_knee_1``, ``leg_knee_2``, ...) can be used as keys. Other entries using joint names, like
+``joint_properties``, see the renamed joints. A warning is printed for keys that match no DOF, and an error is
+raised if two DOFs still end up with the same name.
 
 .. _draw-frames:
 

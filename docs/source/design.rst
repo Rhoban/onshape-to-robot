@@ -52,8 +52,22 @@ Sub-assemblies that contain no ``dof_`` mate are still exported as a single rigi
 
 Names coming from a sub-assembly are prefixed with the names of the instances leading to it. For instance,
 ``dof_elbow`` in a sub-assembly instance named ``Right arm <1>`` results in a joint named ``right_arm_elbow``.
-The ``<1>`` suffix is dropped, so instances that only differ by it (``Arm <1>`` and ``Arm <2>``) should be
-renamed.
+The ``<1>`` suffix is dropped.
+
+.. _dof-names:
+
+Duplicated and custom joint names
+---------------------------------
+
+Several DOFs can end up with the same name, for example when the same articulated sub-assembly is
+instantiated several times (Onshape names its instances ``Arm <1>``, ``Arm <2>``, ... and doesn't let you
+rename them). In that case, all of them are numbered with the ``<n>`` of the instance they come from:
+``dof_elbow`` in ``Arm <1>`` and ``Arm <2>`` gives ``arm_elbow_1`` and ``arm_elbow_2``. When the instance
+numbers don't tell them apart (for example two DOFs with the same name at the top level), they are numbered
+``_1``, ``_2``, ... in the order they are found.
+
+To give them meaningful names, use the :ref:`rename_dofs <rename-dofs>` entry of ``config.json``, for
+example ``{"arm_elbow_1": "left_elbow", "arm_elbow_2": "right_elbow"}``.
 
 Naming links
 ------------
