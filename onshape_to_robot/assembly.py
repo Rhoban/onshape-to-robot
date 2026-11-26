@@ -28,10 +28,19 @@ class Frame:
     Represents a frame attached
     """
 
-    def __init__(self, body_id: int, name: str, T_world_frame: np.ndarray):
+    def __init__(
+        self,
+        body_id: int,
+        name: str,
+        T_world_frame: np.ndarray,
+        source_path: list[str] | None = None,
+    ):
         self.body_id: int = body_id
         self.name: str = name
         self.T_world_frame: np.ndarray = T_world_frame
+        # For frame_ entries: path of the sub-assembly instance they come from
+        # ([] at the root); None for frames that can't be renamed (closures)
+        self.source_path: list[str] | None = source_path
 
 
 class DOF:
@@ -118,6 +127,8 @@ class Assembly:
         self.root_nodes: list = []
         # Overriden link names
         self.link_names: dict[int, str] = {}
+        # Path of the sub-assembly instance each link_ name comes from ([] at the root)
+        self.link_name_paths: dict[int, list[str]] = {}
         # Relation indexed by target joints, values are [source joint, ratio]
         self.relations: dict = {}
         # (path, subassembly data, name prefix) for each sub-assembly instance
@@ -138,6 +149,7 @@ class Assembly:
         self.build_trees()
         self.find_relations()
         self.finalize_dof_names()
+        self.finalize_frame_and_link_names()
         print("")
 
     def ensure_workspace_or_version(self):
@@ -847,7 +859,12 @@ class Assembly:
                 )
 
                 self.frames.append(
-                    Frame(self.instance_body[parent], name, T_world_part)
+                    Frame(
+                        self.instance_body[parent],
+                        name,
+                        T_world_part,
+                        data.get("_path", []),
+                    )
                 )
 
                 if self.config.draw_frames:
@@ -942,6 +959,7 @@ class Assembly:
                 link_name = "_".join(feature["featureData"]["name"].split("_")[1:])
                 body_id = self._occurrence_body(feature["featureData"]["occurrence"])
                 self.link_names[body_id] = link_name
+                self.link_name_paths[body_id] = []
 
             if feature["featureType"] == "mateConnector" and feature["featureData"][
                 "name"
@@ -954,7 +972,7 @@ class Assembly:
                     feature["featureData"]["mateConnectorCS"]
                 )
                 T_world_mate = T_world_occurrence @ T_occurrence_mate
-                self.frames.append(Frame(body_id, name, T_world_mate))
+                self.frames.append(Frame(body_id, name, T_world_mate, []))
 
         # Same for mate connectors inside sub-assemblies
         for path, _, name_prefix, data in self.subassembly_features("mateConnector"):
@@ -964,12 +982,13 @@ class Assembly:
 
             if data["name"].startswith("link_"):
                 self.link_names[body_id] = name
+                self.link_name_paths[body_id] = path
 
             if data["name"].startswith("frame_"):
                 T_world_occurrence = self.get_occurrence_transform(occurrence)
                 T_occurrence_mate = self.cs_to_transformation(data["mateConnectorCS"])
                 T_world_mate = T_world_occurrence @ T_occurrence_mate
-                self.frames.append(Frame(body_id, name, T_world_mate))
+                self.frames.append(Frame(body_id, name, T_world_mate, path))
 
         print(success(f"* Found total {len(self.dofs)} degrees of freedom"))
 
@@ -1183,9 +1202,17 @@ class Assembly:
         instances they come from, at the levels where they differ (Leg <4>
         gives "4"), or 1, 2, 3, ... in the order found if that doesn't work.
         """
+        return self._instance_number_suffixes([dof.source_path for dof in group])
 
-        def instance_numbers(dof: DOF) -> list[str]:
-            path = dof.source_path or []
+    def _instance_number_suffixes(self, paths: list[list[str] | None]) -> list[str]:
+        """
+        Suffixes telling apart entries coming from sub-assembly instances whose
+        names only differ by their "<n>": the "<n>" at the levels where they
+        differ, or 1, 2, 3, ... in the given order if that doesn't work.
+        """
+
+        def instance_numbers(path: list[str] | None) -> list[str]:
+            path = path or []
             numbers = []
             for depth in range(1, len(path) + 1):
                 name = self.get_occurrence(path[:depth])["instance"]["name"]
@@ -1193,7 +1220,8 @@ class Assembly:
                 numbers.append(match.group(1) if match else "")
             return numbers
 
-        numbers = [instance_numbers(dof) for dof in group]
+        group = paths
+        numbers = [instance_numbers(path) for path in paths]
         if all(numbers) and len({len(n) for n in numbers}) == 1:
             differing = [
                 depth
@@ -1208,6 +1236,39 @@ class Assembly:
             ):
                 return suffixes
         return [str(index) for index in range(1, len(group) + 1)]
+
+    def finalize_frame_and_link_names(self):
+        """
+        Number the names coming from frame_ and link_ entries that are
+        duplicated (both end up as link names in the export), like DOFs: with
+        the "<n>" of the sub-assembly instance they come from (Arm <2> gives
+        arm_hand_2), or 1, 2, 3, ... in the order found.
+        """
+        entries: dict[str, list[tuple]] = {}
+        for frame in self.frames:
+            if frame.source_path is not None:
+                entries.setdefault(frame.name, []).append(
+                    ("frame", frame, frame.source_path)
+                )
+        for body_id, name in self.link_names.items():
+            path = self.link_name_paths.get(body_id, [])
+            entries.setdefault(name, []).append(("link", body_id, path))
+
+        for name, group in entries.items():
+            if len(group) < 2:
+                continue
+            suffixes = self._instance_number_suffixes([path for _, _, path in group])
+            for (kind, target, _), suffix in zip(group, suffixes):
+                new_name = f"{name}_{suffix}"
+                print(
+                    info(
+                        f"* Several frames or links are named {name}, renaming one to {new_name}"
+                    )
+                )
+                if kind == "frame":
+                    target.name = new_name
+                else:
+                    self.link_names[target] = new_name
 
     def finalize_dof_names(self):
         """

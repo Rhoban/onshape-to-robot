@@ -75,7 +75,8 @@ instantiated several times (Onshape names its instances ``Arm <1>``, ``Arm <2>``
 rename them). In that case, all of them are numbered with the ``<n>`` of the instance they come from:
 ``dof_elbow`` in ``Arm <1>`` and ``Arm <2>`` gives ``arm_elbow_1`` and ``arm_elbow_2``. When the instance
 numbers don't tell them apart (for example two DOFs with the same name at the top level), they are numbered
-``_1``, ``_2``, ... in the order they are found.
+``_1``, ``_2``, ... in the order they are found. Names coming from ``frame_`` and ``link_`` entries of a
+reused sub-assembly are numbered the same way (``arm_hand_1``, ``arm_hand_2``).
 
 To give them meaningful names, use the :ref:`rename_dofs <rename-dofs>` entry of ``config.json``, for
 example ``{"arm_elbow_1": "left_elbow", "arm_elbow_2": "right_elbow"}``.
