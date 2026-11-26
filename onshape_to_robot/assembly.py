@@ -1170,8 +1170,18 @@ class Assembly:
     def _load_feature_context(self, subassembly: dict) -> _FeatureContext:
         """Load and cache feature data for a nested assembly."""
         version_id = subassembly.get("documentVersion")
-        wmv = "v" if version_id is not None else "m"
-        element_version_id = version_id or subassembly["documentMicroversion"]
+        if version_id is not None:
+            # Linked from another document: pinned to a version of that document
+            wmv, element_version_id = "v", version_id
+        elif subassembly["documentId"] == self.document_id:
+            # Same document: it shares the root's workspace or version. The
+            # variables and matevalues endpoints don't accept a microversion.
+            if self.version_id:
+                wmv, element_version_id = "v", self.version_id
+            else:
+                wmv, element_version_id = "w", self.workspace_id
+        else:
+            wmv, element_version_id = "m", subassembly["documentMicroversion"]
         key = (
             subassembly["documentId"],
             element_version_id,
