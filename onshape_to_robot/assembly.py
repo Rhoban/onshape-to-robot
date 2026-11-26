@@ -124,6 +124,7 @@ class Assembly:
         self.subassembly_instances: list[tuple[list[str], dict, str]] = []
         # Paths of the sub-assembly instances containing dof_ mates
         self.articulated_paths: set[tuple[str, ...]] = set()
+        self._mated_paths_cache: set[tuple[str, ...]] | None = None
 
         self.ensure_workspace_or_version()
         self.find_assembly()
@@ -622,17 +623,50 @@ class Assembly:
             if tuple(prefix) not in self.articulated_paths:
                 continue
 
-            child_keys = [
-                self._path_key(prefix + [instance["id"]])
+            children = [
+                instance
                 for instance in subassembly["instances"]
                 if self.is_active_instance(instance)
-                and self._path_key(prefix + [instance["id"]]) in self.instance_body
             ]
-            if not child_keys:
+            with_body = [
+                instance
+                for instance in children
+                if self._path_key(prefix + [instance["id"]]) in self.instance_body
+            ]
+            if not with_body:
                 continue
 
+            # Children with no body (no mate at all) follow the wrapper, i.e.
+            # the base body: prefer the part fixed in the sub-assembly
+            base = with_body[0]
+            unmated = [
+                instance
+                for instance in children
+                if instance not in with_body
+                and tuple(prefix + [instance["id"]]) not in self._mated_paths()
+            ]
+            if unmated:
+                fixed_ids = self._fixed_instance_ids(subassembly)
+                fixed = [
+                    instance for instance in with_body if instance["id"] in fixed_ids
+                ]
+                if fixed:
+                    base = fixed[0]
+                    reason = f"the fixed part {base['name']}"
+                else:
+                    reason = (
+                        f"{base['name']} (no fixed part with mates in the sub-assembly)"
+                    )
+                wrapper_name = self.get_occurrence(prefix)["instance"]["name"]
+                print(
+                    warning(
+                        f"WARNING: {', '.join(i['name'] for i in unmated)} in"
+                        f" {wrapper_name} has no mate, attached to {reason}"
+                    )
+                )
+
             wrapper_key = self._path_key(prefix)
-            base_key = child_keys[0]
+            base_key = self._path_key(prefix + [base["id"]])
             if wrapper_key not in self.instance_body:
                 self.instance_body[wrapper_key] = self.instance_body[base_key]
                 continue
@@ -1332,21 +1366,69 @@ class Assembly:
             values[parts[0]] = parts[1].replace("+", " ")
         return values
 
-    def _load_feature_context(self, subassembly: dict) -> _FeatureContext:
-        """Load and cache feature data for a nested assembly."""
+    def _subassembly_context(self, subassembly: dict) -> tuple[str, str]:
+        """(wmv, id) to use for API calls on a sub-assembly element."""
         version_id = subassembly.get("documentVersion")
         if version_id is not None:
             # Linked from another document: pinned to a version of that document
-            wmv, element_version_id = "v", version_id
-        elif subassembly["documentId"] == self.document_id:
+            return "v", version_id
+        if subassembly["documentId"] == self.document_id:
             # Same document: it shares the root's workspace or version. The
             # variables and matevalues endpoints don't accept a microversion.
             if self.version_id:
-                wmv, element_version_id = "v", self.version_id
-            else:
-                wmv, element_version_id = "w", self.workspace_id
-        else:
-            wmv, element_version_id = "m", subassembly["documentMicroversion"]
+                return "v", self.version_id
+            return "w", self.workspace_id
+        return "m", subassembly["documentMicroversion"]
+
+    def _fixed_instance_ids(self, subassembly: dict) -> set[str]:
+        """
+        Ids of the instances fixed inside a sub-assembly. The parent assembly
+        definition doesn't tell it, so this needs the sub-assembly's own one.
+        """
+        wmv, element_version_id = self._subassembly_context(subassembly)
+        definition = self.client.get_assembly(
+            subassembly["documentId"],
+            element_version_id,
+            subassembly["elementId"],
+            wmv=wmv,
+            configuration=subassembly["configuration"],
+        )
+        return {
+            occurrence["path"][0]
+            for occurrence in definition["rootAssembly"]["occurrences"]
+            if occurrence.get("fixed") and len(occurrence["path"]) == 1
+        }
+
+    def _mated_paths(self) -> set[tuple[str, ...]]:
+        """
+        Occurrence paths (and their prefixes) referenced by an active mate or
+        mate group.
+        """
+        if self._mated_paths_cache is None:
+            mated = set()
+            sources = [([], self.assembly_data["rootAssembly"])] + [
+                (path, subassembly)
+                for path, subassembly, _ in self.subassembly_instances
+            ]
+            for prefix, assembly in sources:
+                for feature in assembly.get("features", []):
+                    if feature.get("suppressed"):
+                        continue
+                    data = feature["featureData"]
+                    paths = [
+                        e["matedOccurrence"] for e in data.get("matedEntities", [])
+                    ]
+                    paths += [o["occurrence"] for o in data.get("occurrences", [])]
+                    for path in paths:
+                        path = prefix + path
+                        for depth in range(1, len(path) + 1):
+                            mated.add(tuple(path[:depth]))
+            self._mated_paths_cache = mated
+        return self._mated_paths_cache
+
+    def _load_feature_context(self, subassembly: dict) -> _FeatureContext:
+        """Load and cache feature data for a nested assembly."""
+        wmv, element_version_id = self._subassembly_context(subassembly)
         key = (
             subassembly["documentId"],
             element_version_id,
