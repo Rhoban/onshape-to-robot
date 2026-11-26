@@ -78,7 +78,10 @@ numbers don't tell them apart (for example two DOFs with the same name at the to
 ``_1``, ``_2``, ... in the order they are found. Names coming from ``frame_`` and ``link_`` entries of a
 reused sub-assembly are numbered the same way (``arm_hand_1``, ``arm_hand_2``).
 
-To give them meaningful names, use the :ref:`rename_dofs <rename-dofs>` entry of ``config.json``, for
+Links of parts inside a sub-assembly are named after their part, like the other links (``doubleu``,
+``doubleu_2``, ...): only joints, frames and ``link_`` names get the sub-assembly prefix.
+
+To give the joints meaningful names, use the :ref:`rename_dofs <rename-dofs>` entry of ``config.json``, for
 example ``{"arm_elbow_1": "left_elbow", "arm_elbow_2": "right_elbow"}``.
 
 Naming links

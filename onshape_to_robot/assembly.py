@@ -1649,12 +1649,40 @@ class Assembly:
 
     def body_instance(self, body_id: int):
         """
-        Get the (first) instance associated with a given body.
+        Get the (first) instance associated with a given body, used to name it.
 
-        Searches root-level instances first, then internal subassembly
-        instances for bodies created by internal DOFs. Path keys are matched
-        without splitting on ``/`` because Onshape IDs may contain slashes.
+        For a body inside an articulated sub-assembly, an instance of the
+        sub-assembly is used (the first one of the shallowest level, in the
+        sub-assembly's order), i.e. its part rather than the articulated
+        sub-assembly instance mapped to the same body: the base body of
+        "Leg 2 <1>" is named after its "DoubleU" part, as on master, not
+        "leg_2". Otherwise, root-level instances are searched first. Path keys
+        are matched without splitting on ``/`` because Onshape IDs may contain
+        slashes.
         """
+        nested = [
+            path
+            for path in self.occurrences
+            if len(path) >= 2
+            and path not in self.articulated_paths
+            and self.instance_body.get(self._path_key(list(path))) == body_id
+            and "instance" in self.occurrences[path]
+        ]
+        if nested:
+            # The first instance of the shallowest level, in the order of the
+            # sub-assembly's instance list (as root instances are searched)
+            children = {
+                tuple(path): [i["id"] for i in subassembly["instances"]]
+                for path, subassembly, _ in self.subassembly_instances
+            }
+
+            def order(path):
+                siblings = children.get(path[:-1], [])
+                index = siblings.index(path[-1]) if path[-1] in siblings else 0
+                return (len(path), index)
+
+            return self.occurrences[min(nested, key=order)]["instance"]
+
         for instance in self.assembly_data["rootAssembly"]["instances"]:
             if (
                 instance["id"] in self.instance_body
