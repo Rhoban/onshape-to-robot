@@ -50,6 +50,17 @@ Degrees of freedom in sub-assemblies
 one link per instance it contains, and its mates and mate connectors are processed like the top-level ones.
 Sub-assemblies that contain no ``dof_`` mate are still exported as a single rigid link.
 
+To keep an articulated sub-assembly rigid in a given robot, **lock** its instance in Onshape (padlock icon
+in the instance list): a locked instance is exported as a single rigid link and its ``dof_`` mates are
+ignored, as well as those of the sub-assemblies it contains.
+
+.. note::
+
+    Before this feature, ``dof_`` mates inside sub-assemblies were ignored and every sub-assembly was
+    exported as a single rigid link. If your assembly has ``dof_`` mates in sub-assemblies (for example a
+    gripper that you also export on its own), they now become joints: lock those instances to get the
+    previous result.
+
 Names coming from a sub-assembly are prefixed with the names of the instances leading to it. For instance,
 ``dof_elbow`` in a sub-assembly instance named ``Right arm <1>`` results in a joint named ``right_arm_elbow``.
 The ``<1>`` suffix is dropped.
