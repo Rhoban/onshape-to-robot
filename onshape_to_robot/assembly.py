@@ -131,6 +131,7 @@ class Assembly:
         self.retrieve_assembly()
         self.find_instances()
         self.load_features()
+        self.ignore_locked_subassemblies()
         self.load_configuration()
         self.process_mates()
         self.build_trees()
@@ -344,6 +345,64 @@ class Assembly:
             wmv="v" if self.version_id else "w",
             configuration=self.config.configuration,
         )
+
+    def ignore_locked_subassemblies(self):
+        """
+        Sub-assembly instances locked in Onshape (padlock in the instance list)
+        are exported as a single rigid link: their dof_ mates are ignored.
+
+        The API doesn't expose the lock on the instance, but the mate values of
+        a locked instance are missing from the root assembly's mate values
+        (they are listed with their ownerOccurrencePath otherwise).
+        """
+        values = (self.matevalues or {}).get("mateValues") or []
+        if not values:
+            if self.articulated_paths:
+                # Articulated sub-assemblies always have mate values unless
+                # locked: an empty answer more likely means the values couldn't
+                # be read, so don't freeze everything.
+                print(
+                    warning(
+                        "WARNING: no mate values returned for the assembly, locked"
+                        " sub-assemblies can't be detected (all are considered unlocked)"
+                    )
+                )
+            return
+
+        # Only mates that move have a value (a FASTENED dof_ mate has none), so
+        # only sub-assemblies with such a dof_ mate can be checked
+        subassemblies = {
+            tuple(path): sub for path, sub, _ in self.subassembly_instances
+        }
+
+        def has_valued_dof(subassembly: dict) -> bool:
+            return any(
+                feature["featureType"] == "mate"
+                and not feature["suppressed"]
+                and feature["featureData"]["name"].startswith("dof_")
+                and feature["featureData"].get("mateType") != "FASTENED"
+                for feature in subassembly.get("features", [])
+            )
+
+        owners = [tuple(value.get("ownerOccurrencePath") or []) for value in values]
+        for path in sorted(self.articulated_paths, key=len):
+            if path not in self.articulated_paths:
+                continue
+            if not has_valued_dof(subassemblies[path]):
+                continue
+            if not any(owner[: len(path)] == path for owner in owners):
+                locked = {
+                    other
+                    for other in self.articulated_paths
+                    if other[: len(path)] == path
+                }
+                self.articulated_paths -= locked
+                name = self.get_occurrence(list(path))["instance"]["name"]
+                print(
+                    info(
+                        f"* Sub-assembly {name} is locked in Onshape, its dof_ mates are ignored"
+                    )
+                )
 
     def load_configuration(self):
         """
