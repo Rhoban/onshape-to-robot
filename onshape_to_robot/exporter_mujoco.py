@@ -193,7 +193,21 @@ class ExporterMuJoCo(Exporter):
         inertial: str = "<inertial "
         inertial += 'pos="%g %g %g" ' % self.config.round(tuple(com))
         inertial += 'mass="%g" ' % self.config.round(mass)
-        inertial += 'fullinertia="%g %g %g %g %g %g" ' % self.config.round(
+        inertial += 'fullinertia="%s" ' % self.full_inertia(inertia)
+        inertial += " />"
+        self.append(inertial)
+
+    def full_inertia(self, inertia: np.ndarray) -> str:
+        """
+        Inertia as written in fullinertia (ixx iyy izz ixy ixz iyz).
+
+        MuJoCo rejects an inertia whose principal moments don't satisfy the
+        triangle inequality (A + B >= C). For flat parts, C is very close to
+        A + B and rounding the written values can break the inequality: the
+        same small value is then added to the diagonal, which keeps the
+        principal axes and fixes it.
+        """
+        values = self.config.round(
             (
                 inertia[0, 0],
                 inertia[1, 1],
@@ -203,8 +217,23 @@ class ExporterMuJoCo(Exporter):
                 inertia[1, 2],
             )
         )
-        inertial += " />"
-        self.append(inertial)
+        # Values as read by MuJoCo
+        written = [float("%g" % value) for value in values]
+        ixx, iyy, izz, ixy, ixz, iyz = written
+        if ixy == ixz == iyz == 0:
+            moments = sorted([ixx, iyy, izz])
+        else:
+            moments = np.linalg.eigvalsh(
+                [[ixx, ixy, ixz], [ixy, iyy, iyz], [ixz, iyz, izz]]
+            )
+        # Computed like MuJoCo checks it (A + B >= C)
+        violation = moments[2] - (moments[0] + moments[1])
+        if violation <= 0:
+            return "%g %g %g %g %g %g" % values
+
+        delta = violation + 1e-9 * moments[2]
+        diagonal = ["%.17g" % (value + delta) for value in written[:3]]
+        return " ".join(diagonal + ["%g" % value for value in values[3:]])
 
     def add_mesh(self, part: Part, class_: str, T_world_link: np.ndarray, mesh: Mesh):
         """
