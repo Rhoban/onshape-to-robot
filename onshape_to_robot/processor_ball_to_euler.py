@@ -27,7 +27,7 @@ class ProcessorBallToEuler(Processor):
             return True
         elif isinstance(self.ball_to_euler, list):
             for entry in self.ball_to_euler:
-                if fnmatch.fnmatch(entry, joint.name):
+                if fnmatch.fnmatch(joint.name, entry):
                     return True
         return False
 
