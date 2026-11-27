@@ -2,6 +2,8 @@ from __future__ import annotations
 import numpy as np
 import re
 import os
+import sys
+import urllib.parse
 import commentjson as json
 
 
@@ -28,9 +30,11 @@ class Config:
         self.output_directory: str = os.path.dirname(os.path.abspath(self.config_file))
 
         if self.robot_name is None:
-            self.robot_name = os.path.dirname(os.path.abspath(self.config_file)).split(
-                "/"
-            )[-1]
+            # Name of the robot directory (os.path, so that it also works with
+            # Windows paths)
+            self.robot_name = os.path.basename(
+                os.path.dirname(os.path.abspath(self.config_file))
+            )
 
         try:
             os.makedirs(self.output_directory)
@@ -64,7 +68,7 @@ class Config:
 
             if values_list is not None and value not in values_list:
                 raise Exception(
-                    f"Value for {name} should be onf of: {','.join(values_list)}"
+                    f"Value for {name} should be one of: {','.join(values_list)}"
                 )
             return value
         elif required and default is None:
@@ -85,19 +89,27 @@ class Config:
             return version
 
     def parse_url(self):
-        pattern = "https://(.*)/(.*)/([wv])/(.*)/e/(.*)"
-        match = re.match(pattern, self.url)
+        # The query string and fragment (e.g. "?renderMode=0", added when the
+        # URL is copied from the browser) are not part of the element id
+        path = urllib.parse.urlparse(self.url).path
+        match = re.search(r"/([^/]+)/([wvm])/([^/]+)/e/([^/]+)/?$", path)
 
-        if match is None:
+        if not self.url.startswith("https://") or match is None:
             raise Exception(f"Invalid URL: {self.url}")
 
-        match_groups = match.groups()
-        self.document_id = match_groups[1]
-        if match_groups[2] == "w":
-            self.workspace_id = match_groups[3]
-        elif match_groups[2] == "v":
-            self.version_id = match_groups[3]
-        self.element_id = match_groups[4]
+        document_id, wvm, wvm_id, element_id = match.groups()
+        if wvm == "m":
+            raise Exception(
+                f"Microversion URLs (/m/) are not supported, use the URL of a "
+                f"workspace (/w/) or a version (/v/): {self.url}"
+            )
+
+        self.document_id = document_id
+        if wvm == "w":
+            self.workspace_id = wvm_id
+        else:
+            self.version_id = wvm_id
+        self.element_id = element_id
 
     def asset_path(self, asset_name: str) -> str:
         return f"{self.output_directory}/{self.assets_directory}/{asset_name}"
@@ -189,6 +201,15 @@ class Config:
                 else:
                     module, cls = parts
                     if module not in loaded_modules:
+                        # Custom processors can be in the current directory or
+                        # in the robot directory, which are not in the import
+                        # path when running the onshape-to-robot command
+                        for directory in (
+                            os.getcwd(),
+                            os.path.dirname(os.path.abspath(self.config_file)),
+                        ):
+                            if directory not in sys.path:
+                                sys.path.append(directory)
                         loaded_modules[module] = __import__(module, fromlist=[cls])
                     processor = getattr(loaded_modules[module], cls)
 

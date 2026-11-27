@@ -6,7 +6,7 @@ from .robot import Robot, Link, Part, Joint
 from .config import Config
 from .geometry import Box, Cylinder, Sphere, Mesh, Shape
 from .exporter import Exporter
-from .exporter_utils import xml_escape, rotation_matrix_to_rpy
+from .exporter_utils import xml_escape, xml_comment_escape, rotation_matrix_to_rpy
 
 MODEL_CONFIG_XML = """
 <?xml version="1.0" ?>
@@ -42,7 +42,7 @@ class ExporterSDF(Exporter):
                     self.add_additional_xml(filename)
 
     def add_additional_xml(self, xml_file: str):
-        self.additional_xml += f"<!-- Additional {xml_file} -->"
+        self.additional_xml += f"<!-- Additional {xml_comment_escape(xml_file)} -->"
         with open(self.config.output_directory + "/" + xml_file, "r") as file:
             self.additional_xml += file.read()
 
@@ -54,7 +54,7 @@ class ExporterSDF(Exporter):
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
         if self.config:
-            self.append(f"<!-- Onshape {self.config.printable_version()} -->")
+            self.append(f"<!-- Onshape {xml_comment_escape(self.config.printable_version())} -->")
         self.append('<sdf version="1.7">')
         self.append(f'<model name="{xml_escape(robot.name)}">')
 
@@ -123,16 +123,19 @@ class ExporterSDF(Exporter):
         """
         Add a mesh node (e.g. STL) to the SDF file
         """
-        self.append(f'<{node} name="{part.name}_{node}_mesh_{mesh_n}">')
+        self.append(f'<{node} name="{xml_escape(part.name)}_{node}_mesh_{mesh_n}">')
 
         T_link_part = np.linalg.inv(T_world_link) @ part.T_world_part
         self.append(self.pose(T_link_part, relative_to=link.name))
 
         mesh_file = mesh.filename
+        # Gazebo resolves model:// URIs with the name of the model directory
+        # (where model.config is), which can differ from the robot name
+        model_directory = os.path.basename(self.config.output_directory)
 
         self.append("<geometry>")
         self.append(
-            f"<mesh><uri>model://{self.config.robot_name}/{xml_escape(mesh_file)}</uri></mesh>"
+            f"<mesh><uri>model://{xml_escape(model_directory)}/{xml_escape(mesh_file)}</uri></mesh>"
         )
         self.append("</geometry>")
 
@@ -158,7 +161,7 @@ class ExporterSDF(Exporter):
         """
         Add shapes (box, sphere and cylinder) nodes to the SDF.
         """
-        self.append(f'<{node} name="{part.name}_{node}_shapes_{shape_n}">')
+        self.append(f'<{node} name="{xml_escape(part.name)}_{node}_shapes_{shape_n}">')
 
         T_link_shape = (
             np.linalg.inv(T_world_link) @ part.T_world_part @ shape.T_part_shape
@@ -210,16 +213,22 @@ class ExporterSDF(Exporter):
                 self.add_mesh(link, part, "collision", T_world_link, mesh, mesh_n)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
-        self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
+        self.append(f"<!-- Joint from {xml_comment_escape(joint.parent.name)} to {xml_comment_escape(joint.child.name)} -->")
 
         joint_type = joint.properties.get("type", joint.joint_type)
-        self.append(f'<joint name="{joint.name}" type="{joint_type}">')
+        self.append(f'<joint name="{xml_escape(joint.name)}" type="{joint_type}">')
 
         T_link_joint = np.linalg.inv(T_world_link) @ joint.T_world_joint
         self.append(self.pose(T_link_joint, relative_to=joint.parent.name))
 
-        self.append(f"<parent>{joint.parent.name}</parent>")
-        self.append(f"<child>{joint.child.name}</child>")
+        self.append(f"<parent>{xml_escape(joint.parent.name)}</parent>")
+        self.append(f"<child>{xml_escape(joint.child.name)}</child>")
+
+        # Fixed and ball joints have no axis
+        if joint_type in ("fixed", "ball"):
+            self.append("</joint>")
+            return
+
         self.append("<axis>")
         self.append("<xyz>%g %g %g</xyz>" % self.config.round(tuple(joint.axis)))
 
@@ -241,13 +250,15 @@ class ExporterSDF(Exporter):
             if joint_type == "prismatic":
                 joint_limits = [-1, 1]
 
-        self.append(f"<lower>{joint_limits[0]}</lower>")
-        self.append(f"<upper>{joint_limits[1]}</upper>")
+        # Continuous joints have no limits
+        if joint_limits is not None:
+            self.append(f"<lower>{self.config.round(joint_limits[0])}</lower>")
+            self.append(f"<upper>{self.config.round(joint_limits[1])}</upper>")
         self.append("</limit>")
 
         if joint.relation is not None:
             self.append(
-                f'<mimic joint="{joint.relation.source_joint}"><multiplier>{joint.relation.ratio}</multiplier></mimic>'
+                f'<mimic joint="{xml_escape(joint.relation.source_joint)}"><multiplier>{self.config.round(joint.relation.ratio)}</multiplier></mimic>'
             )
 
         self.append("<dynamics>")
@@ -266,10 +277,10 @@ class ExporterSDF(Exporter):
         T_world_link: np.ndarray,
         T_world_frame: np.ndarray,
     ):
-        self.append(f"<!-- Frame {frame} -->")
+        self.append(f"<!-- Frame {xml_comment_escape(frame)} -->")
         T_link_frame = np.linalg.inv(T_world_link) @ T_world_frame
 
-        self.append(f'<frame name="{frame}">')
+        self.append(f'<frame name="{xml_escape(frame)}">')
         self.append(self.pose(T_link_frame, relative_to=link.name))
         self.append("</frame>")
 
@@ -277,8 +288,8 @@ class ExporterSDF(Exporter):
         """
         Adds a link recursively to the SDF file
         """
-        self.append(f"<!-- Link {link.name} -->")
-        self.append(f'<link name="{link.name}">')
+        self.append(f"<!-- Link {xml_comment_escape(link.name)} -->")
+        self.append(f'<link name="{xml_escape(link.name)}">')
 
         T_world_link = np.eye(4)
         if joint is not None:
@@ -295,15 +306,15 @@ class ExporterSDF(Exporter):
 
         # Adding geometry objects
         for part in link.parts:
-            self.append(f"<!-- Part {part.name} -->")
+            self.append(f"<!-- Part {xml_comment_escape(part.name)} -->")
             self.add_geometries(link, part, T_world_link)
 
         self.append("</link>")
 
         if link.fixed:
-            self.append(f'<joint name="{link.name}_fixed_world" type="fixed">')
+            self.append(f'<joint name="{xml_escape(link.name)}_fixed_world" type="fixed">')
             self.append(f"<parent>world</parent>")
-            self.append(f"<child>{link.name}</child>")
+            self.append(f"<child>{xml_escape(link.name)}</child>")
             self.append("</joint>")
 
         # Adding frames attached to current link
@@ -321,14 +332,17 @@ class ExporterSDF(Exporter):
         """
         relative = ""
         if relative_to:
-            relative = f' relative_to="{relative_to}"'
+            relative = f' relative_to="{xml_escape(relative_to)}"'
 
         sdf = "<pose%s>%g %g %g %g %g %g</pose>"
 
         return sdf % (relative, *self.config.round((*matrix[:3, 3], *rotation_matrix_to_rpy(matrix))))
 
     def write_xml(self, robot: Robot, filename: str) -> str:
-        model_config = MODEL_CONFIG_XML % (robot.name, os.path.basename(filename))
+        model_config = MODEL_CONFIG_XML % (
+            xml_escape(robot.name),
+            xml_escape(os.path.basename(filename)),
+        )
 
         super().write_xml(robot, filename)
 

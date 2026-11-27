@@ -102,15 +102,20 @@ class ProcessorConvexDecomposition(Processor):
                 color = (
                     np.concatenate([np.random.rand(3), [1.0]]) if self.rainbow_colors else collision_mesh.color
                 )
+                # Mesh paths are relative to the output directory, like the
+                # other meshes
+                mesh_filename = os.path.relpath(
+                    filename % k, self.config.output_directory
+                )
                 part.meshes.append(
                     Mesh(
-                        filename % k,
+                        mesh_filename,
                         color,
                         visual=False,
                         collision=True,
                     )
                 )
-                part.collision_meshes.append(filename % k)
+                part.collision_meshes.append(mesh_filename)
 
             collision_mesh.collision = False
             part.prune_unused_geometry()

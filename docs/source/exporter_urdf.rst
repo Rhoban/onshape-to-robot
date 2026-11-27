@@ -8,6 +8,8 @@ URDF is a very standard format that can be exported by ``onshape-to-robot``. Bel
 
 When using this exporter, frames will be added as a *dummy links* attached to their body using a fixed joint
 
+URDF doesn't support ball joints: the export fails if the robot has some, unless they are replaced with revolute joints using the :doc:`ball_to_euler <processor_ball_to_euler>` processor. The SDF and MuJoCo formats support them.
+
 ``config.json`` entries (URDF)
 ------------------------------
 

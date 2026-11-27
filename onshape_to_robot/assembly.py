@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import re
 import numpy as np
 from .config import Config
-from .message import error, info, bright, success, warning
+from .message import info, bright, success, warning
 from .onshape_api.client import Client
 from .robot import Joint
 from .expression import ExpressionParser
@@ -257,9 +257,15 @@ class Assembly:
                         options,
                     ]
                 elif type_name.startswith("BTMConfigurationParameterBoolean"):
-                    parameters[message["parameterName"]] = ["bool"]
+                    parameters[message["parameterName"]] = [
+                        "bool",
+                        message["parameterId"],
+                    ]
                 elif type_name.startswith("BTMConfigurationParameterQuantity"):
-                    parameters[message["parameterName"]] = ["quantity"]
+                    parameters[message["parameterName"]] = [
+                        "quantity",
+                        message["parameterId"],
+                    ]
 
             # Parsing configuration
             parts = self.config.configuration.split(";")
@@ -279,7 +285,15 @@ class Assembly:
                             )
 
                         value = parameters[key][3][parameters[key][2].index(value)]
-                        key = parameters[key][1]
+                    elif parameters[key][0] == "bool":
+                        # e.g. "True" when written as a JSON boolean in config.json
+                        if value.lower() not in ("true", "false"):
+                            raise Exception(
+                                f'ERROR: Value "{value}" for configuration parameter "{key}" should be true or false'
+                            )
+                        value = value.lower()
+                    # The API expects the parameter id, which can differ from its name
+                    key = parameters[key][1]
                     processed_configuration.append(f"{key}={value.replace(' ', '+')}")
 
             # Re-writing the configuration
@@ -741,7 +755,9 @@ class Assembly:
                     else:
                         joint_type = Joint.REVOLUTE
 
-                    if not self.config.ignore_limits:
+                    # Continuous joints have no limits, even if some are
+                    # enabled on the mate
+                    if joint_type == Joint.REVOLUTE and not self.config.ignore_limits:
                         limits = self.get_limits(
                             joint_type,
                             data["name"],
@@ -771,7 +787,7 @@ class Assembly:
                 else:
                     raise Exception(
                         f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
-                        + "       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"
+                        + "       Only REVOLUTE, CYLINDRICAL, SLIDER, BALL and FASTENED are supported"
                     )
 
                 # We compute the axis in the world frame
@@ -1347,6 +1363,34 @@ class Assembly:
                 for target, (source, ratio) in self.relations.items()
             }
 
+    def read_boolean_parameter(
+        self, parameter: dict, name: str, configuration_parameters: dict[str, str]
+    ) -> bool:
+        """
+        Read a boolean parameter (e.g. limitsEnabled), which can be configured
+        """
+        if parameter["typeName"] != "BTMParameterConfigured":
+            return parameter["message"]["value"]
+
+        message = parameter["message"]
+        parameter_value = configuration_parameters[message["configurationParameterId"]]
+        for value in message["values"]:
+            if value["typeName"] == "BTMConfiguredValueByBoolean":
+                matches = value["message"]["booleanValue"] == (parameter_value == "true")
+            elif value["typeName"] == "BTMConfiguredValueByEnum":
+                matches = value["message"]["enumValue"] == parameter_value
+            else:
+                raise Exception(
+                    f"Can't read value of parameter {name} configured with {value['typeName']}"
+                )
+            if matches:
+                return value["message"]["value"]["message"]["value"]
+
+        raise Exception(
+            f"Could not find the value of {name} for the configuration "
+            f"{message['configurationParameterId']}={parameter_value}"
+        )
+
     def read_parameter_value(
         self,
         parameter: dict,
@@ -1385,10 +1429,13 @@ class Assembly:
                         )
                 else:
                     raise Exception(
-                        "Can't read value of parameter {name} configured with {value['typeName']}"
+                        f"Can't read value of parameter {name} configured with {value['typeName']}"
                     )
 
-            print(error(f"Coud not find the value for {name}"))
+            raise Exception(
+                f"Could not find the value of {name} for the configuration "
+                f"{message['configurationParameterId']}={parameterValue}"
+            )
         else:
             raise Exception(f"Unknown feature type for {name}: {parameter['typeName']}")
 
@@ -1580,7 +1627,9 @@ class Assembly:
                 # Find min and max values
                 for parameter in feature["message"]["parameters"]:
                     if parameter["message"]["parameterId"] == "limitsEnabled":
-                        enabled = parameter["message"]["value"]
+                        enabled = self.read_boolean_parameter(
+                            parameter, feature_name, configured_values
+                        )
 
                 if enabled:
                     for parameter in feature["message"]["parameters"]:

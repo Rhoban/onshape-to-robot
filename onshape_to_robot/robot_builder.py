@@ -1,3 +1,4 @@
+from __future__ import annotations
 import numpy as np
 import os
 import hashlib
@@ -9,6 +10,69 @@ from .assembly import Assembly
 from .config import Config
 from .robot import Part, Joint, Link, Robot, Relation, Closure
 from .csg import process as csg_process
+
+
+def get_joint_properties(config: Config, joint_name: str) -> dict:
+    """
+    Properties of a joint, from the joint_properties entry of the configuration
+    """
+    properties = dict(config.joint_properties.get("default", {}))
+    for pattern in config.joint_properties:
+        if fnmatch.fnmatch(joint_name, pattern):
+            properties = {**properties, **config.joint_properties[pattern]}
+
+    return properties
+
+
+def get_geom_properties(config: Config, part_name: str) -> tuple:
+    """
+    (visual, collision) properties of the meshes of a part, from the
+    geom_properties entry of the configuration
+    """
+    visual_properties = {}
+    collision_properties = {}
+
+    for pattern in config.geom_properties:
+        if fnmatch.fnmatch(part_name, pattern):
+            pattern_props = config.geom_properties[pattern]
+
+            # Check for nested visual/collision structure
+            if "visual" in pattern_props or "collision" in pattern_props:
+                visual_properties = {
+                    **visual_properties,
+                    **pattern_props.get("visual", {}),
+                }
+                collision_properties = {
+                    **collision_properties,
+                    **pattern_props.get("collision", {}),
+                }
+            else:
+                # Apply to both if not nested
+                visual_properties = {**visual_properties, **pattern_props}
+                collision_properties = {**collision_properties, **pattern_props}
+
+    return visual_properties, collision_properties
+
+
+def apply_properties(robot: Robot, config: Config):
+    """
+    (Re-)apply the robot_name, joint_properties and geom_properties of the
+    configuration to a robot, e.g. loaded from a robot.pkl produced with
+    another configuration (--convert)
+    """
+    robot.name = config.robot_name
+
+    for joint in robot.joints:
+        joint.properties = get_joint_properties(config, joint.name)
+
+    for link in robot.links:
+        for part in link.parts:
+            visual_properties, collision_properties = get_geom_properties(
+                config, part.name
+            )
+            for mesh in part.meshes:
+                mesh.visual_properties = dict(visual_properties)
+                mesh.collision_properties = dict(collision_properties)
 
 
 class RobotBuilder:
@@ -216,18 +280,25 @@ class RobotBuilder:
 
         return self.config.asset_path(filename)
 
-    def get_color(self, instance: dict) -> np.ndarray:
+    def get_metadata(self, instance: dict) -> dict:
         """
-        Retrieve the color of a part
+        Retrieve the metadata of a part
+        """
+        params = self.instance_request_params(instance)
+        return self.assembly.client.part_get_metadata(
+            **params,
+            partid=instance["partId"],
+        )
+
+    def get_color(self, instance: dict, metadata: dict | None = None) -> np.ndarray:
+        """
+        Retrieve the color of a part (from its metadata)
         """
         if self.config.color is not None:
             color = np.array(self.config.color)
         else:
-            params = self.instance_request_params(instance)
-            metadata = self.assembly.client.part_get_metadata(
-                **params,
-                partid=instance["partId"],
-            )
+            if metadata is None:
+                metadata = self.get_metadata(instance)
 
             color = np.array([0.5, 0.5, 0.5, 1.0])
 
@@ -334,8 +405,11 @@ class RobotBuilder:
         else:
             stl_file = self.get_stl(instance)
 
-        # Obtain metadatas about part to retrieve color
-        color = self.get_color(instance)
+        # Obtain metadatas about part to retrieve color (unless the color is set in
+        # the configuration) and whether it is a surface
+        metadata = None if self.config.color is not None else self.get_metadata(instance)
+        color = self.get_color(instance, metadata)
+        is_surface = metadata is not None and metadata.get("partType") == "sheet"
 
         # Obtain the instance dynamics
         mass, com, inertia = self.get_dynamics(instance)
@@ -355,6 +429,12 @@ class RobotBuilder:
             mesh.visual = False
         if self.part_is_ignored(part_name, "collision"):
             mesh.collision = False
+        if is_surface:
+            # A surface has no volume: it can't be used for collisions (e.g.
+            # MuJoCo can't compute its convex hull)
+            print(warning(f"WARNING: part {part_name} is a surface, it is exported without collision"))
+            mesh.surface = True
+            mesh.collision = False
         if mesh.visual or mesh.collision:
             meshes.append(mesh)
 
@@ -362,35 +442,12 @@ class RobotBuilder:
         unique_part_name = self.unique_name(instance, "part")
 
         # Apply geom_properties based on unique part name pattern matching
+        visual_properties, collision_properties = get_geom_properties(
+            self.config, unique_part_name
+        )
         for mesh in meshes:
-            visual_properties = {}
-            collision_properties = {}
-
-            for pattern_name in self.config.geom_properties:
-                if fnmatch.fnmatch(unique_part_name, pattern_name):
-                    pattern_props = self.config.geom_properties[pattern_name]
-
-                    # Check for nested visual/collision structure
-                    has_nested = (
-                        "visual" in pattern_props or "collision" in pattern_props
-                    )
-
-                    if has_nested:
-                        visual_properties = {
-                            **visual_properties,
-                            **pattern_props.get("visual", {}),
-                        }
-                        collision_properties = {
-                            **collision_properties,
-                            **pattern_props.get("collision", {}),
-                        }
-                    else:
-                        # Apply to both if not nested
-                        visual_properties = {**visual_properties, **pattern_props}
-                        collision_properties = {**collision_properties, **pattern_props}
-
-            mesh.visual_properties = visual_properties
-            mesh.collision_properties = collision_properties
+            mesh.visual_properties = dict(visual_properties)
+            mesh.collision_properties = dict(collision_properties)
 
         part = Part(
             unique_part_name,
@@ -435,21 +492,13 @@ class RobotBuilder:
             child_body = dof.other_body(body_id)
             T_world_axis = dof.T_world_mate.copy()
 
-            properties = self.config.joint_properties.get("default", {})
-            for joint_name in self.config.joint_properties:
-                if fnmatch.fnmatch(dof.name, joint_name):
-                    properties = {
-                        **properties,
-                        **self.config.joint_properties[joint_name],
-                    }
-
             joint = Joint(
                 dof.name,
                 dof.joint_type,
                 link,
                 None,
                 T_world_axis,
-                properties,
+                get_joint_properties(self.config, dof.name),
                 dof.limits,
                 dof.axis,
             )

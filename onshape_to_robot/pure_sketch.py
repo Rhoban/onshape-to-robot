@@ -3,21 +3,56 @@ def main():
     import math
     import commentjson as json
     import os
+    import subprocess
     import sys, os
     from dotenv import load_dotenv, find_dotenv
     from colorama import Fore, Back, Style
 
     load_dotenv(find_dotenv(usecwd=True))
 
-    if len(sys.argv) < 2:
-        print("Usage: onshape-to-robot-pure-shape {STL file} [prefix=PureShapes]")
+    # --quiet: only writes the .scad file, without opening OpenSCAD
+    quiet = "--quiet" in sys.argv[1:]
+    args = [arg for arg in sys.argv[1:] if arg != "--quiet"]
+
+    if len(args) < 1:
+        print(
+            "Usage: onshape-to-robot-pure-sketch {STL file} [prefix=PureShapes] [--quiet]"
+        )
     else:
-        fileName = sys.argv[1]
-        robotDir = os.path.dirname(fileName)
-        configFile = os.path.join(robotDir, "config.json")
+        fileName = args[0]
+
+        # The meshes are in the assets directory of the robot: looking for the
+        # config.json in the parents of the file whose assets directory contains
+        # it (so that an unrelated config.json higher in the tree is not used)
+        def is_robot_config(candidate: str) -> bool:
+            if not os.path.exists(candidate):
+                return False
+            try:
+                with open(candidate, "r", encoding="utf-8") as stream:
+                    entries = json.load(stream)
+                assets = entries.get("assets_directory", entries.get("assetsDirectory", "assets"))
+            except Exception:
+                return False
+            assets_path = os.path.abspath(os.path.join(os.path.dirname(candidate), assets))
+            return os.path.commonpath([assets_path, os.path.abspath(fileName)]) == assets_path
+
+        configFile = None
+        directory = os.path.dirname(os.path.abspath(fileName))
+        while configFile is None:
+            if is_robot_config(os.path.join(directory, "config.json")):
+                configFile = os.path.join(directory, "config.json")
+            elif os.path.dirname(directory) == directory:
+                print(
+                    Fore.RED
+                    + f"ERROR: Can't find the config.json of the robot of {fileName}"
+                    + Style.RESET_ALL
+                )
+                sys.exit(1)
+            else:
+                directory = os.path.dirname(directory)
         prefix = "PureShapes"
-        if len(sys.argv) > 2:
-            prefix = sys.argv[2]
+        if len(args) > 1:
+            prefix = args[1]
 
         from .onshape_api.client import Client
 
@@ -141,10 +176,16 @@ def main():
             with open(scadFileName, "w", encoding="utf-8") as stream:
                 stream.write(scad)
 
-            directory = os.path.dirname(fileName)
-            os.system(
-                "cd " + directory + "; openscad " + os.path.basename(scadFileName)
-            )
+            if quiet:
+                print(f"Written {scadFileName}")
+            else:
+                # Running OpenSCAD in the directory of the file (without a
+                # shell, so that it works for a file in the current directory
+                # or a path with spaces)
+                directory = os.path.dirname(fileName) or "."
+                subprocess.run(
+                    ["openscad", os.path.basename(scadFileName)], cwd=directory
+                )
         else:
             print(
                 Fore.RED

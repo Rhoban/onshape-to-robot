@@ -31,10 +31,13 @@ class Exporter:
             node.childNodes.remove(child_node)
 
     def write_xml(self, robot: Robot, filename: str) -> str:
+        # Building the XML before opening the file, so that a failing export
+        # doesn't leave an empty file in place of the previous one
+        self.build(robot)
+        dom = xml.dom.minidom.parseString(self.xml)
+        self.remove_empty_text_nodes(dom)
+        xml_output = dom.toprettyxml(indent="  ")
+
         with open(filename, "w") as file:
-            self.build(robot)
-            dom = xml.dom.minidom.parseString(self.xml)
-            self.remove_empty_text_nodes(dom)
-            xml_output = dom.toprettyxml(indent="  ")
             file.write(xml_output)
             print(success(f"* Writing {os.path.basename(filename)}"))

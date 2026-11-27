@@ -10,6 +10,15 @@ def xml_escape(unescaped: str) -> str:
     return escape(unescaped, entities={"'": "&apos;", '"': "&quot;"})
 
 
+def xml_comment_escape(text: str) -> str:
+    """
+    Makes a string safe to be put in an XML comment, which can't contain "--"
+    """
+    while "--" in text:
+        text = text.replace("--", "- -")
+    return text
+
+
 def rotation_matrix_to_rpy(R):
     """
     Converts a rotation matrix to rpy Euler angles

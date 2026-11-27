@@ -8,6 +8,8 @@ Introduction
 
 If this processor is enabled, a dummy base called ``base_link`` will be added in your robot. The base will be attached to this link using a ``fixed`` joint.
 
+If your robot already has a link or a frame named ``base_link`` (frames are links in URDF), the dummy base is named ``dummy_base_link`` instead (a warning is printed).
+
 ``config.json`` entries
 -----------------------
 

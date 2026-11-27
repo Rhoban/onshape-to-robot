@@ -175,7 +175,7 @@ The element ID can be found in URL, after the ``/e/`` part when selecting a spec
 ``configuration`` *(default: "default")*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the robot configuration string that will be passed to Onshape. Lists, booleans and quantities are allowed. For example:
+This is the robot configuration string that will be passed to Onshape. Lists, booleans and quantities are allowed, written with the names displayed in Onshape (parameter names and list values), which are translated to their internal ids. For example:
 
 .. image:: _static/img/configuration.png
     :width: 300px

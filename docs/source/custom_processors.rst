@@ -51,6 +51,9 @@ To register your processor, use the ``processors`` entry in ``config.json``:
         ]
     }
 
+Custom processors are given as ``module:Class``. The module is imported from the Python path, the directory
+where you run ``onshape-to-robot`` or the robot directory (where ``config.json`` is).
+
 .. note::
 
     The list of existing default processors can be found in `processors.py <https://github.com/Rhoban/onshape-to-robot/blob/master/onshape_to_robot/processors.py>`_.

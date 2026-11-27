@@ -1,3 +1,4 @@
+import copy
 import numpy as np
 import os
 from .config import Config
@@ -66,27 +67,43 @@ class ProcessorMergeParts(Processor):
         T_world_com = np.eye(4)
         T_world_com[:3, 3] = com
 
-        # Computing a new color, weighting by masses
-        color = np.zeros(4)
-        total_mass = 0
+        # Computing a new color, weighting the parts with meshes by their
+        # masses (or equally if they are all massless, e.g. with no_dynamics)
+        colors, masses = [], []
         for part in link.parts:
             if len(part.meshes):
-                meshes_color = np.mean([mesh.color for mesh in part.meshes], axis=0)
-                color += meshes_color * part.mass
-            total_mass += part.mass
+                colors.append(np.mean([mesh.color for mesh in part.meshes], axis=0))
+                masses.append(part.mass)
+        if not colors:
+            color = np.array([0.5, 0.5, 0.5, 1.0])
+        elif sum(masses) > 1e-9:
+            color = np.average(colors, axis=0, weights=masses)
+        else:
+            color = np.mean(colors, axis=0)
 
-        color /= total_mass
-
-        # Changing shapes frame
+        # Copying the shapes to the merged part, in its frame
         merged_shapes = []
         for part in link.parts:
             if part.shapes is not None:
                 for shape in part.shapes:
                     if merge_everything or shape.is_type(self.merge_stls):
-                        # Changing the shape frame
+                        merged_shape = copy.deepcopy(shape)
                         T_world_shape = part.T_world_part @ shape.T_part_shape
-                        shape.T_part_shape = np.linalg.inv(T_world_com) @ T_world_shape
-                        merged_shapes.append(shape)
+                        merged_shape.T_part_shape = (
+                            np.linalg.inv(T_world_com) @ T_world_shape
+                        )
+                        if not merge_everything:
+                            # The original parts are kept: the merged role
+                            # (visual or collision) is moved to the copy, like
+                            # for meshes
+                            merged_shape.visual = self.merge_stls == "visual"
+                            merged_shape.collision = self.merge_stls == "collision"
+                            if self.merge_stls == "visual":
+                                shape.visual = False
+                            else:
+                                shape.collision = False
+                        merged_shapes.append(merged_shape)
+                part.prune_unused_geometry()
 
         # Merging STL files
         def accumulate_meshes(which: str):
