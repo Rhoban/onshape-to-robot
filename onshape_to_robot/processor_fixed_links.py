@@ -18,7 +18,7 @@ class ProcessorFixedLinks(Processor):
         self.use_fixed_links: bool | list = config.get("use_fixed_links", False)
 
     def should_fix_links(self, link_name: str) -> bool:
-        if self.use_fixed_links == True:
+        if self.use_fixed_links:
             return True
         elif isinstance(self.use_fixed_links, list):
             for entry in self.use_fixed_links:
