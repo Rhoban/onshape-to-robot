@@ -47,6 +47,48 @@ class Link:
         self.parts: list[Part] = []
         self.frames: dict[str, np.ndarray] = {}
         self.fixed: bool = False
+        self._assembly_dynamics: tuple | None = None
+
+    def set_assembly_dynamics(
+        self, mass: float, com_local: np.ndarray, inertia_local: np.ndarray, T_world_assembly: np.ndarray
+    ):
+        """
+        Set dynamics for Link
+        """
+        self._assembly_dynamics = (
+            mass,
+            com_local.copy(),
+            inertia_local.copy(),
+            T_world_assembly.copy(),
+        )
+
+    def get_assembly_dynamics(self, T_world_frame: np.ndarray = np.eye(4)):
+        """
+        Returns (mass, com_frame, inertia_frame) from assembly-level dynamics.
+
+        Inertia is around COM, aligned with assembly axes. No parallel-axis
+        theorem needed when transforming - only rotation, since the reference
+        point stays at COM.
+
+        Two-step transform:
+        1. Assembly → World
+        2. World → Target frame
+        """
+        mass, com_local, inertia_local, T_world_assembly = self._assembly_dynamics
+
+        R_assembly = T_world_assembly[:3, :3]
+        T_frame_world = np.linalg.inv(T_world_frame)
+        R_frame = T_frame_world[:3, :3]
+
+        # Assembly → World
+        com_world = (T_world_assembly @ [*com_local, 1])[:3]
+        inertia_world = R_assembly @ inertia_local @ R_assembly.T
+
+        # World → Target frame
+        com_frame = (T_frame_world @ [*com_world, 1])[:3]
+        inertia_frame = R_frame @ inertia_world @ R_frame.T
+
+        return mass, com_frame, inertia_frame
 
     def get_dynamics(self, T_world_frame: np.ndarray = np.eye(4)):
         """
@@ -54,6 +96,11 @@ class Link:
         The CoM is expressed in the required frame.
         Inertia is expressed around the CoM, aligned with the required frame.
         """
+        # Use assembly-level dynamics if available
+        if self._assembly_dynamics is not None:
+            return self.get_assembly_dynamics(T_world_frame)
+
+        # Fall back to part-level accumulation
         mass = 0
         com = np.zeros(3)
         inertia = np.zeros((3, 3))

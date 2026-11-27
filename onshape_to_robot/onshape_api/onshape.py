@@ -73,6 +73,7 @@ class Onshape():
             self._url = config["onshape_api"]
             self._access_key = config['onshape_access_key'].encode('utf-8')
             self._secret_key = config['onshape_secret_key'].encode('utf-8')
+            self._secret_bearer = None  # Not using bearer token auth
 
             print(Fore.YELLOW + 'WARNING: Storing Onshape credentials in config.json is deprecated, please use environment variables instead' + Style.RESET_ALL)
         except KeyError:
@@ -80,12 +81,17 @@ class Onshape():
             self._secret_bearer = os.getenv('ONSHAPE_SECRET_BEARER')
             self._access_key = os.getenv('ONSHAPE_ACCESS_KEY')
             self._secret_key = os.getenv('ONSHAPE_SECRET_KEY')
+            # Initialize _secret_bearer to None if using access_key/secret_key auth
+            if self._secret_bearer is None:
+                self._secret_bearer = None
 
         if self._url and self._secret_bearer:
             self._secret_bearer = self._secret_bearer.encode('utf-8')
         elif self._url and self._access_key and self._secret_key:
-            self._access_key = self._access_key.encode('utf-8')
-            self._secret_key = self._secret_key.encode('utf-8')
+            if not isinstance(self._access_key, bytes):
+                self._access_key = self._access_key.encode('utf-8')
+            if not isinstance(self._secret_key, bytes):
+                self._secret_key = self._secret_key.encode('utf-8')
         else:
             print(Fore.RED + 'ERROR: No Onshape API access key are set' + Style.RESET_ALL)
             print()
@@ -166,7 +172,21 @@ class Onshape():
             - dict: Dictionary containing all headers
         '''
 
+        # Use English locale for HTTP date format to avoid non-ASCII characters
+        import locale
+        old_locale = locale.getlocale(locale.LC_TIME)
+        try:
+            locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
+        except:
+            try:
+                locale.setlocale(locale.LC_TIME, 'C')
+            except:
+                pass
         date = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')
+        try:
+            locale.setlocale(locale.LC_TIME, old_locale)
+        except:
+            pass
         ctype = headers.get('Content-Type') if headers.get('Content-Type') else 'application/json'
 
         req_headers = {
