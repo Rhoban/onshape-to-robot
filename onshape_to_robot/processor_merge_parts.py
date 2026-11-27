@@ -1,3 +1,4 @@
+import copy
 import numpy as np
 import os
 from .config import Config
@@ -80,16 +81,29 @@ class ProcessorMergeParts(Processor):
         else:
             color = np.mean(colors, axis=0)
 
-        # Changing shapes frame
+        # Copying the shapes to the merged part, in its frame
         merged_shapes = []
         for part in link.parts:
             if part.shapes is not None:
                 for shape in part.shapes:
                     if merge_everything or shape.is_type(self.merge_stls):
-                        # Changing the shape frame
+                        merged_shape = copy.deepcopy(shape)
                         T_world_shape = part.T_world_part @ shape.T_part_shape
-                        shape.T_part_shape = np.linalg.inv(T_world_com) @ T_world_shape
-                        merged_shapes.append(shape)
+                        merged_shape.T_part_shape = (
+                            np.linalg.inv(T_world_com) @ T_world_shape
+                        )
+                        if not merge_everything:
+                            # The original parts are kept: the merged role
+                            # (visual or collision) is moved to the copy, like
+                            # for meshes
+                            merged_shape.visual = self.merge_stls == "visual"
+                            merged_shape.collision = self.merge_stls == "collision"
+                            if self.merge_stls == "visual":
+                                shape.visual = False
+                            else:
+                                shape.collision = False
+                        merged_shapes.append(merged_shape)
+                part.prune_unused_geometry()
 
         # Merging STL files
         def accumulate_meshes(which: str):
