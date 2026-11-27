@@ -1,4 +1,5 @@
 import subprocess
+import tempfile
 import re
 import json
 import os
@@ -185,10 +186,20 @@ class ProcessorScad(Processor):
         return shapes
 
     def parse_scad(self, scad_file: str, color: np.ndarray):
-        tmp_data = os.getcwd() + "/_tmp_data.csg"
-        os.system("openscad " + scad_file + " -o " + tmp_data)
-        with open(tmp_data, "r", encoding="utf-8") as stream:
-            data = stream.read()
-        os.system("rm " + tmp_data)
+        # Running OpenSCAD without a shell, so that paths with spaces work (and
+        # on Windows), producing the CSG in a temporary directory
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_data = os.path.join(tmp_dir, "data.csg")
+            result = subprocess.run(
+                ["openscad", scad_file, "-o", tmp_data],
+                capture_output=True,
+                text=True,
+            )
+            if result.returncode != 0 or not os.path.exists(tmp_data):
+                raise Exception(
+                    f"OpenSCAD failed to process {scad_file}:\n{result.stderr}"
+                )
+            with open(tmp_data, "r", encoding="utf-8") as stream:
+                data = stream.read()
 
         return self.parse_csg(data, color)
