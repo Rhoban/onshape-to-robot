@@ -257,9 +257,15 @@ class Assembly:
                         options,
                     ]
                 elif type_name.startswith("BTMConfigurationParameterBoolean"):
-                    parameters[message["parameterName"]] = ["bool"]
+                    parameters[message["parameterName"]] = [
+                        "bool",
+                        message["parameterId"],
+                    ]
                 elif type_name.startswith("BTMConfigurationParameterQuantity"):
-                    parameters[message["parameterName"]] = ["quantity"]
+                    parameters[message["parameterName"]] = [
+                        "quantity",
+                        message["parameterId"],
+                    ]
 
             # Parsing configuration
             parts = self.config.configuration.split(";")
@@ -279,7 +285,15 @@ class Assembly:
                             )
 
                         value = parameters[key][3][parameters[key][2].index(value)]
-                        key = parameters[key][1]
+                    elif parameters[key][0] == "bool":
+                        # e.g. "True" when written as a JSON boolean in config.json
+                        if value.lower() not in ("true", "false"):
+                            raise Exception(
+                                f'ERROR: Value "{value}" for configuration parameter "{key}" should be true or false'
+                            )
+                        value = value.lower()
+                    # The API expects the parameter id, which can differ from its name
+                    key = parameters[key][1]
                     processed_configuration.append(f"{key}={value.replace(' ', '+')}")
 
             # Re-writing the configuration
