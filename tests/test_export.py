@@ -9,6 +9,7 @@ modify the exports, regenerate the expected outputs and review their diff:
 """
 
 import difflib
+import math
 import re
 from pathlib import Path
 
@@ -38,8 +39,31 @@ def canonical_quaternion(match: re.Match) -> str:
     return 'quat="' + " ".join(f"{value + 0:g}" for value in values) + '"'
 
 
+# An Euler angle of +pi or -pi is the same rotation: near pi, tiny numerical
+# differences between machines (e.g. the CPU of the CI) can flip its sign. It
+# is written +pi in the URDF rpy attributes and in the angles of SDF poses
+RPY = re.compile(r'rpy="([^"]*)"')
+POSE = re.compile(r"(<pose[^>]*>)([^<]*)(</pose>)")
+
+
+def canonical_angles(angles: list) -> list:
+    return ["3.14159" if abs(abs(float(a)) - math.pi) < 1e-5 else a for a in angles]
+
+
+def canonical_rpy(match: re.Match) -> str:
+    return 'rpy="' + " ".join(canonical_angles(match.group(1).split())) + '"'
+
+
+def canonical_pose(match: re.Match) -> str:
+    values = match.group(2).split()
+    if len(values) == 6:
+        values = values[:3] + canonical_angles(values[3:])
+    return match.group(1) + " ".join(values) + match.group(3)
+
+
 def normalize(text: str) -> str:
-    return QUATERNION.sub(canonical_quaternion, NEGATIVE_ZERO.sub("0", text))
+    text = QUATERNION.sub(canonical_quaternion, NEGATIVE_ZERO.sub("0", text))
+    return POSE.sub(canonical_pose, RPY.sub(canonical_rpy, text))
 
 
 @pytest.mark.parametrize("output_format", list(FORMATS))

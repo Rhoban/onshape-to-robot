@@ -9,7 +9,8 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    # Pinned: setup-python has no Python 3.9 for newer Ubuntu versions
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
