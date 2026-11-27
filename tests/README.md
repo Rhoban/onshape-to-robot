@@ -24,11 +24,21 @@ The cases cover real robots (quadrupeds, humanoids, arms, wheeled robots,
 parallel robots with closed loops...) and synthetic cases for degrees of
 freedom inside sub-assemblies.
 
-`tests/test_regressions.py` contains a test for each fixed bug, reproducing
-its situation (on a robot built in Python, or on a recorded robot). Some of
-them need an external tool and are skipped when it is not installed: MuJoCo
-(`pip install mujoco`), CoACD (`pip install coacd trimesh`), OpenSCAD and
-Gazebo (`gz`, installed in a separate job of the GitHub workflow).
+The other tests use the same recorded robots:
+
+- `tests/test_models.py` checks that the exports are valid models, not only
+  identical to the expected outputs: MuJoCo loads and simulates every case,
+  URDF and SDF are well-formed trees, and the three formats describe the same
+  joints, limits and masses;
+- `tests/test_options.py` checks the effect of the `config.json` entries and
+  of the command line options (`--retrieve`, `--convert`, `--safe`);
+- `tests/test_regressions.py` contains a test for each fixed bug, reproducing
+  its situation (on a robot built in Python, or on a recorded robot).
+
+Some tests need an external tool and are skipped when it is not installed:
+MuJoCo (`pip install mujoco`), CoACD (`pip install coacd trimesh`), OpenSCAD
+and Gazebo (`gz`, installed in a separate job of the GitHub workflow).
+`tests/helpers.py` contains the helpers shared by the tests.
 
 ## How it works
 
