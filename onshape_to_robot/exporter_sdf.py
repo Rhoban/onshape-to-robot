@@ -220,6 +220,12 @@ class ExporterSDF(Exporter):
 
         self.append(f"<parent>{joint.parent.name}</parent>")
         self.append(f"<child>{joint.child.name}</child>")
+
+        # Fixed and ball joints have no axis
+        if joint_type in ("fixed", "ball"):
+            self.append("</joint>")
+            return
+
         self.append("<axis>")
         self.append("<xyz>%g %g %g</xyz>" % self.config.round(tuple(joint.axis)))
 
@@ -241,8 +247,10 @@ class ExporterSDF(Exporter):
             if joint_type == "prismatic":
                 joint_limits = [-1, 1]
 
-        self.append(f"<lower>{joint_limits[0]}</lower>")
-        self.append(f"<upper>{joint_limits[1]}</upper>")
+        # Continuous joints have no limits
+        if joint_limits is not None:
+            self.append(f"<lower>{joint_limits[0]}</lower>")
+            self.append(f"<upper>{joint_limits[1]}</upper>")
         self.append("</limit>")
 
         if joint.relation is not None:
