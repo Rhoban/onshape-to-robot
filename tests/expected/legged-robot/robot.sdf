@@ -1,0 +1,4629 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 232d5b80b8d4b0da823fa0ff / version_id: ef3cec58ad207da0c782c5de -->
+<sdf version="1.7">
+  <model name="test_export_legged_robot_sdf_0">
+    <!-- Link body -->
+    <link name="body">
+      <inertial>
+        <pose>0.0214807 0.174889 0.0251766 0 0 0</pose>
+        <mass>0.59334</mass>
+        <inertia>
+          <ixx>0.0122631</ixx>
+          <ixy>-2.8563e-08</ixy>
+          <ixz>-6.09619e-07</ixz>
+          <iyy>0.00106641</iyy>
+          <iyz>-1.91683e-06</iyz>
+          <izz>0.0129862</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part body_plate -->
+      <visual name="body_plate_visual_mesh_1">
+        <pose relative_to="body">0 0 -0 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_plate_collision_mesh_2">
+        <pose relative_to="body">0 0 -0 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part body_plate_2 -->
+      <visual name="body_plate_2_visual_mesh_1">
+        <pose relative_to="body">0 0 0.0432 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_plate_2_collision_mesh_2">
+        <pose relative_to="body">0 0 0.0432 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part body_back -->
+      <visual name="body_back_visual_mesh_1">
+        <pose relative_to="body">0 0 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_back_collision_mesh_2">
+        <pose relative_to="body">0 0 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30 -->
+      <visual name="mounting_cube_25_30_visual_mesh_1">
+        <pose relative_to="body">-0.0345 0.0043 0.0379 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_collision_mesh_2">
+        <pose relative_to="body">-0.0345 0.0043 0.0379 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_2 -->
+      <visual name="mounting_cube_25_30_2_visual_mesh_1">
+        <pose relative_to="body">-0.0125 0.0283 0.0083 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_2_collision_mesh_2">
+        <pose relative_to="body">-0.0125 0.0283 0.0083 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_3 -->
+      <visual name="mounting_cube_25_30_3_visual_mesh_1">
+        <pose relative_to="body">-0.0075 0.0043 0.0083 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_3_collision_mesh_2">
+        <pose relative_to="body">-0.0075 0.0043 0.0083 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_4 -->
+      <visual name="mounting_cube_25_30_4_visual_mesh_1">
+        <pose relative_to="body">-0.0295 0.0043 0.0083 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_4_collision_mesh_2">
+        <pose relative_to="body">-0.0295 0.0043 0.0083 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_5 -->
+      <visual name="mounting_cube_25_30_5_visual_mesh_1">
+        <pose relative_to="body">-0.0345 0.0283 0.0083 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_5_collision_mesh_2">
+        <pose relative_to="body">-0.0345 0.0283 0.0083 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_6 -->
+      <visual name="mounting_cube_25_30_6_visual_mesh_1">
+        <pose relative_to="body">-0.0125 0.0043 0.0379 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_6_collision_mesh_2">
+        <pose relative_to="body">-0.0125 0.0043 0.0379 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_7 -->
+      <visual name="mounting_cube_25_30_7_visual_mesh_1">
+        <pose relative_to="body">-0.0125 0.0283 0.0429 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_7_collision_mesh_2">
+        <pose relative_to="body">-0.0125 0.0283 0.0429 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_8 -->
+      <visual name="mounting_cube_25_30_8_visual_mesh_1">
+        <pose relative_to="body">-0.0295 0.0283 0.0379 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_8_collision_mesh_2">
+        <pose relative_to="body">-0.0295 0.0283 0.0379 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_9 -->
+      <visual name="mounting_cube_25_30_9_visual_mesh_1">
+        <pose relative_to="body">-0.0345 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_9_collision_mesh_2">
+        <pose relative_to="body">-0.0345 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_10 -->
+      <visual name="mounting_cube_25_30_10_visual_mesh_1">
+        <pose relative_to="body">-0.0125 0.3217 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_10_collision_mesh_2">
+        <pose relative_to="body">-0.0125 0.3217 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_11 -->
+      <visual name="mounting_cube_25_30_11_visual_mesh_1">
+        <pose relative_to="body">-0.0075 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_11_collision_mesh_2">
+        <pose relative_to="body">-0.0075 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_12 -->
+      <visual name="mounting_cube_25_30_12_visual_mesh_1">
+        <pose relative_to="body">-0.0295 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_12_collision_mesh_2">
+        <pose relative_to="body">-0.0295 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_13 -->
+      <visual name="mounting_cube_25_30_13_visual_mesh_1">
+        <pose relative_to="body">-0.0345 0.3217 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_13_collision_mesh_2">
+        <pose relative_to="body">-0.0345 0.3217 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_14 -->
+      <visual name="mounting_cube_25_30_14_visual_mesh_1">
+        <pose relative_to="body">-0.0125 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_14_collision_mesh_2">
+        <pose relative_to="body">-0.0125 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_15 -->
+      <visual name="mounting_cube_25_30_15_visual_mesh_1">
+        <pose relative_to="body">-0.0125 0.3217 0.0036 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_15_collision_mesh_2">
+        <pose relative_to="body">-0.0125 0.3217 0.0036 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_16 -->
+      <visual name="mounting_cube_25_30_16_visual_mesh_1">
+        <pose relative_to="body">-0.0295 0.3217 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_16_collision_mesh_2">
+        <pose relative_to="body">-0.0295 0.3217 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_17 -->
+      <visual name="mounting_cube_25_30_17_visual_mesh_1">
+        <pose relative_to="body">0.0775 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_17_collision_mesh_2">
+        <pose relative_to="body">0.0775 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_18 -->
+      <visual name="mounting_cube_25_30_18_visual_mesh_1">
+        <pose relative_to="body">0.0555 0.3217 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_18_collision_mesh_2">
+        <pose relative_to="body">0.0555 0.3217 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_19 -->
+      <visual name="mounting_cube_25_30_19_visual_mesh_1">
+        <pose relative_to="body">0.0505 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_19_collision_mesh_2">
+        <pose relative_to="body">0.0505 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_20 -->
+      <visual name="mounting_cube_25_30_20_visual_mesh_1">
+        <pose relative_to="body">0.0725 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_20_collision_mesh_2">
+        <pose relative_to="body">0.0725 0.3457 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_21 -->
+      <visual name="mounting_cube_25_30_21_visual_mesh_1">
+        <pose relative_to="body">0.0775 0.3217 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_21_collision_mesh_2">
+        <pose relative_to="body">0.0775 0.3217 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_22 -->
+      <visual name="mounting_cube_25_30_22_visual_mesh_1">
+        <pose relative_to="body">0.0555 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_22_collision_mesh_2">
+        <pose relative_to="body">0.0555 0.3457 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_23 -->
+      <visual name="mounting_cube_25_30_23_visual_mesh_1">
+        <pose relative_to="body">0.0555 0.3217 0.0432 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_23_collision_mesh_2">
+        <pose relative_to="body">0.0555 0.3217 0.0432 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_24 -->
+      <visual name="mounting_cube_25_30_24_visual_mesh_1">
+        <pose relative_to="body">0.0725 0.3217 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_24_collision_mesh_2">
+        <pose relative_to="body">0.0725 0.3217 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_25 -->
+      <visual name="mounting_cube_25_30_25_visual_mesh_1">
+        <pose relative_to="body">0.0775 0.0043 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_25_collision_mesh_2">
+        <pose relative_to="body">0.0775 0.0043 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_26 -->
+      <visual name="mounting_cube_25_30_26_visual_mesh_1">
+        <pose relative_to="body">0.0555 0.0283 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_26_collision_mesh_2">
+        <pose relative_to="body">0.0555 0.0283 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_27 -->
+      <visual name="mounting_cube_25_30_27_visual_mesh_1">
+        <pose relative_to="body">0.0505 0.0043 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_27_collision_mesh_2">
+        <pose relative_to="body">0.0505 0.0043 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_28 -->
+      <visual name="mounting_cube_25_30_28_visual_mesh_1">
+        <pose relative_to="body">0.0725 0.0043 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_28_collision_mesh_2">
+        <pose relative_to="body">0.0725 0.0043 0.0382 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_29 -->
+      <visual name="mounting_cube_25_30_29_visual_mesh_1">
+        <pose relative_to="body">0.0775 0.0283 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_29_collision_mesh_2">
+        <pose relative_to="body">0.0775 0.0283 0.0382 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_30 -->
+      <visual name="mounting_cube_25_30_30_visual_mesh_1">
+        <pose relative_to="body">0.0555 0.0043 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_30_collision_mesh_2">
+        <pose relative_to="body">0.0555 0.0043 0.0086 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_31 -->
+      <visual name="mounting_cube_25_30_31_visual_mesh_1">
+        <pose relative_to="body">0.0555 0.0283 0.0036 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_31_collision_mesh_2">
+        <pose relative_to="body">0.0555 0.0283 0.0036 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_32 -->
+      <visual name="mounting_cube_25_30_32_visual_mesh_1">
+        <pose relative_to="body">0.0725 0.0283 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_32_collision_mesh_2">
+        <pose relative_to="body">0.0725 0.0283 0.0086 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part body_back_2 -->
+      <visual name="body_back_2_visual_mesh_1">
+        <pose relative_to="body">-0 0.1722 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_back_2_collision_mesh_2">
+        <pose relative_to="body">-0 0.1722 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part body_back_3 -->
+      <visual name="body_back_3_visual_mesh_1">
+        <pose relative_to="body">0 0.0574 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_back_3_collision_mesh_2">
+        <pose relative_to="body">0 0.0574 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part body_back_4 -->
+      <visual name="body_back_4_visual_mesh_1">
+        <pose relative_to="body">0 0.1148 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_back_4_collision_mesh_2">
+        <pose relative_to="body">0 0.1148 0.0432 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/body_back.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap -->
+      <visual name="rx64_cap_visual_mesh_1">
+        <pose relative_to="body">-0.028 -0.0057 0.0231 1.5708 -0.391796 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_collision_mesh_2">
+        <pose relative_to="body">-0.028 -0.0057 0.0231 1.5708 -0.391796 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz -->
+      <visual name="mf128zz_visual_mesh_1">
+        <pose relative_to="body">-0.028 -0.00698 0.0231 1.5708 0.391796 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_collision_mesh_2">
+        <pose relative_to="body">-0.028 -0.00698 0.0231 1.5708 0.391796 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101 -->
+      <visual name="hn05_i101_visual_mesh_1">
+        <pose relative_to="body">-0.028 -0.00342 0.0231 -1.5708 -0.792005 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_collision_mesh_2">
+        <pose relative_to="body">-0.028 -0.00342 0.0231 -1.5708 -0.792005 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64 -->
+      <visual name="mx64_visual_mesh_1">
+        <pose relative_to="body">-0.028 0.0163 0.0231 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_collision_mesh_2">
+        <pose relative_to="body">-0.028 0.0163 0.0231 -1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_2 -->
+      <visual name="rx64_cap_2_visual_mesh_1">
+        <pose relative_to="body">-0.028 0.3557 0.0234 1.5708 0.186913 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_2_collision_mesh_2">
+        <pose relative_to="body">-0.028 0.3557 0.0234 1.5708 0.186913 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_2 -->
+      <visual name="mf128zz_2_visual_mesh_1">
+        <pose relative_to="body">-0.028 0.35698 0.0234 -1.5708 0.186913 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_2_collision_mesh_2">
+        <pose relative_to="body">-0.028 0.35698 0.0234 -1.5708 0.186913 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_2 -->
+      <visual name="hn05_i101_2_visual_mesh_1">
+        <pose relative_to="body">-0.028 0.35342 0.0234 -1.5708 -1.37072 3e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_2_collision_mesh_2">
+        <pose relative_to="body">-0.028 0.35342 0.0234 -1.5708 -1.37072 3e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_2 -->
+      <visual name="mx64_2_visual_mesh_1">
+        <pose relative_to="body">-0.028 0.3337 0.0234 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_2_collision_mesh_2">
+        <pose relative_to="body">-0.028 0.3337 0.0234 1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_3 -->
+      <visual name="rx64_cap_3_visual_mesh_1">
+        <pose relative_to="body">0.071 0.3557 0.0234 1.5708 -0.391796 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_3_collision_mesh_2">
+        <pose relative_to="body">0.071 0.3557 0.0234 1.5708 -0.391796 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_3 -->
+      <visual name="mf128zz_3_visual_mesh_1">
+        <pose relative_to="body">0.071 0.35698 0.0234 1.5708 0.391796 -2e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_3_collision_mesh_2">
+        <pose relative_to="body">0.071 0.35698 0.0234 1.5708 0.391796 -2e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_3 -->
+      <visual name="hn05_i101_3_visual_mesh_1">
+        <pose relative_to="body">0.071 0.35342 0.0234 -1.5708 -0.792005 -2e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_3_collision_mesh_2">
+        <pose relative_to="body">0.071 0.35342 0.0234 -1.5708 -0.792005 -2e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_3 -->
+      <visual name="mx64_3_visual_mesh_1">
+        <pose relative_to="body">0.071 0.3337 0.0234 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_3_collision_mesh_2">
+        <pose relative_to="body">0.071 0.3337 0.0234 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_4 -->
+      <visual name="rx64_cap_4_visual_mesh_1">
+        <pose relative_to="body">0.071 -0.0057 0.0234 1.5708 0.186913 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_4_collision_mesh_2">
+        <pose relative_to="body">0.071 -0.0057 0.0234 1.5708 0.186913 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_4 -->
+      <visual name="mf128zz_4_visual_mesh_1">
+        <pose relative_to="body">0.071 -0.00698 0.0234 -1.5708 0.186913 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_4_collision_mesh_2">
+        <pose relative_to="body">0.071 -0.00698 0.0234 -1.5708 0.186913 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_4 -->
+      <visual name="hn05_i101_4_visual_mesh_1">
+        <pose relative_to="body">0.071 -0.00342 0.0234 -1.5708 -1.37072 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_4_collision_mesh_2">
+        <pose relative_to="body">0.071 -0.00342 0.0234 -1.5708 -1.37072 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_4 -->
+      <visual name="mx64_4_visual_mesh_1">
+        <pose relative_to="body">0.071 0.0163 0.0234 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_4_collision_mesh_2">
+        <pose relative_to="body">0.071 0.0163 0.0234 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_top -->
+    <link name="leg_top">
+      <inertial>
+        <pose>0.00232729 -0.0615551 0.0232841 0 0 0</pose>
+        <mass>0.115968</mass>
+        <inertia>
+          <ixx>6.37077e-05</ixx>
+          <ixy>3.18309e-06</ixy>
+          <ixz>4.3256e-08</ixz>
+          <iyy>3.93169e-05</iyy>
+          <iyz>6.7374e-08</iyz>
+          <izz>6.27571e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="fl_1">0 0 0 0 -0 0</pose>
+      <!-- Part spacing_plate -->
+      <visual name="spacing_plate_visual_mesh_1">
+        <pose relative_to="leg_top">0.0166 -0.0538608 0.0459 3.14159 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_collision_mesh_2">
+        <pose relative_to="leg_top">0.0166 -0.0538608 0.0459 3.14159 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_extension -->
+      <visual name="spacing_plate_extension_visual_mesh_1">
+        <pose relative_to="leg_top">-0.016 -0.0858608 0.04972 -3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_extension_collision_mesh_2">
+        <pose relative_to="leg_top">-0.016 -0.0858608 0.04972 -3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_2 -->
+      <visual name="spacing_plate_2_visual_mesh_1">
+        <pose relative_to="leg_top">0.0166 -0.0858608 -0 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_2_collision_mesh_2">
+        <pose relative_to="leg_top">0.0166 -0.0858608 -0 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate -->
+      <visual name="leg_top_plate_visual_mesh_1">
+        <pose relative_to="leg_top">-0.016 -0.016 0.04672 0 0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_collision_mesh_2">
+        <pose relative_to="leg_top">-0.016 -0.016 0.04672 0 0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate_2 -->
+      <visual name="leg_top_plate_2_visual_mesh_1">
+        <pose relative_to="leg_top">-0.016 -0.016 -0.003 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_2_collision_mesh_2">
+        <pose relative_to="leg_top">-0.016 -0.016 -0.003 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_33 -->
+      <visual name="mounting_cube_25_30_33_visual_mesh_1">
+        <pose relative_to="leg_top">0.0123 -0.0833608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_33_collision_mesh_2">
+        <pose relative_to="leg_top">0.0123 -0.0833608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_34 -->
+      <visual name="mounting_cube_25_30_34_visual_mesh_1">
+        <pose relative_to="leg_top">-0.0117 -0.0613608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_34_collision_mesh_2">
+        <pose relative_to="leg_top">-0.0117 -0.0613608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_35 -->
+      <visual name="mounting_cube_25_30_35_visual_mesh_1">
+        <pose relative_to="leg_top">0.0123 -0.0563608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_35_collision_mesh_2">
+        <pose relative_to="leg_top">0.0123 -0.0563608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_36 -->
+      <visual name="mounting_cube_25_30_36_visual_mesh_1">
+        <pose relative_to="leg_top">0.0123 -0.0783608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_36_collision_mesh_2">
+        <pose relative_to="leg_top">0.0123 -0.0783608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_37 -->
+      <visual name="mounting_cube_25_30_37_visual_mesh_1">
+        <pose relative_to="leg_top">-0.0117 -0.0833608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_37_collision_mesh_2">
+        <pose relative_to="leg_top">-0.0117 -0.0833608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_38 -->
+      <visual name="mounting_cube_25_30_38_visual_mesh_1">
+        <pose relative_to="leg_top">0.0123 -0.0613608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_38_collision_mesh_2">
+        <pose relative_to="leg_top">0.0123 -0.0613608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_39 -->
+      <visual name="mounting_cube_25_30_39_visual_mesh_1">
+        <pose relative_to="leg_top">-0.0117 -0.0613608 0.0429 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_39_collision_mesh_2">
+        <pose relative_to="leg_top">-0.0117 -0.0613608 0.0429 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_40 -->
+      <visual name="mounting_cube_25_30_40_visual_mesh_1">
+        <pose relative_to="leg_top">-0.0117 -0.0783608 0.0379 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_40_collision_mesh_2">
+        <pose relative_to="leg_top">-0.0117 -0.0783608 0.0379 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_5 -->
+      <visual name="rx64_cap_5_visual_mesh_1">
+        <pose relative_to="leg_top">0.0223 -0.0768608 0.0231 -1.5708 -1.10558 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_5_collision_mesh_2">
+        <pose relative_to="leg_top">0.0223 -0.0768608 0.0231 -1.5708 -1.10558 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_5 -->
+      <visual name="mf128zz_5_visual_mesh_1">
+        <pose relative_to="leg_top">0.02358 -0.0768608 0.0231 1.5708 1.55849 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_5_collision_mesh_2">
+        <pose relative_to="leg_top">0.02358 -0.0768608 0.0231 1.5708 1.55849 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_5 -->
+      <visual name="hn05_i101_5_visual_mesh_1">
+        <pose relative_to="leg_top">0.02002 -0.0768608 0.0231 -1.5708 0.0565903 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_5_collision_mesh_2">
+        <pose relative_to="leg_top">0.02002 -0.0768608 0.0231 -1.5708 0.0565903 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_5 -->
+      <visual name="mx64_5_visual_mesh_1">
+        <pose relative_to="leg_top">0.0003 -0.0768608 0.0231 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_5_collision_mesh_2">
+        <pose relative_to="leg_top">0.0003 -0.0768608 0.0231 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_middle -->
+    <link name="leg_middle">
+      <inertial>
+        <pose>0.039 -0 0.023505 0 0 0</pose>
+        <mass>0.0282748</mass>
+        <inertia>
+          <ixx>1.51213e-05</ixx>
+          <ixy>1.76438e-06</ixy>
+          <ixz>0</ixz>
+          <iyy>2.51079e-05</iyy>
+          <iyz>-0</iyz>
+          <izz>1.72974e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="fl_2">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer_mid -->
+      <visual name="leg_spacer_mid_visual_mesh_1">
+        <pose relative_to="leg_middle">0.049 -0.0125 -0.034 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_collision_mesh_2">
+        <pose relative_to="leg_middle">0.049 -0.0125 -0.034 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate -->
+      <visual name="leg_middle_plate_visual_mesh_1">
+        <pose relative_to="leg_middle">-0.016 0.0175 0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_collision_mesh_2">
+        <pose relative_to="leg_middle">-0.016 0.0175 0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_mid_2 -->
+      <visual name="leg_spacer_mid_2_visual_mesh_1">
+        <pose relative_to="leg_middle">0.029 0.0125 -0.034 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_2_collision_mesh_2">
+        <pose relative_to="leg_middle">0.029 0.0125 -0.034 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate_2 -->
+      <visual name="leg_middle_plate_2_visual_mesh_1">
+        <pose relative_to="leg_middle">-0.016 0.0175 0.05002 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_2_collision_mesh_2">
+        <pose relative_to="leg_middle">-0.016 0.0175 0.05002 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_tip -->
+    <link name="leg_tip">
+      <inertial>
+        <pose>-7.08e-10 -0.0411183 -0.0252857 0 0 0</pose>
+        <mass>0.131575</mass>
+        <inertia>
+          <ixx>0.000294116</ixx>
+          <ixy>3e-12</ixy>
+          <ixz>2e-12</ixz>
+          <iyy>3.97285e-05</iyy>
+          <iyz>9.25707e-06</iyz>
+          <izz>0.00028263</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="fl_3">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer -->
+      <visual name="leg_spacer_visual_mesh_1">
+        <pose relative_to="leg_tip">-0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_collision_mesh_2">
+        <pose relative_to="leg_tip">-0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_2 -->
+      <visual name="leg_spacer_2_visual_mesh_1">
+        <pose relative_to="leg_tip">-0.0161 -0.0831 -0.0405 0 0 -0.497652</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_2_collision_mesh_2">
+        <pose relative_to="leg_tip">-0.0161 -0.0831 -0.0405 0 0 -0.497652</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate -->
+      <visual name="leg_tip_plate_visual_mesh_1">
+        <pose relative_to="leg_tip">0 -0 -0.0235 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_collision_mesh_2">
+        <pose relative_to="leg_tip">0 -0 -0.0235 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_3 -->
+      <visual name="leg_spacer_3_visual_mesh_1">
+        <pose relative_to="leg_tip">0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_3_collision_mesh_2">
+        <pose relative_to="leg_tip">0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_4 -->
+      <visual name="leg_spacer_4_visual_mesh_1">
+        <pose relative_to="leg_tip">0.0161 -0.0831 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_4_collision_mesh_2">
+        <pose relative_to="leg_tip">0.0161 -0.0831 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate_2 -->
+      <visual name="leg_tip_plate_2_visual_mesh_1">
+        <pose relative_to="leg_tip">-0 0 -0.0605 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_2_collision_mesh_2">
+        <pose relative_to="leg_tip">-0 0 -0.0605 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_5 -->
+      <visual name="leg_spacer_5_visual_mesh_1">
+        <pose relative_to="leg_tip">0 -0.1392 -0.0065 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_5_collision_mesh_2">
+        <pose relative_to="leg_tip">0 -0.1392 -0.0065 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_6 -->
+      <visual name="rx64_cap_6_visual_mesh_1">
+        <pose relative_to="leg_tip">-0 0 -0.0455 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_6_collision_mesh_2">
+        <pose relative_to="leg_tip">-0 0 -0.0455 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_6 -->
+      <visual name="mf128zz_6_visual_mesh_1">
+        <pose relative_to="leg_tip">-0 0 -0.04678 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_6_collision_mesh_2">
+        <pose relative_to="leg_tip">-0 0 -0.04678 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_6 -->
+      <visual name="hn05_i101_6_visual_mesh_1">
+        <pose relative_to="leg_tip">-0 0 -0.04322 3.14159 -0 -0.386994</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_6_collision_mesh_2">
+        <pose relative_to="leg_tip">-0 0 -0.04322 3.14159 -0 -0.386994</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_6 -->
+      <visual name="mx64_6_visual_mesh_1">
+        <pose relative_to="leg_tip">-0 0 -0.0235 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_6_collision_mesh_2">
+        <pose relative_to="leg_tip">-0 0 -0.0235 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from leg_middle to leg_tip -->
+    <joint name="fl_3" type="revolute">
+      <pose relative_to="leg_middle">0.078 -0 0 -3.14159 -0 -1.5708</pose>
+      <parent>leg_middle</parent>
+      <child>leg_tip</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from leg_top to leg_middle -->
+    <joint name="fl_2" type="revolute">
+      <pose relative_to="leg_top">-0.0232 -0.0768608 0.0231 -1.5708 -0 -1.5708</pose>
+      <parent>leg_top</parent>
+      <child>leg_middle</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to leg_top -->
+    <joint name="fl_1" type="revolute">
+      <pose relative_to="body">0.071 0.0398 0.0234 1.5708 -1e-12 0</pose>
+      <parent>body</parent>
+      <child>leg_top</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link leg_top_2 -->
+    <link name="leg_top_2">
+      <inertial>
+        <pose>0.00232729 0.0615551 0.0234359 0 0 0</pose>
+        <mass>0.115968</mass>
+        <inertia>
+          <ixx>6.37077e-05</ixx>
+          <ixy>-3.18309e-06</ixy>
+          <ixz>-4.3256e-08</ixz>
+          <iyy>3.93169e-05</iyy>
+          <iyz>6.7374e-08</iyz>
+          <izz>6.27571e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="fr_1">0 0 0 0 -0 0</pose>
+      <!-- Part spacing_plate_3 -->
+      <visual name="spacing_plate_3_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0166 0.0538608 0.00082 -0 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_3_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0166 0.0538608 0.00082 -0 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_extension_2 -->
+      <visual name="spacing_plate_extension_2_visual_mesh_1">
+        <pose relative_to="leg_top_2">-0.016 0.0858608 -0.003 0 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_extension_2_collision_mesh_2">
+        <pose relative_to="leg_top_2">-0.016 0.0858608 -0.003 0 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_4 -->
+      <visual name="spacing_plate_4_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0166 0.0858608 0.04672 -3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_4_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0166 0.0858608 0.04672 -3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate_3 -->
+      <visual name="leg_top_plate_3_visual_mesh_1">
+        <pose relative_to="leg_top_2">-0.016 0.016 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_3_collision_mesh_2">
+        <pose relative_to="leg_top_2">-0.016 0.016 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate_4 -->
+      <visual name="leg_top_plate_4_visual_mesh_1">
+        <pose relative_to="leg_top_2">-0.016 0.016 0.04972 3.14159 -0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_4_collision_mesh_2">
+        <pose relative_to="leg_top_2">-0.016 0.016 0.04972 3.14159 -0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_41 -->
+      <visual name="mounting_cube_25_30_41_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0123 0.0833608 0.00882 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_41_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0123 0.0833608 0.00882 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_42 -->
+      <visual name="mounting_cube_25_30_42_visual_mesh_1">
+        <pose relative_to="leg_top_2">-0.0117 0.0613608 0.03842 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_42_collision_mesh_2">
+        <pose relative_to="leg_top_2">-0.0117 0.0613608 0.03842 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_43 -->
+      <visual name="mounting_cube_25_30_43_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0123 0.0563608 0.03842 -0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_43_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0123 0.0563608 0.03842 -0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_44 -->
+      <visual name="mounting_cube_25_30_44_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0123 0.0783608 0.03842 -0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_44_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0123 0.0783608 0.03842 -0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_45 -->
+      <visual name="mounting_cube_25_30_45_visual_mesh_1">
+        <pose relative_to="leg_top_2">-0.0117 0.0833608 0.03842 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_45_collision_mesh_2">
+        <pose relative_to="leg_top_2">-0.0117 0.0833608 0.03842 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_46 -->
+      <visual name="mounting_cube_25_30_46_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0123 0.0613608 0.00882 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_46_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0123 0.0613608 0.00882 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_47 -->
+      <visual name="mounting_cube_25_30_47_visual_mesh_1">
+        <pose relative_to="leg_top_2">-0.0117 0.0613608 0.00382 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_47_collision_mesh_2">
+        <pose relative_to="leg_top_2">-0.0117 0.0613608 0.00382 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_48 -->
+      <visual name="mounting_cube_25_30_48_visual_mesh_1">
+        <pose relative_to="leg_top_2">-0.0117 0.0783608 0.00882 0 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_48_collision_mesh_2">
+        <pose relative_to="leg_top_2">-0.0117 0.0783608 0.00882 0 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_7 -->
+      <visual name="rx64_cap_7_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0223 0.0768608 0.02362 -1.5708 -1.10558 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_7_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0223 0.0768608 0.02362 -1.5708 -1.10558 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_7 -->
+      <visual name="mf128zz_7_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.02358 0.0768608 0.02362 1.5708 1.55849 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_7_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.02358 0.0768608 0.02362 1.5708 1.55849 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_7 -->
+      <visual name="hn05_i101_7_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.02002 0.0768608 0.02362 -1.5708 0.0565903 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_7_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.02002 0.0768608 0.02362 -1.5708 0.0565903 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_7 -->
+      <visual name="mx64_7_visual_mesh_1">
+        <pose relative_to="leg_top_2">0.0003 0.0768608 0.02362 -0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_7_collision_mesh_2">
+        <pose relative_to="leg_top_2">0.0003 0.0768608 0.02362 -0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_middle_2 -->
+    <link name="leg_middle_2">
+      <inertial>
+        <pose>0.039 0 0.023505 0 0 0</pose>
+        <mass>0.0282748</mass>
+        <inertia>
+          <ixx>1.51213e-05</ixx>
+          <ixy>1.76438e-06</ixy>
+          <ixz>0</ixz>
+          <iyy>2.51079e-05</iyy>
+          <iyz>-0</iyz>
+          <izz>1.72974e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="fr_2">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer_mid_3 -->
+      <visual name="leg_spacer_mid_3_visual_mesh_1">
+        <pose relative_to="leg_middle_2">0.049 -0.0125 -0.034 -0 -0 1.28928</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_3_collision_mesh_2">
+        <pose relative_to="leg_middle_2">0.049 -0.0125 -0.034 -0 -0 1.28928</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate_3 -->
+      <visual name="leg_middle_plate_3_visual_mesh_1">
+        <pose relative_to="leg_middle_2">-0.016 0.0175 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_3_collision_mesh_2">
+        <pose relative_to="leg_middle_2">-0.016 0.0175 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_mid_4 -->
+      <visual name="leg_spacer_mid_4_visual_mesh_1">
+        <pose relative_to="leg_middle_2">0.029 0.0125 -0.034 -0 -0 1.28928</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_4_collision_mesh_2">
+        <pose relative_to="leg_middle_2">0.029 0.0125 -0.034 -0 -0 1.28928</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate_4 -->
+      <visual name="leg_middle_plate_4_visual_mesh_1">
+        <pose relative_to="leg_middle_2">-0.016 0.0175 0.05002 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_4_collision_mesh_2">
+        <pose relative_to="leg_middle_2">-0.016 0.0175 0.05002 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_tip_2 -->
+    <link name="leg_tip_2">
+      <inertial>
+        <pose>-7.08e-10 -0.0411183 -0.0252857 0 0 0</pose>
+        <mass>0.131575</mass>
+        <inertia>
+          <ixx>0.000294116</ixx>
+          <ixy>3e-12</ixy>
+          <ixz>2e-12</ixz>
+          <iyy>3.97285e-05</iyy>
+          <iyz>9.25707e-06</iyz>
+          <izz>0.00028263</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="fr_3">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer_6 -->
+      <visual name="leg_spacer_6_visual_mesh_1">
+        <pose relative_to="leg_tip_2">-0.013943 -0.11505 -0.0405 -0 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_6_collision_mesh_2">
+        <pose relative_to="leg_tip_2">-0.013943 -0.11505 -0.0405 -0 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_7 -->
+      <visual name="leg_spacer_7_visual_mesh_1">
+        <pose relative_to="leg_tip_2">-0.0161 -0.0831 -0.0405 -0 -0 1.35466</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_7_collision_mesh_2">
+        <pose relative_to="leg_tip_2">-0.0161 -0.0831 -0.0405 -0 -0 1.35466</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate_3 -->
+      <visual name="leg_tip_plate_3_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0 -0 -0.0235 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_3_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0 -0 -0.0235 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_8 -->
+      <visual name="leg_spacer_8_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0.013943 -0.11505 -0.0405 -0 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_8_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0.013943 -0.11505 -0.0405 -0 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_9 -->
+      <visual name="leg_spacer_9_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0.0161 -0.0831 -0.0405 -0 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_9_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0.0161 -0.0831 -0.0405 -0 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate_4 -->
+      <visual name="leg_tip_plate_4_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0 -0 -0.0605 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_4_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0 -0 -0.0605 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_10 -->
+      <visual name="leg_spacer_10_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0 -0.1392 -0.0065 3.14159 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_10_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0 -0.1392 -0.0065 3.14159 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_8 -->
+      <visual name="rx64_cap_8_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0 -0 -0.0455 3.14159 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_8_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0 -0 -0.0455 3.14159 0 -2.86007</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_8 -->
+      <visual name="mf128zz_8_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0 -0 -0.04678 0 -0 0.281518</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_8_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0 -0 -0.04678 0 -0 0.281518</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_8 -->
+      <visual name="hn05_i101_8_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0 -0 -0.04322 3.14159 -0 1.46532</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_8_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0 -0 -0.04322 3.14159 -0 1.46532</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_8 -->
+      <visual name="mx64_8_visual_mesh_1">
+        <pose relative_to="leg_tip_2">0 -0 -0.0235 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_8_collision_mesh_2">
+        <pose relative_to="leg_tip_2">0 -0 -0.0235 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from leg_middle_2 to leg_tip_2 -->
+    <joint name="fr_3" type="revolute">
+      <pose relative_to="leg_middle_2">0.078 0 0 3.14159 0 -1.5708</pose>
+      <parent>leg_middle_2</parent>
+      <child>leg_tip_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from leg_top_2 to leg_middle_2 -->
+    <joint name="fr_2" type="revolute">
+      <pose relative_to="leg_top_2">-0.0232 0.0768608 0.02362 1.5708 -0 1.5708</pose>
+      <parent>leg_top_2</parent>
+      <child>leg_middle_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to leg_top_2 -->
+    <joint name="fr_1" type="revolute">
+      <pose relative_to="body">-0.028 0.0398 0.0231 -1.5708 1e-12 -3.14159</pose>
+      <parent>body</parent>
+      <child>leg_top_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link leg_top_3 -->
+    <link name="leg_top_3">
+      <inertial>
+        <pose>0.00232729 0.0615551 0.0234359 0 0 0</pose>
+        <mass>0.115968</mass>
+        <inertia>
+          <ixx>6.37077e-05</ixx>
+          <ixy>-3.18309e-06</ixy>
+          <ixz>-4.3256e-08</ixz>
+          <iyy>3.93169e-05</iyy>
+          <iyz>6.7374e-08</iyz>
+          <izz>6.27571e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="bl_1">0 0 0 0 -0 0</pose>
+      <!-- Part spacing_plate_5 -->
+      <visual name="spacing_plate_5_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0166 0.0538608 0.00082 0 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_5_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0166 0.0538608 0.00082 0 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_extension_3 -->
+      <visual name="spacing_plate_extension_3_visual_mesh_1">
+        <pose relative_to="leg_top_3">-0.016 0.0858608 -0.003 -0 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_extension_3_collision_mesh_2">
+        <pose relative_to="leg_top_3">-0.016 0.0858608 -0.003 -0 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_6 -->
+      <visual name="spacing_plate_6_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0166 0.0858608 0.04672 3.14159 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_6_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0166 0.0858608 0.04672 3.14159 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate_5 -->
+      <visual name="leg_top_plate_5_visual_mesh_1">
+        <pose relative_to="leg_top_3">-0.016 0.016 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_5_collision_mesh_2">
+        <pose relative_to="leg_top_3">-0.016 0.016 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate_6 -->
+      <visual name="leg_top_plate_6_visual_mesh_1">
+        <pose relative_to="leg_top_3">-0.016 0.016 0.04972 3.14159 0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_6_collision_mesh_2">
+        <pose relative_to="leg_top_3">-0.016 0.016 0.04972 3.14159 0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_49 -->
+      <visual name="mounting_cube_25_30_49_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0123 0.0833608 0.00882 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_49_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0123 0.0833608 0.00882 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_50 -->
+      <visual name="mounting_cube_25_30_50_visual_mesh_1">
+        <pose relative_to="leg_top_3">-0.0117 0.0613608 0.03842 -3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_50_collision_mesh_2">
+        <pose relative_to="leg_top_3">-0.0117 0.0613608 0.03842 -3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_51 -->
+      <visual name="mounting_cube_25_30_51_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0123 0.0563608 0.03842 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_51_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0123 0.0563608 0.03842 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_52 -->
+      <visual name="mounting_cube_25_30_52_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0123 0.0783608 0.03842 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_52_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0123 0.0783608 0.03842 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_53 -->
+      <visual name="mounting_cube_25_30_53_visual_mesh_1">
+        <pose relative_to="leg_top_3">-0.0117 0.0833608 0.03842 -3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_53_collision_mesh_2">
+        <pose relative_to="leg_top_3">-0.0117 0.0833608 0.03842 -3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_54 -->
+      <visual name="mounting_cube_25_30_54_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0123 0.0613608 0.00882 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_54_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0123 0.0613608 0.00882 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_55 -->
+      <visual name="mounting_cube_25_30_55_visual_mesh_1">
+        <pose relative_to="leg_top_3">-0.0117 0.0613608 0.00382 -3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_55_collision_mesh_2">
+        <pose relative_to="leg_top_3">-0.0117 0.0613608 0.00382 -3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_56 -->
+      <visual name="mounting_cube_25_30_56_visual_mesh_1">
+        <pose relative_to="leg_top_3">-0.0117 0.0783608 0.00882 -0 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_56_collision_mesh_2">
+        <pose relative_to="leg_top_3">-0.0117 0.0783608 0.00882 -0 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_9 -->
+      <visual name="rx64_cap_9_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0223 0.0768608 0.02362 1.5708 1.10558 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_9_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0223 0.0768608 0.02362 1.5708 1.10558 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_9 -->
+      <visual name="mf128zz_9_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.02358 0.0768608 0.02362 -1.5708 -1.55849 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_9_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.02358 0.0768608 0.02362 -1.5708 -1.55849 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_9 -->
+      <visual name="hn05_i101_9_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.02002 0.0768608 0.02362 1.5708 -0.0565903 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_9_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.02002 0.0768608 0.02362 1.5708 -0.0565903 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_9 -->
+      <visual name="mx64_9_visual_mesh_1">
+        <pose relative_to="leg_top_3">0.0003 0.0768608 0.02362 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_9_collision_mesh_2">
+        <pose relative_to="leg_top_3">0.0003 0.0768608 0.02362 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_middle_3 -->
+    <link name="leg_middle_3">
+      <inertial>
+        <pose>0.039 0 0.023505 0 0 0</pose>
+        <mass>0.0282748</mass>
+        <inertia>
+          <ixx>1.51213e-05</ixx>
+          <ixy>1.76438e-06</ixy>
+          <ixz>0</ixz>
+          <iyy>2.51079e-05</iyy>
+          <iyz>-0</iyz>
+          <izz>1.72974e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="bl_2">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer_mid_5 -->
+      <visual name="leg_spacer_mid_5_visual_mesh_1">
+        <pose relative_to="leg_middle_3">0.049 -0.0125 -0.034 -0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_5_collision_mesh_2">
+        <pose relative_to="leg_middle_3">0.049 -0.0125 -0.034 -0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate_5 -->
+      <visual name="leg_middle_plate_5_visual_mesh_1">
+        <pose relative_to="leg_middle_3">-0.016 0.0175 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_5_collision_mesh_2">
+        <pose relative_to="leg_middle_3">-0.016 0.0175 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_mid_6 -->
+      <visual name="leg_spacer_mid_6_visual_mesh_1">
+        <pose relative_to="leg_middle_3">0.029 0.0125 -0.034 -0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_6_collision_mesh_2">
+        <pose relative_to="leg_middle_3">0.029 0.0125 -0.034 -0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate_6 -->
+      <visual name="leg_middle_plate_6_visual_mesh_1">
+        <pose relative_to="leg_middle_3">-0.016 0.0175 0.05002 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_6_collision_mesh_2">
+        <pose relative_to="leg_middle_3">-0.016 0.0175 0.05002 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_tip_3 -->
+    <link name="leg_tip_3">
+      <inertial>
+        <pose>-7.08e-10 -0.0411183 -0.0252857 0 0 0</pose>
+        <mass>0.131575</mass>
+        <inertia>
+          <ixx>0.000294116</ixx>
+          <ixy>3e-12</ixy>
+          <ixz>2e-12</ixz>
+          <iyy>3.97285e-05</iyy>
+          <iyz>9.25707e-06</iyz>
+          <izz>0.00028263</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="bl_3">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer_11 -->
+      <visual name="leg_spacer_11_visual_mesh_1">
+        <pose relative_to="leg_tip_3">-0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_11_collision_mesh_2">
+        <pose relative_to="leg_tip_3">-0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_12 -->
+      <visual name="leg_spacer_12_visual_mesh_1">
+        <pose relative_to="leg_tip_3">-0.0161 -0.0831 -0.0405 0 0 -0.497652</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_12_collision_mesh_2">
+        <pose relative_to="leg_tip_3">-0.0161 -0.0831 -0.0405 0 0 -0.497652</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate_5 -->
+      <visual name="leg_tip_plate_5_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0 -0 -0.0235 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_5_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0 -0 -0.0235 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_13 -->
+      <visual name="leg_spacer_13_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_13_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0.013943 -0.11505 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_14 -->
+      <visual name="leg_spacer_14_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0.0161 -0.0831 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_14_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0.0161 -0.0831 -0.0405 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate_6 -->
+      <visual name="leg_tip_plate_6_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0 -0 -0.0605 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_6_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0 -0 -0.0605 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_15 -->
+      <visual name="leg_spacer_15_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0 -0.1392 -0.0065 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_15_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0 -0.1392 -0.0065 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_10 -->
+      <visual name="rx64_cap_10_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0 0 -0.0455 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_10_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0 0 -0.0455 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_10 -->
+      <visual name="mf128zz_10_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0 0 -0.04678 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_10_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0 0 -0.04678 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_10 -->
+      <visual name="hn05_i101_10_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0 0 -0.04322 3.14159 0 -0.386994</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_10_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0 0 -0.04322 3.14159 0 -0.386994</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_10 -->
+      <visual name="mx64_10_visual_mesh_1">
+        <pose relative_to="leg_tip_3">0 0 -0.0235 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_10_collision_mesh_2">
+        <pose relative_to="leg_tip_3">0 0 -0.0235 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from leg_middle_3 to leg_tip_3 -->
+    <joint name="bl_3" type="revolute">
+      <pose relative_to="leg_middle_3">0.078 0 0 3.14159 -0 -1.5708</pose>
+      <parent>leg_middle_3</parent>
+      <child>leg_tip_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from leg_top_3 to leg_middle_3 -->
+    <joint name="bl_2" type="revolute">
+      <pose relative_to="leg_top_3">-0.0232 0.0768608 0.02362 1.5708 0 1.5708</pose>
+      <parent>leg_top_3</parent>
+      <child>leg_middle_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to leg_top_3 -->
+    <joint name="bl_1" type="revolute">
+      <pose relative_to="body">0.071 0.3102 0.0234 -1.5708 1e-12 0</pose>
+      <parent>body</parent>
+      <child>leg_top_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link leg_top_4 -->
+    <link name="leg_top_4">
+      <inertial>
+        <pose>0.00232729 -0.0615551 0.0232841 0 0 0</pose>
+        <mass>0.115968</mass>
+        <inertia>
+          <ixx>6.37077e-05</ixx>
+          <ixy>3.18309e-06</ixy>
+          <ixz>4.3256e-08</ixz>
+          <iyy>3.93169e-05</iyy>
+          <iyz>6.7374e-08</iyz>
+          <izz>6.27571e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="br_1">0 0 0 0 -0 0</pose>
+      <!-- Part spacing_plate_7 -->
+      <visual name="spacing_plate_7_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0166 -0.0538608 0.0459 -3.14159 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_7_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0166 -0.0538608 0.0459 -3.14159 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_extension_4 -->
+      <visual name="spacing_plate_extension_4_visual_mesh_1">
+        <pose relative_to="leg_top_4">-0.016 -0.0858608 0.04972 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_extension_4_collision_mesh_2">
+        <pose relative_to="leg_top_4">-0.016 -0.0858608 0.04972 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate_extension.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part spacing_plate_8 -->
+      <visual name="spacing_plate_8_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0166 -0.0858608 0 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="spacing_plate_8_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0166 -0.0858608 0 -0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/spacing_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate_7 -->
+      <visual name="leg_top_plate_7_visual_mesh_1">
+        <pose relative_to="leg_top_4">-0.016 -0.016 0.04672 -0 -0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_7_collision_mesh_2">
+        <pose relative_to="leg_top_4">-0.016 -0.016 0.04672 -0 -0 -1e-12</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_top_plate_8 -->
+      <visual name="leg_top_plate_8_visual_mesh_1">
+        <pose relative_to="leg_top_4">-0.016 -0.016 -0.003 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_top_plate_8_collision_mesh_2">
+        <pose relative_to="leg_top_4">-0.016 -0.016 -0.003 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_top_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_57 -->
+      <visual name="mounting_cube_25_30_57_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0123 -0.0833608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_57_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0123 -0.0833608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_58 -->
+      <visual name="mounting_cube_25_30_58_visual_mesh_1">
+        <pose relative_to="leg_top_4">-0.0117 -0.0613608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_58_collision_mesh_2">
+        <pose relative_to="leg_top_4">-0.0117 -0.0613608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_59 -->
+      <visual name="mounting_cube_25_30_59_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0123 -0.0563608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_59_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0123 -0.0563608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_60 -->
+      <visual name="mounting_cube_25_30_60_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0123 -0.0783608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_60_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0123 -0.0783608 0.0083 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_61 -->
+      <visual name="mounting_cube_25_30_61_visual_mesh_1">
+        <pose relative_to="leg_top_4">-0.0117 -0.0833608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_61_collision_mesh_2">
+        <pose relative_to="leg_top_4">-0.0117 -0.0833608 0.0083 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_62 -->
+      <visual name="mounting_cube_25_30_62_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0123 -0.0613608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_62_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0123 -0.0613608 0.0379 -1e-12 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_63 -->
+      <visual name="mounting_cube_25_30_63_visual_mesh_1">
+        <pose relative_to="leg_top_4">-0.0117 -0.0613608 0.0429 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_63_collision_mesh_2">
+        <pose relative_to="leg_top_4">-0.0117 -0.0613608 0.0429 1e-12 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mounting_cube_25_30_64 -->
+      <visual name="mounting_cube_25_30_64_visual_mesh_1">
+        <pose relative_to="leg_top_4">-0.0117 -0.0783608 0.0379 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mounting_cube_25_30_64_collision_mesh_2">
+        <pose relative_to="leg_top_4">-0.0117 -0.0783608 0.0379 3.14159 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mounting_cube_25_30.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_11 -->
+      <visual name="rx64_cap_11_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0223 -0.0768608 0.0231 1.5708 1.10558 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_11_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0223 -0.0768608 0.0231 1.5708 1.10558 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_11 -->
+      <visual name="mf128zz_11_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.02358 -0.0768608 0.0231 -1.5708 -1.55849 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_11_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.02358 -0.0768608 0.0231 -1.5708 -1.55849 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_11 -->
+      <visual name="hn05_i101_11_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.02002 -0.0768608 0.0231 1.5708 -0.0565903 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_11_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.02002 -0.0768608 0.0231 1.5708 -0.0565903 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_11 -->
+      <visual name="mx64_11_visual_mesh_1">
+        <pose relative_to="leg_top_4">0.0003 -0.0768608 0.0231 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_11_collision_mesh_2">
+        <pose relative_to="leg_top_4">0.0003 -0.0768608 0.0231 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_middle_4 -->
+    <link name="leg_middle_4">
+      <inertial>
+        <pose>0.039 -0 0.023505 0 0 0</pose>
+        <mass>0.0282748</mass>
+        <inertia>
+          <ixx>1.51213e-05</ixx>
+          <ixy>1.76438e-06</ixy>
+          <ixz>0</ixz>
+          <iyy>2.51079e-05</iyy>
+          <iyz>0</iyz>
+          <izz>1.72974e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="br_2">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer_mid_7 -->
+      <visual name="leg_spacer_mid_7_visual_mesh_1">
+        <pose relative_to="leg_middle_4">0.049 -0.0125 -0.034 0 -0 1.179</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_7_collision_mesh_2">
+        <pose relative_to="leg_middle_4">0.049 -0.0125 -0.034 0 -0 1.179</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate_7 -->
+      <visual name="leg_middle_plate_7_visual_mesh_1">
+        <pose relative_to="leg_middle_4">-0.016 0.0175 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_7_collision_mesh_2">
+        <pose relative_to="leg_middle_4">-0.016 0.0175 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_mid_8 -->
+      <visual name="leg_spacer_mid_8_visual_mesh_1">
+        <pose relative_to="leg_middle_4">0.029 0.0125 -0.034 0 -0 1.179</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_mid_8_collision_mesh_2">
+        <pose relative_to="leg_middle_4">0.029 0.0125 -0.034 0 -0 1.179</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer_mid.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_middle_plate_8 -->
+      <visual name="leg_middle_plate_8_visual_mesh_1">
+        <pose relative_to="leg_middle_4">-0.016 0.0175 0.05002 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_middle_plate_8_collision_mesh_2">
+        <pose relative_to="leg_middle_4">-0.016 0.0175 0.05002 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_middle_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_tip_4 -->
+    <link name="leg_tip_4">
+      <inertial>
+        <pose>-7.08e-10 -0.0411183 -0.0252857 0 0 0</pose>
+        <mass>0.131575</mass>
+        <inertia>
+          <ixx>0.000294116</ixx>
+          <ixy>3e-12</ixy>
+          <ixz>2e-12</ixz>
+          <iyy>3.97285e-05</iyy>
+          <iyz>9.25707e-06</iyz>
+          <izz>0.00028263</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="br_3">0 0 0 0 -0 0</pose>
+      <!-- Part leg_spacer_16 -->
+      <visual name="leg_spacer_16_visual_mesh_1">
+        <pose relative_to="leg_tip_4">-0.013943 -0.11505 -0.0405 -0 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_16_collision_mesh_2">
+        <pose relative_to="leg_tip_4">-0.013943 -0.11505 -0.0405 -0 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_17 -->
+      <visual name="leg_spacer_17_visual_mesh_1">
+        <pose relative_to="leg_tip_4">-0.0161 -0.0831 -0.0405 -0 -0 1.46494</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_17_collision_mesh_2">
+        <pose relative_to="leg_tip_4">-0.0161 -0.0831 -0.0405 -0 -0 1.46494</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate_7 -->
+      <visual name="leg_tip_plate_7_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0 -0 -0.0235 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_7_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0 -0 -0.0235 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_18 -->
+      <visual name="leg_spacer_18_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0.013943 -0.11505 -0.0405 -0 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_18_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0.013943 -0.11505 -0.0405 -0 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_19 -->
+      <visual name="leg_spacer_19_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0.0161 -0.0831 -0.0405 -0 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_19_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0.0161 -0.0831 -0.0405 -0 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_tip_plate_8 -->
+      <visual name="leg_tip_plate_8_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0 0 -0.0605 -0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_tip_plate_8_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0 0 -0.0605 -0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_tip_plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part leg_spacer_20 -->
+      <visual name="leg_spacer_20_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0 -0.1392 -0.0065 3.14159 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_spacer_20_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0 -0.1392 -0.0065 3.14159 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/leg_spacer.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part rx64_cap_12 -->
+      <visual name="rx64_cap_12_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0 0 -0.0455 3.14159 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="rx64_cap_12_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0 0 -0.0455 3.14159 0 -2.7498</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/rx64_cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mf128zz_12 -->
+      <visual name="mf128zz_12_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0 0 -0.04678 0 -0 0.391796</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mf128zz_12_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0 0 -0.04678 0 -0 0.391796</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mf128zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hn05_i101_12 -->
+      <visual name="hn05_i101_12_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0 0 -0.04322 3.14159 -0 1.5756</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.776471 0.713725 1</ambient>
+          <diffuse>0.8 0.776471 0.713725 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hn05_i101_12_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0 0 -0.04322 3.14159 -0 1.5756</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/hn05_i101.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part mx64_12 -->
+      <visual name="mx64_12_visual_mesh_1">
+        <pose relative_to="leg_tip_4">0 0 -0.0235 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.211765 0.211765 0.211765 1</ambient>
+          <diffuse>0.211765 0.211765 0.211765 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="mx64_12_collision_mesh_2">
+        <pose relative_to="leg_tip_4">0 0 -0.0235 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_legged_robot_sdf_0/assets/mx64.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from leg_middle_4 to leg_tip_4 -->
+    <joint name="br_3" type="revolute">
+      <pose relative_to="leg_middle_4">0.078 0 -0 3.14159 0 -1.5708</pose>
+      <parent>leg_middle_4</parent>
+      <child>leg_tip_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from leg_top_4 to leg_middle_4 -->
+    <joint name="br_2" type="revolute">
+      <pose relative_to="leg_top_4">-0.0232 -0.0768608 0.0231 -1.5708 -0 -1.5708</pose>
+      <parent>leg_top_4</parent>
+      <child>leg_middle_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to leg_top_4 -->
+    <joint name="br_1" type="revolute">
+      <pose relative_to="body">-0.028 0.3102 0.0234 1.5708 -1e-12 -3.14159</pose>
+      <parent>body</parent>
+      <child>leg_top_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

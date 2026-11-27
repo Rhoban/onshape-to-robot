@@ -1,0 +1,298 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 1fdd0d64561342b0e458666d / version_id: e84b0b6e47ca77dee74bded7 -->
+<sdf version="1.7">
+  <model name="test_export_planar_2dof_sdf_0">
+    <!-- Link base -->
+    <link name="base">
+      <inertial>
+        <pose>0.000673879 0 0.035858 0 0 0</pose>
+        <mass>1.01252</mass>
+        <inertia>
+          <ixx>0.00500639</ixx>
+          <ixy>-0</ixy>
+          <ixz>-6.2377e-06</ixz>
+          <iyy>0.000479748</iyy>
+          <iyz>0</iyz>
+          <izz>0.00460688</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part base -->
+      <visual name="base_visual_mesh_1">
+        <pose relative_to="base">-0.01 -0.125 0 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="base_collision_mesh_2">
+        <pose relative_to="base">-0.01 -0.125 0 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link branch1 -->
+    <link name="branch1">
+      <inertial>
+        <pose>-0.0325 -0.0533854 -0.005 0 0 0</pose>
+        <mass>0.123901</mass>
+        <inertia>
+          <ixx>0.000170703</ixx>
+          <ixy>-9.78593e-05</ixy>
+          <ixz>-0</ixz>
+          <iyy>6.95315e-05</iyy>
+          <iyz>-0</iyz>
+          <izz>0.00023817</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="motor1">0 0 0 0 -0 0</pose>
+      <!-- Part branch1 -->
+      <visual name="branch1_visual_mesh_1">
+        <pose relative_to="branch1">-0.065 0.045 0.025 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.231373 0.380392 0.705882 1</ambient>
+          <diffuse>0.231373 0.380392 0.705882 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="branch1_collision_mesh_2">
+        <pose relative_to="branch1">-0.065 0.045 0.025 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link branch2 -->
+    <link name="branch2">
+      <inertial>
+        <pose>0.035329 0.0413041 -0.00434716 0 0 0</pose>
+        <mass>0.112876</mass>
+        <inertia>
+          <ixx>9.43665e-05</ixx>
+          <ixy>-7.27633e-05</ixy>
+          <ixz>-2.18646e-06</ixz>
+          <iyy>7.1534e-05</iyy>
+          <iyz>-2.55625e-06</iyz>
+          <izz>0.000163133</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="passive1">0 0 0 0 -0 0</pose>
+      <!-- Part branch2 -->
+      <visual name="branch2_visual_mesh_1">
+        <pose relative_to="branch2">0 -0.151771 -0.025 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="branch2_collision_mesh_2">
+        <pose relative_to="branch2">0 -0.151771 -0.025 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_effector_1 -->
+    <frame name="closing_effector_1">
+      <pose relative_to="branch2">0.065 0.0759934 0.005 0 0 -0</pose>
+    </frame>
+    <!-- Frame closing_effector_1_z -->
+    <frame name="closing_effector_1_z">
+      <pose relative_to="branch2">0.065 0.0759934 0.105 0 0 -0</pose>
+    </frame>
+    <!-- Joint from branch1 to branch2 -->
+    <joint name="passive1" type="revolute">
+      <pose relative_to="branch1">-0.065 -0.106771 0 3.14159 -0 -0.610934</pose>
+      <parent>branch1</parent>
+      <child>branch2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from base to branch1 -->
+    <joint name="motor1" type="revolute">
+      <pose relative_to="base">0.015 -0.06 0.045 -1.5708 0.546851 1.5708</pose>
+      <parent>base</parent>
+      <child>branch1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link branch1_2 -->
+    <link name="branch1_2">
+      <inertial>
+        <pose>-0.0325 0.0533854 -0.005 0 0 0</pose>
+        <mass>0.123901</mass>
+        <inertia>
+          <ixx>0.000170703</ixx>
+          <ixy>9.78593e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>6.95315e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0.00023817</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="motor2">0 0 0 0 -0 0</pose>
+      <!-- Part branch1_2 -->
+      <visual name="branch1_2_visual_mesh_1">
+        <pose relative_to="branch1_2">-0.065 -0.045 -0.035 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.231373 0.380392 0.705882 1</ambient>
+          <diffuse>0.231373 0.380392 0.705882 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="branch1_2_collision_mesh_2">
+        <pose relative_to="branch1_2">-0.065 -0.045 -0.035 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link branch2_2 -->
+    <link name="branch2_2">
+      <inertial>
+        <pose>0.035329 0.0413041 -0.00434716 0 0 0</pose>
+        <mass>0.112876</mass>
+        <inertia>
+          <ixx>9.43665e-05</ixx>
+          <ixy>-7.27633e-05</ixy>
+          <ixz>-2.18646e-06</ixz>
+          <iyy>7.1534e-05</iyy>
+          <iyz>-2.55625e-06</iyz>
+          <izz>0.000163133</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="passive2">0 0 0 0 -0 0</pose>
+      <!-- Part branch2_2 -->
+      <visual name="branch2_2_visual_mesh_1">
+        <pose relative_to="branch2_2">0 -0.151771 -0.025 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="branch2_2_collision_mesh_2">
+        <pose relative_to="branch2_2">0 -0.151771 -0.025 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_planar_2dof_sdf_0/assets/branch2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame effector -->
+    <frame name="effector">
+      <pose relative_to="branch2_2">0.065 0.0759934 -0.01 -3.14159 -0 0</pose>
+    </frame>
+    <!-- Frame closing_effector_2 -->
+    <frame name="closing_effector_2">
+      <pose relative_to="branch2_2">0.065 0.0759934 0.005 3.14159 0 1.5708</pose>
+    </frame>
+    <!-- Frame closing_effector_2_z -->
+    <frame name="closing_effector_2_z">
+      <pose relative_to="branch2_2">0.065 0.0759934 -0.095 3.14159 0 1.5708</pose>
+    </frame>
+    <!-- Joint from branch1_2 to branch2_2 -->
+    <joint name="passive2" type="revolute">
+      <pose relative_to="branch1_2">-0.065 0.106771 -0.01 -0 -0 0.610934</pose>
+      <parent>branch1_2</parent>
+      <child>branch2_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from base to branch1_2 -->
+    <joint name="motor2" type="revolute">
+      <pose relative_to="base">0.015 0.06 0.045 1.5708 0.546851 -1.5708</pose>
+      <parent>base</parent>
+      <child>branch1_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

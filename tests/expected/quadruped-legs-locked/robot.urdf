@@ -1,0 +1,828 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: b8903cc6885e9fafbd1e3461 / version_id: e26805965cfe84541d0b7609 -->
+<robot name="test_export_quadruped_legs_loc0">
+  <!-- Link body -->
+  <link name="body">
+    <inertial>
+      <origin xyz="0 0 0.0143384" rpy="0 0 0"/>
+      <mass value="0.0808736"/>
+      <inertia ixx="7.37408e-05" ixy="-0" ixz="0" iyy="7.37408e-05" iyz="0" izz="0.000135878"/>
+    </inertial>
+    <!-- Part body -->
+    <visual>
+      <origin xyz="0 0 0.0286" rpy="3.14159 -0 -0.471239"/>
+      <geometry>
+        <mesh filename="package://assets/body.stl"/>
+      </geometry>
+      <material name="body_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0286" rpy="3.14159 -0 -0.471239"/>
+      <geometry>
+        <mesh filename="package://assets/body.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part body_2 -->
+    <visual>
+      <origin xyz="0 -0 0" rpy="0 -0 -0.471239"/>
+      <geometry>
+        <mesh filename="package://assets/body.stl"/>
+      </geometry>
+      <material name="body_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0" rpy="0 -0 -0.471239"/>
+      <geometry>
+        <mesh filename="package://assets/body.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn -->
+    <visual>
+      <origin xyz="-0.0220185 -0.0432138 0.0143" rpy="0 0 1.49355"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220185 -0.0432138 0.0143" rpy="0 0 1.49355"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor -->
+    <visual>
+      <origin xyz="-0.0220185 -0.0432138 0.0143" rpy="0 -0 2.67035"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220185 -0.0432138 0.0143" rpy="0 -0 2.67035"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_2 -->
+    <visual>
+      <origin xyz="0.0432138 -0.0220185 0.0143" rpy="-0 -0 1.45228"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0432138 -0.0220185 0.0143" rpy="-0 -0 1.45228"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_2 -->
+    <visual>
+      <origin xyz="0.0432138 -0.0220185 0.0143" rpy="0 -0 -2.04204"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_2_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0432138 -0.0220185 0.0143" rpy="0 -0 -2.04204"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_3 -->
+    <visual>
+      <origin xyz="0.0220185 0.0432138 0.0143" rpy="0 -0 1.49355"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0220185 0.0432138 0.0143" rpy="0 -0 1.49355"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_3 -->
+    <visual>
+      <origin xyz="0.0220185 0.0432138 0.0143" rpy="0 -0 -0.471239"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_3_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0220185 0.0432138 0.0143" rpy="0 -0 -0.471239"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_4 -->
+    <visual>
+      <origin xyz="-0.0432138 0.0220185 0.0143" rpy="0 0 1.49355"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0432138 0.0220185 0.0143" rpy="0 0 1.49355"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_4 -->
+    <visual>
+      <origin xyz="-0.0432138 0.0220185 0.0143" rpy="0 0 1.09956"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_4_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0432138 0.0220185 0.0143" rpy="0 0 1.09956"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_1 -->
+  <link name="leg_1">
+    <inertial>
+      <origin xyz="-2.37129e-05 0.0658491 0.0257774" rpy="0 0 0"/>
+      <mass value="0.0654986"/>
+      <inertia ixx="9.46753e-05" ixy="-2.675e-09" ixz="1.5793e-08" iyy="5.13085e-05" iyz="-3.62476e-06" izz="5.59068e-05"/>
+    </inertial>
+    <!-- Part leg -->
+    <visual>
+      <origin xyz="-0 0.0876539 0.0568919" rpy="-0 -0.139194 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+      <material name="leg_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.0876539 0.0568919" rpy="-0 -0.139194 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate -->
+    <visual>
+      <origin xyz="0 0.0456275 0.000329811" rpy="-0 -0.727428 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0456275 0.000329811" rpy="-0 -0.727428 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_2 -->
+    <visual>
+      <origin xyz="-0 0.0281393 0.0199729" rpy="-0 -0.727428 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.0281393 0.0199729" rpy="-0 -0.727428 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u -->
+    <visual>
+      <origin xyz="0 0.018 0.015" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.018 0.015" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_2 -->
+    <visual>
+      <origin xyz="0 0.0226 0.015" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0226 0.015" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_5 -->
+    <visual>
+      <origin xyz="0 0.0406 0.015" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_5_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0406 0.015" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_5 -->
+    <visual>
+      <origin xyz="-0 0.0406 0.015" rpy="-1.5708 0.843368 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_5_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.0406 0.015" rpy="-1.5708 0.843368 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_6 -->
+    <visual>
+      <origin xyz="-0 0.0876539 0.0568919" rpy="-1.5708 -0.986922 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_6_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.0876539 0.0568919" rpy="-1.5708 -0.986922 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_6 -->
+    <visual>
+      <origin xyz="-0 0.0876539 0.0568919" rpy="1.5708 -0.843368 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_6_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.0876539 0.0568919" rpy="1.5708 -0.843368 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from body to leg_1 -->
+  <joint name="leg1_a" type="revolute">
+    <origin xyz="-0.0432138 0.0220185 -0.0007" rpy="0 0 1.11854"/>
+    <parent link="body"/>
+    <child link="leg_1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link leg_2 -->
+  <link name="leg_2">
+    <inertial>
+      <origin xyz="-2.37129e-05 -0.0677659 -0.0257901" rpy="0 0 0"/>
+      <mass value="0.0654986"/>
+      <inertia ixx="0.000101148" ixy="5.249e-09" ixz="-1.5316e-08" iyy="4.92494e-05" iyz="4.58433e-07" izz="6.44386e-05"/>
+    </inertial>
+    <!-- Part leg_2 -->
+    <visual>
+      <origin xyz="-0 -0.0881724 -0.0563021" rpy="-3.14159 0.27177 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+      <material name="leg_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0881724 -0.0563021" rpy="-3.14159 0.27177 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_3 -->
+    <visual>
+      <origin xyz="-0 -0.0226 -0.015" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0226 -0.015" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_4 -->
+    <visual>
+      <origin xyz="-0 -0.018 -0.015" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_4_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.018 -0.015" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_3 -->
+    <visual>
+      <origin xyz="-0 -0.0454442 -0.000268284" rpy="-3.14159 0.714963 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0454442 -0.000268284" rpy="-3.14159 0.714963 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_4 -->
+    <visual>
+      <origin xyz="0 -0.0282022 -0.0201279" rpy="-3.14159 0.714963 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_4_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0282022 -0.0201279" rpy="-3.14159 0.714963 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_7 -->
+    <visual>
+      <origin xyz="-0 -0.0406 -0.015" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_7_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0406 -0.015" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_7 -->
+    <visual>
+      <origin xyz="0 -0.0406 -0.015" rpy="1.5708 -0.855833 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_7_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0406 -0.015" rpy="1.5708 -0.855833 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_8 -->
+    <visual>
+      <origin xyz="-0 -0.0881724 -0.0563021" rpy="1.5708 1.26624 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_8_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0881724 -0.0563021" rpy="1.5708 1.26624 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_8 -->
+    <visual>
+      <origin xyz="-0 -0.0881724 -0.0563021" rpy="-1.5708 0.855833 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_8_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0881724 -0.0563021" rpy="-1.5708 0.855833 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from body to leg_2 -->
+  <joint name="leg2_a" type="revolute">
+    <origin xyz="-0.0220185 -0.0432138 -0.0007" rpy="3.14159 0 2.65081"/>
+    <parent link="body"/>
+    <child link="leg_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link leg_3 -->
+  <link name="leg_3">
+    <inertial>
+      <origin xyz="2.37129e-05 -0.0694412 0.0252655" rpy="0 0 0"/>
+      <mass value="0.0654986"/>
+      <inertia ixx="0.000106528" ixy="-6.864e-09" ixz="-1.4956e-08" iyy="4.71262e-05" iyz="-3.20909e-06" izz="7.19418e-05"/>
+    </inertial>
+    <!-- Part leg_3 -->
+    <visual>
+      <origin xyz="0 -0.089444 0.0547902" rpy="-0 -0.352971 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+      <material name="leg_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.089444 0.0547902" rpy="-0 -0.352971 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_5 -->
+    <visual>
+      <origin xyz="0 -0.0226 0.015" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_5_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0226 0.015" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_6 -->
+    <visual>
+      <origin xyz="-0 -0.018 0.015" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_6_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.018 0.015" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_5 -->
+    <visual>
+      <origin xyz="-0 -0.0449799 0.000123638" rpy="0 -0.683603 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_5_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0449799 0.000123638" rpy="0 -0.683603 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_6 -->
+    <visual>
+      <origin xyz="-0 -0.0283691 0.0205141" rpy="0 -0.683603 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_6_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0283691 0.0205141" rpy="0 -0.683603 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_9 -->
+    <visual>
+      <origin xyz="-0 -0.0406 0.015" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_9_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0406 0.015" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_9 -->
+    <visual>
+      <origin xyz="-0 -0.0406 0.015" rpy="-1.5708 0.887193 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_9_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0406 0.015" rpy="-1.5708 0.887193 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_10 -->
+    <visual>
+      <origin xyz="0 -0.089444 0.0547902" rpy="-1.5708 -0.0772446 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_10_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.089444 0.0547902" rpy="-1.5708 -0.0772446 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_10 -->
+    <visual>
+      <origin xyz="-0 -0.089444 0.0547902" rpy="1.5708 -0.887193 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_10_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.089444 0.0547902" rpy="1.5708 -0.887193 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame leg_tip (dummy link + fixed joint) -->
+  <link name="leg_tip">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="leg_tip_frame" type="fixed">
+    <origin xyz="0.0795581 -0.101456 -0.0393704" rpy="3.14159 0.340784 2.06544"/>
+    <parent link="leg_3"/>
+    <child link="leg_tip"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from body to leg_3 -->
+  <joint name="leg3_a" type="revolute">
+    <origin xyz="0.0432138 -0.0220185 -0.0007" rpy="0 0 1.10469"/>
+    <parent link="body"/>
+    <child link="leg_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link leg_4 -->
+  <link name="leg_4">
+    <inertial>
+      <origin xyz="-0.00128605 -0.0675337 0.0258037" rpy="0 0 0"/>
+      <mass value="0.0654986"/>
+      <inertia ixx="0.000100361" ixy="-5.93519e-07" ixz="1.19238e-07" iyy="4.95622e-05" iyz="-2.5527e-08" izz="6.337e-05"/>
+    </inertial>
+    <!-- Part leg_4 -->
+    <visual>
+      <origin xyz="-0.0015 -0.0880752 0.0564138" rpy="0 0.257069 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+      <material name="leg_4_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0015 -0.0880752 0.0564138" rpy="0 0.257069 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_7 -->
+    <visual>
+      <origin xyz="-0 -0.0226 0.015" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_7_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0226 0.015" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_8 -->
+    <visual>
+      <origin xyz="0 -0.018 0.015" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+      <material name="u_8_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.018 0.015" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_7 -->
+    <visual>
+      <origin xyz="-0.0015 -0.0454788 0.000279705" rpy="-0 -0.717312 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_7_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0015 -0.0454788 0.000279705" rpy="-0 -0.717312 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_8 -->
+    <visual>
+      <origin xyz="-0.0015 -0.0281902 0.0200987" rpy="-0 -0.717312 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_8_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0015 -0.0281902 0.0200987" rpy="-0 -0.717312 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_11 -->
+    <visual>
+      <origin xyz="-0.0015 -0.0406 0.015" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_11_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0015 -0.0406 0.015" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_11 -->
+    <visual>
+      <origin xyz="-0.0015 -0.0406 0.015" rpy="-1.5708 0.853484 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_11_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0015 -0.0406 0.015" rpy="-1.5708 0.853484 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part horn_12 -->
+    <visual>
+      <origin xyz="-0.0015 -0.0880752 0.0564138" rpy="-1.5708 1.3082 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+      <material name="horn_12_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0015 -0.0880752 0.0564138" rpy="-1.5708 1.3082 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/horn.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_12 -->
+    <visual>
+      <origin xyz="-0.0015 -0.0880752 0.0564138" rpy="1.5708 -0.853484 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_12_material">
+        <color rgba="0.470588 0.470588 0.470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0015 -0.0880752 0.0564138" rpy="1.5708 -0.853484 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from body to leg_4 -->
+  <joint name="leg4_a" type="revolute">
+    <origin xyz="0.0220185 0.0432138 -0.0007" rpy="0 0 2.7068"/>
+    <parent link="body"/>
+    <child link="leg_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

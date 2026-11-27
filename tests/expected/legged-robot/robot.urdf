@@ -1,0 +1,3117 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 232d5b80b8d4b0da823fa0ff / version_id: ef3cec58ad207da0c782c5de -->
+<robot name="test_export_legged_robot_urdf_0">
+  <!-- Link body -->
+  <link name="body">
+    <inertial>
+      <origin xyz="0.0214807 0.174889 0.0251766" rpy="0 0 0"/>
+      <mass value="0.59334"/>
+      <inertia ixx="0.0122631" ixy="-2.8563e-08" ixz="-6.09619e-07" iyy="0.00106641" iyz="-1.91683e-06" izz="0.0129862"/>
+    </inertial>
+    <!-- Part body_plate -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_plate.stl"/>
+      </geometry>
+      <material name="body_plate_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part body_plate_2 -->
+    <visual>
+      <origin xyz="0 0 0.0432" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_plate.stl"/>
+      </geometry>
+      <material name="body_plate_2_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0432" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part body_back -->
+    <visual>
+      <origin xyz="0 0 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+      <material name="body_back_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30 -->
+    <visual>
+      <origin xyz="-0.0345 0.0043 0.0379" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0345 0.0043 0.0379" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_2 -->
+    <visual>
+      <origin xyz="-0.0125 0.0283 0.0083" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_2_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0125 0.0283 0.0083" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_3 -->
+    <visual>
+      <origin xyz="-0.0075 0.0043 0.0083" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_3_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0075 0.0043 0.0083" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_4 -->
+    <visual>
+      <origin xyz="-0.0295 0.0043 0.0083" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_4_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0295 0.0043 0.0083" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_5 -->
+    <visual>
+      <origin xyz="-0.0345 0.0283 0.0083" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_5_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0345 0.0283 0.0083" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_6 -->
+    <visual>
+      <origin xyz="-0.0125 0.0043 0.0379" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_6_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0125 0.0043 0.0379" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_7 -->
+    <visual>
+      <origin xyz="-0.0125 0.0283 0.0429" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_7_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0125 0.0283 0.0429" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_8 -->
+    <visual>
+      <origin xyz="-0.0295 0.0283 0.0379" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_8_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0295 0.0283 0.0379" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_9 -->
+    <visual>
+      <origin xyz="-0.0345 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_9_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0345 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_10 -->
+    <visual>
+      <origin xyz="-0.0125 0.3217 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_10_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0125 0.3217 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_11 -->
+    <visual>
+      <origin xyz="-0.0075 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_11_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0075 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_12 -->
+    <visual>
+      <origin xyz="-0.0295 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_12_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0295 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_13 -->
+    <visual>
+      <origin xyz="-0.0345 0.3217 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_13_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0345 0.3217 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_14 -->
+    <visual>
+      <origin xyz="-0.0125 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_14_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0125 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_15 -->
+    <visual>
+      <origin xyz="-0.0125 0.3217 0.0036" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_15_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0125 0.3217 0.0036" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_16 -->
+    <visual>
+      <origin xyz="-0.0295 0.3217 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_16_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0295 0.3217 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_17 -->
+    <visual>
+      <origin xyz="0.0775 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_17_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0775 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_18 -->
+    <visual>
+      <origin xyz="0.0555 0.3217 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_18_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0555 0.3217 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_19 -->
+    <visual>
+      <origin xyz="0.0505 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_19_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0505 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_20 -->
+    <visual>
+      <origin xyz="0.0725 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_20_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0725 0.3457 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_21 -->
+    <visual>
+      <origin xyz="0.0775 0.3217 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_21_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0775 0.3217 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_22 -->
+    <visual>
+      <origin xyz="0.0555 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_22_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0555 0.3457 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_23 -->
+    <visual>
+      <origin xyz="0.0555 0.3217 0.0432" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_23_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0555 0.3217 0.0432" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_24 -->
+    <visual>
+      <origin xyz="0.0725 0.3217 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_24_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0725 0.3217 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_25 -->
+    <visual>
+      <origin xyz="0.0775 0.0043 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_25_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0775 0.0043 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_26 -->
+    <visual>
+      <origin xyz="0.0555 0.0283 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_26_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0555 0.0283 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_27 -->
+    <visual>
+      <origin xyz="0.0505 0.0043 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_27_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0505 0.0043 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_28 -->
+    <visual>
+      <origin xyz="0.0725 0.0043 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_28_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0725 0.0043 0.0382" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_29 -->
+    <visual>
+      <origin xyz="0.0775 0.0283 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_29_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0775 0.0283 0.0382" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_30 -->
+    <visual>
+      <origin xyz="0.0555 0.0043 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_30_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0555 0.0043 0.0086" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_31 -->
+    <visual>
+      <origin xyz="0.0555 0.0283 0.0036" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_31_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0555 0.0283 0.0036" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_32 -->
+    <visual>
+      <origin xyz="0.0725 0.0283 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_32_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0725 0.0283 0.0086" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part body_back_2 -->
+    <visual>
+      <origin xyz="-0 0.1722 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+      <material name="body_back_2_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.1722 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part body_back_3 -->
+    <visual>
+      <origin xyz="0 0.0574 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+      <material name="body_back_3_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0574 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part body_back_4 -->
+    <visual>
+      <origin xyz="0 0.1148 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+      <material name="body_back_4_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.1148 0.0432" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_back.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap -->
+    <visual>
+      <origin xyz="-0.028 -0.0057 0.0231" rpy="1.5708 -0.391796 -0"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 -0.0057 0.0231" rpy="1.5708 -0.391796 -0"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz -->
+    <visual>
+      <origin xyz="-0.028 -0.00698 0.0231" rpy="1.5708 0.391796 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 -0.00698 0.0231" rpy="1.5708 0.391796 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101 -->
+    <visual>
+      <origin xyz="-0.028 -0.00342 0.0231" rpy="-1.5708 -0.792005 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 -0.00342 0.0231" rpy="-1.5708 -0.792005 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64 -->
+    <visual>
+      <origin xyz="-0.028 0.0163 0.0231" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 0.0163 0.0231" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_2 -->
+    <visual>
+      <origin xyz="-0.028 0.3557 0.0234" rpy="1.5708 0.186913 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 0.3557 0.0234" rpy="1.5708 0.186913 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_2 -->
+    <visual>
+      <origin xyz="-0.028 0.35698 0.0234" rpy="-1.5708 0.186913 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 0.35698 0.0234" rpy="-1.5708 0.186913 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_2 -->
+    <visual>
+      <origin xyz="-0.028 0.35342 0.0234" rpy="-1.5708 -1.37072 3e-12"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 0.35342 0.0234" rpy="-1.5708 -1.37072 3e-12"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_2 -->
+    <visual>
+      <origin xyz="-0.028 0.3337 0.0234" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_2_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.028 0.3337 0.0234" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_3 -->
+    <visual>
+      <origin xyz="0.071 0.3557 0.0234" rpy="1.5708 -0.391796 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 0.3557 0.0234" rpy="1.5708 -0.391796 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_3 -->
+    <visual>
+      <origin xyz="0.071 0.35698 0.0234" rpy="1.5708 0.391796 -2e-12"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 0.35698 0.0234" rpy="1.5708 0.391796 -2e-12"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_3 -->
+    <visual>
+      <origin xyz="0.071 0.35342 0.0234" rpy="-1.5708 -0.792005 -2e-12"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 0.35342 0.0234" rpy="-1.5708 -0.792005 -2e-12"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_3 -->
+    <visual>
+      <origin xyz="0.071 0.3337 0.0234" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_3_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 0.3337 0.0234" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_4 -->
+    <visual>
+      <origin xyz="0.071 -0.0057 0.0234" rpy="1.5708 0.186913 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 -0.0057 0.0234" rpy="1.5708 0.186913 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_4 -->
+    <visual>
+      <origin xyz="0.071 -0.00698 0.0234" rpy="-1.5708 0.186913 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 -0.00698 0.0234" rpy="-1.5708 0.186913 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_4 -->
+    <visual>
+      <origin xyz="0.071 -0.00342 0.0234" rpy="-1.5708 -1.37072 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 -0.00342 0.0234" rpy="-1.5708 -1.37072 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_4 -->
+    <visual>
+      <origin xyz="0.071 0.0163 0.0234" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_4_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.071 0.0163 0.0234" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_top -->
+  <link name="leg_top">
+    <inertial>
+      <origin xyz="0.00232729 -0.0615551 0.0232841" rpy="0 0 0"/>
+      <mass value="0.115968"/>
+      <inertia ixx="6.37077e-05" ixy="3.18309e-06" ixz="4.3256e-08" iyy="3.93169e-05" iyz="6.7374e-08" izz="6.27571e-05"/>
+    </inertial>
+    <!-- Part spacing_plate -->
+    <visual>
+      <origin xyz="0.0166 -0.0538608 0.0459" rpy="3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 -0.0538608 0.0459" rpy="3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_extension -->
+    <visual>
+      <origin xyz="-0.016 -0.0858608 0.04972" rpy="-3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+      <material name="spacing_plate_extension_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 -0.0858608 0.04972" rpy="-3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_2 -->
+    <visual>
+      <origin xyz="0.0166 -0.0858608 -0" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_2_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 -0.0858608 -0" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate -->
+    <visual>
+      <origin xyz="-0.016 -0.016 0.04672" rpy="0 0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 -0.016 0.04672" rpy="0 0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate_2 -->
+    <visual>
+      <origin xyz="-0.016 -0.016 -0.003" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_2_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 -0.016 -0.003" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_33 -->
+    <visual>
+      <origin xyz="0.0123 -0.0833608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_33_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0833608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_34 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0613608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_34_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0613608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_35 -->
+    <visual>
+      <origin xyz="0.0123 -0.0563608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_35_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0563608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_36 -->
+    <visual>
+      <origin xyz="0.0123 -0.0783608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_36_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0783608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_37 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0833608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_37_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0833608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_38 -->
+    <visual>
+      <origin xyz="0.0123 -0.0613608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_38_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0613608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_39 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0613608 0.0429" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_39_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0613608 0.0429" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_40 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0783608 0.0379" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_40_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0783608 0.0379" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_5 -->
+    <visual>
+      <origin xyz="0.0223 -0.0768608 0.0231" rpy="-1.5708 -1.10558 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0223 -0.0768608 0.0231" rpy="-1.5708 -1.10558 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_5 -->
+    <visual>
+      <origin xyz="0.02358 -0.0768608 0.0231" rpy="1.5708 1.55849 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02358 -0.0768608 0.0231" rpy="1.5708 1.55849 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_5 -->
+    <visual>
+      <origin xyz="0.02002 -0.0768608 0.0231" rpy="-1.5708 0.0565903 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02002 -0.0768608 0.0231" rpy="-1.5708 0.0565903 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_5 -->
+    <visual>
+      <origin xyz="0.0003 -0.0768608 0.0231" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_5_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0003 -0.0768608 0.0231" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_middle -->
+  <link name="leg_middle">
+    <inertial>
+      <origin xyz="0.039 -0 0.023505" rpy="0 0 0"/>
+      <mass value="0.0282748"/>
+      <inertia ixx="1.51213e-05" ixy="1.76438e-06" ixz="0" iyy="2.51079e-05" iyz="-0" izz="1.72974e-05"/>
+    </inertial>
+    <!-- Part leg_spacer_mid -->
+    <visual>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_mid_2 -->
+    <visual>
+      <origin xyz="0.029 0.0125 -0.034" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.029 0.0125 -0.034" rpy="-0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate_2 -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_2_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_tip -->
+  <link name="leg_tip">
+    <inertial>
+      <origin xyz="-7.08e-10 -0.0411183 -0.0252857" rpy="0 0 0"/>
+      <mass value="0.131575"/>
+      <inertia ixx="0.000294116" ixy="3e-12" ixz="2e-12" iyy="3.97285e-05" iyz="9.25707e-06" izz="0.00028263"/>
+    </inertial>
+    <!-- Part leg_spacer -->
+    <visual>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_2 -->
+    <visual>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="0 0 -0.497652"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_2_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="0 0 -0.497652"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate -->
+    <visual>
+      <origin xyz="0 -0 -0.0235" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0235" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_3 -->
+    <visual>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_3_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_4 -->
+    <visual>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_4_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate_2 -->
+    <visual>
+      <origin xyz="-0 0 -0.0605" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_2_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.0605" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_5 -->
+    <visual>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_5_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_6 -->
+    <visual>
+      <origin xyz="-0 0 -0.0455" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.0455" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_6 -->
+    <visual>
+      <origin xyz="-0 0 -0.04678" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.04678" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_6 -->
+    <visual>
+      <origin xyz="-0 0 -0.04322" rpy="3.14159 -0 -0.386994"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.04322" rpy="3.14159 -0 -0.386994"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_6 -->
+    <visual>
+      <origin xyz="-0 0 -0.0235" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_6_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.0235" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from leg_middle to leg_tip -->
+  <joint name="fl_3" type="revolute">
+    <origin xyz="0.078 -0 0" rpy="-3.14159 -0 -1.5708"/>
+    <parent link="leg_middle"/>
+    <child link="leg_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from leg_top to leg_middle -->
+  <joint name="fl_2" type="revolute">
+    <origin xyz="-0.0232 -0.0768608 0.0231" rpy="-1.5708 -0 -1.5708"/>
+    <parent link="leg_top"/>
+    <child link="leg_middle"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from body to leg_top -->
+  <joint name="fl_1" type="revolute">
+    <origin xyz="0.071 0.0398 0.0234" rpy="1.5708 -1e-12 0"/>
+    <parent link="body"/>
+    <child link="leg_top"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link leg_top_2 -->
+  <link name="leg_top_2">
+    <inertial>
+      <origin xyz="0.00232729 0.0615551 0.0234359" rpy="0 0 0"/>
+      <mass value="0.115968"/>
+      <inertia ixx="6.37077e-05" ixy="-3.18309e-06" ixz="-4.3256e-08" iyy="3.93169e-05" iyz="6.7374e-08" izz="6.27571e-05"/>
+    </inertial>
+    <!-- Part spacing_plate_3 -->
+    <visual>
+      <origin xyz="0.0166 0.0538608 0.00082" rpy="-0 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_3_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 0.0538608 0.00082" rpy="-0 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_extension_2 -->
+    <visual>
+      <origin xyz="-0.016 0.0858608 -0.003" rpy="0 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+      <material name="spacing_plate_extension_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0858608 -0.003" rpy="0 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_4 -->
+    <visual>
+      <origin xyz="0.0166 0.0858608 0.04672" rpy="-3.14159 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_4_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 0.0858608 0.04672" rpy="-3.14159 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate_3 -->
+    <visual>
+      <origin xyz="-0.016 0.016 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_3_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.016 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate_4 -->
+    <visual>
+      <origin xyz="-0.016 0.016 0.04972" rpy="3.14159 -0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_4_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.016 0.04972" rpy="3.14159 -0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_41 -->
+    <visual>
+      <origin xyz="0.0123 0.0833608 0.00882" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_41_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0833608 0.00882" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_42 -->
+    <visual>
+      <origin xyz="-0.0117 0.0613608 0.03842" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_42_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0613608 0.03842" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_43 -->
+    <visual>
+      <origin xyz="0.0123 0.0563608 0.03842" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_43_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0563608 0.03842" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_44 -->
+    <visual>
+      <origin xyz="0.0123 0.0783608 0.03842" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_44_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0783608 0.03842" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_45 -->
+    <visual>
+      <origin xyz="-0.0117 0.0833608 0.03842" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_45_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0833608 0.03842" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_46 -->
+    <visual>
+      <origin xyz="0.0123 0.0613608 0.00882" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_46_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0613608 0.00882" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_47 -->
+    <visual>
+      <origin xyz="-0.0117 0.0613608 0.00382" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_47_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0613608 0.00382" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_48 -->
+    <visual>
+      <origin xyz="-0.0117 0.0783608 0.00882" rpy="0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_48_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0783608 0.00882" rpy="0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_7 -->
+    <visual>
+      <origin xyz="0.0223 0.0768608 0.02362" rpy="-1.5708 -1.10558 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0223 0.0768608 0.02362" rpy="-1.5708 -1.10558 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_7 -->
+    <visual>
+      <origin xyz="0.02358 0.0768608 0.02362" rpy="1.5708 1.55849 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02358 0.0768608 0.02362" rpy="1.5708 1.55849 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_7 -->
+    <visual>
+      <origin xyz="0.02002 0.0768608 0.02362" rpy="-1.5708 0.0565903 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02002 0.0768608 0.02362" rpy="-1.5708 0.0565903 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_7 -->
+    <visual>
+      <origin xyz="0.0003 0.0768608 0.02362" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_7_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0003 0.0768608 0.02362" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_middle_2 -->
+  <link name="leg_middle_2">
+    <inertial>
+      <origin xyz="0.039 0 0.023505" rpy="0 0 0"/>
+      <mass value="0.0282748"/>
+      <inertia ixx="1.51213e-05" ixy="1.76438e-06" ixz="0" iyy="2.51079e-05" iyz="-0" izz="1.72974e-05"/>
+    </inertial>
+    <!-- Part leg_spacer_mid_3 -->
+    <visual>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="-0 -0 1.28928"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="-0 -0 1.28928"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate_3 -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_3_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_mid_4 -->
+    <visual>
+      <origin xyz="0.029 0.0125 -0.034" rpy="-0 -0 1.28928"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_4_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.029 0.0125 -0.034" rpy="-0 -0 1.28928"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate_4 -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_4_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_tip_2 -->
+  <link name="leg_tip_2">
+    <inertial>
+      <origin xyz="-7.08e-10 -0.0411183 -0.0252857" rpy="0 0 0"/>
+      <mass value="0.131575"/>
+      <inertia ixx="0.000294116" ixy="3e-12" ixz="2e-12" iyy="3.97285e-05" iyz="9.25707e-06" izz="0.00028263"/>
+    </inertial>
+    <!-- Part leg_spacer_6 -->
+    <visual>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_6_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_7 -->
+    <visual>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="-0 -0 1.35466"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_7_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="-0 -0 1.35466"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate_3 -->
+    <visual>
+      <origin xyz="0 -0 -0.0235" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_3_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0235" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_8 -->
+    <visual>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_8_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_9 -->
+    <visual>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_9_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate_4 -->
+    <visual>
+      <origin xyz="0 -0 -0.0605" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_4_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0605" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_10 -->
+    <visual>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_10_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_8 -->
+    <visual>
+      <origin xyz="0 -0 -0.0455" rpy="3.14159 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0455" rpy="3.14159 0 -2.86007"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_8 -->
+    <visual>
+      <origin xyz="0 -0 -0.04678" rpy="0 -0 0.281518"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.04678" rpy="0 -0 0.281518"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_8 -->
+    <visual>
+      <origin xyz="0 -0 -0.04322" rpy="3.14159 -0 1.46532"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.04322" rpy="3.14159 -0 1.46532"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_8 -->
+    <visual>
+      <origin xyz="0 -0 -0.0235" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_8_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0235" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from leg_middle_2 to leg_tip_2 -->
+  <joint name="fr_3" type="revolute">
+    <origin xyz="0.078 0 0" rpy="3.14159 0 -1.5708"/>
+    <parent link="leg_middle_2"/>
+    <child link="leg_tip_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from leg_top_2 to leg_middle_2 -->
+  <joint name="fr_2" type="revolute">
+    <origin xyz="-0.0232 0.0768608 0.02362" rpy="1.5708 -0 1.5708"/>
+    <parent link="leg_top_2"/>
+    <child link="leg_middle_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from body to leg_top_2 -->
+  <joint name="fr_1" type="revolute">
+    <origin xyz="-0.028 0.0398 0.0231" rpy="-1.5708 1e-12 -3.14159"/>
+    <parent link="body"/>
+    <child link="leg_top_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link leg_top_3 -->
+  <link name="leg_top_3">
+    <inertial>
+      <origin xyz="0.00232729 0.0615551 0.0234359" rpy="0 0 0"/>
+      <mass value="0.115968"/>
+      <inertia ixx="6.37077e-05" ixy="-3.18309e-06" ixz="-4.3256e-08" iyy="3.93169e-05" iyz="6.7374e-08" izz="6.27571e-05"/>
+    </inertial>
+    <!-- Part spacing_plate_5 -->
+    <visual>
+      <origin xyz="0.0166 0.0538608 0.00082" rpy="0 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_5_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 0.0538608 0.00082" rpy="0 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_extension_3 -->
+    <visual>
+      <origin xyz="-0.016 0.0858608 -0.003" rpy="-0 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+      <material name="spacing_plate_extension_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0858608 -0.003" rpy="-0 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_6 -->
+    <visual>
+      <origin xyz="0.0166 0.0858608 0.04672" rpy="3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_6_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 0.0858608 0.04672" rpy="3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate_5 -->
+    <visual>
+      <origin xyz="-0.016 0.016 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_5_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.016 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate_6 -->
+    <visual>
+      <origin xyz="-0.016 0.016 0.04972" rpy="3.14159 0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_6_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.016 0.04972" rpy="3.14159 0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_49 -->
+    <visual>
+      <origin xyz="0.0123 0.0833608 0.00882" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_49_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0833608 0.00882" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_50 -->
+    <visual>
+      <origin xyz="-0.0117 0.0613608 0.03842" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_50_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0613608 0.03842" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_51 -->
+    <visual>
+      <origin xyz="0.0123 0.0563608 0.03842" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_51_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0563608 0.03842" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_52 -->
+    <visual>
+      <origin xyz="0.0123 0.0783608 0.03842" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_52_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0783608 0.03842" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_53 -->
+    <visual>
+      <origin xyz="-0.0117 0.0833608 0.03842" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_53_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0833608 0.03842" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_54 -->
+    <visual>
+      <origin xyz="0.0123 0.0613608 0.00882" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_54_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 0.0613608 0.00882" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_55 -->
+    <visual>
+      <origin xyz="-0.0117 0.0613608 0.00382" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_55_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0613608 0.00382" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_56 -->
+    <visual>
+      <origin xyz="-0.0117 0.0783608 0.00882" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_56_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 0.0783608 0.00882" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_9 -->
+    <visual>
+      <origin xyz="0.0223 0.0768608 0.02362" rpy="1.5708 1.10558 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0223 0.0768608 0.02362" rpy="1.5708 1.10558 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_9 -->
+    <visual>
+      <origin xyz="0.02358 0.0768608 0.02362" rpy="-1.5708 -1.55849 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02358 0.0768608 0.02362" rpy="-1.5708 -1.55849 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_9 -->
+    <visual>
+      <origin xyz="0.02002 0.0768608 0.02362" rpy="1.5708 -0.0565903 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02002 0.0768608 0.02362" rpy="1.5708 -0.0565903 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_9 -->
+    <visual>
+      <origin xyz="0.0003 0.0768608 0.02362" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_9_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0003 0.0768608 0.02362" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_middle_3 -->
+  <link name="leg_middle_3">
+    <inertial>
+      <origin xyz="0.039 0 0.023505" rpy="0 0 0"/>
+      <mass value="0.0282748"/>
+      <inertia ixx="1.51213e-05" ixy="1.76438e-06" ixz="0" iyy="2.51079e-05" iyz="-0" izz="1.72974e-05"/>
+    </inertial>
+    <!-- Part leg_spacer_mid_5 -->
+    <visual>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="-0 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_5_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="-0 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate_5 -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_5_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_mid_6 -->
+    <visual>
+      <origin xyz="0.029 0.0125 -0.034" rpy="-0 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_6_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.029 0.0125 -0.034" rpy="-0 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate_6 -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_6_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_tip_3 -->
+  <link name="leg_tip_3">
+    <inertial>
+      <origin xyz="-7.08e-10 -0.0411183 -0.0252857" rpy="0 0 0"/>
+      <mass value="0.131575"/>
+      <inertia ixx="0.000294116" ixy="3e-12" ixz="2e-12" iyy="3.97285e-05" iyz="9.25707e-06" izz="0.00028263"/>
+    </inertial>
+    <!-- Part leg_spacer_11 -->
+    <visual>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_11_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_12 -->
+    <visual>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="0 0 -0.497652"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_12_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="0 0 -0.497652"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate_5 -->
+    <visual>
+      <origin xyz="0 -0 -0.0235" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_5_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0235" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_13 -->
+    <visual>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_13_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_14 -->
+    <visual>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_14_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate_6 -->
+    <visual>
+      <origin xyz="0 -0 -0.0605" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_6_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0605" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_15 -->
+    <visual>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_15_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_10 -->
+    <visual>
+      <origin xyz="0 0 -0.0455" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0455" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_10 -->
+    <visual>
+      <origin xyz="0 0 -0.04678" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04678" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_10 -->
+    <visual>
+      <origin xyz="0 0 -0.04322" rpy="3.14159 0 -0.386994"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04322" rpy="3.14159 0 -0.386994"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_10 -->
+    <visual>
+      <origin xyz="0 0 -0.0235" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_10_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0235" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from leg_middle_3 to leg_tip_3 -->
+  <joint name="bl_3" type="revolute">
+    <origin xyz="0.078 0 0" rpy="3.14159 -0 -1.5708"/>
+    <parent link="leg_middle_3"/>
+    <child link="leg_tip_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from leg_top_3 to leg_middle_3 -->
+  <joint name="bl_2" type="revolute">
+    <origin xyz="-0.0232 0.0768608 0.02362" rpy="1.5708 0 1.5708"/>
+    <parent link="leg_top_3"/>
+    <child link="leg_middle_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from body to leg_top_3 -->
+  <joint name="bl_1" type="revolute">
+    <origin xyz="0.071 0.3102 0.0234" rpy="-1.5708 1e-12 0"/>
+    <parent link="body"/>
+    <child link="leg_top_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link leg_top_4 -->
+  <link name="leg_top_4">
+    <inertial>
+      <origin xyz="0.00232729 -0.0615551 0.0232841" rpy="0 0 0"/>
+      <mass value="0.115968"/>
+      <inertia ixx="6.37077e-05" ixy="3.18309e-06" ixz="4.3256e-08" iyy="3.93169e-05" iyz="6.7374e-08" izz="6.27571e-05"/>
+    </inertial>
+    <!-- Part spacing_plate_7 -->
+    <visual>
+      <origin xyz="0.0166 -0.0538608 0.0459" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_7_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 -0.0538608 0.0459" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_extension_4 -->
+    <visual>
+      <origin xyz="-0.016 -0.0858608 0.04972" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+      <material name="spacing_plate_extension_4_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 -0.0858608 0.04972" rpy="3.14159 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate_extension.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part spacing_plate_8 -->
+    <visual>
+      <origin xyz="0.0166 -0.0858608 0" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+      <material name="spacing_plate_8_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0166 -0.0858608 0" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/spacing_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate_7 -->
+    <visual>
+      <origin xyz="-0.016 -0.016 0.04672" rpy="-0 -0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_7_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 -0.016 0.04672" rpy="-0 -0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_top_plate_8 -->
+    <visual>
+      <origin xyz="-0.016 -0.016 -0.003" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+      <material name="leg_top_plate_8_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 -0.016 -0.003" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_top_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_57 -->
+    <visual>
+      <origin xyz="0.0123 -0.0833608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_57_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0833608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_58 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0613608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_58_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0613608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_59 -->
+    <visual>
+      <origin xyz="0.0123 -0.0563608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_59_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0563608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_60 -->
+    <visual>
+      <origin xyz="0.0123 -0.0783608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_60_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0783608 0.0083" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_61 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0833608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_61_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0833608 0.0083" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_62 -->
+    <visual>
+      <origin xyz="0.0123 -0.0613608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_62_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0123 -0.0613608 0.0379" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_63 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0613608 0.0429" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_63_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0613608 0.0429" rpy="1e-12 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_cube_25_30_64 -->
+    <visual>
+      <origin xyz="-0.0117 -0.0783608 0.0379" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+      <material name="mounting_cube_25_30_64_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0117 -0.0783608 0.0379" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_cube_25_30.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_11 -->
+    <visual>
+      <origin xyz="0.0223 -0.0768608 0.0231" rpy="1.5708 1.10558 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_11_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0223 -0.0768608 0.0231" rpy="1.5708 1.10558 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_11 -->
+    <visual>
+      <origin xyz="0.02358 -0.0768608 0.0231" rpy="-1.5708 -1.55849 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_11_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02358 -0.0768608 0.0231" rpy="-1.5708 -1.55849 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_11 -->
+    <visual>
+      <origin xyz="0.02002 -0.0768608 0.0231" rpy="1.5708 -0.0565903 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_11_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02002 -0.0768608 0.0231" rpy="1.5708 -0.0565903 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_11 -->
+    <visual>
+      <origin xyz="0.0003 -0.0768608 0.0231" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_11_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0003 -0.0768608 0.0231" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_middle_4 -->
+  <link name="leg_middle_4">
+    <inertial>
+      <origin xyz="0.039 -0 0.023505" rpy="0 0 0"/>
+      <mass value="0.0282748"/>
+      <inertia ixx="1.51213e-05" ixy="1.76438e-06" ixz="0" iyy="2.51079e-05" iyz="0" izz="1.72974e-05"/>
+    </inertial>
+    <!-- Part leg_spacer_mid_7 -->
+    <visual>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="0 -0 1.179"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_7_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.049 -0.0125 -0.034" rpy="0 -0 1.179"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate_7 -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_7_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_mid_8 -->
+    <visual>
+      <origin xyz="0.029 0.0125 -0.034" rpy="0 -0 1.179"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+      <material name="leg_spacer_mid_8_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.029 0.0125 -0.034" rpy="0 -0 1.179"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer_mid.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_middle_plate_8 -->
+    <visual>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+      <material name="leg_middle_plate_8_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.016 0.0175 0.05002" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_middle_plate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link leg_tip_4 -->
+  <link name="leg_tip_4">
+    <inertial>
+      <origin xyz="-7.08e-10 -0.0411183 -0.0252857" rpy="0 0 0"/>
+      <mass value="0.131575"/>
+      <inertia ixx="0.000294116" ixy="3e-12" ixz="2e-12" iyy="3.97285e-05" iyz="9.25707e-06" izz="0.00028263"/>
+    </inertial>
+    <!-- Part leg_spacer_16 -->
+    <visual>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_16_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.013943 -0.11505 -0.0405" rpy="-0 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_17 -->
+    <visual>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="-0 -0 1.46494"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_17_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0161 -0.0831 -0.0405" rpy="-0 -0 1.46494"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate_7 -->
+    <visual>
+      <origin xyz="0 -0 -0.0235" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_7_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0235" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_18 -->
+    <visual>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_18_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.013943 -0.11505 -0.0405" rpy="-0 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_19 -->
+    <visual>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_19_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0161 -0.0831 -0.0405" rpy="-0 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_tip_plate_8 -->
+    <visual>
+      <origin xyz="0 0 -0.0605" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+      <material name="leg_tip_plate_8_material">
+        <color rgba="0.447059 0.243137 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0605" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_tip_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part leg_spacer_20 -->
+    <visual>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+      <material name="leg_spacer_20_material">
+        <color rgba="0.701961 0.701961 0.701961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.1392 -0.0065" rpy="3.14159 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/leg_spacer.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_12 -->
+    <visual>
+      <origin xyz="0 0 -0.0455" rpy="3.14159 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_12_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0455" rpy="3.14159 0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_12 -->
+    <visual>
+      <origin xyz="0 0 -0.04678" rpy="0 -0 0.391796"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_12_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04678" rpy="0 -0 0.391796"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_12 -->
+    <visual>
+      <origin xyz="0 0 -0.04322" rpy="3.14159 -0 1.5756"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_12_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04322" rpy="3.14159 -0 1.5756"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_12 -->
+    <visual>
+      <origin xyz="0 0 -0.0235" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_12_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0235" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from leg_middle_4 to leg_tip_4 -->
+  <joint name="br_3" type="revolute">
+    <origin xyz="0.078 0 -0" rpy="3.14159 0 -1.5708"/>
+    <parent link="leg_middle_4"/>
+    <child link="leg_tip_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from leg_top_4 to leg_middle_4 -->
+  <joint name="br_2" type="revolute">
+    <origin xyz="-0.0232 -0.0768608 0.0231" rpy="-1.5708 -0 -1.5708"/>
+    <parent link="leg_top_4"/>
+    <child link="leg_middle_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from body to leg_top_4 -->
+  <joint name="br_1" type="revolute">
+    <origin xyz="-0.028 0.3102 0.0234" rpy="1.5708 -1e-12 -3.14159"/>
+    <parent link="body"/>
+    <child link="leg_top_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

@@ -1,0 +1,574 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 6a04069fb9e9b699f96a6881 / version_id: 72d595132303706ea0b2cb97 -->
+<mujoco model="test_export_spm_mujoco_0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_spm_mujoco_0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link moteur_bati_v2 -->
+    <body name="moteur_bati_v2" pos="0 0 0" quat="1 0 0 0" childclass="test_export_spm_mujoco_0">
+      <freejoint name="moteur_bati_v2_freejoint"/>
+      <inertial pos="-3.7563e-05 2.82067e-06 0.044516" mass="0.925933" fullinertia="0.00239253 0.00239489 0.00452148 1.78337e-07 1.13556e-06 -8.5735e-08"/>
+      <!-- Part b08_cra_ri30_40_pro_xx_客户参考 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="b08_cra_ri30_40_pro_xx_客户参考" material="b08_cra_ri30_40_pro_xx_客户参考_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="b08_cra_ri30_40_pro_xx_客户参考" material="b08_cra_ri30_40_pro_xx_客户参考_material"/>
+      <!-- Part cra_ri30_40_pro_xx_后盖 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cra_ri30_40_pro_xx_后盖" material="cra_ri30_40_pro_xx_后盖_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cra_ri30_40_pro_xx_后盖" material="cra_ri30_40_pro_xx_后盖_material"/>
+      <!-- Part extruded_4_2 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_2" material="extruded_4_2_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_2" material="extruded_4_2_material"/>
+      <!-- Part 1_bati3 -->
+      <geom type="mesh" class="visual" pos="0.0280564 -0.0254488 0.0198908" quat="0.892399 0.369644 0.0990458 0.239118" mesh="1_bati3" material="1_bati3_material"/>
+      <geom type="mesh" class="collision" pos="0.0280564 -0.0254488 0.0198908" quat="0.892399 0.369644 0.0990458 0.239118" mesh="1_bati3" material="1_bati3_material"/>
+      <!-- Part extruded_6 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_6" material="extruded_6_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_6" material="extruded_6_material"/>
+      <!-- Part extruded_1 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_1" material="extruded_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_1" material="extruded_1_material"/>
+      <!-- Part cra_ri30_40_xx_柔轮盖 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cra_ri30_40_xx_柔轮盖" material="cra_ri30_40_xx_柔轮盖_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cra_ri30_40_xx_柔轮盖" material="cra_ri30_40_xx_柔轮盖_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material"/>
+      <!-- Part extruded_4_4 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_4" material="extruded_4_4_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_4" material="extruded_4_4_material"/>
+      <!-- Part user_library_0805_2012m__cap -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="user_library_0805_2012m__cap" material="user_library_0805_2012m__cap_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="user_library_0805_2012m__cap" material="user_library_0805_2012m__cap_material"/>
+      <!-- Part extruded_2 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_2" material="extruded_2_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_2" material="extruded_2_material"/>
+      <!-- Part user_library_0805_2012m__cap_2 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="user_library_0805_2012m__cap__2" material="user_library_0805_2012m__cap__2_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="user_library_0805_2012m__cap__2" material="user_library_0805_2012m__cap__2_material"/>
+      <!-- Part user_library_0805_2012m__cap_3 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="user_library_0805_2012m__cap__3" material="user_library_0805_2012m__cap__3_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="user_library_0805_2012m__cap__3" material="user_library_0805_2012m__cap__3_material"/>
+      <!-- Part extruded -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded" material="extruded_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded" material="extruded_material"/>
+      <!-- Part extruded_4_3 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_3" material="extruded_4_3_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_3" material="extruded_4_3_material"/>
+      <!-- Part cra_ri30_40_xx_b_电机壳_1 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cra_ri30_40_xx_b_电机壳_1" material="cra_ri30_40_xx_b_电机壳_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cra_ri30_40_xx_b_电机壳_1" material="cra_ri30_40_xx_b_电机壳_1_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material"/>
+      <!-- Part lsg_8_减速器外圈固定_1 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="lsg_8_减速器外圈固定_1" material="lsg_8_减速器外圈固定_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="lsg_8_减速器外圈固定_1" material="lsg_8_减速器外圈固定_1_material"/>
+      <!-- Part extruded_0 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_0" material="extruded_0_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_0" material="extruded_0_material"/>
+      <!-- Part d2f_o1l -->
+      <geom type="mesh" class="visual" pos="-0.0682973 0.00218361 0.0794696" quat="0.271917 -0.653827 0.652733 -0.269278" mesh="d2f_o1l" material="d2f_o1l_material"/>
+      <geom type="mesh" class="collision" pos="-0.0682973 0.00218361 0.0794696" quat="0.271917 -0.653827 0.652733 -0.269278" mesh="d2f_o1l" material="d2f_o1l_material"/>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material"/>
+      <!-- Part extruded_1_2 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_1__2" material="extruded_1__2_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_1__2" material="extruded_1__2_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material"/>
+      <!-- Part hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0 -->
+      <geom type="mesh" class="visual" pos="-0.0637803 0.00513026 0.0818822" quat="0.6546 -0.270051 0.271144 -0.65196" mesh="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0" material="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0_material"/>
+      <geom type="mesh" class="collision" pos="-0.0637803 0.00513026 0.0818822" quat="0.6546 -0.270051 0.271144 -0.65196" mesh="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0" material="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0_material"/>
+      <!-- Part extruded_4_5 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_5" material="extruded_4_5_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_5" material="extruded_4_5_material"/>
+      <!-- Part lsg_08_柔轮 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="lsg_08_柔轮" material="lsg_08_柔轮_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="lsg_08_柔轮" material="lsg_08_柔轮_material"/>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material"/>
+      <!-- Part extruded_5 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_5" material="extruded_5_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_5" material="extruded_5_material"/>
+      <!-- Part extruded_4_1 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_1" material="extruded_4_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4_1" material="extruded_4_1_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material"/>
+      <!-- Part extruded_4 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4" material="extruded_4_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_4" material="extruded_4_material"/>
+      <!-- Part extruded_0_1 -->
+      <geom type="mesh" class="visual" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_0_1" material="extruded_0_1_material"/>
+      <geom type="mesh" class="collision" pos="-0.0926361 0.0115732 0.0764594" quat="0.270598 0.653281 0.653281 0.270598" mesh="extruded_0_1" material="extruded_0_1_material"/>
+      <!-- Part user_library_0805_2012m__cap_4 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="user_library_0805_2012m__cap__3" material="user_library_0805_2012m__cap__3_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="user_library_0805_2012m__cap__3" material="user_library_0805_2012m__cap__3_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material"/>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material"/>
+      <!-- Part user_library_0805_2012m__cap_5 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="user_library_0805_2012m__cap" material="user_library_0805_2012m__cap_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="user_library_0805_2012m__cap" material="user_library_0805_2012m__cap_material"/>
+      <!-- Part extruded_4_6 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4" material="extruded_4_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4" material="extruded_4_material"/>
+      <!-- Part extruded_4_3_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_3" material="extruded_4_3_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_3" material="extruded_4_3_material"/>
+      <!-- Part extruded_4_3_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_3" material="extruded_4_3_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_3" material="extruded_4_3_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material"/>
+      <!-- Part extruded_6_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_6" material="extruded_6_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_6" material="extruded_6_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material"/>
+      <!-- Part cra_ri30_40_pro_xx_后盖_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cra_ri30_40_pro_xx_后盖" material="cra_ri30_40_pro_xx_后盖_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cra_ri30_40_pro_xx_后盖" material="cra_ri30_40_pro_xx_后盖_material"/>
+      <!-- Part extruded_0_1_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_0_1" material="extruded_0_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_0_1" material="extruded_0_1_material"/>
+      <!-- Part cra_ri30_40_xx_b_电机壳_1_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cra_ri30_40_xx_b_电机壳_1" material="cra_ri30_40_xx_b_电机壳_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cra_ri30_40_xx_b_电机壳_1" material="cra_ri30_40_xx_b_电机壳_1_material"/>
+      <!-- Part extruded_0_1_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_0_1" material="extruded_0_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_0_1" material="extruded_0_1_material"/>
+      <!-- Part extruded_1_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_1__2" material="extruded_1__2_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_1__2" material="extruded_1__2_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_7 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material"/>
+      <!-- Part extruded_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded" material="extruded_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded" material="extruded_material"/>
+      <!-- Part extruded_2_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_2" material="extruded_2_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_2" material="extruded_2_material"/>
+      <!-- Part user_library_0805_2012m__cap_6 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="user_library_0805_2012m__cap__2" material="user_library_0805_2012m__cap__2_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="user_library_0805_2012m__cap__2" material="user_library_0805_2012m__cap__2_material"/>
+      <!-- Part extruded_4_4_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_4" material="extruded_4_4_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_4" material="extruded_4_4_material"/>
+      <!-- Part extruded_1_4 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_1" material="extruded_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_1" material="extruded_1_material"/>
+      <!-- Part cra_ri30_40_xx_柔轮盖_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cra_ri30_40_xx_柔轮盖" material="cra_ri30_40_xx_柔轮盖_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cra_ri30_40_xx_柔轮盖" material="cra_ri30_40_xx_柔轮盖_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material"/>
+      <!-- Part extruded_6_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_6" material="extruded_6_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_6" material="extruded_6_material"/>
+      <!-- Part extruded_7 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded" material="extruded_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded" material="extruded_material"/>
+      <!-- Part lsg_8_减速器外圈固定_1_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="lsg_8_减速器外圈固定_1" material="lsg_8_减速器外圈固定_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="lsg_8_减速器外圈固定_1" material="lsg_8_减速器外圈固定_1_material"/>
+      <!-- Part lsg_08_柔轮_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="lsg_08_柔轮" material="lsg_08_柔轮_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="lsg_08_柔轮" material="lsg_08_柔轮_material"/>
+      <!-- Part cra_ri30_40_xx_柔轮盖_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cra_ri30_40_xx_柔轮盖" material="cra_ri30_40_xx_柔轮盖_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cra_ri30_40_xx_柔轮盖" material="cra_ri30_40_xx_柔轮盖_material"/>
+      <!-- Part extruded_5_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_5" material="extruded_5_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_5" material="extruded_5_material"/>
+      <!-- Part extruded_5_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_5" material="extruded_5_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_5" material="extruded_5_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_8 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material"/>
+      <!-- Part extruded_1_5 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_1__2" material="extruded_1__2_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_1__2" material="extruded_1__2_material"/>
+      <!-- Part extruded_4_2_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_2" material="extruded_4_2_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_2" material="extruded_4_2_material"/>
+      <!-- Part b08_cra_ri30_40_pro_xx_客户参考_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="b08_cra_ri30_40_pro_xx_客户参考" material="b08_cra_ri30_40_pro_xx_客户参考_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="b08_cra_ri30_40_pro_xx_客户参考" material="b08_cra_ri30_40_pro_xx_客户参考_material"/>
+      <!-- Part cra_ri30_40_xx_b_电机壳_1_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cra_ri30_40_xx_b_电机壳_1" material="cra_ri30_40_xx_b_电机壳_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cra_ri30_40_xx_b_电机壳_1" material="cra_ri30_40_xx_b_电机壳_1_material"/>
+      <!-- Part extruded_1_6 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_1" material="extruded_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_1" material="extruded_1_material"/>
+      <!-- Part extruded_0_2 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_0" material="extruded_0_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_0" material="extruded_0_material"/>
+      <!-- Part lsg_08_柔轮_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="lsg_08_柔轮" material="lsg_08_柔轮_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="lsg_08_柔轮" material="lsg_08_柔轮_material"/>
+      <!-- Part user_library_0805_2012m__cap_7 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="user_library_0805_2012m__cap__3" material="user_library_0805_2012m__cap__3_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="user_library_0805_2012m__cap__3" material="user_library_0805_2012m__cap__3_material"/>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material"/>
+      <!-- Part extruded_4_1_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_1" material="extruded_4_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_1" material="extruded_4_1_material"/>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material"/>
+      <!-- Part b08_cra_ri30_40_pro_xx_客户参考_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="b08_cra_ri30_40_pro_xx_客户参考" material="b08_cra_ri30_40_pro_xx_客户参考_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="b08_cra_ri30_40_pro_xx_客户参考" material="b08_cra_ri30_40_pro_xx_客户参考_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material"/>
+      <!-- Part user_library_0805_2012m__cap_8 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="user_library_0805_2012m__cap__2" material="user_library_0805_2012m__cap__2_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="user_library_0805_2012m__cap__2" material="user_library_0805_2012m__cap__2_material"/>
+      <!-- Part extruded_4_7 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4" material="extruded_4_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4" material="extruded_4_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material"/>
+      <!-- Part extruded_4_2_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_2" material="extruded_4_2_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_2" material="extruded_4_2_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material"/>
+      <!-- Part user_library_0805_2012m__cap_9 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="user_library_0805_2012m__cap" material="user_library_0805_2012m__cap_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="user_library_0805_2012m__cap" material="user_library_0805_2012m__cap_material"/>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4" material="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material"/>
+      <!-- Part extruded_0_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_0" material="extruded_0_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_0" material="extruded_0_material"/>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n" material="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material"/>
+      <!-- Part extruded_4_4_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_4" material="extruded_4_4_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_4" material="extruded_4_4_material"/>
+      <!-- Part extruded_4_5_2 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_5" material="extruded_4_5_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_4_5" material="extruded_4_5_material"/>
+      <!-- Part lsg_8_减速器外圈固定_1_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="lsg_8_减速器外圈固定_1" material="lsg_8_减速器外圈固定_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="lsg_8_减速器外圈固定_1" material="lsg_8_减速器外圈固定_1_material"/>
+      <!-- Part cra_ri30_40_pro_xx_后盖_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cra_ri30_40_pro_xx_后盖" material="cra_ri30_40_pro_xx_后盖_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="cra_ri30_40_pro_xx_后盖" material="cra_ri30_40_pro_xx_后盖_material"/>
+      <!-- Part extruded_2_3 -->
+      <geom type="mesh" class="visual" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_2" material="extruded_2_material"/>
+      <geom type="mesh" class="collision" pos="0.0563407 0.0744386 0.0764594" quat="0.369644 0.892399 -0.239118 -0.0990458" mesh="extruded_2" material="extruded_2_material"/>
+      <!-- Part extruded_4_5_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_5" material="extruded_4_5_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_5" material="extruded_4_5_material"/>
+      <!-- Part extruded_4_1_3 -->
+      <geom type="mesh" class="visual" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_1" material="extruded_4_1_material"/>
+      <geom type="mesh" class="collision" pos="0.0362954 -0.0860118 0.0764594" quat="0.0990458 0.239118 -0.892399 -0.369644" mesh="extruded_4_1" material="extruded_4_1_material"/>
+      <!-- Link 2_arbremoteur3 -->
+      <body name="2_arbremoteur3" pos="-0.0513137 0 0.0612132" quat="0.270598 0.653281 -0.653281 -0.270598">
+        <!-- Joint from moteur_bati_v2 to 2_arbremoteur3 -->
+        <joint axis="0 0 1" name="m1" type="hinge"/>
+        <inertial pos="0.01068 -0.00881276 -0.017437" mass="0.0296675" fullinertia="1.7693e-05 1.82772e-05 1.26746e-05 4.94455e-06 7.0291e-06 -7.38623e-06"/>
+        <!-- Part dbtm3_14_5 -->
+        <geom type="mesh" class="visual" pos="0.0307218 -0.0376264 -0.0600264" quat="0.257415 -0.357144 -0.524999 0.728397" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+        <geom type="mesh" class="collision" pos="0.0307218 -0.0376264 -0.0600264" quat="0.257415 -0.357144 -0.524999 0.728397" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+        <!-- Part 2_arbremoteur3 -->
+        <geom type="mesh" class="visual" pos="0.0115732 -0.04 0.0184386" quat="0.707107 -0.707107 0 -0" mesh="2_arbremoteur3" material="2_arbremoteur3_material"/>
+        <geom type="mesh" class="collision" pos="0.0115732 -0.04 0.0184386" quat="0.707107 -0.707107 0 -0" mesh="2_arbremoteur3" material="2_arbremoteur3_material"/>
+        <!-- Part sfl676zz -->
+        <geom type="mesh" class="visual" pos="0.0288847 -0.0353764 -0.0607764" quat="0.524999 -0.728397 0.257415 -0.357144" mesh="sfl676zz" material="sfl676zz_material"/>
+        <geom type="mesh" class="collision" pos="0.0288847 -0.0353764 -0.0607764" quat="0.524999 -0.728397 0.257415 -0.357144" mesh="sfl676zz" material="sfl676zz_material"/>
+        <!-- Link 3_lien2 -->
+        <body name="3_lien2" pos="0.0260678 -0.0319264 -0.0619264" quat="0.767593 0.55325 0.262516 0.189211">
+          <!-- Joint from 2_arbremoteur3 to 3_lien2 -->
+          <joint axis="0 0 1" name="m1_p1" type="hinge"/>
+          <inertial pos="0.0153881 0.00162035 -0.0217923" mass="0.0118051" fullinertia="3.6573e-06 4.83538e-06 1.52639e-06 -1.03018e-07 1.62019e-06 -2.6151e-08"/>
+          <!-- Part dbtm3_14_5_2 -->
+          <geom type="mesh" class="visual" pos="0.0206151 0 -0.0478913" quat="0 0.99203 0 -0.126004" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+          <geom type="mesh" class="collision" pos="0.0206151 0 -0.0478913" quat="0 0.99203 0 -0.126004" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+          <!-- Part sfl676zz_2 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.0046" quat="0 0.707107 0 -0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.0046" quat="0 0.707107 0 -0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+          <!-- Part sfl676zz_3 -->
+          <geom type="mesh" class="visual" pos="0.0235199 0 -0.0486413" quat="0 -0.126004 -0 -0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+          <geom type="mesh" class="collision" pos="0.0235199 0 -0.0486413" quat="0 -0.126004 -0 -0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+          <!-- Part 3_lien2 -->
+          <geom type="mesh" class="visual" pos="-0.031712 0.0736879 0.0172703" quat="0.151564 -0.933977 -0.0518346 -0.319419" mesh="3_lien2" material="3_lien2_material"/>
+          <geom type="mesh" class="collision" pos="-0.031712 0.0736879 0.0172703" quat="0.151564 -0.933977 -0.0518346 -0.319419" mesh="3_lien2" material="3_lien2_material"/>
+          <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2 -->
+          <geom type="mesh" class="visual" pos="-0 0 -0.0085" quat="0 -1 -0 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 -0.0085" quat="0 -1 -0 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+          <!-- Link 4_supporthead -->
+          <body name="4_supporthead" pos="0.0279738 0 -0.0497913" quat="0.790569 0 -0.612372 0">
+            <!-- Joint from 3_lien2 to 4_supporthead -->
+            <joint axis="0 0 1" name="m2_p2" type="hinge"/>
+            <inertial pos="-0.015854 -0.012944 0.00842424" mass="0.027354" fullinertia="6.25131e-06 5.83496e-06 7.08287e-06 1.01868e-06 1.61018e-06 1.31515e-06"/>
+            <!-- Part 4_supporthead -->
+            <geom type="mesh" class="visual" pos="0.0500108 0.0736879 0.0745559" quat="0.151564 -0.933977 0.0518346 0.319419" mesh="4_supporthead" material="4_supporthead_material"/>
+            <geom type="mesh" class="collision" pos="0.0500108 0.0736879 0.0745559" quat="0.151564 -0.933977 0.0518346 0.319419" mesh="4_supporthead" material="4_supporthead_material"/>
+            <!-- Part sfl676zz_4 -->
+            <geom type="mesh" class="visual" pos="0 -0 -0.0026" quat="0 0.707107 -0 -0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+            <geom type="mesh" class="collision" pos="0 -0 -0.0026" quat="0 0.707107 -0 -0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+            <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_2 -->
+            <geom type="mesh" class="visual" pos="0 -0 -0.0065" quat="1 -0 -0 0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+            <geom type="mesh" class="collision" pos="0 -0 -0.0065" quat="1 -0 -0 0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+            <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_3 -->
+            <geom type="mesh" class="visual" pos="-0.00685348 -0.033575 0.0200434" quat="0.767593 -0.55325 0.262516 0.189211" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+            <geom type="mesh" class="collision" pos="-0.00685348 -0.033575 0.0200434" quat="0.767593 -0.55325 0.262516 0.189211" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+            <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_4 -->
+            <geom type="mesh" class="visual" pos="-0.0342674 -0 0.0200434" quat="0.790569 -0 0.612372 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+            <geom type="mesh" class="collision" pos="-0.0342674 -0 0.0200434" quat="0.790569 -0 0.612372 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+            <!-- Part sfl676zz_5 -->
+            <geom type="mesh" class="visual" pos="-0.00609825 -0.0298752 0.0210184" quat="0.524999 0.357144 -0.257415 -0.728397" mesh="sfl676zz" material="sfl676zz_material"/>
+            <geom type="mesh" class="collision" pos="-0.00609825 -0.0298752 0.0210184" quat="0.524999 0.357144 -0.257415 -0.728397" mesh="sfl676zz" material="sfl676zz_material"/>
+            <!-- Part sfl676zz_6 -->
+            <geom type="mesh" class="visual" pos="-0.0304912 -0 0.0210184" quat="0 -0.126004 0 0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+            <geom type="mesh" class="collision" pos="-0.0304912 -0 0.0210184" quat="0 -0.126004 0 0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+            <!-- Frame effector -->
+            <site group="3" name="effector" pos="-0.0184369 -0.0148849 0.00519521" quat="0.376415 0.703734 -0.598591 -0.0689781"/>
+            <!-- Frame closing_m1_p2_2 -->
+            <site group="3" name="closing_m1_p2_2" pos="-0.0279738 -0 0.0216684" quat="0.433013 -0.559017 -0.559017 0.433013"/>
+            <!-- Frame closing_m1_p2_2_z -->
+            <site group="3" name="closing_m1_p2_2_z" pos="-0.124798 -0 -0.00333159" quat="0.433013 -0.559017 -0.559017 0.433013"/>
+            <!-- Frame closing_m3_p2_2 -->
+            <site group="3" name="closing_m3_p2_2" pos="-0.00559476 -0.0274086 0.0216684" quat="0.576833 0.676563 -0.408978 0.20558"/>
+            <!-- Frame closing_m3_p2_2_z -->
+            <site group="3" name="closing_m3_p2_2_z" pos="-0.0249597 -0.122277 -0.00333159" quat="0.576833 0.676563 -0.408978 0.20558"/>
+          </body>
+        </body>
+      </body>
+      <!-- Link 2_arbremoteur3_2 -->
+      <body name="2_arbremoteur3_2" pos="0.0256569 -0.044439 0.0612132" quat="0.0990458 -0.239118 0.892399 -0.369644">
+        <!-- Joint from moteur_bati_v2 to 2_arbremoteur3_2 -->
+        <joint axis="0 0 1" name="m2" type="hinge"/>
+        <inertial pos="-0.01068 0.00881276 -0.017437" mass="0.0296675" fullinertia="1.7693e-05 1.82772e-05 1.26746e-05 4.94455e-06 -7.0291e-06 7.38623e-06"/>
+        <!-- Part dbtm3_14_5_3 -->
+        <geom type="mesh" class="visual" pos="-0.0307218 0.0376264 -0.0600264" quat="0.728397 -0.524999 0.357144 -0.257415" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+        <geom type="mesh" class="collision" pos="-0.0307218 0.0376264 -0.0600264" quat="0.728397 -0.524999 0.357144 -0.257415" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+        <!-- Part 2_arbremoteur3_2 -->
+        <geom type="mesh" class="visual" pos="-0.0115732 0.04 0.0184386" quat="0 0 -0.707107 0.707107" mesh="2_arbremoteur3" material="2_arbremoteur3_material"/>
+        <geom type="mesh" class="collision" pos="-0.0115732 0.04 0.0184386" quat="0 0 -0.707107 0.707107" mesh="2_arbremoteur3" material="2_arbremoteur3_material"/>
+        <!-- Part sfl676zz_7 -->
+        <geom type="mesh" class="visual" pos="-0.0288847 0.0353764 -0.0607764" quat="0.357144 -0.257415 -0.728397 0.524999" mesh="sfl676zz" material="sfl676zz_material"/>
+        <geom type="mesh" class="collision" pos="-0.0288847 0.0353764 -0.0607764" quat="0.357144 -0.257415 -0.728397 0.524999" mesh="sfl676zz" material="sfl676zz_material"/>
+        <!-- Link 3_lien2_2 -->
+        <body name="3_lien2_2" pos="-0.0260678 0.0319264 -0.0619264" quat="0.189211 0.262516 -0.55325 -0.767593">
+          <!-- Joint from 2_arbremoteur3_2 to 3_lien2_2 -->
+          <joint axis="0 0 1" name="m2_p1" type="hinge"/>
+          <inertial pos="0.0153881 0.00162035 -0.0217923" mass="0.0118051" fullinertia="3.6573e-06 4.83538e-06 1.52639e-06 -1.03018e-07 1.62019e-06 -2.6151e-08"/>
+          <!-- Part dbtm3_14_5_4 -->
+          <geom type="mesh" class="visual" pos="0.0206151 0 -0.0478913" quat="0 -0.99203 0 0.126004" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+          <geom type="mesh" class="collision" pos="0.0206151 0 -0.0478913" quat="0 -0.99203 0 0.126004" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+          <!-- Part sfl676zz_8 -->
+          <geom type="mesh" class="visual" pos="0 -0 -0.0046" quat="0 -0.707107 0 0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 -0.0046" quat="0 -0.707107 0 0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+          <!-- Part sfl676zz_9 -->
+          <geom type="mesh" class="visual" pos="0.0235199 0 -0.0486413" quat="0 0.126004 -0 0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+          <geom type="mesh" class="collision" pos="0.0235199 0 -0.0486413" quat="0 0.126004 -0 0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+          <!-- Part 3_lien2_2 -->
+          <geom type="mesh" class="visual" pos="-0.031712 0.0736879 0.0172703" quat="0.151564 -0.933977 -0.0518346 -0.319419" mesh="3_lien2" material="3_lien2_material"/>
+          <geom type="mesh" class="collision" pos="-0.031712 0.0736879 0.0172703" quat="0.151564 -0.933977 -0.0518346 -0.319419" mesh="3_lien2" material="3_lien2_material"/>
+          <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_5 -->
+          <geom type="mesh" class="visual" pos="0 -0 -0.0085" quat="0 -1 0 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 -0.0085" quat="0 -1 0 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+          <!-- Frame closing_m3_p2_1 -->
+          <site group="3" name="closing_m3_p2_1" pos="0.0279738 0 -0.0497913" quat="0 0.790569 -0 0.612372"/>
+          <!-- Frame closing_m3_p2_1_z -->
+          <site group="3" name="closing_m3_p2_1_z" pos="0.124798 0 -0.0747913" quat="0 0.790569 -0 0.612372"/>
+        </body>
+      </body>
+      <!-- Link 2_arbremoteur3_3 -->
+      <body name="2_arbremoteur3_3" pos="0.0256569 0.044439 0.0612132" quat="0.369644 -0.892399 0.239118 -0.0990458">
+        <!-- Joint from moteur_bati_v2 to 2_arbremoteur3_3 -->
+        <joint axis="0 0 1" name="m3" type="hinge"/>
+        <inertial pos="-0.01068 0.00881276 -0.017437" mass="0.0296675" fullinertia="1.7693e-05 1.82772e-05 1.26746e-05 4.94455e-06 -7.0291e-06 7.38623e-06"/>
+        <!-- Part dbtm3_14_5_5 -->
+        <geom type="mesh" class="visual" pos="-0.0307218 0.0376264 -0.0600264" quat="0.728397 -0.524999 0.357144 -0.257415" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+        <geom type="mesh" class="collision" pos="-0.0307218 0.0376264 -0.0600264" quat="0.728397 -0.524999 0.357144 -0.257415" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+        <!-- Part 2_arbremoteur3_3 -->
+        <geom type="mesh" class="visual" pos="-0.0115732 0.04 0.0184386" quat="0 0 0.707107 -0.707107" mesh="2_arbremoteur3" material="2_arbremoteur3_material"/>
+        <geom type="mesh" class="collision" pos="-0.0115732 0.04 0.0184386" quat="0 0 0.707107 -0.707107" mesh="2_arbremoteur3" material="2_arbremoteur3_material"/>
+        <!-- Part sfl676zz_10 -->
+        <geom type="mesh" class="visual" pos="-0.0288847 0.0353764 -0.0607764" quat="0.357144 -0.257415 -0.728397 0.524999" mesh="sfl676zz" material="sfl676zz_material"/>
+        <geom type="mesh" class="collision" pos="-0.0288847 0.0353764 -0.0607764" quat="0.357144 -0.257415 -0.728397 0.524999" mesh="sfl676zz" material="sfl676zz_material"/>
+        <!-- Link 3_lien2_3 -->
+        <body name="3_lien2_3" pos="-0.0260678 0.0319264 -0.0619264" quat="0.189211 0.262516 -0.55325 -0.767593">
+          <!-- Joint from 2_arbremoteur3_3 to 3_lien2_3 -->
+          <joint axis="0 0 1" name="m3_p1" type="hinge"/>
+          <inertial pos="0.0153881 0.00162035 -0.0217923" mass="0.0118051" fullinertia="3.6573e-06 4.83538e-06 1.52639e-06 -1.03018e-07 1.62019e-06 -2.6151e-08"/>
+          <!-- Part dbtm3_14_5_6 -->
+          <geom type="mesh" class="visual" pos="0.0206151 0 -0.0478913" quat="0 -0.99203 -0 0.126004" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+          <geom type="mesh" class="collision" pos="0.0206151 0 -0.0478913" quat="0 -0.99203 -0 0.126004" mesh="dbtm3_14_5" material="dbtm3_14_5_material"/>
+          <!-- Part sfl676zz_11 -->
+          <geom type="mesh" class="visual" pos="-0 -0 -0.0046" quat="0 -0.707107 -0 0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 -0.0046" quat="0 -0.707107 -0 0.707107" mesh="sfl676zz" material="sfl676zz_material"/>
+          <!-- Part sfl676zz_12 -->
+          <geom type="mesh" class="visual" pos="0.0235199 0 -0.0486413" quat="0 -0.126004 -0 -0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+          <geom type="mesh" class="collision" pos="0.0235199 0 -0.0486413" quat="0 -0.126004 -0 -0.99203" mesh="sfl676zz" material="sfl676zz_material"/>
+          <!-- Part 3_lien2_3 -->
+          <geom type="mesh" class="visual" pos="-0.031712 0.0736879 0.0172703" quat="0.151564 -0.933977 -0.0518346 -0.319419" mesh="3_lien2" material="3_lien2_material"/>
+          <geom type="mesh" class="collision" pos="-0.031712 0.0736879 0.0172703" quat="0.151564 -0.933977 -0.0518346 -0.319419" mesh="3_lien2" material="3_lien2_material"/>
+          <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_6 -->
+          <geom type="mesh" class="visual" pos="-0 0 -0.0085" quat="0 -1 0 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 -0.0085" quat="0 -1 0 -0" mesh="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2" material="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material"/>
+          <!-- Frame closing_m1_p2_1 -->
+          <site group="3" name="closing_m1_p2_1" pos="0.0279738 0 -0.0497913" quat="0 -0.790569 0 -0.612372"/>
+          <!-- Frame closing_m1_p2_1_z -->
+          <site group="3" name="closing_m1_p2_1_z" pos="0.124798 0 -0.0747913" quat="0 -0.790569 0 -0.612372"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="b08_cra_ri30_40_pro_xx_客户参考.stl"/>
+    <mesh file="cra_ri30_40_pro_xx_后盖.stl"/>
+    <mesh file="extruded_4_2.stl"/>
+    <mesh file="1_bati3.stl"/>
+    <mesh file="extruded_6.stl"/>
+    <mesh file="extruded_1.stl"/>
+    <mesh file="cra_ri30_40_xx_柔轮盖.stl"/>
+    <mesh file="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl"/>
+    <mesh file="extruded_4_4.stl"/>
+    <mesh file="user_library_0805_2012m__cap.stl"/>
+    <mesh file="extruded_2.stl"/>
+    <mesh file="user_library_0805_2012m__cap__2.stl"/>
+    <mesh file="user_library_0805_2012m__cap__3.stl"/>
+    <mesh file="extruded.stl"/>
+    <mesh file="extruded_4_3.stl"/>
+    <mesh file="cra_ri30_40_xx_b_电机壳_1.stl"/>
+    <mesh file="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl"/>
+    <mesh file="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl"/>
+    <mesh file="lsg_8_减速器外圈固定_1.stl"/>
+    <mesh file="extruded_0.stl"/>
+    <mesh file="d2f_o1l.stl"/>
+    <mesh file="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl"/>
+    <mesh file="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl"/>
+    <mesh file="extruded_1__2.stl"/>
+    <mesh file="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl"/>
+    <mesh file="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0.stl"/>
+    <mesh file="extruded_4_5.stl"/>
+    <mesh file="lsg_08_柔轮.stl"/>
+    <mesh file="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl"/>
+    <mesh file="extruded_5.stl"/>
+    <mesh file="extruded_4_1.stl"/>
+    <mesh file="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl"/>
+    <mesh file="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl"/>
+    <mesh file="extruded_4.stl"/>
+    <mesh file="extruded_0_1.stl"/>
+    <mesh file="dbtm3_14_5.stl"/>
+    <mesh file="2_arbremoteur3.stl"/>
+    <mesh file="sfl676zz.stl"/>
+    <mesh file="3_lien2.stl"/>
+    <mesh file="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+    <mesh file="4_supporthead.stl"/>
+    <material name="b08_cra_ri30_40_pro_xx_客户参考_material" rgba="1 1 1 1"/>
+    <material name="cra_ri30_40_pro_xx_后盖_material" rgba="0.690196 0.764706 0.0196078 1"/>
+    <material name="extruded_4_2_material" rgba="0.960784 0.796078 0.207843 1"/>
+    <material name="1_bati3_material" rgba="0.980392 0.713725 0.00392157 1"/>
+    <material name="extruded_6_material" rgba="0.00784314 0.392157 0.72549 1"/>
+    <material name="extruded_1_material" rgba="0.14902 0.180392 0.435294 1"/>
+    <material name="cra_ri30_40_xx_柔轮盖_material" rgba="0.368627 0.941176 0.733333 1"/>
+    <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="extruded_4_4_material" rgba="0.960784 0.796078 0.207843 1"/>
+    <material name="user_library_0805_2012m__cap_material" rgba="0.0196078 0.498039 0.341176 1"/>
+    <material name="extruded_2_material" rgba="0.176471 0.0431373 0.792157 1"/>
+    <material name="user_library_0805_2012m__cap__2_material" rgba="1 1 1 1"/>
+    <material name="user_library_0805_2012m__cap__3_material" rgba="0.0196078 0.498039 0.341176 1"/>
+    <material name="extruded_material" rgba="0.14902 0.180392 0.435294 1"/>
+    <material name="extruded_4_3_material" rgba="0.960784 0.796078 0.207843 1"/>
+    <material name="cra_ri30_40_xx_b_电机壳_1_material" rgba="0.898039 0.917647 0.929412 1"/>
+    <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="lsg_8_减速器外圈固定_1_material" rgba="0.898039 0.917647 0.929412 1"/>
+    <material name="extruded_0_material" rgba="0.105882 0.580392 0.14902 1"/>
+    <material name="d2f_o1l_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="extruded_1__2_material" rgba="0.435294 0.792157 0.176471 1"/>
+    <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0_material" rgba="0.603922 0.647059 0.686275 1"/>
+    <material name="extruded_4_5_material" rgba="0.960784 0.796078 0.207843 1"/>
+    <material name="lsg_08_柔轮_material" rgba="1 1 1 1"/>
+    <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="extruded_5_material" rgba="0.792157 0.576471 0.509804 1"/>
+    <material name="extruded_4_1_material" rgba="0.960784 0.796078 0.207843 1"/>
+    <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material" rgba="0.776471 0.756863 0.737255 1"/>
+    <material name="extruded_4_material" rgba="0.960784 0.796078 0.207843 1"/>
+    <material name="extruded_0_1_material" rgba="0.105882 0.580392 0.14902 1"/>
+    <material name="dbtm3_14_5_material" rgba="0.690196 0.690196 0.690196 1"/>
+    <material name="2_arbremoteur3_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="sfl676zz_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="3_lien2_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material" rgba="0.603922 0.647059 0.686275 1"/>
+    <material name="4_supporthead_material" rgba="0.917647 0.917647 0.917647 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_spm_mujoco_0" name="m1" joint="m1"/>
+    <position class="test_export_spm_mujoco_0" name="m1_p1" joint="m1_p1"/>
+    <position class="test_export_spm_mujoco_0" name="m2_p2" joint="m2_p2"/>
+    <position class="test_export_spm_mujoco_0" name="m2" joint="m2"/>
+    <position class="test_export_spm_mujoco_0" name="m2_p1" joint="m2_p1"/>
+    <position class="test_export_spm_mujoco_0" name="m3" joint="m3"/>
+    <position class="test_export_spm_mujoco_0" name="m3_p1" joint="m3_p1"/>
+  </actuator>
+  <equality>
+    <connect site1="closing_m1_p2_1" site2="closing_m1_p2_2"/>
+    <connect site1="closing_m1_p2_1_z" site2="closing_m1_p2_2_z"/>
+    <connect site1="closing_m3_p2_1" site2="closing_m3_p2_2"/>
+    <connect site1="closing_m3_p2_1_z" site2="closing_m3_p2_2_z"/>
+  </equality>
+</mujoco>

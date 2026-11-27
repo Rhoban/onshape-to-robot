@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 4c0bd896eb7a677f0feac15c / version_id: 686073445a22c513cd41e39a -->
+<mujoco model="test_export_2_wheels_mujoco_0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_2_wheels_mujoco_0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link body -->
+    <body name="body" pos="0 0 0" quat="1 0 0 0" childclass="test_export_2_wheels_mujoco_0">
+      <freejoint name="body_freejoint"/>
+      <inertial pos="0.0375 0.0253843 0.0225241" mass="2.23874" fullinertia="0.00206023 0.00150691 0.00254354 4.48e-10 6.5e-11 -0.00028761"/>
+      <!-- Part body -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="body" material="body_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="body" material="body_material"/>
+      <!-- Link wheel -->
+      <body name="wheel" pos="-0.02 0.0325 0.025" quat="0.5 -0.5 -0.5 0.5">
+        <!-- Joint from body to wheel -->
+        <joint axis="0 0 1" name="wheel1_speed" type="hinge"/>
+        <inertial pos="0 0 -0.004" mass="0.335419" fullinertia="0.000174367 0.000174367 0.000345298 0 0 0"/>
+        <!-- Part wheel -->
+        <geom type="mesh" class="visual" pos="-0.0325 0.025 -0.02" quat="0.5 0.5 0.5 -0.5" mesh="wheel" material="wheel_material"/>
+        <geom type="mesh" class="collision" pos="-0.0325 0.025 -0.02" quat="0.5 0.5 0.5 -0.5" mesh="wheel" material="wheel_material"/>
+      </body>
+      <!-- Link wheel_2 -->
+      <body name="wheel_2" pos="0.095 0.0325 0.025" quat="0.5 -0.5 -0.5 0.5">
+        <!-- Joint from body to wheel_2 -->
+        <joint axis="0 0 1" name="wheel2_speed" type="hinge"/>
+        <inertial pos="0 0 0.004" mass="0.335419" fullinertia="0.000174367 0.000174367 0.000345298 0 0 0"/>
+        <!-- Part wheel_2 -->
+        <geom type="mesh" class="visual" pos="-0.0325 0.025 -0.012" quat="0.5 0.5 0.5 -0.5" mesh="wheel" material="wheel_material"/>
+        <geom type="mesh" class="collision" pos="-0.0325 0.025 -0.012" quat="0.5 0.5 0.5 -0.5" mesh="wheel" material="wheel_material"/>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="body.stl"/>
+    <mesh file="wheel.stl"/>
+    <material name="body_material" rgba="0.8 0.8 0.8 1"/>
+    <material name="wheel_material" rgba="0.262745 0.282353 0.301961 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_2_wheels_mujoco_0" name="wheel1_speed" joint="wheel1_speed"/>
+    <position class="test_export_2_wheels_mujoco_0" name="wheel2_speed" joint="wheel2_speed"/>
+  </actuator>
+  <equality/>
+</mujoco>

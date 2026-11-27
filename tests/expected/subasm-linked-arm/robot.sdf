@@ -1,0 +1,189 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 87d011266aedcba5625ad9ab / version_id: 5ba322a44be900ea91a05281 -->
+<sdf version="1.7">
+  <model name="test_export_subasm_linked_arm_1">
+    <!-- Link part_1 -->
+    <link name="part_1">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part part_1 -->
+      <visual name="part_1_visual_mesh_1">
+        <pose relative_to="part_1">0 0.02 0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part_1_collision_mesh_2">
+        <pose relative_to="part_1">0 0.02 0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link part_1_2 -->
+    <link name="part_1_2">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="shoulder">0 0 0 0 -0 0</pose>
+      <!-- Part part_1_2 -->
+      <visual name="part_1_2_visual_mesh_1">
+        <pose relative_to="part_1_2">-0.01 -0.01 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part_1_2_collision_mesh_2">
+        <pose relative_to="part_1_2">-0.01 -0.01 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part part_1_3 -->
+      <visual name="part_1_3_visual_mesh_1">
+        <pose relative_to="part_1_2">-0.01 -0.01 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part_1_3_collision_mesh_2">
+        <pose relative_to="part_1_2">-0.01 -0.01 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link library_arm_forearm -->
+    <link name="library_arm_forearm">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="library_arm_elbow">0 0 0 0 -0 0</pose>
+      <!-- Part part_1_4 -->
+      <visual name="part_1_4_visual_mesh_1">
+        <pose relative_to="library_arm_forearm">-0.01 -0.01 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part_1_4_collision_mesh_2">
+        <pose relative_to="library_arm_forearm">-0.01 -0.01 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_subasm_linked_arm_1/assets/part_1__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame library_arm_hand -->
+    <frame name="library_arm_hand">
+      <pose relative_to="library_arm_forearm">0 0 0.02 0 -0 0</pose>
+    </frame>
+    <!-- Joint from part_1_2 to library_arm_forearm -->
+    <joint name="library_arm_elbow" type="revolute">
+      <pose relative_to="part_1_2">0 0 0.02 3.14159 -0 0</pose>
+      <parent>part_1_2</parent>
+      <child>library_arm_forearm</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.785398163397</lower>
+          <upper>2.094395102393</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from part_1 to part_1_2 -->
+    <joint name="shoulder" type="revolute">
+      <pose relative_to="part_1">0.01 0.01 0 0 -0 0</pose>
+      <parent>part_1</parent>
+      <child>part_1_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.570796326795</lower>
+          <upper>1.570796326795</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

@@ -1,0 +1,3294 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 6a04069fb9e9b699f96a6881 / version_id: 72d595132303706ea0b2cb97 -->
+<sdf version="1.7">
+  <model name="test_export_spm_sdf_0">
+    <!-- Link moteur_bati_v2 -->
+    <link name="moteur_bati_v2">
+      <inertial>
+        <pose>-3.7563e-05 2.82067e-06 0.044516 0 0 0</pose>
+        <mass>0.925933</mass>
+        <inertia>
+          <ixx>0.00239253</ixx>
+          <ixy>1.78337e-07</ixy>
+          <ixz>1.13556e-06</ixz>
+          <iyy>0.00239489</iyy>
+          <iyz>-8.5735e-08</iyz>
+          <izz>0.00452148</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part b08_cra_ri30_40_pro_xx_客户参考 -->
+      <visual name="b08_cra_ri30_40_pro_xx_客户参考_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/b08_cra_ri30_40_pro_xx_客户参考.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="b08_cra_ri30_40_pro_xx_客户参考_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/b08_cra_ri30_40_pro_xx_客户参考.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_pro_xx_后盖 -->
+      <visual name="cra_ri30_40_pro_xx_后盖_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_pro_xx_后盖.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.764706 0.0196078 1</ambient>
+          <diffuse>0.690196 0.764706 0.0196078 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_pro_xx_后盖_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_pro_xx_后盖.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_2 -->
+      <visual name="extruded_4_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part 1_bati3 -->
+      <visual name="1_bati3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0280564 -0.0254488 0.0198908 0.785398 -0 0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/1_bati3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.980392 0.713725 0.00392157 1</ambient>
+          <diffuse>0.980392 0.713725 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="1_bati3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0280564 -0.0254488 0.0198908 0.785398 -0 0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/1_bati3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_6 -->
+      <visual name="extruded_6_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.00784314 0.392157 0.72549 1</ambient>
+          <diffuse>0.00784314 0.392157 0.72549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_6_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_1 -->
+      <visual name="extruded_1_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.14902 0.180392 0.435294 1</ambient>
+          <diffuse>0.14902 0.180392 0.435294 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_1_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_xx_柔轮盖 -->
+      <visual name="cra_ri30_40_xx_柔轮盖_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_柔轮盖.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.368627 0.941176 0.733333 1</ambient>
+          <diffuse>0.368627 0.941176 0.733333 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_xx_柔轮盖_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_柔轮盖.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_4 -->
+      <visual name="extruded_4_4_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_4_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap -->
+      <visual name="user_library_0805_2012m__cap_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0196078 0.498039 0.341176 1</ambient>
+          <diffuse>0.0196078 0.498039 0.341176 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_2 -->
+      <visual name="extruded_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.176471 0.0431373 0.792157 1</ambient>
+          <diffuse>0.176471 0.0431373 0.792157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_2 -->
+      <visual name="user_library_0805_2012m__cap_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_3 -->
+      <visual name="user_library_0805_2012m__cap_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0196078 0.498039 0.341176 1</ambient>
+          <diffuse>0.0196078 0.498039 0.341176 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded -->
+      <visual name="extruded_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.14902 0.180392 0.435294 1</ambient>
+          <diffuse>0.14902 0.180392 0.435294 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_3 -->
+      <visual name="extruded_4_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_xx_b_电机壳_1 -->
+      <visual name="cra_ri30_40_xx_b_电机壳_1_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_b_电机壳_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.898039 0.917647 0.929412 1</ambient>
+          <diffuse>0.898039 0.917647 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_xx_b_电机壳_1_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_b_电机壳_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part lsg_8_减速器外圈固定_1 -->
+      <visual name="lsg_8_减速器外圈固定_1_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_8_减速器外圈固定_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.898039 0.917647 0.929412 1</ambient>
+          <diffuse>0.898039 0.917647 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="lsg_8_减速器外圈固定_1_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_8_减速器外圈固定_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_0 -->
+      <visual name="extruded_0_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.105882 0.580392 0.14902 1</ambient>
+          <diffuse>0.105882 0.580392 0.14902 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_0_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part d2f_o1l -->
+      <visual name="d2f_o1l_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0682973 0.00218361 0.0794696 -2.35619 0.00285727 -1.56794</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/d2f_o1l.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="d2f_o1l_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0682973 0.00218361 0.0794696 -2.35619 0.00285727 -1.56794</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/d2f_o1l.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n -->
+      <visual name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_1_2 -->
+      <visual name="extruded_1_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.435294 0.792157 0.176471 1</ambient>
+          <diffuse>0.435294 0.792157 0.176471 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_1_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0 -->
+      <visual name="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0637803 0.00513026 0.0818822 -0.785394 0.00285727 -1.56794</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.603922 0.647059 0.686275 1</ambient>
+          <diffuse>0.603922 0.647059 0.686275 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0637803 0.00513026 0.0818822 -0.785394 0.00285727 -1.56794</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_5 -->
+      <visual name="extruded_4_5_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_5_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part lsg_08_柔轮 -->
+      <visual name="lsg_08_柔轮_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_08_柔轮.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="lsg_08_柔轮_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_08_柔轮.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1 -->
+      <visual name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_5 -->
+      <visual name="extruded_5_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.792157 0.576471 0.509804 1</ambient>
+          <diffuse>0.792157 0.576471 0.509804 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_5_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_1 -->
+      <visual name="extruded_4_1_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_1_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4 -->
+      <visual name="extruded_4_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_0_1 -->
+      <visual name="extruded_0_1_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.105882 0.580392 0.14902 1</ambient>
+          <diffuse>0.105882 0.580392 0.14902 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_0_1_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">-0.0926361 0.0115732 0.0764594 2.35619 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_4 -->
+      <visual name="user_library_0805_2012m__cap_4_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0196078 0.498039 0.341176 1</ambient>
+          <diffuse>0.0196078 0.498039 0.341176 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_4_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_2 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_2 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_2 -->
+      <visual name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_5 -->
+      <visual name="user_library_0805_2012m__cap_5_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0196078 0.498039 0.341176 1</ambient>
+          <diffuse>0.0196078 0.498039 0.341176 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_5_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_6 -->
+      <visual name="extruded_4_6_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_6_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_3_2 -->
+      <visual name="extruded_4_3_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_3_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_3_3 -->
+      <visual name="extruded_4_3_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_3_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_2 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_3 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_6_2 -->
+      <visual name="extruded_6_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.00784314 0.392157 0.72549 1</ambient>
+          <diffuse>0.00784314 0.392157 0.72549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_6_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_2 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_pro_xx_后盖_2 -->
+      <visual name="cra_ri30_40_pro_xx_后盖_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_pro_xx_后盖.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.764706 0.0196078 1</ambient>
+          <diffuse>0.690196 0.764706 0.0196078 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_pro_xx_后盖_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_pro_xx_后盖.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_0_1_2 -->
+      <visual name="extruded_0_1_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.105882 0.580392 0.14902 1</ambient>
+          <diffuse>0.105882 0.580392 0.14902 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_0_1_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_xx_b_电机壳_1_2 -->
+      <visual name="cra_ri30_40_xx_b_电机壳_1_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_b_电机壳_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.898039 0.917647 0.929412 1</ambient>
+          <diffuse>0.898039 0.917647 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_xx_b_电机壳_1_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_b_电机壳_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_0_1_3 -->
+      <visual name="extruded_0_1_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.105882 0.580392 0.14902 1</ambient>
+          <diffuse>0.105882 0.580392 0.14902 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_0_1_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_1_3 -->
+      <visual name="extruded_1_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.435294 0.792157 0.176471 1</ambient>
+          <diffuse>0.435294 0.792157 0.176471 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_1_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_7 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_7_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_7_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_3 -->
+      <visual name="extruded_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.14902 0.180392 0.435294 1</ambient>
+          <diffuse>0.14902 0.180392 0.435294 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_2_2 -->
+      <visual name="extruded_2_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.176471 0.0431373 0.792157 1</ambient>
+          <diffuse>0.176471 0.0431373 0.792157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_2_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_6 -->
+      <visual name="user_library_0805_2012m__cap_6_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_6_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_4_2 -->
+      <visual name="extruded_4_4_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_4_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_1_4 -->
+      <visual name="extruded_1_4_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.14902 0.180392 0.435294 1</ambient>
+          <diffuse>0.14902 0.180392 0.435294 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_1_4_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_xx_柔轮盖_2 -->
+      <visual name="cra_ri30_40_xx_柔轮盖_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_柔轮盖.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.368627 0.941176 0.733333 1</ambient>
+          <diffuse>0.368627 0.941176 0.733333 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_xx_柔轮盖_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_柔轮盖.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_3 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_6_3 -->
+      <visual name="extruded_6_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.00784314 0.392157 0.72549 1</ambient>
+          <diffuse>0.00784314 0.392157 0.72549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_6_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_7 -->
+      <visual name="extruded_7_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.14902 0.180392 0.435294 1</ambient>
+          <diffuse>0.14902 0.180392 0.435294 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_7_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part lsg_8_减速器外圈固定_1_2 -->
+      <visual name="lsg_8_减速器外圈固定_1_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_8_减速器外圈固定_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.898039 0.917647 0.929412 1</ambient>
+          <diffuse>0.898039 0.917647 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="lsg_8_减速器外圈固定_1_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_8_减速器外圈固定_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part lsg_08_柔轮_2 -->
+      <visual name="lsg_08_柔轮_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_08_柔轮.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="lsg_08_柔轮_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_08_柔轮.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_xx_柔轮盖_3 -->
+      <visual name="cra_ri30_40_xx_柔轮盖_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_柔轮盖.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.368627 0.941176 0.733333 1</ambient>
+          <diffuse>0.368627 0.941176 0.733333 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_xx_柔轮盖_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_柔轮盖.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_5_2 -->
+      <visual name="extruded_5_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.792157 0.576471 0.509804 1</ambient>
+          <diffuse>0.792157 0.576471 0.509804 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_5_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_5_3 -->
+      <visual name="extruded_5_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.792157 0.576471 0.509804 1</ambient>
+          <diffuse>0.792157 0.576471 0.509804 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_5_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_8 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_8_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_8_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_2 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_1_5 -->
+      <visual name="extruded_1_5_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.435294 0.792157 0.176471 1</ambient>
+          <diffuse>0.435294 0.792157 0.176471 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_1_5_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_2_2 -->
+      <visual name="extruded_4_2_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_2_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part b08_cra_ri30_40_pro_xx_客户参考_2 -->
+      <visual name="b08_cra_ri30_40_pro_xx_客户参考_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/b08_cra_ri30_40_pro_xx_客户参考.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="b08_cra_ri30_40_pro_xx_客户参考_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/b08_cra_ri30_40_pro_xx_客户参考.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_xx_b_电机壳_1_3 -->
+      <visual name="cra_ri30_40_xx_b_电机壳_1_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_b_电机壳_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.898039 0.917647 0.929412 1</ambient>
+          <diffuse>0.898039 0.917647 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_xx_b_电机壳_1_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_xx_b_电机壳_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_1_6 -->
+      <visual name="extruded_1_6_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.14902 0.180392 0.435294 1</ambient>
+          <diffuse>0.14902 0.180392 0.435294 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_1_6_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_0_2 -->
+      <visual name="extruded_0_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.105882 0.580392 0.14902 1</ambient>
+          <diffuse>0.105882 0.580392 0.14902 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_0_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part lsg_08_柔轮_3 -->
+      <visual name="lsg_08_柔轮_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_08_柔轮.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="lsg_08_柔轮_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_08_柔轮.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_7 -->
+      <visual name="user_library_0805_2012m__cap_7_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0196078 0.498039 0.341176 1</ambient>
+          <diffuse>0.0196078 0.498039 0.341176 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_7_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_2 -->
+      <visual name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_1_2 -->
+      <visual name="extruded_4_1_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_1_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_3 -->
+      <visual name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part b08_cra_ri30_40_pro_xx_客户参考_3 -->
+      <visual name="b08_cra_ri30_40_pro_xx_客户参考_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/b08_cra_ri30_40_pro_xx_客户参考.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="b08_cra_ri30_40_pro_xx_客户参考_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/b08_cra_ri30_40_pro_xx_客户参考.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_2 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_8 -->
+      <visual name="user_library_0805_2012m__cap_8_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_8_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap__2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_7 -->
+      <visual name="extruded_4_7_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_7_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_3 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_3 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_2_3 -->
+      <visual name="extruded_4_2_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_2_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_3 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part user_library_0805_2012m__cap_9 -->
+      <visual name="user_library_0805_2012m__cap_9_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0196078 0.498039 0.341176 1</ambient>
+          <diffuse>0.0196078 0.498039 0.341176 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="user_library_0805_2012m__cap_9_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/user_library_0805_2012m__cap.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_3 -->
+      <visual name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_0_3 -->
+      <visual name="extruded_0_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.105882 0.580392 0.14902 1</ambient>
+          <diffuse>0.105882 0.580392 0.14902 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_0_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_0.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_3 -->
+      <visual name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.776471 0.756863 0.737255 1</ambient>
+          <diffuse>0.776471 0.756863 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_4_3 -->
+      <visual name="extruded_4_4_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_4_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_5_2 -->
+      <visual name="extruded_4_5_2_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_5_2_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part lsg_8_减速器外圈固定_1_3 -->
+      <visual name="lsg_8_减速器外圈固定_1_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_8_减速器外圈固定_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.898039 0.917647 0.929412 1</ambient>
+          <diffuse>0.898039 0.917647 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="lsg_8_减速器外圈固定_1_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/lsg_8_减速器外圈固定_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part cra_ri30_40_pro_xx_后盖_3 -->
+      <visual name="cra_ri30_40_pro_xx_后盖_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_pro_xx_后盖.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.764706 0.0196078 1</ambient>
+          <diffuse>0.690196 0.764706 0.0196078 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cra_ri30_40_pro_xx_后盖_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/cra_ri30_40_pro_xx_后盖.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_2_3 -->
+      <visual name="extruded_2_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.176471 0.0431373 0.792157 1</ambient>
+          <diffuse>0.176471 0.0431373 0.792157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_2_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0563407 0.0744386 0.0764594 2.35619 -0 -0.523599</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_5_3 -->
+      <visual name="extruded_4_5_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_5_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part extruded_4_1_3 -->
+      <visual name="extruded_4_1_3_visual_mesh_1">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.960784 0.796078 0.207843 1</ambient>
+          <diffuse>0.960784 0.796078 0.207843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="extruded_4_1_3_collision_mesh_2">
+        <pose relative_to="moteur_bati_v2">0.0362954 -0.0860118 0.0764594 2.35619 -0 -2.61799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/extruded_4_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link 2_arbremoteur3 -->
+    <link name="2_arbremoteur3">
+      <inertial>
+        <pose>0.01068 -0.00881276 -0.017437 0 0 0</pose>
+        <mass>0.0296675</mass>
+        <inertia>
+          <ixx>1.7693e-05</ixx>
+          <ixy>4.94455e-06</ixy>
+          <ixz>7.0291e-06</ixz>
+          <iyy>1.82772e-05</iyy>
+          <iyz>-7.38623e-06</iyz>
+          <izz>1.26746e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="m1">0 0 0 0 -0 0</pose>
+      <!-- Part dbtm3_14_5 -->
+      <visual name="dbtm3_14_5_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3">0.0307218 -0.0376264 -0.0600264 -1.36944 0.25268 2.25552</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.690196 0.690196 1</ambient>
+          <diffuse>0.690196 0.690196 0.690196 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="dbtm3_14_5_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3">0.0307218 -0.0376264 -0.0600264 -1.36944 0.25268 2.25552</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part 2_arbremoteur3 -->
+      <visual name="2_arbremoteur3_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3">0.0115732 -0.04 0.0184386 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/2_arbremoteur3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="2_arbremoteur3_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3">0.0115732 -0.04 0.0184386 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/2_arbremoteur3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz -->
+      <visual name="sfl676zz_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3">0.0288847 -0.0353764 -0.0607764 -1.77215 -0.25268 -0.886077</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3">0.0288847 -0.0353764 -0.0607764 -1.77215 -0.25268 -0.886077</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link 3_lien2 -->
+    <link name="3_lien2">
+      <inertial>
+        <pose>0.0153881 0.00162035 -0.0217923 0 0 0</pose>
+        <mass>0.0118051</mass>
+        <inertia>
+          <ixx>3.6573e-06</ixx>
+          <ixy>-1.03018e-07</ixy>
+          <ixz>1.62019e-06</ixz>
+          <iyy>4.83538e-06</iyy>
+          <iyz>-2.6151e-08</iyz>
+          <izz>1.52639e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="m1_p1">0 0 0 0 -0 0</pose>
+      <!-- Part dbtm3_14_5_2 -->
+      <visual name="dbtm3_14_5_2_visual_mesh_1">
+        <pose relative_to="3_lien2">0.0206151 0 -0.0478913 3.14159 0.25268 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.690196 0.690196 1</ambient>
+          <diffuse>0.690196 0.690196 0.690196 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="dbtm3_14_5_2_collision_mesh_2">
+        <pose relative_to="3_lien2">0.0206151 0 -0.0478913 3.14159 0.25268 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_2 -->
+      <visual name="sfl676zz_2_visual_mesh_1">
+        <pose relative_to="3_lien2">0 0 -0.0046 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_2_collision_mesh_2">
+        <pose relative_to="3_lien2">0 0 -0.0046 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_3 -->
+      <visual name="sfl676zz_3_visual_mesh_1">
+        <pose relative_to="3_lien2">0.0235199 0 -0.0486413 0 -0.25268 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_3_collision_mesh_2">
+        <pose relative_to="3_lien2">0.0235199 0 -0.0486413 0 -0.25268 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part 3_lien2 -->
+      <visual name="3_lien2_visual_mesh_1">
+        <pose relative_to="3_lien2">-0.031712 0.0736879 0.0172703 -2.81984 -0.659058 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/3_lien2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="3_lien2_collision_mesh_2">
+        <pose relative_to="3_lien2">-0.031712 0.0736879 0.0172703 -2.81984 -0.659058 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/3_lien2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2 -->
+      <visual name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_visual_mesh_1">
+        <pose relative_to="3_lien2">-0 0 -0.0085 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.603922 0.647059 0.686275 1</ambient>
+          <diffuse>0.603922 0.647059 0.686275 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_collision_mesh_2">
+        <pose relative_to="3_lien2">-0 0 -0.0085 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link 4_supporthead -->
+    <link name="4_supporthead">
+      <inertial>
+        <pose>-0.015854 -0.012944 0.00842424 0 0 0</pose>
+        <mass>0.027354</mass>
+        <inertia>
+          <ixx>6.25131e-06</ixx>
+          <ixy>1.01868e-06</ixy>
+          <ixz>1.61018e-06</ixz>
+          <iyy>5.83496e-06</iyy>
+          <iyz>1.31515e-06</iyz>
+          <izz>7.08287e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="m2_p2">0 0 0 0 -0 0</pose>
+      <!-- Part 4_supporthead -->
+      <visual name="4_supporthead_visual_mesh_1">
+        <pose relative_to="4_supporthead">0.0500108 0.0736879 0.0745559 -2.81984 0.659058 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/4_supporthead.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="4_supporthead_collision_mesh_2">
+        <pose relative_to="4_supporthead">0.0500108 0.0736879 0.0745559 -2.81984 0.659058 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/4_supporthead.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_4 -->
+      <visual name="sfl676zz_4_visual_mesh_1">
+        <pose relative_to="4_supporthead">0 -0 -0.0026 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_4_collision_mesh_2">
+        <pose relative_to="4_supporthead">0 -0 -0.0026 3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_2 -->
+      <visual name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_2_visual_mesh_1">
+        <pose relative_to="4_supporthead">0 -0 -0.0065 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.603922 0.647059 0.686275 1</ambient>
+          <diffuse>0.603922 0.647059 0.686275 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_2_collision_mesh_2">
+        <pose relative_to="4_supporthead">0 -0 -0.0065 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_3 -->
+      <visual name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_3_visual_mesh_1">
+        <pose relative_to="4_supporthead">-0.00685348 -0.033575 0.0200434 -1.24905 0.659058 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.603922 0.647059 0.686275 1</ambient>
+          <diffuse>0.603922 0.647059 0.686275 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_3_collision_mesh_2">
+        <pose relative_to="4_supporthead">-0.00685348 -0.033575 0.0200434 -1.24905 0.659058 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_4 -->
+      <visual name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_4_visual_mesh_1">
+        <pose relative_to="4_supporthead">-0.0342674 -0 0.0200434 -0 1.31812 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.603922 0.647059 0.686275 1</ambient>
+          <diffuse>0.603922 0.647059 0.686275 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_4_collision_mesh_2">
+        <pose relative_to="4_supporthead">-0.0342674 -0 0.0200434 -0 1.31812 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_5 -->
+      <visual name="sfl676zz_5_visual_mesh_1">
+        <pose relative_to="4_supporthead">-0.00609825 -0.0298752 0.0210184 0.886077 0.25268 -1.77215</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_5_collision_mesh_2">
+        <pose relative_to="4_supporthead">-0.00609825 -0.0298752 0.0210184 0.886077 0.25268 -1.77215</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_6 -->
+      <visual name="sfl676zz_6_visual_mesh_1">
+        <pose relative_to="4_supporthead">-0.0304912 -0 0.0210184 -0 0.25268 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_6_collision_mesh_2">
+        <pose relative_to="4_supporthead">-0.0304912 -0 0.0210184 -0 0.25268 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame effector -->
+    <frame name="effector">
+      <pose relative_to="4_supporthead">-0.0184369 -0.0148849 0.00519521 2.42787 -0.361367 -1.27367</pose>
+    </frame>
+    <!-- Frame closing_m1_p2_2 -->
+    <frame name="closing_m1_p2_2">
+      <pose relative_to="4_supporthead">-0.0279738 -0 0.0216684 -1.82348 -0 1.5708</pose>
+    </frame>
+    <!-- Frame closing_m1_p2_2_z -->
+    <frame name="closing_m1_p2_2_z">
+      <pose relative_to="4_supporthead">-0.124798 -0 -0.00333159 -1.82348 -0 1.5708</pose>
+    </frame>
+    <!-- Frame closing_m3_p2_2 -->
+    <frame name="closing_m3_p2_2">
+      <pose relative_to="4_supporthead">-0.00559476 -0.0274086 0.0216684 1.95839 -0.848062 -0.49848</pose>
+    </frame>
+    <!-- Frame closing_m3_p2_2_z -->
+    <frame name="closing_m3_p2_2_z">
+      <pose relative_to="4_supporthead">-0.0249597 -0.122277 -0.00333159 1.95839 -0.848062 -0.49848</pose>
+    </frame>
+    <!-- Joint from 3_lien2 to 4_supporthead -->
+    <joint name="m2_p2" type="revolute">
+      <pose relative_to="3_lien2">0.0279738 0 -0.0497913 -0 -1.31812 0</pose>
+      <parent>3_lien2</parent>
+      <child>4_supporthead</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from 2_arbremoteur3 to 3_lien2 -->
+    <joint name="m1_p1" type="revolute">
+      <pose relative_to="2_arbremoteur3">0.0260678 -0.0319264 -0.0619264 1.31313 0.19488 0.633732</pose>
+      <parent>2_arbremoteur3</parent>
+      <child>3_lien2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from moteur_bati_v2 to 2_arbremoteur3 -->
+    <joint name="m1" type="revolute">
+      <pose relative_to="moteur_bati_v2">-0.0513137 0 0.0612132 2.35619 0 -1.5708</pose>
+      <parent>moteur_bati_v2</parent>
+      <child>2_arbremoteur3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link 2_arbremoteur3_2 -->
+    <link name="2_arbremoteur3_2">
+      <inertial>
+        <pose>-0.01068 0.00881276 -0.017437 0 0 0</pose>
+        <mass>0.0296675</mass>
+        <inertia>
+          <ixx>1.7693e-05</ixx>
+          <ixy>4.94455e-06</ixy>
+          <ixz>-7.0291e-06</ixz>
+          <iyy>1.82772e-05</iyy>
+          <iyz>7.38623e-06</iyz>
+          <izz>1.26746e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="m2">0 0 0 0 -0 0</pose>
+      <!-- Part dbtm3_14_5_3 -->
+      <visual name="dbtm3_14_5_3_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3_2">-0.0307218 0.0376264 -0.0600264 -1.36944 0.25268 -0.886077</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.690196 0.690196 1</ambient>
+          <diffuse>0.690196 0.690196 0.690196 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="dbtm3_14_5_3_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3_2">-0.0307218 0.0376264 -0.0600264 -1.36944 0.25268 -0.886077</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part 2_arbremoteur3_2 -->
+      <visual name="2_arbremoteur3_2_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3_2">-0.0115732 0.04 0.0184386 -1.5708 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/2_arbremoteur3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="2_arbremoteur3_2_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3_2">-0.0115732 0.04 0.0184386 -1.5708 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/2_arbremoteur3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_7 -->
+      <visual name="sfl676zz_7_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3_2">-0.0288847 0.0353764 -0.0607764 -1.77215 -0.25268 2.25552</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_7_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3_2">-0.0288847 0.0353764 -0.0607764 -1.77215 -0.25268 2.25552</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link 3_lien2_2 -->
+    <link name="3_lien2_2">
+      <inertial>
+        <pose>0.0153881 0.00162035 -0.0217923 0 0 0</pose>
+        <mass>0.0118051</mass>
+        <inertia>
+          <ixx>3.6573e-06</ixx>
+          <ixy>-1.03018e-07</ixy>
+          <ixz>1.62019e-06</ixz>
+          <iyy>4.83538e-06</iyy>
+          <iyz>-2.6151e-08</iyz>
+          <izz>1.52639e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="m2_p1">0 0 0 0 -0 0</pose>
+      <!-- Part dbtm3_14_5_4 -->
+      <visual name="dbtm3_14_5_4_visual_mesh_1">
+        <pose relative_to="3_lien2_2">0.0206151 0 -0.0478913 -3.14159 0.25268 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.690196 0.690196 1</ambient>
+          <diffuse>0.690196 0.690196 0.690196 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="dbtm3_14_5_4_collision_mesh_2">
+        <pose relative_to="3_lien2_2">0.0206151 0 -0.0478913 -3.14159 0.25268 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_8 -->
+      <visual name="sfl676zz_8_visual_mesh_1">
+        <pose relative_to="3_lien2_2">0 -0 -0.0046 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_8_collision_mesh_2">
+        <pose relative_to="3_lien2_2">0 -0 -0.0046 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_9 -->
+      <visual name="sfl676zz_9_visual_mesh_1">
+        <pose relative_to="3_lien2_2">0.0235199 0 -0.0486413 -0 -0.25268 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_9_collision_mesh_2">
+        <pose relative_to="3_lien2_2">0.0235199 0 -0.0486413 -0 -0.25268 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part 3_lien2_2 -->
+      <visual name="3_lien2_2_visual_mesh_1">
+        <pose relative_to="3_lien2_2">-0.031712 0.0736879 0.0172703 -2.81984 -0.659058 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/3_lien2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="3_lien2_2_collision_mesh_2">
+        <pose relative_to="3_lien2_2">-0.031712 0.0736879 0.0172703 -2.81984 -0.659058 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/3_lien2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_5 -->
+      <visual name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_5_visual_mesh_1">
+        <pose relative_to="3_lien2_2">0 -0 -0.0085 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.603922 0.647059 0.686275 1</ambient>
+          <diffuse>0.603922 0.647059 0.686275 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_5_collision_mesh_2">
+        <pose relative_to="3_lien2_2">0 -0 -0.0085 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_m3_p2_1 -->
+    <frame name="closing_m3_p2_1">
+      <pose relative_to="3_lien2_2">0.0279738 0 -0.0497913 -3.14159 -1.31812 -0</pose>
+    </frame>
+    <!-- Frame closing_m3_p2_1_z -->
+    <frame name="closing_m3_p2_1_z">
+      <pose relative_to="3_lien2_2">0.124798 0 -0.0747913 -3.14159 -1.31812 -0</pose>
+    </frame>
+    <!-- Joint from 2_arbremoteur3_2 to 3_lien2_2 -->
+    <joint name="m2_p1" type="revolute">
+      <pose relative_to="2_arbremoteur3_2">-0.0260678 0.0319264 -0.0619264 1.31313 0.19488 -2.50786</pose>
+      <parent>2_arbremoteur3_2</parent>
+      <child>3_lien2_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from moteur_bati_v2 to 2_arbremoteur3_2 -->
+    <joint name="m2" type="revolute">
+      <pose relative_to="moteur_bati_v2">0.0256569 -0.044439 0.0612132 -2.35619 -0 -2.61799</pose>
+      <parent>moteur_bati_v2</parent>
+      <child>2_arbremoteur3_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link 2_arbremoteur3_3 -->
+    <link name="2_arbremoteur3_3">
+      <inertial>
+        <pose>-0.01068 0.00881276 -0.017437 0 0 0</pose>
+        <mass>0.0296675</mass>
+        <inertia>
+          <ixx>1.7693e-05</ixx>
+          <ixy>4.94455e-06</ixy>
+          <ixz>-7.0291e-06</ixz>
+          <iyy>1.82772e-05</iyy>
+          <iyz>7.38623e-06</iyz>
+          <izz>1.26746e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="m3">0 0 0 0 -0 0</pose>
+      <!-- Part dbtm3_14_5_5 -->
+      <visual name="dbtm3_14_5_5_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3_3">-0.0307218 0.0376264 -0.0600264 -1.36944 0.25268 -0.886077</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.690196 0.690196 1</ambient>
+          <diffuse>0.690196 0.690196 0.690196 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="dbtm3_14_5_5_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3_3">-0.0307218 0.0376264 -0.0600264 -1.36944 0.25268 -0.886077</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part 2_arbremoteur3_3 -->
+      <visual name="2_arbremoteur3_3_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3_3">-0.0115732 0.04 0.0184386 -1.5708 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/2_arbremoteur3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="2_arbremoteur3_3_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3_3">-0.0115732 0.04 0.0184386 -1.5708 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/2_arbremoteur3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_10 -->
+      <visual name="sfl676zz_10_visual_mesh_1">
+        <pose relative_to="2_arbremoteur3_3">-0.0288847 0.0353764 -0.0607764 -1.77215 -0.25268 2.25552</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_10_collision_mesh_2">
+        <pose relative_to="2_arbremoteur3_3">-0.0288847 0.0353764 -0.0607764 -1.77215 -0.25268 2.25552</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link 3_lien2_3 -->
+    <link name="3_lien2_3">
+      <inertial>
+        <pose>0.0153881 0.00162035 -0.0217923 0 0 0</pose>
+        <mass>0.0118051</mass>
+        <inertia>
+          <ixx>3.6573e-06</ixx>
+          <ixy>-1.03018e-07</ixy>
+          <ixz>1.62019e-06</ixz>
+          <iyy>4.83538e-06</iyy>
+          <iyz>-2.6151e-08</iyz>
+          <izz>1.52639e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="m3_p1">0 0 0 0 -0 0</pose>
+      <!-- Part dbtm3_14_5_6 -->
+      <visual name="dbtm3_14_5_6_visual_mesh_1">
+        <pose relative_to="3_lien2_3">0.0206151 0 -0.0478913 -3.14159 0.25268 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.690196 0.690196 0.690196 1</ambient>
+          <diffuse>0.690196 0.690196 0.690196 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="dbtm3_14_5_6_collision_mesh_2">
+        <pose relative_to="3_lien2_3">0.0206151 0 -0.0478913 -3.14159 0.25268 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/dbtm3_14_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_11 -->
+      <visual name="sfl676zz_11_visual_mesh_1">
+        <pose relative_to="3_lien2_3">-0 -0 -0.0046 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_11_collision_mesh_2">
+        <pose relative_to="3_lien2_3">-0 -0 -0.0046 -3.14159 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part sfl676zz_12 -->
+      <visual name="sfl676zz_12_visual_mesh_1">
+        <pose relative_to="3_lien2_3">0.0235199 0 -0.0486413 0 -0.25268 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="sfl676zz_12_collision_mesh_2">
+        <pose relative_to="3_lien2_3">0.0235199 0 -0.0486413 0 -0.25268 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/sfl676zz.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part 3_lien2_3 -->
+      <visual name="3_lien2_3_visual_mesh_1">
+        <pose relative_to="3_lien2_3">-0.031712 0.0736879 0.0172703 -2.81984 -0.659058 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/3_lien2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="3_lien2_3_collision_mesh_2">
+        <pose relative_to="3_lien2_3">-0.031712 0.0736879 0.0172703 -2.81984 -0.659058 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/3_lien2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_6 -->
+      <visual name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_6_visual_mesh_1">
+        <pose relative_to="3_lien2_3">-0 0 -0.0085 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.603922 0.647059 0.686275 1</ambient>
+          <diffuse>0.603922 0.647059 0.686275 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_6_collision_mesh_2">
+        <pose relative_to="3_lien2_3">-0 0 -0.0085 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_spm_sdf_0/assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_m1_p2_1 -->
+    <frame name="closing_m1_p2_1">
+      <pose relative_to="3_lien2_3">0.0279738 0 -0.0497913 -3.14159 -1.31812 -0</pose>
+    </frame>
+    <!-- Frame closing_m1_p2_1_z -->
+    <frame name="closing_m1_p2_1_z">
+      <pose relative_to="3_lien2_3">0.124798 0 -0.0747913 -3.14159 -1.31812 -0</pose>
+    </frame>
+    <!-- Joint from 2_arbremoteur3_3 to 3_lien2_3 -->
+    <joint name="m3_p1" type="revolute">
+      <pose relative_to="2_arbremoteur3_3">-0.0260678 0.0319264 -0.0619264 1.31313 0.19488 -2.50786</pose>
+      <parent>2_arbremoteur3_3</parent>
+      <child>3_lien2_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from moteur_bati_v2 to 2_arbremoteur3_3 -->
+    <joint name="m3" type="revolute">
+      <pose relative_to="moteur_bati_v2">0.0256569 0.044439 0.0612132 -2.35619 -0 -0.523599</pose>
+      <parent>moteur_bati_v2</parent>
+      <child>2_arbremoteur3_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

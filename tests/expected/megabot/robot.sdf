@@ -1,0 +1,2750 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3cddea8d10f23b74231e7636 / version_id: 1d5f0ae8daf92bbda6f52727 -->
+<sdf version="1.7">
+  <model name="test_export_megabot_sdf_0">
+    <!-- Link center -->
+    <link name="center">
+      <inertial>
+        <pose>0 -0.525 0.000101117 0 0 0</pose>
+        <mass>139.991</mass>
+        <inertia>
+          <ixx>23.042</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>23.0687</iyy>
+          <iyz>-0</iyz>
+          <izz>46.0044</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part center -->
+      <visual name="center_visual_mesh_1">
+        <pose relative_to="center">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/center.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="center_collision_mesh_2">
+        <pose relative_to="center">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/center.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="center_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>center</child>
+    </joint>
+    <!-- Frame base -->
+    <frame name="base">
+      <pose relative_to="center">0 -0.525 0.025 0 -0 -1.5708</pose>
+    </frame>
+    <!-- Link cylinder_f -->
+    <link name="cylinder_f">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f -->
+      <visual name="cylinder_f_visual_mesh_1">
+        <pose relative_to="cylinder_f">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_collision_mesh_2">
+        <pose relative_to="cylinder_f">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m -->
+    <link name="cylinder_m">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_c1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m -->
+      <visual name="cylinder_m_visual_mesh_1">
+        <pose relative_to="cylinder_m">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_collision_mesh_2">
+        <pose relative_to="cylinder_m">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl1_1 -->
+    <frame name="l1_cl1_1">
+      <pose relative_to="cylinder_m">0 0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f to cylinder_m -->
+    <joint name="l1_c1" type="prismatic">
+      <pose relative_to="cylinder_f">0.531994 -0 -0 0 1.5708 0</pose>
+      <parent>cylinder_f</parent>
+      <child>cylinder_m</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.072494092679</lower>
+          <upper>0.127505907321</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to cylinder_f -->
+    <joint name="l1_r1" type="revolute">
+      <pose relative_to="center">-0.44 -0.335 0 3.14159 -0 -1.29639</pose>
+      <parent>center</parent>
+      <child>cylinder_f</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.296390352596</lower>
+          <upper>0.274405974199</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link hip -->
+    <link name="hip">
+      <inertial>
+        <pose>-0.0375418 -0 -0.0164898 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.00825192</ixx>
+          <ixy>0</ixy>
+          <ixz>-0.0120504</ixz>
+          <iyy>0.126424</iyy>
+          <iyz>0</iyz>
+          <izz>0.128671</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r2">0 0 0 0 -0 0</pose>
+      <!-- Part hip -->
+      <visual name="hip_visual_mesh_1">
+        <pose relative_to="hip">-0.065 -0 0 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hip_collision_mesh_2">
+        <pose relative_to="hip">-0.065 -0 0 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl1_2 -->
+    <frame name="l1_cl1_2">
+      <pose relative_to="hip">0.275 -0 0.03 -1.5708 0 3.14159</pose>
+    </frame>
+    <!-- Link femur -->
+    <link name="femur">
+      <inertial>
+        <pose>0.00641397 0.245927 0.02 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.0813908</ixx>
+          <ixy>0.000199157</ixy>
+          <ixz>-1.18e-10</ixz>
+          <iyy>0.00807931</iyy>
+          <iyz>-5.8e-11</iyz>
+          <izz>0.0746916</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r3">0 0 0 0 -0 0</pose>
+      <!-- Part femur -->
+      <visual name="femur_visual_mesh_1">
+        <pose relative_to="femur">0 0.2425 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="femur_collision_mesh_2">
+        <pose relative_to="femur">0 0.2425 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl2_2 -->
+    <frame name="l1_cl2_2">
+      <pose relative_to="femur">-0.013 0.384 0.02 1.5708 -0 -0</pose>
+    </frame>
+    <!-- Link tibia -->
+    <link name="tibia">
+      <inertial>
+        <pose>-0.374888 0 -0.02 0 0 0</pose>
+        <mass>4</mass>
+        <inertia>
+          <ixx>0.00296427</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.21898</iyy>
+          <iyz>-0</iyz>
+          <izz>0.219917</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r4">0 0 0 0 -0 0</pose>
+      <!-- Part tibia -->
+      <visual name="tibia_visual_mesh_1">
+        <pose relative_to="tibia">-0.375 0 0 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="tibia_collision_mesh_2">
+        <pose relative_to="tibia">-0.375 0 0 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl4_2 -->
+    <frame name="l1_cl4_2">
+      <pose relative_to="tibia">-0.45 0 -0.02 -1.5708 0 -3.14159</pose>
+    </frame>
+    <!-- Link foot -->
+    <link name="foot">
+      <inertial>
+        <pose>0.00674789 -0.371096 0.02 0 0 0</pose>
+        <mass>3.65</mass>
+        <inertia>
+          <ixx>0.27435</ixx>
+          <ixy>-0.000537481</ixy>
+          <ixz>3.1807e-08</ixz>
+          <iyy>0.00564812</iyy>
+          <iyz>3.381e-09</iyz>
+          <izz>0.270045</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r5">0 0 0 0 -0 0</pose>
+      <!-- Part foot -->
+      <visual name="foot_visual_mesh_1">
+        <pose relative_to="foot">0 -0.3475 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="foot_collision_mesh_2">
+        <pose relative_to="foot">0 -0.3475 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl3_2 -->
+    <frame name="l1_cl3_2">
+      <pose relative_to="foot">0 -0.505 0.02 -1.5708 0 3.14159</pose>
+    </frame>
+    <!-- Frame leg_1 -->
+    <frame name="leg_1">
+      <pose relative_to="foot">0.005 -1.0075 0.02 -1.5708 -0 0</pose>
+    </frame>
+    <!-- Joint from tibia to foot -->
+    <joint name="l1_r5" type="revolute">
+      <pose relative_to="tibia">-0.75 0 -0.04 -0 0 -2.88715</pose>
+      <parent>tibia</parent>
+      <child>foot</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.825241885494</lower>
+          <upper>1.316350768096</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from femur to tibia -->
+    <joint name="l1_r4" type="revolute">
+      <pose relative_to="femur">0 0.49 -0 3.14159 -0 -0.248167</pose>
+      <parent>femur</parent>
+      <child>tibia</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.818963306368</lower>
+          <upper>1.322629347222</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip to femur -->
+    <joint name="l1_r3" type="revolute">
+      <pose relative_to="hip">0.125 -0.02 -0.04 -1.5708 0.168299 -0</pose>
+      <parent>hip</parent>
+      <child>femur</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.739095701208</lower>
+          <upper>1.402496952382</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_f_2 -->
+    <link name="cylinder_f_2">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r6">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_2 -->
+      <visual name="cylinder_f_2_visual_mesh_1">
+        <pose relative_to="cylinder_f_2">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_2_collision_mesh_2">
+        <pose relative_to="cylinder_f_2">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_2 -->
+    <link name="cylinder_m_2">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_c2">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_2 -->
+      <visual name="cylinder_m_2_visual_mesh_1">
+        <pose relative_to="cylinder_m_2">-0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_2_collision_mesh_2">
+        <pose relative_to="cylinder_m_2">-0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl2_1 -->
+    <frame name="l1_cl2_1">
+      <pose relative_to="cylinder_m_2">-0 0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_2 to cylinder_m_2 -->
+    <joint name="l1_c2" type="prismatic">
+      <pose relative_to="cylinder_f_2">0.568904 0 -0 -0 1.5708 0</pose>
+      <parent>cylinder_f_2</parent>
+      <child>cylinder_m_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.109404156811</lower>
+          <upper>0.090595843189</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip to cylinder_f_2 -->
+    <joint name="l1_r6" type="revolute">
+      <pose relative_to="hip">-0.41 -0 -0.095 1.5708 0.612035 -0</pose>
+      <parent>hip</parent>
+      <child>cylinder_f_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.958761202737</lower>
+          <upper>0.612035124058</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_support -->
+    <link name="cylinder_support">
+      <inertial>
+        <pose>0.00543544 0.298634 0.0201529 0 0 0</pose>
+        <mass>3.45</mass>
+        <inertia>
+          <ixx>0.122413</ixx>
+          <ixy>-0.000135757</ixy>
+          <ixz>-9.00296e-06</ixz>
+          <iyy>0.00809203</iyy>
+          <iyz>1.77445e-05</iyz>
+          <izz>0.115611</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r7">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_support -->
+      <visual name="cylinder_support_visual_mesh_1">
+        <pose relative_to="cylinder_support">0 0.2425 -0.03 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_support_collision_mesh_2">
+        <pose relative_to="cylinder_support">0 0.2425 -0.03 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl4_1 -->
+    <frame name="l1_cl4_1">
+      <pose relative_to="cylinder_support">0 0.59 0.02 1.5708 0 3.14159</pose>
+    </frame>
+    <!-- Link cylinder_f_3 -->
+    <link name="cylinder_f_3">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_r8">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_3 -->
+      <visual name="cylinder_f_3_visual_mesh_1">
+        <pose relative_to="cylinder_f_3">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_3_collision_mesh_2">
+        <pose relative_to="cylinder_f_3">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_3 -->
+    <link name="cylinder_m_3">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l1_c3">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_3 -->
+      <visual name="cylinder_m_3_visual_mesh_1">
+        <pose relative_to="cylinder_m_3">0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_3_collision_mesh_2">
+        <pose relative_to="cylinder_m_3">0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l1_cl3_1 -->
+    <frame name="l1_cl3_1">
+      <pose relative_to="cylinder_m_3">0 -0 -0.0095 1.5708 1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_3 to cylinder_m_3 -->
+    <joint name="l1_c3" type="prismatic">
+      <pose relative_to="cylinder_f_3">0.633829 0 -0 -3.14159 -1.5708 0</pose>
+      <parent>cylinder_f_3</parent>
+      <child>cylinder_m_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.174328783235</lower>
+          <upper>0.025671216765</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from cylinder_support to cylinder_f_3 -->
+    <joint name="l1_r8" type="revolute">
+      <pose relative_to="cylinder_support">0 0.4125 0.02 0 0 -3.14159</pose>
+      <parent>cylinder_support</parent>
+      <child>cylinder_f_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-4.70204e-07</lower>
+          <upper>1.570795856591</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip to cylinder_support -->
+    <joint name="l1_r7" type="revolute">
+      <pose relative_to="hip">-0.125 -0.02 -0.04 -1.5708 0.495722 -0</pose>
+      <parent>hip</parent>
+      <child>cylinder_support</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-2.066518350167</lower>
+          <upper>1.075074303423</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to hip -->
+    <joint name="l1_r2" type="revolute">
+      <pose relative_to="center">-0.5 -1.025 0.03 3.14159 -0 0.748032</pose>
+      <parent>center</parent>
+      <child>hip</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.822764224101</lower>
+          <upper>0.748032102694</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_f_4 -->
+    <link name="cylinder_f_4">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_4 -->
+      <visual name="cylinder_f_4_visual_mesh_1">
+        <pose relative_to="cylinder_f_4">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_4_collision_mesh_2">
+        <pose relative_to="cylinder_f_4">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_4 -->
+    <link name="cylinder_m_4">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_c1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_4 -->
+      <visual name="cylinder_m_4_visual_mesh_1">
+        <pose relative_to="cylinder_m_4">-0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_4_collision_mesh_2">
+        <pose relative_to="cylinder_m_4">-0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl1_1 -->
+    <frame name="l2_cl1_1">
+      <pose relative_to="cylinder_m_4">0 0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_4 to cylinder_m_4 -->
+    <joint name="l2_c1" type="prismatic">
+      <pose relative_to="cylinder_f_4">0.4595 0 0 0 1.5708 0</pose>
+      <parent>cylinder_f_4</parent>
+      <child>cylinder_m_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to cylinder_f_4 -->
+    <joint name="l2_r1" type="revolute">
+      <pose relative_to="center">0.19 -0.085 0 3.14159 -0 -2.99586</pose>
+      <parent>center</parent>
+      <child>cylinder_f_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.425060020555</lower>
+          <upper>0.14573630624</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link hip_2 -->
+    <link name="hip_2">
+      <inertial>
+        <pose>-0.0375418 0 -0.0164898 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.00825192</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0.0120504</ixz>
+          <iyy>0.126424</iyy>
+          <iyz>0</iyz>
+          <izz>0.128671</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r2">0 0 0 0 -0 0</pose>
+      <!-- Part hip_2 -->
+      <visual name="hip_2_visual_mesh_1">
+        <pose relative_to="hip_2">-0.065 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hip_2_collision_mesh_2">
+        <pose relative_to="hip_2">-0.065 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl1_2 -->
+    <frame name="l2_cl1_2">
+      <pose relative_to="hip_2">0.275 0 0.03 -1.5708 0 -3.14159</pose>
+    </frame>
+    <!-- Link femur_2 -->
+    <link name="femur_2">
+      <inertial>
+        <pose>0.00641397 0.245927 0.02 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.0813908</ixx>
+          <ixy>0.000199157</ixy>
+          <ixz>-1.18e-10</ixz>
+          <iyy>0.00807931</iyy>
+          <iyz>-5.8e-11</iyz>
+          <izz>0.0746916</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r3">0 0 0 0 -0 0</pose>
+      <!-- Part femur_2 -->
+      <visual name="femur_2_visual_mesh_1">
+        <pose relative_to="femur_2">-0 0.2425 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="femur_2_collision_mesh_2">
+        <pose relative_to="femur_2">-0 0.2425 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl2_2 -->
+    <frame name="l2_cl2_2">
+      <pose relative_to="femur_2">-0.013 0.384 0.02 1.5708 0 0</pose>
+    </frame>
+    <!-- Link tibia_2 -->
+    <link name="tibia_2">
+      <inertial>
+        <pose>-0.374888 0 -0.02 0 0 0</pose>
+        <mass>4</mass>
+        <inertia>
+          <ixx>0.00296427</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>0.21898</iyy>
+          <iyz>-0</iyz>
+          <izz>0.219917</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r4">0 0 0 0 -0 0</pose>
+      <!-- Part tibia_2 -->
+      <visual name="tibia_2_visual_mesh_1">
+        <pose relative_to="tibia_2">-0.375 0 0 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="tibia_2_collision_mesh_2">
+        <pose relative_to="tibia_2">-0.375 0 0 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl4_2 -->
+    <frame name="l2_cl4_2">
+      <pose relative_to="tibia_2">-0.45 0 -0.02 -1.5708 -0 3.14159</pose>
+    </frame>
+    <!-- Link foot_2 -->
+    <link name="foot_2">
+      <inertial>
+        <pose>0.00674789 -0.371096 0.02 0 0 0</pose>
+        <mass>3.65</mass>
+        <inertia>
+          <ixx>0.27435</ixx>
+          <ixy>-0.000537481</ixy>
+          <ixz>3.1807e-08</ixz>
+          <iyy>0.00564812</iyy>
+          <iyz>3.381e-09</iyz>
+          <izz>0.270045</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r5">0 0 0 0 -0 0</pose>
+      <!-- Part foot_2 -->
+      <visual name="foot_2_visual_mesh_1">
+        <pose relative_to="foot_2">0 -0.3475 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="foot_2_collision_mesh_2">
+        <pose relative_to="foot_2">0 -0.3475 -0.03 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl3_2 -->
+    <frame name="l2_cl3_2">
+      <pose relative_to="foot_2">-0 -0.505 0.02 -1.5708 -0 3.14159</pose>
+    </frame>
+    <!-- Frame leg_2 -->
+    <frame name="leg_2">
+      <pose relative_to="foot_2">0.005 -1.0075 0.02 -1.5708 0 -0</pose>
+    </frame>
+    <!-- Joint from tibia_2 to foot_2 -->
+    <joint name="l2_r5" type="revolute">
+      <pose relative_to="tibia_2">-0.75 0 -0.04 -0 -0 2.85742</pose>
+      <parent>tibia_2</parent>
+      <child>foot_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.286627712513</lower>
+          <upper>1.854964941077</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from femur_2 to tibia_2 -->
+    <joint name="l2_r4" type="revolute">
+      <pose relative_to="femur_2">0 0.49 0 -3.14159 -0 -0.415329</pose>
+      <parent>femur_2</parent>
+      <child>tibia_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.986125541475</lower>
+          <upper>1.155467112115</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_2 to femur_2 -->
+    <joint name="l2_r3" type="revolute">
+      <pose relative_to="hip_2">0.125 -0.02 -0.04 -1.5708 0.466703 -0</pose>
+      <parent>hip_2</parent>
+      <child>femur_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-2.037499815189</lower>
+          <upper>1.104092838401</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_f_5 -->
+    <link name="cylinder_f_5">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r6">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_5 -->
+      <visual name="cylinder_f_5_visual_mesh_1">
+        <pose relative_to="cylinder_f_5">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_5_collision_mesh_2">
+        <pose relative_to="cylinder_f_5">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_5 -->
+    <link name="cylinder_m_5">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_c2">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_5 -->
+      <visual name="cylinder_m_5_visual_mesh_1">
+        <pose relative_to="cylinder_m_5">0 -0.0355 -0.337 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_5_collision_mesh_2">
+        <pose relative_to="cylinder_m_5">0 -0.0355 -0.337 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl2_1 -->
+    <frame name="l2_cl2_1">
+      <pose relative_to="cylinder_m_5">0 0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_5 to cylinder_m_5 -->
+    <joint name="l2_c2" type="prismatic">
+      <pose relative_to="cylinder_f_5">0.4595 -0 0 0 1.5708 0</pose>
+      <parent>cylinder_f_5</parent>
+      <child>cylinder_m_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_2 to cylinder_f_5 -->
+    <joint name="l2_r6" type="revolute">
+      <pose relative_to="hip_2">-0.41 0 -0.095 1.5708 0.677509 0</pose>
+      <parent>hip_2</parent>
+      <child>cylinder_f_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.893287307915</lower>
+          <upper>0.67750901888</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_support_2 -->
+    <link name="cylinder_support_2">
+      <inertial>
+        <pose>0.00543544 0.298634 0.0201529 0 0 0</pose>
+        <mass>3.45</mass>
+        <inertia>
+          <ixx>0.122413</ixx>
+          <ixy>-0.000135757</ixy>
+          <ixz>-9.00296e-06</ixz>
+          <iyy>0.00809203</iyy>
+          <iyz>1.77445e-05</iyz>
+          <izz>0.115611</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r7">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_support_2 -->
+      <visual name="cylinder_support_2_visual_mesh_1">
+        <pose relative_to="cylinder_support_2">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_support_2_collision_mesh_2">
+        <pose relative_to="cylinder_support_2">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl4_1 -->
+    <frame name="l2_cl4_1">
+      <pose relative_to="cylinder_support_2">0 0.59 0.02 1.5708 -0 3.14159</pose>
+    </frame>
+    <!-- Link cylinder_f_6 -->
+    <link name="cylinder_f_6">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_r8">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_6 -->
+      <visual name="cylinder_f_6_visual_mesh_1">
+        <pose relative_to="cylinder_f_6">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_6_collision_mesh_2">
+        <pose relative_to="cylinder_f_6">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_6 -->
+    <link name="cylinder_m_6">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l2_c3">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_6 -->
+      <visual name="cylinder_m_6_visual_mesh_1">
+        <pose relative_to="cylinder_m_6">-0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_6_collision_mesh_2">
+        <pose relative_to="cylinder_m_6">-0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l2_cl3_1 -->
+    <frame name="l2_cl3_1">
+      <pose relative_to="cylinder_m_6">-0 0 -0.0095 1.5708 1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_6 to cylinder_m_6 -->
+    <joint name="l2_c3" type="prismatic">
+      <pose relative_to="cylinder_f_6">0.4595 0 -0 -3.14159 -1.5708 0</pose>
+      <parent>cylinder_f_6</parent>
+      <child>cylinder_m_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from cylinder_support_2 to cylinder_f_6 -->
+    <joint name="l2_r8" type="revolute">
+      <pose relative_to="cylinder_support_2">-0 0.4125 0.02 0 0 -2.97767</pose>
+      <parent>cylinder_support_2</parent>
+      <child>cylinder_f_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.16392451796</lower>
+          <upper>1.406871808835</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_2 to cylinder_support_2 -->
+    <joint name="l2_r7" type="revolute">
+      <pose relative_to="hip_2">-0.125 -0.02 -0.04 -1.5708 0.791858 0</pose>
+      <parent>hip_2</parent>
+      <child>cylinder_support_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-2.362654189383</lower>
+          <upper>0.778938464207</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to hip_2 -->
+    <joint name="l2_r2" type="revolute">
+      <pose relative_to="center">-0.5 -0.025 0.03 3.14159 -0 -0.473289</pose>
+      <parent>center</parent>
+      <child>hip_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.473288925669</lower>
+          <upper>1.097507401126</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_f_7 -->
+    <link name="cylinder_f_7">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_7 -->
+      <visual name="cylinder_f_7_visual_mesh_1">
+        <pose relative_to="cylinder_f_7">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_7_collision_mesh_2">
+        <pose relative_to="cylinder_f_7">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_7 -->
+    <link name="cylinder_m_7">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_c1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_7 -->
+      <visual name="cylinder_m_7_visual_mesh_1">
+        <pose relative_to="cylinder_m_7">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_7_collision_mesh_2">
+        <pose relative_to="cylinder_m_7">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl1_1 -->
+    <frame name="l3_cl1_1">
+      <pose relative_to="cylinder_m_7">-0 -0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_7 to cylinder_m_7 -->
+    <joint name="l3_c1" type="prismatic">
+      <pose relative_to="cylinder_f_7">0.4595 0 -0 -0 1.5708 0</pose>
+      <parent>cylinder_f_7</parent>
+      <child>cylinder_m_7</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to cylinder_f_7 -->
+    <joint name="l3_r1" type="revolute">
+      <pose relative_to="center">0.44 -0.715 0 -3.14159 0 1.71653</pose>
+      <parent>center</parent>
+      <child>cylinder_f_7</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.425060020555</lower>
+          <upper>0.14573630624</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link hip_3 -->
+    <link name="hip_3">
+      <inertial>
+        <pose>-0.0375418 0 -0.0164898 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.00825192</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0.0120504</ixz>
+          <iyy>0.126424</iyy>
+          <iyz>0</iyz>
+          <izz>0.128671</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r2">0 0 0 0 -0 0</pose>
+      <!-- Part hip_3 -->
+      <visual name="hip_3_visual_mesh_1">
+        <pose relative_to="hip_3">-0.065 0 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hip_3_collision_mesh_2">
+        <pose relative_to="hip_3">-0.065 0 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl1_2 -->
+    <frame name="l3_cl1_2">
+      <pose relative_to="hip_3">0.275 0 0.03 -1.5708 -0 3.14159</pose>
+    </frame>
+    <!-- Link femur_3 -->
+    <link name="femur_3">
+      <inertial>
+        <pose>0.00641397 0.245927 0.02 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.0813908</ixx>
+          <ixy>0.000199157</ixy>
+          <ixz>-1.18e-10</ixz>
+          <iyy>0.00807931</iyy>
+          <iyz>-5.8e-11</iyz>
+          <izz>0.0746916</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r3">0 0 0 0 -0 0</pose>
+      <!-- Part femur_3 -->
+      <visual name="femur_3_visual_mesh_1">
+        <pose relative_to="femur_3">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="femur_3_collision_mesh_2">
+        <pose relative_to="femur_3">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl2_2 -->
+    <frame name="l3_cl2_2">
+      <pose relative_to="femur_3">-0.013 0.384 0.02 1.5708 -0 -0</pose>
+    </frame>
+    <!-- Link tibia_3 -->
+    <link name="tibia_3">
+      <inertial>
+        <pose>-0.374888 0 -0.02 0 0 0</pose>
+        <mass>4</mass>
+        <inertia>
+          <ixx>0.00296427</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>0.21898</iyy>
+          <iyz>0</iyz>
+          <izz>0.219917</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r4">0 0 0 0 -0 0</pose>
+      <!-- Part tibia_3 -->
+      <visual name="tibia_3_visual_mesh_1">
+        <pose relative_to="tibia_3">-0.375 0 0 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="tibia_3_collision_mesh_2">
+        <pose relative_to="tibia_3">-0.375 0 0 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl4_2 -->
+    <frame name="l3_cl4_2">
+      <pose relative_to="tibia_3">-0.45 0 -0.02 -1.5708 0 3.14159</pose>
+    </frame>
+    <!-- Link foot_3 -->
+    <link name="foot_3">
+      <inertial>
+        <pose>0.00674789 -0.371096 0.02 0 0 0</pose>
+        <mass>3.65</mass>
+        <inertia>
+          <ixx>0.27435</ixx>
+          <ixy>-0.000537481</ixy>
+          <ixz>3.1807e-08</ixz>
+          <iyy>0.00564812</iyy>
+          <iyz>3.381e-09</iyz>
+          <izz>0.270045</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r5">0 0 0 0 -0 0</pose>
+      <!-- Part foot_3 -->
+      <visual name="foot_3_visual_mesh_1">
+        <pose relative_to="foot_3">0 -0.3475 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="foot_3_collision_mesh_2">
+        <pose relative_to="foot_3">0 -0.3475 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl3_2 -->
+    <frame name="l3_cl3_2">
+      <pose relative_to="foot_3">-0 -0.505 0.02 -1.5708 -0 -3.14159</pose>
+    </frame>
+    <!-- Frame leg_3 -->
+    <frame name="leg_3">
+      <pose relative_to="foot_3">0.005 -1.0075 0.02 -1.5708 0 0</pose>
+    </frame>
+    <!-- Joint from tibia_3 to foot_3 -->
+    <joint name="l3_r5" type="revolute">
+      <pose relative_to="tibia_3">-0.75 0 -0.04 -0 0 2.85742</pose>
+      <parent>tibia_3</parent>
+      <child>foot_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.286627712513</lower>
+          <upper>1.854964941077</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from femur_3 to tibia_3 -->
+    <joint name="l3_r4" type="revolute">
+      <pose relative_to="femur_3">0 0.49 0 3.14159 -0 -0.415329</pose>
+      <parent>femur_3</parent>
+      <child>tibia_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.986125541475</lower>
+          <upper>1.155467112115</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_3 to femur_3 -->
+    <joint name="l3_r3" type="revolute">
+      <pose relative_to="hip_3">0.125 -0.02 -0.04 -1.5708 0.466703 -0</pose>
+      <parent>hip_3</parent>
+      <child>femur_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-2.037499815189</lower>
+          <upper>1.104092838401</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_f_8 -->
+    <link name="cylinder_f_8">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r6">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_8 -->
+      <visual name="cylinder_f_8_visual_mesh_1">
+        <pose relative_to="cylinder_f_8">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_8_collision_mesh_2">
+        <pose relative_to="cylinder_f_8">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_8 -->
+    <link name="cylinder_m_8">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_c2">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_8 -->
+      <visual name="cylinder_m_8_visual_mesh_1">
+        <pose relative_to="cylinder_m_8">0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_8_collision_mesh_2">
+        <pose relative_to="cylinder_m_8">0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl2_1 -->
+    <frame name="l3_cl2_1">
+      <pose relative_to="cylinder_m_8">0 0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_8 to cylinder_m_8 -->
+    <joint name="l3_c2" type="prismatic">
+      <pose relative_to="cylinder_f_8">0.4595 0 -0 -0 1.5708 0</pose>
+      <parent>cylinder_f_8</parent>
+      <child>cylinder_m_8</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_3 to cylinder_f_8 -->
+    <joint name="l3_r6" type="revolute">
+      <pose relative_to="hip_3">-0.41 0 -0.095 1.5708 0.677509 -0</pose>
+      <parent>hip_3</parent>
+      <child>cylinder_f_8</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.893287307915</lower>
+          <upper>0.67750901888</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_support_3 -->
+    <link name="cylinder_support_3">
+      <inertial>
+        <pose>0.00543544 0.298634 0.0201529 0 0 0</pose>
+        <mass>3.45</mass>
+        <inertia>
+          <ixx>0.122413</ixx>
+          <ixy>-0.000135757</ixy>
+          <ixz>-9.00296e-06</ixz>
+          <iyy>0.00809203</iyy>
+          <iyz>1.77445e-05</iyz>
+          <izz>0.115611</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r7">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_support_3 -->
+      <visual name="cylinder_support_3_visual_mesh_1">
+        <pose relative_to="cylinder_support_3">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_support_3_collision_mesh_2">
+        <pose relative_to="cylinder_support_3">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl4_1 -->
+    <frame name="l3_cl4_1">
+      <pose relative_to="cylinder_support_3">0 0.59 0.02 1.5708 0 3.14159</pose>
+    </frame>
+    <!-- Link cylinder_f_9 -->
+    <link name="cylinder_f_9">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_r8">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_9 -->
+      <visual name="cylinder_f_9_visual_mesh_1">
+        <pose relative_to="cylinder_f_9">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_9_collision_mesh_2">
+        <pose relative_to="cylinder_f_9">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_9 -->
+    <link name="cylinder_m_9">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l3_c3">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_9 -->
+      <visual name="cylinder_m_9_visual_mesh_1">
+        <pose relative_to="cylinder_m_9">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_9_collision_mesh_2">
+        <pose relative_to="cylinder_m_9">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l3_cl3_1 -->
+    <frame name="l3_cl3_1">
+      <pose relative_to="cylinder_m_9">-0 0 -0.0095 1.5708 1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_9 to cylinder_m_9 -->
+    <joint name="l3_c3" type="prismatic">
+      <pose relative_to="cylinder_f_9">0.4595 0 0 3.14159 -1.5708 0</pose>
+      <parent>cylinder_f_9</parent>
+      <child>cylinder_m_9</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from cylinder_support_3 to cylinder_f_9 -->
+    <joint name="l3_r8" type="revolute">
+      <pose relative_to="cylinder_support_3">-0 0.4125 0.02 0 0 -2.97767</pose>
+      <parent>cylinder_support_3</parent>
+      <child>cylinder_f_9</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.16392451796</lower>
+          <upper>1.406871808835</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_3 to cylinder_support_3 -->
+    <joint name="l3_r7" type="revolute">
+      <pose relative_to="hip_3">-0.125 -0.02 -0.04 -1.5708 0.791858 -0</pose>
+      <parent>hip_3</parent>
+      <child>cylinder_support_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-2.362654189383</lower>
+          <upper>0.778938464207</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to hip_3 -->
+    <joint name="l3_r2" type="revolute">
+      <pose relative_to="center">0.5 -0.025 0.03 -3.14159 -0 -2.04409</pose>
+      <parent>center</parent>
+      <child>hip_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.473288925669</lower>
+          <upper>1.097507401126</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_f_10 -->
+    <link name="cylinder_f_10">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_10 -->
+      <visual name="cylinder_f_10_visual_mesh_1">
+        <pose relative_to="cylinder_f_10">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_10_collision_mesh_2">
+        <pose relative_to="cylinder_f_10">0.118 -0.0355 -0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_10 -->
+    <link name="cylinder_m_10">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_c1">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_10 -->
+      <visual name="cylinder_m_10_visual_mesh_1">
+        <pose relative_to="cylinder_m_10">-0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_10_collision_mesh_2">
+        <pose relative_to="cylinder_m_10">-0 -0.0355 -0.337 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl1_1 -->
+    <frame name="l4_cl1_1">
+      <pose relative_to="cylinder_m_10">-0 0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_10 to cylinder_m_10 -->
+    <joint name="l4_c1" type="prismatic">
+      <pose relative_to="cylinder_f_10">0.4595 0 -0 -0 1.5708 0</pose>
+      <parent>cylinder_f_10</parent>
+      <child>cylinder_m_10</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to cylinder_f_10 -->
+    <joint name="l4_r1" type="revolute">
+      <pose relative_to="center">-0.19 -0.965 0 3.14159 0 0.145736</pose>
+      <parent>center</parent>
+      <child>cylinder_f_10</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.425060020555</lower>
+          <upper>0.14573630624</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link hip_4 -->
+    <link name="hip_4">
+      <inertial>
+        <pose>-0.0375418 -0 -0.0164898 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.00825192</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0.0120504</ixz>
+          <iyy>0.126424</iyy>
+          <iyz>0</iyz>
+          <izz>0.128671</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r2">0 0 0 0 -0 0</pose>
+      <!-- Part hip_4 -->
+      <visual name="hip_4_visual_mesh_1">
+        <pose relative_to="hip_4">-0.065 -0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="hip_4_collision_mesh_2">
+        <pose relative_to="hip_4">-0.065 -0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/hip.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl1_2 -->
+    <frame name="l4_cl1_2">
+      <pose relative_to="hip_4">0.275 0 0.03 -1.5708 0 3.14159</pose>
+    </frame>
+    <!-- Link femur_4 -->
+    <link name="femur_4">
+      <inertial>
+        <pose>0.00641397 0.245927 0.02 0 0 0</pose>
+        <mass>3.6</mass>
+        <inertia>
+          <ixx>0.0813908</ixx>
+          <ixy>0.000199157</ixy>
+          <ixz>-1.18e-10</ixz>
+          <iyy>0.00807931</iyy>
+          <iyz>-5.8e-11</iyz>
+          <izz>0.0746916</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r3">0 0 0 0 -0 0</pose>
+      <!-- Part femur_4 -->
+      <visual name="femur_4_visual_mesh_1">
+        <pose relative_to="femur_4">0 0.2425 -0.03 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="femur_4_collision_mesh_2">
+        <pose relative_to="femur_4">0 0.2425 -0.03 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl2_2 -->
+    <frame name="l4_cl2_2">
+      <pose relative_to="femur_4">-0.013 0.384 0.02 1.5708 0 -0</pose>
+    </frame>
+    <!-- Link tibia_4 -->
+    <link name="tibia_4">
+      <inertial>
+        <pose>-0.374888 0 -0.02 0 0 0</pose>
+        <mass>4</mass>
+        <inertia>
+          <ixx>0.00296427</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.21898</iyy>
+          <iyz>0</iyz>
+          <izz>0.219917</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r4">0 0 0 0 -0 0</pose>
+      <!-- Part tibia_4 -->
+      <visual name="tibia_4_visual_mesh_1">
+        <pose relative_to="tibia_4">-0.375 0 0 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="tibia_4_collision_mesh_2">
+        <pose relative_to="tibia_4">-0.375 0 0 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl4_2 -->
+    <frame name="l4_cl4_2">
+      <pose relative_to="tibia_4">-0.45 0 -0.02 -1.5708 -0 -3.14159</pose>
+    </frame>
+    <!-- Link foot_4 -->
+    <link name="foot_4">
+      <inertial>
+        <pose>0.00674789 -0.371096 0.02 0 0 0</pose>
+        <mass>3.65</mass>
+        <inertia>
+          <ixx>0.27435</ixx>
+          <ixy>-0.000537481</ixy>
+          <ixz>3.1807e-08</ixz>
+          <iyy>0.00564812</iyy>
+          <iyz>3.381e-09</iyz>
+          <izz>0.270045</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r5">0 0 0 0 -0 0</pose>
+      <!-- Part foot_4 -->
+      <visual name="foot_4_visual_mesh_1">
+        <pose relative_to="foot_4">0 -0.3475 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.301961 0.301961 1</ambient>
+          <diffuse>0.301961 0.301961 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="foot_4_collision_mesh_2">
+        <pose relative_to="foot_4">0 -0.3475 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/foot.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl3_2 -->
+    <frame name="l4_cl3_2">
+      <pose relative_to="foot_4">-0 -0.505 0.02 -1.5708 0 -3.14159</pose>
+    </frame>
+    <!-- Frame leg_4 -->
+    <frame name="leg_4">
+      <pose relative_to="foot_4">0.005 -1.0075 0.02 -1.5708 0 0</pose>
+    </frame>
+    <!-- Joint from tibia_4 to foot_4 -->
+    <joint name="l4_r5" type="revolute">
+      <pose relative_to="tibia_4">-0.75 -0 -0.04 -0 0 2.85742</pose>
+      <parent>tibia_4</parent>
+      <child>foot_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.286627712513</lower>
+          <upper>1.854964941077</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from femur_4 to tibia_4 -->
+    <joint name="l4_r4" type="revolute">
+      <pose relative_to="femur_4">0 0.49 0 3.14159 -0 -0.415329</pose>
+      <parent>femur_4</parent>
+      <child>tibia_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.986125541475</lower>
+          <upper>1.155467112115</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_4 to femur_4 -->
+    <joint name="l4_r3" type="revolute">
+      <pose relative_to="hip_4">0.125 -0.02 -0.04 -1.5708 0.466703 -0</pose>
+      <parent>hip_4</parent>
+      <child>femur_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-2.037499815189</lower>
+          <upper>1.104092838401</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_f_11 -->
+    <link name="cylinder_f_11">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r6">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_11 -->
+      <visual name="cylinder_f_11_visual_mesh_1">
+        <pose relative_to="cylinder_f_11">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_11_collision_mesh_2">
+        <pose relative_to="cylinder_f_11">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_11 -->
+    <link name="cylinder_m_11">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_c2">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_11 -->
+      <visual name="cylinder_m_11_visual_mesh_1">
+        <pose relative_to="cylinder_m_11">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_11_collision_mesh_2">
+        <pose relative_to="cylinder_m_11">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl2_1 -->
+    <frame name="l4_cl2_1">
+      <pose relative_to="cylinder_m_11">0 0 -0.0095 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_11 to cylinder_m_11 -->
+    <joint name="l4_c2" type="prismatic">
+      <pose relative_to="cylinder_f_11">0.4595 -0 0 0 1.5708 0</pose>
+      <parent>cylinder_f_11</parent>
+      <child>cylinder_m_11</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_4 to cylinder_f_11 -->
+    <joint name="l4_r6" type="revolute">
+      <pose relative_to="hip_4">-0.41 0 -0.095 1.5708 0.677509 -0</pose>
+      <parent>hip_4</parent>
+      <child>cylinder_f_11</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.893287307915</lower>
+          <upper>0.67750901888</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link cylinder_support_4 -->
+    <link name="cylinder_support_4">
+      <inertial>
+        <pose>0.00543544 0.298634 0.0201529 0 0 0</pose>
+        <mass>3.45</mass>
+        <inertia>
+          <ixx>0.122413</ixx>
+          <ixy>-0.000135757</ixy>
+          <ixz>-9.00296e-06</ixz>
+          <iyy>0.00809203</iyy>
+          <iyz>1.77445e-05</iyz>
+          <izz>0.115611</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r7">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_support_4 -->
+      <visual name="cylinder_support_4_visual_mesh_1">
+        <pose relative_to="cylinder_support_4">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_support_4_collision_mesh_2">
+        <pose relative_to="cylinder_support_4">0 0.2425 -0.03 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_support.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl4_1 -->
+    <frame name="l4_cl4_1">
+      <pose relative_to="cylinder_support_4">0 0.59 0.02 1.5708 -0 -3.14159</pose>
+    </frame>
+    <!-- Link cylinder_f_12 -->
+    <link name="cylinder_f_12">
+      <inertial>
+        <pose>0.139815 -0.0342983 -3.32e-10 0 0 0</pose>
+        <mass>2.7502</mass>
+        <inertia>
+          <ixx>0.00533295</ixx>
+          <ixy>-0.0021373</ixy>
+          <ixz>-9.8e-11</ixz>
+          <iyy>0.0276458</iyy>
+          <iyz>3e-12</iyz>
+          <izz>0.0310777</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_r8">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_f_12 -->
+      <visual name="cylinder_f_12_visual_mesh_1">
+        <pose relative_to="cylinder_f_12">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_f_12_collision_mesh_2">
+        <pose relative_to="cylinder_f_12">0.118 -0.0355 0 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_f.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link cylinder_m_12 -->
+    <link name="cylinder_m_12">
+      <inertial>
+        <pose>-3.859e-09 -4.418e-09 -0.19587 0 0 0</pose>
+        <mass>2.74999</mass>
+        <inertia>
+          <ixx>0.033691</ixx>
+          <ixy>8.3e-11</ixy>
+          <ixz>1.661e-09</ixz>
+          <iyy>0.033689</iyy>
+          <iyz>1.867e-09</iyz>
+          <izz>0.000282174</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="l4_c3">0 0 0 0 -0 0</pose>
+      <!-- Part cylinder_m_12 -->
+      <visual name="cylinder_m_12_visual_mesh_1">
+        <pose relative_to="cylinder_m_12">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.439216 0.47451 0.501961 1</ambient>
+          <diffuse>0.439216 0.47451 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="cylinder_m_12_collision_mesh_2">
+        <pose relative_to="cylinder_m_12">0 -0.0355 -0.337 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_megabot_sdf_0/assets/cylinder_m.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame l4_cl3_1 -->
+    <frame name="l4_cl3_1">
+      <pose relative_to="cylinder_m_12">0 0 -0.0095 1.5708 1.5708 0</pose>
+    </frame>
+    <!-- Joint from cylinder_f_12 to cylinder_m_12 -->
+    <joint name="l4_c3" type="prismatic">
+      <pose relative_to="cylinder_f_12">0.4595 -0 0 3.14159 -1.5708 0</pose>
+      <parent>cylinder_f_12</parent>
+      <child>cylinder_m_12</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.0</lower>
+          <upper>0.2</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from cylinder_support_4 to cylinder_f_12 -->
+    <joint name="l4_r8" type="revolute">
+      <pose relative_to="cylinder_support_4">0 0.4125 0.02 -0 -0 -2.97767</pose>
+      <parent>cylinder_support_4</parent>
+      <child>cylinder_f_12</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.16392451796</lower>
+          <upper>1.406871808835</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from hip_4 to cylinder_support_4 -->
+    <joint name="l4_r7" type="revolute">
+      <pose relative_to="hip_4">-0.125 -0.02 -0.04 -1.5708 0.791858 0</pose>
+      <parent>hip_4</parent>
+      <child>cylinder_support_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-2.362654189383</lower>
+          <upper>0.778938464207</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from center to hip_4 -->
+    <joint name="l4_r2" type="revolute">
+      <pose relative_to="center">0.5 -1.025 0.03 3.14159 0 2.6683</pose>
+      <parent>center</parent>
+      <child>hip_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.473288925669</lower>
+          <upper>1.097507401126</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

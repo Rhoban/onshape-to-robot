@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: a91a2a42fc8d48275e133731 / version_id: 94313e6836c0723e0db8b804 -->
+<mujoco model="test_export_adjustable_height_2">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_adjustable_height_2">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link base -->
+    <body name="base" pos="0 0 0" quat="1 0 0 0" childclass="test_export_adjustable_height_2">
+      <inertial pos="-0 0 0.020169" mass="0.39382" fullinertia="0.000177195 0.000177195 0.000123463 0 0 0"/>
+      <!-- Part base -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="base" material="base_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="base" material="base_material"/>
+      <!-- Link part1 -->
+      <body name="part1" pos="0 0 0.053" quat="1 0 0 0">
+        <!-- Joint from base to part1 -->
+        <joint axis="0 0 1" name="slider" type="slide" range="-0.05 -0.0"/>
+        <inertial pos="0 0 0.027892" mass="0.298971" fullinertia="0.000123868 0.000123868 9.58869e-05 0 0 0"/>
+        <!-- Part part1 -->
+        <geom type="mesh" class="visual" pos="0 -0 -0.053" quat="1 0 0 0" mesh="part1" material="part1_material"/>
+        <geom type="mesh" class="collision" pos="0 -0 -0.053" quat="1 0 0 0" mesh="part1" material="part1_material"/>
+        <!-- Link part2 -->
+        <body name="part2" pos="-0 0 0.053" quat="0 1 0 0">
+          <!-- Joint from part1 to part2 -->
+          <joint axis="0 0 1" name="part2" type="hinge"/>
+          <inertial pos="6.624e-09 -1.7e-10 -0.0149478" mass="0.148575" fullinertia="6.89125e-05 6.97803e-05 6.69782e-05 6.1e-11 -6e-12 0"/>
+          <!-- Part part2 -->
+          <geom type="mesh" class="visual" pos="0 0 0.106" quat="0 1 0 0" mesh="part2" material="part2_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.106" quat="0 1 0 0" mesh="part2" material="part2_material"/>
+          <!-- Link part3 -->
+          <body name="part3" pos="-0.02 0 -0.025" quat="0.5 0.5 -0.5 -0.5">
+            <!-- Joint from part2 to part3 -->
+            <joint axis="0 0 1" name="part3" type="hinge"/>
+            <inertial pos="-3.0623e-08 -0.0314519 -0.02" mass="0.642728" fullinertia="0.000872587 0.000126043 0.000853226 2.8e-11 2.05e-10 -1.53e-10"/>
+            <!-- Part part3 -->
+            <geom type="mesh" class="visual" pos="0 0.131 -0.02" quat="0.5 0.5 0.5 -0.5" mesh="part3" material="part3_material"/>
+            <geom type="mesh" class="collision" pos="0 0.131 -0.02" quat="0.5 0.5 0.5 -0.5" mesh="part3" material="part3_material"/>
+            <!-- Link part4 -->
+            <body name="part4" pos="0 -0.0975 0" quat="1 0 0 -0">
+              <!-- Joint from part3 to part4 -->
+              <joint axis="0 0 1" name="part4" type="hinge"/>
+              <inertial pos="-3.5461e-08 -0.0331362 -0.02" mass="0.64593" fullinertia="0.000969336 8.7724e-05 0.000952436 2.7e-11 -2.96e-10 2.45e-10"/>
+              <!-- Part part4 -->
+              <geom type="mesh" class="visual" pos="0 0.2285 -0.02" quat="0.5 0.5 0.5 -0.5" mesh="part4" material="part4_material"/>
+              <geom type="mesh" class="collision" pos="0 0.2285 -0.02" quat="0.5 0.5 0.5 -0.5" mesh="part4" material="part4_material"/>
+              <!-- Frame tip -->
+              <site group="3" name="tip" pos="0 -0.1325 -0.02" quat="0.707107 0.707107 0 0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="base.stl"/>
+    <mesh file="part1.stl"/>
+    <mesh file="part2.stl"/>
+    <mesh file="part3.stl"/>
+    <mesh file="part4.stl"/>
+    <material name="base_material" rgba="0.301961 0.290196 0.262745 1"/>
+    <material name="part1_material" rgba="0.866667 0.321569 0.156863 1"/>
+    <material name="part2_material" rgba="0.372549 0.654902 0.239216 1"/>
+    <material name="part3_material" rgba="0.0862745 0.317647 0.690196 1"/>
+    <material name="part4_material" rgba="0.972549 0.529412 0.00392157 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_adjustable_height_2" name="slider" joint="slider" inheritrange="1"/>
+    <position class="test_export_adjustable_height_2" name="part2" joint="part2"/>
+    <position class="test_export_adjustable_height_2" name="part3" joint="part3"/>
+    <position class="test_export_adjustable_height_2" name="part4" joint="part4"/>
+  </actuator>
+  <equality/>
+</mujoco>

@@ -1,0 +1,3796 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 1aeb21793980b4217bb57764 / version_id: d80b8dca03c6a60cf39cd715 -->
+<sdf version="1.7">
+  <model name="test_export_omnidirectional_sd0">
+    <!-- Link body_2 -->
+    <link name="body_2">
+      <inertial>
+        <pose>0.000413137 0.000238525 0.0129604 0 0 0</pose>
+        <mass>0.55184</mass>
+        <inertia>
+          <ixx>0.000615732</ixx>
+          <ixy>-4.54339e-06</ixy>
+          <ixz>-9.037e-09</ixz>
+          <iyy>0.000620978</iyy>
+          <iyz>-5.217e-09</iyz>
+          <izz>0.00118941</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part plate -->
+      <visual name="plate_visual_mesh_1">
+        <pose relative_to="body_2">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.682353 0.333333 0.737255 1</ambient>
+          <diffuse>0.682353 0.333333 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_collision_mesh_2">
+        <pose relative_to="body_2">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part plate_2 -->
+      <visual name="plate_2_visual_mesh_1">
+        <pose relative_to="body_2">0 0 0.023 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.682353 0.333333 0.737255 1</ambient>
+          <diffuse>0.682353 0.333333 0.737255 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_2_collision_mesh_2">
+        <pose relative_to="body_2">0 0 0.023 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor -->
+      <visual name="motor_visual_mesh_1">
+        <pose relative_to="body_2">0 0 0 0 -0 -2.0944</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_collision_mesh_2">
+        <pose relative_to="body_2">0 0 0 0 -0 -2.0944</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_2 -->
+      <visual name="motor_2_visual_mesh_1">
+        <pose relative_to="body_2">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_2_collision_mesh_2">
+        <pose relative_to="body_2">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_3 -->
+      <visual name="motor_3_visual_mesh_1">
+        <pose relative_to="body_2">-0 -0 0 0 -0 2.0944</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_3_collision_mesh_2">
+        <pose relative_to="body_2">-0 -0 0 0 -0 2.0944</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame body -->
+    <frame name="body">
+      <pose relative_to="body_2">0.00418699 0.00241736 0.0145 0 -0 0.523599</pose>
+    </frame>
+    <!-- Link wheel -->
+    <link name="wheel">
+      <inertial>
+        <pose>-9.3e-11 -1.438e-09 -0.0025 0 0 0</pose>
+        <mass>0.0192491</mass>
+        <inertia>
+          <ixx>6.87651e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>6.87651e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.36736e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="wheel1_speed">0 0 0 0 -0 0</pose>
+      <!-- Part wheel -->
+      <visual name="wheel_visual_mesh_1">
+        <pose relative_to="wheel">-0 0.013 0.075 1.5708 1.0472 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.941176 0.87451 0.678431 1</ambient>
+          <diffuse>0.941176 0.87451 0.678431 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="wheel_collision_mesh_2">
+        <pose relative_to="wheel">-0 0.013 0.075 1.5708 1.0472 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link passivewheel -->
+    <link name="passivewheel">
+      <inertial>
+        <pose>-0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_1_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel -->
+      <visual name="passivewheel_visual_mesh_1">
+        <pose relative_to="passivewheel">0 0 0.004 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_collision_mesh_2">
+        <pose relative_to="passivewheel">0 0 0.004 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel -->
+    <joint name="w1_1_passive" type="revolute">
+      <pose relative_to="wheel">-0.0134903 -0.0350466 -0.0025 1.5708 1.39424 1.25664</pose>
+      <parent>wheel</parent>
+      <child>passivewheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_2 -->
+    <link name="passivewheel_2">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_2_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_2 -->
+      <visual name="passivewheel_2_visual_mesh_1">
+        <pose relative_to="passivewheel_2">-0 0 -0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_2_collision_mesh_2">
+        <pose relative_to="passivewheel_2">-0 0 -0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_2 -->
+    <joint name="w1_2_passive" type="revolute">
+      <pose relative_to="wheel">-0.002 -0.0375 -0.0025 3.14159 1.5708 0</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_3 -->
+    <link name="passivewheel_3">
+      <inertial>
+        <pose>0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_3_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_3 -->
+      <visual name="passivewheel_3_visual_mesh_1">
+        <pose relative_to="passivewheel_3">0 0 -0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_3_collision_mesh_2">
+        <pose relative_to="passivewheel_3">0 0 -0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_3 -->
+    <joint name="w1_3_passive" type="revolute">
+      <pose relative_to="wheel">0.00968602 -0.0362827 -0.0025 -1.5708 1.39424 -1.25664</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_4 -->
+    <link name="passivewheel_4">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_4_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_4 -->
+      <visual name="passivewheel_4_visual_mesh_1">
+        <pose relative_to="passivewheel_4">-0 0 -0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_4_collision_mesh_2">
+        <pose relative_to="passivewheel_4">-0 0 -0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_4 -->
+    <joint name="w1_4_passive" type="revolute">
+      <pose relative_to="wheel">0.0204239 -0.0315137 -0.0025 1.5708 1.24363 -0.942478</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_5 -->
+    <link name="passivewheel_5">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_5_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_5 -->
+      <visual name="passivewheel_5_visual_mesh_1">
+        <pose relative_to="passivewheel_5">0 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_5_collision_mesh_2">
+        <pose relative_to="passivewheel_5">0 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_5 -->
+    <joint name="w1_5_passive" type="revolute">
+      <pose relative_to="wheel">0.0291626 -0.02366 -0.0025 1.5708 1.13382 -0.628319</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_6 -->
+    <link name="passivewheel_6">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_6_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_6 -->
+      <visual name="passivewheel_6_visual_mesh_1">
+        <pose relative_to="passivewheel_6">0 -0 0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_6_collision_mesh_2">
+        <pose relative_to="passivewheel_6">0 -0 0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_6 -->
+    <joint name="w1_6_passive" type="revolute">
+      <pose relative_to="wheel">0.0350466 -0.0134903 -0.0025 1.5708 1.06865 -0.314159</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_7 -->
+    <link name="passivewheel_7">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_7_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_7 -->
+      <visual name="passivewheel_7_visual_mesh_1">
+        <pose relative_to="passivewheel_7">0 -0 -0.004 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_7_collision_mesh_2">
+        <pose relative_to="passivewheel_7">0 -0 -0.004 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_7 -->
+    <joint name="w1_7_passive" type="revolute">
+      <pose relative_to="wheel">0.0375 -0.002 -0.0025 1.5708 1.0472 -0</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_7</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_8 -->
+    <link name="passivewheel_8">
+      <inertial>
+        <pose>-0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_8_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_8 -->
+      <visual name="passivewheel_8_visual_mesh_1">
+        <pose relative_to="passivewheel_8">-0 0 0.004 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_8_collision_mesh_2">
+        <pose relative_to="passivewheel_8">-0 0 0.004 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_8 -->
+    <joint name="w1_8_passive" type="revolute">
+      <pose relative_to="wheel">0.0362827 0.00968602 -0.0025 -1.5708 1.06865 0.314159</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_8</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_9 -->
+    <link name="passivewheel_9">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_9_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_9 -->
+      <visual name="passivewheel_9_visual_mesh_1">
+        <pose relative_to="passivewheel_9">0 0 -0.004 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_9_collision_mesh_2">
+        <pose relative_to="passivewheel_9">0 0 -0.004 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_9 -->
+    <joint name="w1_9_passive" type="revolute">
+      <pose relative_to="wheel">0.0315137 0.0204239 -0.0025 1.5708 1.13382 0.628319</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_9</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_10 -->
+    <link name="passivewheel_10">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_10_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_10 -->
+      <visual name="passivewheel_10_visual_mesh_1">
+        <pose relative_to="passivewheel_10">0 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_10_collision_mesh_2">
+        <pose relative_to="passivewheel_10">0 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_10 -->
+    <joint name="w1_10_passive" type="revolute">
+      <pose relative_to="wheel">0.02366 0.0291626 -0.0025 1.5708 1.24363 0.942478</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_10</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_11 -->
+    <link name="passivewheel_11">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_11_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_11 -->
+      <visual name="passivewheel_11_visual_mesh_1">
+        <pose relative_to="passivewheel_11">0 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_11_collision_mesh_2">
+        <pose relative_to="passivewheel_11">0 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_11 -->
+    <joint name="w1_11_passive" type="revolute">
+      <pose relative_to="wheel">0.0134903 0.0350466 -0.0025 1.5708 1.39424 1.25664</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_11</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_12 -->
+    <link name="passivewheel_12">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_12_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_12 -->
+      <visual name="passivewheel_12_visual_mesh_1">
+        <pose relative_to="passivewheel_12">0 0 -0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_12_collision_mesh_2">
+        <pose relative_to="passivewheel_12">0 0 -0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_12 -->
+    <joint name="w1_12_passive" type="revolute">
+      <pose relative_to="wheel">0.002 0.0375 -0.0025 0 1.5708 0</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_12</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_13 -->
+    <link name="passivewheel_13">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_13_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_13 -->
+      <visual name="passivewheel_13_visual_mesh_1">
+        <pose relative_to="passivewheel_13">0 0 -0 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_13_collision_mesh_2">
+        <pose relative_to="passivewheel_13">0 0 -0 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_13 -->
+    <joint name="w1_13_passive" type="revolute">
+      <pose relative_to="wheel">-0.00968602 0.0362827 -0.0025 -1.5708 1.39424 -1.25664</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_13</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_14 -->
+    <link name="passivewheel_14">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_14_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_14 -->
+      <visual name="passivewheel_14_visual_mesh_1">
+        <pose relative_to="passivewheel_14">0 -0 -0.004 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_14_collision_mesh_2">
+        <pose relative_to="passivewheel_14">0 -0 -0.004 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_14 -->
+    <joint name="w1_14_passive" type="revolute">
+      <pose relative_to="wheel">-0.0204239 0.0315137 -0.0025 -1.5708 1.24363 -0.942478</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_14</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_15 -->
+    <link name="passivewheel_15">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_15_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_15 -->
+      <visual name="passivewheel_15_visual_mesh_1">
+        <pose relative_to="passivewheel_15">0 0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_15_collision_mesh_2">
+        <pose relative_to="passivewheel_15">0 0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_15 -->
+    <joint name="w1_15_passive" type="revolute">
+      <pose relative_to="wheel">-0.0291626 0.02366 -0.0025 -1.5708 1.13382 -0.628319</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_15</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_16 -->
+    <link name="passivewheel_16">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_16_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_16 -->
+      <visual name="passivewheel_16_visual_mesh_1">
+        <pose relative_to="passivewheel_16">0 -0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_16_collision_mesh_2">
+        <pose relative_to="passivewheel_16">0 -0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_16 -->
+    <joint name="w1_16_passive" type="revolute">
+      <pose relative_to="wheel">-0.0350466 0.0134903 -0.0025 -1.5708 1.06865 -0.314159</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_16</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_17 -->
+    <link name="passivewheel_17">
+      <inertial>
+        <pose>0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_17_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_17 -->
+      <visual name="passivewheel_17_visual_mesh_1">
+        <pose relative_to="passivewheel_17">0 0 0.004 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_17_collision_mesh_2">
+        <pose relative_to="passivewheel_17">0 0 0.004 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_17 -->
+    <joint name="w1_17_passive" type="revolute">
+      <pose relative_to="wheel">-0.0375 0.002 -0.0025 1.5708 1.0472 -0</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_17</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_18 -->
+    <link name="passivewheel_18">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_18_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_18 -->
+      <visual name="passivewheel_18_visual_mesh_1">
+        <pose relative_to="passivewheel_18">0 -0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_18_collision_mesh_2">
+        <pose relative_to="passivewheel_18">0 -0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_18 -->
+    <joint name="w1_18_passive" type="revolute">
+      <pose relative_to="wheel">-0.0362827 -0.00968602 -0.0025 -1.5708 1.06865 0.314159</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_18</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_19 -->
+    <link name="passivewheel_19">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_19_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_19 -->
+      <visual name="passivewheel_19_visual_mesh_1">
+        <pose relative_to="passivewheel_19">-0 0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_19_collision_mesh_2">
+        <pose relative_to="passivewheel_19">-0 0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_19 -->
+    <joint name="w1_19_passive" type="revolute">
+      <pose relative_to="wheel">-0.0315137 -0.0204239 -0.0025 -1.5708 1.13382 0.628319</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_19</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_20 -->
+    <link name="passivewheel_20">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w1_20_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_20 -->
+      <visual name="passivewheel_20_visual_mesh_1">
+        <pose relative_to="passivewheel_20">0 0 0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_20_collision_mesh_2">
+        <pose relative_to="passivewheel_20">0 0 0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel to passivewheel_20 -->
+    <joint name="w1_20_passive" type="revolute">
+      <pose relative_to="wheel">-0.02366 -0.0291626 -0.0025 -1.5708 1.24363 0.942478</pose>
+      <parent>wheel</parent>
+      <child>passivewheel_20</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body_2 to wheel -->
+    <joint name="wheel1_speed" type="revolute">
+      <pose relative_to="body_2">0.069282 -0.04 0.013 -1.5708 -0 1.0472</pose>
+      <parent>body_2</parent>
+      <child>wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link wheel_2 -->
+    <link name="wheel_2">
+      <inertial>
+        <pose>-9.3e-11 1.438e-09 -0.0025 0 0 0</pose>
+        <mass>0.0192491</mass>
+        <inertia>
+          <ixx>6.87651e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.87651e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.36736e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="wheel3_speed">0 0 0 0 -0 0</pose>
+      <!-- Part wheel_2 -->
+      <visual name="wheel_2_visual_mesh_1">
+        <pose relative_to="wheel_2">-0 -0.013 -0.08 -1.5708 -1.0472 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.941176 0.87451 0.678431 1</ambient>
+          <diffuse>0.941176 0.87451 0.678431 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="wheel_2_collision_mesh_2">
+        <pose relative_to="wheel_2">-0 -0.013 -0.08 -1.5708 -1.0472 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link passivewheel_21 -->
+    <link name="passivewheel_21">
+      <inertial>
+        <pose>0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_1_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_21 -->
+      <visual name="passivewheel_21_visual_mesh_1">
+        <pose relative_to="passivewheel_21">0 0 0.004 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_21_collision_mesh_2">
+        <pose relative_to="passivewheel_21">0 0 0.004 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_21 -->
+    <joint name="w3_1_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.0134903 0.0350466 -0.0025 1.5708 -1.39424 1.88496</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_21</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_22 -->
+    <link name="passivewheel_22">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_2_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_22 -->
+      <visual name="passivewheel_22_visual_mesh_1">
+        <pose relative_to="passivewheel_22">0 0 -0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_22_collision_mesh_2">
+        <pose relative_to="passivewheel_22">0 0 -0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_22 -->
+    <joint name="w3_2_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.002 0.0375 -0.0025 0 -1.5708 0</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_22</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_23 -->
+    <link name="passivewheel_23">
+      <inertial>
+        <pose>-0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_3_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_23 -->
+      <visual name="passivewheel_23_visual_mesh_1">
+        <pose relative_to="passivewheel_23">-0 0 0 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_23_collision_mesh_2">
+        <pose relative_to="passivewheel_23">-0 0 0 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_23 -->
+    <joint name="w3_3_passive" type="revolute">
+      <pose relative_to="wheel_2">0.00968602 0.0362827 -0.0025 -1.5708 -1.39424 -1.88496</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_23</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_24 -->
+    <link name="passivewheel_24">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_4_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_24 -->
+      <visual name="passivewheel_24_visual_mesh_1">
+        <pose relative_to="passivewheel_24">0 0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_24_collision_mesh_2">
+        <pose relative_to="passivewheel_24">0 0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_24 -->
+    <joint name="w3_4_passive" type="revolute">
+      <pose relative_to="wheel_2">0.0204239 0.0315137 -0.0025 1.5708 -1.24363 -2.19911</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_24</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_25 -->
+    <link name="passivewheel_25">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_5_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_25 -->
+      <visual name="passivewheel_25_visual_mesh_1">
+        <pose relative_to="passivewheel_25">0 -0 -0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_25_collision_mesh_2">
+        <pose relative_to="passivewheel_25">0 -0 -0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_25 -->
+    <joint name="w3_5_passive" type="revolute">
+      <pose relative_to="wheel_2">0.0291626 0.02366 -0.0025 1.5708 -1.13382 -2.51327</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_25</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_26 -->
+    <link name="passivewheel_26">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_6_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_26 -->
+      <visual name="passivewheel_26_visual_mesh_1">
+        <pose relative_to="passivewheel_26">-0 -0 -0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_26_collision_mesh_2">
+        <pose relative_to="passivewheel_26">-0 -0 -0 -3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_26 -->
+    <joint name="w3_6_passive" type="revolute">
+      <pose relative_to="wheel_2">0.0350466 0.0134903 -0.0025 1.5708 -1.06865 -2.82743</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_26</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_27 -->
+    <link name="passivewheel_27">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_7_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_27 -->
+      <visual name="passivewheel_27_visual_mesh_1">
+        <pose relative_to="passivewheel_27">0 -0 -0.004 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_27_collision_mesh_2">
+        <pose relative_to="passivewheel_27">0 -0 -0.004 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_27 -->
+    <joint name="w3_7_passive" type="revolute">
+      <pose relative_to="wheel_2">0.0375 0.002 -0.0025 1.5708 -1.0472 3.14159</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_27</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_28 -->
+    <link name="passivewheel_28">
+      <inertial>
+        <pose>0 -0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_8_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_28 -->
+      <visual name="passivewheel_28_visual_mesh_1">
+        <pose relative_to="passivewheel_28">0 0 0.004 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_28_collision_mesh_2">
+        <pose relative_to="passivewheel_28">0 0 0.004 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_28 -->
+    <joint name="w3_8_passive" type="revolute">
+      <pose relative_to="wheel_2">0.0362827 -0.00968602 -0.0025 -1.5708 -1.06865 2.82743</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_28</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_29 -->
+    <link name="passivewheel_29">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_9_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_29 -->
+      <visual name="passivewheel_29_visual_mesh_1">
+        <pose relative_to="passivewheel_29">0 -0 -0.004 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_29_collision_mesh_2">
+        <pose relative_to="passivewheel_29">0 -0 -0.004 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_29 -->
+    <joint name="w3_9_passive" type="revolute">
+      <pose relative_to="wheel_2">0.0315137 -0.0204239 -0.0025 1.5708 -1.13382 2.51327</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_29</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_30 -->
+    <link name="passivewheel_30">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_10_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_30 -->
+      <visual name="passivewheel_30_visual_mesh_1">
+        <pose relative_to="passivewheel_30">0 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_30_collision_mesh_2">
+        <pose relative_to="passivewheel_30">0 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_30 -->
+    <joint name="w3_10_passive" type="revolute">
+      <pose relative_to="wheel_2">0.02366 -0.0291626 -0.0025 1.5708 -1.24363 2.19911</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_30</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_31 -->
+    <link name="passivewheel_31">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_11_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_31 -->
+      <visual name="passivewheel_31_visual_mesh_1">
+        <pose relative_to="passivewheel_31">0 0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_31_collision_mesh_2">
+        <pose relative_to="passivewheel_31">0 0 0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_31 -->
+    <joint name="w3_11_passive" type="revolute">
+      <pose relative_to="wheel_2">0.0134903 -0.0350466 -0.0025 1.5708 -1.39424 1.88496</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_31</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_32 -->
+    <link name="passivewheel_32">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_12_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_32 -->
+      <visual name="passivewheel_32_visual_mesh_1">
+        <pose relative_to="passivewheel_32">0 0 -0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_32_collision_mesh_2">
+        <pose relative_to="passivewheel_32">0 0 -0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_32 -->
+    <joint name="w3_12_passive" type="revolute">
+      <pose relative_to="wheel_2">0.002 -0.0375 -0.0025 -3.14159 -1.5708 0</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_32</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_33 -->
+    <link name="passivewheel_33">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_13_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_33 -->
+      <visual name="passivewheel_33_visual_mesh_1">
+        <pose relative_to="passivewheel_33">-0 0 -0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_33_collision_mesh_2">
+        <pose relative_to="passivewheel_33">-0 0 -0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_33 -->
+    <joint name="w3_13_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.00968602 -0.0362827 -0.0025 -1.5708 -1.39424 -1.88496</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_33</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_34 -->
+    <link name="passivewheel_34">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_14_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_34 -->
+      <visual name="passivewheel_34_visual_mesh_1">
+        <pose relative_to="passivewheel_34">0 -0 -0.004 -0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_34_collision_mesh_2">
+        <pose relative_to="passivewheel_34">0 -0 -0.004 -0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_34 -->
+    <joint name="w3_14_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.0204239 -0.0315137 -0.0025 -1.5708 -1.24363 -2.19911</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_34</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_35 -->
+    <link name="passivewheel_35">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_15_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_35 -->
+      <visual name="passivewheel_35_visual_mesh_1">
+        <pose relative_to="passivewheel_35">0 0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_35_collision_mesh_2">
+        <pose relative_to="passivewheel_35">0 0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_35 -->
+    <joint name="w3_15_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.0291626 -0.02366 -0.0025 -1.5708 -1.13382 -2.51327</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_35</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_36 -->
+    <link name="passivewheel_36">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_16_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_36 -->
+      <visual name="passivewheel_36_visual_mesh_1">
+        <pose relative_to="passivewheel_36">0 0 -0.004 -0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_36_collision_mesh_2">
+        <pose relative_to="passivewheel_36">0 0 -0.004 -0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_36 -->
+    <joint name="w3_16_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.0350466 -0.0134903 -0.0025 -1.5708 -1.06865 -2.82743</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_36</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_37 -->
+    <link name="passivewheel_37">
+      <inertial>
+        <pose>0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_17_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_37 -->
+      <visual name="passivewheel_37_visual_mesh_1">
+        <pose relative_to="passivewheel_37">0 0 0.004 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_37_collision_mesh_2">
+        <pose relative_to="passivewheel_37">0 0 0.004 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_37 -->
+    <joint name="w3_17_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.0375 -0.002 -0.0025 1.5708 -1.0472 3.14159</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_37</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_38 -->
+    <link name="passivewheel_38">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_18_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_38 -->
+      <visual name="passivewheel_38_visual_mesh_1">
+        <pose relative_to="passivewheel_38">0 0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_38_collision_mesh_2">
+        <pose relative_to="passivewheel_38">0 0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_38 -->
+    <joint name="w3_18_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.0362827 0.00968602 -0.0025 -1.5708 -1.06865 2.82743</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_38</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_39 -->
+    <link name="passivewheel_39">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_19_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_39 -->
+      <visual name="passivewheel_39_visual_mesh_1">
+        <pose relative_to="passivewheel_39">0 0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_39_collision_mesh_2">
+        <pose relative_to="passivewheel_39">0 0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_39 -->
+    <joint name="w3_19_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.0315137 0.0204239 -0.0025 -1.5708 -1.13382 2.51327</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_39</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_40 -->
+    <link name="passivewheel_40">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w3_20_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_40 -->
+      <visual name="passivewheel_40_visual_mesh_1">
+        <pose relative_to="passivewheel_40">0 0 -0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_40_collision_mesh_2">
+        <pose relative_to="passivewheel_40">0 0 -0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_2 to passivewheel_40 -->
+    <joint name="w3_20_passive" type="revolute">
+      <pose relative_to="wheel_2">-0.02366 0.0291626 -0.0025 -1.5708 -1.24363 2.19911</pose>
+      <parent>wheel_2</parent>
+      <child>passivewheel_40</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body_2 to wheel_2 -->
+    <joint name="wheel3_speed" type="revolute">
+      <pose relative_to="body_2">-0.069282 -0.04 0.013 1.5708 -0 2.0944</pose>
+      <parent>body_2</parent>
+      <child>wheel_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link wheel_3 -->
+    <link name="wheel_3">
+      <inertial>
+        <pose>-9.3e-11 -1.438e-09 -0.0025 0 0 0</pose>
+        <mass>0.0192491</mass>
+        <inertia>
+          <ixx>6.87651e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>6.87651e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.36736e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="wheel2_speed">0 0 0 0 -0 0</pose>
+      <!-- Part wheel_3 -->
+      <visual name="wheel_3_visual_mesh_1">
+        <pose relative_to="wheel_3">-0 0.013 0.075 1.5708 1.0472 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.941176 0.87451 0.678431 1</ambient>
+          <diffuse>0.941176 0.87451 0.678431 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="wheel_3_collision_mesh_2">
+        <pose relative_to="wheel_3">-0 0.013 0.075 1.5708 1.0472 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link passivewheel_41 -->
+    <link name="passivewheel_41">
+      <inertial>
+        <pose>-0 -0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_1_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_41 -->
+      <visual name="passivewheel_41_visual_mesh_1">
+        <pose relative_to="passivewheel_41">0 0 0.004 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_41_collision_mesh_2">
+        <pose relative_to="passivewheel_41">0 0 0.004 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_41 -->
+    <joint name="w2_1_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.0134903 -0.0350466 -0.0025 -1.5708 -1.39424 -1.88496</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_41</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_42 -->
+    <link name="passivewheel_42">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_2_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_42 -->
+      <visual name="passivewheel_42_visual_mesh_1">
+        <pose relative_to="passivewheel_42">0 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_42_collision_mesh_2">
+        <pose relative_to="passivewheel_42">0 0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_42 -->
+    <joint name="w2_2_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.002 -0.0375 -0.0025 -0 -1.5708 0</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_42</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_43 -->
+    <link name="passivewheel_43">
+      <inertial>
+        <pose>0 0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_3_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_43 -->
+      <visual name="passivewheel_43_visual_mesh_1">
+        <pose relative_to="passivewheel_43">0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_43_collision_mesh_2">
+        <pose relative_to="passivewheel_43">0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_43 -->
+    <joint name="w2_3_passive" type="revolute">
+      <pose relative_to="wheel_3">0.00968602 -0.0362827 -0.0025 1.5708 -1.39424 1.88496</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_43</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_44 -->
+    <link name="passivewheel_44">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_4_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_44 -->
+      <visual name="passivewheel_44_visual_mesh_1">
+        <pose relative_to="passivewheel_44">0 -0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_44_collision_mesh_2">
+        <pose relative_to="passivewheel_44">0 -0 0 -3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_44 -->
+    <joint name="w2_4_passive" type="revolute">
+      <pose relative_to="wheel_3">0.0204239 -0.0315137 -0.0025 -1.5708 -1.24363 2.19911</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_44</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_45 -->
+    <link name="passivewheel_45">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_5_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_45 -->
+      <visual name="passivewheel_45_visual_mesh_1">
+        <pose relative_to="passivewheel_45">-0 -0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_45_collision_mesh_2">
+        <pose relative_to="passivewheel_45">-0 -0 0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_45 -->
+    <joint name="w2_5_passive" type="revolute">
+      <pose relative_to="wheel_3">0.0291626 -0.02366 -0.0025 -1.5708 -1.13382 2.51327</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_45</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_46 -->
+    <link name="passivewheel_46">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_6_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_46 -->
+      <visual name="passivewheel_46_visual_mesh_1">
+        <pose relative_to="passivewheel_46">0 -0 0 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_46_collision_mesh_2">
+        <pose relative_to="passivewheel_46">0 -0 0 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_46 -->
+    <joint name="w2_6_passive" type="revolute">
+      <pose relative_to="wheel_3">0.0350466 -0.0134903 -0.0025 -1.5708 -1.06865 2.82743</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_46</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_47 -->
+    <link name="passivewheel_47">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_7_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_47 -->
+      <visual name="passivewheel_47_visual_mesh_1">
+        <pose relative_to="passivewheel_47">0 -0 -0.004 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_47_collision_mesh_2">
+        <pose relative_to="passivewheel_47">0 -0 -0.004 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_47 -->
+    <joint name="w2_7_passive" type="revolute">
+      <pose relative_to="wheel_3">0.0375 -0.002 -0.0025 -1.5708 -0.393095 -3.14159</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_47</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_48 -->
+    <link name="passivewheel_48">
+      <inertial>
+        <pose>-0 -0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_8_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_48 -->
+      <visual name="passivewheel_48_visual_mesh_1">
+        <pose relative_to="passivewheel_48">-0 -0 0.004 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_48_collision_mesh_2">
+        <pose relative_to="passivewheel_48">-0 -0 0.004 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_48 -->
+    <joint name="w2_8_passive" type="revolute">
+      <pose relative_to="wheel_3">0.0362827 0.00968602 -0.0025 1.5708 -1.06865 -2.82743</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_48</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_49 -->
+    <link name="passivewheel_49">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_9_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_49 -->
+      <visual name="passivewheel_49_visual_mesh_1">
+        <pose relative_to="passivewheel_49">-0 0 -0.004 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_49_collision_mesh_2">
+        <pose relative_to="passivewheel_49">-0 0 -0.004 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_49 -->
+    <joint name="w2_9_passive" type="revolute">
+      <pose relative_to="wheel_3">0.0315137 0.0204239 -0.0025 -1.5708 -1.13382 -2.51327</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_49</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_50 -->
+    <link name="passivewheel_50">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_10_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_50 -->
+      <visual name="passivewheel_50_visual_mesh_1">
+        <pose relative_to="passivewheel_50">0 0 -0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_50_collision_mesh_2">
+        <pose relative_to="passivewheel_50">0 0 -0 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_50 -->
+    <joint name="w2_10_passive" type="revolute">
+      <pose relative_to="wheel_3">0.02366 0.0291626 -0.0025 -1.5708 -1.24363 -2.19911</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_50</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_51 -->
+    <link name="passivewheel_51">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_11_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_51 -->
+      <visual name="passivewheel_51_visual_mesh_1">
+        <pose relative_to="passivewheel_51">-0 -0 -0 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_51_collision_mesh_2">
+        <pose relative_to="passivewheel_51">-0 -0 -0 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_51 -->
+    <joint name="w2_11_passive" type="revolute">
+      <pose relative_to="wheel_3">0.0134903 0.0350466 -0.0025 -1.5708 -1.39424 -1.88496</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_51</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_52 -->
+    <link name="passivewheel_52">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_12_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_52 -->
+      <visual name="passivewheel_52_visual_mesh_1">
+        <pose relative_to="passivewheel_52">0 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_52_collision_mesh_2">
+        <pose relative_to="passivewheel_52">0 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_52 -->
+    <joint name="w2_12_passive" type="revolute">
+      <pose relative_to="wheel_3">0.002 0.0375 -0.0025 3.14159 -1.5708 0</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_52</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_53 -->
+    <link name="passivewheel_53">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_13_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_53 -->
+      <visual name="passivewheel_53_visual_mesh_1">
+        <pose relative_to="passivewheel_53">-0 0 -0 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_53_collision_mesh_2">
+        <pose relative_to="passivewheel_53">-0 0 -0 -3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_53 -->
+    <joint name="w2_13_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.00968602 0.0362827 -0.0025 1.5708 -1.39424 1.88496</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_53</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_54 -->
+    <link name="passivewheel_54">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_14_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_54 -->
+      <visual name="passivewheel_54_visual_mesh_1">
+        <pose relative_to="passivewheel_54">0 0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_54_collision_mesh_2">
+        <pose relative_to="passivewheel_54">0 0 -0.004 0 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_54 -->
+    <joint name="w2_14_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.0204239 0.0315137 -0.0025 1.5708 -1.24363 2.19911</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_54</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_55 -->
+    <link name="passivewheel_55">
+      <inertial>
+        <pose>0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_15_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_55 -->
+      <visual name="passivewheel_55_visual_mesh_1">
+        <pose relative_to="passivewheel_55">0 -0 -0.004 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_55_collision_mesh_2">
+        <pose relative_to="passivewheel_55">0 -0 -0.004 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_55 -->
+    <joint name="w2_15_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.0291626 0.02366 -0.0025 1.5708 -1.13382 2.51327</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_55</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_56 -->
+    <link name="passivewheel_56">
+      <inertial>
+        <pose>0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_16_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_56 -->
+      <visual name="passivewheel_56_visual_mesh_1">
+        <pose relative_to="passivewheel_56">0 0 -0.004 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_56_collision_mesh_2">
+        <pose relative_to="passivewheel_56">0 0 -0.004 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_56 -->
+    <joint name="w2_16_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.0350466 0.0134903 -0.0025 1.5708 -1.06865 2.82743</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_56</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_57 -->
+    <link name="passivewheel_57">
+      <inertial>
+        <pose>-0 -0 0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>-0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>-0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_17_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_57 -->
+      <visual name="passivewheel_57_visual_mesh_1">
+        <pose relative_to="passivewheel_57">-0 0 0.004 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_57_collision_mesh_2">
+        <pose relative_to="passivewheel_57">-0 0 0.004 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_57 -->
+    <joint name="w2_17_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.0375 0.002 -0.0025 -1.5708 -0.393095 -3.14159</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_57</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_58 -->
+    <link name="passivewheel_58">
+      <inertial>
+        <pose>-0 -0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_18_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_58 -->
+      <visual name="passivewheel_58_visual_mesh_1">
+        <pose relative_to="passivewheel_58">0 0 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_58_collision_mesh_2">
+        <pose relative_to="passivewheel_58">0 0 0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_58 -->
+    <joint name="w2_18_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.0362827 -0.00968602 -0.0025 1.5708 -1.06865 -2.82743</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_58</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_59 -->
+    <link name="passivewheel_59">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_19_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_59 -->
+      <visual name="passivewheel_59_visual_mesh_1">
+        <pose relative_to="passivewheel_59">-0 0 -0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_59_collision_mesh_2">
+        <pose relative_to="passivewheel_59">-0 0 -0 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_59 -->
+    <joint name="w2_19_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.0315137 -0.0204239 -0.0025 1.5708 -1.13382 -2.51327</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_59</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link passivewheel_60 -->
+    <link name="passivewheel_60">
+      <inertial>
+        <pose>-0 0 -0.002 0 0 0</pose>
+        <mass>0.00285906</mass>
+        <inertia>
+          <ixx>2.7747e-08</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.7747e-08</iyy>
+          <iyz>0</iyz>
+          <izz>4.8977e-08</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="w2_20_passive">0 0 0 0 -0 0</pose>
+      <!-- Part passivewheel_60 -->
+      <visual name="passivewheel_60_visual_mesh_1">
+        <pose relative_to="passivewheel_60">-0 0 -0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="passivewheel_60_collision_mesh_2">
+        <pose relative_to="passivewheel_60">-0 0 -0 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_omnidirectional_sd0/assets/passivewheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from wheel_3 to passivewheel_60 -->
+    <joint name="w2_20_passive" type="revolute">
+      <pose relative_to="wheel_3">-0.02366 -0.0291626 -0.0025 1.5708 -1.24363 -2.19911</pose>
+      <parent>wheel_3</parent>
+      <child>passivewheel_60</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body_2 to wheel_3 -->
+    <joint name="wheel2_speed" type="revolute">
+      <pose relative_to="body_2">-0 0.08 0.013 1.5708 -0 0</pose>
+      <parent>body_2</parent>
+      <child>wheel_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

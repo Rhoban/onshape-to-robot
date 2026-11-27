@@ -1,0 +1,286 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 99762129c29a303a858e0b48 / version_id: 1d2877f16de11aa213466001 -->
+<sdf version="1.7">
+  <model name="test_export_differential_sdf_0">
+    <!-- Link base -->
+    <link name="base">
+      <inertial>
+        <pose>-0 0 0.0025 0 0 0</pose>
+        <mass>0.022107</mass>
+        <inertia>
+          <ixx>2.84397e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.84397e-06</iyy>
+          <iyz>0</iyz>
+          <izz>5.59583e-06</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part base -->
+      <visual name="base_visual_mesh_1">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.615686 0.811765 0.929412 1</ambient>
+          <diffuse>0.615686 0.811765 0.929412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="base_collision_mesh_2">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="base_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>base</child>
+    </joint>
+    <!-- Link ring -->
+    <link name="ring">
+      <inertial>
+        <pose>-0 0 0.0025 0 0 0</pose>
+        <mass>0.0212665</mass>
+        <inertia>
+          <ixx>8.13099e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.13099e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.61734e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="lower">0 0 0 0 -0 0</pose>
+      <!-- Part ring -->
+      <visual name="ring_visual_mesh_1">
+        <pose relative_to="ring">-0 0 0.01 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/ring.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="ring_collision_mesh_2">
+        <pose relative_to="ring">-0 0 0.01 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/ring.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from base to ring -->
+    <joint name="lower" type="revolute">
+      <pose relative_to="base">0 -0 0.005 0 -0 0</pose>
+      <parent>base</parent>
+      <child>ring</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link ring_2 -->
+    <link name="ring_2">
+      <inertial>
+        <pose>0 0 -0.0025 0 0 0</pose>
+        <mass>0.0212665</mass>
+        <inertia>
+          <ixx>8.13099e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>8.13099e-06</iyy>
+          <iyz>-0</iyz>
+          <izz>1.61734e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="upper">0 0 0 0 -0 0</pose>
+      <!-- Part ring_2 -->
+      <visual name="ring_2_visual_mesh_1">
+        <pose relative_to="ring_2">0 -0 -0.01 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/ring.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="ring_2_collision_mesh_2">
+        <pose relative_to="ring_2">0 -0 -0.01 -0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/ring.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from base to ring_2 -->
+    <joint name="upper" type="revolute">
+      <pose relative_to="base">0 0 0.045 0 -0 -0</pose>
+      <parent>base</parent>
+      <child>ring_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link shaft1 -->
+    <link name="shaft1">
+      <inertial>
+        <pose>-0 0 0.02 0 0 0</pose>
+        <mass>0.00868</mass>
+        <inertia>
+          <ixx>1.31107e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.31107e-06</iyy>
+          <iyz>0</iyz>
+          <izz>3.07473e-07</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="alpha">0 0 0 0 -0 0</pose>
+      <!-- Part shaft1 -->
+      <visual name="shaft1_visual_mesh_1">
+        <pose relative_to="shaft1">-0 0 0.045 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/shaft1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.909804 0.572549 0.164706 1</ambient>
+          <diffuse>0.909804 0.572549 0.164706 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="shaft1_collision_mesh_2">
+        <pose relative_to="shaft1">-0 0 0.045 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/shaft1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link shaft2 -->
+    <link name="shaft2">
+      <inertial>
+        <pose>0.0120943 -0.0166463 -0.0193923 0 0 0</pose>
+        <mass>0.028492</mass>
+        <inertia>
+          <ixx>2.00317e-05</ixx>
+          <ixy>1.20287e-05</ixy>
+          <ixz>2.79432e-06</ixz>
+          <iyy>1.2215e-05</iyy>
+          <iyz>-3.84604e-06</iyz>
+          <izz>2.77956e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="beta">0 0 0 0 -0 0</pose>
+      <!-- Part shaft2 -->
+      <visual name="shaft2_visual_mesh_1">
+        <pose relative_to="shaft2">0 0.025 0.0075 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/shaft2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.654902 0.823529 0.576471 1</ambient>
+          <diffuse>0.654902 0.823529 0.576471 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="shaft2_collision_mesh_2">
+        <pose relative_to="shaft2">0 0.025 0.0075 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_differential_sdf_0/assets/shaft2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame effector -->
+    <frame name="effector">
+      <pose relative_to="shaft2">0.0496679 -0.0683619 -0.0275 0.942478 1.5708 0</pose>
+    </frame>
+    <!-- Joint from shaft1 to shaft2 -->
+    <joint name="beta" type="revolute">
+      <pose relative_to="shaft1">-0 -0.0075 0.02 -1.5708 -0.628319 -0</pose>
+      <parent>shaft1</parent>
+      <child>shaft2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from base to shaft1 -->
+    <joint name="alpha" type="revolute">
+      <pose relative_to="base">0 0 0.005 0 -0 0.735193</pose>
+      <parent>base</parent>
+      <child>shaft1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

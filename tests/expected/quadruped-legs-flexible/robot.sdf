@@ -1,0 +1,1505 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: b8903cc6885e9fafbd1e3461 / version_id: e26805965cfe84541d0b7609 -->
+<sdf version="1.7">
+  <model name="test_export_quadruped_legs_fle1">
+    <!-- Link body -->
+    <link name="body">
+      <inertial>
+        <pose>0 0 0.0143384 0 0 0</pose>
+        <mass>0.0808736</mass>
+        <inertia>
+          <ixx>7.37408e-05</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>7.37408e-05</iyy>
+          <iyz>-0</iyz>
+          <izz>0.000135878</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part body -->
+      <visual name="body_visual_mesh_1">
+        <pose relative_to="body">0 -0 0.0286 3.14159 -0 -0.471239</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/body.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_collision_mesh_2">
+        <pose relative_to="body">0 -0 0.0286 3.14159 -0 -0.471239</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/body.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part body_2 -->
+      <visual name="body_2_visual_mesh_1">
+        <pose relative_to="body">0 -0 0 0 -0 -0.471239</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/body.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_2_collision_mesh_2">
+        <pose relative_to="body">0 -0 0 0 -0 -0.471239</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/body.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn -->
+      <visual name="horn_visual_mesh_1">
+        <pose relative_to="body">-0.0220185 -0.0432138 0.0143 -0 0 1.49355</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_collision_mesh_2">
+        <pose relative_to="body">-0.0220185 -0.0432138 0.0143 -0 0 1.49355</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor -->
+      <visual name="motor_visual_mesh_1">
+        <pose relative_to="body">-0.0220185 -0.0432138 0.0143 0 -0 2.67035</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_collision_mesh_2">
+        <pose relative_to="body">-0.0220185 -0.0432138 0.0143 0 -0 2.67035</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_2 -->
+      <visual name="horn_2_visual_mesh_1">
+        <pose relative_to="body">0.0432138 -0.0220185 0.0143 -0 -0 1.45228</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_2_collision_mesh_2">
+        <pose relative_to="body">0.0432138 -0.0220185 0.0143 -0 -0 1.45228</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_2 -->
+      <visual name="motor_2_visual_mesh_1">
+        <pose relative_to="body">0.0432138 -0.0220185 0.0143 0 -0 -2.04204</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_2_collision_mesh_2">
+        <pose relative_to="body">0.0432138 -0.0220185 0.0143 0 -0 -2.04204</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_3 -->
+      <visual name="horn_3_visual_mesh_1">
+        <pose relative_to="body">0.0220185 0.0432138 0.0143 0 -0 1.49355</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_3_collision_mesh_2">
+        <pose relative_to="body">0.0220185 0.0432138 0.0143 0 -0 1.49355</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_3 -->
+      <visual name="motor_3_visual_mesh_1">
+        <pose relative_to="body">0.0220185 0.0432138 0.0143 0 -0 -0.471239</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_3_collision_mesh_2">
+        <pose relative_to="body">0.0220185 0.0432138 0.0143 0 -0 -0.471239</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_4 -->
+      <visual name="horn_4_visual_mesh_1">
+        <pose relative_to="body">-0.0432138 0.0220185 0.0143 0 0 1.49355</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_4_collision_mesh_2">
+        <pose relative_to="body">-0.0432138 0.0220185 0.0143 0 0 1.49355</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_4 -->
+      <visual name="motor_4_visual_mesh_1">
+        <pose relative_to="body">-0.0432138 0.0220185 0.0143 0 0 1.09956</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_4_collision_mesh_2">
+        <pose relative_to="body">-0.0432138 0.0220185 0.0143 0 0 1.09956</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link doubleu -->
+    <link name="doubleu">
+      <inertial>
+        <pose>0 0.0203 0.015 0 0 0</pose>
+        <mass>0.00830698</mass>
+        <inertia>
+          <ixx>2.78361e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.9255e-06</iyy>
+          <iyz>0</iyz>
+          <izz>2.78361e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg1_a">0 0 0 0 -0 0</pose>
+      <!-- Part u -->
+      <visual name="u_visual_mesh_1">
+        <pose relative_to="doubleu">0 0.018 0.015 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_collision_mesh_2">
+        <pose relative_to="doubleu">0 0.018 0.015 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part u_2 -->
+      <visual name="u_2_visual_mesh_1">
+        <pose relative_to="doubleu">0 0.0226 0.015 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_2_collision_mesh_2">
+        <pose relative_to="doubleu">0 0.0226 0.015 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link platesblock -->
+    <link name="platesblock">
+      <inertial>
+        <pose>-0.020946 -0.0235269 0.0150372 0 0 0</pose>
+        <mass>0.0417755</mass>
+        <inertia>
+          <ixx>1.86838e-05</ixx>
+          <ixy>-1.25173e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>1.57682e-05</iyy>
+          <iyz>0</iyz>
+          <izz>2.99828e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_1_leg1_b">0 0 0 0 -0 0</pose>
+      <!-- Part plate -->
+      <visual name="plate_visual_mesh_1">
+        <pose relative_to="platesblock">0.0146702 -0.00502748 0.015 1.5708 -0 -2.29822</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_collision_mesh_2">
+        <pose relative_to="platesblock">0.0146702 -0.00502748 0.015 1.5708 -0 -2.29822</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part plate_2 -->
+      <visual name="plate_2_visual_mesh_1">
+        <pose relative_to="platesblock">-0.00497294 0.0124607 0.015 1.5708 -0 -2.29822</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_2_collision_mesh_2">
+        <pose relative_to="platesblock">-0.00497294 0.0124607 0.015 1.5708 -0 -2.29822</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_5 -->
+      <visual name="horn_5_visual_mesh_1">
+        <pose relative_to="platesblock">0 0 0.015 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_5_collision_mesh_2">
+        <pose relative_to="platesblock">0 0 0.015 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_5 -->
+      <visual name="motor_5_visual_mesh_1">
+        <pose relative_to="platesblock">0 0 0.015 0 -0 -0.727428</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_5_collision_mesh_2">
+        <pose relative_to="platesblock">0 0 0.015 0 -0 -0.727428</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_6 -->
+      <visual name="horn_6_visual_mesh_1">
+        <pose relative_to="platesblock">-0.0418919 -0.0470539 0.015 0 -0 -2.55772</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_6_collision_mesh_2">
+        <pose relative_to="platesblock">-0.0418919 -0.0470539 0.015 0 -0 -2.55772</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_6 -->
+      <visual name="motor_6_visual_mesh_1">
+        <pose relative_to="platesblock">-0.0418919 -0.0470539 0.015 0 -0 2.41416</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_6_collision_mesh_2">
+        <pose relative_to="platesblock">-0.0418919 -0.0470539 0.015 0 -0 2.41416</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg -->
+    <link name="leg">
+      <inertial>
+        <pose>-0 0.0533786 0.015 0 0 0</pose>
+        <mass>0.0154162</mass>
+        <inertia>
+          <ixx>2.13816e-05</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.58407e-06</iyy>
+          <iyz>-0</iyz>
+          <izz>1.88204e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_1_leg1_c">0 0 0 0 -0 0</pose>
+      <!-- Part leg -->
+      <visual name="leg_visual_mesh_1">
+        <pose relative_to="leg">0 0 0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_collision_mesh_2">
+        <pose relative_to="leg">0 0 0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from platesblock to leg -->
+    <joint name="leg_1_leg1_c" type="revolute">
+      <pose relative_to="platesblock">-0.0418919 -0.0470539 0 -0 -0 -1.70999</pose>
+      <parent>platesblock</parent>
+      <child>leg</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from doubleu to platesblock -->
+    <joint name="leg_1_leg1_b" type="revolute">
+      <pose relative_to="doubleu">0.015 0.0406 0.015 3.14159 1.5708 0</pose>
+      <parent>doubleu</parent>
+      <child>platesblock</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to doubleu -->
+    <joint name="leg1_a" type="revolute">
+      <pose relative_to="body">-0.0432138 0.0220185 -0.0007 0 0 1.11854</pose>
+      <parent>body</parent>
+      <child>doubleu</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link doubleu_2 -->
+    <link name="doubleu_2">
+      <inertial>
+        <pose>-0 -0.0203 -0.015 0 0 0</pose>
+        <mass>0.00830698</mass>
+        <inertia>
+          <ixx>2.78361e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>1.9255e-06</iyy>
+          <iyz>0</iyz>
+          <izz>2.78361e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg2_a">0 0 0 0 -0 0</pose>
+      <!-- Part u_3 -->
+      <visual name="u_3_visual_mesh_1">
+        <pose relative_to="doubleu_2">-0 -0.0226 -0.015 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_3_collision_mesh_2">
+        <pose relative_to="doubleu_2">-0 -0.0226 -0.015 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part u_4 -->
+      <visual name="u_4_visual_mesh_1">
+        <pose relative_to="doubleu_2">-0 -0.018 -0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_4_collision_mesh_2">
+        <pose relative_to="doubleu_2">-0 -0.018 -0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link platesblock_2 -->
+    <link name="platesblock_2">
+      <inertial>
+        <pose>-0.0237862 0.0206511 0.0150372 0 0 0</pose>
+        <mass>0.0417755</mass>
+        <inertia>
+          <ixx>1.54566e-05</ixx>
+          <ixy>1.24771e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>1.89954e-05</iyy>
+          <iyz>-0</iyz>
+          <izz>2.99828e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_2_leg2_b">0 0 0 0 -0 0</pose>
+      <!-- Part plate_3 -->
+      <visual name="plate_3_visual_mesh_1">
+        <pose relative_to="platesblock_2">-0.00484423 -0.0147317 0.015 1.5708 -0 2.42663</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_3_collision_mesh_2">
+        <pose relative_to="platesblock_2">-0.00484423 -0.0147317 0.015 1.5708 -0 2.42663</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part plate_4 -->
+      <visual name="plate_4_visual_mesh_1">
+        <pose relative_to="platesblock_2">0.0123978 0.00512787 0.015 1.5708 -0 2.42663</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_4_collision_mesh_2">
+        <pose relative_to="platesblock_2">0.0123978 0.00512787 0.015 1.5708 -0 2.42663</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_7 -->
+      <visual name="horn_7_visual_mesh_1">
+        <pose relative_to="platesblock_2">0 0 0.015 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_7_collision_mesh_2">
+        <pose relative_to="platesblock_2">0 0 0.015 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_7 -->
+      <visual name="motor_7_visual_mesh_1">
+        <pose relative_to="platesblock_2">0 0 0.015 -0 -0 -2.28576</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_7_collision_mesh_2">
+        <pose relative_to="platesblock_2">0 0 0.015 -0 -0 -2.28576</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_8 -->
+      <visual name="horn_8_visual_mesh_1">
+        <pose relative_to="platesblock_2">-0.0475724 0.0413021 0.015 0 0 1.87535</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_8_collision_mesh_2">
+        <pose relative_to="platesblock_2">-0.0475724 0.0413021 0.015 0 0 1.87535</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_8 -->
+      <visual name="motor_8_visual_mesh_1">
+        <pose relative_to="platesblock_2">-0.0475724 0.0413021 0.015 0 0 0.855833</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_8_collision_mesh_2">
+        <pose relative_to="platesblock_2">-0.0475724 0.0413021 0.015 0 0 0.855833</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_2 -->
+    <link name="leg_2">
+      <inertial>
+        <pose>-0 0.0533786 0.015 0 0 0</pose>
+        <mass>0.0154162</mass>
+        <inertia>
+          <ixx>2.13816e-05</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>3.58407e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.88204e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_2_leg2_c">0 0 0 0 -0 0</pose>
+      <!-- Part leg_2 -->
+      <visual name="leg_2_visual_mesh_1">
+        <pose relative_to="leg_2">-0 -0 0.015 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_2_collision_mesh_2">
+        <pose relative_to="leg_2">-0 -0 0.015 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from platesblock_2 to leg_2 -->
+    <joint name="leg_2_leg2_c" type="revolute">
+      <pose relative_to="platesblock_2">-0.0475724 0.0413021 -0 0 0 2.86982</pose>
+      <parent>platesblock_2</parent>
+      <child>leg_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from doubleu_2 to platesblock_2 -->
+    <joint name="leg_2_leg2_b" type="revolute">
+      <pose relative_to="doubleu_2">0.015 -0.0406 -0.015 -1.5708 -0 1.5708</pose>
+      <parent>doubleu_2</parent>
+      <child>platesblock_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to doubleu_2 -->
+    <joint name="leg2_a" type="revolute">
+      <pose relative_to="body">-0.0220185 -0.0432138 -0.0007 3.14159 0 2.65081</pose>
+      <parent>body</parent>
+      <child>doubleu_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link doubleu_3 -->
+    <link name="doubleu_3">
+      <inertial>
+        <pose>0 -0.0203 0.015 0 0 0</pose>
+        <mass>0.00830698</mass>
+        <inertia>
+          <ixx>2.78361e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.9255e-06</iyy>
+          <iyz>-0</iyz>
+          <izz>2.78361e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg3_a">0 0 0 0 -0 0</pose>
+      <!-- Part u_5 -->
+      <visual name="u_5_visual_mesh_1">
+        <pose relative_to="doubleu_3">0 -0.0226 0.015 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_5_collision_mesh_2">
+        <pose relative_to="doubleu_3">0 -0.0226 0.015 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part u_6 -->
+      <visual name="u_6_visual_mesh_1">
+        <pose relative_to="doubleu_3">0 -0.018 0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_6_collision_mesh_2">
+        <pose relative_to="doubleu_3">0 -0.018 0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link platesblock_3 -->
+    <link name="platesblock_3">
+      <inertial>
+        <pose>-0.024422 0.0198951 0.0150372 0 0 0</pose>
+        <mass>0.0417755</mass>
+        <inertia>
+          <ixx>1.46781e-05</ixx>
+          <ixy>1.23416e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97739e-05</iyy>
+          <iyz>-0</iyz>
+          <izz>2.99828e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_3_leg3_b">0 0 0 0 -0 0</pose>
+      <!-- Part plate_5 -->
+      <visual name="plate_5_visual_mesh_1">
+        <pose relative_to="platesblock_3">-0.00437994 -0.0148764 0.015 1.5708 0 2.45799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_5_collision_mesh_2">
+        <pose relative_to="platesblock_3">-0.00437994 -0.0148764 0.015 1.5708 0 2.45799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part plate_6 -->
+      <visual name="plate_6_visual_mesh_1">
+        <pose relative_to="platesblock_3">0.0122309 0.00551408 0.015 1.5708 0 2.45799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_6_collision_mesh_2">
+        <pose relative_to="platesblock_3">0.0122309 0.00551408 0.015 1.5708 0 2.45799</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_9 -->
+      <visual name="horn_9_visual_mesh_1">
+        <pose relative_to="platesblock_3">0 0 0.015 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_9_collision_mesh_2">
+        <pose relative_to="platesblock_3">0 0 0.015 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_9 -->
+      <visual name="motor_9_visual_mesh_1">
+        <pose relative_to="platesblock_3">0 0 0.015 0 0 -2.2544</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_9_collision_mesh_2">
+        <pose relative_to="platesblock_3">0 0 0.015 0 0 -2.2544</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_10 -->
+      <visual name="horn_10_visual_mesh_1">
+        <pose relative_to="platesblock_3">-0.048844 0.0397902 0.015 -0 0 3.06435</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_10_collision_mesh_2">
+        <pose relative_to="platesblock_3">-0.048844 0.0397902 0.015 -0 0 3.06435</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_10 -->
+      <visual name="motor_10_visual_mesh_1">
+        <pose relative_to="platesblock_3">-0.048844 0.0397902 0.015 -0 -0 0.887193</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_10_collision_mesh_2">
+        <pose relative_to="platesblock_3">-0.048844 0.0397902 0.015 -0 -0 0.887193</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_3 -->
+    <link name="leg_3">
+      <inertial>
+        <pose>0 0.0533786 0.015 0 0 0</pose>
+        <mass>0.0154162</mass>
+        <inertia>
+          <ixx>2.13816e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.58407e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.88204e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_3_leg3_c">0 0 0 0 -0 0</pose>
+      <!-- Part leg_3 -->
+      <visual name="leg_3_visual_mesh_1">
+        <pose relative_to="leg_3">0 0 0.015 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_3_collision_mesh_2">
+        <pose relative_to="leg_3">0 0 0.015 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame leg_tip -->
+    <frame name="leg_tip">
+      <pose relative_to="leg_3">-0.021279 0.0925079 0.0945581 1.39244 0.46388 3.11155</pose>
+    </frame>
+    <!-- Joint from platesblock_3 to leg_3 -->
+    <joint name="leg_3_leg3_c" type="revolute">
+      <pose relative_to="platesblock_3">-0.048844 0.0397902 0 -0 0 2.78862</pose>
+      <parent>platesblock_3</parent>
+      <child>leg_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from doubleu_3 to platesblock_3 -->
+    <joint name="leg_3_leg3_b" type="revolute">
+      <pose relative_to="doubleu_3">-0.015 -0.0406 0.015 1.5708 0 1.5708</pose>
+      <parent>doubleu_3</parent>
+      <child>platesblock_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to doubleu_3 -->
+    <joint name="leg3_a" type="revolute">
+      <pose relative_to="body">0.0432138 -0.0220185 -0.0007 0 0 1.10469</pose>
+      <parent>body</parent>
+      <child>doubleu_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link doubleu_4 -->
+    <link name="doubleu_4">
+      <inertial>
+        <pose>-0 -0.0203 0.015 0 0 0</pose>
+        <mass>0.00830698</mass>
+        <inertia>
+          <ixx>2.78361e-06</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>1.9255e-06</iyy>
+          <iyz>-0</iyz>
+          <izz>2.78361e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg4_a">0 0 0 0 -0 0</pose>
+      <!-- Part u_7 -->
+      <visual name="u_7_visual_mesh_1">
+        <pose relative_to="doubleu_4">-0 -0.0226 0.015 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_7_collision_mesh_2">
+        <pose relative_to="doubleu_4">-0 -0.0226 0.015 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part u_8 -->
+      <visual name="u_8_visual_mesh_1">
+        <pose relative_to="doubleu_4">0 -0.018 0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="u_8_collision_mesh_2">
+        <pose relative_to="doubleu_4">0 -0.018 0.015 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/u.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link platesblock_4 -->
+    <link name="platesblock_4">
+      <inertial>
+        <pose>-0.0237376 0.0207069 0.0135372 0 0 0</pose>
+        <mass>0.0417755</mass>
+        <inertia>
+          <ixx>1.55153e-05</ixx>
+          <ixy>1.24852e-05</ixy>
+          <ixz>-0</ixz>
+          <iyy>1.89367e-05</iyy>
+          <iyz>0</iyz>
+          <izz>2.99828e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_4_leg4_b">0 0 0 0 -0 0</pose>
+      <!-- Part plate_7 -->
+      <visual name="plate_7_visual_mesh_1">
+        <pose relative_to="platesblock_4">-0.00487882 -0.0147203 0.0135 1.5708 0 2.42428</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_7_collision_mesh_2">
+        <pose relative_to="platesblock_4">-0.00487882 -0.0147203 0.0135 1.5708 0 2.42428</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part plate_8 -->
+      <visual name="plate_8_visual_mesh_1">
+        <pose relative_to="platesblock_4">0.0124098 0.00509873 0.0135 1.5708 0 2.42428</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="plate_8_collision_mesh_2">
+        <pose relative_to="platesblock_4">0.0124098 0.00509873 0.0135 1.5708 0 2.42428</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/plate.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_11 -->
+      <visual name="horn_11_visual_mesh_1">
+        <pose relative_to="platesblock_4">0 0 0.0135 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_11_collision_mesh_2">
+        <pose relative_to="platesblock_4">0 0 0.0135 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_11 -->
+      <visual name="motor_11_visual_mesh_1">
+        <pose relative_to="platesblock_4">-0 -0 0.0135 0 0 -2.28811</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_11_collision_mesh_2">
+        <pose relative_to="platesblock_4">-0 -0 0.0135 0 0 -2.28811</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part horn_12 -->
+      <visual name="horn_12_visual_mesh_1">
+        <pose relative_to="platesblock_4">-0.0474752 0.0414138 0.0135 0 0 -1.83339</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="horn_12_collision_mesh_2">
+        <pose relative_to="platesblock_4">-0.0474752 0.0414138 0.0135 0 0 -1.83339</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/horn.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Part motor_12 -->
+      <visual name="motor_12_visual_mesh_1">
+        <pose relative_to="platesblock_4">-0.0474752 0.0414138 0.0135 -0 -0 0.853484</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.470588 0.470588 0.470588 1</ambient>
+          <diffuse>0.470588 0.470588 0.470588 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="motor_12_collision_mesh_2">
+        <pose relative_to="platesblock_4">-0.0474752 0.0414138 0.0135 -0 -0 0.853484</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link leg_4 -->
+    <link name="leg_4">
+      <inertial>
+        <pose>0 -0.0533786 0.015 0 0 0</pose>
+        <mass>0.0154162</mass>
+        <inertia>
+          <ixx>2.13816e-05</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.58407e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.88204e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="leg_4_leg4_c">0 0 0 0 -0 0</pose>
+      <!-- Part leg_4 -->
+      <visual name="leg_4_visual_mesh_1">
+        <pose relative_to="leg_4">0 0 0.015 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="leg_4_collision_mesh_2">
+        <pose relative_to="leg_4">0 0 0.015 -1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_quadruped_legs_fle1/assets/leg.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from platesblock_4 to leg_4 -->
+    <joint name="leg_4_leg4_c" type="revolute">
+      <pose relative_to="platesblock_4">-0.0474752 0.0414138 -0.0015 0 -0 -0.257069</pose>
+      <parent>platesblock_4</parent>
+      <child>leg_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from doubleu_4 to platesblock_4 -->
+    <joint name="leg_4_leg4_b" type="revolute">
+      <pose relative_to="doubleu_4">-0.015 -0.0406 0.015 1.5708 0 1.5708</pose>
+      <parent>doubleu_4</parent>
+      <child>platesblock_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from body to doubleu_4 -->
+    <joint name="leg4_a" type="revolute">
+      <pose relative_to="body">0.0220185 0.0432138 -0.0007 0 0 2.7068</pose>
+      <parent>body</parent>
+      <child>doubleu_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

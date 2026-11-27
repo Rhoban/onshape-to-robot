@@ -1,0 +1,286 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: a91a2a42fc8d48275e133731 / version_id: 94313e6836c0723e0db8b804 -->
+<sdf version="1.7">
+  <model name="test_export_adjustable_height_1">
+    <!-- Link base -->
+    <link name="base">
+      <inertial>
+        <pose>-0 0 0.020169 0 0 0</pose>
+        <mass>0.39382</mass>
+        <inertia>
+          <ixx>0.000177195</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000177195</iyy>
+          <iyz>0</iyz>
+          <izz>0.000123463</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part base -->
+      <visual name="base_visual_mesh_1">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.301961 0.290196 0.262745 1</ambient>
+          <diffuse>0.301961 0.290196 0.262745 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="base_collision_mesh_2">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="base_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>base</child>
+    </joint>
+    <!-- Link part1 -->
+    <link name="part1">
+      <inertial>
+        <pose>0 0 0.027892 0 0 0</pose>
+        <mass>0.298971</mass>
+        <inertia>
+          <ixx>0.000123868</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000123868</iyy>
+          <iyz>0</iyz>
+          <izz>9.58869e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="slider">0 0 0 0 -0 0</pose>
+      <!-- Part part1 -->
+      <visual name="part1_visual_mesh_1">
+        <pose relative_to="part1">0 -0 -0.053 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.866667 0.321569 0.156863 1</ambient>
+          <diffuse>0.866667 0.321569 0.156863 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part1_collision_mesh_2">
+        <pose relative_to="part1">0 -0 -0.053 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link part2 -->
+    <link name="part2">
+      <inertial>
+        <pose>6.624e-09 -1.7e-10 -0.0149478 0 0 0</pose>
+        <mass>0.148575</mass>
+        <inertia>
+          <ixx>6.89125e-05</ixx>
+          <ixy>6.1e-11</ixy>
+          <ixz>-6e-12</ixz>
+          <iyy>6.97803e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.69782e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="part2">0 0 0 0 -0 0</pose>
+      <!-- Part part2 -->
+      <visual name="part2_visual_mesh_1">
+        <pose relative_to="part2">0 0 0.106 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.372549 0.654902 0.239216 1</ambient>
+          <diffuse>0.372549 0.654902 0.239216 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part2_collision_mesh_2">
+        <pose relative_to="part2">0 0 0.106 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link part3 -->
+    <link name="part3">
+      <inertial>
+        <pose>-3.0623e-08 -0.0314519 -0.02 0 0 0</pose>
+        <mass>0.642728</mass>
+        <inertia>
+          <ixx>0.000872587</ixx>
+          <ixy>2.8e-11</ixy>
+          <ixz>2.05e-10</ixz>
+          <iyy>0.000126043</iyy>
+          <iyz>-1.53e-10</iyz>
+          <izz>0.000853226</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="part3">0 0 0 0 -0 0</pose>
+      <!-- Part part3 -->
+      <visual name="part3_visual_mesh_1">
+        <pose relative_to="part3">0 0.131 -0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0862745 0.317647 0.690196 1</ambient>
+          <diffuse>0.0862745 0.317647 0.690196 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part3_collision_mesh_2">
+        <pose relative_to="part3">0 0.131 -0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link part4 -->
+    <link name="part4">
+      <inertial>
+        <pose>-3.5461e-08 -0.0331362 -0.02 0 0 0</pose>
+        <mass>0.64593</mass>
+        <inertia>
+          <ixx>0.000969336</ixx>
+          <ixy>2.7e-11</ixy>
+          <ixz>-2.96e-10</ixz>
+          <iyy>8.7724e-05</iyy>
+          <iyz>2.45e-10</iyz>
+          <izz>0.000952436</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="part4">0 0 0 0 -0 0</pose>
+      <!-- Part part4 -->
+      <visual name="part4_visual_mesh_1">
+        <pose relative_to="part4">0 0.2285 -0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.972549 0.529412 0.00392157 1</ambient>
+          <diffuse>0.972549 0.529412 0.00392157 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="part4_collision_mesh_2">
+        <pose relative_to="part4">0 0.2285 -0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_adjustable_height_1/assets/part4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame tip -->
+    <frame name="tip">
+      <pose relative_to="part4">0 -0.1325 -0.02 1.5708 -0 -0</pose>
+    </frame>
+    <!-- Joint from part3 to part4 -->
+    <joint name="part4" type="revolute">
+      <pose relative_to="part3">0 -0.0975 0 0 -0 -0</pose>
+      <parent>part3</parent>
+      <child>part4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from part2 to part3 -->
+    <joint name="part3" type="revolute">
+      <pose relative_to="part2">-0.02 0 -0.025 1.5708 0 -1.5708</pose>
+      <parent>part2</parent>
+      <child>part3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from part1 to part2 -->
+    <joint name="part2" type="revolute">
+      <pose relative_to="part1">-0 0 0.053 -3.14159 0 -0</pose>
+      <parent>part1</parent>
+      <child>part2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from base to part1 -->
+    <joint name="slider" type="prismatic">
+      <pose relative_to="base">0 0 0.053 0 -0 0</pose>
+      <parent>base</parent>
+      <child>part1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.05</lower>
+          <upper>-0.0</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 4c0bd896eb7a677f0feac15c / version_id: 686073445a22c513cd41e39a -->
+<sdf version="1.7">
+  <model name="test_export_2_wheels_sdf_0">
+    <!-- Link body -->
+    <link name="body">
+      <inertial>
+        <pose>0.0375 0.0253843 0.0225241 0 0 0</pose>
+        <mass>2.23874</mass>
+        <inertia>
+          <ixx>0.00206023</ixx>
+          <ixy>4.48e-10</ixy>
+          <ixz>6.5e-11</ixz>
+          <iyy>0.00150691</iyy>
+          <iyz>-0.00028761</iyz>
+          <izz>0.00254354</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part body -->
+      <visual name="body_visual_mesh_1">
+        <pose relative_to="body">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_2_wheels_sdf_0/assets/body.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="body_collision_mesh_2">
+        <pose relative_to="body">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_2_wheels_sdf_0/assets/body.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link wheel -->
+    <link name="wheel">
+      <inertial>
+        <pose>0 0 -0.004 0 0 0</pose>
+        <mass>0.335419</mass>
+        <inertia>
+          <ixx>0.000174367</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000174367</iyy>
+          <iyz>0</iyz>
+          <izz>0.000345298</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="wheel1_speed">0 0 0 0 -0 0</pose>
+      <!-- Part wheel -->
+      <visual name="wheel_visual_mesh_1">
+        <pose relative_to="wheel">-0.0325 0.025 -0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_2_wheels_sdf_0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="wheel_collision_mesh_2">
+        <pose relative_to="wheel">-0.0325 0.025 -0.02 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_2_wheels_sdf_0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from body to wheel -->
+    <joint name="wheel1_speed" type="revolute">
+      <pose relative_to="body">-0.02 0.0325 0.025 -1.5708 -0 1.5708</pose>
+      <parent>body</parent>
+      <child>wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link wheel_2 -->
+    <link name="wheel_2">
+      <inertial>
+        <pose>0 0 0.004 0 0 0</pose>
+        <mass>0.335419</mass>
+        <inertia>
+          <ixx>0.000174367</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000174367</iyy>
+          <iyz>0</iyz>
+          <izz>0.000345298</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="wheel2_speed">0 0 0 0 -0 0</pose>
+      <!-- Part wheel_2 -->
+      <visual name="wheel_2_visual_mesh_1">
+        <pose relative_to="wheel_2">-0.0325 0.025 -0.012 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_2_wheels_sdf_0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.262745 0.282353 0.301961 1</ambient>
+          <diffuse>0.262745 0.282353 0.301961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="wheel_2_collision_mesh_2">
+        <pose relative_to="wheel_2">-0.0325 0.025 -0.012 1.5708 1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_2_wheels_sdf_0/assets/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from body to wheel_2 -->
+    <joint name="wheel2_speed" type="revolute">
+      <pose relative_to="body">0.095 0.0325 0.025 -1.5708 -0 1.5708</pose>
+      <parent>body</parent>
+      <child>wheel_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

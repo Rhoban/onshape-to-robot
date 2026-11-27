@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: c5d4b2ebb6499294b3663e92 / version_id: 6574a148ca818170a1733d43 -->
+<mujoco model="test_export_field_mujoco_0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_field_mujoco_0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link field -->
+    <body name="field" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="0 0 0.0015" mass="242.886" fullinertia="1108.37 2189.21 3297.58 0 0 0"/>
+      <!-- Part field -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="field" material="field_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="field" material="field_material"/>
+    </body>
+    <!-- Link goalsally -->
+    <body name="goalsally" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="-4.7587 -0 0.561696" mass="96.784" fullinertia="135.641 38.0502 117.494 0 -12.7365 0"/>
+      <!-- Part goalsally -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="goalsally" material="goalsally_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="goalsally" material="goalsally_material"/>
+    </body>
+    <!-- Link goalsallyback -->
+    <body name="goalsallyback" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part goalsallyback -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="goalsallyback" material="goalsallyback_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="goalsallyback" material="goalsallyback_material"/>
+    </body>
+    <!-- Link goalsopponent -->
+    <body name="goalsopponent" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="4.7587 -0 0.561696" mass="96.784" fullinertia="135.641 38.0502 117.494 -0 12.7365 0"/>
+      <!-- Part goalsopponent -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="goalsopponent" material="goalsopponent_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="goalsopponent" material="goalsopponent_material"/>
+    </body>
+    <!-- Link goalsopponentback -->
+    <body name="goalsopponentback" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part goalsopponentback -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="goalsopponentback" material="goalsopponentback_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="goalsopponentback" material="goalsopponentback_material"/>
+    </body>
+    <!-- Link lines -->
+    <body name="lines" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="-0 -0 0.00305" mass="0.354815" fullinertia="1.5334400049553207 3.4218800049553209 4.955320004955321 -0 0 0"/>
+      <!-- Part lines -->
+      <geom type="mesh" class="visual" pos="-0 -0 0" quat="1 0 0 0" mesh="lines" material="lines_material"/>
+      <geom type="mesh" class="collision" pos="-0 -0 0" quat="1 0 0 0" mesh="lines" material="lines_material"/>
+    </body>
+    <!-- Link penaltyally -->
+    <body name="penaltyally" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="-3 0 0.00305" mass="0.001315" fullinertia="1.58896e-06 1.58896e-06 3.17792e-06 0 0 0"/>
+      <!-- Part penaltyally -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="penaltyally" material="penaltyally_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="penaltyally" material="penaltyally_material"/>
+    </body>
+    <!-- Link penaltyopponent -->
+    <body name="penaltyopponent" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="3 0 0.00305" mass="0.001315" fullinertia="1.58896e-06 1.58896e-06 3.17792e-06 0 0 0"/>
+      <!-- Part penaltyopponent -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="penaltyopponent" material="penaltyopponent_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="penaltyopponent" material="penaltyopponent_material"/>
+    </body>
+    <!-- Link table -->
+    <body name="table" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part table -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="table" material="table_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="table" material="table_material"/>
+    </body>
+    <!-- Link table2 -->
+    <body name="table2" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part table2 -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="table2" material="table2_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="table2" material="table2_material"/>
+    </body>
+    <!-- Link table3 -->
+    <body name="table3" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part table3 -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="table3" material="table3_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="table3" material="table3_material"/>
+    </body>
+    <!-- Link table4 -->
+    <body name="table4" pos="0 0 0" quat="1 0 0 0" childclass="test_export_field_mujoco_0">
+      <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+      <!-- Part table4 -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="table4" material="table4_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="table4" material="table4_material"/>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="field.stl"/>
+    <mesh file="goalsally.stl"/>
+    <mesh file="goalsallyback.stl"/>
+    <mesh file="goalsopponent.stl"/>
+    <mesh file="goalsopponentback.stl"/>
+    <mesh file="lines.stl"/>
+    <mesh file="penaltyally.stl"/>
+    <mesh file="penaltyopponent.stl"/>
+    <mesh file="table.stl"/>
+    <mesh file="table2.stl"/>
+    <mesh file="table3.stl"/>
+    <mesh file="table4.stl"/>
+    <material name="field_material" rgba="0.372549 0.654902 0.239216 1"/>
+    <material name="goalsally_material" rgba="0.737255 0.937255 0.917647 1"/>
+    <material name="goalsallyback_material" rgba="0 0.356863 0.329412 1"/>
+    <material name="goalsopponent_material" rgba="0.882353 0.572549 0.478431 1"/>
+    <material name="goalsopponentback_material" rgba="0.458824 0.105882 0 1"/>
+    <material name="lines_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="penaltyally_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="penaltyopponent_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="table_material" rgba="0.447059 0.243137 0 1"/>
+    <material name="table2_material" rgba="0.447059 0.243137 0 1"/>
+    <material name="table3_material" rgba="0.447059 0.243137 0 1"/>
+    <material name="table4_material" rgba="0.447059 0.243137 0 1"/>
+  </asset>
+  <actuator/>
+  <equality/>
+</mujoco>

@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: c5d4b2ebb6499294b3663e92 / version_id: 6574a148ca818170a1733d43 -->
+<robot name="test_export_field_urdf_0">
+  <!-- Link field -->
+  <link name="field">
+    <inertial>
+      <origin xyz="0 0 0.0015" rpy="0 0 0"/>
+      <mass value="242.886"/>
+      <inertia ixx="1108.37" ixy="0" ixz="0" iyy="2189.21" iyz="0" izz="3297.58"/>
+    </inertial>
+    <!-- Part field -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/field.stl"/>
+      </geometry>
+      <material name="field_material">
+        <color rgba="0.372549 0.654902 0.239216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/field.stl"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
