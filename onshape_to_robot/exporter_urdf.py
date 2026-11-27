@@ -6,7 +6,7 @@ from .robot import Robot, Link, Part, Joint
 from .config import Config
 from .geometry import Box, Cylinder, Sphere, Shape, Mesh
 from .exporter import Exporter
-from .exporter_utils import xml_escape, rotation_matrix_to_rpy
+from .exporter_utils import xml_escape, xml_comment_escape, rotation_matrix_to_rpy
 
 
 class ExporterURDF(Exporter):
@@ -34,7 +34,7 @@ class ExporterURDF(Exporter):
                     self.add_additional_xml(filename)
 
     def add_additional_xml(self, xml_file: str):
-        self.additional_xml += f"<!-- Additional {xml_file} -->"
+        self.additional_xml += f"<!-- Additional {xml_comment_escape(xml_file)} -->"
         with open(self.config.output_directory + "/" + xml_file, "r") as file:
             self.additional_xml += file.read()
 
@@ -46,8 +46,8 @@ class ExporterURDF(Exporter):
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
         if self.config:
-            self.append(f"<!-- Onshape {self.config.printable_version()} -->")
-        self.append(f'<robot name="{robot.name}">')
+            self.append(f"<!-- Onshape {xml_comment_escape(self.config.printable_version())} -->")
+        self.append(f'<robot name="{xml_escape(robot.name)}">')
 
         if len(robot.base_links) > 1:
             print(
@@ -205,7 +205,7 @@ class ExporterURDF(Exporter):
                 self.add_mesh(part, "collision", T_world_link, mesh)
 
     def add_joint(self, joint: Joint, T_world_link: np.ndarray):
-        self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
+        self.append(f"<!-- Joint from {xml_comment_escape(joint.parent.name)} to {xml_comment_escape(joint.child.name)} -->")
 
         joint_type = joint.properties.get("type", joint.joint_type)
         if joint_type == Joint.BALL:
@@ -214,13 +214,13 @@ class ExporterURDF(Exporter):
                 "ball_to_euler option to replace them with revolute joints, or "
                 "export to SDF or MuJoCo, which support them"
             )
-        self.append(f'<joint name="{joint.name}" type="{joint_type}">')
+        self.append(f'<joint name="{xml_escape(joint.name)}" type="{joint_type}">')
 
         T_link_joint = np.linalg.inv(T_world_link) @ joint.T_world_joint
         self.append(self.origin(T_link_joint))
 
-        self.append(f'<parent link="{joint.parent.name}" />')
-        self.append(f'<child link="{joint.child.name}" />')
+        self.append(f'<parent link="{xml_escape(joint.parent.name)}" />')
+        self.append(f'<child link="{xml_escape(joint.child.name)}" />')
         self.append('<axis xyz="%g %g %g"/>' % self.config.round(tuple(joint.axis)))
 
         limits = ""
@@ -256,7 +256,7 @@ class ExporterURDF(Exporter):
 
         if joint.relation is not None:
             self.append(
-                f'<mimic joint="{joint.relation.source_joint}" multiplier="{joint.relation.ratio}" />'
+                f'<mimic joint="{xml_escape(joint.relation.source_joint)}" multiplier="{joint.relation.ratio}" />'
             )
 
         self.append("</joint>")
@@ -268,11 +268,11 @@ class ExporterURDF(Exporter):
         T_world_link: np.ndarray,
         T_world_frame: np.ndarray,
     ):
-        self.append(f"<!-- Frame {frame} (dummy link + fixed joint) -->")
+        self.append(f"<!-- Frame {xml_comment_escape(frame)} (dummy link + fixed joint) -->")
         T_link_frame = np.linalg.inv(T_world_link) @ T_world_frame
 
         # Adding a dummy link to the assembly
-        self.append(f'<link name="{frame}">')
+        self.append(f'<link name="{xml_escape(frame)}">')
         self.append(self.origin(np.eye(4)))
 
         self.append("<inertial>")
@@ -287,10 +287,10 @@ class ExporterURDF(Exporter):
         self.append("</link>")
 
         # Attaching this dummy link to the parent frame using a fixed joint
-        self.append(f'<joint name="{frame}_frame" type="fixed">')
+        self.append(f'<joint name="{xml_escape(frame)}_frame" type="fixed">')
         self.append(self.origin(T_link_frame))
-        self.append(f'<parent link="{link.name}" />')
-        self.append(f'<child link="{frame}" />')
+        self.append(f'<parent link="{xml_escape(link.name)}" />')
+        self.append(f'<child link="{xml_escape(frame)}" />')
         self.append('<axis xyz="0 0 0"/>')
         self.append("</joint>")
 
@@ -298,8 +298,8 @@ class ExporterURDF(Exporter):
         """
         Adds a link recursively to the URDF file
         """
-        self.append(f"<!-- Link {link.name} -->")
-        self.append(f'<link name="{link.name}">')
+        self.append(f"<!-- Link {xml_comment_escape(link.name)} -->")
+        self.append(f'<link name="{xml_escape(link.name)}">')
 
         # Adding inertial properties
         mass, com, inertia = link.get_dynamics(T_world_link)
@@ -307,7 +307,7 @@ class ExporterURDF(Exporter):
 
         # Adding geometry objects
         for part in link.parts:
-            self.append(f"<!-- Part {part.name} -->")
+            self.append(f"<!-- Part {xml_comment_escape(part.name)} -->")
             self.add_geometries(part, T_world_link)
 
         self.append("</link>")

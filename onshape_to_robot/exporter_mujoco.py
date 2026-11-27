@@ -7,7 +7,7 @@ from .robot import Robot, Link, Part, Joint, Closure
 from .config import Config
 from .geometry import Box, Cylinder, Sphere, Mesh, Shape
 from .exporter import Exporter
-from .exporter_utils import xml_escape, rotation_matrix_to_rpy
+from .exporter_utils import xml_escape, xml_comment_escape, rotation_matrix_to_rpy
 from transforms3d.quaternions import mat2quat
 
 
@@ -32,7 +32,7 @@ class ExporterMuJoCo(Exporter):
                     self.add_additional_xml(filename)
 
     def add_additional_xml(self, xml_file: str):
-        self.additional_xml += f"<!-- Additional {xml_file} -->"
+        self.additional_xml += f"<!-- Additional {xml_comment_escape(xml_file)} -->"
         with open(self.config.output_directory + "/" + xml_file, "r") as file:
             self.additional_xml += file.read()
 
@@ -44,8 +44,8 @@ class ExporterMuJoCo(Exporter):
         self.append('<?xml version="1.0" ?>')
         self.append("<!-- Generated using onshape-to-robot -->")
         if self.config:
-            self.append(f"<!-- Onshape {self.config.printable_version()} -->")
-        self.append(f'<mujoco model="{robot.name}">')
+            self.append(f"<!-- Onshape {xml_comment_escape(self.config.printable_version())} -->")
+        self.append(f'<mujoco model="{xml_escape(robot.name)}">')
         self.append(
             f'<compiler angle="radian" meshdir="{self.config.assets_directory}" autolimits="true" />'
         )
@@ -53,7 +53,7 @@ class ExporterMuJoCo(Exporter):
         # Boilerplate
         self.default_class = robot.name
         self.append("<default>")
-        self.append(f'<default class="{self.default_class}">')
+        self.append(f'<default class="{xml_escape(self.default_class)}">')
         self.append('<joint frictionloss="0.1" armature="0.005"/>')
         self.append('<position kp="50" dampratio="1" />')
         self.append('<default class="visual">')
@@ -79,10 +79,10 @@ class ExporterMuJoCo(Exporter):
         # Unique meshes, in a deterministic order (iterating a set of strings
         # gives a different order at each run)
         for mesh_file in dict.fromkeys(self.meshes):
-            self.append(f'<mesh file="{mesh_file}" />')
+            self.append(f'<mesh file="{xml_escape(mesh_file)}" />')
         for material_name, color in self.materials.items():
             color_str = "%g %g %g %g" % self.config.round(tuple(color))
-            self.append(f'<material name="{material_name}" rgba="{color_str}" />')
+            self.append(f'<material name="{xml_escape(material_name)}" rgba="{color_str}" />')
         self.append("</asset>")
 
         # Adding actuators
@@ -111,7 +111,7 @@ class ExporterMuJoCo(Exporter):
             ):
                 type = joint.properties.get("type", "position")
                 actuator_class = joint.properties.get("class", self.default_class)
-                actuator: str = f'<{type} class="{actuator_class}" name="{joint.name}" joint="{joint.name}" '
+                actuator: str = f'<{type} class="{xml_escape(actuator_class)}" name="{xml_escape(joint.name)}" joint="{xml_escape(joint.name)}" '
 
                 for key in "kp", "kv", "dampratio":
                     if key in joint.properties:
@@ -156,15 +156,15 @@ class ExporterMuJoCo(Exporter):
 
             if closure.closure_type == Closure.FIXED:
                 self.append(
-                    f'<weld site1="{closure.frame1}" site2="{closure.frame2}" {attributes}/>'
+                    f'<weld site1="{xml_escape(closure.frame1)}" site2="{xml_escape(closure.frame2)}" {attributes}/>'
                 )
             elif closure.closure_type == Closure.REVOLUTE:
                 self.append(
-                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" {attributes}/>'
+                    f'<connect site1="{xml_escape(closure.frame1)}" site2="{xml_escape(closure.frame2)}" {attributes}/>'
                 )
             elif closure.closure_type == Closure.BALL:
                 self.append(
-                    f'<connect site1="{closure.frame1}" site2="{closure.frame2}" {attributes}/>'
+                    f'<connect site1="{xml_escape(closure.frame1)}" site2="{xml_escape(closure.frame2)}" {attributes}/>'
                 )
             else:
                 print(
@@ -176,7 +176,7 @@ class ExporterMuJoCo(Exporter):
         for joint in robot.joints:
             if joint.relation is not None:
                 self.append(
-                    f'<joint joint1="{joint.name}" joint2="{joint.relation.source_joint}" polycoef="0 {joint.relation.ratio} 0 0 0" />'
+                    f'<joint joint1="{xml_escape(joint.name)}" joint2="{xml_escape(joint.relation.source_joint)}" polycoef="0 {joint.relation.ratio} 0 0 0" />'
                 )
 
         self.append("</equality>")
@@ -290,14 +290,14 @@ class ExporterMuJoCo(Exporter):
                 self.add_mesh(part, "collision", T_world_link, mesh)
 
     def add_joint(self, joint: Joint):
-        self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
+        self.append(f"<!-- Joint from {xml_comment_escape(joint.parent.name)} to {xml_comment_escape(joint.child.name)} -->")
         if joint.joint_type == "fixed":
             self.append(f'<!-- Joint is "fixed", skipping it -->')
             return
 
         joint_xml: str = "<joint "
         joint_xml += 'axis="%g %g %g" ' % self.config.round(tuple(joint.axis))
-        joint_xml += f'name="{joint.name}" '
+        joint_xml += f'name="{xml_escape(joint.name)}" '
         if joint.joint_type in (Joint.REVOLUTE, Joint.CONTINUOUS):
             joint_xml += 'type="hinge" '
         elif joint.joint_type == Joint.PRISMATIC:
@@ -331,10 +331,10 @@ class ExporterMuJoCo(Exporter):
         T_world_frame: np.ndarray,
         group: int = 0,
     ):
-        self.append(f"<!-- Frame {frame} -->")
+        self.append(f"<!-- Frame {xml_comment_escape(frame)} -->")
         T_link_frame = np.linalg.inv(T_world_link) @ T_world_frame
 
-        site: str = f'<site group="{group}" name="{frame}" '
+        site: str = f'<site group="{group}" name="{xml_escape(frame)}" '
         site += self.pos_quat(T_link_frame) + " "
         site += " />"
         self.append(site)
@@ -356,16 +356,16 @@ class ExporterMuJoCo(Exporter):
 
         childclass = ""
         if parent_joint is None:
-            childclass = f'childclass="{self.default_class}" '
-        self.append(f"<!-- Link {link.name} -->")
+            childclass = f'childclass="{xml_escape(self.default_class)}" '
+        self.append(f"<!-- Link {xml_comment_escape(link.name)} -->")
         T_parent_link = np.linalg.inv(T_world_parent) @ T_world_link
         self.append(
-            f'<body name="{link.name}" {self.pos_quat(T_parent_link)} {childclass}>'
+            f'<body name="{xml_escape(link.name)}" {self.pos_quat(T_parent_link)} {childclass}>'
         )
 
         if parent_joint is None:
             if not link.fixed:
-                self.append(f'<freejoint name="{link.name}_freejoint" />')
+                self.append(f'<freejoint name="{xml_escape(link.name)}_freejoint" />')
         else:
             self.add_joint(parent_joint)
 
@@ -375,7 +375,7 @@ class ExporterMuJoCo(Exporter):
 
         # Adding geometry objects
         for part in link.parts:
-            self.append(f"<!-- Part {part.name} -->")
+            self.append(f"<!-- Part {xml_comment_escape(part.name)} -->")
             self.add_geometries(part, T_world_link)
 
         # Adding frames attached to current link
