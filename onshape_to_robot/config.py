@@ -2,6 +2,7 @@ from __future__ import annotations
 import numpy as np
 import re
 import os
+import sys
 import urllib.parse
 import commentjson as json
 
@@ -200,6 +201,15 @@ class Config:
                 else:
                     module, cls = parts
                     if module not in loaded_modules:
+                        # Custom processors can be in the current directory or
+                        # in the robot directory, which are not in the import
+                        # path when running the onshape-to-robot command
+                        for directory in (
+                            os.getcwd(),
+                            os.path.dirname(os.path.abspath(self.config_file)),
+                        ):
+                            if directory not in sys.path:
+                                sys.path.append(directory)
                         loaded_modules[module] = __import__(module, fromlist=[cls])
                     processor = getattr(loaded_modules[module], cls)
 
