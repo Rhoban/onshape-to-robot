@@ -1,5 +1,6 @@
 import numpy as np
 import ast
+import re
 import operator as op
 
 
@@ -50,8 +51,9 @@ class ExpressionParser:
         "exp": np.exp,
         "sqrt": np.sqrt,
         "abs": np.abs,
-        "max": np.max,
-        "min": np.min,
+        # np.max(a, b) would read b as an axis
+        "max": lambda *values: max(values),
+        "min": lambda *values: min(values),
         "log": np.log,
         "log10": np.log10,
     }
@@ -77,7 +79,8 @@ class ExpressionParser:
             "m": 1.0
         }
         for unit, factor in units.items():
-            expr = expr.replace(f" {unit}", f"*{factor}")
+            # Whole words only, so that e.g. " max(" is not read as the unit "m"
+            expr = re.sub(rf"\s+{unit}\b", f"*{factor}", expr)
 
         expr = expr.replace("#", "")
         expr = expr.replace("^", "**")
