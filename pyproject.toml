@@ -28,7 +28,7 @@ Homepage = "https://onshape-to-robot.readthedocs.io/"
 Repository = "https://github.com/rhoban/onshape-to-robot/"
 
 [project.scripts]
-onshape-to-robot = "onshape_to_robot:export.main"
+onshape-to-robot = "onshape_to_robot.cli:main"
 onshape-to-robot-bullet = "onshape_to_robot:bullet.main"
 onshape-to-robot-mujoco = "onshape_to_robot:mujoco.main"
 onshape-to-robot-clear-cache = "onshape_to_robot:clear_cache.main"

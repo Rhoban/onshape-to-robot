@@ -5,8 +5,8 @@ client
 Convenience functions for working with the Onshape API
 """
 
-from .onshape import Onshape
 from .cache import cache_response
+from .onshape import Onshape
 
 
 def escape(s):
@@ -36,9 +36,6 @@ class Client:
             - stack (str, default='https://cad.onshape.com'): Base URL
             - logging (bool, default=True): Turn logging on or off
         """
-
-        self._metadata_cache = {}
-        self._massproperties_cache = {}
         self._stack = stack
         self._api = Onshape(stack=stack, logging=logging, creds=creds)
 

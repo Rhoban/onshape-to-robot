@@ -1,18 +1,10 @@
-def main():
+def main(sim, x, y, z, directory):
     import time
+
     import mujoco
-    import argparse
     import mujoco.viewer
 
-    parser = argparse.ArgumentParser(prog="onshape-to-robot-mujoco")
-    parser.add_argument("--sim", action="store_true")
-    parser.add_argument("--x", type=float, default=0)
-    parser.add_argument("--y", type=float, default=0)
-    parser.add_argument("--z", type=float, default=0.5)
-    parser.add_argument("directory")
-    args = parser.parse_args()
-
-    robot_path = args.directory
+    robot_path = directory
     if not robot_path.endswith(".xml"):
         robot_path += "/scene.xml"
 
@@ -21,7 +13,7 @@ def main():
 
     # Check for root existence
     if len(model.jnt_type) and model.jnt_type[0] == mujoco.mjtJoint.mjJNT_FREE:
-        data.qpos[:3] = [args.x, args.y, args.z]
+        data.qpos[:3] = [x, y, z]
 
     viewer = mujoco.viewer.launch_passive(model, data)
     while viewer.is_running():
@@ -35,4 +27,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    parser = argparse.ArgumentParser(prog="onshape-to-robot-mujoco")
+    parser.add_argument("--sim", action="store_true")
+    parser.add_argument("-x", type=float, default=0)
+    parser.add_argument("-y", type=float, default=0)
+    parser.add_argument("-z", type=float, default=0.5)
+    parser.add_argument("directory")
+    args = parser.parse_args()
+
+    main(args.sim, args.x, args.y, args.z, args.directory)
