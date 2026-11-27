@@ -33,6 +33,18 @@
     {"name": "megabot", "document_id": "3cddea8d10f23b74231e7636", "version_id": "1d5f0ae8daf92bbda6f52727", "assembly": "megabot"},
     {"name": "differential", "document_id": "99762129c29a303a858e0b48", "version_id": "1d2877f16de11aa213466001", "assembly": "Robot"},
     {"name": "irb6620", "document_id": "2b4ce6dcaffccdf3fecc29ed", "version_id": "da799a570132a433a3735a45", "assembly": "Robot"},
-    {"name": "spm", "document_id": "6a04069fb9e9b699f96a6881", "version_id": "72d595132303706ea0b2cb97", "assembly": "SPM v2"}
+    {"name": "spm", "document_id": "6a04069fb9e9b699f96a6881", "version_id": "72d595132303706ea0b2cb97", "assembly": "SPM v2"},
+    {"name": "features-mechanisms", "document_id": "3da7edeeb70f989a5edba88b", "version_id": "cec8ddb1dda1f9c4a9676e77", "assembly": "mechanisms",
+     "description": "Built for the tests: continuous wheel (with limits enabled in Onshape), ball joint limited by a variable, fixed DOF, slider limited by variables, gear relations (ratio 2, ratio 3 reversed), fix_ mate, mate group, surface part"},
+    {"name": "features-mechanisms-euler", "document_id": "3da7edeeb70f989a5edba88b", "version_id": "cec8ddb1dda1f9c4a9676e77", "assembly": "mechanisms", "config": {"ball_to_euler": true},
+     "description": "Same, with the ball joint replaced by revolute joints (ball_to_euler), so that it can be exported to URDF"},
+    {"name": "features-closures", "document_id": "3da7edeeb70f989a5edba88b", "version_id": "cec8ddb1dda1f9c4a9676e77", "assembly": "closures",
+     "description": "Built for the tests: closing mates of every type (fastened, revolute, ball, slider)"},
+    {"name": "features-configured", "document_id": "3da7edeeb70f989a5edba88b", "version_id": "cec8ddb1dda1f9c4a9676e77", "assembly": "configured",
+     "description": "Built for the tests: joint limits and their activation depending on a configuration (default configuration)"},
+    {"name": "features-configured-large", "document_id": "3da7edeeb70f989a5edba88b", "version_id": "cec8ddb1dda1f9c4a9676e77", "assembly": "configured", "config": {"configuration": {"Size": "Large arm", "Limited": true}},
+     "description": "Same, other configuration (list parameter given by its label, boolean given as a JSON boolean)"},
+    {"name": "features-configured-unlimited", "document_id": "3da7edeeb70f989a5edba88b", "version_id": "cec8ddb1dda1f9c4a9676e77", "assembly": "configured", "config": {"configuration": {"Size": "Small arm", "Limited": "false"}},
+     "description": "Same, with the limits of the elbow disabled by the configuration"}
   ]
 }

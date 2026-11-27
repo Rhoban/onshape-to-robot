@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3da7edeeb70f989a5edba88b / version_id: cec8ddb1dda1f9c4a9676e77 -->
+<sdf version="1.7">
+  <model name="test_export_features_configure4">
+    <!-- Link base -->
+    <link name="base">
+      <inertial>
+        <pose>7.47222e-05 -0.000119555 0.0201315 0 0 0</pose>
+        <mass>6.53863</mass>
+        <inertia>
+          <ixx>0.0226458</ixx>
+          <ixy>-2.35103e-05</ixy>
+          <ixz>-1.4984e-05</ixz>
+          <iyy>0.0499322</iyy>
+          <iyz>1.70952e-05</iyz>
+          <izz>0.0707933</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part base -->
+      <visual name="base_visual_mesh_1">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_configure4/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.6 0.6 0.65098 1</ambient>
+          <diffuse>0.6 0.6 0.65098 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="base_collision_mesh_2">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_configure4/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link arm -->
+    <link name="arm">
+      <inertial>
+        <pose>0 0 -0.06 0 0 0</pose>
+        <mass>0.1296</mass>
+        <inertia>
+          <ixx>0.00015984</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00015984</iyy>
+          <iyz>0</iyz>
+          <izz>8.64e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="elbow">0 0 0 0 -0 0</pose>
+      <!-- Part arm -->
+      <visual name="arm_visual_mesh_1">
+        <pose relative_to="arm">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_configure4/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.4 0.8 1</ambient>
+          <diffuse>0.2 0.4 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="arm_collision_mesh_2">
+        <pose relative_to="arm">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_configure4/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from base to arm -->
+    <joint name="elbow" type="revolute">
+      <pose relative_to="base">-0.1 -0.01 0.044 3.14159 -0 0</pose>
+      <parent>base</parent>
+      <child>arm</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.785398163397</lower>
+          <upper>1.570796326795</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link arm_2 -->
+    <link name="arm_2">
+      <inertial>
+        <pose>0 0 -0.06 0 0 0</pose>
+        <mass>0.1296</mass>
+        <inertia>
+          <ixx>0.00015984</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00015984</iyy>
+          <iyz>0</iyz>
+          <izz>8.64e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="wrist">0 0 0 0 -0 0</pose>
+      <!-- Part arm_2 -->
+      <visual name="arm_2_visual_mesh_1">
+        <pose relative_to="arm_2">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_configure4/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.4 0.8 1</ambient>
+          <diffuse>0.2 0.4 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="arm_2_collision_mesh_2">
+        <pose relative_to="arm_2">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_configure4/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Joint from base to arm_2 -->
+    <joint name="wrist" type="revolute">
+      <pose relative_to="base">-0.1 0.05 0.044 3.14159 -0 0</pose>
+      <parent>base</parent>
+      <child>arm_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-0.349065850399</lower>
+          <upper>1.047197551197</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

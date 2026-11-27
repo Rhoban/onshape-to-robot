@@ -1,0 +1,307 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3da7edeeb70f989a5edba88b / version_id: cec8ddb1dda1f9c4a9676e77 -->
+<robot name="test_export_features_closures_0">
+  <!-- Link base -->
+  <link name="base">
+    <inertial>
+      <origin xyz="7.47222e-05 -0.000119555 0.0201315" rpy="0 0 0"/>
+      <mass value="6.53863"/>
+      <inertia ixx="0.0226458" ixy="-2.35103e-05" ixz="-1.4984e-05" iyy="0.0499322" iyz="1.70952e-05" izz="0.0707933"/>
+    </inertial>
+    <!-- Part base -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.6 0.6 0.65098 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_fastened_1 (dummy link + fixed joint) -->
+  <link name="closing_fastened_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_fastened_1_frame" type="fixed">
+    <origin xyz="-0.11 -0.06 0.044" rpy="0 -0 0"/>
+    <parent link="base"/>
+    <child link="closing_fastened_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_revolute_1 (dummy link + fixed joint) -->
+  <link name="closing_revolute_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_revolute_1_frame" type="fixed">
+    <origin xyz="-0.05 -0.06 0.044" rpy="0 -0 0"/>
+    <parent link="base"/>
+    <child link="closing_revolute_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_revolute_1_z (dummy link + fixed joint) -->
+  <link name="closing_revolute_1_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_revolute_1_z_frame" type="fixed">
+    <origin xyz="-0.05 -0.06 0.144" rpy="0 -0 0"/>
+    <parent link="base"/>
+    <child link="closing_revolute_1_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_ball_1 (dummy link + fixed joint) -->
+  <link name="closing_ball_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ball_1_frame" type="fixed">
+    <origin xyz="0.01 -0.06 0.044" rpy="0 -0 0"/>
+    <parent link="base"/>
+    <child link="closing_ball_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_slider_1 (dummy link + fixed joint) -->
+  <link name="closing_slider_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_slider_1_frame" type="fixed">
+    <origin xyz="0.07 -0.06 0.044" rpy="0 -0 0"/>
+    <parent link="base"/>
+    <child link="closing_slider_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link arm -->
+  <link name="arm">
+    <inertial>
+      <origin xyz="0 0 -0.06" rpy="0 0 0"/>
+      <mass value="0.1296"/>
+      <inertia ixx="0.00015984" ixy="0" ixz="0" iyy="0.00015984" iyz="0" izz="8.64e-06"/>
+    </inertial>
+    <!-- Part arm -->
+    <visual>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+      <material name="arm_material">
+        <color rgba="0.2 0.4 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_fastened_2 (dummy link + fixed joint) -->
+  <link name="closing_fastened_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_fastened_2_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+    <parent link="arm"/>
+    <child link="closing_fastened_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from base to arm -->
+  <joint name="arm_fastened" type="revolute">
+    <origin xyz="-0.11 -0.06 0.044" rpy="3.14159 -0 0"/>
+    <parent link="base"/>
+    <child link="arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link arm_2 -->
+  <link name="arm_2">
+    <inertial>
+      <origin xyz="0 0 -0.06" rpy="0 0 0"/>
+      <mass value="0.1296"/>
+      <inertia ixx="0.00015984" ixy="0" ixz="0" iyy="0.00015984" iyz="0" izz="8.64e-06"/>
+    </inertial>
+    <!-- Part arm_2 -->
+    <visual>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+      <material name="arm_2_material">
+        <color rgba="0.2 0.4 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_revolute_2 (dummy link + fixed joint) -->
+  <link name="closing_revolute_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_revolute_2_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+    <parent link="arm_2"/>
+    <child link="closing_revolute_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_revolute_2_z (dummy link + fixed joint) -->
+  <link name="closing_revolute_2_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_revolute_2_z_frame" type="fixed">
+    <origin xyz="0 0 -0.1" rpy="3.14159 -0 0"/>
+    <parent link="arm_2"/>
+    <child link="closing_revolute_2_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from base to arm_2 -->
+  <joint name="arm_revolute" type="revolute">
+    <origin xyz="-0.05 -0.06 0.044" rpy="3.14159 -0 0"/>
+    <parent link="base"/>
+    <child link="arm_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link arm_3 -->
+  <link name="arm_3">
+    <inertial>
+      <origin xyz="0 0 -0.06" rpy="0 0 0"/>
+      <mass value="0.1296"/>
+      <inertia ixx="0.00015984" ixy="0" ixz="0" iyy="0.00015984" iyz="0" izz="8.64e-06"/>
+    </inertial>
+    <!-- Part arm_3 -->
+    <visual>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+      <material name="arm_3_material">
+        <color rgba="0.2 0.4 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_ball_2 (dummy link + fixed joint) -->
+  <link name="closing_ball_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ball_2_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+    <parent link="arm_3"/>
+    <child link="closing_ball_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from base to arm_3 -->
+  <joint name="arm_ball" type="revolute">
+    <origin xyz="0.01 -0.06 0.044" rpy="3.14159 -0 0"/>
+    <parent link="base"/>
+    <child link="arm_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link arm_4 -->
+  <link name="arm_4">
+    <inertial>
+      <origin xyz="0 0 -0.06" rpy="0 0 0"/>
+      <mass value="0.1296"/>
+      <inertia ixx="0.00015984" ixy="0" ixz="0" iyy="0.00015984" iyz="0" izz="8.64e-06"/>
+    </inertial>
+    <!-- Part arm_4 -->
+    <visual>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+      <material name="arm_4_material">
+        <color rgba="0.2 0.4 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.4 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_slider_2 (dummy link + fixed joint) -->
+  <link name="closing_slider_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_slider_2_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+    <parent link="arm_4"/>
+    <child link="closing_slider_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from base to arm_4 -->
+  <joint name="arm_slider" type="revolute">
+    <origin xyz="0.07 -0.06 0.044" rpy="3.14159 -0 0"/>
+    <parent link="base"/>
+    <child link="arm_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

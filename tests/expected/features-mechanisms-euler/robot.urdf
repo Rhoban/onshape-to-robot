@@ -1,0 +1,361 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3da7edeeb70f989a5edba88b / version_id: cec8ddb1dda1f9c4a9676e77 -->
+<robot name="test_export_features_mechanism3">
+  <!-- Link base -->
+  <link name="base">
+    <inertial>
+      <origin xyz="0.442339 -0.117532 -0.0618962" rpy="0 0 0"/>
+      <mass value="6.88423"/>
+      <inertia ixx="0.0273976" ixy="-0.00619856" ixz="-0.00110468" iyy="0.0517055" iyz="-0.00165121" izz="0.0741929"/>
+    </inertial>
+    <!-- Part block -->
+    <visual>
+      <origin xyz="-0.0130185 -0.110249 -0" rpy="-0 -0 0.2"/>
+      <geometry>
+        <mesh filename="package://assets/block.stl"/>
+      </geometry>
+      <material name="block_material">
+        <color rgba="0.8 0.498039 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0130185 -0.110249 -0" rpy="-0 -0 0.2"/>
+      <geometry>
+        <mesh filename="package://assets/block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part base -->
+    <visual>
+      <origin xyz="0.44337 -0.119769 -0.083" rpy="-0 -0 0.2"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.6 0.6 0.65098 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.44337 -0.119769 -0.083" rpy="-0 -0 0.2"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sheet -->
+    <visual>
+      <origin xyz="-0.183873 -0.246917 -0.097" rpy="-0 -0 0.2"/>
+      <geometry>
+        <mesh filename="package://assets/sheet.stl"/>
+      </geometry>
+      <material name="sheet_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <!-- Part block_2 -->
+    <visual>
+      <origin xyz="-0.125069 -0.234997 -0.127" rpy="-0 -0 0.2"/>
+      <geometry>
+        <mesh filename="package://assets/block.stl"/>
+      </geometry>
+      <material name="block_2_material">
+        <color rgba="0.8 0.498039 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.125069 -0.234997 -0.127" rpy="-0 -0 0.2"/>
+      <geometry>
+        <mesh filename="package://assets/block.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link wheel -->
+  <link name="wheel">
+    <inertial>
+      <origin xyz="-0 0 -0.01" rpy="0 0 0"/>
+      <mass value="0.424115"/>
+      <inertia ixx="0.000279209" ixy="0" ixz="-0" iyy="0.000279209" iyz="-0" izz="0.000530144"/>
+    </inertial>
+    <!-- Part wheel -->
+    <visual>
+      <origin xyz="-0.2 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+      <material name="wheel_material">
+        <color rgba="0.14902 0.14902 0.14902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.2 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to wheel -->
+  <joint name="left_wheel" type="continuous">
+    <origin xyz="0.423503 -0.0217619 -0.063" rpy="1.5708 -0 0.2"/>
+    <parent link="base"/>
+    <child link="wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Link block -->
+  <link name="block">
+    <inertial>
+      <origin xyz="0 -0 -0.02" rpy="0 0 0"/>
+      <mass value="0.1728"/>
+      <inertia ixx="4.608e-05" ixy="-0" ixz="-0" iyy="4.608e-05" iyz="0" izz="4.608e-05"/>
+    </inertial>
+    <!-- Part block_3 -->
+    <visual>
+      <origin xyz="0 -0.02 -0.52" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/block.stl"/>
+      </geometry>
+      <material name="block_3_material">
+        <color rgba="0.8 0.498039 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.02 -0.52" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/block.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to block -->
+  <joint name="fixed_block" type="fixed">
+    <origin xyz="0.29636 -0.149569 -0.063" rpy="1.5708 0 1.7708"/>
+    <parent link="base"/>
+    <child link="block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Link slider -->
+  <link name="slider">
+    <inertial>
+      <origin xyz="0 -0 -0.0046" rpy="0 0 0"/>
+      <mass value="0.1458"/>
+      <inertia ixx="5.4675e-05" ixy="0" ixz="0" iyy="5.4675e-05" iyz="0" izz="2.187e-05"/>
+    </inertial>
+    <!-- Part slider -->
+    <visual>
+      <origin xyz="0 0.015 0.5954" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/slider.stl"/>
+      </geometry>
+      <material name="slider_material">
+        <color rgba="0.298039 0.698039 0.298039 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.015 0.5954" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/slider.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to slider -->
+  <joint name="slide" type="prismatic">
+    <origin xyz="0.59038 -0.0899681 -0.063" rpy="-1.5708 0 1.7708"/>
+    <parent link="base"/>
+    <child link="slider"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.0354" upper="0"/>
+  </joint>
+  <!-- Link gear -->
+  <link name="gear">
+    <inertial>
+      <origin xyz="0 -0 -0.005" rpy="0 0 0"/>
+      <mass value="0.0763407"/>
+      <inertia ixx="1.78128e-05" ixy="-0" ixz="0" iyy="1.78128e-05" iyz="-0" izz="3.43533e-05"/>
+    </inertial>
+    <!-- Part gear -->
+    <visual>
+      <origin xyz="-0.3 -0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_material">
+        <color rgba="0.8 0.8 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.3 -0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to gear -->
+  <joint name="gear_a1" type="revolute">
+    <origin xyz="0.555284 -0.168506 -0.039" rpy="3.14159 -0 0.2"/>
+    <parent link="base"/>
+    <child link="gear"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link gear_2 -->
+  <link name="gear_2">
+    <inertial>
+      <origin xyz="0 -0 -0.005" rpy="0 0 0"/>
+      <mass value="0.0763407"/>
+      <inertia ixx="1.78128e-05" ixy="-0" ixz="0" iyy="1.78128e-05" iyz="-0" izz="3.43533e-05"/>
+    </inertial>
+    <!-- Part gear_2 -->
+    <visual>
+      <origin xyz="-0.3 -0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_2_material">
+        <color rgba="0.8 0.8 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.3 -0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to gear_2 -->
+  <joint name="gear_a2" type="revolute">
+    <origin xyz="0.543363 -0.109702 -0.039" rpy="3.14159 -0 0.2"/>
+    <parent link="base"/>
+    <child link="gear_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+    <mimic joint="gear_a1" multiplier="-2.0"/>
+  </joint>
+  <!-- Link gear_3 -->
+  <link name="gear_3">
+    <inertial>
+      <origin xyz="0 0 -0.005" rpy="0 0 0"/>
+      <mass value="0.0763407"/>
+      <inertia ixx="1.78128e-05" ixy="-0" ixz="0" iyy="1.78128e-05" iyz="0" izz="3.43533e-05"/>
+    </inertial>
+    <!-- Part gear_3 -->
+    <visual>
+      <origin xyz="-0.3 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_3_material">
+        <color rgba="0.8 0.8 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.3 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to gear_3 -->
+  <joint name="gear_b1" type="revolute">
+    <origin xyz="0.535417 -0.0704996 -0.039" rpy="3.14159 -0 0.2"/>
+    <parent link="base"/>
+    <child link="gear_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link gear_4 -->
+  <link name="gear_4">
+    <inertial>
+      <origin xyz="0 0 -0.005" rpy="0 0 0"/>
+      <mass value="0.0763407"/>
+      <inertia ixx="1.78128e-05" ixy="-0" ixz="0" iyy="1.78128e-05" iyz="0" izz="3.43533e-05"/>
+    </inertial>
+    <!-- Part gear_4 -->
+    <visual>
+      <origin xyz="-0.3 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_4_material">
+        <color rgba="0.8 0.8 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.3 0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to gear_4 -->
+  <joint name="gear_b2" type="revolute">
+    <origin xyz="0.523496 -0.0116956 -0.039" rpy="3.14159 -0 0.2"/>
+    <parent link="base"/>
+    <child link="gear_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+    <mimic joint="gear_b1" multiplier="3.0"/>
+  </joint>
+  <!-- Link shoulder_link_x -->
+  <link name="shoulder_link_x">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+  </link>
+  <!-- Link shoulder_link_y -->
+  <link name="shoulder_link_y">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+  </link>
+  <!-- Link arm -->
+  <link name="arm">
+    <inertial>
+      <origin xyz="-0 -0 -0.06" rpy="0 0 0"/>
+      <mass value="0.1296"/>
+      <inertia ixx="0.00015984" ixy="-0" ixz="0" iyy="0.00015984" iyz="0" izz="8.64e-06"/>
+    </inertial>
+    <!-- Part arm -->
+    <visual>
+      <origin xyz="-0.4 -0 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+      <material name="arm_material">
+        <color rgba="0.2 0.4 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.4 -0 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/arm.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from shoulder_link_y to arm -->
+  <joint name="shoulder_z" type="revolute">
+    <origin xyz="0 0 0" rpy="0 -0 -0"/>
+    <parent link="shoulder_link_y"/>
+    <child link="arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from shoulder_link_x to shoulder_link_y -->
+  <joint name="shoulder_y" type="revolute">
+    <origin xyz="0 0 0" rpy="0 -0 -0"/>
+    <parent link="shoulder_link_x"/>
+    <child link="shoulder_link_y"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from base to shoulder_link_x -->
+  <joint name="shoulder_x" type="revolute">
+    <origin xyz="0.33543 -0.0906321 -0.039" rpy="3.14159 -0 0.2"/>
+    <parent link="base"/>
+    <child link="shoulder_link_x"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

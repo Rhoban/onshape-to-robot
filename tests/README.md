@@ -21,8 +21,11 @@ and MuJoCo (`tests/test_export.py`) and compared with `tests/expected/<case>/`.
 An export that is expected to fail is described by a `robot.<ext>.error` file.
 
 The cases cover real robots (quadrupeds, humanoids, arms, wheeled robots,
-parallel robots with closed loops...) and synthetic cases for degrees of
-freedom inside sub-assemblies.
+parallel robots with closed loops...), synthetic cases for degrees of freedom
+inside sub-assemblies, and the "features" document, built for the tests with
+the features no robot uses: continuous joints, ball joints, gear relations,
+closing mates of every type, limits defined by variables and configurations,
+mate groups, surfaces.
 
 The other tests use the same recorded robots:
 
@@ -34,6 +37,8 @@ The other tests use the same recorded robots:
   of the command line options (`--retrieve`, `--convert`, `--safe`);
 - `tests/test_regressions.py` contains a test for each fixed bug, reproducing
   its situation (on a robot built in Python, or on a recorded robot).
+- `tests/test_features.py` checks explicitly the behaviors on the "features"
+  document (relations, closures, configured limits...).
 
 Some tests need an external tool and are skipped when it is not installed:
 MuJoCo (`pip install mujoco`), CoACD (`pip install coacd trimesh`), OpenSCAD
