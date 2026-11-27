@@ -208,6 +208,12 @@ class ExporterURDF(Exporter):
         self.append(f"<!-- Joint from {joint.parent.name} to {joint.child.name} -->")
 
         joint_type = joint.properties.get("type", joint.joint_type)
+        if joint_type == Joint.BALL:
+            raise Exception(
+                f"URDF doesn't support ball joints ({joint.name}), use the "
+                "ball_to_euler option to replace them with revolute joints, or "
+                "export to SDF or MuJoCo, which support them"
+            )
         self.append(f'<joint name="{joint.name}" type="{joint_type}">')
 
         T_link_joint = np.linalg.inv(T_world_link) @ joint.T_world_joint
