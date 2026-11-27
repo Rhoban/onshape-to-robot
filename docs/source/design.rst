@@ -28,7 +28,7 @@ Specifying degrees of freedom
 
 To create a degree of freedom, you should use the ``dof_`` prefix when placing a mate connector.
 
-* If the mate connector is **cylindrical** or **revolute**, a ``revolute`` joint will be issued 
+* If the mate connector is **cylindrical** or **revolute**, a ``revolute`` joint will be issued (or a ``continuous`` joint, which has no limits, if its name contains the word ``wheel`` or ``continuous``, e.g. ``dof_left_wheel``)
 * If the mate connector is a **slider**, a ``prismatic`` joint will be issued
 * If the mate connector is a **ball**, a ``ball`` joint will be issued (not supported by URDF, see :doc:`ball_to_euler <processor_ball_to_euler>`)
 * If the mate connector is **fastened**, a ``fixed`` joint will be issued

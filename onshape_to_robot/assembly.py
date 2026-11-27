@@ -741,7 +741,9 @@ class Assembly:
                     else:
                         joint_type = Joint.REVOLUTE
 
-                    if not self.config.ignore_limits:
+                    # Continuous joints have no limits, even if some are
+                    # enabled on the mate
+                    if joint_type == Joint.REVOLUTE and not self.config.ignore_limits:
                         limits = self.get_limits(
                             joint_type,
                             data["name"],
