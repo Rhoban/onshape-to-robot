@@ -10,6 +10,7 @@ The `SDF format <http://sdformat.org/>`_ is an extension of URDF extensively use
 * When using SDF, frames will be exported as ``<frame>`` items.
 * The links and joints always using ``relative_to`` attribute to specify the parent frame, keeping the same coordinates system as in URDF.
 * Additionally to the ``robot.sdf`` file, a ``model.config`` file will be produced, adding metadata useful for Gazebo.
+* Meshes are referenced as ``model://<directory>/...``, where ``<directory>`` is the name of the robot directory (which contains ``model.config``): add its parent directory to ``GZ_SIM_RESOURCE_PATH`` for Gazebo to find them.
 
 ``config.json`` entries (SDF)
 -----------------------------

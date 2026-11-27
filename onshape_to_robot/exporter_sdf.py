@@ -129,10 +129,13 @@ class ExporterSDF(Exporter):
         self.append(self.pose(T_link_part, relative_to=link.name))
 
         mesh_file = mesh.filename
+        # Gazebo resolves model:// URIs with the name of the model directory
+        # (where model.config is), which can differ from the robot name
+        model_directory = os.path.basename(self.config.output_directory)
 
         self.append("<geometry>")
         self.append(
-            f"<mesh><uri>model://{xml_escape(self.config.robot_name)}/{xml_escape(mesh_file)}</uri></mesh>"
+            f"<mesh><uri>model://{xml_escape(model_directory)}/{xml_escape(mesh_file)}</uri></mesh>"
         )
         self.append("</geometry>")
 
