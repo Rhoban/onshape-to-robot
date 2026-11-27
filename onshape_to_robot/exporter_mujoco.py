@@ -76,7 +76,9 @@ class ExporterMuJoCo(Exporter):
 
         # Asset (mesh & materials)
         self.append("<asset>")
-        for mesh_file in set(self.meshes):
+        # Unique meshes, in a deterministic order (iterating a set of strings
+        # gives a different order at each run)
+        for mesh_file in dict.fromkeys(self.meshes):
             self.append(f'<mesh file="{mesh_file}" />')
         for material_name, color in self.materials.items():
             color_str = "%g %g %g %g" % self.config.round(tuple(color))
