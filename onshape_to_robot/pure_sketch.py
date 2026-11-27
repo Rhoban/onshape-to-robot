@@ -3,6 +3,7 @@ def main():
     import math
     import commentjson as json
     import os
+    import subprocess
     import sys, os
     from dotenv import load_dotenv, find_dotenv
     from colorama import Fore, Back, Style
@@ -141,10 +142,11 @@ def main():
             with open(scadFileName, "w", encoding="utf-8") as stream:
                 stream.write(scad)
 
-            directory = os.path.dirname(fileName)
-            os.system(
-                "cd " + directory + "; openscad " + os.path.basename(scadFileName)
-            )
+            # Running OpenSCAD in the directory of the file (without a shell, so
+            # that it works for a file in the current directory or a path with
+            # spaces)
+            directory = os.path.dirname(fileName) or "."
+            subprocess.run(["openscad", os.path.basename(scadFileName)], cwd=directory)
         else:
             print(
                 Fore.RED

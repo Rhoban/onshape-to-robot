@@ -1,5 +1,6 @@
 def main():
     import os
+    import subprocess
     import sys
 
     if len(sys.argv) < 2:
@@ -18,8 +19,11 @@ def main():
             scad += "// sphere(10);\n"
             with open(fileName, "w", encoding="utf-8") as stream:
                 stream.write(scad)
-        directory = os.path.dirname(fileName)
-        os.system("cd " + directory + "; openscad " + os.path.basename(fileName))
+        # Running OpenSCAD in the directory of the file (without a shell, so
+        # that it works for a file in the current directory or a path with
+        # spaces)
+        directory = os.path.dirname(fileName) or "."
+        subprocess.run(["openscad", os.path.basename(fileName)], cwd=directory)
 
 
 if __name__ == "__main__":
