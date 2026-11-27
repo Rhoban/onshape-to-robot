@@ -20,7 +20,8 @@ class RobotBuilder:
         for closure_type, frame1, frame2 in self.assembly.closures:
             self.robot.closures.append(Closure(closure_type, frame1, frame2))
 
-        self.unique_names = {}
+        self.unique_names: dict[str, dict[str, int]] = {}
+        self.used_names: dict[str, set[str]] = {}
         self.stl_filenames: dict = {}
 
         for node in self.assembly.root_nodes:
@@ -115,22 +116,29 @@ class RobotBuilder:
     def unique_name(self, part: dict, type: str):
         """
         Get unique part name (plate, plate_2, plate_3, ...)
-        In the case where multiple parts have the same name in Onshape, they will result in different names in the URDF
+        In the case where multiple parts have the same name in Onshape, they will result in different names in the URDF.
+
+        A generated name is never one already given (e.g. a "leg" duplicate
+        suffixed into "leg_2" while another body is already named "leg_2"),
+        nor a frame name or, for links, a name set with a link_ connector.
         """
+        base = self.part_name(part, include_configuration=True)
+        counters = self.unique_names.setdefault(type, {})
+        used = self.used_names.setdefault(type, set())
+        reserved = {frame.name for frame in self.assembly.frames}
+        if type == "link":
+            reserved |= set(self.assembly.link_names.values())
+
         while True:
-            name = self.part_name(part, include_configuration=True)
-
-            if type not in self.unique_names:
-                self.unique_names[type] = {}
-
-            if name in self.unique_names[type]:
-                self.unique_names[type][name] += 1
-                name = f"{name}_{self.unique_names[type][name]}"
+            if base in counters:
+                counters[base] += 1
+                name = f"{base}_{counters[base]}"
             else:
-                self.unique_names[type][name] = 1
-                name = name
+                counters[base] = 1
+                name = base
 
-            if name not in [frame.name for frame in self.assembly.frames]:
+            if name not in used and name not in reserved:
+                used.add(name)
                 return name
 
     def instance_request_params(self, instance: dict) -> dict:
@@ -403,8 +411,10 @@ class RobotBuilder:
 
         if body_id in self.assembly.link_names:
             link_name = self.assembly.link_names[body_id]
-        else:
+        elif instance is not None:
             link_name = self.unique_name(instance, "link")
+        else:
+            link_name = f"body_{body_id}"
 
         # Adding all the parts in the current link
         link = Link(link_name)

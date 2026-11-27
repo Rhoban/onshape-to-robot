@@ -43,6 +43,47 @@ You sometime might want your robot joint to rotate in the opposite direction tha
 
 To that end, use the ``inv`` suffix in the mate connector name. For instance, ``dof_head_pitch_inv`` will result in a joint named ``head_pitch`` having the axis inverted with the one from the Onshape assembly.
 
+Degrees of freedom in sub-assemblies
+------------------------------------
+
+``dof_`` mates can also be placed inside sub-assemblies, at any depth. Such a sub-assembly is split into
+one link per instance it contains, and its mates and mate connectors are processed like the top-level ones.
+Sub-assemblies that contain no ``dof_`` mate are still exported as a single rigid link.
+
+To keep an articulated sub-assembly rigid in a given robot, **lock** its instance in Onshape (padlock icon
+in the instance list): a locked instance is exported as a single rigid link and its ``dof_`` mates are
+ignored, as well as those of the sub-assemblies it contains.
+
+.. note::
+
+    Before this feature, ``dof_`` mates inside sub-assemblies were ignored and every sub-assembly was
+    exported as a single rigid link. If your assembly has ``dof_`` mates in sub-assemblies (for example a
+    gripper that you also export on its own), they now become joints: lock those instances to get the
+    previous result.
+
+Names coming from a sub-assembly are prefixed with the names of the instances leading to it. For instance,
+``dof_elbow`` in a sub-assembly instance named ``Right arm <1>`` results in a joint named ``right_arm_elbow``.
+The ``<1>`` suffix is dropped.
+
+.. _dof-names:
+
+Duplicated and custom joint names
+---------------------------------
+
+Several DOFs can end up with the same name, for example when the same articulated sub-assembly is
+instantiated several times (Onshape names its instances ``Arm <1>``, ``Arm <2>``, ... and doesn't let you
+rename them). In that case, all of them are numbered with the ``<n>`` of the instance they come from:
+``dof_elbow`` in ``Arm <1>`` and ``Arm <2>`` gives ``arm_elbow_1`` and ``arm_elbow_2``. When the instance
+numbers don't tell them apart (for example two DOFs with the same name at the top level), they are numbered
+``_1``, ``_2``, ... in the order they are found. Names coming from ``frame_`` and ``link_`` entries of a
+reused sub-assembly are numbered the same way (``arm_hand_1``, ``arm_hand_2``).
+
+Links of parts inside a sub-assembly are named after their part, like the other links (``doubleu``,
+``doubleu_2``, ...): only joints, frames and ``link_`` names get the sub-assembly prefix.
+
+To give the joints meaningful names, use the :ref:`rename_dofs <rename-dofs>` entry of ``config.json``, for
+example ``{"arm_elbow_1": "left_elbow", "arm_elbow_2": "right_elbow"}``.
+
 Naming links
 ------------
 
