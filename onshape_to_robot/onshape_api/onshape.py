@@ -71,23 +71,24 @@ class Onshape():
 
         try:
             # Trying to retrieve from config.json, this is deprecated but kept for backwards compatibility
-            self._url = config["onshape_api"]
-            self._access_key = config['onshape_access_key'].encode('utf-8')
-            self._secret_key = config['onshape_secret_key'].encode('utf-8')
+            url = config["onshape_api"]
+            access_key = config['onshape_access_key']
+            secret_key = config['onshape_secret_key']
+            secret_bearer = None
 
             print(Fore.YELLOW + 'WARNING: Storing Onshape credentials in config.json is deprecated, please use environment variables instead' + Style.RESET_ALL)
         except KeyError:
-            self._url = os.getenv('ONSHAPE_API')
-            self._secret_bearer = os.getenv('ONSHAPE_SECRET_BEARER')
-            self._access_key = os.getenv('ONSHAPE_ACCESS_KEY')
-            self._secret_key = os.getenv('ONSHAPE_SECRET_KEY')
+            url = os.getenv('ONSHAPE_API')
+            secret_bearer = os.getenv('ONSHAPE_SECRET_BEARER')
+            access_key = os.getenv('ONSHAPE_ACCESS_KEY')
+            secret_key = os.getenv('ONSHAPE_SECRET_KEY')
 
-        if self._url and self._secret_bearer:
-            self._secret_bearer = self._secret_bearer.encode('utf-8')
-        elif self._url and self._access_key and self._secret_key:
-            self._access_key = self._access_key.encode('utf-8')
-            self._secret_key = self._secret_key.encode('utf-8')
-        else:
+        self._url = url
+        self._secret_bearer = secret_bearer.encode('utf-8') if secret_bearer else None
+        self._access_key = access_key.encode('utf-8') if access_key else None
+        self._secret_key = secret_key.encode('utf-8') if secret_key else None
+
+        if not (self._url and (self._secret_bearer or (self._access_key and self._secret_key))):
             print(Fore.RED + 'ERROR: No Onshape API access key are set' + Style.RESET_ALL)
             print()
             print(Fore.BLUE + 'TIP: Connect to https://dev-portal.onshape.com/keys, and edit your .bashrc file:' + Style.RESET_ALL)
