@@ -66,16 +66,19 @@ class ProcessorMergeParts(Processor):
         T_world_com = np.eye(4)
         T_world_com[:3, 3] = com
 
-        # Computing a new color, weighting by masses
-        color = np.zeros(4)
-        total_mass = 0
+        # Computing a new color, weighting the parts with meshes by their
+        # masses (or equally if they are all massless, e.g. with no_dynamics)
+        colors, masses = [], []
         for part in link.parts:
             if len(part.meshes):
-                meshes_color = np.mean([mesh.color for mesh in part.meshes], axis=0)
-                color += meshes_color * part.mass
-            total_mass += part.mass
-
-        color /= total_mass
+                colors.append(np.mean([mesh.color for mesh in part.meshes], axis=0))
+                masses.append(part.mass)
+        if not colors:
+            color = np.array([0.5, 0.5, 0.5, 1.0])
+        elif sum(masses) > 1e-9:
+            color = np.average(colors, axis=0, weights=masses)
+        else:
+            color = np.mean(colors, axis=0)
 
         # Changing shapes frame
         merged_shapes = []
