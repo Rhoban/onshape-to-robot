@@ -1,0 +1,50 @@
+name: Regression tests
+
+# Exports the test robots from recorded Onshape API responses and compares
+# them with the expected outputs (no network access to Onshape, no API key).
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  tests:
+    # Pinned: setup-python has no Python 3.9 for newer Ubuntu versions
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: pip install -e . pytest
+      - name: Install optional tools used by some tests
+        # Only binary wheels: e.g. no recent mujoco wheel for Python 3.9 (an older one is used)
+        run: |
+          pip install --only-binary=:all: mujoco coacd trimesh
+          sudo apt-get update && sudo apt-get install -y openscad
+      - name: Run tests
+        run: pytest tests -q -rs
+
+  # Loads an exported SDF in Gazebo (only on one Python version, installing
+  # Gazebo takes a few minutes)
+  gazebo:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: gazebo-tooling/setup-gazebo@v0.3.0
+        with:
+          required-gazebo-distributions: harmonic
+      - name: Install
+        run: pip install -e . pytest
+      - name: Run the Gazebo test
+        env:
+          O2R_REQUIRE_GAZEBO: "1"
+        run: pytest tests/test_regressions.py -k gazebo -v

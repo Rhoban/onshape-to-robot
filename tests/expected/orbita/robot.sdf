@@ -1,0 +1,496 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 50202dd9a44cc0c62ae35265 / version_id: d3a9dd1ea5dc026fbffa1858 -->
+<sdf version="1.7">
+  <model name="test_export_orbita_sdf_0">
+    <!-- Link bottom -->
+    <link name="bottom">
+      <inertial>
+        <pose>-0 -0 0.0140985 0 0 0</pose>
+        <mass>1.67515</mass>
+        <inertia>
+          <ixx>0.00291976</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>0.00291976</iyy>
+          <iyz>0</iyz>
+          <izz>0.00559097</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part bottom -->
+      <visual name="bottom_visual_mesh_1">
+        <pose relative_to="bottom">0 -0 0.09 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/bottom.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.501961 0.501961 0.501961 1</ambient>
+          <diffuse>0.501961 0.501961 0.501961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="bottom_collision_mesh_2">
+        <pose relative_to="bottom">0 -0 0.09 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/bottom.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="bottom_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>bottom</child>
+    </joint>
+    <!-- Frame base -->
+    <frame name="base">
+      <pose relative_to="bottom">0 -0 0.102 0 -0 -0</pose>
+    </frame>
+    <!-- Link ring2 -->
+    <link name="ring2">
+      <inertial>
+        <pose>-0.00223555 0.00387209 -0.0144385 0 0 0</pose>
+        <mass>1.24789</mass>
+        <inertia>
+          <ixx>0.00222303</ixx>
+          <ixy>0.000185255</ixy>
+          <ixz>-0.000115174</ixz>
+          <iyy>0.00200912</iyy>
+          <iyz>0.000199488</iyz>
+          <izz>0.00374646</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="ring1">0 0 0 0 -0 0</pose>
+      <!-- Part ring2 -->
+      <visual name="ring2_visual_mesh_1">
+        <pose relative_to="ring2">0 0 -0.06 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/ring2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.513725 0.737255 0.407843 1</ambient>
+          <diffuse>0.513725 0.737255 0.407843 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="ring2_collision_mesh_2">
+        <pose relative_to="ring2">0 0 -0.06 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/ring2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link branch -->
+    <link name="branch">
+      <inertial>
+        <pose>0.0563091 0 -0.0426909 0 0 0</pose>
+        <mass>0.0820329</mass>
+        <inertia>
+          <ixx>8.38675e-05</ixx>
+          <ixy>-1.51e-10</ixy>
+          <ixz>7.28802e-05</ixz>
+          <iyy>0.000165393</iyy>
+          <iyz>1.51e-10</iyz>
+          <izz>8.38675e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="ring2_br1">0 0 0 0 -0 0</pose>
+      <!-- Part branch -->
+      <visual name="branch_visual_mesh_1">
+        <pose relative_to="branch">-0.0771967 0 -0.0218033 3.14159 -0.785398 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/branch.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="branch_collision_mesh_2">
+        <pose relative_to="branch">-0.0771967 0 -0.0218033 3.14159 -0.785398 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/branch.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_ring2_br2_2 -->
+    <frame name="closing_ring2_br2_2">
+      <pose relative_to="branch">0.081 0 -0.099 -1.5708 -0 -1.5708</pose>
+    </frame>
+    <!-- Frame closing_ring2_br2_2_z -->
+    <frame name="closing_ring2_br2_2_z">
+      <pose relative_to="branch">0.181 0 -0.099 -1.5708 -0 -1.5708</pose>
+    </frame>
+    <!-- Joint from ring2 to branch -->
+    <joint name="ring2_br1" type="revolute">
+      <pose relative_to="ring2">-0.0350018 0.0606249 -0.099169 -0.785398 -0 0.523599</pose>
+      <parent>ring2</parent>
+      <child>branch</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from bottom to ring2 -->
+    <joint name="ring1" type="revolute">
+      <pose relative_to="bottom">-0 -0 0.03 -3.14159 0 -0</pose>
+      <parent>bottom</parent>
+      <child>ring2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link ring3 -->
+    <link name="ring3">
+      <inertial>
+        <pose>-0.0017605 -0.00304927 -0.0133819 0 0 0</pose>
+        <mass>1.23288</mass>
+        <inertia>
+          <ixx>0.00204466</ixx>
+          <ixy>-0.000145195</ixy>
+          <ixz>-6.48302e-05</ixz>
+          <iyy>0.001877</iyy>
+          <iyz>-0.000112289</iyz>
+          <izz>0.00365339</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="ring2">0 0 0 0 -0 0</pose>
+      <!-- Part ring3 -->
+      <visual name="ring3_visual_mesh_1">
+        <pose relative_to="ring3">0 0 -0.036 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/ring3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.913725 0.647059 0.329412 1</ambient>
+          <diffuse>0.913725 0.647059 0.329412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="ring3_collision_mesh_2">
+        <pose relative_to="ring3">0 0 -0.036 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/ring3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link branch_2 -->
+    <link name="branch_2">
+      <inertial>
+        <pose>0.0563091 -0 -0.0426909 0 0 0</pose>
+        <mass>0.0820329</mass>
+        <inertia>
+          <ixx>8.38675e-05</ixx>
+          <ixy>-1.51e-10</ixy>
+          <ixz>7.28802e-05</ixz>
+          <iyy>0.000165393</iyy>
+          <iyz>1.51e-10</iyz>
+          <izz>8.38675e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="ring3_br1">0 0 0 0 -0 0</pose>
+      <!-- Part branch_2 -->
+      <visual name="branch_2_visual_mesh_1">
+        <pose relative_to="branch_2">-0.0771967 -0 -0.0218033 3.14159 -0.785398 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/branch.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="branch_2_collision_mesh_2">
+        <pose relative_to="branch_2">-0.0771967 -0 -0.0218033 3.14159 -0.785398 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/branch.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_ring3_br2_2 -->
+    <frame name="closing_ring3_br2_2">
+      <pose relative_to="branch_2">0.081 -0 -0.099 1.5708 0 1.5708</pose>
+    </frame>
+    <!-- Frame closing_ring3_br2_2_z -->
+    <frame name="closing_ring3_br2_2_z">
+      <pose relative_to="branch_2">0.181 -0 -0.099 1.5708 0 1.5708</pose>
+    </frame>
+    <!-- Joint from ring3 to branch_2 -->
+    <joint name="ring3_br1" type="revolute">
+      <pose relative_to="ring3">-0.0350018 -0.0606249 -0.075169 -0.785398 0 2.61799</pose>
+      <parent>ring3</parent>
+      <child>branch_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from bottom to ring3 -->
+    <joint name="ring2" type="revolute">
+      <pose relative_to="bottom">-0 -0 0.054 -3.14159 -0 0</pose>
+      <parent>bottom</parent>
+      <child>ring3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link ring1 -->
+    <link name="ring1">
+      <inertial>
+        <pose>0.00260742 0 -0.0124691 0 0 0</pose>
+        <mass>1.2023</mass>
+        <inertia>
+          <ixx>0.00169208</ixx>
+          <ixy>-0</ixy>
+          <ixz>5.59484e-05</ixz>
+          <iyy>0.00193469</iyy>
+          <iyz>-0</iyz>
+          <izz>0.00347396</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="ring3">0 0 0 0 -0 0</pose>
+      <!-- Part ring1 -->
+      <visual name="ring1_visual_mesh_1">
+        <pose relative_to="ring1">0 0 -0.012 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/ring1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.513725 0.415686 0.733333 1</ambient>
+          <diffuse>0.513725 0.415686 0.733333 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="ring1_collision_mesh_2">
+        <pose relative_to="ring1">0 0 -0.012 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/ring1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link branch_3 -->
+    <link name="branch_3">
+      <inertial>
+        <pose>0.0563091 0 -0.0426909 0 0 0</pose>
+        <mass>0.0820329</mass>
+        <inertia>
+          <ixx>8.38675e-05</ixx>
+          <ixy>-1.51e-10</ixy>
+          <ixz>7.28802e-05</ixz>
+          <iyy>0.000165393</iyy>
+          <iyz>1.51e-10</iyz>
+          <izz>8.38675e-05</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="ring1_br1">0 0 0 0 -0 0</pose>
+      <!-- Part branch_3 -->
+      <visual name="branch_3_visual_mesh_1">
+        <pose relative_to="branch_3">-0.0771967 0 -0.0218033 -3.14159 -0.785398 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/branch.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.647059 0.647059 0.647059 1</ambient>
+          <diffuse>0.647059 0.647059 0.647059 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="branch_3_collision_mesh_2">
+        <pose relative_to="branch_3">-0.0771967 0 -0.0218033 -3.14159 -0.785398 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/branch.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link platform -->
+    <link name="platform">
+      <inertial>
+        <pose>1.0108e-08 8.83e-10 -0.0810001 0 0 0</pose>
+        <mass>1.15601</mass>
+        <inertia>
+          <ixx>0.0016525</ixx>
+          <ixy>4.1e-11</ixy>
+          <ixz>-7.7e-10</ixz>
+          <iyy>0.00319848</iyy>
+          <iyz>2.2e-11</iyz>
+          <izz>0.00165251</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="ring1_br2">0 0 0 0 -0 0</pose>
+      <!-- Part platform -->
+      <visual name="platform_visual_mesh_1">
+        <pose relative_to="platform">0 -0.109173 -0.081 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/platform.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.541176 0.682353 0.839216 1</ambient>
+          <diffuse>0.541176 0.682353 0.839216 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="platform_collision_mesh_2">
+        <pose relative_to="platform">0 -0.109173 -0.081 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_orbita_sdf_0/assets/platform.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame effector -->
+    <frame name="effector">
+      <pose relative_to="platform">-0 0.012 -0.081 1.5708 -0 3.14159</pose>
+    </frame>
+    <!-- Frame closing_ring3_br2_1 -->
+    <frame name="closing_ring3_br2_1">
+      <pose relative_to="platform">0.0701481 0 -0.1215 -3.14159 -1.0472 -0</pose>
+    </frame>
+    <!-- Frame closing_ring3_br2_1_z -->
+    <frame name="closing_ring3_br2_1_z">
+      <pose relative_to="platform">0.156751 0 -0.1715 -3.14159 -1.0472 -0</pose>
+    </frame>
+    <!-- Frame closing_ring2_br2_1 -->
+    <frame name="closing_ring2_br2_1">
+      <pose relative_to="platform">-0.0701481 0 -0.1215 3.14159 -1.0472 -3.14159</pose>
+    </frame>
+    <!-- Frame closing_ring2_br2_1_z -->
+    <frame name="closing_ring2_br2_1_z">
+      <pose relative_to="platform">-0.156751 0 -0.1715 3.14159 -1.0472 -3.14159</pose>
+    </frame>
+    <!-- Joint from branch_3 to platform -->
+    <joint name="ring1_br2" type="revolute">
+      <pose relative_to="branch_3">0.081 -0 -0.099 -1.5708 0.785398 -1.5708</pose>
+      <parent>branch_3</parent>
+      <child>platform</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from ring1 to branch_3 -->
+    <joint name="ring1_br1" type="revolute">
+      <pose relative_to="ring1">0.0700036 -0 -0.051169 -0.785398 0 -1.5708</pose>
+      <parent>ring1</parent>
+      <child>branch_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from bottom to ring1 -->
+    <joint name="ring3" type="revolute">
+      <pose relative_to="bottom">-0 -0 0.078 -3.14159 -0 0</pose>
+      <parent>bottom</parent>
+      <child>ring1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

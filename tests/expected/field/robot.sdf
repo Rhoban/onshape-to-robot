@@ -1,0 +1,523 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: c5d4b2ebb6499294b3663e92 / version_id: 6574a148ca818170a1733d43 -->
+<sdf version="1.7">
+  <model name="test_export_field_sdf_0">
+    <!-- Link field -->
+    <link name="field">
+      <inertial>
+        <pose>0 0 0.0015 0 0 0</pose>
+        <mass>242.886</mass>
+        <inertia>
+          <ixx>1108.37</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2189.21</iyy>
+          <iyz>0</iyz>
+          <izz>3297.58</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part field -->
+      <visual name="field_visual_mesh_1">
+        <pose relative_to="field">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/field.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.372549 0.654902 0.239216 1</ambient>
+          <diffuse>0.372549 0.654902 0.239216 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="field_collision_mesh_2">
+        <pose relative_to="field">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/field.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="field_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>field</child>
+    </joint>
+    <!-- Link goalsally -->
+    <link name="goalsally">
+      <inertial>
+        <pose>-4.7587 -0 0.561696 0 0 0</pose>
+        <mass>96.784</mass>
+        <inertia>
+          <ixx>135.641</ixx>
+          <ixy>0</ixy>
+          <ixz>-12.7365</ixz>
+          <iyy>38.0502</iyy>
+          <iyz>0</iyz>
+          <izz>117.494</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part goalsally -->
+      <visual name="goalsally_visual_mesh_1">
+        <pose relative_to="goalsally">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsally.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.737255 0.937255 0.917647 1</ambient>
+          <diffuse>0.737255 0.937255 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="goalsally_collision_mesh_2">
+        <pose relative_to="goalsally">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsally.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="goalsally_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>goalsally</child>
+    </joint>
+    <!-- Link goalsallyback -->
+    <link name="goalsallyback">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part goalsallyback -->
+      <visual name="goalsallyback_visual_mesh_1">
+        <pose relative_to="goalsallyback">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsallyback.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0 0.356863 0.329412 1</ambient>
+          <diffuse>0 0.356863 0.329412 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="goalsallyback_collision_mesh_2">
+        <pose relative_to="goalsallyback">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsallyback.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="goalsallyback_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>goalsallyback</child>
+    </joint>
+    <!-- Link goalsopponent -->
+    <link name="goalsopponent">
+      <inertial>
+        <pose>4.7587 -0 0.561696 0 0 0</pose>
+        <mass>96.784</mass>
+        <inertia>
+          <ixx>135.641</ixx>
+          <ixy>-0</ixy>
+          <ixz>12.7365</ixz>
+          <iyy>38.0502</iyy>
+          <iyz>0</iyz>
+          <izz>117.494</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part goalsopponent -->
+      <visual name="goalsopponent_visual_mesh_1">
+        <pose relative_to="goalsopponent">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsopponent.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.882353 0.572549 0.478431 1</ambient>
+          <diffuse>0.882353 0.572549 0.478431 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="goalsopponent_collision_mesh_2">
+        <pose relative_to="goalsopponent">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsopponent.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="goalsopponent_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>goalsopponent</child>
+    </joint>
+    <!-- Link goalsopponentback -->
+    <link name="goalsopponentback">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part goalsopponentback -->
+      <visual name="goalsopponentback_visual_mesh_1">
+        <pose relative_to="goalsopponentback">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsopponentback.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.458824 0.105882 0 1</ambient>
+          <diffuse>0.458824 0.105882 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="goalsopponentback_collision_mesh_2">
+        <pose relative_to="goalsopponentback">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/goalsopponentback.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="goalsopponentback_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>goalsopponentback</child>
+    </joint>
+    <!-- Link lines -->
+    <link name="lines">
+      <inertial>
+        <pose>-0 -0 0.00305 0 0 0</pose>
+        <mass>0.354815</mass>
+        <inertia>
+          <ixx>1.53344</ixx>
+          <ixy>-0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.42188</iyy>
+          <iyz>0</iyz>
+          <izz>4.95532</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part lines -->
+      <visual name="lines_visual_mesh_1">
+        <pose relative_to="lines">-0 -0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/lines.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="lines_collision_mesh_2">
+        <pose relative_to="lines">-0 -0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/lines.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="lines_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>lines</child>
+    </joint>
+    <!-- Link penaltyally -->
+    <link name="penaltyally">
+      <inertial>
+        <pose>-3 0 0.00305 0 0 0</pose>
+        <mass>0.001315</mass>
+        <inertia>
+          <ixx>1.58896e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.58896e-06</iyy>
+          <iyz>0</iyz>
+          <izz>3.17792e-06</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part penaltyally -->
+      <visual name="penaltyally_visual_mesh_1">
+        <pose relative_to="penaltyally">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/penaltyally.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="penaltyally_collision_mesh_2">
+        <pose relative_to="penaltyally">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/penaltyally.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="penaltyally_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>penaltyally</child>
+    </joint>
+    <!-- Link penaltyopponent -->
+    <link name="penaltyopponent">
+      <inertial>
+        <pose>3 0 0.00305 0 0 0</pose>
+        <mass>0.001315</mass>
+        <inertia>
+          <ixx>1.58896e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.58896e-06</iyy>
+          <iyz>0</iyz>
+          <izz>3.17792e-06</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part penaltyopponent -->
+      <visual name="penaltyopponent_visual_mesh_1">
+        <pose relative_to="penaltyopponent">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/penaltyopponent.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.917647 0.917647 0.917647 1</ambient>
+          <diffuse>0.917647 0.917647 0.917647 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="penaltyopponent_collision_mesh_2">
+        <pose relative_to="penaltyopponent">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/penaltyopponent.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="penaltyopponent_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>penaltyopponent</child>
+    </joint>
+    <!-- Link table -->
+    <link name="table">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part table -->
+      <visual name="table_visual_mesh_1">
+        <pose relative_to="table">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="table_collision_mesh_2">
+        <pose relative_to="table">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="table_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>table</child>
+    </joint>
+    <!-- Link table2 -->
+    <link name="table2">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part table2 -->
+      <visual name="table2_visual_mesh_1">
+        <pose relative_to="table2">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="table2_collision_mesh_2">
+        <pose relative_to="table2">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="table2_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>table2</child>
+    </joint>
+    <!-- Link table3 -->
+    <link name="table3">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part table3 -->
+      <visual name="table3_visual_mesh_1">
+        <pose relative_to="table3">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="table3_collision_mesh_2">
+        <pose relative_to="table3">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="table3_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>table3</child>
+    </joint>
+    <!-- Link table4 -->
+    <link name="table4">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e-09</mass>
+        <inertia>
+          <ixx>1e-09</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-09</iyy>
+          <iyz>0</iyz>
+          <izz>1e-09</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part table4 -->
+      <visual name="table4_visual_mesh_1">
+        <pose relative_to="table4">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.447059 0.243137 0 1</ambient>
+          <diffuse>0.447059 0.243137 0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="table4_collision_mesh_2">
+        <pose relative_to="table4">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_field_sdf_0/assets/table4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="table4_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>table4</child>
+    </joint>
+  </model>
+</sdf>

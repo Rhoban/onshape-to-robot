@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 2b4ce6dcaffccdf3fecc29ed / version_id: da799a570132a433a3735a45 -->
+<mujoco model="test_export_irb6620_mujoco_0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_irb6620_mujoco_0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link irb6620_220_150_m2004_rev0_01_1 -->
+    <body name="irb6620_220_150_m2004_rev0_01_1" pos="0 0 0" quat="1 0 0 0" childclass="test_export_irb6620_mujoco_0">
+      <inertial pos="-0.13157 -0.000324731 0.10665" mass="266.09" fullinertia="8.79656 18.2862 25.3614 -0.0458079 0.141772 -0.0023724"/>
+      <!-- Part irb6620_220_150_m2004_rev0_01_1 -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="irb6620_220_150_m2004_rev0_01_1" material="irb6620_220_150_m2004_rev0_01_1_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="irb6620_220_150_m2004_rev0_01_1" material="irb6620_220_150_m2004_rev0_01_1_material"/>
+      <!-- Link irb6620_220_150_m2004_rev0_01_2 -->
+      <body name="irb6620_220_150_m2004_rev0_01_2" pos="-0 0 0.23" quat="0.998318 0 0 0.0579686">
+        <!-- Joint from irb6620_220_150_m2004_rev0_01_1 to irb6620_220_150_m2004_rev0_01_2 -->
+        <joint axis="0 0 1" name="r1" type="hinge" range="-3.083061908031 2.85105754875"/>
+        <inertial pos="0.148912 0.0326312 0.29935" mass="220.489" fullinertia="9.5054 15.3894 12.196 -0.754959 -4.4029 -0.907867"/>
+        <!-- Part irb6620_220_150_m2004_rev0_01_2 -->
+        <geom type="mesh" class="visual" pos="0 -0 -0.23" quat="1 0 0 -0" mesh="irb6620_220_150_m2004_rev0_01_2" material="irb6620_220_150_m2004_rev0_01_2_material"/>
+        <geom type="mesh" class="collision" pos="0 -0 -0.23" quat="1 0 0 -0" mesh="irb6620_220_150_m2004_rev0_01_2" material="irb6620_220_150_m2004_rev0_01_2_material"/>
+        <!-- Link irb6620_220_150_m2004_rev0_01_3 -->
+        <body name="irb6620_220_150_m2004_rev0_01_3" pos="0.32 -0.1305 0.45" quat="0.598169 -0.598169 -0.377086 -0.377086">
+          <!-- Joint from irb6620_220_150_m2004_rev0_01_2 to irb6620_220_150_m2004_rev0_01_3 -->
+          <joint axis="0 0 1" name="r2" type="hinge" range="-1.31851552389 2.259409442698"/>
+          <inertial pos="0.000201766 -0.418032 -0.0878342" mass="110.699" fullinertia="10.6951 0.930618 10.9397 0.00186965 0.000244831 -1.01793"/>
+          <!-- Part irb6620_220_150_m2004_rev0_01_3 -->
+          <geom type="mesh" class="visual" pos="-0.32 0.68 0.1305" quat="0.707107 0.707107 0 0" mesh="irb6620_220_150_m2004_rev0_01_3" material="irb6620_220_150_m2004_rev0_01_3_material"/>
+          <geom type="mesh" class="collision" pos="-0.32 0.68 0.1305" quat="0.707107 0.707107 0 0" mesh="irb6620_220_150_m2004_rev0_01_3" material="irb6620_220_150_m2004_rev0_01_3_material"/>
+          <!-- Link irb6620_220_150_m2004_rev0_01_4 -->
+          <body name="irb6620_220_150_m2004_rev0_01_4" pos="-0 -0.975 -0.0955" quat="0.971529 0 -0 0.236919">
+            <!-- Joint from irb6620_220_150_m2004_rev0_01_3 to irb6620_220_150_m2004_rev0_01_4 -->
+            <joint axis="0 0 1" name="r3" type="hinge" range="-3.619979800623 0.743343329363"/>
+            <inertial pos="-0.0481335 -0.117643 0.233825" mass="134.266" fullinertia="4.01479 3.9943 3.70266 -0.542085 0.49661 0.698475"/>
+            <!-- Part irb6620_220_150_m2004_rev0_01_4 -->
+            <geom type="mesh" class="visual" pos="-0.32 1.655 0.226" quat="0.707107 0.707107 -0 -0" mesh="irb6620_220_150_m2004_rev0_01_4" material="irb6620_220_150_m2004_rev0_01_4_material"/>
+            <geom type="mesh" class="collision" pos="-0.32 1.655 0.226" quat="0.707107 0.707107 -0 -0" mesh="irb6620_220_150_m2004_rev0_01_4" material="irb6620_220_150_m2004_rev0_01_4_material"/>
+            <!-- Link irb6620_220_150_m2004_rev0_01_5 -->
+            <body name="irb6620_220_150_m2004_rev0_01_5" pos="0.182 -0.2 0.226" quat="0.109417 0.69859 0.109417 0.69859">
+              <!-- Joint from irb6620_220_150_m2004_rev0_01_4 to irb6620_220_150_m2004_rev0_01_5 -->
+              <joint axis="0 0 1" name="r4" type="hinge" range="-4.925261486437 5.546714025529"/>
+              <inertial pos="-0.0139217 1.09139e-05 0.391175" mass="97.0252" fullinertia="3.90432 4.61447 1.34679 8.74851e-05 0.218534 -0.000206186"/>
+              <!-- Part irb6620_220_150_m2004_rev0_01_5 -->
+              <geom type="mesh" class="visual" pos="0 -1.855 -0.502" quat="0.5 -0.5 -0.5 -0.5" mesh="irb6620_220_150_m2004_rev0_01_5" material="irb6620_220_150_m2004_rev0_01_5_material"/>
+              <geom type="mesh" class="collision" pos="0 -1.855 -0.502" quat="0.5 -0.5 -0.5 -0.5" mesh="irb6620_220_150_m2004_rev0_01_5" material="irb6620_220_150_m2004_rev0_01_5_material"/>
+              <!-- Link irb6620_220_150_m2004_rev0_01_6 -->
+              <body name="irb6620_220_150_m2004_rev0_01_6" pos="-0.095 0 0.705" quat="0.278821 -0.649814 0.278821 -0.649814">
+                <!-- Joint from irb6620_220_150_m2004_rev0_01_5 to irb6620_220_150_m2004_rev0_01_6 -->
+                <joint axis="0 0 1" name="r5" type="hinge" range="-3.079568470184 1.458287585001"/>
+                <inertial pos="0.0363042 -4.4635e-08 0.09713" mass="16.719" fullinertia="0.0660364 0.131163 0.121498 -2.1174e-08 0.00327854 6.0012e-08"/>
+                <!-- Part irb6620_220_150_m2004_rev0_01_6 -->
+                <geom type="mesh" class="visual" pos="-1.207 1.855 0.095" quat="0.707107 0.707107 0 -0" mesh="irb6620_220_150_m2004_rev0_01_6" material="irb6620_220_150_m2004_rev0_01_6_material"/>
+                <geom type="mesh" class="collision" pos="-1.207 1.855 0.095" quat="0.707107 0.707107 0 -0" mesh="irb6620_220_150_m2004_rev0_01_6" material="irb6620_220_150_m2004_rev0_01_6_material"/>
+                <!-- Link irb6620_220_150_m2004_rev0_01_7 -->
+                <body name="irb6620_220_150_m2004_rev0_01_7" pos="0.163 0 0.095" quat="0.101023 -0.699853 0.101023 -0.699853">
+                  <!-- Joint from irb6620_220_150_m2004_rev0_01_6 to irb6620_220_150_m2004_rev0_01_7 -->
+                  <joint axis="0 0 1" name="r6" type="hinge" range="-5.522704400625 4.949271111341"/>
+                  <inertial pos="0 9.49046e-06 0.018941" mass="7.065" fullinertia="0.0177307 0.0177254 0.0340227 -0 -0 3.4598e-06"/>
+                  <!-- Part irb6620_220_150_m2004_rev0_01_7 -->
+                  <geom type="mesh" class="visual" pos="0 -1.855 -1.37" quat="0.5 -0.5 -0.5 -0.5" mesh="irb6620_220_150_m2004_rev0_01_7" material="irb6620_220_150_m2004_rev0_01_7_material"/>
+                  <geom type="mesh" class="collision" pos="0 -1.855 -1.37" quat="0.5 -0.5 -0.5 -0.5" mesh="irb6620_220_150_m2004_rev0_01_7" material="irb6620_220_150_m2004_rev0_01_7_material"/>
+                  <!-- Frame effector -->
+                  <site group="3" name="effector" pos="0 0 0.0385" quat="0.5 -0.5 -0.5 -0.5"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="irb6620_220_150_m2004_rev0_01_1.stl"/>
+    <mesh file="irb6620_220_150_m2004_rev0_01_2.stl"/>
+    <mesh file="irb6620_220_150_m2004_rev0_01_3.stl"/>
+    <mesh file="irb6620_220_150_m2004_rev0_01_4.stl"/>
+    <mesh file="irb6620_220_150_m2004_rev0_01_5.stl"/>
+    <mesh file="irb6620_220_150_m2004_rev0_01_6.stl"/>
+    <mesh file="irb6620_220_150_m2004_rev0_01_7.stl"/>
+    <material name="irb6620_220_150_m2004_rev0_01_1_material" rgba="0.890196 0.411765 0.12549 1"/>
+    <material name="irb6620_220_150_m2004_rev0_01_2_material" rgba="0.890196 0.411765 0.12549 1"/>
+    <material name="irb6620_220_150_m2004_rev0_01_3_material" rgba="0.890196 0.411765 0.12549 1"/>
+    <material name="irb6620_220_150_m2004_rev0_01_4_material" rgba="0.890196 0.411765 0.12549 1"/>
+    <material name="irb6620_220_150_m2004_rev0_01_5_material" rgba="0.890196 0.411765 0.12549 1"/>
+    <material name="irb6620_220_150_m2004_rev0_01_6_material" rgba="0.890196 0.411765 0.12549 1"/>
+    <material name="irb6620_220_150_m2004_rev0_01_7_material" rgba="0.701961 0.701961 0.701961 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_irb6620_mujoco_0" name="r1" joint="r1" inheritrange="1"/>
+    <position class="test_export_irb6620_mujoco_0" name="r2" joint="r2" inheritrange="1"/>
+    <position class="test_export_irb6620_mujoco_0" name="r3" joint="r3" inheritrange="1"/>
+    <position class="test_export_irb6620_mujoco_0" name="r4" joint="r4" inheritrange="1"/>
+    <position class="test_export_irb6620_mujoco_0" name="r5" joint="r5" inheritrange="1"/>
+    <position class="test_export_irb6620_mujoco_0" name="r6" joint="r6" inheritrange="1"/>
+  </actuator>
+  <equality/>
+</mujoco>

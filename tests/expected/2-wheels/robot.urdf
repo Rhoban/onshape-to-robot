@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 4c0bd896eb7a677f0feac15c / version_id: 686073445a22c513cd41e39a -->
+<robot name="test_export_2_wheels_urdf_0">
+  <!-- Link body -->
+  <link name="body">
+    <inertial>
+      <origin xyz="0.0375 0.0253843 0.0225241" rpy="0 0 0"/>
+      <mass value="2.23874"/>
+      <inertia ixx="0.00206023" ixy="4.48e-10" ixz="6.5e-11" iyy="0.00150691" iyz="-0.00028761" izz="0.00254354"/>
+    </inertial>
+    <!-- Part body -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body.stl"/>
+      </geometry>
+      <material name="body_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link wheel -->
+  <link name="wheel">
+    <inertial>
+      <origin xyz="0 0 -0.004" rpy="0 0 0"/>
+      <mass value="0.335419"/>
+      <inertia ixx="0.000174367" ixy="0" ixz="0" iyy="0.000174367" iyz="0" izz="0.000345298"/>
+    </inertial>
+    <!-- Part wheel -->
+    <visual>
+      <origin xyz="-0.0325 0.025 -0.02" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+      <material name="wheel_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 0.025 -0.02" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from body to wheel -->
+  <joint name="wheel1_speed" type="revolute">
+    <origin xyz="-0.02 0.0325 0.025" rpy="-1.5708 -0 1.5708"/>
+    <parent link="body"/>
+    <child link="wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link wheel_2 -->
+  <link name="wheel_2">
+    <inertial>
+      <origin xyz="0 0 0.004" rpy="0 0 0"/>
+      <mass value="0.335419"/>
+      <inertia ixx="0.000174367" ixy="0" ixz="0" iyy="0.000174367" iyz="0" izz="0.000345298"/>
+    </inertial>
+    <!-- Part wheel_2 -->
+    <visual>
+      <origin xyz="-0.0325 0.025 -0.012" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+      <material name="wheel_2_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 0.025 -0.012" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from body to wheel_2 -->
+  <joint name="wheel2_speed" type="revolute">
+    <origin xyz="0.095 0.0325 0.025" rpy="-1.5708 -0 1.5708"/>
+    <parent link="body"/>
+    <child link="wheel_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

@@ -1,0 +1,2340 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 6a04069fb9e9b699f96a6881 / version_id: 72d595132303706ea0b2cb97 -->
+<robot name="test_export_spm_urdf_0">
+  <!-- Link moteur_bati_v2 -->
+  <link name="moteur_bati_v2">
+    <inertial>
+      <origin xyz="-3.7563e-05 2.82067e-06 0.044516" rpy="0 0 0"/>
+      <mass value="0.925933"/>
+      <inertia ixx="0.00239253" ixy="1.78337e-07" ixz="1.13556e-06" iyy="0.00239489" iyz="-8.5735e-08" izz="0.00452148"/>
+    </inertial>
+    <!-- Part b08_cra_ri30_40_pro_xx_客户参考 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/b08_cra_ri30_40_pro_xx_客户参考.stl"/>
+      </geometry>
+      <material name="b08_cra_ri30_40_pro_xx_客户参考_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/b08_cra_ri30_40_pro_xx_客户参考.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_pro_xx_后盖 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_pro_xx_后盖.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_pro_xx_后盖_material">
+        <color rgba="0.690196 0.764706 0.0196078 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_pro_xx_后盖.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_2 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_2.stl"/>
+      </geometry>
+      <material name="extruded_4_2_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part 1_bati3 -->
+    <visual>
+      <origin xyz="0.0280564 -0.0254488 0.0198908" rpy="0.785398 -0 0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/1_bati3.stl"/>
+      </geometry>
+      <material name="1_bati3_material">
+        <color rgba="0.980392 0.713725 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0280564 -0.0254488 0.0198908" rpy="0.785398 -0 0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/1_bati3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_6 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_6.stl"/>
+      </geometry>
+      <material name="extruded_6_material">
+        <color rgba="0.00784314 0.392157 0.72549 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_6.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_1 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1.stl"/>
+      </geometry>
+      <material name="extruded_1_material">
+        <color rgba="0.14902 0.180392 0.435294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_xx_柔轮盖 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_柔轮盖.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_xx_柔轮盖_material">
+        <color rgba="0.368627 0.941176 0.733333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_柔轮盖.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_4 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_4.stl"/>
+      </geometry>
+      <material name="extruded_4_4_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_material">
+        <color rgba="0.0196078 0.498039 0.341176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_2 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_2.stl"/>
+      </geometry>
+      <material name="extruded_2_material">
+        <color rgba="0.176471 0.0431373 0.792157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_2 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__2.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_2_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_3 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__3.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_3_material">
+        <color rgba="0.0196078 0.498039 0.341176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded.stl"/>
+      </geometry>
+      <material name="extruded_material">
+        <color rgba="0.14902 0.180392 0.435294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_3 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_3.stl"/>
+      </geometry>
+      <material name="extruded_4_3_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_xx_b_电机壳_1 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_b_电机壳_1.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_xx_b_电机壳_1_material">
+        <color rgba="0.898039 0.917647 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_b_电机壳_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lsg_8_减速器外圈固定_1 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_8_减速器外圈固定_1.stl"/>
+      </geometry>
+      <material name="lsg_8_减速器外圈固定_1_material">
+        <color rgba="0.898039 0.917647 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_8_减速器外圈固定_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_0 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0.stl"/>
+      </geometry>
+      <material name="extruded_0_material">
+        <color rgba="0.105882 0.580392 0.14902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part d2f_o1l -->
+    <visual>
+      <origin xyz="-0.0682973 0.00218361 0.0794696" rpy="-2.35619 0.00285727 -1.56794"/>
+      <geometry>
+        <mesh filename="package://assets/d2f_o1l.stl"/>
+      </geometry>
+      <material name="d2f_o1l_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0682973 0.00218361 0.0794696" rpy="-2.35619 0.00285727 -1.56794"/>
+      <geometry>
+        <mesh filename="package://assets/d2f_o1l.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl"/>
+      </geometry>
+      <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_1_2 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1__2.stl"/>
+      </geometry>
+      <material name="extruded_1_2_material">
+        <color rgba="0.435294 0.792157 0.176471 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0 -->
+    <visual>
+      <origin xyz="-0.0637803 0.00513026 0.0818822" rpy="-0.785394 0.00285727 -1.56794"/>
+      <geometry>
+        <mesh filename="package://assets/hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0.stl"/>
+      </geometry>
+      <material name="hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0_material">
+        <color rgba="0.603922 0.647059 0.686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0637803 0.00513026 0.0818822" rpy="-0.785394 0.00285727 -1.56794"/>
+      <geometry>
+        <mesh filename="package://assets/hex_socket_head_cap_screw_m2x0_40_x_14__412f78e1d9b47ad523e72c9cd1097cb0.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_5 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_5.stl"/>
+      </geometry>
+      <material name="extruded_4_5_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lsg_08_柔轮 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_08_柔轮.stl"/>
+      </geometry>
+      <material name="lsg_08_柔轮_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_08_柔轮.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl"/>
+      </geometry>
+      <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_5 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_5.stl"/>
+      </geometry>
+      <material name="extruded_5_material">
+        <color rgba="0.792157 0.576471 0.509804 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_1 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_1.stl"/>
+      </geometry>
+      <material name="extruded_4_1_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4.stl"/>
+      </geometry>
+      <material name="extruded_4_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_0_1 -->
+    <visual>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0_1.stl"/>
+      </geometry>
+      <material name="extruded_0_1_material">
+        <color rgba="0.105882 0.580392 0.14902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0926361 0.0115732 0.0764594" rpy="2.35619 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_4 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__3.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_4_material">
+        <color rgba="0.0196078 0.498039 0.341176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl"/>
+      </geometry>
+      <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_5 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_5_material">
+        <color rgba="0.0196078 0.498039 0.341176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_6 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4.stl"/>
+      </geometry>
+      <material name="extruded_4_6_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_3_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_3.stl"/>
+      </geometry>
+      <material name="extruded_4_3_2_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_3_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_3.stl"/>
+      </geometry>
+      <material name="extruded_4_3_3_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_6.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_6_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_6.stl"/>
+      </geometry>
+      <material name="extruded_6_2_material">
+        <color rgba="0.00784314 0.392157 0.72549 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_6.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_pro_xx_后盖_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_pro_xx_后盖.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_pro_xx_后盖_2_material">
+        <color rgba="0.690196 0.764706 0.0196078 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_pro_xx_后盖.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_0_1_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0_1.stl"/>
+      </geometry>
+      <material name="extruded_0_1_2_material">
+        <color rgba="0.105882 0.580392 0.14902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_xx_b_电机壳_1_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_b_电机壳_1.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_xx_b_电机壳_1_2_material">
+        <color rgba="0.898039 0.917647 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_b_电机壳_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_0_1_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0_1.stl"/>
+      </geometry>
+      <material name="extruded_0_1_3_material">
+        <color rgba="0.105882 0.580392 0.14902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_1_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1__2.stl"/>
+      </geometry>
+      <material name="extruded_1_3_material">
+        <color rgba="0.435294 0.792157 0.176471 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_7 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_7_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded.stl"/>
+      </geometry>
+      <material name="extruded_3_material">
+        <color rgba="0.14902 0.180392 0.435294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_2_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_2.stl"/>
+      </geometry>
+      <material name="extruded_2_2_material">
+        <color rgba="0.176471 0.0431373 0.792157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_6 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__2.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_6_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_4_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_4.stl"/>
+      </geometry>
+      <material name="extruded_4_4_2_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_1_4 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1.stl"/>
+      </geometry>
+      <material name="extruded_1_4_material">
+        <color rgba="0.14902 0.180392 0.435294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_xx_柔轮盖_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_柔轮盖.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_xx_柔轮盖_2_material">
+        <color rgba="0.368627 0.941176 0.733333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_柔轮盖.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_6_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_6.stl"/>
+      </geometry>
+      <material name="extruded_6_3_material">
+        <color rgba="0.00784314 0.392157 0.72549 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_6.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_7 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded.stl"/>
+      </geometry>
+      <material name="extruded_7_material">
+        <color rgba="0.14902 0.180392 0.435294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lsg_8_减速器外圈固定_1_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_8_减速器外圈固定_1.stl"/>
+      </geometry>
+      <material name="lsg_8_减速器外圈固定_1_2_material">
+        <color rgba="0.898039 0.917647 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_8_减速器外圈固定_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lsg_08_柔轮_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_08_柔轮.stl"/>
+      </geometry>
+      <material name="lsg_08_柔轮_2_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_08_柔轮.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_xx_柔轮盖_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_柔轮盖.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_xx_柔轮盖_3_material">
+        <color rgba="0.368627 0.941176 0.733333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_柔轮盖.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_5_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_5.stl"/>
+      </geometry>
+      <material name="extruded_5_2_material">
+        <color rgba="0.792157 0.576471 0.509804 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_5_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_5.stl"/>
+      </geometry>
+      <material name="extruded_5_3_material">
+        <color rgba="0.792157 0.576471 0.509804 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_8 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_8_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_1_5 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1__2.stl"/>
+      </geometry>
+      <material name="extruded_1_5_material">
+        <color rgba="0.435294 0.792157 0.176471 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_2_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_2.stl"/>
+      </geometry>
+      <material name="extruded_4_2_2_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part b08_cra_ri30_40_pro_xx_客户参考_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/b08_cra_ri30_40_pro_xx_客户参考.stl"/>
+      </geometry>
+      <material name="b08_cra_ri30_40_pro_xx_客户参考_2_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/b08_cra_ri30_40_pro_xx_客户参考.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_xx_b_电机壳_1_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_b_电机壳_1.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_xx_b_电机壳_1_3_material">
+        <color rgba="0.898039 0.917647 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_xx_b_电机壳_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_1_6 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1.stl"/>
+      </geometry>
+      <material name="extruded_1_6_material">
+        <color rgba="0.14902 0.180392 0.435294 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_0_2 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0.stl"/>
+      </geometry>
+      <material name="extruded_0_2_material">
+        <color rgba="0.105882 0.580392 0.14902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lsg_08_柔轮_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_08_柔轮.stl"/>
+      </geometry>
+      <material name="lsg_08_柔轮_3_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_08_柔轮.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_7 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__3.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_7_material">
+        <color rgba="0.0196078 0.498039 0.341176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl"/>
+      </geometry>
+      <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_1_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_1.stl"/>
+      </geometry>
+      <material name="extruded_4_1_2_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl"/>
+      </geometry>
+      <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part b08_cra_ri30_40_pro_xx_客户参考_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/b08_cra_ri30_40_pro_xx_客户参考.stl"/>
+      </geometry>
+      <material name="b08_cra_ri30_40_pro_xx_客户参考_3_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/b08_cra_ri30_40_pro_xx_客户参考.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_2_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_8 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__2.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_8_material">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_7 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4.stl"/>
+      </geometry>
+      <material name="extruded_4_7_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_2_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_2.stl"/>
+      </geometry>
+      <material name="extruded_4_2_3_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part user_library_0805_2012m__cap_9 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap.stl"/>
+      </geometry>
+      <material name="user_library_0805_2012m__cap_9_material">
+        <color rgba="0.0196078 0.498039 0.341176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/user_library_0805_2012m__cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl"/>
+      </geometry>
+      <material name="cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cross_recessed_countersunk_head_screws_gb1_gb_cross_screws_type4_m2x10_8_8__h_type_n_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_0_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0.stl"/>
+      </geometry>
+      <material name="extruded_0_3_material">
+        <color rgba="0.105882 0.580392 0.14902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_0.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl"/>
+      </geometry>
+      <material name="hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n_3_material">
+        <color rgba="0.776471 0.756863 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/hexagon_socket_head_cap_screws_gb_gb_fastener_screws_hshcs_m2x20_n.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_4_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_4.stl"/>
+      </geometry>
+      <material name="extruded_4_4_3_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_4.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_5_2 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_5.stl"/>
+      </geometry>
+      <material name="extruded_4_5_2_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lsg_8_减速器外圈固定_1_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_8_减速器外圈固定_1.stl"/>
+      </geometry>
+      <material name="lsg_8_减速器外圈固定_1_3_material">
+        <color rgba="0.898039 0.917647 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/lsg_8_减速器外圈固定_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cra_ri30_40_pro_xx_后盖_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_pro_xx_后盖.stl"/>
+      </geometry>
+      <material name="cra_ri30_40_pro_xx_后盖_3_material">
+        <color rgba="0.690196 0.764706 0.0196078 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/cra_ri30_40_pro_xx_后盖.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_2_3 -->
+    <visual>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_2.stl"/>
+      </geometry>
+      <material name="extruded_2_3_material">
+        <color rgba="0.176471 0.0431373 0.792157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0563407 0.0744386 0.0764594" rpy="2.35619 -0 -0.523599"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_5_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_5.stl"/>
+      </geometry>
+      <material name="extruded_4_5_3_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part extruded_4_1_3 -->
+    <visual>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_1.stl"/>
+      </geometry>
+      <material name="extruded_4_1_3_material">
+        <color rgba="0.960784 0.796078 0.207843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0362954 -0.0860118 0.0764594" rpy="2.35619 -0 -2.61799"/>
+      <geometry>
+        <mesh filename="package://assets/extruded_4_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link 2_arbremoteur3 -->
+  <link name="2_arbremoteur3">
+    <inertial>
+      <origin xyz="0.01068 -0.00881276 -0.017437" rpy="0 0 0"/>
+      <mass value="0.0296675"/>
+      <inertia ixx="1.7693e-05" ixy="4.94455e-06" ixz="7.0291e-06" iyy="1.82772e-05" iyz="-7.38623e-06" izz="1.26746e-05"/>
+    </inertial>
+    <!-- Part dbtm3_14_5 -->
+    <visual>
+      <origin xyz="0.0307218 -0.0376264 -0.0600264" rpy="-1.36944 0.25268 2.25552"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+      <material name="dbtm3_14_5_material">
+        <color rgba="0.690196 0.690196 0.690196 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0307218 -0.0376264 -0.0600264" rpy="-1.36944 0.25268 2.25552"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part 2_arbremoteur3 -->
+    <visual>
+      <origin xyz="0.0115732 -0.04 0.0184386" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/2_arbremoteur3.stl"/>
+      </geometry>
+      <material name="2_arbremoteur3_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0115732 -0.04 0.0184386" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/2_arbremoteur3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz -->
+    <visual>
+      <origin xyz="0.0288847 -0.0353764 -0.0607764" rpy="-1.77215 -0.25268 -0.886077"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0288847 -0.0353764 -0.0607764" rpy="-1.77215 -0.25268 -0.886077"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link 3_lien2 -->
+  <link name="3_lien2">
+    <inertial>
+      <origin xyz="0.0153881 0.00162035 -0.0217923" rpy="0 0 0"/>
+      <mass value="0.0118051"/>
+      <inertia ixx="3.6573e-06" ixy="-1.03018e-07" ixz="1.62019e-06" iyy="4.83538e-06" iyz="-2.6151e-08" izz="1.52639e-06"/>
+    </inertial>
+    <!-- Part dbtm3_14_5_2 -->
+    <visual>
+      <origin xyz="0.0206151 0 -0.0478913" rpy="3.14159 0.25268 0"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+      <material name="dbtm3_14_5_2_material">
+        <color rgba="0.690196 0.690196 0.690196 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0206151 0 -0.0478913" rpy="3.14159 0.25268 0"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_2 -->
+    <visual>
+      <origin xyz="0 0 -0.0046" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0046" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_3 -->
+    <visual>
+      <origin xyz="0.0235199 0 -0.0486413" rpy="0 -0.25268 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0235199 0 -0.0486413" rpy="0 -0.25268 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part 3_lien2 -->
+    <visual>
+      <origin xyz="-0.031712 0.0736879 0.0172703" rpy="-2.81984 -0.659058 0"/>
+      <geometry>
+        <mesh filename="package://assets/3_lien2.stl"/>
+      </geometry>
+      <material name="3_lien2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.031712 0.0736879 0.0172703" rpy="-2.81984 -0.659058 0"/>
+      <geometry>
+        <mesh filename="package://assets/3_lien2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2 -->
+    <visual>
+      <origin xyz="-0 0 -0.0085" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+      <material name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_material">
+        <color rgba="0.603922 0.647059 0.686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.0085" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link 4_supporthead -->
+  <link name="4_supporthead">
+    <inertial>
+      <origin xyz="-0.015854 -0.012944 0.00842424" rpy="0 0 0"/>
+      <mass value="0.027354"/>
+      <inertia ixx="6.25131e-06" ixy="1.01868e-06" ixz="1.61018e-06" iyy="5.83496e-06" iyz="1.31515e-06" izz="7.08287e-06"/>
+    </inertial>
+    <!-- Part 4_supporthead -->
+    <visual>
+      <origin xyz="0.0500108 0.0736879 0.0745559" rpy="-2.81984 0.659058 -0"/>
+      <geometry>
+        <mesh filename="package://assets/4_supporthead.stl"/>
+      </geometry>
+      <material name="4_supporthead_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0500108 0.0736879 0.0745559" rpy="-2.81984 0.659058 -0"/>
+      <geometry>
+        <mesh filename="package://assets/4_supporthead.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_4 -->
+    <visual>
+      <origin xyz="0 -0 -0.0026" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0026" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_2 -->
+    <visual>
+      <origin xyz="0 -0 -0.0065" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+      <material name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_2_material">
+        <color rgba="0.603922 0.647059 0.686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0065" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_3 -->
+    <visual>
+      <origin xyz="-0.00685348 -0.033575 0.0200434" rpy="-1.24905 0.659058 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+      <material name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_3_material">
+        <color rgba="0.603922 0.647059 0.686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00685348 -0.033575 0.0200434" rpy="-1.24905 0.659058 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_4 -->
+    <visual>
+      <origin xyz="-0.0342674 -0 0.0200434" rpy="-0 1.31812 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+      <material name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_4_material">
+        <color rgba="0.603922 0.647059 0.686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0342674 -0 0.0200434" rpy="-0 1.31812 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_5 -->
+    <visual>
+      <origin xyz="-0.00609825 -0.0298752 0.0210184" rpy="0.886077 0.25268 -1.77215"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_5_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00609825 -0.0298752 0.0210184" rpy="0.886077 0.25268 -1.77215"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_6 -->
+    <visual>
+      <origin xyz="-0.0304912 -0 0.0210184" rpy="-0 0.25268 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_6_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0304912 -0 0.0210184" rpy="-0 0.25268 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame effector (dummy link + fixed joint) -->
+  <link name="effector">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="effector_frame" type="fixed">
+    <origin xyz="-0.0184369 -0.0148849 0.00519521" rpy="2.42787 -0.361367 -1.27367"/>
+    <parent link="4_supporthead"/>
+    <child link="effector"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_m1_p2_2 (dummy link + fixed joint) -->
+  <link name="closing_m1_p2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m1_p2_2_frame" type="fixed">
+    <origin xyz="-0.0279738 -0 0.0216684" rpy="-1.82348 -0 1.5708"/>
+    <parent link="4_supporthead"/>
+    <child link="closing_m1_p2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_m1_p2_2_z (dummy link + fixed joint) -->
+  <link name="closing_m1_p2_2_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m1_p2_2_z_frame" type="fixed">
+    <origin xyz="-0.124798 -0 -0.00333159" rpy="-1.82348 -0 1.5708"/>
+    <parent link="4_supporthead"/>
+    <child link="closing_m1_p2_2_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_m3_p2_2 (dummy link + fixed joint) -->
+  <link name="closing_m3_p2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m3_p2_2_frame" type="fixed">
+    <origin xyz="-0.00559476 -0.0274086 0.0216684" rpy="1.95839 -0.848062 -0.49848"/>
+    <parent link="4_supporthead"/>
+    <child link="closing_m3_p2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_m3_p2_2_z (dummy link + fixed joint) -->
+  <link name="closing_m3_p2_2_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m3_p2_2_z_frame" type="fixed">
+    <origin xyz="-0.0249597 -0.122277 -0.00333159" rpy="1.95839 -0.848062 -0.49848"/>
+    <parent link="4_supporthead"/>
+    <child link="closing_m3_p2_2_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from 3_lien2 to 4_supporthead -->
+  <joint name="m2_p2" type="revolute">
+    <origin xyz="0.0279738 0 -0.0497913" rpy="-0 -1.31812 0"/>
+    <parent link="3_lien2"/>
+    <child link="4_supporthead"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from 2_arbremoteur3 to 3_lien2 -->
+  <joint name="m1_p1" type="revolute">
+    <origin xyz="0.0260678 -0.0319264 -0.0619264" rpy="1.31313 0.19488 0.633732"/>
+    <parent link="2_arbremoteur3"/>
+    <child link="3_lien2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from moteur_bati_v2 to 2_arbremoteur3 -->
+  <joint name="m1" type="revolute">
+    <origin xyz="-0.0513137 0 0.0612132" rpy="2.35619 0 -1.5708"/>
+    <parent link="moteur_bati_v2"/>
+    <child link="2_arbremoteur3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link 2_arbremoteur3_2 -->
+  <link name="2_arbremoteur3_2">
+    <inertial>
+      <origin xyz="-0.01068 0.00881276 -0.017437" rpy="0 0 0"/>
+      <mass value="0.0296675"/>
+      <inertia ixx="1.7693e-05" ixy="4.94455e-06" ixz="-7.0291e-06" iyy="1.82772e-05" iyz="7.38623e-06" izz="1.26746e-05"/>
+    </inertial>
+    <!-- Part dbtm3_14_5_3 -->
+    <visual>
+      <origin xyz="-0.0307218 0.0376264 -0.0600264" rpy="-1.36944 0.25268 -0.886077"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+      <material name="dbtm3_14_5_3_material">
+        <color rgba="0.690196 0.690196 0.690196 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0307218 0.0376264 -0.0600264" rpy="-1.36944 0.25268 -0.886077"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part 2_arbremoteur3_2 -->
+    <visual>
+      <origin xyz="-0.0115732 0.04 0.0184386" rpy="-1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/2_arbremoteur3.stl"/>
+      </geometry>
+      <material name="2_arbremoteur3_2_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0115732 0.04 0.0184386" rpy="-1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/2_arbremoteur3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_7 -->
+    <visual>
+      <origin xyz="-0.0288847 0.0353764 -0.0607764" rpy="-1.77215 -0.25268 2.25552"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_7_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0288847 0.0353764 -0.0607764" rpy="-1.77215 -0.25268 2.25552"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link 3_lien2_2 -->
+  <link name="3_lien2_2">
+    <inertial>
+      <origin xyz="0.0153881 0.00162035 -0.0217923" rpy="0 0 0"/>
+      <mass value="0.0118051"/>
+      <inertia ixx="3.6573e-06" ixy="-1.03018e-07" ixz="1.62019e-06" iyy="4.83538e-06" iyz="-2.6151e-08" izz="1.52639e-06"/>
+    </inertial>
+    <!-- Part dbtm3_14_5_4 -->
+    <visual>
+      <origin xyz="0.0206151 0 -0.0478913" rpy="-3.14159 0.25268 -0"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+      <material name="dbtm3_14_5_4_material">
+        <color rgba="0.690196 0.690196 0.690196 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0206151 0 -0.0478913" rpy="-3.14159 0.25268 -0"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_8 -->
+    <visual>
+      <origin xyz="0 -0 -0.0046" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_8_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0046" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_9 -->
+    <visual>
+      <origin xyz="0.0235199 0 -0.0486413" rpy="-0 -0.25268 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_9_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0235199 0 -0.0486413" rpy="-0 -0.25268 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part 3_lien2_2 -->
+    <visual>
+      <origin xyz="-0.031712 0.0736879 0.0172703" rpy="-2.81984 -0.659058 -0"/>
+      <geometry>
+        <mesh filename="package://assets/3_lien2.stl"/>
+      </geometry>
+      <material name="3_lien2_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.031712 0.0736879 0.0172703" rpy="-2.81984 -0.659058 -0"/>
+      <geometry>
+        <mesh filename="package://assets/3_lien2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_5 -->
+    <visual>
+      <origin xyz="0 -0 -0.0085" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+      <material name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_5_material">
+        <color rgba="0.603922 0.647059 0.686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.0085" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_m3_p2_1 (dummy link + fixed joint) -->
+  <link name="closing_m3_p2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m3_p2_1_frame" type="fixed">
+    <origin xyz="0.0279738 0 -0.0497913" rpy="-3.14159 -1.31812 -0"/>
+    <parent link="3_lien2_2"/>
+    <child link="closing_m3_p2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_m3_p2_1_z (dummy link + fixed joint) -->
+  <link name="closing_m3_p2_1_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m3_p2_1_z_frame" type="fixed">
+    <origin xyz="0.124798 0 -0.0747913" rpy="-3.14159 -1.31812 -0"/>
+    <parent link="3_lien2_2"/>
+    <child link="closing_m3_p2_1_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from 2_arbremoteur3_2 to 3_lien2_2 -->
+  <joint name="m2_p1" type="revolute">
+    <origin xyz="-0.0260678 0.0319264 -0.0619264" rpy="1.31313 0.19488 -2.50786"/>
+    <parent link="2_arbremoteur3_2"/>
+    <child link="3_lien2_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from moteur_bati_v2 to 2_arbremoteur3_2 -->
+  <joint name="m2" type="revolute">
+    <origin xyz="0.0256569 -0.044439 0.0612132" rpy="-2.35619 -0 -2.61799"/>
+    <parent link="moteur_bati_v2"/>
+    <child link="2_arbremoteur3_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link 2_arbremoteur3_3 -->
+  <link name="2_arbremoteur3_3">
+    <inertial>
+      <origin xyz="-0.01068 0.00881276 -0.017437" rpy="0 0 0"/>
+      <mass value="0.0296675"/>
+      <inertia ixx="1.7693e-05" ixy="4.94455e-06" ixz="-7.0291e-06" iyy="1.82772e-05" iyz="7.38623e-06" izz="1.26746e-05"/>
+    </inertial>
+    <!-- Part dbtm3_14_5_5 -->
+    <visual>
+      <origin xyz="-0.0307218 0.0376264 -0.0600264" rpy="-1.36944 0.25268 -0.886077"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+      <material name="dbtm3_14_5_5_material">
+        <color rgba="0.690196 0.690196 0.690196 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0307218 0.0376264 -0.0600264" rpy="-1.36944 0.25268 -0.886077"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part 2_arbremoteur3_3 -->
+    <visual>
+      <origin xyz="-0.0115732 0.04 0.0184386" rpy="-1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/2_arbremoteur3.stl"/>
+      </geometry>
+      <material name="2_arbremoteur3_3_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0115732 0.04 0.0184386" rpy="-1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/2_arbremoteur3.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_10 -->
+    <visual>
+      <origin xyz="-0.0288847 0.0353764 -0.0607764" rpy="-1.77215 -0.25268 2.25552"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_10_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0288847 0.0353764 -0.0607764" rpy="-1.77215 -0.25268 2.25552"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link 3_lien2_3 -->
+  <link name="3_lien2_3">
+    <inertial>
+      <origin xyz="0.0153881 0.00162035 -0.0217923" rpy="0 0 0"/>
+      <mass value="0.0118051"/>
+      <inertia ixx="3.6573e-06" ixy="-1.03018e-07" ixz="1.62019e-06" iyy="4.83538e-06" iyz="-2.6151e-08" izz="1.52639e-06"/>
+    </inertial>
+    <!-- Part dbtm3_14_5_6 -->
+    <visual>
+      <origin xyz="0.0206151 0 -0.0478913" rpy="-3.14159 0.25268 0"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+      <material name="dbtm3_14_5_6_material">
+        <color rgba="0.690196 0.690196 0.690196 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0206151 0 -0.0478913" rpy="-3.14159 0.25268 0"/>
+      <geometry>
+        <mesh filename="package://assets/dbtm3_14_5.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_11 -->
+    <visual>
+      <origin xyz="-0 -0 -0.0046" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_11_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 -0.0046" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part sfl676zz_12 -->
+    <visual>
+      <origin xyz="0.0235199 0 -0.0486413" rpy="0 -0.25268 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+      <material name="sfl676zz_12_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0235199 0 -0.0486413" rpy="0 -0.25268 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/sfl676zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part 3_lien2_3 -->
+    <visual>
+      <origin xyz="-0.031712 0.0736879 0.0172703" rpy="-2.81984 -0.659058 0"/>
+      <geometry>
+        <mesh filename="package://assets/3_lien2.stl"/>
+      </geometry>
+      <material name="3_lien2_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.031712 0.0736879 0.0172703" rpy="-2.81984 -0.659058 0"/>
+      <geometry>
+        <mesh filename="package://assets/3_lien2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_6 -->
+    <visual>
+      <origin xyz="-0 0 -0.0085" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+      <material name="hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2_6_material">
+        <color rgba="0.603922 0.647059 0.686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.0085" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hex_thin_nut_grade_a___b_m3__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_m1_p2_1 (dummy link + fixed joint) -->
+  <link name="closing_m1_p2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m1_p2_1_frame" type="fixed">
+    <origin xyz="0.0279738 0 -0.0497913" rpy="-3.14159 -1.31812 -0"/>
+    <parent link="3_lien2_3"/>
+    <child link="closing_m1_p2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_m1_p2_1_z (dummy link + fixed joint) -->
+  <link name="closing_m1_p2_1_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_m1_p2_1_z_frame" type="fixed">
+    <origin xyz="0.124798 0 -0.0747913" rpy="-3.14159 -1.31812 -0"/>
+    <parent link="3_lien2_3"/>
+    <child link="closing_m1_p2_1_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from 2_arbremoteur3_3 to 3_lien2_3 -->
+  <joint name="m3_p1" type="revolute">
+    <origin xyz="-0.0260678 0.0319264 -0.0619264" rpy="1.31313 0.19488 -2.50786"/>
+    <parent link="2_arbremoteur3_3"/>
+    <child link="3_lien2_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from moteur_bati_v2 to 2_arbremoteur3_3 -->
+  <joint name="m3" type="revolute">
+    <origin xyz="0.0256569 0.044439 0.0612132" rpy="-2.35619 -0 -0.523599"/>
+    <parent link="moteur_bati_v2"/>
+    <child link="2_arbremoteur3_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

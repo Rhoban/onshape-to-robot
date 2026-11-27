@@ -1,0 +1,403 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 50202dd9a44cc0c62ae35265 / version_id: d3a9dd1ea5dc026fbffa1858 -->
+<robot name="test_export_orbita_urdf_0">
+  <!-- Link bottom -->
+  <link name="bottom">
+    <inertial>
+      <origin xyz="-0 -0 0.0140985" rpy="0 0 0"/>
+      <mass value="1.67515"/>
+      <inertia ixx="0.00291976" ixy="-0" ixz="-0" iyy="0.00291976" iyz="0" izz="0.00559097"/>
+    </inertial>
+    <!-- Part bottom -->
+    <visual>
+      <origin xyz="0 -0 0.09" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/bottom.stl"/>
+      </geometry>
+      <material name="bottom_material">
+        <color rgba="0.501961 0.501961 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0.09" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/bottom.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame base (dummy link + fixed joint) -->
+  <link name="base">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="base_frame" type="fixed">
+    <origin xyz="0 -0 0.102" rpy="0 -0 -0"/>
+    <parent link="bottom"/>
+    <child link="base"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link ring2 -->
+  <link name="ring2">
+    <inertial>
+      <origin xyz="-0.00223555 0.00387209 -0.0144385" rpy="0 0 0"/>
+      <mass value="1.24789"/>
+      <inertia ixx="0.00222303" ixy="0.000185255" ixz="-0.000115174" iyy="0.00200912" iyz="0.000199488" izz="0.00374646"/>
+    </inertial>
+    <!-- Part ring2 -->
+    <visual>
+      <origin xyz="0 0 -0.06" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/ring2.stl"/>
+      </geometry>
+      <material name="ring2_material">
+        <color rgba="0.513725 0.737255 0.407843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.06" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/ring2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link branch -->
+  <link name="branch">
+    <inertial>
+      <origin xyz="0.0563091 0 -0.0426909" rpy="0 0 0"/>
+      <mass value="0.0820329"/>
+      <inertia ixx="8.38675e-05" ixy="-1.51e-10" ixz="7.28802e-05" iyy="0.000165393" iyz="1.51e-10" izz="8.38675e-05"/>
+    </inertial>
+    <!-- Part branch -->
+    <visual>
+      <origin xyz="-0.0771967 0 -0.0218033" rpy="3.14159 -0.785398 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch.stl"/>
+      </geometry>
+      <material name="branch_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0771967 0 -0.0218033" rpy="3.14159 -0.785398 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_ring2_br2_2 (dummy link + fixed joint) -->
+  <link name="closing_ring2_br2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring2_br2_2_frame" type="fixed">
+    <origin xyz="0.081 0 -0.099" rpy="-1.5708 -0 -1.5708"/>
+    <parent link="branch"/>
+    <child link="closing_ring2_br2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_ring2_br2_2_z (dummy link + fixed joint) -->
+  <link name="closing_ring2_br2_2_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring2_br2_2_z_frame" type="fixed">
+    <origin xyz="0.181 0 -0.099" rpy="-1.5708 -0 -1.5708"/>
+    <parent link="branch"/>
+    <child link="closing_ring2_br2_2_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from ring2 to branch -->
+  <joint name="ring2_br1" type="revolute">
+    <origin xyz="-0.0350018 0.0606249 -0.099169" rpy="-0.785398 -0 0.523599"/>
+    <parent link="ring2"/>
+    <child link="branch"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from bottom to ring2 -->
+  <joint name="ring1" type="revolute">
+    <origin xyz="-0 -0 0.03" rpy="-3.14159 0 -0"/>
+    <parent link="bottom"/>
+    <child link="ring2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link ring3 -->
+  <link name="ring3">
+    <inertial>
+      <origin xyz="-0.0017605 -0.00304927 -0.0133819" rpy="0 0 0"/>
+      <mass value="1.23288"/>
+      <inertia ixx="0.00204466" ixy="-0.000145195" ixz="-6.48302e-05" iyy="0.001877" iyz="-0.000112289" izz="0.00365339"/>
+    </inertial>
+    <!-- Part ring3 -->
+    <visual>
+      <origin xyz="0 0 -0.036" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/ring3.stl"/>
+      </geometry>
+      <material name="ring3_material">
+        <color rgba="0.913725 0.647059 0.329412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.036" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/ring3.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link branch_2 -->
+  <link name="branch_2">
+    <inertial>
+      <origin xyz="0.0563091 -0 -0.0426909" rpy="0 0 0"/>
+      <mass value="0.0820329"/>
+      <inertia ixx="8.38675e-05" ixy="-1.51e-10" ixz="7.28802e-05" iyy="0.000165393" iyz="1.51e-10" izz="8.38675e-05"/>
+    </inertial>
+    <!-- Part branch_2 -->
+    <visual>
+      <origin xyz="-0.0771967 -0 -0.0218033" rpy="3.14159 -0.785398 0"/>
+      <geometry>
+        <mesh filename="package://assets/branch.stl"/>
+      </geometry>
+      <material name="branch_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0771967 -0 -0.0218033" rpy="3.14159 -0.785398 0"/>
+      <geometry>
+        <mesh filename="package://assets/branch.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_ring3_br2_2 (dummy link + fixed joint) -->
+  <link name="closing_ring3_br2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring3_br2_2_frame" type="fixed">
+    <origin xyz="0.081 -0 -0.099" rpy="1.5708 0 1.5708"/>
+    <parent link="branch_2"/>
+    <child link="closing_ring3_br2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_ring3_br2_2_z (dummy link + fixed joint) -->
+  <link name="closing_ring3_br2_2_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring3_br2_2_z_frame" type="fixed">
+    <origin xyz="0.181 -0 -0.099" rpy="1.5708 0 1.5708"/>
+    <parent link="branch_2"/>
+    <child link="closing_ring3_br2_2_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from ring3 to branch_2 -->
+  <joint name="ring3_br1" type="revolute">
+    <origin xyz="-0.0350018 -0.0606249 -0.075169" rpy="-0.785398 0 2.61799"/>
+    <parent link="ring3"/>
+    <child link="branch_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from bottom to ring3 -->
+  <joint name="ring2" type="revolute">
+    <origin xyz="-0 -0 0.054" rpy="-3.14159 -0 0"/>
+    <parent link="bottom"/>
+    <child link="ring3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link ring1 -->
+  <link name="ring1">
+    <inertial>
+      <origin xyz="0.00260742 0 -0.0124691" rpy="0 0 0"/>
+      <mass value="1.2023"/>
+      <inertia ixx="0.00169208" ixy="-0" ixz="5.59484e-05" iyy="0.00193469" iyz="-0" izz="0.00347396"/>
+    </inertial>
+    <!-- Part ring1 -->
+    <visual>
+      <origin xyz="0 0 -0.012" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/ring1.stl"/>
+      </geometry>
+      <material name="ring1_material">
+        <color rgba="0.513725 0.415686 0.733333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.012" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/ring1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link branch_3 -->
+  <link name="branch_3">
+    <inertial>
+      <origin xyz="0.0563091 0 -0.0426909" rpy="0 0 0"/>
+      <mass value="0.0820329"/>
+      <inertia ixx="8.38675e-05" ixy="-1.51e-10" ixz="7.28802e-05" iyy="0.000165393" iyz="1.51e-10" izz="8.38675e-05"/>
+    </inertial>
+    <!-- Part branch_3 -->
+    <visual>
+      <origin xyz="-0.0771967 0 -0.0218033" rpy="-3.14159 -0.785398 0"/>
+      <geometry>
+        <mesh filename="package://assets/branch.stl"/>
+      </geometry>
+      <material name="branch_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0771967 0 -0.0218033" rpy="-3.14159 -0.785398 0"/>
+      <geometry>
+        <mesh filename="package://assets/branch.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link platform -->
+  <link name="platform">
+    <inertial>
+      <origin xyz="1.0108e-08 8.83e-10 -0.0810001" rpy="0 0 0"/>
+      <mass value="1.15601"/>
+      <inertia ixx="0.0016525" ixy="4.1e-11" ixz="-7.7e-10" iyy="0.00319848" iyz="2.2e-11" izz="0.00165251"/>
+    </inertial>
+    <!-- Part platform -->
+    <visual>
+      <origin xyz="0 -0.109173 -0.081" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/platform.stl"/>
+      </geometry>
+      <material name="platform_material">
+        <color rgba="0.541176 0.682353 0.839216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.109173 -0.081" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/platform.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame effector (dummy link + fixed joint) -->
+  <link name="effector">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="effector_frame" type="fixed">
+    <origin xyz="-0 0.012 -0.081" rpy="1.5708 -0 3.14159"/>
+    <parent link="platform"/>
+    <child link="effector"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_ring3_br2_1 (dummy link + fixed joint) -->
+  <link name="closing_ring3_br2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring3_br2_1_frame" type="fixed">
+    <origin xyz="0.0701481 0 -0.1215" rpy="-3.14159 -1.0472 -0"/>
+    <parent link="platform"/>
+    <child link="closing_ring3_br2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_ring3_br2_1_z (dummy link + fixed joint) -->
+  <link name="closing_ring3_br2_1_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring3_br2_1_z_frame" type="fixed">
+    <origin xyz="0.156751 0 -0.1715" rpy="-3.14159 -1.0472 -0"/>
+    <parent link="platform"/>
+    <child link="closing_ring3_br2_1_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_ring2_br2_1 (dummy link + fixed joint) -->
+  <link name="closing_ring2_br2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring2_br2_1_frame" type="fixed">
+    <origin xyz="-0.0701481 0 -0.1215" rpy="3.14159 -1.0472 -3.14159"/>
+    <parent link="platform"/>
+    <child link="closing_ring2_br2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_ring2_br2_1_z (dummy link + fixed joint) -->
+  <link name="closing_ring2_br2_1_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_ring2_br2_1_z_frame" type="fixed">
+    <origin xyz="-0.156751 0 -0.1715" rpy="3.14159 -1.0472 -3.14159"/>
+    <parent link="platform"/>
+    <child link="closing_ring2_br2_1_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from branch_3 to platform -->
+  <joint name="ring1_br2" type="revolute">
+    <origin xyz="0.081 -0 -0.099" rpy="-1.5708 0.785398 -1.5708"/>
+    <parent link="branch_3"/>
+    <child link="platform"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from ring1 to branch_3 -->
+  <joint name="ring1_br1" type="revolute">
+    <origin xyz="0.0700036 -0 -0.051169" rpy="-0.785398 0 -1.5708"/>
+    <parent link="ring1"/>
+    <child link="branch_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from bottom to ring1 -->
+  <joint name="ring3" type="revolute">
+    <origin xyz="-0 -0 0.078" rpy="-3.14159 -0 0"/>
+    <parent link="bottom"/>
+    <child link="ring1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

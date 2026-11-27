@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3da7edeeb70f989a5edba88b / version_id: cec8ddb1dda1f9c4a9676e77 -->
+<mujoco model="test_export_features_mechanism5">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_features_mechanism5">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link base -->
+    <body name="base" pos="0 0 0" quat="1 0 0 0" childclass="test_export_features_mechanism5">
+      <freejoint name="base_freejoint"/>
+      <inertial pos="0.442339 -0.117532 -0.0618962" mass="6.88423" fullinertia="0.0273976 0.0517055 0.0741929 -0.00619856 -0.00110468 -0.00165121"/>
+      <!-- Part block -->
+      <geom type="mesh" class="visual" pos="-0.0130185 -0.110249 -0" quat="0.995004 0 -0 0.0998334" mesh="block" material="block_material"/>
+      <geom type="mesh" class="collision" pos="-0.0130185 -0.110249 -0" quat="0.995004 0 -0 0.0998334" mesh="block" material="block_material"/>
+      <!-- Part base -->
+      <geom type="mesh" class="visual" pos="0.44337 -0.119769 -0.083" quat="0.995004 0 -0 0.0998334" mesh="base" material="base_material"/>
+      <geom type="mesh" class="collision" pos="0.44337 -0.119769 -0.083" quat="0.995004 0 -0 0.0998334" mesh="base" material="base_material"/>
+      <!-- Part sheet -->
+      <geom type="mesh" class="visual" pos="-0.183873 -0.246917 -0.097" quat="0.995004 0 -0 0.0998334" mesh="sheet" material="sheet_material"/>
+      <!-- Part block_2 -->
+      <geom type="mesh" class="visual" pos="-0.125069 -0.234997 -0.127" quat="0.995004 0 -0 0.0998334" mesh="block" material="block_material"/>
+      <geom type="mesh" class="collision" pos="-0.125069 -0.234997 -0.127" quat="0.995004 0 -0 0.0998334" mesh="block" material="block_material"/>
+      <!-- Link wheel -->
+      <body name="wheel" pos="0.423503 -0.0217619 -0.063" quat="0.703574 0.703574 0.0705929 0.0705929">
+        <!-- Joint from base to wheel -->
+        <joint axis="0 0 1" name="left_wheel" type="hinge"/>
+        <inertial pos="-0 0 -0.01" mass="0.424115" fullinertia="0.000279209 0.000279209 0.000530144 0 -0 -0"/>
+        <!-- Part wheel -->
+        <geom type="mesh" class="visual" pos="-0.2 0 0" quat="0 1 0 0" mesh="wheel" material="wheel_material"/>
+        <geom type="mesh" class="collision" pos="-0.2 0 0" quat="0 1 0 0" mesh="wheel" material="wheel_material"/>
+      </body>
+      <!-- Link block -->
+      <body name="block" pos="0.29636 -0.149569 -0.063" quat="0.447585 0.447585 0.547419 0.547419">
+        <!-- Joint from base to block -->
+        <!-- Joint is "fixed", skipping it -->
+        <inertial pos="0 -0 -0.02" mass="0.1728" fullinertia="4.608e-05 4.608e-05 4.608e-05 -0 -0 0"/>
+        <!-- Part block_3 -->
+        <geom type="mesh" class="visual" pos="0 -0.02 -0.52" quat="0.5 -0.5 -0.5 -0.5" mesh="block" material="block_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.02 -0.52" quat="0.5 -0.5 -0.5 -0.5" mesh="block" material="block_material"/>
+      </body>
+      <!-- Link slider -->
+      <body name="slider" pos="0.59038 -0.0899681 -0.063" quat="0.447585 -0.447585 -0.547419 0.547419">
+        <!-- Joint from base to slider -->
+        <joint axis="0 0 1" name="slide" type="slide" range="-0.0354 0.0"/>
+        <inertial pos="0 -0 -0.0046" mass="0.1458" fullinertia="5.4675e-05 5.4675e-05 2.187e-05 0 0 0"/>
+        <!-- Part slider -->
+        <geom type="mesh" class="visual" pos="0 0.015 0.5954" quat="0.5 0.5 0.5 -0.5" mesh="slider" material="slider_material"/>
+        <geom type="mesh" class="collision" pos="0 0.015 0.5954" quat="0.5 0.5 0.5 -0.5" mesh="slider" material="slider_material"/>
+      </body>
+      <!-- Link gear -->
+      <body name="gear" pos="0.555284 -0.168506 -0.039" quat="0 0.995004 0.0998334 0">
+        <!-- Joint from base to gear -->
+        <joint axis="0 0 1" name="gear_a1" type="hinge"/>
+        <inertial pos="0 -0 -0.005" mass="0.0763407" fullinertia="1.78128e-05 1.78128e-05 3.43533e-05 -0 0 -0"/>
+        <!-- Part gear -->
+        <geom type="mesh" class="visual" pos="-0.3 -0 0" quat="0 1 0 0" mesh="gear" material="gear_material"/>
+        <geom type="mesh" class="collision" pos="-0.3 -0 0" quat="0 1 0 0" mesh="gear" material="gear_material"/>
+      </body>
+      <!-- Link gear_2 -->
+      <body name="gear_2" pos="0.543363 -0.109702 -0.039" quat="0 0.995004 0.0998334 0">
+        <!-- Joint from base to gear_2 -->
+        <joint axis="0 0 1" name="gear_a2" type="hinge"/>
+        <inertial pos="0 -0 -0.005" mass="0.0763407" fullinertia="1.78128e-05 1.78128e-05 3.43533e-05 -0 0 -0"/>
+        <!-- Part gear_2 -->
+        <geom type="mesh" class="visual" pos="-0.3 -0 0" quat="0 -1 -0 0" mesh="gear" material="gear_material"/>
+        <geom type="mesh" class="collision" pos="-0.3 -0 0" quat="0 -1 -0 0" mesh="gear" material="gear_material"/>
+      </body>
+      <!-- Link gear_3 -->
+      <body name="gear_3" pos="0.535417 -0.0704996 -0.039" quat="0 0.995004 0.0998334 0">
+        <!-- Joint from base to gear_3 -->
+        <joint axis="0 0 1" name="gear_b1" type="hinge"/>
+        <inertial pos="0 0 -0.005" mass="0.0763407" fullinertia="1.78128e-05 1.78128e-05 3.43533e-05 -0 0 0"/>
+        <!-- Part gear_3 -->
+        <geom type="mesh" class="visual" pos="-0.3 0 0" quat="0 1 0 0" mesh="gear" material="gear_material"/>
+        <geom type="mesh" class="collision" pos="-0.3 0 0" quat="0 1 0 0" mesh="gear" material="gear_material"/>
+      </body>
+      <!-- Link gear_4 -->
+      <body name="gear_4" pos="0.523496 -0.0116956 -0.039" quat="0 0.995004 0.0998334 0">
+        <!-- Joint from base to gear_4 -->
+        <joint axis="0 0 1" name="gear_b2" type="hinge"/>
+        <inertial pos="0 0 -0.005" mass="0.0763407" fullinertia="1.78128e-05 1.78128e-05 3.43533e-05 -0 0 0"/>
+        <!-- Part gear_4 -->
+        <geom type="mesh" class="visual" pos="-0.3 0 0" quat="0 1 0 -0" mesh="gear" material="gear_material"/>
+        <geom type="mesh" class="collision" pos="-0.3 0 0" quat="0 1 0 -0" mesh="gear" material="gear_material"/>
+      </body>
+      <!-- Link shoulder_link_x -->
+      <body name="shoulder_link_x" pos="0.33543 -0.0906321 -0.039" quat="0 0.995004 0.0998334 0">
+        <!-- Joint from base to shoulder_link_x -->
+        <joint axis="1 0 0" name="shoulder_x" type="hinge"/>
+        <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+        <!-- Link shoulder_link_y -->
+        <body name="shoulder_link_y" pos="0 0 0" quat="1 -0 -0 -0">
+          <!-- Joint from shoulder_link_x to shoulder_link_y -->
+          <joint axis="0 1 0" name="shoulder_y" type="hinge"/>
+          <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
+          <!-- Link arm -->
+          <body name="arm" pos="0 0 0" quat="1 -0 -0 -0">
+            <!-- Joint from shoulder_link_y to arm -->
+            <joint axis="0 0 1" name="shoulder_z" type="hinge"/>
+            <inertial pos="-0 -0 -0.06" mass="0.1296" fullinertia="0.00015984 0.00015984 8.64e-06 -0 0 0"/>
+            <!-- Part arm -->
+            <geom type="mesh" class="visual" pos="-0.4 -0 0" quat="0 1 0 0" mesh="arm" material="arm_material"/>
+            <geom type="mesh" class="collision" pos="-0.4 -0 0" quat="0 1 0 0" mesh="arm" material="arm_material"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="block.stl"/>
+    <mesh file="base.stl"/>
+    <mesh file="sheet.stl" inertia="shell"/>
+    <mesh file="wheel.stl"/>
+    <mesh file="slider.stl"/>
+    <mesh file="gear.stl"/>
+    <mesh file="arm.stl"/>
+    <material name="block_material" rgba="0.8 0.498039 0.2 1"/>
+    <material name="base_material" rgba="0.6 0.6 0.65098 1"/>
+    <material name="sheet_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="wheel_material" rgba="0.14902 0.14902 0.14902 1"/>
+    <material name="slider_material" rgba="0.298039 0.698039 0.298039 1"/>
+    <material name="gear_material" rgba="0.8 0.8 0.2 1"/>
+    <material name="arm_material" rgba="0.2 0.4 0.8 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_features_mechanism5" name="left_wheel" joint="left_wheel"/>
+    <position class="test_export_features_mechanism5" name="slide" joint="slide" inheritrange="1"/>
+    <position class="test_export_features_mechanism5" name="gear_a1" joint="gear_a1"/>
+    <position class="test_export_features_mechanism5" name="gear_b1" joint="gear_b1"/>
+    <position class="test_export_features_mechanism5" name="shoulder_x" joint="shoulder_x"/>
+    <position class="test_export_features_mechanism5" name="shoulder_y" joint="shoulder_y"/>
+    <position class="test_export_features_mechanism5" name="shoulder_z" joint="shoulder_z"/>
+  </actuator>
+  <equality>
+    <joint joint1="gear_a2" joint2="gear_a1" polycoef="0 -2.0 0 0 0"/>
+    <joint joint1="gear_b2" joint2="gear_b1" polycoef="0 3.0 0 0 0"/>
+  </equality>
+</mujoco>

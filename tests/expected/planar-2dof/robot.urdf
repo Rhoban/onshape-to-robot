@@ -1,0 +1,232 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 1fdd0d64561342b0e458666d / version_id: e84b0b6e47ca77dee74bded7 -->
+<robot name="test_export_planar_2dof_urdf_0">
+  <!-- Link base -->
+  <link name="base">
+    <inertial>
+      <origin xyz="0.000673879 0 0.035858" rpy="0 0 0"/>
+      <mass value="1.01252"/>
+      <inertia ixx="0.00500639" ixy="-0" ixz="-6.2377e-06" iyy="0.000479748" iyz="0" izz="0.00460688"/>
+    </inertial>
+    <!-- Part base -->
+    <visual>
+      <origin xyz="-0.01 -0.125 0" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.01 -0.125 0" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link branch1 -->
+  <link name="branch1">
+    <inertial>
+      <origin xyz="-0.0325 -0.0533854 -0.005" rpy="0 0 0"/>
+      <mass value="0.123901"/>
+      <inertia ixx="0.000170703" ixy="-9.78593e-05" ixz="-0" iyy="6.95315e-05" iyz="-0" izz="0.00023817"/>
+    </inertial>
+    <!-- Part branch1 -->
+    <visual>
+      <origin xyz="-0.065 0.045 0.025" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch1.stl"/>
+      </geometry>
+      <material name="branch1_material">
+        <color rgba="0.231373 0.380392 0.705882 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.065 0.045 0.025" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link branch2 -->
+  <link name="branch2">
+    <inertial>
+      <origin xyz="0.035329 0.0413041 -0.00434716" rpy="0 0 0"/>
+      <mass value="0.112876"/>
+      <inertia ixx="9.43665e-05" ixy="-7.27633e-05" ixz="-2.18646e-06" iyy="7.1534e-05" iyz="-2.55625e-06" izz="0.000163133"/>
+    </inertial>
+    <!-- Part branch2 -->
+    <visual>
+      <origin xyz="0 -0.151771 -0.025" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch2.stl"/>
+      </geometry>
+      <material name="branch2_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.151771 -0.025" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame closing_effector_1 (dummy link + fixed joint) -->
+  <link name="closing_effector_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_effector_1_frame" type="fixed">
+    <origin xyz="0.065 0.0759934 0.005" rpy="0 0 -0"/>
+    <parent link="branch2"/>
+    <child link="closing_effector_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_effector_1_z (dummy link + fixed joint) -->
+  <link name="closing_effector_1_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_effector_1_z_frame" type="fixed">
+    <origin xyz="0.065 0.0759934 0.105" rpy="0 0 -0"/>
+    <parent link="branch2"/>
+    <child link="closing_effector_1_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from branch1 to branch2 -->
+  <joint name="passive1" type="revolute">
+    <origin xyz="-0.065 -0.106771 0" rpy="3.14159 -0 -0.610934"/>
+    <parent link="branch1"/>
+    <child link="branch2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from base to branch1 -->
+  <joint name="motor1" type="revolute">
+    <origin xyz="0.015 -0.06 0.045" rpy="-1.5708 0.546851 1.5708"/>
+    <parent link="base"/>
+    <child link="branch1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link branch1_2 -->
+  <link name="branch1_2">
+    <inertial>
+      <origin xyz="-0.0325 0.0533854 -0.005" rpy="0 0 0"/>
+      <mass value="0.123901"/>
+      <inertia ixx="0.000170703" ixy="9.78593e-05" ixz="0" iyy="6.95315e-05" iyz="0" izz="0.00023817"/>
+    </inertial>
+    <!-- Part branch1_2 -->
+    <visual>
+      <origin xyz="-0.065 -0.045 -0.035" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch1.stl"/>
+      </geometry>
+      <material name="branch1_2_material">
+        <color rgba="0.231373 0.380392 0.705882 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.065 -0.045 -0.035" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/branch1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link branch2_2 -->
+  <link name="branch2_2">
+    <inertial>
+      <origin xyz="0.035329 0.0413041 -0.00434716" rpy="0 0 0"/>
+      <mass value="0.112876"/>
+      <inertia ixx="9.43665e-05" ixy="-7.27633e-05" ixz="-2.18646e-06" iyy="7.1534e-05" iyz="-2.55625e-06" izz="0.000163133"/>
+    </inertial>
+    <!-- Part branch2_2 -->
+    <visual>
+      <origin xyz="0 -0.151771 -0.025" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/branch2.stl"/>
+      </geometry>
+      <material name="branch2_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.151771 -0.025" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/branch2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame effector (dummy link + fixed joint) -->
+  <link name="effector">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="effector_frame" type="fixed">
+    <origin xyz="0.065 0.0759934 -0.01" rpy="-3.14159 -0 0"/>
+    <parent link="branch2_2"/>
+    <child link="effector"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_effector_2 (dummy link + fixed joint) -->
+  <link name="closing_effector_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_effector_2_frame" type="fixed">
+    <origin xyz="0.065 0.0759934 0.005" rpy="3.14159 0 1.5708"/>
+    <parent link="branch2_2"/>
+    <child link="closing_effector_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame closing_effector_2_z (dummy link + fixed joint) -->
+  <link name="closing_effector_2_z">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_effector_2_z_frame" type="fixed">
+    <origin xyz="0.065 0.0759934 -0.095" rpy="3.14159 0 1.5708"/>
+    <parent link="branch2_2"/>
+    <child link="closing_effector_2_z"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from branch1_2 to branch2_2 -->
+  <joint name="passive2" type="revolute">
+    <origin xyz="-0.065 0.106771 -0.01" rpy="-0 -0 0.610934"/>
+    <parent link="branch1_2"/>
+    <child link="branch2_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from base to branch1_2 -->
+  <joint name="motor2" type="revolute">
+    <origin xyz="0.015 0.06 0.045" rpy="1.5708 0.546851 -1.5708"/>
+    <parent link="base"/>
+    <child link="branch1_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

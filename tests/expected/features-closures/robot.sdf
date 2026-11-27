@@ -1,0 +1,318 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3da7edeeb70f989a5edba88b / version_id: cec8ddb1dda1f9c4a9676e77 -->
+<sdf version="1.7">
+  <model name="test_export_features_closures_1">
+    <!-- Link base -->
+    <link name="base">
+      <inertial>
+        <pose>7.47222e-05 -0.000119555 0.0201315 0 0 0</pose>
+        <mass>6.53863</mass>
+        <inertia>
+          <ixx>0.0226458</ixx>
+          <ixy>-2.35103e-05</ixy>
+          <ixz>-1.4984e-05</ixz>
+          <iyy>0.0499322</iyy>
+          <iyz>1.70952e-05</iyz>
+          <izz>0.0707933</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part base -->
+      <visual name="base_visual_mesh_1">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.6 0.6 0.65098 1</ambient>
+          <diffuse>0.6 0.6 0.65098 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="base_collision_mesh_2">
+        <pose relative_to="base">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_fastened_1 -->
+    <frame name="closing_fastened_1">
+      <pose relative_to="base">-0.11 -0.06 0.044 0 -0 0</pose>
+    </frame>
+    <!-- Frame closing_revolute_1 -->
+    <frame name="closing_revolute_1">
+      <pose relative_to="base">-0.05 -0.06 0.044 0 -0 0</pose>
+    </frame>
+    <!-- Frame closing_revolute_1_z -->
+    <frame name="closing_revolute_1_z">
+      <pose relative_to="base">-0.05 -0.06 0.144 0 -0 0</pose>
+    </frame>
+    <!-- Frame closing_ball_1 -->
+    <frame name="closing_ball_1">
+      <pose relative_to="base">0.01 -0.06 0.044 0 -0 0</pose>
+    </frame>
+    <!-- Frame closing_slider_1 -->
+    <frame name="closing_slider_1">
+      <pose relative_to="base">0.07 -0.06 0.044 0 -0 0</pose>
+    </frame>
+    <!-- Link arm -->
+    <link name="arm">
+      <inertial>
+        <pose>0 0 -0.06 0 0 0</pose>
+        <mass>0.1296</mass>
+        <inertia>
+          <ixx>0.00015984</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00015984</iyy>
+          <iyz>0</iyz>
+          <izz>8.64e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="arm_fastened">0 0 0 0 -0 0</pose>
+      <!-- Part arm -->
+      <visual name="arm_visual_mesh_1">
+        <pose relative_to="arm">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.4 0.8 1</ambient>
+          <diffuse>0.2 0.4 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="arm_collision_mesh_2">
+        <pose relative_to="arm">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_fastened_2 -->
+    <frame name="closing_fastened_2">
+      <pose relative_to="arm">0 0 0 3.14159 -0 0</pose>
+    </frame>
+    <!-- Joint from base to arm -->
+    <joint name="arm_fastened" type="revolute">
+      <pose relative_to="base">-0.11 -0.06 0.044 3.14159 -0 0</pose>
+      <parent>base</parent>
+      <child>arm</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link arm_2 -->
+    <link name="arm_2">
+      <inertial>
+        <pose>0 0 -0.06 0 0 0</pose>
+        <mass>0.1296</mass>
+        <inertia>
+          <ixx>0.00015984</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00015984</iyy>
+          <iyz>0</iyz>
+          <izz>8.64e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="arm_revolute">0 0 0 0 -0 0</pose>
+      <!-- Part arm_2 -->
+      <visual name="arm_2_visual_mesh_1">
+        <pose relative_to="arm_2">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.4 0.8 1</ambient>
+          <diffuse>0.2 0.4 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="arm_2_collision_mesh_2">
+        <pose relative_to="arm_2">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_revolute_2 -->
+    <frame name="closing_revolute_2">
+      <pose relative_to="arm_2">0 0 0 3.14159 -0 0</pose>
+    </frame>
+    <!-- Frame closing_revolute_2_z -->
+    <frame name="closing_revolute_2_z">
+      <pose relative_to="arm_2">0 0 -0.1 3.14159 -0 0</pose>
+    </frame>
+    <!-- Joint from base to arm_2 -->
+    <joint name="arm_revolute" type="revolute">
+      <pose relative_to="base">-0.05 -0.06 0.044 3.14159 -0 0</pose>
+      <parent>base</parent>
+      <child>arm_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link arm_3 -->
+    <link name="arm_3">
+      <inertial>
+        <pose>0 0 -0.06 0 0 0</pose>
+        <mass>0.1296</mass>
+        <inertia>
+          <ixx>0.00015984</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00015984</iyy>
+          <iyz>0</iyz>
+          <izz>8.64e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="arm_ball">0 0 0 0 -0 0</pose>
+      <!-- Part arm_3 -->
+      <visual name="arm_3_visual_mesh_1">
+        <pose relative_to="arm_3">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.4 0.8 1</ambient>
+          <diffuse>0.2 0.4 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="arm_3_collision_mesh_2">
+        <pose relative_to="arm_3">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_ball_2 -->
+    <frame name="closing_ball_2">
+      <pose relative_to="arm_3">0 0 0 3.14159 -0 0</pose>
+    </frame>
+    <!-- Joint from base to arm_3 -->
+    <joint name="arm_ball" type="revolute">
+      <pose relative_to="base">0.01 -0.06 0.044 3.14159 -0 0</pose>
+      <parent>base</parent>
+      <child>arm_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Link arm_4 -->
+    <link name="arm_4">
+      <inertial>
+        <pose>0 0 -0.06 0 0 0</pose>
+        <mass>0.1296</mass>
+        <inertia>
+          <ixx>0.00015984</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00015984</iyy>
+          <iyz>0</iyz>
+          <izz>8.64e-06</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="arm_slider">0 0 0 0 -0 0</pose>
+      <!-- Part arm_4 -->
+      <visual name="arm_4_visual_mesh_1">
+        <pose relative_to="arm_4">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.4 0.8 1</ambient>
+          <diffuse>0.2 0.4 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="arm_4_collision_mesh_2">
+        <pose relative_to="arm_4">-0.4 0 0 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_features_closures_1/assets/arm.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame closing_slider_2 -->
+    <frame name="closing_slider_2">
+      <pose relative_to="arm_4">0 0 0 3.14159 -0 0</pose>
+    </frame>
+    <!-- Joint from base to arm_4 -->
+    <joint name="arm_slider" type="revolute">
+      <pose relative_to="base">0.07 -0.06 0.044 3.14159 -0 0</pose>
+      <parent>base</parent>
+      <child>arm_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.14159265359</lower>
+          <upper>3.14159265359</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

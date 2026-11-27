@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 87d011266aedcba5625ad9ab / version_id: 5ba322a44be900ea91a05281 -->
+<robot name="test_export_subasm_linked_arm_0">
+  <!-- Link part_1 -->
+  <link name="part_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part part_1 -->
+    <visual>
+      <origin xyz="0 0.02 0.02" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1.stl"/>
+      </geometry>
+      <material name="part_1_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.02 0.02" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link part_1_2 -->
+  <link name="part_1_2">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part part_1_2 -->
+    <visual>
+      <origin xyz="-0.01 -0.01 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl"/>
+      </geometry>
+      <material name="part_1_2_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.01 -0.01 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part part_1_3 -->
+    <visual>
+      <origin xyz="-0.01 -0.01 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl"/>
+      </geometry>
+      <material name="part_1_3_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.01 -0.01 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link library_arm_forearm -->
+  <link name="library_arm_forearm">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part part_1_4 -->
+    <visual>
+      <origin xyz="-0.01 -0.01 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl"/>
+      </geometry>
+      <material name="part_1_4_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.01 -0.01 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame library_arm_hand (dummy link + fixed joint) -->
+  <link name="library_arm_hand">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="library_arm_hand_frame" type="fixed">
+    <origin xyz="0 0 0.02" rpy="0 -0 0"/>
+    <parent link="library_arm_forearm"/>
+    <child link="library_arm_hand"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from part_1_2 to library_arm_forearm -->
+  <joint name="library_arm_elbow" type="revolute">
+    <origin xyz="0 0 0.02" rpy="3.14159 -0 0"/>
+    <parent link="part_1_2"/>
+    <child link="library_arm_forearm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="2.0944"/>
+  </joint>
+  <!-- Joint from part_1 to part_1_2 -->
+  <joint name="shoulder" type="revolute">
+    <origin xyz="0.01 0.01 0" rpy="0 -0 0"/>
+    <parent link="part_1"/>
+    <child link="part_1_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.5708" upper="1.5708"/>
+  </joint>
+</robot>

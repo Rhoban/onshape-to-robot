@@ -1,0 +1,402 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 2b4ce6dcaffccdf3fecc29ed / version_id: da799a570132a433a3735a45 -->
+<sdf version="1.7">
+  <model name="test_export_irb6620_sdf_0">
+    <!-- Link irb6620_220_150_m2004_rev0_01_1 -->
+    <link name="irb6620_220_150_m2004_rev0_01_1">
+      <inertial>
+        <pose>-0.13157 -0.000324731 0.10665 0 0 0</pose>
+        <mass>266.09</mass>
+        <inertia>
+          <ixx>8.79656</ixx>
+          <ixy>-0.0458079</ixy>
+          <ixz>0.141772</ixz>
+          <iyy>18.2862</iyy>
+          <iyz>-0.0023724</iyz>
+          <izz>25.3614</izz>
+        </inertia>
+      </inertial>
+      <pose>0 0 0 0 -0 0</pose>
+      <!-- Part irb6620_220_150_m2004_rev0_01_1 -->
+      <visual name="irb6620_220_150_m2004_rev0_01_1_visual_mesh_1">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_1">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.890196 0.411765 0.12549 1</ambient>
+          <diffuse>0.890196 0.411765 0.12549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="irb6620_220_150_m2004_rev0_01_1_collision_mesh_2">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_1">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_1.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="irb6620_220_150_m2004_rev0_01_1_fixed_world" type="fixed">
+      <parent>world</parent>
+      <child>irb6620_220_150_m2004_rev0_01_1</child>
+    </joint>
+    <!-- Link irb6620_220_150_m2004_rev0_01_2 -->
+    <link name="irb6620_220_150_m2004_rev0_01_2">
+      <inertial>
+        <pose>0.148912 0.0326312 0.29935 0 0 0</pose>
+        <mass>220.489</mass>
+        <inertia>
+          <ixx>9.5054</ixx>
+          <ixy>-0.754959</ixy>
+          <ixz>-4.4029</ixz>
+          <iyy>15.3894</iyy>
+          <iyz>-0.907867</iyz>
+          <izz>12.196</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="r1">0 0 0 0 -0 0</pose>
+      <!-- Part irb6620_220_150_m2004_rev0_01_2 -->
+      <visual name="irb6620_220_150_m2004_rev0_01_2_visual_mesh_1">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_2">0 -0 -0.23 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.890196 0.411765 0.12549 1</ambient>
+          <diffuse>0.890196 0.411765 0.12549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="irb6620_220_150_m2004_rev0_01_2_collision_mesh_2">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_2">0 -0 -0.23 -0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link irb6620_220_150_m2004_rev0_01_3 -->
+    <link name="irb6620_220_150_m2004_rev0_01_3">
+      <inertial>
+        <pose>0.000201766 -0.418032 -0.0878342 0 0 0</pose>
+        <mass>110.699</mass>
+        <inertia>
+          <ixx>10.6951</ixx>
+          <ixy>0.00186965</ixy>
+          <ixz>0.000244831</ixz>
+          <iyy>0.930618</iyy>
+          <iyz>-1.01793</iyz>
+          <izz>10.9397</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="r2">0 0 0 0 -0 0</pose>
+      <!-- Part irb6620_220_150_m2004_rev0_01_3 -->
+      <visual name="irb6620_220_150_m2004_rev0_01_3_visual_mesh_1">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_3">-0.32 0.68 0.1305 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.890196 0.411765 0.12549 1</ambient>
+          <diffuse>0.890196 0.411765 0.12549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="irb6620_220_150_m2004_rev0_01_3_collision_mesh_2">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_3">-0.32 0.68 0.1305 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link irb6620_220_150_m2004_rev0_01_4 -->
+    <link name="irb6620_220_150_m2004_rev0_01_4">
+      <inertial>
+        <pose>-0.0481335 -0.117643 0.233825 0 0 0</pose>
+        <mass>134.266</mass>
+        <inertia>
+          <ixx>4.01479</ixx>
+          <ixy>-0.542085</ixy>
+          <ixz>0.49661</ixz>
+          <iyy>3.9943</iyy>
+          <iyz>0.698475</iyz>
+          <izz>3.70266</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="r3">0 0 0 0 -0 0</pose>
+      <!-- Part irb6620_220_150_m2004_rev0_01_4 -->
+      <visual name="irb6620_220_150_m2004_rev0_01_4_visual_mesh_1">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_4">-0.32 1.655 0.226 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.890196 0.411765 0.12549 1</ambient>
+          <diffuse>0.890196 0.411765 0.12549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="irb6620_220_150_m2004_rev0_01_4_collision_mesh_2">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_4">-0.32 1.655 0.226 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link irb6620_220_150_m2004_rev0_01_5 -->
+    <link name="irb6620_220_150_m2004_rev0_01_5">
+      <inertial>
+        <pose>-0.0139217 1.09139e-05 0.391175 0 0 0</pose>
+        <mass>97.0252</mass>
+        <inertia>
+          <ixx>3.90432</ixx>
+          <ixy>8.74851e-05</ixy>
+          <ixz>0.218534</ixz>
+          <iyy>4.61447</iyy>
+          <iyz>-0.000206186</iyz>
+          <izz>1.34679</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="r4">0 0 0 0 -0 0</pose>
+      <!-- Part irb6620_220_150_m2004_rev0_01_5 -->
+      <visual name="irb6620_220_150_m2004_rev0_01_5_visual_mesh_1">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_5">0 -1.855 -0.502 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.890196 0.411765 0.12549 1</ambient>
+          <diffuse>0.890196 0.411765 0.12549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="irb6620_220_150_m2004_rev0_01_5_collision_mesh_2">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_5">0 -1.855 -0.502 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link irb6620_220_150_m2004_rev0_01_6 -->
+    <link name="irb6620_220_150_m2004_rev0_01_6">
+      <inertial>
+        <pose>0.0363042 -4.4635e-08 0.09713 0 0 0</pose>
+        <mass>16.719</mass>
+        <inertia>
+          <ixx>0.0660364</ixx>
+          <ixy>-2.1174e-08</ixy>
+          <ixz>0.00327854</ixz>
+          <iyy>0.131163</iyy>
+          <iyz>6.0012e-08</iyz>
+          <izz>0.121498</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="r5">0 0 0 0 -0 0</pose>
+      <!-- Part irb6620_220_150_m2004_rev0_01_6 -->
+      <visual name="irb6620_220_150_m2004_rev0_01_6_visual_mesh_1">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_6">-1.207 1.855 0.095 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.890196 0.411765 0.12549 1</ambient>
+          <diffuse>0.890196 0.411765 0.12549 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="irb6620_220_150_m2004_rev0_01_6_collision_mesh_2">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_6">-1.207 1.855 0.095 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Link irb6620_220_150_m2004_rev0_01_7 -->
+    <link name="irb6620_220_150_m2004_rev0_01_7">
+      <inertial>
+        <pose>0 9.49046e-06 0.018941 0 0 0</pose>
+        <mass>7.065</mass>
+        <inertia>
+          <ixx>0.0177307</ixx>
+          <ixy>-0</ixy>
+          <ixz>-0</ixz>
+          <iyy>0.0177254</iyy>
+          <iyz>3.4598e-06</iyz>
+          <izz>0.0340227</izz>
+        </inertia>
+      </inertial>
+      <pose relative_to="r6">0 0 0 0 -0 0</pose>
+      <!-- Part irb6620_220_150_m2004_rev0_01_7 -->
+      <visual name="irb6620_220_150_m2004_rev0_01_7_visual_mesh_1">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_7">0 -1.855 -1.37 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_7.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.701961 0.701961 0.701961 1</ambient>
+          <diffuse>0.701961 0.701961 0.701961 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+      <collision name="irb6620_220_150_m2004_rev0_01_7_collision_mesh_2">
+        <pose relative_to="irb6620_220_150_m2004_rev0_01_7">0 -1.855 -1.37 -1.5708 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_export_irb6620_sdf_0/assets/irb6620_220_150_m2004_rev0_01_7.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <!-- Frame effector -->
+    <frame name="effector">
+      <pose relative_to="irb6620_220_150_m2004_rev0_01_7">0 0 0.0385 -1.5708 -1.5708 0</pose>
+    </frame>
+    <!-- Joint from irb6620_220_150_m2004_rev0_01_6 to irb6620_220_150_m2004_rev0_01_7 -->
+    <joint name="r6" type="revolute">
+      <pose relative_to="irb6620_220_150_m2004_rev0_01_6">0.163 0 0.095 -1.5708 -1.28408 -1.5708</pose>
+      <parent>irb6620_220_150_m2004_rev0_01_6</parent>
+      <child>irb6620_220_150_m2004_rev0_01_7</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-5.522704400625</lower>
+          <upper>4.949271111341</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from irb6620_220_150_m2004_rev0_01_5 to irb6620_220_150_m2004_rev0_01_6 -->
+    <joint name="r5" type="revolute">
+      <pose relative_to="irb6620_220_150_m2004_rev0_01_5">-0.095 0 0.705 -1.5708 -0.760156 -1.5708</pose>
+      <parent>irb6620_220_150_m2004_rev0_01_5</parent>
+      <child>irb6620_220_150_m2004_rev0_01_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.079568470184</lower>
+          <upper>1.458287585001</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from irb6620_220_150_m2004_rev0_01_4 to irb6620_220_150_m2004_rev0_01_5 -->
+    <joint name="r4" type="revolute">
+      <pose relative_to="irb6620_220_150_m2004_rev0_01_4">0.182 -0.2 0.226 1.5708 -1.26007 1.5708</pose>
+      <parent>irb6620_220_150_m2004_rev0_01_4</parent>
+      <child>irb6620_220_150_m2004_rev0_01_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-4.925261486437</lower>
+          <upper>5.546714025529</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from irb6620_220_150_m2004_rev0_01_3 to irb6620_220_150_m2004_rev0_01_4 -->
+    <joint name="r3" type="revolute">
+      <pose relative_to="irb6620_220_150_m2004_rev0_01_3">-0 -0.975 -0.0955 -0 -0 0.478387</pose>
+      <parent>irb6620_220_150_m2004_rev0_01_3</parent>
+      <child>irb6620_220_150_m2004_rev0_01_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.619979800623</lower>
+          <upper>0.743343329363</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from irb6620_220_150_m2004_rev0_01_2 to irb6620_220_150_m2004_rev0_01_3 -->
+    <joint name="r2" type="revolute">
+      <pose relative_to="irb6620_220_150_m2004_rev0_01_2">0.32 -0.1305 0.45 -1.5708 -1.12495 -0</pose>
+      <parent>irb6620_220_150_m2004_rev0_01_2</parent>
+      <child>irb6620_220_150_m2004_rev0_01_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-1.31851552389</lower>
+          <upper>2.259409442698</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <!-- Joint from irb6620_220_150_m2004_rev0_01_1 to irb6620_220_150_m2004_rev0_01_2 -->
+    <joint name="r1" type="revolute">
+      <pose relative_to="irb6620_220_150_m2004_rev0_01_1">-0 0 0.23 -0 0 0.116002</pose>
+      <parent>irb6620_220_150_m2004_rev0_01_1</parent>
+      <child>irb6620_220_150_m2004_rev0_01_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>10</velocity>
+          <lower>-3.083061908031</lower>
+          <upper>2.85105754875</upper>
+        </limit>
+        <dynamics>
+          <friction>0.0</friction>
+          <damping>0.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

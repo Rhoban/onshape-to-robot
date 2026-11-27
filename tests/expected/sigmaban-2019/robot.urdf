@@ -1,0 +1,3751 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 2ef789a836dee8edd86c1288 / version_id: 2f72ce9b0a27e1c384564b81 -->
+<robot name="test_export_sigmaban_2019_urdf0">
+  <!-- Link tronc -->
+  <link name="tronc">
+    <inertial>
+      <origin xyz="0.000280866 0.00434829 0.0901186" rpy="0 0 0"/>
+      <mass value="1.49258"/>
+      <inertia ixx="0.00652487" ixy="5.5354e-06" ixz="1.87301e-05" iyy="0.00716127" iyz="-0.000110706" izz="0.00434153"/>
+    </inertial>
+    <!-- Part handle -->
+    <visual>
+      <origin xyz="0 0.072823 0.1449" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/handle.stl"/>
+      </geometry>
+      <material name="handle_material">
+        <color rgba="0.701961 0.682353 0.623529 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.072823 0.1449" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/handle.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64 -->
+    <visual>
+      <origin xyz="0.05 -0.032127 0.1609" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.05 -0.032127 0.1609" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101 -->
+    <visual>
+      <origin xyz="-0.031 -0.046627 0.1369" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.031 -0.046627 0.1369" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part high_leg_protection_left -->
+    <visual>
+      <origin xyz="-0.121675 -0.054354 -0.00350004" rpy="0 -0 1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/high_leg_protection_left.stl"/>
+      </geometry>
+      <material name="high_leg_protection_left_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.121675 -0.054354 -0.00350004" rpy="0 -0 1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/high_leg_protection_left.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_2 -->
+    <visual>
+      <origin xyz="0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_2_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part high_leg_protection_right -->
+    <visual>
+      <origin xyz="0.031275 -0.054354 -0.00349999" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/high_leg_protection_right.stl"/>
+      </geometry>
+      <material name="high_leg_protection_right_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.031275 -0.054354 -0.00349999" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/high_leg_protection_right.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_3 -->
+    <visual>
+      <origin xyz="0 -0.037127 0.1623" rpy="0 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_3_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.037127 0.1623" rpy="0 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part torso_top_plate_nuc -->
+    <visual>
+      <origin xyz="0 -0.007127 0.1369" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/torso_top_plate_nuc.stl"/>
+      </geometry>
+      <material name="torso_top_plate_nuc_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.007127 0.1369" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/torso_top_plate_nuc.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part pillar_tube -->
+    <visual>
+      <origin xyz="0.0625 0.037873 0.1339" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+      <material name="pillar_tube_material">
+        <color rgba="0.501961 0.486275 0.439216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0625 0.037873 0.1339" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lipo_4s_2800mah -->
+    <visual>
+      <origin xyz="-0.001 0.026123 0.0406" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/lipo_4s_2800mah.stl"/>
+      </geometry>
+      <material name="lipo_4s_2800mah_material">
+        <color rgba="0.105882 0.372549 0.666667 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.001 0.026123 0.0406" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/lipo_4s_2800mah.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr08_b101 -->
+    <visual>
+      <origin xyz="0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+      <material name="fr08_b101_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part pillar_tube_2 -->
+    <visual>
+      <origin xyz="-0.0625 0.037873 0.0479" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+      <material name="pillar_tube_2_material">
+        <color rgba="0.501961 0.486275 0.439216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0625 0.037873 0.0479" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part pillar_tube_3 -->
+    <visual>
+      <origin xyz="-0.031 -0.054127 0.0479" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+      <material name="pillar_tube_3_material">
+        <color rgba="0.501961 0.486275 0.439216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.031 -0.054127 0.0479" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block -->
+    <visual>
+      <origin xyz="-0.0625 0.069823 0.1489" rpy="-1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0625 0.069823 0.1489" rpy="-1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part torso_middle_plate_nuc -->
+    <visual>
+      <origin xyz="0 -0.004627 0.0454" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torso_middle_plate_nuc.stl"/>
+      </geometry>
+      <material name="torso_middle_plate_nuc_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.004627 0.0454" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torso_middle_plate_nuc.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part piano_wire_back_fixation -->
+    <visual>
+      <origin xyz="-0.052 0.066273 0.1459" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/piano_wire_back_fixation.stl"/>
+      </geometry>
+      <material name="piano_wire_back_fixation_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.052 0.066273 0.1459" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/piano_wire_back_fixation.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part torso_bottom_plate_nuc -->
+    <visual>
+      <origin xyz="0 0.008123 -4.219e-08" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torso_bottom_plate_nuc.stl"/>
+      </geometry>
+      <material name="torso_bottom_plate_nuc_material">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.008123 -4.219e-08" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torso_bottom_plate_nuc.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr08_b101_2 -->
+    <visual>
+      <origin xyz="0 -0.037127 0.1623" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+      <material name="fr08_b101_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.037127 0.1623" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part dxlboard -->
+    <visual>
+      <origin xyz="0 -0.015627 0.1274" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/dxlboard.stl"/>
+      </geometry>
+      <material name="dxlboard_material">
+        <color rgba="0.105882 0.333333 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.015627 0.1274" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/dxlboard.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part piano_wire_back_fixation_2 -->
+    <visual>
+      <origin xyz="0.06695 0.051323 0.1459" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/piano_wire_back_fixation.stl"/>
+      </geometry>
+      <material name="piano_wire_back_fixation_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.06695 0.051323 0.1459" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/piano_wire_back_fixation.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_2 -->
+    <visual>
+      <origin xyz="0.069 -0.046627 0.1369" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.069 -0.046627 0.1369" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hotswap -->
+    <visual>
+      <origin xyz="-0.005 -0.011254 0.0534" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/hotswap.stl"/>
+      </geometry>
+      <material name="hotswap_material">
+        <color rgba="0.0431373 0.333333 0.0392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.005 -0.011254 0.0534" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/hotswap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_4 -->
+    <visual>
+      <origin xyz="-0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_4_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nuc -->
+    <visual>
+      <origin xyz="0 0.019873 0.10615" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nuc.stl"/>
+      </geometry>
+      <material name="nuc_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.019873 0.10615" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nuc.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nuc_fix -->
+    <visual>
+      <origin xyz="0 0.052373 0.1399" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/nuc_fix.stl"/>
+      </geometry>
+      <material name="nuc_fix_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.052373 0.1399" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/nuc_fix.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_2 -->
+    <visual>
+      <origin xyz="0.0625 0.069823 0.1489" rpy="-1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0625 0.069823 0.1489" rpy="-1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr08_b101_3 -->
+    <visual>
+      <origin xyz="-0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+      <material name="fr08_b101_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.046375 -0.011254 0.02" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part pillar_tube_4 -->
+    <visual>
+      <origin xyz="0.031 -0.054127 0.0484" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+      <material name="pillar_tube_4_material">
+        <color rgba="0.501961 0.486275 0.439216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.031 -0.054127 0.0484" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/pillar_tube.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_5 -->
+    <visual>
+      <origin xyz="-0.0505868 -0.032127 0.1609" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_5_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0505868 -0.032127 0.1609" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part torsomarker -->
+    <visual>
+      <origin xyz="0 -0.064127 0.0439" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torsomarker.stl"/>
+      </geometry>
+      <material name="torsomarker_material">
+        <color rgba="0.341176 0.776471 0.741176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.064127 0.0439" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torsomarker.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part torsoprotect -->
+    <visual>
+      <origin xyz="0 -0.064127 0.0439" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torsoprotect.stl"/>
+      </geometry>
+      <material name="torsoprotect_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.064127 0.0439" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/torsoprotect.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part emergencymarker -->
+    <visual>
+      <origin xyz="0 -0.064127 0.0439" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/emergencymarker.stl"/>
+      </geometry>
+      <material name="emergencymarker_material">
+        <color rgba="0.341176 0.776471 0.741176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.064127 0.0439" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/emergencymarker.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part backmarker -->
+    <visual>
+      <origin xyz="0.0005 0.057873 -4.219e-08" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/backmarker.stl"/>
+      </geometry>
+      <material name="backmarker_material">
+        <color rgba="0.341176 0.776471 0.741176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0005 0.057873 -4.219e-08" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/backmarker.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part belt -->
+    <visual>
+      <origin xyz="0.0005 0.057873 -4.219e-08" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/belt.stl"/>
+      </geometry>
+      <material name="belt_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0005 0.057873 -4.219e-08" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/belt.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame trunk (dummy link + fixed joint) -->
+  <link name="trunk">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="trunk_frame" type="fixed">
+    <origin xyz="0 -0.011254 -0.0435" rpy="-0 -0 -1.5708"/>
+    <parent link="tronc"/>
+    <child link="trunk"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame head_base (dummy link + fixed joint) -->
+  <link name="head_base">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="head_base_frame" type="fixed">
+    <origin xyz="0 -0.037127 0.1858" rpy="0 0 -1.5708"/>
+    <parent link="tronc"/>
+    <child link="head_base"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link u_block -->
+  <link name="u_block">
+    <inertial>
+      <origin xyz="-0.00607049 -2.126e-09 -0.0117654" rpy="0 0 0"/>
+      <mass value="0.0354404"/>
+      <inertia ixx="8.64708e-06" ixy="-3e-12" ixz="-7.76843e-07" iyy="2.30163e-05" iyz="-1e-12" izz="2.00312e-05"/>
+    </inertial>
+    <!-- Part u_base_motors_blocs -->
+    <visual>
+      <origin xyz="-0.03094 0.015 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+      <material name="u_base_motors_blocs_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.03094 0.015 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small -->
+    <visual>
+      <origin xyz="-0.03294 0.015 0" rpy="-1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+      <material name="u_side_small_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.03294 0.015 0" rpy="-1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_with_trace -->
+    <visual>
+      <origin xyz="0.0234 -0.015 0" rpy="-1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+      <material name="u_side_small_with_trace_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0234 -0.015 0" rpy="-1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link mx106_block_mir -->
+  <link name="mx106_block_mir">
+    <inertial>
+      <origin xyz="0.000708644 -0.0149916 0.004996" rpy="0 0 0"/>
+      <mass value="0.293468"/>
+      <inertia ixx="0.000351924" ixy="-3.56118e-06" ixz="-3.81447e-06" iyy="0.000307324" iyz="-2.48449e-05" izz="0.000137869"/>
+    </inertial>
+    <!-- Part hn05_i101 -->
+    <visual>
+      <origin xyz="-0 -0 0.04962" rpy="0 -0 -2.7698"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.04962" rpy="0 -0 -2.7698"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz -->
+    <visual>
+      <origin xyz="-0 -0 0.05318" rpy="3.14159 0 0.57871"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.05318" rpy="3.14159 0 0.57871"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_3 -->
+    <visual>
+      <origin xyz="0.019 0.0145 0.0474" rpy="3.14159 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.019 0.0145 0.0474" rpy="3.14159 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_4 -->
+    <visual>
+      <origin xyz="0.019 -0.0505 -0.0006" rpy="0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.019 -0.0505 -0.0006" rpy="0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr08_b101_4 -->
+    <visual>
+      <origin xyz="-0 -0.036 -0.026" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+      <material name="fr08_b101_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.036 -0.026" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_f101 -->
+    <visual>
+      <origin xyz="-0 -0 0.0474" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+      <material name="fr05_f101_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.0474" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_2 -->
+    <visual>
+      <origin xyz="0.02222 0 0.0234" rpy="-1.5708 0.391796 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02222 0 0.0234" rpy="-1.5708 0.391796 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_2 -->
+    <visual>
+      <origin xyz="0.02578 0 0.0234" rpy="1.5708 -1.179 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02578 0 0.0234" rpy="1.5708 -1.179 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap -->
+    <visual>
+      <origin xyz="0.0245 0 0.0234" rpy="-1.5708 0.391796 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0245 0 0.0234" rpy="-1.5708 0.391796 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106 -->
+    <visual>
+      <origin xyz="-0 -0 0.0234" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.0234" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_3 -->
+    <visual>
+      <origin xyz="0 0 -0.04822" rpy="3.14159 -0 -2.56288"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04822" rpy="3.14159 -0 -2.56288"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_3 -->
+    <visual>
+      <origin xyz="0 0 -0.05178" rpy="-0 0 -0.992087"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05178" rpy="-0 0 -0.992087"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_2 -->
+    <visual>
+      <origin xyz="0 0 -0.0505" rpy="3.14159 -0 -2.56288"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0505" rpy="3.14159 -0 -2.56288"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_2 -->
+    <visual>
+      <origin xyz="0 0 -0.026" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.026" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link right_knee -->
+  <link name="right_knee">
+    <inertial>
+      <origin xyz="0.000188839 -0.092394 0.0273957" rpy="0 0 0"/>
+      <mass value="0.202752"/>
+      <inertia ixx="0.000442788" ixy="-7.6707e-08" ixz="-2.5533e-08" iyy="9.69639e-05" iyz="1.17863e-05" izz="0.000385387"/>
+    </inertial>
+    <!-- Part fr05_s101_5 -->
+    <visual>
+      <origin xyz="-0.0145 -0.0855 0.007" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0145 -0.0855 0.007" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_4 -->
+    <visual>
+      <origin xyz="0 -0.14 0.04822" rpy="0 -0 0.29763"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.14 0.04822" rpy="0 -0 0.29763"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_4 -->
+    <visual>
+      <origin xyz="0 -0.14 0.05178" rpy="-3.14159 0 -1.179"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.14 0.05178" rpy="-3.14159 0 -1.179"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_3 -->
+    <visual>
+      <origin xyz="0 -0.14 0.0505" rpy="0 0 -1.1495"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.14 0.0505" rpy="0 0 -1.1495"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_3 -->
+    <visual>
+      <origin xyz="0 -0.14 0.026" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.14 0.026" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_base_64 -->
+    <visual>
+      <origin xyz="0 -0.0855 0.026" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64.stl"/>
+      </geometry>
+      <material name="u_base_64_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0855 0.026" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_femur_mir -->
+    <visual>
+      <origin xyz="0 -0.0855 0.009" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur_mir.stl"/>
+      </geometry>
+      <material name="u_side_femur_mir_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0855 0.009" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur_mir.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_femur -->
+    <visual>
+      <origin xyz="0 -0.0855 -0.003" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur.stl"/>
+      </geometry>
+      <material name="u_side_femur_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0855 -0.003" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link tibia -->
+  <link name="tibia">
+    <inertial>
+      <origin xyz="-0.00342169 0.0646068 0.026" rpy="0 0 0"/>
+      <mass value="0.0888437"/>
+      <inertia ixx="0.000245247" ixy="-6.12719e-06" ixz="1.4e-11" iyy="7.67255e-05" iyz="3.8e-11" izz="0.000187463"/>
+    </inertial>
+    <!-- Part tibia_plate -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+      <material name="tibia_plate_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part tibia_plate_2 -->
+    <visual>
+      <origin xyz="-0 -0 0.055" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+      <material name="tibia_plate_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.055" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link mx106_block -->
+  <link name="mx106_block">
+    <inertial>
+      <origin xyz="0.0184063 0.0149916 0.027049" rpy="0 0 0"/>
+      <mass value="0.293468"/>
+      <inertia ixx="0.000137693" ixy="-2.48419e-05" ixz="5.67913e-06" iyy="0.000307124" iyz="3.25323e-06" izz="0.0003519"/>
+    </inertial>
+    <!-- Part hn05_i101_5 -->
+    <visual>
+      <origin xyz="-0.02622 0 0.026" rpy="-1.5708 1.5032 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02622 0 0.026" rpy="-1.5708 1.5032 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_5 -->
+    <visual>
+      <origin xyz="-0.02978 0 0.026" rpy="-1.5708 1.24899 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02978 0 0.026" rpy="-1.5708 1.24899 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_6 -->
+    <visual>
+      <origin xyz="-0.024 -0.0145 0.007" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.024 -0.0145 0.007" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_7 -->
+    <visual>
+      <origin xyz="0.024 0.0505 0.007" rpy="1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.024 0.0505 0.007" rpy="1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr08_b101_5 -->
+    <visual>
+      <origin xyz="0.0494 0.036 0.026" rpy="0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+      <material name="fr08_b101_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0494 0.036 0.026" rpy="0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_f101_2 -->
+    <visual>
+      <origin xyz="-0.024 0 0.026" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+      <material name="fr05_f101_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.024 0 0.026" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_6 -->
+    <visual>
+      <origin xyz="0 0 0.04822" rpy="0 -0 1.96259"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.04822" rpy="0 -0 1.96259"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_6 -->
+    <visual>
+      <origin xyz="0 0 0.05178" rpy="3.14159 -0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05178" rpy="3.14159 -0 -2.7498"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_4 -->
+    <visual>
+      <origin xyz="0 0 0.0505" rpy="0 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0505" rpy="0 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_4 -->
+    <visual>
+      <origin xyz="0 0 0.026" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.026" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_7 -->
+    <visual>
+      <origin xyz="0.07162 0 0.026" rpy="-1.5708 1.24899 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.07162 0 0.026" rpy="-1.5708 1.24899 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_7 -->
+    <visual>
+      <origin xyz="0.07518 0 0.026" rpy="-1.5708 0.321807 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.07518 0 0.026" rpy="-1.5708 0.321807 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_5 -->
+    <visual>
+      <origin xyz="0.0739 0 0.026" rpy="-1.5708 1.24899 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0739 0 0.026" rpy="-1.5708 1.24899 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_5 -->
+    <visual>
+      <origin xyz="0.0494 0 0.026" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_5_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0494 0 0.026" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link right_foot_cleat_back_left -->
+  <link name="right_foot_cleat_back_left">
+    <inertial>
+      <origin xyz="-0.00468466 -0.0365779 0.0511529" rpy="0 0 0"/>
+      <mass value="0.239067"/>
+      <inertia ixx="0.000628183" ixy="-1.62629e-06" ixz="4.22638e-06" iyy="0.000791509" iyz="-2.53047e-05" izz="0.000201629"/>
+    </inertial>
+    <!-- Part gauge_protection_lateral -->
+    <visual>
+      <origin xyz="0.0425 -0.0431 0.11867" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+      <material name="gauge_protection_lateral_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0425 -0.0431 0.11867" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_3 -->
+    <visual>
+      <origin xyz="-0.0525 -0.037 0.00867" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0525 -0.037 0.00867" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_protection -->
+    <visual>
+      <origin xyz="-0.033 -0.04 0.10347" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot_protection.stl"/>
+      </geometry>
+      <material name="foot_protection_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.033 -0.04 0.10347" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot_protection.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_4 -->
+    <visual>
+      <origin xyz="0.0415 -0.037 0.06867" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0415 -0.037 0.06867" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_plate -->
+    <visual>
+      <origin xyz="-0.0055 -0.043 0.03867" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/foot_plate.stl"/>
+      </geometry>
+      <material name="foot_plate_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0055 -0.043 0.03867" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/foot_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part gauge_protection_lateral_2 -->
+    <visual>
+      <origin xyz="-0.0535 -0.0431 -0.04133" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+      <material name="gauge_protection_lateral_2_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0535 -0.0431 -0.04133" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_5 -->
+    <visual>
+      <origin xyz="-0.0525 -0.037 0.06867" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0525 -0.037 0.06867" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_6 -->
+    <visual>
+      <origin xyz="0.0415 -0.037 0.00867" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0415 -0.037 0.00867" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_base_motors_blocs_2 -->
+    <visual>
+      <origin xyz="0.015 -0.04 0.05434" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+      <material name="u_base_motors_blocs_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.015 -0.04 0.05434" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_2 -->
+    <visual>
+      <origin xyz="0.015 -0.04 0.05634" rpy="-3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+      <material name="u_side_small_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.015 -0.04 0.05634" rpy="-3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_with_trace_2 -->
+    <visual>
+      <origin xyz="-0.015 -0.04 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+      <material name="u_side_small_with_trace_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.015 -0.04 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg -->
+    <visual>
+      <origin xyz="0.0325 -0.04 0.09597" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0325 -0.04 0.09597" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring -->
+    <visual>
+      <origin xyz="0.0325 -0.044 0.10947" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0325 -0.044 0.10947" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat -->
+    <visual>
+      <origin xyz="0.0325 -0.06 0.10947" rpy="-0 0.555221 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0325 -0.06 0.10947" rpy="-0 0.555221 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg_2 -->
+    <visual>
+      <origin xyz="-0.0435 -0.04 0.09597" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_2_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0435 -0.04 0.09597" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring_2 -->
+    <visual>
+      <origin xyz="-0.0435 -0.044 0.10947" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_2_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0435 -0.044 0.10947" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat_2 -->
+    <visual>
+      <origin xyz="-0.0435 -0.06 0.10947" rpy="-3.14159 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_2_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0435 -0.06 0.10947" rpy="-3.14159 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg_3 -->
+    <visual>
+      <origin xyz="0.0325 -0.04 -0.01863" rpy="-1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0325 -0.04 -0.01863" rpy="-1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring_3 -->
+    <visual>
+      <origin xyz="0.0325 -0.044 -0.03213" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_3_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0325 -0.044 -0.03213" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat_3 -->
+    <visual>
+      <origin xyz="0.0325 -0.06 -0.03213" rpy="-0 -0.311457 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_3_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0325 -0.06 -0.03213" rpy="-0 -0.311457 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg_4 -->
+    <visual>
+      <origin xyz="-0.0435 -0.04 -0.01863" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0435 -0.04 -0.01863" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring_4 -->
+    <visual>
+      <origin xyz="-0.0435 -0.044 -0.03213" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_4_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0435 -0.044 -0.03213" rpy="1.5708 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat_4 -->
+    <visual>
+      <origin xyz="-0.0435 -0.06 -0.03213" rpy="-3.14159 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_4_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0435 -0.06 -0.03213" rpy="-3.14159 0.199727 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame right_foot (dummy link + fixed joint) -->
+  <link name="right_foot">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_foot_frame" type="fixed">
+    <origin xyz="-0 -0.06 0.02317" rpy="-1.5708 -1.5708 0"/>
+    <parent link="right_foot_cleat_back_left"/>
+    <child link="right_foot"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from mx106_block to right_foot_cleat_back_left -->
+  <joint name="right_ankle_roll" type="revolute">
+    <origin xyz="0.0234 0 0.026" rpy="-0 -1.5708 0"/>
+    <parent link="mx106_block"/>
+    <child link="right_foot_cleat_back_left"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from tibia to mx106_block -->
+  <joint name="right_ankle_pitch" type="revolute">
+    <origin xyz="0 0.14 0" rpy="-0 0 -3.14159"/>
+    <parent link="tibia"/>
+    <child link="mx106_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from right_knee to tibia -->
+  <joint name="right_knee" type="revolute">
+    <origin xyz="0 -0.14 0" rpy="-0 -0 -3.14159"/>
+    <parent link="right_knee"/>
+    <child link="tibia"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from mx106_block_mir to right_knee -->
+  <joint name="right_hip_pitch" type="revolute">
+    <origin xyz="-0.026 -0 0.0234" rpy="-0 1.5708 0"/>
+    <parent link="mx106_block_mir"/>
+    <child link="right_knee"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from u_block to mx106_block_mir -->
+  <joint name="right_hip_roll" type="revolute">
+    <origin xyz="0.0234 0 -0.04" rpy="1.5708 0 -1.5708"/>
+    <parent link="u_block"/>
+    <child link="mx106_block_mir"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from tronc to u_block -->
+  <joint name="right_hip_yaw" type="revolute">
+    <origin xyz="-0.046375 -0.011254 -0.00350004" rpy="-0 -0 1.5708"/>
+    <parent link="tronc"/>
+    <child link="u_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link u_block_2 -->
+  <link name="u_block_2">
+    <inertial>
+      <origin xyz="-0.00607049 -2.126e-09 -0.0117654" rpy="0 0 0"/>
+      <mass value="0.0354404"/>
+      <inertia ixx="8.64708e-06" ixy="-3e-12" ixz="-7.76843e-07" iyy="2.30163e-05" iyz="-1e-12" izz="2.00312e-05"/>
+    </inertial>
+    <!-- Part u_base_motors_blocs_3 -->
+    <visual>
+      <origin xyz="-0.03094 0.015 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+      <material name="u_base_motors_blocs_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.03094 0.015 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_3 -->
+    <visual>
+      <origin xyz="-0.03294 0.015 0" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+      <material name="u_side_small_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.03294 0.015 0" rpy="-1.5708 -0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_with_trace_3 -->
+    <visual>
+      <origin xyz="0.0234 -0.015 0" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+      <material name="u_side_small_with_trace_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0234 -0.015 0" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link mx106_block_2 -->
+  <link name="mx106_block_2">
+    <inertial>
+      <origin xyz="-0.00104898 -0.0149916 0.00499375" rpy="0 0 0"/>
+      <mass value="0.293468"/>
+      <inertia ixx="0.0003519" ixy="3.25323e-06" ixz="5.67913e-06" iyy="0.000307124" iyz="-2.48419e-05" izz="0.000137693"/>
+    </inertial>
+    <!-- Part hn05_i101_8 -->
+    <visual>
+      <origin xyz="-0 -0 0.04962" rpy="0 -0 -1.38232"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.04962" rpy="0 -0 -1.38232"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_8 -->
+    <visual>
+      <origin xyz="-0 -0 0.05318" rpy="3.14159 0 2.14868"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.05318" rpy="3.14159 0 2.14868"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_8 -->
+    <visual>
+      <origin xyz="0.019 0.0145 0.0474" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.019 0.0145 0.0474" rpy="-3.14159 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_9 -->
+    <visual>
+      <origin xyz="0.019 -0.0505 -0.0006" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.019 -0.0505 -0.0006" rpy="-0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr08_b101_6 -->
+    <visual>
+      <origin xyz="-0 -0.036 -0.026" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+      <material name="fr08_b101_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.036 -0.026" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_f101_3 -->
+    <visual>
+      <origin xyz="-0 -0 0.0474" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+      <material name="fr05_f101_3_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.0474" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_9 -->
+    <visual>
+      <origin xyz="-0.02222 -0 0.0234" rpy="-1.5708 1.42471 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02222 -0 0.0234" rpy="-1.5708 1.42471 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_9 -->
+    <visual>
+      <origin xyz="-0.02578 -0 0.0234" rpy="-1.5708 0.146084 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02578 -0 0.0234" rpy="-1.5708 0.146084 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_6 -->
+    <visual>
+      <origin xyz="-0.0245 -0 0.0234" rpy="-1.5708 1.43999 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0245 -0 0.0234" rpy="-1.5708 1.43999 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_6 -->
+    <visual>
+      <origin xyz="-0 0 0.0234" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_6_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 0.0234" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_10 -->
+    <visual>
+      <origin xyz="-0 0 -0.04822" rpy="-3.14159 0 -0.992912"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.04822" rpy="-3.14159 0 -0.992912"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_10 -->
+    <visual>
+      <origin xyz="-0 0 -0.05178" rpy="-0 0 -2.56371"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.05178" rpy="-0 0 -2.56371"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_7 -->
+    <visual>
+      <origin xyz="-0 0 -0.0505" rpy="-3.14159 0 -0.992912"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.0505" rpy="-3.14159 0 -0.992912"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_7 -->
+    <visual>
+      <origin xyz="-0 0 -0.026" rpy="-0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_7_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.026" rpy="-0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link left_knee -->
+  <link name="left_knee">
+    <inertial>
+      <origin xyz="-0.000185582 0.092394 -0.0271483" rpy="0 0 0"/>
+      <mass value="0.202752"/>
+      <inertia ixx="0.000442915" ixy="-1.0121e-07" ixz="1.22179e-07" iyy="9.70918e-05" iyz="1.18508e-05" izz="0.000385387"/>
+    </inertial>
+    <!-- Part fr05_s101_10 -->
+    <visual>
+      <origin xyz="0.0145 0.0855 -0.045" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0145 0.0855 -0.045" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_11 -->
+    <visual>
+      <origin xyz="-0 0.14 -0.04822" rpy="-3.14159 -0 0.485963"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_11_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.14 -0.04822" rpy="-3.14159 -0 0.485963"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_11 -->
+    <visual>
+      <origin xyz="-0 0.14 -0.05178" rpy="-0 -0 1.96259"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_11_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.14 -0.05178" rpy="-0 -0 1.96259"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_8 -->
+    <visual>
+      <origin xyz="-0 0.14 -0.0505" rpy="3.14159 -0 1.93309"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.14 -0.0505" rpy="3.14159 -0 1.93309"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_8 -->
+    <visual>
+      <origin xyz="-0 0.14 -0.026" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_8_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.14 -0.026" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_base_64_2 -->
+    <visual>
+      <origin xyz="0 0.0855 -0.026" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64.stl"/>
+      </geometry>
+      <material name="u_base_64_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0855 -0.026" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_femur_mir_2 -->
+    <visual>
+      <origin xyz="0 0.0855 -0.009" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur_mir.stl"/>
+      </geometry>
+      <material name="u_side_femur_mir_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0855 -0.009" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur_mir.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_femur_2 -->
+    <visual>
+      <origin xyz="0 0.0855 0.003" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur.stl"/>
+      </geometry>
+      <material name="u_side_femur_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0855 0.003" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_femur.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link tibia_2 -->
+  <link name="tibia_2">
+    <inertial>
+      <origin xyz="-0.00342169 0.0646068 -0.026" rpy="0 0 0"/>
+      <mass value="0.0888437"/>
+      <inertia ixx="0.000245247" ixy="-6.12719e-06" ixz="1.4e-11" iyy="7.67255e-05" iyz="3.8e-11" izz="0.000187463"/>
+    </inertial>
+    <!-- Part tibia_plate_3 -->
+    <visual>
+      <origin xyz="0 0 -0.052" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+      <material name="tibia_plate_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.052" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part tibia_plate_4 -->
+    <visual>
+      <origin xyz="0 0 0.003" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+      <material name="tibia_plate_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.003" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia_plate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link mx106_block_mir_2 -->
+  <link name="mx106_block_mir_2">
+    <inertial>
+      <origin xyz="-0.018404 -0.0149916 -0.0267086" rpy="0 0 0"/>
+      <mass value="0.293468"/>
+      <inertia ixx="0.000137869" ixy="-2.48449e-05" ixz="3.81447e-06" iyy="0.000307324" iyz="3.56118e-06" izz="0.000351924"/>
+    </inertial>
+    <!-- Part hn05_i101_12 -->
+    <visual>
+      <origin xyz="0.02622 -0 -0.026" rpy="-1.5708 -0.410724 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_12_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02622 -0 -0.026" rpy="-1.5708 -0.410724 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_12 -->
+    <visual>
+      <origin xyz="0.02978 -0 -0.026" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_12_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02978 -0 -0.026" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_11 -->
+    <visual>
+      <origin xyz="0.024 0.0145 -0.045" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_11_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.024 0.0145 -0.045" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_12 -->
+    <visual>
+      <origin xyz="-0.024 -0.0505 -0.045" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_12_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.024 -0.0505 -0.045" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr08_b101_7 -->
+    <visual>
+      <origin xyz="-0.0494 -0.036 -0.026" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+      <material name="fr08_b101_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0494 -0.036 -0.026" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr08_b101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_f101_4 -->
+    <visual>
+      <origin xyz="0.024 -0 -0.026" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+      <material name="fr05_f101_4_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.024 -0 -0.026" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_f101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_13 -->
+    <visual>
+      <origin xyz="0 0 -0.04822" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_13_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04822" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_13 -->
+    <visual>
+      <origin xyz="0 0 -0.05178" rpy="0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_13_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05178" rpy="0 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_9 -->
+    <visual>
+      <origin xyz="0 0 -0.0505" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0505" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_9 -->
+    <visual>
+      <origin xyz="0 0 -0.026" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_9_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.026" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_14 -->
+    <visual>
+      <origin xyz="-0.07162 -0 -0.026" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_14_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.07162 -0 -0.026" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_14 -->
+    <visual>
+      <origin xyz="-0.07518 -0 -0.026" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_14_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.07518 -0 -0.026" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_10 -->
+    <visual>
+      <origin xyz="-0.0739 -0 -0.026" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0739 -0 -0.026" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx106_10 -->
+    <visual>
+      <origin xyz="-0.0494 -0 -0.026" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+      <material name="mx106_10_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0494 -0 -0.026" rpy="-0 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx106.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link left_foot_cleat_front_right -->
+  <link name="left_foot_cleat_front_right">
+    <inertial>
+      <origin xyz="0.00468466 -0.0365779 0.0511529" rpy="0 0 0"/>
+      <mass value="0.239067"/>
+      <inertia ixx="0.000628183" ixy="1.62629e-06" ixz="-4.22638e-06" iyy="0.000791509" iyz="-2.53047e-05" izz="0.000201629"/>
+    </inertial>
+    <!-- Part gauge_protection_lateral_3 -->
+    <visual>
+      <origin xyz="0.0535 -0.0431 0.11867" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+      <material name="gauge_protection_lateral_3_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0535 -0.0431 0.11867" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_7 -->
+    <visual>
+      <origin xyz="-0.0415 -0.037 0.00867" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0415 -0.037 0.00867" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_protection_2 -->
+    <visual>
+      <origin xyz="-0.022 -0.04 0.10347" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot_protection.stl"/>
+      </geometry>
+      <material name="foot_protection_2_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.022 -0.04 0.10347" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot_protection.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_8 -->
+    <visual>
+      <origin xyz="0.0525 -0.037 0.06867" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0525 -0.037 0.06867" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part foot_plate_2 -->
+    <visual>
+      <origin xyz="0.0055 -0.043 0.03867" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/foot_plate.stl"/>
+      </geometry>
+      <material name="foot_plate_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0055 -0.043 0.03867" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/foot_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part gauge_protection_lateral_4 -->
+    <visual>
+      <origin xyz="-0.0425 -0.0431 -0.04133" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+      <material name="gauge_protection_lateral_4_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0425 -0.0431 -0.04133" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/gauge_protection_lateral.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_9 -->
+    <visual>
+      <origin xyz="-0.0415 -0.037 0.06867" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_9_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0415 -0.037 0.06867" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mounting_block_10 -->
+    <visual>
+      <origin xyz="0.0525 -0.037 0.00867" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+      <material name="mounting_block_10_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0525 -0.037 0.00867" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/mounting_block.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_base_motors_blocs_4 -->
+    <visual>
+      <origin xyz="0.015 -0.04 0.05434" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+      <material name="u_base_motors_blocs_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.015 -0.04 0.05434" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_motors_blocs.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_4 -->
+    <visual>
+      <origin xyz="0.015 -0.04 0.05634" rpy="-3.14159 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+      <material name="u_side_small_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.015 -0.04 0.05634" rpy="-3.14159 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_with_trace_4 -->
+    <visual>
+      <origin xyz="-0.015 -0.04 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+      <material name="u_side_small_with_trace_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.015 -0.04 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small_with_trace.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg_5 -->
+    <visual>
+      <origin xyz="0.0435 -0.04 0.09597" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_5_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0435 -0.04 0.09597" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring_5 -->
+    <visual>
+      <origin xyz="0.0435 -0.044 0.10947" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_5_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0435 -0.044 0.10947" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat_5 -->
+    <visual>
+      <origin xyz="0.0435 -0.06 0.10947" rpy="3.14159 0.480536 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_5_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0435 -0.06 0.10947" rpy="3.14159 0.480536 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg_6 -->
+    <visual>
+      <origin xyz="-0.0325 -0.04 0.09597" rpy="1.5708 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_6_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 -0.04 0.09597" rpy="1.5708 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring_6 -->
+    <visual>
+      <origin xyz="-0.0325 -0.044 0.10947" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_6_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 -0.044 0.10947" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat_6 -->
+    <visual>
+      <origin xyz="-0.0325 -0.06 0.10947" rpy="3.14159 0.480536 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_6_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 -0.06 0.10947" rpy="3.14159 0.480536 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg_7 -->
+    <visual>
+      <origin xyz="0.0435 -0.04 -0.01863" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_7_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0435 -0.04 -0.01863" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring_7 -->
+    <visual>
+      <origin xyz="0.0435 -0.044 -0.03213" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_7_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0435 -0.044 -0.03213" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat_7 -->
+    <visual>
+      <origin xyz="0.0435 -0.06 -0.03213" rpy="3.14159 0.480536 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_7_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0435 -0.06 -0.03213" rpy="3.14159 0.480536 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part load_cell_40kg_8 -->
+    <visual>
+      <origin xyz="-0.0325 -0.04 -0.01863" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+      <material name="load_cell_40kg_8_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 -0.04 -0.01863" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/load_cell_40kg.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part nylon_ring_8 -->
+    <visual>
+      <origin xyz="-0.0325 -0.044 -0.03213" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+      <material name="nylon_ring_8_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 -0.044 -0.03213" rpy="1.5708 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/nylon_ring.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part cleat_8 -->
+    <visual>
+      <origin xyz="-0.0325 -0.06 -0.03213" rpy="3.14159 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+      <material name="cleat_8_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0325 -0.06 -0.03213" rpy="3.14159 0.480536 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/cleat.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame left_foot (dummy link + fixed joint) -->
+  <link name="left_foot">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_foot_frame" type="fixed">
+    <origin xyz="-0 -0.06 0.02317" rpy="-1.5708 -1.5708 0"/>
+    <parent link="left_foot_cleat_front_right"/>
+    <child link="left_foot"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from mx106_block_mir_2 to left_foot_cleat_front_right -->
+  <joint name="left_ankle_roll" type="revolute">
+    <origin xyz="-0.0234 -0 -0.026" rpy="-3.14159 -1.5708 0"/>
+    <parent link="mx106_block_mir_2"/>
+    <child link="left_foot_cleat_front_right"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from tibia_2 to mx106_block_mir_2 -->
+  <joint name="left_ankle_pitch" type="revolute">
+    <origin xyz="0 0.14 0" rpy="-0 -0 -0"/>
+    <parent link="tibia_2"/>
+    <child link="mx106_block_mir_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from left_knee to tibia_2 -->
+  <joint name="left_knee" type="revolute">
+    <origin xyz="-0 0.14 0" rpy="0 -0 0"/>
+    <parent link="left_knee"/>
+    <child link="tibia_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from mx106_block_2 to left_knee -->
+  <joint name="left_hip_pitch" type="revolute">
+    <origin xyz="0.026 0 0.0234" rpy="-3.14159 -1.5708 0"/>
+    <parent link="mx106_block_2"/>
+    <child link="left_knee"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from u_block_2 to mx106_block_2 -->
+  <joint name="left_hip_roll" type="revolute">
+    <origin xyz="0.0234 0 -0.04" rpy="1.5708 0 -1.5708"/>
+    <parent link="u_block_2"/>
+    <child link="mx106_block_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from tronc to u_block_2 -->
+  <joint name="left_hip_yaw" type="revolute">
+    <origin xyz="0.046375 -0.011254 -0.00349999" rpy="0 -0 1.5708"/>
+    <parent link="tronc"/>
+    <child link="u_block_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link u_shoulder -->
+  <link name="u_shoulder">
+    <inertial>
+      <origin xyz="0 0.00486029 0.0167829" rpy="0 0 0"/>
+      <mass value="0.042898"/>
+      <inertia ixx="1.57991e-05" ixy="0" ixz="-0" iyy="2.84983e-05" iyz="-3.76137e-06" izz="2.50037e-05"/>
+    </inertial>
+    <!-- Part u_side_shoulder_mir -->
+    <visual>
+      <origin xyz="-0.071 -0 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder_mir.stl"/>
+      </geometry>
+      <material name="u_side_shoulder_mir_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.071 -0 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder_mir.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_shoulder -->
+    <visual>
+      <origin xyz="0 -0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder.stl"/>
+      </geometry>
+      <material name="u_side_shoulder_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_base_64_3 -->
+    <visual>
+      <origin xyz="0 -0 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64__2.stl"/>
+      </geometry>
+      <material name="u_base_64_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64__2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link left_humerus -->
+  <link name="left_humerus">
+    <inertial>
+      <origin xyz="-0.00126251 -0.0436099 -0.0264304" rpy="0 0 0"/>
+      <mass value="0.160913"/>
+      <inertia ixx="0.000298866" ixy="-1.14436e-05" ixz="2.70833e-06" iyy="5.22003e-05" iyz="-2.91954e-06" izz="0.000291858"/>
+    </inertial>
+    <!-- Part elbow_protection -->
+    <visual>
+      <origin xyz="-0.0305 -0.098 -0.0216736" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/elbow_protection.stl"/>
+      </geometry>
+      <material name="elbow_protection_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0305 -0.098 -0.0216736" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/elbow_protection.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_h101 -->
+    <visual>
+      <origin xyz="-0 -0.112 -0.00167365" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_h101.stl"/>
+      </geometry>
+      <material name="fr05_h101_material">
+        <color rgba="0.501961 0.486275 0.439216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.112 -0.00167365" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_h101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_13 -->
+    <visual>
+      <origin xyz="0.0145 -0.052 -0.0416736" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_13_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0145 -0.052 -0.0416736" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part humerus_plate -->
+    <visual>
+      <origin xyz="0.015 -0.127 -0.0406736" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/humerus_plate.stl"/>
+      </geometry>
+      <material name="humerus_plate_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.015 -0.127 -0.0406736" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/humerus_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_11 -->
+    <visual>
+      <origin xyz="0 0 -0.0455" rpy="-3.14159 0 -0.551747"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_11_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0455" rpy="-3.14159 0 -0.551747"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_15 -->
+    <visual>
+      <origin xyz="0 0 -0.04678" rpy="0 0 -0.551747"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_15_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04678" rpy="0 0 -0.551747"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_15 -->
+    <visual>
+      <origin xyz="0 0 -0.04322" rpy="3.14159 -0 -2.50954"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_15_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04322" rpy="3.14159 -0 -2.50954"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_6 -->
+    <visual>
+      <origin xyz="0 0 -0.0235" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_6_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0235" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link left_radius -->
+  <link name="left_radius">
+    <inertial>
+      <origin xyz="0.00327966 -0.0430868 -0.0251932" rpy="0 0 0"/>
+      <mass value="0.15357"/>
+      <inertia ixx="0.000332027" ixy="2.83043e-05" ixz="-7.76862e-07" iyy="4.10668e-05" iyz="9.63669e-06" izz="0.000323367"/>
+    </inertial>
+    <!-- Part fr05_s101_14 -->
+    <visual>
+      <origin xyz="-0.0145 -0.052 -0.0045" rpy="-1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_14_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0145 -0.052 -0.0045" rpy="-1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part radius_plate -->
+    <visual>
+      <origin xyz="0.0165 -0.141 -0.0085" rpy="-3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/radius_plate.stl"/>
+      </geometry>
+      <material name="radius_plate_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0165 -0.141 -0.0085" rpy="-3.14159 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/radius_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_12 -->
+    <visual>
+      <origin xyz="0 0 -0.0455" rpy="-3.14159 -0 -1.85238"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_12_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0455" rpy="-3.14159 -0 -1.85238"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_16 -->
+    <visual>
+      <origin xyz="0 0 -0.04678" rpy="0 -0 -1.85238"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_16_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04678" rpy="0 -0 -1.85238"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_16 -->
+    <visual>
+      <origin xyz="0 0 -0.04322" rpy="-3.14159 0 2.47301"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_16_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04322" rpy="-3.14159 0 2.47301"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_7 -->
+    <visual>
+      <origin xyz="0 0 -0.0235" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_7_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0235" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from left_humerus to left_radius -->
+  <joint name="left_elbow" type="revolute">
+    <origin xyz="0.0235 -0.112 -0.00167365" rpy="0 1.5708 0"/>
+    <parent link="left_humerus"/>
+    <child link="left_radius"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from u_shoulder to left_humerus -->
+  <joint name="left_shoulder_roll" type="revolute">
+    <origin xyz="0.0225 0.03 0.035" rpy="3.14159 -1.5708 0"/>
+    <parent link="u_shoulder"/>
+    <child link="left_humerus"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from tronc to u_shoulder -->
+  <joint name="left_shoulder_pitch" type="revolute">
+    <origin xyz="0.0735 -0.032127 0.1609" rpy="-1.5708 -0 -1.5708"/>
+    <parent link="tronc"/>
+    <child link="u_shoulder"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link u_shoulder_2 -->
+  <link name="u_shoulder_2">
+    <inertial>
+      <origin xyz="0 -0.00486029 -0.0167829" rpy="0 0 0"/>
+      <mass value="0.042898"/>
+      <inertia ixx="1.57991e-05" ixy="-0" ixz="0" iyy="2.84983e-05" iyz="-3.76137e-06" izz="2.50037e-05"/>
+    </inertial>
+    <!-- Part u_side_shoulder_mir_2 -->
+    <visual>
+      <origin xyz="-0.071 0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder_mir.stl"/>
+      </geometry>
+      <material name="u_side_shoulder_mir_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.071 0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder_mir.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_shoulder_2 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder.stl"/>
+      </geometry>
+      <material name="u_side_shoulder_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_shoulder.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_base_64_4 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64__2.stl"/>
+      </geometry>
+      <material name="u_base_64_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64__2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link right_humerus -->
+  <link name="right_humerus">
+    <inertial>
+      <origin xyz="0.00126251 -0.0436099 -0.0271147" rpy="0 0 0"/>
+      <mass value="0.160913"/>
+      <inertia ixx="0.000298586" ixy="1.14436e-05" ixz="-2.52758e-06" iyy="5.19202e-05" iyz="-5.286e-06" izz="0.000291858"/>
+    </inertial>
+    <!-- Part fr05_h101_2 -->
+    <visual>
+      <origin xyz="-0 -0.112 -0.0025" rpy="-1.5708 0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_h101.stl"/>
+      </geometry>
+      <material name="fr05_h101_2_material">
+        <color rgba="0.501961 0.486275 0.439216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.112 -0.0025" rpy="-1.5708 0 -1e-12"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_h101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part elbow_protection_2 -->
+    <visual>
+      <origin xyz="0.0305 -0.126 -0.0225" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/elbow_protection.stl"/>
+      </geometry>
+      <material name="elbow_protection_2_material">
+        <color rgba="0.901961 0.901961 0.901961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0305 -0.126 -0.0225" rpy="-1e-12 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/elbow_protection.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part fr05_s101_15 -->
+    <visual>
+      <origin xyz="-0.0145 -0.052 -0.0045" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_15_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0145 -0.052 -0.0045" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part humerus_plate_2 -->
+    <visual>
+      <origin xyz="0.015 -0.127 -0.0415" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/humerus_plate.stl"/>
+      </geometry>
+      <material name="humerus_plate_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.015 -0.127 -0.0415" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/humerus_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_13 -->
+    <visual>
+      <origin xyz="0 0 -0.0455" rpy="-3.14159 -0 -2.59023"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_13_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0455" rpy="-3.14159 -0 -2.59023"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_17 -->
+    <visual>
+      <origin xyz="0 0 -0.04678" rpy="-0 0 0.551368"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_17_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04678" rpy="-0 0 0.551368"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_17 -->
+    <visual>
+      <origin xyz="0 0 -0.04322" rpy="-3.14159 0 1.73517"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_17_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04322" rpy="-3.14159 0 1.73517"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_8 -->
+    <visual>
+      <origin xyz="0 0 -0.0235" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_8_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0235" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link right_radius -->
+  <link name="right_radius">
+    <inertial>
+      <origin xyz="-0.00327966 0.0430868 0.0248666" rpy="0 0 0"/>
+      <mass value="0.15357"/>
+      <inertia ixx="0.00033218" ixy="2.83043e-05" ixz="-7.64256e-07" iyy="4.12202e-05" iyz="9.80244e-06" izz="0.000323367"/>
+    </inertial>
+    <!-- Part fr05_s101_16 -->
+    <visual>
+      <origin xyz="0.0145 0.052 0.0425" rpy="-1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+      <material name="fr05_s101_16_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0145 0.052 0.0425" rpy="-1.5708 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/fr05_s101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part radius_plate_2 -->
+    <visual>
+      <origin xyz="-0.0165 0.141 0.0385" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/radius_plate.stl"/>
+      </geometry>
+      <material name="radius_plate_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0165 0.141 0.0385" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/radius_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_14 -->
+    <visual>
+      <origin xyz="0 -0 0.0455" rpy="-0 0 -1.62003"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_14_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0.0455" rpy="-0 0 -1.62003"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_18 -->
+    <visual>
+      <origin xyz="0 -0 0.04678" rpy="3.14159 0 -1.62003"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_18_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0.04678" rpy="3.14159 0 -1.62003"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_18 -->
+    <visual>
+      <origin xyz="0 -0 0.04322" rpy="0 -0 0.337763"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_18_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0.04322" rpy="0 -0 0.337763"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_9 -->
+    <visual>
+      <origin xyz="0 -0 0.0235" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_9_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0.0235" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from right_humerus to right_radius -->
+  <joint name="right_elbow" type="revolute">
+    <origin xyz="-0.0235 -0.112 -0.0025" rpy="3.14159 -1.5708 0"/>
+    <parent link="right_humerus"/>
+    <child link="right_radius"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from u_shoulder_2 to right_humerus -->
+  <joint name="right_shoulder_roll" type="revolute">
+    <origin xyz="-0.0225 -0.03 -0.035" rpy="-0 -1.5708 0"/>
+    <parent link="u_shoulder_2"/>
+    <child link="right_humerus"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from tronc to u_shoulder_2 -->
+  <joint name="right_shoulder_pitch" type="revolute">
+    <origin xyz="-0.0740868 -0.032127 0.1609" rpy="1.5708 -0 1.5708"/>
+    <parent link="tronc"/>
+    <child link="u_shoulder_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link u_neck -->
+  <link name="u_neck">
+    <inertial>
+      <origin xyz="-0 -0 0.0128918" rpy="0 0 0"/>
+      <mass value="0.0362092"/>
+      <inertia ixx="9.33353e-06" ixy="4e-12" ixz="0" iyy="2.23897e-05" iyz="0" izz="1.88135e-05"/>
+    </inertial>
+    <!-- Part u_side_small_5 -->
+    <visual>
+      <origin xyz="-0.0265 -0.015 0" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+      <material name="u_side_small_5_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0265 -0.015 0" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_base_64_5 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64__2.stl"/>
+      </geometry>
+      <material name="u_base_64_5_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/u_base_64__2.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part u_side_small_6 -->
+    <visual>
+      <origin xyz="0.0265 0.015 0" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+      <material name="u_side_small_6_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0265 0.015 0" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/u_side_small.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link head -->
+  <link name="head">
+    <inertial>
+      <origin xyz="0.00154487 -0.0388417 -0.0248279" rpy="0 0 0"/>
+      <mass value="0.174917"/>
+      <inertia ixx="0.000196166" ixy="8.95351e-06" ixz="-3.22141e-07" iyy="7.55235e-05" iyz="8.82273e-06" izz="0.000202779"/>
+    </inertial>
+    <!-- Part head_plate -->
+    <visual>
+      <origin xyz="-0 -0.0428 -0.0405" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/head_plate.stl"/>
+      </geometry>
+      <material name="head_plate_material">
+        <color rgba="0.701961 0.682353 0.623529 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0428 -0.0405" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/head_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part lens -->
+    <visual>
+      <origin xyz="0.034233 -0.06905 -0.0235" rpy="-1.5708 -0.684656 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/lens.stl"/>
+      </geometry>
+      <material name="lens_material">
+        <color rgba="0.4 0.388235 0.34902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.034233 -0.06905 -0.0235" rpy="-1.5708 -0.684656 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/lens.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part ptgrey_fix -->
+    <visual>
+      <origin xyz="0.003 -0.05455 -0.0235" rpy="1.5708 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/ptgrey_fix.stl"/>
+      </geometry>
+      <material name="ptgrey_fix_material">
+        <color rgba="0.701961 0.682353 0.623529 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.003 -0.05455 -0.0235" rpy="1.5708 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/ptgrey_fix.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part ptgrey_camera -->
+    <visual>
+      <origin xyz="0.00496822 -0.06905 -0.0235" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/ptgrey_camera.stl"/>
+      </geometry>
+      <material name="ptgrey_camera_material">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00496822 -0.06905 -0.0235" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/ptgrey_camera.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part head_plate_2 -->
+    <visual>
+      <origin xyz="-0 -0.0428 -0.0035" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/head_plate.stl"/>
+      </geometry>
+      <material name="head_plate_2_material">
+        <color rgba="0.701961 0.682353 0.623529 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0428 -0.0035" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/head_plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part rx64_cap_15 -->
+    <visual>
+      <origin xyz="-0 -0 -0.0455" rpy="-3.14159 0 -0.0335507"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+      <material name="rx64_cap_15_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 -0.0455" rpy="-3.14159 0 -0.0335507"/>
+      <geometry>
+        <mesh filename="package://assets/rx64_cap.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mf128zz_19 -->
+    <visual>
+      <origin xyz="-0 0 -0.04678" rpy="-0 -0 3.10804"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+      <material name="mf128zz_19_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.04678" rpy="-0 -0 3.10804"/>
+      <geometry>
+        <mesh filename="package://assets/mf128zz.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part hn05_i101_19 -->
+    <visual>
+      <origin xyz="0 -0 -0.04322" rpy="3.14159 0 -1.99134"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+      <material name="hn05_i101_19_material">
+        <color rgba="0.8 0.776471 0.713725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.04322" rpy="3.14159 0 -1.99134"/>
+      <geometry>
+        <mesh filename="package://assets/hn05_i101.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part mx64_10 -->
+    <visual>
+      <origin xyz="0 0 -0.0235" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+      <material name="mx64_10_material">
+        <color rgba="0.211765 0.211765 0.211765 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0235" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/mx64.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame camera (dummy link + fixed joint) -->
+  <link name="camera">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="camera_frame" type="fixed">
+    <origin xyz="0.024933 -0.06905 -0.0235" rpy="-0 1.5708 0"/>
+    <parent link="head"/>
+    <child link="camera"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame vive (dummy link + fixed joint) -->
+  <link name="vive">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="vive_frame" type="fixed">
+    <origin xyz="-0 -0.0998 -0.0235" rpy="-1.5708 -0 -3.14159"/>
+    <parent link="head"/>
+    <child link="vive"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from u_neck to head -->
+  <joint name="head_pitch" type="revolute">
+    <origin xyz="-0.0235 -0 0.04" rpy="-1.5708 -0 1.5708"/>
+    <parent link="u_neck"/>
+    <child link="head"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from tronc to u_neck -->
+  <joint name="head_yaw" type="revolute">
+    <origin xyz="0 -0.037127 0.1858" rpy="0 -0 -3.14159"/>
+    <parent link="tronc"/>
+    <child link="u_neck"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

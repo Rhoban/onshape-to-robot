@@ -1,0 +1,2124 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 1aeb21793980b4217bb57764 / version_id: d80b8dca03c6a60cf39cd715 -->
+<robot name="test_export_omnidirectional_ur0">
+  <!-- Link body_2 -->
+  <link name="body_2">
+    <inertial>
+      <origin xyz="0.000413137 0.000238525 0.0129604" rpy="0 0 0"/>
+      <mass value="0.55184"/>
+      <inertia ixx="0.000615732" ixy="-4.54339e-06" ixz="-9.037e-09" iyy="0.000620978" iyz="-5.217e-09" izz="0.00118941"/>
+    </inertial>
+    <!-- Part plate -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_material">
+        <color rgba="0.682353 0.333333 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part plate_2 -->
+    <visual>
+      <origin xyz="0 0 0.023" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+      <material name="plate_2_material">
+        <color rgba="0.682353 0.333333 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.023" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/plate.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 -2.0944"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 -2.0944"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_2 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part motor_3 -->
+    <visual>
+      <origin xyz="-0 -0 0" rpy="0 -0 2.0944"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+      <material name="motor_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0" rpy="0 -0 2.0944"/>
+      <geometry>
+        <mesh filename="package://assets/motor.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame body (dummy link + fixed joint) -->
+  <link name="body">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="body_frame" type="fixed">
+    <origin xyz="0.00418699 0.00241736 0.0145" rpy="0 -0 0.523599"/>
+    <parent link="body_2"/>
+    <child link="body"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link wheel -->
+  <link name="wheel">
+    <inertial>
+      <origin xyz="-9.3e-11 -1.438e-09 -0.0025" rpy="0 0 0"/>
+      <mass value="0.0192491"/>
+      <inertia ixx="6.87651e-06" ixy="0" ixz="-0" iyy="6.87651e-06" iyz="0" izz="1.36736e-05"/>
+    </inertial>
+    <!-- Part wheel -->
+    <visual>
+      <origin xyz="-0 0.013 0.075" rpy="1.5708 1.0472 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+      <material name="wheel_material">
+        <color rgba="0.941176 0.87451 0.678431 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.013 0.075" rpy="1.5708 1.0472 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link passivewheel -->
+  <link name="passivewheel">
+    <inertial>
+      <origin xyz="-0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel -->
+    <visual>
+      <origin xyz="0 0 0.004" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.004" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel -->
+  <joint name="w1_1_passive" type="revolute">
+    <origin xyz="-0.0134903 -0.0350466 -0.0025" rpy="1.5708 1.39424 1.25664"/>
+    <parent link="wheel"/>
+    <child link="passivewheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_2 -->
+  <link name="passivewheel_2">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_2 -->
+    <visual>
+      <origin xyz="-0 0 -0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_2_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_2 -->
+  <joint name="w1_2_passive" type="revolute">
+    <origin xyz="-0.002 -0.0375 -0.0025" rpy="3.14159 1.5708 0"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_3 -->
+  <link name="passivewheel_3">
+    <inertial>
+      <origin xyz="0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_3 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_3_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_3 -->
+  <joint name="w1_3_passive" type="revolute">
+    <origin xyz="0.00968602 -0.0362827 -0.0025" rpy="-1.5708 1.39424 -1.25664"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_4 -->
+  <link name="passivewheel_4">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_4 -->
+    <visual>
+      <origin xyz="-0 0 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_4_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_4 -->
+  <joint name="w1_4_passive" type="revolute">
+    <origin xyz="0.0204239 -0.0315137 -0.0025" rpy="1.5708 1.24363 -0.942478"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_5 -->
+  <link name="passivewheel_5">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_5 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_5_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_5 -->
+  <joint name="w1_5_passive" type="revolute">
+    <origin xyz="0.0291626 -0.02366 -0.0025" rpy="1.5708 1.13382 -0.628319"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_5"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_6 -->
+  <link name="passivewheel_6">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_6 -->
+    <visual>
+      <origin xyz="0 -0 0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_6_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_6 -->
+  <joint name="w1_6_passive" type="revolute">
+    <origin xyz="0.0350466 -0.0134903 -0.0025" rpy="1.5708 1.06865 -0.314159"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_6"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_7 -->
+  <link name="passivewheel_7">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_7 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_7_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_7 -->
+  <joint name="w1_7_passive" type="revolute">
+    <origin xyz="0.0375 -0.002 -0.0025" rpy="1.5708 1.0472 -0"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_7"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_8 -->
+  <link name="passivewheel_8">
+    <inertial>
+      <origin xyz="-0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_8 -->
+    <visual>
+      <origin xyz="-0 0 0.004" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_8_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 0.004" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_8 -->
+  <joint name="w1_8_passive" type="revolute">
+    <origin xyz="0.0362827 0.00968602 -0.0025" rpy="-1.5708 1.06865 0.314159"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_8"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_9 -->
+  <link name="passivewheel_9">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_9 -->
+    <visual>
+      <origin xyz="0 0 -0.004" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_9_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.004" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_9 -->
+  <joint name="w1_9_passive" type="revolute">
+    <origin xyz="0.0315137 0.0204239 -0.0025" rpy="1.5708 1.13382 0.628319"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_9"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_10 -->
+  <link name="passivewheel_10">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_10 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_10_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_10 -->
+  <joint name="w1_10_passive" type="revolute">
+    <origin xyz="0.02366 0.0291626 -0.0025" rpy="1.5708 1.24363 0.942478"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_10"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_11 -->
+  <link name="passivewheel_11">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_11 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_11_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_11 -->
+  <joint name="w1_11_passive" type="revolute">
+    <origin xyz="0.0134903 0.0350466 -0.0025" rpy="1.5708 1.39424 1.25664"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_11"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_12 -->
+  <link name="passivewheel_12">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_12 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_12_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_12 -->
+  <joint name="w1_12_passive" type="revolute">
+    <origin xyz="0.002 0.0375 -0.0025" rpy="0 1.5708 0"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_12"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_13 -->
+  <link name="passivewheel_13">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_13 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_13_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_13 -->
+  <joint name="w1_13_passive" type="revolute">
+    <origin xyz="-0.00968602 0.0362827 -0.0025" rpy="-1.5708 1.39424 -1.25664"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_13"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_14 -->
+  <link name="passivewheel_14">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_14 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_14_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_14 -->
+  <joint name="w1_14_passive" type="revolute">
+    <origin xyz="-0.0204239 0.0315137 -0.0025" rpy="-1.5708 1.24363 -0.942478"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_14"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_15 -->
+  <link name="passivewheel_15">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_15 -->
+    <visual>
+      <origin xyz="0 0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_15_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_15 -->
+  <joint name="w1_15_passive" type="revolute">
+    <origin xyz="-0.0291626 0.02366 -0.0025" rpy="-1.5708 1.13382 -0.628319"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_15"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_16 -->
+  <link name="passivewheel_16">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_16 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_16_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_16 -->
+  <joint name="w1_16_passive" type="revolute">
+    <origin xyz="-0.0350466 0.0134903 -0.0025" rpy="-1.5708 1.06865 -0.314159"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_16"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_17 -->
+  <link name="passivewheel_17">
+    <inertial>
+      <origin xyz="0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_17 -->
+    <visual>
+      <origin xyz="0 0 0.004" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_17_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.004" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_17 -->
+  <joint name="w1_17_passive" type="revolute">
+    <origin xyz="-0.0375 0.002 -0.0025" rpy="1.5708 1.0472 -0"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_17"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_18 -->
+  <link name="passivewheel_18">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_18 -->
+    <visual>
+      <origin xyz="0 -0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_18_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_18 -->
+  <joint name="w1_18_passive" type="revolute">
+    <origin xyz="-0.0362827 -0.00968602 -0.0025" rpy="-1.5708 1.06865 0.314159"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_18"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_19 -->
+  <link name="passivewheel_19">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_19 -->
+    <visual>
+      <origin xyz="-0 0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_19_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_19 -->
+  <joint name="w1_19_passive" type="revolute">
+    <origin xyz="-0.0315137 -0.0204239 -0.0025" rpy="-1.5708 1.13382 0.628319"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_19"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_20 -->
+  <link name="passivewheel_20">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_20 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_20_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel to passivewheel_20 -->
+  <joint name="w1_20_passive" type="revolute">
+    <origin xyz="-0.02366 -0.0291626 -0.0025" rpy="-1.5708 1.24363 0.942478"/>
+    <parent link="wheel"/>
+    <child link="passivewheel_20"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from body_2 to wheel -->
+  <joint name="wheel1_speed" type="revolute">
+    <origin xyz="0.069282 -0.04 0.013" rpy="-1.5708 -0 1.0472"/>
+    <parent link="body_2"/>
+    <child link="wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link wheel_2 -->
+  <link name="wheel_2">
+    <inertial>
+      <origin xyz="-9.3e-11 1.438e-09 -0.0025" rpy="0 0 0"/>
+      <mass value="0.0192491"/>
+      <inertia ixx="6.87651e-06" ixy="-0" ixz="0" iyy="6.87651e-06" iyz="0" izz="1.36736e-05"/>
+    </inertial>
+    <!-- Part wheel_2 -->
+    <visual>
+      <origin xyz="-0 -0.013 -0.08" rpy="-1.5708 -1.0472 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+      <material name="wheel_2_material">
+        <color rgba="0.941176 0.87451 0.678431 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.013 -0.08" rpy="-1.5708 -1.0472 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link passivewheel_21 -->
+  <link name="passivewheel_21">
+    <inertial>
+      <origin xyz="0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_21 -->
+    <visual>
+      <origin xyz="0 0 0.004" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_21_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.004" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_21 -->
+  <joint name="w3_1_passive" type="revolute">
+    <origin xyz="-0.0134903 0.0350466 -0.0025" rpy="1.5708 -1.39424 1.88496"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_21"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_22 -->
+  <link name="passivewheel_22">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_22 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_22_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_22 -->
+  <joint name="w3_2_passive" type="revolute">
+    <origin xyz="-0.002 0.0375 -0.0025" rpy="0 -1.5708 0"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_22"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_23 -->
+  <link name="passivewheel_23">
+    <inertial>
+      <origin xyz="-0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_23 -->
+    <visual>
+      <origin xyz="-0 0 0" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_23_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 0" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_23 -->
+  <joint name="w3_3_passive" type="revolute">
+    <origin xyz="0.00968602 0.0362827 -0.0025" rpy="-1.5708 -1.39424 -1.88496"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_23"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_24 -->
+  <link name="passivewheel_24">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_24 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_24_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_24 -->
+  <joint name="w3_4_passive" type="revolute">
+    <origin xyz="0.0204239 0.0315137 -0.0025" rpy="1.5708 -1.24363 -2.19911"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_24"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_25 -->
+  <link name="passivewheel_25">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_25 -->
+    <visual>
+      <origin xyz="0 -0 -0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_25_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_25 -->
+  <joint name="w3_5_passive" type="revolute">
+    <origin xyz="0.0291626 0.02366 -0.0025" rpy="1.5708 -1.13382 -2.51327"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_25"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_26 -->
+  <link name="passivewheel_26">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_26 -->
+    <visual>
+      <origin xyz="-0 -0 -0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_26_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 -0" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_26 -->
+  <joint name="w3_6_passive" type="revolute">
+    <origin xyz="0.0350466 0.0134903 -0.0025" rpy="1.5708 -1.06865 -2.82743"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_26"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_27 -->
+  <link name="passivewheel_27">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_27 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_27_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_27 -->
+  <joint name="w3_7_passive" type="revolute">
+    <origin xyz="0.0375 0.002 -0.0025" rpy="1.5708 -1.0472 3.14159"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_27"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_28 -->
+  <link name="passivewheel_28">
+    <inertial>
+      <origin xyz="0 -0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_28 -->
+    <visual>
+      <origin xyz="0 0 0.004" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_28_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.004" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_28 -->
+  <joint name="w3_8_passive" type="revolute">
+    <origin xyz="0.0362827 -0.00968602 -0.0025" rpy="-1.5708 -1.06865 2.82743"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_28"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_29 -->
+  <link name="passivewheel_29">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_29 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_29_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_29 -->
+  <joint name="w3_9_passive" type="revolute">
+    <origin xyz="0.0315137 -0.0204239 -0.0025" rpy="1.5708 -1.13382 2.51327"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_29"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_30 -->
+  <link name="passivewheel_30">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_30 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_30_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_30 -->
+  <joint name="w3_10_passive" type="revolute">
+    <origin xyz="0.02366 -0.0291626 -0.0025" rpy="1.5708 -1.24363 2.19911"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_30"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_31 -->
+  <link name="passivewheel_31">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_31 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_31_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_31 -->
+  <joint name="w3_11_passive" type="revolute">
+    <origin xyz="0.0134903 -0.0350466 -0.0025" rpy="1.5708 -1.39424 1.88496"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_31"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_32 -->
+  <link name="passivewheel_32">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_32 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_32_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_32 -->
+  <joint name="w3_12_passive" type="revolute">
+    <origin xyz="0.002 -0.0375 -0.0025" rpy="-3.14159 -1.5708 0"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_32"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_33 -->
+  <link name="passivewheel_33">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_33 -->
+    <visual>
+      <origin xyz="-0 0 -0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_33_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_33 -->
+  <joint name="w3_13_passive" type="revolute">
+    <origin xyz="-0.00968602 -0.0362827 -0.0025" rpy="-1.5708 -1.39424 -1.88496"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_33"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_34 -->
+  <link name="passivewheel_34">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_34 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="-0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_34_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="-0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_34 -->
+  <joint name="w3_14_passive" type="revolute">
+    <origin xyz="-0.0204239 -0.0315137 -0.0025" rpy="-1.5708 -1.24363 -2.19911"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_34"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_35 -->
+  <link name="passivewheel_35">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_35 -->
+    <visual>
+      <origin xyz="0 0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_35_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_35 -->
+  <joint name="w3_15_passive" type="revolute">
+    <origin xyz="-0.0291626 -0.02366 -0.0025" rpy="-1.5708 -1.13382 -2.51327"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_35"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_36 -->
+  <link name="passivewheel_36">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_36 -->
+    <visual>
+      <origin xyz="0 0 -0.004" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_36_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.004" rpy="-0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_36 -->
+  <joint name="w3_16_passive" type="revolute">
+    <origin xyz="-0.0350466 -0.0134903 -0.0025" rpy="-1.5708 -1.06865 -2.82743"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_36"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_37 -->
+  <link name="passivewheel_37">
+    <inertial>
+      <origin xyz="0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_37 -->
+    <visual>
+      <origin xyz="0 0 0.004" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_37_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.004" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_37 -->
+  <joint name="w3_17_passive" type="revolute">
+    <origin xyz="-0.0375 -0.002 -0.0025" rpy="1.5708 -1.0472 3.14159"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_37"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_38 -->
+  <link name="passivewheel_38">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_38 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_38_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_38 -->
+  <joint name="w3_18_passive" type="revolute">
+    <origin xyz="-0.0362827 0.00968602 -0.0025" rpy="-1.5708 -1.06865 2.82743"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_38"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_39 -->
+  <link name="passivewheel_39">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_39 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_39_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_39 -->
+  <joint name="w3_19_passive" type="revolute">
+    <origin xyz="-0.0315137 0.0204239 -0.0025" rpy="-1.5708 -1.13382 2.51327"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_39"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_40 -->
+  <link name="passivewheel_40">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_40 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_40_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_2 to passivewheel_40 -->
+  <joint name="w3_20_passive" type="revolute">
+    <origin xyz="-0.02366 0.0291626 -0.0025" rpy="-1.5708 -1.24363 2.19911"/>
+    <parent link="wheel_2"/>
+    <child link="passivewheel_40"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from body_2 to wheel_2 -->
+  <joint name="wheel3_speed" type="revolute">
+    <origin xyz="-0.069282 -0.04 0.013" rpy="1.5708 -0 2.0944"/>
+    <parent link="body_2"/>
+    <child link="wheel_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link wheel_3 -->
+  <link name="wheel_3">
+    <inertial>
+      <origin xyz="-9.3e-11 -1.438e-09 -0.0025" rpy="0 0 0"/>
+      <mass value="0.0192491"/>
+      <inertia ixx="6.87651e-06" ixy="0" ixz="-0" iyy="6.87651e-06" iyz="0" izz="1.36736e-05"/>
+    </inertial>
+    <!-- Part wheel_3 -->
+    <visual>
+      <origin xyz="-0 0.013 0.075" rpy="1.5708 1.0472 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+      <material name="wheel_3_material">
+        <color rgba="0.941176 0.87451 0.678431 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.013 0.075" rpy="1.5708 1.0472 0"/>
+      <geometry>
+        <mesh filename="package://assets/wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link passivewheel_41 -->
+  <link name="passivewheel_41">
+    <inertial>
+      <origin xyz="-0 -0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_41 -->
+    <visual>
+      <origin xyz="0 0 0.004" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_41_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.004" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_41 -->
+  <joint name="w2_1_passive" type="revolute">
+    <origin xyz="-0.0134903 -0.0350466 -0.0025" rpy="-1.5708 -1.39424 -1.88496"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_41"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_42 -->
+  <link name="passivewheel_42">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_42 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_42_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_42 -->
+  <joint name="w2_2_passive" type="revolute">
+    <origin xyz="-0.002 -0.0375 -0.0025" rpy="-0 -1.5708 0"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_42"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_43 -->
+  <link name="passivewheel_43">
+    <inertial>
+      <origin xyz="0 0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_43 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_43_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_43 -->
+  <joint name="w2_3_passive" type="revolute">
+    <origin xyz="0.00968602 -0.0362827 -0.0025" rpy="1.5708 -1.39424 1.88496"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_43"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_44 -->
+  <link name="passivewheel_44">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_44 -->
+    <visual>
+      <origin xyz="0 -0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_44_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_44 -->
+  <joint name="w2_4_passive" type="revolute">
+    <origin xyz="0.0204239 -0.0315137 -0.0025" rpy="-1.5708 -1.24363 2.19911"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_44"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_45 -->
+  <link name="passivewheel_45">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_45 -->
+    <visual>
+      <origin xyz="-0 -0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_45_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_45 -->
+  <joint name="w2_5_passive" type="revolute">
+    <origin xyz="0.0291626 -0.02366 -0.0025" rpy="-1.5708 -1.13382 2.51327"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_45"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_46 -->
+  <link name="passivewheel_46">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_46 -->
+    <visual>
+      <origin xyz="0 -0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_46_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_46 -->
+  <joint name="w2_6_passive" type="revolute">
+    <origin xyz="0.0350466 -0.0134903 -0.0025" rpy="-1.5708 -1.06865 2.82743"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_46"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_47 -->
+  <link name="passivewheel_47">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_47 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_47_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_47 -->
+  <joint name="w2_7_passive" type="revolute">
+    <origin xyz="0.0375 -0.002 -0.0025" rpy="-1.5708 -0.393095 -3.14159"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_47"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_48 -->
+  <link name="passivewheel_48">
+    <inertial>
+      <origin xyz="-0 -0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_48 -->
+    <visual>
+      <origin xyz="-0 -0 0.004" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_48_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 0.004" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_48 -->
+  <joint name="w2_8_passive" type="revolute">
+    <origin xyz="0.0362827 0.00968602 -0.0025" rpy="1.5708 -1.06865 -2.82743"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_48"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_49 -->
+  <link name="passivewheel_49">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_49 -->
+    <visual>
+      <origin xyz="-0 0 -0.004" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_49_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0.004" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_49 -->
+  <joint name="w2_9_passive" type="revolute">
+    <origin xyz="0.0315137 0.0204239 -0.0025" rpy="-1.5708 -1.13382 -2.51327"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_49"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_50 -->
+  <link name="passivewheel_50">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_50 -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_50_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_50 -->
+  <joint name="w2_10_passive" type="revolute">
+    <origin xyz="0.02366 0.0291626 -0.0025" rpy="-1.5708 -1.24363 -2.19911"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_50"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_51 -->
+  <link name="passivewheel_51">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_51 -->
+    <visual>
+      <origin xyz="-0 -0 -0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_51_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0 -0" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_51 -->
+  <joint name="w2_11_passive" type="revolute">
+    <origin xyz="0.0134903 0.0350466 -0.0025" rpy="-1.5708 -1.39424 -1.88496"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_51"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_52 -->
+  <link name="passivewheel_52">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_52 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_52_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_52 -->
+  <joint name="w2_12_passive" type="revolute">
+    <origin xyz="0.002 0.0375 -0.0025" rpy="3.14159 -1.5708 0"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_52"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_53 -->
+  <link name="passivewheel_53">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_53 -->
+    <visual>
+      <origin xyz="-0 0 -0" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_53_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_53 -->
+  <joint name="w2_13_passive" type="revolute">
+    <origin xyz="-0.00968602 0.0362827 -0.0025" rpy="1.5708 -1.39424 1.88496"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_53"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_54 -->
+  <link name="passivewheel_54">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="-0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_54 -->
+    <visual>
+      <origin xyz="0 0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_54_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.004" rpy="0 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_54 -->
+  <joint name="w2_14_passive" type="revolute">
+    <origin xyz="-0.0204239 0.0315137 -0.0025" rpy="1.5708 -1.24363 2.19911"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_54"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_55 -->
+  <link name="passivewheel_55">
+    <inertial>
+      <origin xyz="0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_55 -->
+    <visual>
+      <origin xyz="0 -0 -0.004" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_55_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.004" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_55 -->
+  <joint name="w2_15_passive" type="revolute">
+    <origin xyz="-0.0291626 0.02366 -0.0025" rpy="1.5708 -1.13382 2.51327"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_55"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_56 -->
+  <link name="passivewheel_56">
+    <inertial>
+      <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_56 -->
+    <visual>
+      <origin xyz="0 0 -0.004" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_56_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.004" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_56 -->
+  <joint name="w2_16_passive" type="revolute">
+    <origin xyz="-0.0350466 0.0134903 -0.0025" rpy="1.5708 -1.06865 2.82743"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_56"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_57 -->
+  <link name="passivewheel_57">
+    <inertial>
+      <origin xyz="-0 -0 0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="-0" iyy="2.7747e-08" iyz="-0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_57 -->
+    <visual>
+      <origin xyz="-0 0 0.004" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_57_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 0.004" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_57 -->
+  <joint name="w2_17_passive" type="revolute">
+    <origin xyz="-0.0375 0.002 -0.0025" rpy="-1.5708 -0.393095 -3.14159"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_57"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_58 -->
+  <link name="passivewheel_58">
+    <inertial>
+      <origin xyz="-0 -0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_58 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_58_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_58 -->
+  <joint name="w2_18_passive" type="revolute">
+    <origin xyz="-0.0362827 -0.00968602 -0.0025" rpy="1.5708 -1.06865 -2.82743"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_58"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_59 -->
+  <link name="passivewheel_59">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_59 -->
+    <visual>
+      <origin xyz="-0 0 -0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_59_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_59 -->
+  <joint name="w2_19_passive" type="revolute">
+    <origin xyz="-0.0315137 -0.0204239 -0.0025" rpy="1.5708 -1.13382 -2.51327"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_59"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link passivewheel_60 -->
+  <link name="passivewheel_60">
+    <inertial>
+      <origin xyz="-0 0 -0.002" rpy="0 0 0"/>
+      <mass value="0.00285906"/>
+      <inertia ixx="2.7747e-08" ixy="-0" ixz="0" iyy="2.7747e-08" iyz="0" izz="4.8977e-08"/>
+    </inertial>
+    <!-- Part passivewheel_60 -->
+    <visual>
+      <origin xyz="-0 0 -0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+      <material name="passivewheel_60_material">
+        <color rgba="0.301961 0.290196 0.262745 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 -0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/passivewheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from wheel_3 to passivewheel_60 -->
+  <joint name="w2_20_passive" type="revolute">
+    <origin xyz="-0.02366 -0.0291626 -0.0025" rpy="1.5708 -1.24363 -2.19911"/>
+    <parent link="wheel_3"/>
+    <child link="passivewheel_60"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from body_2 to wheel_3 -->
+  <joint name="wheel2_speed" type="revolute">
+    <origin xyz="-0 0.08 0.013" rpy="1.5708 -0 0"/>
+    <parent link="body_2"/>
+    <child link="wheel_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

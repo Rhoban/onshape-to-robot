@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 99762129c29a303a858e0b48 / version_id: 1d2877f16de11aa213466001 -->
+<robot name="test_export_differential_urdf_0">
+  <!-- Link base -->
+  <link name="base">
+    <inertial>
+      <origin xyz="-0 0 0.0025" rpy="0 0 0"/>
+      <mass value="0.022107"/>
+      <inertia ixx="2.84397e-06" ixy="0" ixz="0" iyy="2.84397e-06" iyz="0" izz="5.59583e-06"/>
+    </inertial>
+    <!-- Part base -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/base.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link ring -->
+  <link name="ring">
+    <inertial>
+      <origin xyz="-0 0 0.0025" rpy="0 0 0"/>
+      <mass value="0.0212665"/>
+      <inertia ixx="8.13099e-06" ixy="0" ixz="0" iyy="8.13099e-06" iyz="0" izz="1.61734e-05"/>
+    </inertial>
+    <!-- Part ring -->
+    <visual>
+      <origin xyz="-0 0 0.01" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/ring.stl"/>
+      </geometry>
+      <material name="ring_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 0.01" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/ring.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to ring -->
+  <joint name="lower" type="revolute">
+    <origin xyz="0 -0 0.005" rpy="0 -0 0"/>
+    <parent link="base"/>
+    <child link="ring"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link ring_2 -->
+  <link name="ring_2">
+    <inertial>
+      <origin xyz="0 0 -0.0025" rpy="0 0 0"/>
+      <mass value="0.0212665"/>
+      <inertia ixx="8.13099e-06" ixy="-0" ixz="-0" iyy="8.13099e-06" iyz="-0" izz="1.61734e-05"/>
+    </inertial>
+    <!-- Part ring_2 -->
+    <visual>
+      <origin xyz="0 -0 -0.01" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/ring.stl"/>
+      </geometry>
+      <material name="ring_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0 -0.01" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/ring.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from base to ring_2 -->
+  <joint name="upper" type="revolute">
+    <origin xyz="0 0 0.045" rpy="0 -0 -0"/>
+    <parent link="base"/>
+    <child link="ring_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Link shaft1 -->
+  <link name="shaft1">
+    <inertial>
+      <origin xyz="-0 0 0.02" rpy="0 0 0"/>
+      <mass value="0.00868"/>
+      <inertia ixx="1.31107e-06" ixy="0" ixz="0" iyy="1.31107e-06" iyz="0" izz="3.07473e-07"/>
+    </inertial>
+    <!-- Part shaft1 -->
+    <visual>
+      <origin xyz="-0 0 0.045" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/shaft1.stl"/>
+      </geometry>
+      <material name="shaft1_material">
+        <color rgba="0.909804 0.572549 0.164706 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0 0.045" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/shaft1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link shaft2 -->
+  <link name="shaft2">
+    <inertial>
+      <origin xyz="0.0120943 -0.0166463 -0.0193923" rpy="0 0 0"/>
+      <mass value="0.028492"/>
+      <inertia ixx="2.00317e-05" ixy="1.20287e-05" ixz="2.79432e-06" iyy="1.2215e-05" iyz="-3.84604e-06" izz="2.77956e-05"/>
+    </inertial>
+    <!-- Part shaft2 -->
+    <visual>
+      <origin xyz="0 0.025 0.0075" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/shaft2.stl"/>
+      </geometry>
+      <material name="shaft2_material">
+        <color rgba="0.654902 0.823529 0.576471 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.025 0.0075" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/shaft2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame effector (dummy link + fixed joint) -->
+  <link name="effector">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="effector_frame" type="fixed">
+    <origin xyz="0.0496679 -0.0683619 -0.0275" rpy="0.942478 1.5708 0"/>
+    <parent link="shaft2"/>
+    <child link="effector"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from shaft1 to shaft2 -->
+  <joint name="beta" type="revolute">
+    <origin xyz="-0 -0.0075 0.02" rpy="-1.5708 -0.628319 -0"/>
+    <parent link="shaft1"/>
+    <child link="shaft2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+  <!-- Joint from base to shaft1 -->
+  <joint name="alpha" type="revolute">
+    <origin xyz="0 0 0.005" rpy="0 -0 0.735193"/>
+    <parent link="base"/>
+    <child link="shaft1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159265359" upper="3.14159265359"/>
+  </joint>
+</robot>

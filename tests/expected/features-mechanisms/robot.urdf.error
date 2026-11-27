@@ -1,0 +1,1 @@
+Exception: URDF doesn't support ball joints (shoulder), use the ball_to_euler option to replace them with revolute joints, or export to SDF or MuJoCo, which support them

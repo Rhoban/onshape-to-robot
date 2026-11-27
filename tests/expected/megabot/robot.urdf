@@ -1,0 +1,1992 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3cddea8d10f23b74231e7636 / version_id: 1d5f0ae8daf92bbda6f52727 -->
+<robot name="test_export_megabot_urdf_0">
+  <!-- Link center -->
+  <link name="center">
+    <inertial>
+      <origin xyz="0 -0.525 0.000101117" rpy="0 0 0"/>
+      <mass value="139.991"/>
+      <inertia ixx="23.042" ixy="-0" ixz="-0" iyy="23.0687" iyz="-0" izz="46.0044"/>
+    </inertial>
+    <!-- Part center -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/center.stl"/>
+      </geometry>
+      <material name="center_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/center.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame base (dummy link + fixed joint) -->
+  <link name="base">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="base_frame" type="fixed">
+    <origin xyz="0 -0.525 0.025" rpy="0 -0 -1.5708"/>
+    <parent link="center"/>
+    <child link="base"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link cylinder_f -->
+  <link name="cylinder_f">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f -->
+    <visual>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m -->
+  <link name="cylinder_m">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl1_1 (dummy link + fixed joint) -->
+  <link name="l1_cl1_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl1_1_frame" type="fixed">
+    <origin xyz="0 0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m"/>
+    <child link="l1_cl1_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f to cylinder_m -->
+  <joint name="l1_c1" type="prismatic">
+    <origin xyz="0.531994 -0 -0" rpy="0 1.5708 0"/>
+    <parent link="cylinder_f"/>
+    <child link="cylinder_m"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.0724941" upper="0.127506"/>
+  </joint>
+  <!-- Joint from center to cylinder_f -->
+  <joint name="l1_r1" type="revolute">
+    <origin xyz="-0.44 -0.335 0" rpy="3.14159 -0 -1.29639"/>
+    <parent link="center"/>
+    <child link="cylinder_f"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.29639" upper="0.274406"/>
+  </joint>
+  <!-- Link hip -->
+  <link name="hip">
+    <inertial>
+      <origin xyz="-0.0375418 -0 -0.0164898" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.00825192" ixy="0" ixz="-0.0120504" iyy="0.126424" iyz="0" izz="0.128671"/>
+    </inertial>
+    <!-- Part hip -->
+    <visual>
+      <origin xyz="-0.065 -0 0" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+      <material name="hip_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.065 -0 0" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl1_2 (dummy link + fixed joint) -->
+  <link name="l1_cl1_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl1_2_frame" type="fixed">
+    <origin xyz="0.275 -0 0.03" rpy="-1.5708 0 3.14159"/>
+    <parent link="hip"/>
+    <child link="l1_cl1_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link femur -->
+  <link name="femur">
+    <inertial>
+      <origin xyz="0.00641397 0.245927 0.02" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.0813908" ixy="0.000199157" ixz="-1.18e-10" iyy="0.00807931" iyz="-5.8e-11" izz="0.0746916"/>
+    </inertial>
+    <!-- Part femur -->
+    <visual>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+      <material name="femur_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl2_2 (dummy link + fixed joint) -->
+  <link name="l1_cl2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl2_2_frame" type="fixed">
+    <origin xyz="-0.013 0.384 0.02" rpy="1.5708 -0 -0"/>
+    <parent link="femur"/>
+    <child link="l1_cl2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link tibia -->
+  <link name="tibia">
+    <inertial>
+      <origin xyz="-0.374888 0 -0.02" rpy="0 0 0"/>
+      <mass value="4"/>
+      <inertia ixx="0.00296427" ixy="-0" ixz="0" iyy="0.21898" iyz="-0" izz="0.219917"/>
+    </inertial>
+    <!-- Part tibia -->
+    <visual>
+      <origin xyz="-0.375 0 0" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+      <material name="tibia_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.375 0 0" rpy="1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl4_2 (dummy link + fixed joint) -->
+  <link name="l1_cl4_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl4_2_frame" type="fixed">
+    <origin xyz="-0.45 0 -0.02" rpy="-1.5708 0 -3.14159"/>
+    <parent link="tibia"/>
+    <child link="l1_cl4_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link foot -->
+  <link name="foot">
+    <inertial>
+      <origin xyz="0.00674789 -0.371096 0.02" rpy="0 0 0"/>
+      <mass value="3.65"/>
+      <inertia ixx="0.27435" ixy="-0.000537481" ixz="3.1807e-08" iyy="0.00564812" iyz="3.381e-09" izz="0.270045"/>
+    </inertial>
+    <!-- Part foot -->
+    <visual>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+      <material name="foot_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl3_2 (dummy link + fixed joint) -->
+  <link name="l1_cl3_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl3_2_frame" type="fixed">
+    <origin xyz="0 -0.505 0.02" rpy="-1.5708 0 3.14159"/>
+    <parent link="foot"/>
+    <child link="l1_cl3_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame leg_1 (dummy link + fixed joint) -->
+  <link name="leg_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="leg_1_frame" type="fixed">
+    <origin xyz="0.005 -1.0075 0.02" rpy="-1.5708 -0 0"/>
+    <parent link="foot"/>
+    <child link="leg_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from tibia to foot -->
+  <joint name="l1_r5" type="revolute">
+    <origin xyz="-0.75 0 -0.04" rpy="-0 0 -2.88715"/>
+    <parent link="tibia"/>
+    <child link="foot"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.82524" upper="1.31635"/>
+  </joint>
+  <!-- Joint from femur to tibia -->
+  <joint name="l1_r4" type="revolute">
+    <origin xyz="0 0.49 -0" rpy="3.14159 -0 -0.248167"/>
+    <parent link="femur"/>
+    <child link="tibia"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.81896" upper="1.32263"/>
+  </joint>
+  <!-- Joint from hip to femur -->
+  <joint name="l1_r3" type="revolute">
+    <origin xyz="0.125 -0.02 -0.04" rpy="-1.5708 0.168299 -0"/>
+    <parent link="hip"/>
+    <child link="femur"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.7391" upper="1.4025"/>
+  </joint>
+  <!-- Link cylinder_f_2 -->
+  <link name="cylinder_f_2">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_2 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_2_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_2 -->
+  <link name="cylinder_m_2">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_2 -->
+    <visual>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_2_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl2_1 (dummy link + fixed joint) -->
+  <link name="l1_cl2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl2_1_frame" type="fixed">
+    <origin xyz="-0 0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m_2"/>
+    <child link="l1_cl2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_2 to cylinder_m_2 -->
+  <joint name="l1_c2" type="prismatic">
+    <origin xyz="0.568904 0 -0" rpy="-0 1.5708 0"/>
+    <parent link="cylinder_f_2"/>
+    <child link="cylinder_m_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.109404" upper="0.0905958"/>
+  </joint>
+  <!-- Joint from hip to cylinder_f_2 -->
+  <joint name="l1_r6" type="revolute">
+    <origin xyz="-0.41 -0 -0.095" rpy="1.5708 0.612035 -0"/>
+    <parent link="hip"/>
+    <child link="cylinder_f_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.958761" upper="0.612035"/>
+  </joint>
+  <!-- Link cylinder_support -->
+  <link name="cylinder_support">
+    <inertial>
+      <origin xyz="0.00543544 0.298634 0.0201529" rpy="0 0 0"/>
+      <mass value="3.45"/>
+      <inertia ixx="0.122413" ixy="-0.000135757" ixz="-9.00296e-06" iyy="0.00809203" iyz="1.77445e-05" izz="0.115611"/>
+    </inertial>
+    <!-- Part cylinder_support -->
+    <visual>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+      <material name="cylinder_support_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl4_1 (dummy link + fixed joint) -->
+  <link name="l1_cl4_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl4_1_frame" type="fixed">
+    <origin xyz="0 0.59 0.02" rpy="1.5708 0 3.14159"/>
+    <parent link="cylinder_support"/>
+    <child link="l1_cl4_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link cylinder_f_3 -->
+  <link name="cylinder_f_3">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_3 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_3_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_3 -->
+  <link name="cylinder_m_3">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_3 -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_3_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l1_cl3_1 (dummy link + fixed joint) -->
+  <link name="l1_cl3_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l1_cl3_1_frame" type="fixed">
+    <origin xyz="0 -0 -0.0095" rpy="1.5708 1.5708 0"/>
+    <parent link="cylinder_m_3"/>
+    <child link="l1_cl3_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_3 to cylinder_m_3 -->
+  <joint name="l1_c3" type="prismatic">
+    <origin xyz="0.633829 0 -0" rpy="-3.14159 -1.5708 0"/>
+    <parent link="cylinder_f_3"/>
+    <child link="cylinder_m_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.174329" upper="0.0256712"/>
+  </joint>
+  <!-- Joint from cylinder_support to cylinder_f_3 -->
+  <joint name="l1_r8" type="revolute">
+    <origin xyz="0 0.4125 0.02" rpy="0 0 -3.14159"/>
+    <parent link="cylinder_support"/>
+    <child link="cylinder_f_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-4.70204e-07" upper="1.5708"/>
+  </joint>
+  <!-- Joint from hip to cylinder_support -->
+  <joint name="l1_r7" type="revolute">
+    <origin xyz="-0.125 -0.02 -0.04" rpy="-1.5708 0.495722 -0"/>
+    <parent link="hip"/>
+    <child link="cylinder_support"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.06652" upper="1.07507"/>
+  </joint>
+  <!-- Joint from center to hip -->
+  <joint name="l1_r2" type="revolute">
+    <origin xyz="-0.5 -1.025 0.03" rpy="3.14159 -0 0.748032"/>
+    <parent link="center"/>
+    <child link="hip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.822764" upper="0.748032"/>
+  </joint>
+  <!-- Link cylinder_f_4 -->
+  <link name="cylinder_f_4">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_4 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_4_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_4 -->
+  <link name="cylinder_m_4">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_4 -->
+    <visual>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_4_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl1_1 (dummy link + fixed joint) -->
+  <link name="l2_cl1_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl1_1_frame" type="fixed">
+    <origin xyz="0 0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m_4"/>
+    <child link="l2_cl1_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_4 to cylinder_m_4 -->
+  <joint name="l2_c1" type="prismatic">
+    <origin xyz="0.4595 0 0" rpy="0 1.5708 0"/>
+    <parent link="cylinder_f_4"/>
+    <child link="cylinder_m_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from center to cylinder_f_4 -->
+  <joint name="l2_r1" type="revolute">
+    <origin xyz="0.19 -0.085 0" rpy="3.14159 -0 -2.99586"/>
+    <parent link="center"/>
+    <child link="cylinder_f_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.42506" upper="0.145736"/>
+  </joint>
+  <!-- Link hip_2 -->
+  <link name="hip_2">
+    <inertial>
+      <origin xyz="-0.0375418 0 -0.0164898" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.00825192" ixy="-0" ixz="-0.0120504" iyy="0.126424" iyz="0" izz="0.128671"/>
+    </inertial>
+    <!-- Part hip_2 -->
+    <visual>
+      <origin xyz="-0.065 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+      <material name="hip_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.065 0 0" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl1_2 (dummy link + fixed joint) -->
+  <link name="l2_cl1_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl1_2_frame" type="fixed">
+    <origin xyz="0.275 0 0.03" rpy="-1.5708 0 -3.14159"/>
+    <parent link="hip_2"/>
+    <child link="l2_cl1_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link femur_2 -->
+  <link name="femur_2">
+    <inertial>
+      <origin xyz="0.00641397 0.245927 0.02" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.0813908" ixy="0.000199157" ixz="-1.18e-10" iyy="0.00807931" iyz="-5.8e-11" izz="0.0746916"/>
+    </inertial>
+    <!-- Part femur_2 -->
+    <visual>
+      <origin xyz="-0 0.2425 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+      <material name="femur_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 0.2425 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl2_2 (dummy link + fixed joint) -->
+  <link name="l2_cl2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl2_2_frame" type="fixed">
+    <origin xyz="-0.013 0.384 0.02" rpy="1.5708 0 0"/>
+    <parent link="femur_2"/>
+    <child link="l2_cl2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link tibia_2 -->
+  <link name="tibia_2">
+    <inertial>
+      <origin xyz="-0.374888 0 -0.02" rpy="0 0 0"/>
+      <mass value="4"/>
+      <inertia ixx="0.00296427" ixy="-0" ixz="-0" iyy="0.21898" iyz="-0" izz="0.219917"/>
+    </inertial>
+    <!-- Part tibia_2 -->
+    <visual>
+      <origin xyz="-0.375 0 0" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+      <material name="tibia_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.375 0 0" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl4_2 (dummy link + fixed joint) -->
+  <link name="l2_cl4_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl4_2_frame" type="fixed">
+    <origin xyz="-0.45 0 -0.02" rpy="-1.5708 -0 3.14159"/>
+    <parent link="tibia_2"/>
+    <child link="l2_cl4_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link foot_2 -->
+  <link name="foot_2">
+    <inertial>
+      <origin xyz="0.00674789 -0.371096 0.02" rpy="0 0 0"/>
+      <mass value="3.65"/>
+      <inertia ixx="0.27435" ixy="-0.000537481" ixz="3.1807e-08" iyy="0.00564812" iyz="3.381e-09" izz="0.270045"/>
+    </inertial>
+    <!-- Part foot_2 -->
+    <visual>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+      <material name="foot_2_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl3_2 (dummy link + fixed joint) -->
+  <link name="l2_cl3_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl3_2_frame" type="fixed">
+    <origin xyz="-0 -0.505 0.02" rpy="-1.5708 -0 3.14159"/>
+    <parent link="foot_2"/>
+    <child link="l2_cl3_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame leg_2 (dummy link + fixed joint) -->
+  <link name="leg_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="leg_2_frame" type="fixed">
+    <origin xyz="0.005 -1.0075 0.02" rpy="-1.5708 0 -0"/>
+    <parent link="foot_2"/>
+    <child link="leg_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from tibia_2 to foot_2 -->
+  <joint name="l2_r5" type="revolute">
+    <origin xyz="-0.75 0 -0.04" rpy="-0 -0 2.85742"/>
+    <parent link="tibia_2"/>
+    <child link="foot_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.28663" upper="1.85496"/>
+  </joint>
+  <!-- Joint from femur_2 to tibia_2 -->
+  <joint name="l2_r4" type="revolute">
+    <origin xyz="0 0.49 0" rpy="-3.14159 -0 -0.415329"/>
+    <parent link="femur_2"/>
+    <child link="tibia_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.98613" upper="1.15547"/>
+  </joint>
+  <!-- Joint from hip_2 to femur_2 -->
+  <joint name="l2_r3" type="revolute">
+    <origin xyz="0.125 -0.02 -0.04" rpy="-1.5708 0.466703 -0"/>
+    <parent link="hip_2"/>
+    <child link="femur_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.0375" upper="1.10409"/>
+  </joint>
+  <!-- Link cylinder_f_5 -->
+  <link name="cylinder_f_5">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_5 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_5_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_5 -->
+  <link name="cylinder_m_5">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_5 -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_5_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl2_1 (dummy link + fixed joint) -->
+  <link name="l2_cl2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl2_1_frame" type="fixed">
+    <origin xyz="0 0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m_5"/>
+    <child link="l2_cl2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_5 to cylinder_m_5 -->
+  <joint name="l2_c2" type="prismatic">
+    <origin xyz="0.4595 -0 0" rpy="0 1.5708 0"/>
+    <parent link="cylinder_f_5"/>
+    <child link="cylinder_m_5"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from hip_2 to cylinder_f_5 -->
+  <joint name="l2_r6" type="revolute">
+    <origin xyz="-0.41 0 -0.095" rpy="1.5708 0.677509 0"/>
+    <parent link="hip_2"/>
+    <child link="cylinder_f_5"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.893287" upper="0.677509"/>
+  </joint>
+  <!-- Link cylinder_support_2 -->
+  <link name="cylinder_support_2">
+    <inertial>
+      <origin xyz="0.00543544 0.298634 0.0201529" rpy="0 0 0"/>
+      <mass value="3.45"/>
+      <inertia ixx="0.122413" ixy="-0.000135757" ixz="-9.00296e-06" iyy="0.00809203" iyz="1.77445e-05" izz="0.115611"/>
+    </inertial>
+    <!-- Part cylinder_support_2 -->
+    <visual>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+      <material name="cylinder_support_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl4_1 (dummy link + fixed joint) -->
+  <link name="l2_cl4_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl4_1_frame" type="fixed">
+    <origin xyz="0 0.59 0.02" rpy="1.5708 -0 3.14159"/>
+    <parent link="cylinder_support_2"/>
+    <child link="l2_cl4_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link cylinder_f_6 -->
+  <link name="cylinder_f_6">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_6 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_6_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_6 -->
+  <link name="cylinder_m_6">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_6 -->
+    <visual>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_6_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l2_cl3_1 (dummy link + fixed joint) -->
+  <link name="l2_cl3_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l2_cl3_1_frame" type="fixed">
+    <origin xyz="-0 0 -0.0095" rpy="1.5708 1.5708 0"/>
+    <parent link="cylinder_m_6"/>
+    <child link="l2_cl3_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_6 to cylinder_m_6 -->
+  <joint name="l2_c3" type="prismatic">
+    <origin xyz="0.4595 0 -0" rpy="-3.14159 -1.5708 0"/>
+    <parent link="cylinder_f_6"/>
+    <child link="cylinder_m_6"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from cylinder_support_2 to cylinder_f_6 -->
+  <joint name="l2_r8" type="revolute">
+    <origin xyz="-0 0.4125 0.02" rpy="0 0 -2.97767"/>
+    <parent link="cylinder_support_2"/>
+    <child link="cylinder_f_6"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.163925" upper="1.40687"/>
+  </joint>
+  <!-- Joint from hip_2 to cylinder_support_2 -->
+  <joint name="l2_r7" type="revolute">
+    <origin xyz="-0.125 -0.02 -0.04" rpy="-1.5708 0.791858 0"/>
+    <parent link="hip_2"/>
+    <child link="cylinder_support_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.36265" upper="0.778938"/>
+  </joint>
+  <!-- Joint from center to hip_2 -->
+  <joint name="l2_r2" type="revolute">
+    <origin xyz="-0.5 -0.025 0.03" rpy="3.14159 -0 -0.473289"/>
+    <parent link="center"/>
+    <child link="hip_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.473289" upper="1.09751"/>
+  </joint>
+  <!-- Link cylinder_f_7 -->
+  <link name="cylinder_f_7">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_7 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_7_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_7 -->
+  <link name="cylinder_m_7">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_7 -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_7_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl1_1 (dummy link + fixed joint) -->
+  <link name="l3_cl1_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl1_1_frame" type="fixed">
+    <origin xyz="-0 -0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m_7"/>
+    <child link="l3_cl1_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_7 to cylinder_m_7 -->
+  <joint name="l3_c1" type="prismatic">
+    <origin xyz="0.4595 0 -0" rpy="-0 1.5708 0"/>
+    <parent link="cylinder_f_7"/>
+    <child link="cylinder_m_7"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from center to cylinder_f_7 -->
+  <joint name="l3_r1" type="revolute">
+    <origin xyz="0.44 -0.715 0" rpy="-3.14159 0 1.71653"/>
+    <parent link="center"/>
+    <child link="cylinder_f_7"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.42506" upper="0.145736"/>
+  </joint>
+  <!-- Link hip_3 -->
+  <link name="hip_3">
+    <inertial>
+      <origin xyz="-0.0375418 0 -0.0164898" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.00825192" ixy="-0" ixz="-0.0120504" iyy="0.126424" iyz="0" izz="0.128671"/>
+    </inertial>
+    <!-- Part hip_3 -->
+    <visual>
+      <origin xyz="-0.065 0 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+      <material name="hip_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.065 0 0" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl1_2 (dummy link + fixed joint) -->
+  <link name="l3_cl1_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl1_2_frame" type="fixed">
+    <origin xyz="0.275 0 0.03" rpy="-1.5708 -0 3.14159"/>
+    <parent link="hip_3"/>
+    <child link="l3_cl1_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link femur_3 -->
+  <link name="femur_3">
+    <inertial>
+      <origin xyz="0.00641397 0.245927 0.02" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.0813908" ixy="0.000199157" ixz="-1.18e-10" iyy="0.00807931" iyz="-5.8e-11" izz="0.0746916"/>
+    </inertial>
+    <!-- Part femur_3 -->
+    <visual>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+      <material name="femur_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl2_2 (dummy link + fixed joint) -->
+  <link name="l3_cl2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl2_2_frame" type="fixed">
+    <origin xyz="-0.013 0.384 0.02" rpy="1.5708 -0 -0"/>
+    <parent link="femur_3"/>
+    <child link="l3_cl2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link tibia_3 -->
+  <link name="tibia_3">
+    <inertial>
+      <origin xyz="-0.374888 0 -0.02" rpy="0 0 0"/>
+      <mass value="4"/>
+      <inertia ixx="0.00296427" ixy="-0" ixz="-0" iyy="0.21898" iyz="0" izz="0.219917"/>
+    </inertial>
+    <!-- Part tibia_3 -->
+    <visual>
+      <origin xyz="-0.375 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+      <material name="tibia_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.375 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl4_2 (dummy link + fixed joint) -->
+  <link name="l3_cl4_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl4_2_frame" type="fixed">
+    <origin xyz="-0.45 0 -0.02" rpy="-1.5708 0 3.14159"/>
+    <parent link="tibia_3"/>
+    <child link="l3_cl4_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link foot_3 -->
+  <link name="foot_3">
+    <inertial>
+      <origin xyz="0.00674789 -0.371096 0.02" rpy="0 0 0"/>
+      <mass value="3.65"/>
+      <inertia ixx="0.27435" ixy="-0.000537481" ixz="3.1807e-08" iyy="0.00564812" iyz="3.381e-09" izz="0.270045"/>
+    </inertial>
+    <!-- Part foot_3 -->
+    <visual>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+      <material name="foot_3_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl3_2 (dummy link + fixed joint) -->
+  <link name="l3_cl3_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl3_2_frame" type="fixed">
+    <origin xyz="-0 -0.505 0.02" rpy="-1.5708 -0 -3.14159"/>
+    <parent link="foot_3"/>
+    <child link="l3_cl3_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame leg_3 (dummy link + fixed joint) -->
+  <link name="leg_3">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="leg_3_frame" type="fixed">
+    <origin xyz="0.005 -1.0075 0.02" rpy="-1.5708 0 0"/>
+    <parent link="foot_3"/>
+    <child link="leg_3"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from tibia_3 to foot_3 -->
+  <joint name="l3_r5" type="revolute">
+    <origin xyz="-0.75 0 -0.04" rpy="-0 0 2.85742"/>
+    <parent link="tibia_3"/>
+    <child link="foot_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.28663" upper="1.85496"/>
+  </joint>
+  <!-- Joint from femur_3 to tibia_3 -->
+  <joint name="l3_r4" type="revolute">
+    <origin xyz="0 0.49 0" rpy="3.14159 -0 -0.415329"/>
+    <parent link="femur_3"/>
+    <child link="tibia_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.98613" upper="1.15547"/>
+  </joint>
+  <!-- Joint from hip_3 to femur_3 -->
+  <joint name="l3_r3" type="revolute">
+    <origin xyz="0.125 -0.02 -0.04" rpy="-1.5708 0.466703 -0"/>
+    <parent link="hip_3"/>
+    <child link="femur_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.0375" upper="1.10409"/>
+  </joint>
+  <!-- Link cylinder_f_8 -->
+  <link name="cylinder_f_8">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_8 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_8_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_8 -->
+  <link name="cylinder_m_8">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_8 -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_8_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl2_1 (dummy link + fixed joint) -->
+  <link name="l3_cl2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl2_1_frame" type="fixed">
+    <origin xyz="0 0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m_8"/>
+    <child link="l3_cl2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_8 to cylinder_m_8 -->
+  <joint name="l3_c2" type="prismatic">
+    <origin xyz="0.4595 0 -0" rpy="-0 1.5708 0"/>
+    <parent link="cylinder_f_8"/>
+    <child link="cylinder_m_8"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from hip_3 to cylinder_f_8 -->
+  <joint name="l3_r6" type="revolute">
+    <origin xyz="-0.41 0 -0.095" rpy="1.5708 0.677509 -0"/>
+    <parent link="hip_3"/>
+    <child link="cylinder_f_8"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.893287" upper="0.677509"/>
+  </joint>
+  <!-- Link cylinder_support_3 -->
+  <link name="cylinder_support_3">
+    <inertial>
+      <origin xyz="0.00543544 0.298634 0.0201529" rpy="0 0 0"/>
+      <mass value="3.45"/>
+      <inertia ixx="0.122413" ixy="-0.000135757" ixz="-9.00296e-06" iyy="0.00809203" iyz="1.77445e-05" izz="0.115611"/>
+    </inertial>
+    <!-- Part cylinder_support_3 -->
+    <visual>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+      <material name="cylinder_support_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl4_1 (dummy link + fixed joint) -->
+  <link name="l3_cl4_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl4_1_frame" type="fixed">
+    <origin xyz="0 0.59 0.02" rpy="1.5708 0 3.14159"/>
+    <parent link="cylinder_support_3"/>
+    <child link="l3_cl4_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link cylinder_f_9 -->
+  <link name="cylinder_f_9">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_9 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_9_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_9 -->
+  <link name="cylinder_m_9">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_9 -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_9_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l3_cl3_1 (dummy link + fixed joint) -->
+  <link name="l3_cl3_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l3_cl3_1_frame" type="fixed">
+    <origin xyz="-0 0 -0.0095" rpy="1.5708 1.5708 0"/>
+    <parent link="cylinder_m_9"/>
+    <child link="l3_cl3_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_9 to cylinder_m_9 -->
+  <joint name="l3_c3" type="prismatic">
+    <origin xyz="0.4595 0 0" rpy="3.14159 -1.5708 0"/>
+    <parent link="cylinder_f_9"/>
+    <child link="cylinder_m_9"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from cylinder_support_3 to cylinder_f_9 -->
+  <joint name="l3_r8" type="revolute">
+    <origin xyz="-0 0.4125 0.02" rpy="0 0 -2.97767"/>
+    <parent link="cylinder_support_3"/>
+    <child link="cylinder_f_9"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.163925" upper="1.40687"/>
+  </joint>
+  <!-- Joint from hip_3 to cylinder_support_3 -->
+  <joint name="l3_r7" type="revolute">
+    <origin xyz="-0.125 -0.02 -0.04" rpy="-1.5708 0.791858 -0"/>
+    <parent link="hip_3"/>
+    <child link="cylinder_support_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.36265" upper="0.778938"/>
+  </joint>
+  <!-- Joint from center to hip_3 -->
+  <joint name="l3_r2" type="revolute">
+    <origin xyz="0.5 -0.025 0.03" rpy="-3.14159 -0 -2.04409"/>
+    <parent link="center"/>
+    <child link="hip_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.473289" upper="1.09751"/>
+  </joint>
+  <!-- Link cylinder_f_10 -->
+  <link name="cylinder_f_10">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_10 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_10_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 -0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_10 -->
+  <link name="cylinder_m_10">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_10 -->
+    <visual>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_10_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0 -0.0355 -0.337" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl1_1 (dummy link + fixed joint) -->
+  <link name="l4_cl1_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl1_1_frame" type="fixed">
+    <origin xyz="-0 0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m_10"/>
+    <child link="l4_cl1_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_10 to cylinder_m_10 -->
+  <joint name="l4_c1" type="prismatic">
+    <origin xyz="0.4595 0 -0" rpy="-0 1.5708 0"/>
+    <parent link="cylinder_f_10"/>
+    <child link="cylinder_m_10"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from center to cylinder_f_10 -->
+  <joint name="l4_r1" type="revolute">
+    <origin xyz="-0.19 -0.965 0" rpy="3.14159 0 0.145736"/>
+    <parent link="center"/>
+    <child link="cylinder_f_10"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.42506" upper="0.145736"/>
+  </joint>
+  <!-- Link hip_4 -->
+  <link name="hip_4">
+    <inertial>
+      <origin xyz="-0.0375418 -0 -0.0164898" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.00825192" ixy="-0" ixz="-0.0120504" iyy="0.126424" iyz="0" izz="0.128671"/>
+    </inertial>
+    <!-- Part hip_4 -->
+    <visual>
+      <origin xyz="-0.065 -0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+      <material name="hip_4_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.065 -0 0" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/hip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl1_2 (dummy link + fixed joint) -->
+  <link name="l4_cl1_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl1_2_frame" type="fixed">
+    <origin xyz="0.275 0 0.03" rpy="-1.5708 0 3.14159"/>
+    <parent link="hip_4"/>
+    <child link="l4_cl1_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link femur_4 -->
+  <link name="femur_4">
+    <inertial>
+      <origin xyz="0.00641397 0.245927 0.02" rpy="0 0 0"/>
+      <mass value="3.6"/>
+      <inertia ixx="0.0813908" ixy="0.000199157" ixz="-1.18e-10" iyy="0.00807931" iyz="-5.8e-11" izz="0.0746916"/>
+    </inertial>
+    <!-- Part femur_4 -->
+    <visual>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+      <material name="femur_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/femur.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl2_2 (dummy link + fixed joint) -->
+  <link name="l4_cl2_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl2_2_frame" type="fixed">
+    <origin xyz="-0.013 0.384 0.02" rpy="1.5708 0 -0"/>
+    <parent link="femur_4"/>
+    <child link="l4_cl2_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link tibia_4 -->
+  <link name="tibia_4">
+    <inertial>
+      <origin xyz="-0.374888 0 -0.02" rpy="0 0 0"/>
+      <mass value="4"/>
+      <inertia ixx="0.00296427" ixy="0" ixz="0" iyy="0.21898" iyz="0" izz="0.219917"/>
+    </inertial>
+    <!-- Part tibia_4 -->
+    <visual>
+      <origin xyz="-0.375 0 0" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+      <material name="tibia_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.375 0 0" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tibia.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl4_2 (dummy link + fixed joint) -->
+  <link name="l4_cl4_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl4_2_frame" type="fixed">
+    <origin xyz="-0.45 0 -0.02" rpy="-1.5708 -0 -3.14159"/>
+    <parent link="tibia_4"/>
+    <child link="l4_cl4_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link foot_4 -->
+  <link name="foot_4">
+    <inertial>
+      <origin xyz="0.00674789 -0.371096 0.02" rpy="0 0 0"/>
+      <mass value="3.65"/>
+      <inertia ixx="0.27435" ixy="-0.000537481" ixz="3.1807e-08" iyy="0.00564812" iyz="3.381e-09" izz="0.270045"/>
+    </inertial>
+    <!-- Part foot_4 -->
+    <visual>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+      <material name="foot_4_material">
+        <color rgba="0.301961 0.301961 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.3475 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/foot.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl3_2 (dummy link + fixed joint) -->
+  <link name="l4_cl3_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl3_2_frame" type="fixed">
+    <origin xyz="-0 -0.505 0.02" rpy="-1.5708 0 -3.14159"/>
+    <parent link="foot_4"/>
+    <child link="l4_cl3_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame leg_4 (dummy link + fixed joint) -->
+  <link name="leg_4">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="leg_4_frame" type="fixed">
+    <origin xyz="0.005 -1.0075 0.02" rpy="-1.5708 0 0"/>
+    <parent link="foot_4"/>
+    <child link="leg_4"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from tibia_4 to foot_4 -->
+  <joint name="l4_r5" type="revolute">
+    <origin xyz="-0.75 -0 -0.04" rpy="-0 0 2.85742"/>
+    <parent link="tibia_4"/>
+    <child link="foot_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.28663" upper="1.85496"/>
+  </joint>
+  <!-- Joint from femur_4 to tibia_4 -->
+  <joint name="l4_r4" type="revolute">
+    <origin xyz="0 0.49 0" rpy="3.14159 -0 -0.415329"/>
+    <parent link="femur_4"/>
+    <child link="tibia_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.98613" upper="1.15547"/>
+  </joint>
+  <!-- Joint from hip_4 to femur_4 -->
+  <joint name="l4_r3" type="revolute">
+    <origin xyz="0.125 -0.02 -0.04" rpy="-1.5708 0.466703 -0"/>
+    <parent link="hip_4"/>
+    <child link="femur_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.0375" upper="1.10409"/>
+  </joint>
+  <!-- Link cylinder_f_11 -->
+  <link name="cylinder_f_11">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_11 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_11_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_11 -->
+  <link name="cylinder_m_11">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_11 -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_11_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl2_1 (dummy link + fixed joint) -->
+  <link name="l4_cl2_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl2_1_frame" type="fixed">
+    <origin xyz="0 0 -0.0095" rpy="-1.5708 -1.5708 0"/>
+    <parent link="cylinder_m_11"/>
+    <child link="l4_cl2_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_11 to cylinder_m_11 -->
+  <joint name="l4_c2" type="prismatic">
+    <origin xyz="0.4595 -0 0" rpy="0 1.5708 0"/>
+    <parent link="cylinder_f_11"/>
+    <child link="cylinder_m_11"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from hip_4 to cylinder_f_11 -->
+  <joint name="l4_r6" type="revolute">
+    <origin xyz="-0.41 0 -0.095" rpy="1.5708 0.677509 -0"/>
+    <parent link="hip_4"/>
+    <child link="cylinder_f_11"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.893287" upper="0.677509"/>
+  </joint>
+  <!-- Link cylinder_support_4 -->
+  <link name="cylinder_support_4">
+    <inertial>
+      <origin xyz="0.00543544 0.298634 0.0201529" rpy="0 0 0"/>
+      <mass value="3.45"/>
+      <inertia ixx="0.122413" ixy="-0.000135757" ixz="-9.00296e-06" iyy="0.00809203" iyz="1.77445e-05" izz="0.115611"/>
+    </inertial>
+    <!-- Part cylinder_support_4 -->
+    <visual>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+      <material name="cylinder_support_4_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.2425 -0.03" rpy="-1.5708 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_support.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl4_1 (dummy link + fixed joint) -->
+  <link name="l4_cl4_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl4_1_frame" type="fixed">
+    <origin xyz="0 0.59 0.02" rpy="1.5708 -0 -3.14159"/>
+    <parent link="cylinder_support_4"/>
+    <child link="l4_cl4_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link cylinder_f_12 -->
+  <link name="cylinder_f_12">
+    <inertial>
+      <origin xyz="0.139815 -0.0342983 -3.32e-10" rpy="0 0 0"/>
+      <mass value="2.7502"/>
+      <inertia ixx="0.00533295" ixy="-0.0021373" ixz="-9.8e-11" iyy="0.0276458" iyz="3e-12" izz="0.0310777"/>
+    </inertial>
+    <!-- Part cylinder_f_12 -->
+    <visual>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+      <material name="cylinder_f_12_material">
+        <color rgba="0.262745 0.282353 0.301961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.118 -0.0355 0" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_f.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link cylinder_m_12 -->
+  <link name="cylinder_m_12">
+    <inertial>
+      <origin xyz="-3.859e-09 -4.418e-09 -0.19587" rpy="0 0 0"/>
+      <mass value="2.74999"/>
+      <inertia ixx="0.033691" ixy="8.3e-11" ixz="1.661e-09" iyy="0.033689" iyz="1.867e-09" izz="0.000282174"/>
+    </inertial>
+    <!-- Part cylinder_m_12 -->
+    <visual>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+      <material name="cylinder_m_12_material">
+        <color rgba="0.439216 0.47451 0.501961 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.0355 -0.337" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/cylinder_m.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame l4_cl3_1 (dummy link + fixed joint) -->
+  <link name="l4_cl3_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="l4_cl3_1_frame" type="fixed">
+    <origin xyz="0 0 -0.0095" rpy="1.5708 1.5708 0"/>
+    <parent link="cylinder_m_12"/>
+    <child link="l4_cl3_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from cylinder_f_12 to cylinder_m_12 -->
+  <joint name="l4_c3" type="prismatic">
+    <origin xyz="0.4595 -0 0" rpy="3.14159 -1.5708 0"/>
+    <parent link="cylinder_f_12"/>
+    <child link="cylinder_m_12"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0" upper="0.2"/>
+  </joint>
+  <!-- Joint from cylinder_support_4 to cylinder_f_12 -->
+  <joint name="l4_r8" type="revolute">
+    <origin xyz="0 0.4125 0.02" rpy="-0 -0 -2.97767"/>
+    <parent link="cylinder_support_4"/>
+    <child link="cylinder_f_12"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.163925" upper="1.40687"/>
+  </joint>
+  <!-- Joint from hip_4 to cylinder_support_4 -->
+  <joint name="l4_r7" type="revolute">
+    <origin xyz="-0.125 -0.02 -0.04" rpy="-1.5708 0.791858 0"/>
+    <parent link="hip_4"/>
+    <child link="cylinder_support_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.36265" upper="0.778938"/>
+  </joint>
+  <!-- Joint from center to hip_4 -->
+  <joint name="l4_r2" type="revolute">
+    <origin xyz="0.5 -1.025 0.03" rpy="3.14159 0 2.6683"/>
+    <parent link="center"/>
+    <child link="hip_4"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.473289" upper="1.09751"/>
+  </joint>
+</robot>

@@ -1,0 +1,1444 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: f18a0083cc18d2b70e39eb47 / version_id: 7fd7551f6b9c8c7359e33dd9 -->
+<mujoco model="test_export_rsk_robot_mujoco_0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_rsk_robot_mujoco_0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link base -->
+    <body name="base" pos="0 0 0" quat="1 0 0 0" childclass="test_export_rsk_robot_mujoco_0">
+      <inertial pos="0.00240196 0.0010568 0.0196451" mass="0.374118" fullinertia="0.00052369 0.000556537 0.00084026 -1.32858e-05 3.13518e-05 1.1424e-05"/>
+      <!-- Part m3_spacer__length_0_02_meter -->
+      <geom type="mesh" class="visual" pos="0.0256448 -0.0209793 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.0256448 -0.0209793 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <!-- Part 18650 -->
+      <geom type="mesh" class="visual" pos="-0.0219455 -0.0372159 0.048981" quat="0 0.258819 0.965926 -0" mesh="18650" material="18650_material"/>
+      <geom type="mesh" class="collision" pos="-0.0219455 -0.0372159 0.048981" quat="0 0.258819 0.965926 -0" mesh="18650" material="18650_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07 -->
+      <geom type="mesh" class="visual" pos="0.062651 0.00281118 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07" material="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07_material"/>
+      <geom type="mesh" class="collision" pos="0.062651 0.00281118 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07" material="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07_material"/>
+      <!-- Part marker -->
+      <geom type="mesh" class="visual" pos="0.000651032 0.00281118 0.0438274" quat="0.707107 0 -0 0.707107" mesh="marker" material="marker_material"/>
+      <geom type="mesh" class="collision" pos="0.000651032 0.00281118 0.0438274" quat="0.707107 0 -0 0.707107" mesh="marker" material="marker_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785 -->
+      <geom type="mesh" class="visual" pos="0.00875728 -0.0307293 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <geom type="mesh" class="collision" pos="0.00875728 -0.0307293 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_2 -->
+      <geom type="mesh" class="visual" pos="-0.032449 0.0125612 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <geom type="mesh" class="collision" pos="-0.032449 0.0125612 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_3 -->
+      <geom type="mesh" class="visual" pos="0.0256448 0.0266016 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <geom type="mesh" class="collision" pos="0.0256448 0.0266016 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <!-- Part 18650_2 -->
+      <geom type="mesh" class="visual" pos="-0.00849505 -0.0542191 0.048981" quat="0 0.258819 0.965926 -0" mesh="18650" material="18650_material"/>
+      <geom type="mesh" class="collision" pos="-0.00849505 -0.0542191 0.048981" quat="0 0.258819 0.965926 -0" mesh="18650" material="18650_material"/>
+      <!-- Part m3_spacer__length_0_03_meter -->
+      <geom type="mesh" class="visual" pos="-0.0716861 0.0361028 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.0716861 0.0361028 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part frame -->
+      <geom type="mesh" class="visual" pos="0.000651032 0.00281118 0.0238274" quat="0.707107 -0 -0 0.707107" mesh="frame" material="frame_material"/>
+      <geom type="mesh" class="collision" pos="0.000651032 0.00281118 0.0238274" quat="0.707107 -0 -0 0.707107" mesh="frame" material="frame_material"/>
+      <!-- Part m3_spacer__length_0_006_meter -->
+      <geom type="mesh" class="visual" pos="0.0256448 -0.0209793 0.0178274" quat="0.5 0 0 0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.0256448 -0.0209793 0.0178274" quat="0.5 0 0 0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <!-- Part blue1_blue -->
+      <geom type="mesh" class="visual" pos="0.000937065 0.00404063 0.0438274" quat="0.707107 0 0 0.707107" mesh="blue1_blue" material="blue1_blue_material"/>
+      <geom type="mesh" class="collision" pos="0.000937065 0.00404063 0.0438274" quat="0.707107 0 0 0.707107" mesh="blue1_blue" material="blue1_blue_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_4 -->
+      <geom type="mesh" class="visual" pos="0.00875728 0.0363516 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <geom type="mesh" class="collision" pos="0.00875728 0.0363516 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <!-- Part coupler -->
+      <geom type="mesh" class="visual" pos="0.0336084 0.0184673 0.0268274" quat="0.258819 0 -0 0.965926" mesh="coupler" material="coupler_material"/>
+      <geom type="mesh" class="collision" pos="0.0336084 0.0184673 0.0268274" quat="0.258819 0 -0 0.965926" mesh="coupler" material="coupler_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07_2 -->
+      <geom type="mesh" class="visual" pos="0.048151 0.00281118 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07" material="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07_material"/>
+      <geom type="mesh" class="collision" pos="0.048151 0.00281118 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07" material="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07_material"/>
+      <!-- Part blue1_white -->
+      <geom type="mesh" class="visual" pos="0.000653258 0.00281118 0.0586274" quat="0 -0.707107 0.707107 -0" mesh="blue1_white" material="blue1_white_material"/>
+      <geom type="mesh" class="collision" pos="0.000653258 0.00281118 0.0586274" quat="0 -0.707107 0.707107 -0" mesh="blue1_white" material="blue1_white_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_5 -->
+      <geom type="mesh" class="visual" pos="0.0256448 -0.0209793 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <geom type="mesh" class="collision" pos="0.0256448 -0.0209793 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <!-- Part board -->
+      <geom type="mesh" class="visual" pos="0.000651032 0.00281118 -0.00667264" quat="0.707107 0 0 0.707107" mesh="board" material="board_material"/>
+      <geom type="mesh" class="collision" pos="0.000651032 0.00281118 -0.00667264" quat="0.707107 0 0 0.707107" mesh="board" material="board_material"/>
+      <!-- Part hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_6 -->
+      <geom type="mesh" class="visual" pos="-0.032449 -0.00693882 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <geom type="mesh" class="collision" pos="-0.032449 -0.00693882 -0.0112726" quat="0 0.707107 0.707107 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785" material="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material"/>
+      <!-- Part coil -->
+      <geom type="mesh" class="visual" pos="0.070151 -0.00378882 -0.00667264" quat="0.707107 0 -0.707107 0" mesh="coil" material="coil_material"/>
+      <geom type="mesh" class="collision" pos="0.070151 -0.00378882 -0.00667264" quat="0.707107 0 -0.707107 0" mesh="coil" material="coil_material"/>
+      <!-- Part frame_2 -->
+      <geom type="mesh" class="visual" pos="0.070151 -0.00378882 -0.00667264" quat="0.707107 0 -0.707107 0" mesh="frame__2" material="frame__2_material"/>
+      <geom type="mesh" class="collision" pos="0.070151 -0.00378882 -0.00667264" quat="0.707107 0 -0.707107 0" mesh="frame__2" material="frame__2_material"/>
+      <!-- Part n20 -->
+      <geom type="mesh" class="visual" pos="-0.015949 -0.00318882 0.00532736" quat="0.707107 0 0 0.707107" mesh="n20" material="n20_material"/>
+      <geom type="mesh" class="collision" pos="-0.015949 -0.00318882 0.00532736" quat="0.707107 0 0 0.707107" mesh="n20" material="n20_material"/>
+      <!-- Part motorbox_top -->
+      <geom type="mesh" class="visual" pos="-0.015949 -0.00318882 0.00532736" quat="0.707107 0 0 0.707107" mesh="motorbox_top" material="motorbox_top_material"/>
+      <geom type="mesh" class="collision" pos="-0.015949 -0.00318882 0.00532736" quat="0.707107 0 0 0.707107" mesh="motorbox_top" material="motorbox_top_material"/>
+      <!-- Part motorbox_bottom -->
+      <geom type="mesh" class="visual" pos="-0.015949 -0.00318882 0.00532736" quat="0.707107 0 0 0.707107" mesh="motorbox_bottom" material="motorbox_bottom_material"/>
+      <geom type="mesh" class="collision" pos="-0.015949 -0.00318882 0.00532736" quat="0.707107 0 0 0.707107" mesh="motorbox_bottom" material="motorbox_bottom_material"/>
+      <!-- Part n20_2 -->
+      <geom type="mesh" class="visual" pos="0.0141472 -0.00856484 0.00532736" quat="0.258819 0 0 -0.965926" mesh="n20" material="n20_material"/>
+      <geom type="mesh" class="collision" pos="0.0141472 -0.00856484 0.00532736" quat="0.258819 0 0 -0.965926" mesh="n20" material="n20_material"/>
+      <!-- Part motorbox_top_2 -->
+      <geom type="mesh" class="visual" pos="0.0141472 -0.00856484 0.00532736" quat="0.258819 0 0 -0.965926" mesh="motorbox_top" material="motorbox_top_material"/>
+      <geom type="mesh" class="collision" pos="0.0141472 -0.00856484 0.00532736" quat="0.258819 0 0 -0.965926" mesh="motorbox_top" material="motorbox_top_material"/>
+      <!-- Part motorbox_bottom_2 -->
+      <geom type="mesh" class="visual" pos="0.0141472 -0.00856484 0.00532736" quat="0.258819 0 0 -0.965926" mesh="motorbox_bottom" material="motorbox_bottom_material"/>
+      <geom type="mesh" class="collision" pos="0.0141472 -0.00856484 0.00532736" quat="0.258819 0 0 -0.965926" mesh="motorbox_bottom" material="motorbox_bottom_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_2 -->
+      <geom type="mesh" class="visual" pos="0.0079882 -0.0764805 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.0079882 -0.0764805 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_3 -->
+      <geom type="mesh" class="visual" pos="-0.0527676 0.0493349 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.0527676 0.0493349 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_4 -->
+      <geom type="mesh" class="visual" pos="0.065651 0.0488112 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.065651 0.0488112 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_5 -->
+      <geom type="mesh" class="visual" pos="-0.0129304 -0.0667125 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.0129304 -0.0667125 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_6 -->
+      <geom type="mesh" class="visual" pos="-0.0716861 -0.0304805 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.0716861 -0.0304805 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_7 -->
+      <geom type="mesh" class="visual" pos="-0.0527676 -0.0437125 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.0527676 -0.0437125 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_8 -->
+      <geom type="mesh" class="visual" pos="0.065651 -0.0431888 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.065651 -0.0431888 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_9 -->
+      <geom type="mesh" class="visual" pos="0.0079882 0.0821028 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.0079882 0.0821028 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_03_meter_10 -->
+      <geom type="mesh" class="visual" pos="-0.0129304 0.0723349 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.0129304 0.0723349 -0.00667264" quat="0.707107 0 0 0.707107" mesh="m3_spacer__length_0_03_meter" material="m3_spacer__length_0_03_meter_material"/>
+      <!-- Part m3_spacer__length_0_02_meter_2 -->
+      <geom type="mesh" class="visual" pos="0.00875728 0.0363516 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.00875728 0.0363516 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <!-- Part m3_spacer__length_0_02_meter_3 -->
+      <geom type="mesh" class="visual" pos="-0.032449 -0.00693882 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.032449 -0.00693882 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <!-- Part m3_spacer__length_0_02_meter_4 -->
+      <geom type="mesh" class="visual" pos="0.0256448 0.0266016 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.0256448 0.0266016 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <!-- Part m3_spacer__length_0_02_meter_5 -->
+      <geom type="mesh" class="visual" pos="-0.032449 0.0125612 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.032449 0.0125612 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <!-- Part m3_spacer__length_0_02_meter_6 -->
+      <geom type="mesh" class="visual" pos="0.00875728 -0.0307293 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.00875728 -0.0307293 0.0268274" quat="0.707107 0 -0 0.707107" mesh="m3_spacer__length_0_02_meter" material="m3_spacer__length_0_02_meter_material"/>
+      <!-- Part m3_spacer__length_0_006_meter_2 -->
+      <geom type="mesh" class="visual" pos="0.00875728 -0.0307293 0.0178274" quat="0.5 0 0 0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.00875728 -0.0307293 0.0178274" quat="0.5 0 0 0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <!-- Part m3_spacer__length_0_006_meter_3 -->
+      <geom type="mesh" class="visual" pos="0.0256448 0.0266016 0.0178274" quat="0.5 0 0 -0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.0256448 0.0266016 0.0178274" quat="0.5 0 0 -0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <!-- Part m3_spacer__length_0_006_meter_4 -->
+      <geom type="mesh" class="visual" pos="-0.032449 0.0125612 0.0178274" quat="1 0 0 -0" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.032449 0.0125612 0.0178274" quat="1 0 0 -0" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <!-- Part m3_spacer__length_0_006_meter_5 -->
+      <geom type="mesh" class="visual" pos="0.00875728 0.0363516 0.0178274" quat="0.5 0 0 -0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <geom type="mesh" class="collision" pos="0.00875728 0.0363516 0.0178274" quat="0.5 0 0 -0.866025" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <!-- Part m3_spacer__length_0_006_meter_6 -->
+      <geom type="mesh" class="visual" pos="-0.032449 -0.00693882 0.0178274" quat="1 0 0 -0" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <geom type="mesh" class="collision" pos="-0.032449 -0.00693882 0.0178274" quat="1 0 0 -0" mesh="m3_spacer__length_0_006_meter" material="m3_spacer__length_0_006_meter_material"/>
+      <!-- Part n20_3 -->
+      <geom type="mesh" class="visual" pos="0.00375488 0.0201872 0.00532736" quat="0.965926 0 0 -0.258819" mesh="n20" material="n20_material"/>
+      <geom type="mesh" class="collision" pos="0.00375488 0.0201872 0.00532736" quat="0.965926 0 0 -0.258819" mesh="n20" material="n20_material"/>
+      <!-- Part motorbox_top_3 -->
+      <geom type="mesh" class="visual" pos="0.00375488 0.0201872 0.00532736" quat="0.965926 0 0 -0.258819" mesh="motorbox_top" material="motorbox_top_material"/>
+      <geom type="mesh" class="collision" pos="0.00375488 0.0201872 0.00532736" quat="0.965926 0 0 -0.258819" mesh="motorbox_top" material="motorbox_top_material"/>
+      <!-- Part motorbox_bottom_3 -->
+      <geom type="mesh" class="visual" pos="0.00375488 0.0201872 0.00532736" quat="0.965926 0 0 -0.258819" mesh="motorbox_bottom" material="motorbox_bottom_material"/>
+      <geom type="mesh" class="collision" pos="0.00375488 0.0201872 0.00532736" quat="0.965926 0 0 -0.258819" mesh="motorbox_bottom" material="motorbox_bottom_material"/>
+      <!-- Link wheel_no_passives -->
+      <body name="wheel_no_passives" pos="0.024251 0.0436876 0.0103274" quat="0.704604 0.639927 -0.300821 -0.0594445">
+        <!-- Joint from base to wheel_no_passives -->
+        <joint axis="0 0 1" name="wheel1_speed" type="hinge"/>
+        <inertial pos="6.58074e-07 -5.13421e-06 -0.00986839" mass="0.0266331" fullinertia="3.77181e-06 3.77247e-06 7.07069e-06 8.62e-10 -7.43e-10 -1.5e-11"/>
+        <!-- Part wheel2 -->
+        <geom type="mesh" class="visual" pos="0 -0 -0.0075" quat="0 0 1 -0" mesh="wheel2" material="wheel2_material"/>
+        <geom type="mesh" class="collision" pos="0 -0 -0.0075" quat="0 0 1 -0" mesh="wheel2" material="wheel2_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec -->
+        <geom type="mesh" class="visual" pos="-0 0.008 -0.0132" quat="0 -0.707107 0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0 0.008 -0.0132" quat="0 -0.707107 0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part coupler_2 -->
+        <geom type="mesh" class="visual" pos="0 -0 -0.012" quat="1 -0 -0 -0" mesh="coupler__2" material="coupler__2_material"/>
+        <geom type="mesh" class="collision" pos="0 -0 -0.012" quat="1 -0 -0 -0" mesh="coupler__2" material="coupler__2_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e -->
+        <geom type="mesh" class="visual" pos="0 0.008 -0.005" quat="0 0 -0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 0.008 -0.005" quat="0 0 -0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_2 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 0.008 -0.005" quat="0 0 0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 0.008 -0.005" quat="0 0 0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part wheel1 -->
+        <geom type="mesh" class="visual" pos="0 -0 -0.0075" quat="0 0 1 -0" mesh="wheel1" material="wheel1_material"/>
+        <geom type="mesh" class="collision" pos="0 -0 -0.0075" quat="0 0 1 -0" mesh="wheel1" material="wheel1_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_2 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 0.008 -0.0142" quat="0.965926 -0 -0 -0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 0.008 -0.0142" quat="0.965926 -0 -0 -0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_3 -->
+        <geom type="mesh" class="visual" pos="0.0138564 -0.008 -0.0142" quat="0.258819 0 0 0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 -0.008 -0.0142" quat="0.258819 0 0 0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_4 -->
+        <geom type="mesh" class="visual" pos="0 -0.016 -0.0142" quat="0.707107 -0 0 0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.016 -0.0142" quat="0.707107 -0 0 0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_3 -->
+        <geom type="mesh" class="visual" pos="0.0138564 -0.008 -0.005" quat="1 0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 -0.008 -0.005" quat="1 0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_5 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 -0.008 -0.0142" quat="0.965926 0 0 0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 -0.008 -0.0142" quat="0.965926 0 0 0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_4 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 -0.008 -0.005" quat="0.5 -0 -0 -0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 -0.008 -0.005" quat="0.5 -0 -0 -0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_5 -->
+        <geom type="mesh" class="visual" pos="0.0138564 0.008 -0.005" quat="0.866025 0 0 0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 0.008 -0.005" quat="0.866025 0 0 0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_6 -->
+        <geom type="mesh" class="visual" pos="0 -0.016 -0.005" quat="0.866025 -0 0 -0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.016 -0.005" quat="0.866025 -0 0 -0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_6 -->
+        <geom type="mesh" class="visual" pos="0.0138564 0.008 -0.0142" quat="0.258819 -0 0 -0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 0.008 -0.0142" quat="0.258819 -0 0 -0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_7 -->
+        <geom type="mesh" class="visual" pos="-0 0.016 -0.0142" quat="0.707107 0 -0 -0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0 0.016 -0.0142" quat="0.707107 0 -0 -0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_7 -->
+        <geom type="mesh" class="visual" pos="-0 0.016 -0.005" quat="0.5 0 -0 0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0 0.016 -0.005" quat="0.5 0 -0 0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_8 -->
+        <geom type="mesh" class="visual" pos="0.008 -0 -0.0132" quat="0 0 1 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.008 -0 -0.0132" quat="0 0 1 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_9 -->
+        <geom type="mesh" class="visual" pos="-0 -0.008 -0.0132" quat="0 0.707107 0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0 -0.008 -0.0132" quat="0 0.707107 0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_8 -->
+        <geom type="mesh" class="visual" pos="-0.008 -0 -0.005" quat="0.707107 -0 -0 -0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.008 -0 -0.005" quat="0.707107 -0 -0 -0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_9 -->
+        <geom type="mesh" class="visual" pos="-0 -0.008 -0.005" quat="1 -0 0 -0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0 -0.008 -0.005" quat="1 -0 0 -0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_10 -->
+        <geom type="mesh" class="visual" pos="-0.008 -0 -0.0132" quat="0 1 -0 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.008 -0 -0.0132" quat="0 1 -0 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_10 -->
+        <geom type="mesh" class="visual" pos="0.008 -0 -0.005" quat="0.707107 0 0 0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.008 -0 -0.005" quat="0.707107 0 0 0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Link pin_bearing_oring -->
+        <body name="pin_bearing_oring" pos="-0.00880698 0.0271051 -0.01" quat="0.698401 0.110616 -0.698401 0.110616">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring -->
+          <joint axis="0 0 1" name="wheel1_passive_1" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_2 -->
+        <body name="pin_bearing_oring_2" pos="-0.0167519 0.023057 -0.01" quat="0.630037 -0.630037 0.32102 -0.32102">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_2 -->
+          <joint axis="0 0 1" name="wheel1_passive_2" type="hinge"/>
+          <inertial pos="0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_2 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_2 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_2 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_3 -->
+        <body name="pin_bearing_oring_3" pos="-0.023057 0.0167519 -0.01" quat="0.672499 0.672499 -0.218508 -0.218508">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_3 -->
+          <joint axis="0 0 1" name="wheel1_passive_3" type="hinge"/>
+          <inertial pos="0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_3 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 -0 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 -0 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_3 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.0035" quat="1 -0 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.0035" quat="1 -0 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_3 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 -0 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 -0 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_4 -->
+        <body name="pin_bearing_oring_4" pos="-0.0271051 0.00880698 -0.01" quat="0.698401 0.698401 -0.110616 -0.110616">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_4 -->
+          <joint axis="0 0 1" name="wheel1_passive_4" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 0"/>
+          <!-- Part oring_4 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_4 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_4 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_5 -->
+        <body name="pin_bearing_oring_5" pos="-0.0285 -0 -0.01" quat="0.707107 0.707107 -0 0">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_5 -->
+          <joint axis="0 0 1" name="wheel1_passive_5" type="hinge"/>
+          <inertial pos="0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 -0"/>
+          <!-- Part oring_5 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_5 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_5 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_6 -->
+        <body name="pin_bearing_oring_6" pos="-0.0271051 -0.00880698 -0.01" quat="0.698401 0.698401 0.110616 0.110616">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_6 -->
+          <joint axis="0 0 1" name="wheel1_passive_6" type="hinge"/>
+          <inertial pos="-0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_6 -->
+          <geom type="mesh" class="visual" pos="-0 0 -0.002" quat="1 -0 0 -0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 -0.002" quat="1 -0 0 -0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_6 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.0035" quat="1 -0 0 -0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.0035" quat="1 -0 0 -0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_6 -->
+          <geom type="mesh" class="visual" pos="-0 0 -0.002" quat="1 -0 0 -0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 -0.002" quat="1 -0 0 -0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_7 -->
+        <body name="pin_bearing_oring_7" pos="-0.023057 -0.0167519 -0.01" quat="0.672499 0.672499 0.218508 0.218508">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_7 -->
+          <joint axis="0 0 1" name="wheel1_passive_7" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_7 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_7 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_7 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_8 -->
+        <body name="pin_bearing_oring_8" pos="-0.0167519 -0.023057 -0.01" quat="0.630037 0.630037 0.32102 0.32102">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_8 -->
+          <joint axis="0 0 1" name="wheel1_passive_8" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_8 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_8 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_8 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_9 -->
+        <body name="pin_bearing_oring_9" pos="-0.00880698 -0.0271051 -0.01" quat="0.698401 -0.110616 -0.698401 -0.110616">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_9 -->
+          <joint axis="0 0 1" name="wheel1_passive_9" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_9 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_9 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_9 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_10 -->
+        <body name="pin_bearing_oring_10" pos="0 -0.0285 -0.01" quat="0.5 0.5 0.5 0.5">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_10 -->
+          <joint axis="0 0 1" name="wheel1_passive_10" type="hinge"/>
+          <inertial pos="0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_10 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 -0 -0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 -0 -0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_10 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.0035" quat="1 -0 -0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.0035" quat="1 -0 -0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_10 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 -0 -0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 -0 -0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_11 -->
+        <body name="pin_bearing_oring_11" pos="0.00880698 -0.0271051 -0.01" quat="0.698401 0.110616 -0.698401 0.110616">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_11 -->
+          <joint axis="0 0 1" name="wheel1_passive_11" type="hinge"/>
+          <inertial pos="0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 -0"/>
+          <!-- Part oring_11 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_11 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_11 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_12 -->
+        <body name="pin_bearing_oring_12" pos="0.0167519 -0.023057 -0.01" quat="0.672499 0.218508 -0.672499 0.218508">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_12 -->
+          <joint axis="0 0 1" name="wheel1_passive_12" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_12 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_12 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_12 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_13 -->
+        <body name="pin_bearing_oring_13" pos="0.023057 -0.0167519 -0.01" quat="0.672499 0.672499 -0.218508 -0.218508">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_13 -->
+          <joint axis="0 0 1" name="wheel1_passive_13" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_13 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_13 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_13 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_14 -->
+        <body name="pin_bearing_oring_14" pos="0.0271051 -0.00880698 -0.01" quat="0.698401 0.698401 -0.110616 -0.110616">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_14 -->
+          <joint axis="0 0 1" name="wheel1_passive_14" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_14 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_14 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_14 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_15 -->
+        <body name="pin_bearing_oring_15" pos="0.0285 -0 -0.01" quat="0.707107 0.707107 -0 0">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_15 -->
+          <joint axis="0 0 1" name="wheel1_passive_15" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_15 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_15 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_15 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_16 -->
+        <body name="pin_bearing_oring_16" pos="0.0271051 0.00880698 -0.01" quat="0.110616 0.110616 -0.698401 -0.698401">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_16 -->
+          <joint axis="0 0 1" name="wheel1_passive_16" type="hinge"/>
+          <inertial pos="0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_16 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 0 -0 -0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 0 -0 -0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_16 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.0035" quat="1 0 -0 -0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.0035" quat="1 0 -0 -0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_16 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 0 -0 -0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 0 -0 -0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_17 -->
+        <body name="pin_bearing_oring_17" pos="0.023057 0.0167519 -0.01" quat="0.218508 0.218508 -0.672499 -0.672499">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_17 -->
+          <joint axis="0 0 1" name="wheel1_passive_17" type="hinge"/>
+          <inertial pos="0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 0"/>
+          <!-- Part oring_17 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 -0 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 -0 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_17 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.0035" quat="1 -0 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.0035" quat="1 -0 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_17 -->
+          <geom type="mesh" class="visual" pos="0 0 -0.002" quat="1 -0 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 -0.002" quat="1 -0 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_18 -->
+        <body name="pin_bearing_oring_18" pos="0.0167519 0.023057 -0.01" quat="0.32102 0.32102 -0.630037 -0.630037">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_18 -->
+          <joint axis="0 0 1" name="wheel1_passive_18" type="hinge"/>
+          <inertial pos="-0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_18 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_18 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_18 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_19 -->
+        <body name="pin_bearing_oring_19" pos="0.00880698 0.0271051 -0.01" quat="0.698401 -0.110616 -0.698401 -0.110616">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_19 -->
+          <joint axis="0 0 1" name="wheel1_passive_19" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_19 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_19 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_19 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_20 -->
+        <body name="pin_bearing_oring_20" pos="0 0.0285 -0.01" quat="0.707107 0 -0.707107 -0">
+          <!-- Joint from wheel_no_passives to pin_bearing_oring_20 -->
+          <joint axis="0 0 1" name="wheel1_passive_20" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 0"/>
+          <!-- Part oring_20 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_20 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_20 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+      </body>
+      <!-- Link wheel_no_passives_2 -->
+      <body name="wheel_no_passives_2" pos="0.024251 -0.0380652 0.0103274" quat="0.683013 -0.683013 -0.183013 0.183013">
+        <!-- Joint from base to wheel_no_passives_2 -->
+        <joint axis="0 0 1" name="wheel2_speed" type="hinge"/>
+        <inertial pos="6.58074e-07 -5.13421e-06 -0.00986839" mass="0.0266331" fullinertia="3.77181e-06 3.77247e-06 7.07069e-06 8.62e-10 -7.43e-10 -1.5e-11"/>
+        <!-- Part wheel2_2 -->
+        <geom type="mesh" class="visual" pos="-0 -0 -0.0075" quat="0 0 -1 0" mesh="wheel2" material="wheel2_material"/>
+        <geom type="mesh" class="collision" pos="-0 -0 -0.0075" quat="0 0 -1 0" mesh="wheel2" material="wheel2_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_11 -->
+        <geom type="mesh" class="visual" pos="-0 0.008 -0.0132" quat="0 0.707107 -0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0 0.008 -0.0132" quat="0 0.707107 -0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part coupler_3 -->
+        <geom type="mesh" class="visual" pos="0 -0 -0.012" quat="1 -0 0 0" mesh="coupler__2" material="coupler__2_material"/>
+        <geom type="mesh" class="collision" pos="0 -0 -0.012" quat="1 -0 0 0" mesh="coupler__2" material="coupler__2_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_11 -->
+        <geom type="mesh" class="visual" pos="0 0.008 -0.005" quat="0 0 0 -1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 0.008 -0.005" quat="0 0 0 -1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_12 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 0.008 -0.005" quat="0 0 0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 0.008 -0.005" quat="0 0 0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part wheel1_2 -->
+        <geom type="mesh" class="visual" pos="-0 -0 -0.0075" quat="0 0 -1 0" mesh="wheel1" material="wheel1_material"/>
+        <geom type="mesh" class="collision" pos="-0 -0 -0.0075" quat="0 0 -1 0" mesh="wheel1" material="wheel1_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_12 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 0.008 -0.0142" quat="0.965926 0 -0 -0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 0.008 -0.0142" quat="0.965926 0 -0 -0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_13 -->
+        <geom type="mesh" class="visual" pos="0.0138564 -0.008 -0.0142" quat="0.258819 0 0 0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 -0.008 -0.0142" quat="0.258819 0 0 0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_14 -->
+        <geom type="mesh" class="visual" pos="0 -0.016 -0.0142" quat="0.707107 -0 0 0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.016 -0.0142" quat="0.707107 -0 0 0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_13 -->
+        <geom type="mesh" class="visual" pos="0.0138564 -0.008 -0.005" quat="1 0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 -0.008 -0.005" quat="1 0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_15 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 -0.008 -0.0142" quat="0.965926 -0 -0 0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 -0.008 -0.0142" quat="0.965926 -0 -0 0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_14 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 -0.008 -0.005" quat="0.5 -0 0 -0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 -0.008 -0.005" quat="0.5 -0 0 -0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_15 -->
+        <geom type="mesh" class="visual" pos="0.0138564 0.008 -0.005" quat="0.866025 0 -0 0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 0.008 -0.005" quat="0.866025 0 -0 0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_16 -->
+        <geom type="mesh" class="visual" pos="0 -0.016 -0.005" quat="0.866025 0 -0 -0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.016 -0.005" quat="0.866025 0 -0 -0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_16 -->
+        <geom type="mesh" class="visual" pos="0.0138564 0.008 -0.0142" quat="0.258819 -0 -0 -0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 0.008 -0.0142" quat="0.258819 -0 -0 -0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_17 -->
+        <geom type="mesh" class="visual" pos="-0 0.016 -0.0142" quat="0.707107 0 -0 -0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0 0.016 -0.0142" quat="0.707107 0 -0 -0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_17 -->
+        <geom type="mesh" class="visual" pos="0 0.016 -0.005" quat="0.5 0 0 0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 0.016 -0.005" quat="0.5 0 0 0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_18 -->
+        <geom type="mesh" class="visual" pos="0.008 -0 -0.0132" quat="0 -0 -1 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.008 -0 -0.0132" quat="0 -0 -1 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_19 -->
+        <geom type="mesh" class="visual" pos="-0 -0.008 -0.0132" quat="0 -0.707107 -0.707107 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0 -0.008 -0.0132" quat="0 -0.707107 -0.707107 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_18 -->
+        <geom type="mesh" class="visual" pos="-0.008 0 -0.005" quat="0.707107 -0 -0 -0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.008 0 -0.005" quat="0.707107 -0 -0 -0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_19 -->
+        <geom type="mesh" class="visual" pos="-0 -0.008 -0.005" quat="1 -0 0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0 -0.008 -0.005" quat="1 -0 0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_20 -->
+        <geom type="mesh" class="visual" pos="-0.008 -0 -0.0132" quat="0 1 0 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.008 -0 -0.0132" quat="0 1 0 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_20 -->
+        <geom type="mesh" class="visual" pos="0.008 -0 -0.005" quat="0.707107 -0 0 0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.008 -0 -0.005" quat="0.707107 -0 0 0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Link pin_bearing_oring_21 -->
+        <body name="pin_bearing_oring_21" pos="0.0271051 -0.00880698 -0.01" quat="0.698401 -0.698401 0.110616 -0.110616">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_21 -->
+          <joint axis="0 0 1" name="wheel2_passive1" type="hinge"/>
+          <inertial pos="0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_21 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_21 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_21 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_22 -->
+        <body name="pin_bearing_oring_22" pos="0.023057 -0.0167519 -0.01" quat="0.630037 -0.32102 0.630037 0.32102">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_22 -->
+          <joint axis="0 0 1" name="wheel2_passive2" type="hinge"/>
+          <inertial pos="0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_22 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_22 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_22 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_23 -->
+        <body name="pin_bearing_oring_23" pos="0.0167519 -0.023057 -0.01" quat="0.32102 -0.32102 -0.630037 0.630037">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_23 -->
+          <joint axis="0 0 1" name="wheel2_passive3" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_23 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_23 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_23 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_24 -->
+        <body name="pin_bearing_oring_24" pos="0.00880698 -0.0271051 -0.01" quat="0.698401 -0.110616 0.698401 0.110616">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_24 -->
+          <joint axis="0 0 1" name="wheel2_passive4" type="hinge"/>
+          <inertial pos="0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_24 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_24 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_24 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_25 -->
+        <body name="pin_bearing_oring_25" pos="-0 -0.0285 -0.01" quat="0.707107 -0 -0.707107 0">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_25 -->
+          <joint axis="0 0 1" name="wheel2_passive5" type="hinge"/>
+          <inertial pos="0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_25 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_25 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_25 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_26 -->
+        <body name="pin_bearing_oring_26" pos="-0.00880698 -0.0271051 -0.01" quat="0.110616 -0.698401 0.110616 0.698401">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_26 -->
+          <joint axis="0 0 1" name="wheel2_passive6" type="hinge"/>
+          <inertial pos="0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_26 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_26 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_26 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_27 -->
+        <body name="pin_bearing_oring_27" pos="0.0285 -0 -0.01" quat="0.5 -0.5 0.5 0.5">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_27 -->
+          <joint axis="0 0 1" name="wheel2_passive7" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_27 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_27 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_27 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_28 -->
+        <body name="pin_bearing_oring_28" pos="0.0271051 0.00880698 -0.01" quat="0.415627 -0.572061 0.415627 0.572061">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_28 -->
+          <joint axis="0 0 1" name="wheel2_passive8" type="hinge"/>
+          <inertial pos="-0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_28 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_28 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_28 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_29 -->
+        <body name="pin_bearing_oring_29" pos="0.023057 0.0167519 -0.01" quat="0.32102 -0.630037 0.32102 0.630037">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_29 -->
+          <joint axis="0 0 1" name="wheel2_passive9" type="hinge"/>
+          <inertial pos="-0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 -0"/>
+          <!-- Part oring_29 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_29 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_29 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_30 -->
+        <body name="pin_bearing_oring_30" pos="0.0167519 0.023057 -0.01" quat="0.218508 -0.672499 0.218508 0.672499">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_30 -->
+          <joint axis="0 0 1" name="wheel2_passive10" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_30 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_30 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_30 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_31 -->
+        <body name="pin_bearing_oring_31" pos="0.00880698 0.0271051 -0.01" quat="0.415627 0.415627 -0.572061 -0.572061">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_31 -->
+          <joint axis="0 0 1" name="wheel2_passive11" type="hinge"/>
+          <inertial pos="0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_31 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 -1 0 -0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 -1 0 -0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_31 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 -1 0 -0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 -1 0 -0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_31 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 -1 0 -0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 -1 0 -0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_32 -->
+        <body name="pin_bearing_oring_32" pos="-0 0.0285 -0.01" quat="0 0.707107 -0 -0.707107">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_32 -->
+          <joint axis="0 0 1" name="wheel2_passive12" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 -0"/>
+          <!-- Part oring_32 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_32 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_32 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_33 -->
+        <body name="pin_bearing_oring_33" pos="-0.00880698 0.0271051 -0.01" quat="0.698401 -0.110616 0.698401 0.110616">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_33 -->
+          <joint axis="0 0 1" name="wheel2_passive13" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_33 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_33 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_33 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_34 -->
+        <body name="pin_bearing_oring_34" pos="-0.0167519 0.023057 -0.01" quat="0.672499 -0.218508 0.672499 0.218508">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_34 -->
+          <joint axis="0 0 1" name="wheel2_passive14" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_34 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_34 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_34 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_35 -->
+        <body name="pin_bearing_oring_35" pos="-0.023057 0.0167519 -0.01" quat="0.630037 -0.32102 0.630037 0.32102">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_35 -->
+          <joint axis="0 0 1" name="wheel2_passive15" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 -0"/>
+          <!-- Part oring_35 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_35 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_35 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_36 -->
+        <body name="pin_bearing_oring_36" pos="-0.0167519 -0.023057 -0.01" quat="0.218508 -0.672499 0.218508 0.672499">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_36 -->
+          <joint axis="0 0 1" name="wheel2_passive16" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_36 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_36 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_36 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_37 -->
+        <body name="pin_bearing_oring_37" pos="-0.023057 -0.0167519 -0.01" quat="0.672499 0.672499 0.218508 0.218508">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_37 -->
+          <joint axis="0 0 1" name="wheel2_passive17" type="hinge"/>
+          <inertial pos="0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 0"/>
+          <!-- Part oring_37 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_37 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_37 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_38 -->
+        <body name="pin_bearing_oring_38" pos="-0.0271051 -0.00880698 -0.01" quat="0.415627 -0.572061 0.415627 0.572061">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_38 -->
+          <joint axis="0 0 1" name="wheel2_passive18" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_38 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_38 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_38 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_39 -->
+        <body name="pin_bearing_oring_39" pos="-0.0285 -0 -0.01" quat="0.5 -0.5 0.5 0.5">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_39 -->
+          <joint axis="0 0 1" name="wheel2_passive19" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_39 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_39 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_39 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_40 -->
+        <body name="pin_bearing_oring_40" pos="-0.0271051 0.00880698 -0.01" quat="0.572061 -0.415627 0.572061 0.415627">
+          <!-- Joint from wheel_no_passives_2 to pin_bearing_oring_40 -->
+          <joint axis="0 0 1" name="wheel2_passive20" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_40 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_40 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_40 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+      </body>
+      <!-- Link wheel_no_passives_3 -->
+      <body name="wheel_no_passives_3" pos="-0.046549 0.00281118 0.0103274" quat="0.505815 0.494116 0.505815 0.494116">
+        <!-- Joint from base to wheel_no_passives_3 -->
+        <joint axis="0 0 1" name="wheel3_speed" type="hinge"/>
+        <inertial pos="6.58074e-07 -5.13421e-06 -0.00986839" mass="0.0266331" fullinertia="3.77181e-06 3.77247e-06 7.07069e-06 8.62e-10 -7.43e-10 -1.5e-11"/>
+        <!-- Part wheel2_3 -->
+        <geom type="mesh" class="visual" pos="0 0 -0.0075" quat="0 -0 1 -0" mesh="wheel2" material="wheel2_material"/>
+        <geom type="mesh" class="collision" pos="0 0 -0.0075" quat="0 -0 1 -0" mesh="wheel2" material="wheel2_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_21 -->
+        <geom type="mesh" class="visual" pos="0 0.008 -0.0132" quat="0 -0.707107 0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0 0.008 -0.0132" quat="0 -0.707107 0.707107 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part coupler_4 -->
+        <geom type="mesh" class="visual" pos="0 0 -0.012" quat="1 0 -0 0" mesh="coupler__2" material="coupler__2_material"/>
+        <geom type="mesh" class="collision" pos="0 0 -0.012" quat="1 0 -0 0" mesh="coupler__2" material="coupler__2_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_21 -->
+        <geom type="mesh" class="visual" pos="0 0.008 -0.005" quat="0 -0 0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 0.008 -0.005" quat="0 -0 0 1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_22 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 0.008 -0.005" quat="0 0 -0 -1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 0.008 -0.005" quat="0 0 -0 -1" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part wheel1_3 -->
+        <geom type="mesh" class="visual" pos="0 0 -0.0075" quat="0 -0 1 -0" mesh="wheel1" material="wheel1_material"/>
+        <geom type="mesh" class="collision" pos="0 0 -0.0075" quat="0 -0 1 -0" mesh="wheel1" material="wheel1_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_22 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 0.008 -0.0142" quat="0.965926 -0 0 -0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 0.008 -0.0142" quat="0.965926 -0 0 -0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_23 -->
+        <geom type="mesh" class="visual" pos="0.0138564 -0.008 -0.0142" quat="0.258819 -0 -0 0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 -0.008 -0.0142" quat="0.258819 -0 -0 0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_24 -->
+        <geom type="mesh" class="visual" pos="0 -0.016 -0.0142" quat="0.707107 -0 -0 0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.016 -0.0142" quat="0.707107 -0 -0 0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_23 -->
+        <geom type="mesh" class="visual" pos="0.0138564 -0.008 -0.005" quat="1 -0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 -0.008 -0.005" quat="1 -0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_25 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 -0.008 -0.0142" quat="0.965926 -0 -0 0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 -0.008 -0.0142" quat="0.965926 -0 -0 0.258819" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_24 -->
+        <geom type="mesh" class="visual" pos="-0.0138564 -0.008 -0.005" quat="0.5 0 -0 -0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.0138564 -0.008 -0.005" quat="0.5 0 -0 -0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_25 -->
+        <geom type="mesh" class="visual" pos="0.0138564 0.008 -0.005" quat="0.866025 -0 -0 0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 0.008 -0.005" quat="0.866025 -0 -0 0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_26 -->
+        <geom type="mesh" class="visual" pos="0 -0.016 -0.005" quat="0.866025 -0 0 -0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.016 -0.005" quat="0.866025 -0 0 -0.5" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_26 -->
+        <geom type="mesh" class="visual" pos="0.0138564 0.008 -0.0142" quat="0.258819 0 -0 -0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.0138564 0.008 -0.0142" quat="0.258819 0 -0 -0.965926" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_27 -->
+        <geom type="mesh" class="visual" pos="0 0.016 -0.0142" quat="0.707107 -0 0 -0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0 0.016 -0.0142" quat="0.707107 -0 0 -0.707107" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_27 -->
+        <geom type="mesh" class="visual" pos="0 0.016 -0.005" quat="0.5 -0 -0 0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0 0.016 -0.005" quat="0.5 -0 -0 0.866025" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_28 -->
+        <geom type="mesh" class="visual" pos="0.008 -0 -0.0132" quat="0 -0 -1 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0.008 -0 -0.0132" quat="0 -0 -1 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_29 -->
+        <geom type="mesh" class="visual" pos="0 -0.008 -0.0132" quat="0 -0.707107 -0.707107 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="0 -0.008 -0.0132" quat="0 -0.707107 -0.707107 0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_28 -->
+        <geom type="mesh" class="visual" pos="-0.008 -0 -0.005" quat="0.707107 -0 0 -0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0.008 -0 -0.005" quat="0.707107 -0 0 -0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_29 -->
+        <geom type="mesh" class="visual" pos="-0 -0.008 -0.005" quat="1 -0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="-0 -0.008 -0.005" quat="1 -0 -0 0" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Part hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_30 -->
+        <geom type="mesh" class="visual" pos="-0.008 -0 -0.0132" quat="0 -1 -0 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <geom type="mesh" class="collision" pos="-0.008 -0 -0.0132" quat="0 -1 -0 -0" mesh="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec" material="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material"/>
+        <!-- Part hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_30 -->
+        <geom type="mesh" class="visual" pos="0.008 -0 -0.005" quat="0.707107 -0 -0 0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <geom type="mesh" class="collision" pos="0.008 -0 -0.005" quat="0.707107 -0 -0 0.707107" mesh="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e" material="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material"/>
+        <!-- Link pin_bearing_oring_41 -->
+        <body name="pin_bearing_oring_41" pos="0 0.0285 -0.01" quat="0 0.707107 0 0.707107">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_41 -->
+          <joint axis="0 0 1" name="wheel3_passive1" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 0"/>
+          <!-- Part oring_41 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_41 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_41 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_42 -->
+        <body name="pin_bearing_oring_42" pos="-0.00880698 0.0271051 -0.01" quat="0.572061 0.572061 -0.415627 -0.415627">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_42 -->
+          <joint axis="0 0 1" name="wheel3_passive2" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_42 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_42 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_42 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_43 -->
+        <body name="pin_bearing_oring_43" pos="-0.0167519 0.023057 -0.01" quat="0.630037 0.630037 -0.32102 -0.32102">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_43 -->
+          <joint axis="0 0 1" name="wheel3_passive3" type="hinge"/>
+          <inertial pos="-0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_43 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_43 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_43 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_44 -->
+        <body name="pin_bearing_oring_44" pos="-0.023057 0.0167519 -0.01" quat="0.672499 0.672499 -0.218508 -0.218508">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_44 -->
+          <joint axis="0 0 1" name="wheel3_passive4" type="hinge"/>
+          <inertial pos="0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_44 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_44 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_44 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_45 -->
+        <body name="pin_bearing_oring_45" pos="-0.0271051 0.00880698 -0.01" quat="0.698401 0.698401 -0.110616 -0.110616">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_45 -->
+          <joint axis="0 0 1" name="wheel3_passive5" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_45 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_45 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_45 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_46 -->
+        <body name="pin_bearing_oring_46" pos="-0.0285 0 -0.01" quat="0.707107 0.707107 -0 0">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_46 -->
+          <joint axis="0 0 1" name="wheel3_passive6" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_46 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_46 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_46 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_47 -->
+        <body name="pin_bearing_oring_47" pos="-0.0271051 -0.00880698 -0.01" quat="0.698401 0.698401 0.110616 0.110616">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_47 -->
+          <joint axis="0 0 1" name="wheel3_passive7" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 0"/>
+          <!-- Part oring_47 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_47 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_47 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_48 -->
+        <body name="pin_bearing_oring_48" pos="-0.023057 -0.0167519 -0.01" quat="0.672499 0.672499 0.218508 0.218508">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_48 -->
+          <joint axis="0 0 1" name="wheel3_passive8" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_48 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_48 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_48 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_49 -->
+        <body name="pin_bearing_oring_49" pos="-0.0167519 -0.023057 -0.01" quat="0.630037 0.630037 0.32102 0.32102">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_49 -->
+          <joint axis="0 0 1" name="wheel3_passive9" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_49 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_49 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_49 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_50 -->
+        <body name="pin_bearing_oring_50" pos="-0.00880698 -0.0271051 -0.01" quat="0.572061 0.572061 0.415627 0.415627">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_50 -->
+          <joint axis="0 0 1" name="wheel3_passive10" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_50 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_50 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_50 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_51 -->
+        <body name="pin_bearing_oring_51" pos="0 -0.0285 -0.01" quat="0 -0.707107 0 -0.707107">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_51 -->
+          <joint axis="0 0 1" name="wheel3_passive11" type="hinge"/>
+          <inertial pos="-0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 0"/>
+          <!-- Part oring_51 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_51 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_51 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_52 -->
+        <body name="pin_bearing_oring_52" pos="0.00880698 -0.0271051 -0.01" quat="0.572061 0.572061 -0.415627 -0.415627">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_52 -->
+          <joint axis="0 0 1" name="wheel3_passive12" type="hinge"/>
+          <inertial pos="-0 0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 -0"/>
+          <!-- Part oring_52 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_52 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_52 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_53 -->
+        <body name="pin_bearing_oring_53" pos="0.0167519 -0.023057 -0.01" quat="0.630037 0.630037 -0.32102 -0.32102">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_53 -->
+          <joint axis="0 0 1" name="wheel3_passive13" type="hinge"/>
+          <inertial pos="-0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 -0 -0"/>
+          <!-- Part oring_53 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 -1 -0 -0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 -1 -0 -0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_53 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 -1 -0 -0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 -1 -0 -0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_53 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 -1 -0 -0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 -1 -0 -0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_54 -->
+        <body name="pin_bearing_oring_54" pos="0.023057 -0.0167519 -0.01" quat="0.672499 0.672499 -0.218508 -0.218508">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_54 -->
+          <joint axis="0 0 1" name="wheel3_passive14" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_54 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_54 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_54 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_55 -->
+        <body name="pin_bearing_oring_55" pos="0.0271051 -0.00880698 -0.01" quat="0.698401 0.698401 -0.110616 -0.110616">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_55 -->
+          <joint axis="0 0 1" name="wheel3_passive15" type="hinge"/>
+          <inertial pos="0 -0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 -0 0 0"/>
+          <!-- Part oring_55 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_55 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_55 -->
+          <geom type="mesh" class="visual" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_56 -->
+        <body name="pin_bearing_oring_56" pos="0.00880698 0.0271051 -0.01" quat="0.572061 0.572061 0.415627 0.415627">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_56 -->
+          <joint axis="0 0 1" name="wheel3_passive16" type="hinge"/>
+          <inertial pos="-0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_56 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_56 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_56 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_57 -->
+        <body name="pin_bearing_oring_57" pos="0.0167519 0.023057 -0.01" quat="0.630037 0.630037 0.32102 0.32102">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_57 -->
+          <joint axis="0 0 1" name="wheel3_passive17" type="hinge"/>
+          <inertial pos="-0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_57 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_57 -->
+          <geom type="mesh" class="visual" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_57 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_58 -->
+        <body name="pin_bearing_oring_58" pos="0.023057 0.0167519 -0.01" quat="0.672499 0.672499 0.218508 0.218508">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_58 -->
+          <joint axis="0 0 1" name="wheel3_passive18" type="hinge"/>
+          <inertial pos="-0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 0 -0"/>
+          <!-- Part oring_58 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_58 -->
+          <geom type="mesh" class="visual" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_58 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_59 -->
+        <body name="pin_bearing_oring_59" pos="0.0271051 0.00880698 -0.01" quat="0.698401 0.698401 0.110616 0.110616">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_59 -->
+          <joint axis="0 0 1" name="wheel3_passive19" type="hinge"/>
+          <inertial pos="-0 0 -0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_59 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_59 -->
+          <geom type="mesh" class="visual" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0 0.0035" quat="0 1 0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_59 -->
+          <geom type="mesh" class="visual" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 0.002" quat="0 1 0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+        <!-- Link pin_bearing_oring_60 -->
+        <body name="pin_bearing_oring_60" pos="0.0285 0 -0.01" quat="0 -0 0.707107 0.707107">
+          <!-- Joint from wheel_no_passives_3 to pin_bearing_oring_60 -->
+          <joint axis="0 0 1" name="wheel3_passive20" type="hinge"/>
+          <inertial pos="-0 -0 0" mass="0.00337198" fullinertia="3.5578e-08 3.5578e-08 6.0555e-08 0 -0 0"/>
+          <!-- Part oring_60 -->
+          <geom type="mesh" class="visual" pos="-0 0 -0.002" quat="1 0 -0 0" mesh="oring" material="oring_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 -0.002" quat="1 0 -0 0" mesh="oring" material="oring_material"/>
+          <!-- Part pin_60 -->
+          <geom type="mesh" class="visual" pos="0 -0 -0.0035" quat="1 0 -0 0" mesh="pin" material="pin_material"/>
+          <geom type="mesh" class="collision" pos="0 -0 -0.0035" quat="1 0 -0 0" mesh="pin" material="pin_material"/>
+          <!-- Part bearing_60 -->
+          <geom type="mesh" class="visual" pos="-0 0 -0.002" quat="1 0 -0 0" mesh="bearing" material="bearing_material"/>
+          <geom type="mesh" class="collision" pos="-0 0 -0.002" quat="1 0 -0 0" mesh="bearing" material="bearing_material"/>
+        </body>
+      </body>
+      <!-- Link kicker_front -->
+      <body name="kicker_front" pos="0.0450542 0.00281118 0.00107736" quat="0.707107 0 -0.707107 0">
+        <!-- Joint from base to kicker_front -->
+        <joint axis="0 0 1" name="kicker" type="slide" range="-0.006096863062 0.003903136938"/>
+        <inertial pos="-0.00426625 0 -0.0318837" mass="0.00935331" fullinertia="4.03199e-06 7.89604e-07 4.26246e-06 -0 1.59427e-07 0"/>
+        <!-- Part kicker_tip_2 -->
+        <geom type="mesh" class="visual" pos="-0.035 0.025 -0.0326" quat="0 -0.707107 0.707107 0" mesh="kicker_tip_2" material="kicker_tip_2_material"/>
+        <geom type="mesh" class="collision" pos="-0.035 0.025 -0.0326" quat="0 -0.707107 0.707107 0" mesh="kicker_tip_2" material="kicker_tip_2_material"/>
+        <!-- Part kicker_tip_1 -->
+        <geom type="mesh" class="visual" pos="0.01 -0.025 -0.0326" quat="0 0.707107 0.707107 0" mesh="kicker_tip_1" material="kicker_tip_1_material"/>
+        <geom type="mesh" class="collision" pos="0.01 -0.025 -0.0326" quat="0 0.707107 0.707107 0" mesh="kicker_tip_1" material="kicker_tip_1_material"/>
+        <!-- Part square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2 -->
+        <geom type="mesh" class="visual" pos="-0 0 -0.0347" quat="0 0 0 1" mesh="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2" material="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2_material"/>
+        <geom type="mesh" class="collision" pos="-0 0 -0.0347" quat="0 0 0 1" mesh="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2" material="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2_material"/>
+        <!-- Part square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2_2 -->
+        <geom type="mesh" class="visual" pos="0 0 -0.0315" quat="1 0 0 0" mesh="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2" material="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2_material"/>
+        <geom type="mesh" class="collision" pos="0 0 -0.0315" quat="1 0 0 0" mesh="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2" material="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2_material"/>
+        <!-- Part plunger -->
+        <geom type="mesh" class="visual" pos="-0.00775 -0.0066 -0.029" quat="1 0 0 0" mesh="plunger" material="plunger_material"/>
+        <geom type="mesh" class="collision" pos="-0.00775 -0.0066 -0.029" quat="1 0 0 0" mesh="plunger" material="plunger_material"/>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="m3_spacer__length_0_02_meter.stl"/>
+    <mesh file="18650.stl"/>
+    <mesh file="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07.stl"/>
+    <mesh file="marker.stl"/>
+    <mesh file="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785.stl"/>
+    <mesh file="m3_spacer__length_0_03_meter.stl"/>
+    <mesh file="frame.stl"/>
+    <mesh file="m3_spacer__length_0_006_meter.stl"/>
+    <mesh file="blue1_blue.stl"/>
+    <mesh file="coupler.stl"/>
+    <mesh file="blue1_white.stl"/>
+    <mesh file="board.stl"/>
+    <mesh file="coil.stl"/>
+    <mesh file="frame__2.stl"/>
+    <mesh file="n20.stl"/>
+    <mesh file="motorbox_top.stl"/>
+    <mesh file="motorbox_bottom.stl"/>
+    <mesh file="wheel2.stl"/>
+    <mesh file="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec.stl"/>
+    <mesh file="coupler__2.stl"/>
+    <mesh file="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e.stl"/>
+    <mesh file="wheel1.stl"/>
+    <mesh file="oring.stl"/>
+    <mesh file="pin.stl"/>
+    <mesh file="bearing.stl"/>
+    <mesh file="kicker_tip_2.stl"/>
+    <mesh file="kicker_tip_1.stl"/>
+    <mesh file="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2.stl"/>
+    <mesh file="plunger.stl"/>
+    <material name="m3_spacer__length_0_02_meter_material" rgba="0.8 0.8 0.8 1"/>
+    <material name="18650_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="hex_socket_head_cap_screw_m3x0_50_x_6__acf8a907a0472c0ae6086bf20401fa07_material" rgba="0.603922 0.647059 0.686275 1"/>
+    <material name="marker_material" rgba="0.917647 0.72549 0.490196 1"/>
+    <material name="hex_socket_head_cap_screw_m3x0_50_x_25_x_18__e477b94a6da3e3efbf1606183756b785_material" rgba="0.603922 0.647059 0.686275 1"/>
+    <material name="m3_spacer__length_0_03_meter_material" rgba="0.8 0.8 0.8 1"/>
+    <material name="frame_material" rgba="0.917647 0.917647 0.917647 0.74902"/>
+    <material name="m3_spacer__length_0_006_meter_material" rgba="0.8 0.8 0.8 1"/>
+    <material name="blue1_blue_material" rgba="0.231373 0.380392 0.705882 1"/>
+    <material name="coupler_material" rgba="0.4 0.4 0.4 1"/>
+    <material name="blue1_white_material" rgba="0.980392 0.980392 0.980392 1"/>
+    <material name="board_material" rgba="0.301961 0.290196 0.262745 1"/>
+    <material name="coil_material" rgba="0.0862745 0.321569 0.580392 1"/>
+    <material name="frame__2_material" rgba="0.921569 0.8 0.654902 1"/>
+    <material name="n20_material" rgba="0.917647 0.72549 0.490196 1"/>
+    <material name="motorbox_top_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="motorbox_bottom_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="wheel2_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="hex_nut_style_1_grade_a___b_m3x0_5__59e06dee1671df03e56ade283ea1f5ec_material" rgba="0.603922 0.647059 0.686275 1"/>
+    <material name="coupler__2_material" rgba="0.8 0.8 0.8 1"/>
+    <material name="hex_socket_head_cap_screw_m3x0_50_x_8__cca8b3192bff7455e4b9cc3364d29e0e_material" rgba="0.603922 0.647059 0.686275 1"/>
+    <material name="wheel1_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="oring_material" rgba="0.301961 0.301961 0.301961 1"/>
+    <material name="pin_material" rgba="0.701961 0.682353 0.623529 1"/>
+    <material name="bearing_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="kicker_tip_2_material" rgba="0.917647 0.917647 0.917647 0.517647"/>
+    <material name="kicker_tip_1_material" rgba="0.917647 0.917647 0.917647 0.517647"/>
+    <material name="square_thin_nut_grade_b_m3x0_5__1f32078b7141c356c1ef5a853a7893b2_material" rgba="0.603922 0.647059 0.686275 1"/>
+    <material name="plunger_material" rgba="0.972549 0.529412 0.00392157 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_speed" joint="wheel1_speed"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_1" joint="wheel1_passive_1"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_2" joint="wheel1_passive_2"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_3" joint="wheel1_passive_3"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_4" joint="wheel1_passive_4"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_5" joint="wheel1_passive_5"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_6" joint="wheel1_passive_6"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_7" joint="wheel1_passive_7"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_8" joint="wheel1_passive_8"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_9" joint="wheel1_passive_9"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_10" joint="wheel1_passive_10"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_11" joint="wheel1_passive_11"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_12" joint="wheel1_passive_12"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_13" joint="wheel1_passive_13"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_14" joint="wheel1_passive_14"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_15" joint="wheel1_passive_15"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_16" joint="wheel1_passive_16"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_17" joint="wheel1_passive_17"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_18" joint="wheel1_passive_18"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_19" joint="wheel1_passive_19"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel1_passive_20" joint="wheel1_passive_20"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_speed" joint="wheel2_speed"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive1" joint="wheel2_passive1"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive2" joint="wheel2_passive2"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive3" joint="wheel2_passive3"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive4" joint="wheel2_passive4"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive5" joint="wheel2_passive5"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive6" joint="wheel2_passive6"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive7" joint="wheel2_passive7"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive8" joint="wheel2_passive8"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive9" joint="wheel2_passive9"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive10" joint="wheel2_passive10"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive11" joint="wheel2_passive11"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive12" joint="wheel2_passive12"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive13" joint="wheel2_passive13"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive14" joint="wheel2_passive14"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive15" joint="wheel2_passive15"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive16" joint="wheel2_passive16"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive17" joint="wheel2_passive17"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive18" joint="wheel2_passive18"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive19" joint="wheel2_passive19"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel2_passive20" joint="wheel2_passive20"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_speed" joint="wheel3_speed"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive1" joint="wheel3_passive1"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive2" joint="wheel3_passive2"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive3" joint="wheel3_passive3"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive4" joint="wheel3_passive4"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive5" joint="wheel3_passive5"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive6" joint="wheel3_passive6"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive7" joint="wheel3_passive7"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive8" joint="wheel3_passive8"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive9" joint="wheel3_passive9"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive10" joint="wheel3_passive10"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive11" joint="wheel3_passive11"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive12" joint="wheel3_passive12"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive13" joint="wheel3_passive13"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive14" joint="wheel3_passive14"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive15" joint="wheel3_passive15"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive16" joint="wheel3_passive16"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive17" joint="wheel3_passive17"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive18" joint="wheel3_passive18"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive19" joint="wheel3_passive19"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="wheel3_passive20" joint="wheel3_passive20"/>
+    <position class="test_export_rsk_robot_mujoco_0" name="kicker" joint="kicker" inheritrange="1"/>
+  </actuator>
+  <equality/>
+</mujoco>

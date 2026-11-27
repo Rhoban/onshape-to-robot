@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 99762129c29a303a858e0b48 / version_id: 1d2877f16de11aa213466001 -->
+<mujoco model="test_export_differential_mujoc0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_differential_mujoc0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link base -->
+    <body name="base" pos="0 0 0" quat="1 0 0 0" childclass="test_export_differential_mujoc0">
+      <inertial pos="-0 0 0.0025" mass="0.022107" fullinertia="2.84397e-06 2.84397e-06 5.59583e-06 0 0 0"/>
+      <!-- Part base -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="base" material="base_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="base" material="base_material"/>
+      <!-- Link ring -->
+      <body name="ring" pos="0 -0 0.005" quat="1 0 0 0">
+        <!-- Joint from base to ring -->
+        <joint axis="0 0 1" name="lower" type="hinge"/>
+        <inertial pos="-0 0 0.0025" mass="0.0212665" fullinertia="8.13099e-06 8.13099e-06 1.61734e-05 0 0 0"/>
+        <!-- Part ring -->
+        <geom type="mesh" class="visual" pos="-0 0 0.01" quat="0 1 0 0" mesh="ring" material="ring_material"/>
+        <geom type="mesh" class="collision" pos="-0 0 0.01" quat="0 1 0 0" mesh="ring" material="ring_material"/>
+      </body>
+      <!-- Link ring_2 -->
+      <body name="ring_2" pos="0 0 0.045" quat="1 0 0 0">
+        <!-- Joint from base to ring_2 -->
+        <joint axis="0 0 1" name="upper" type="hinge"/>
+        <inertial pos="0 0 -0.0025" mass="0.0212665" fullinertia="8.13099e-06 8.13099e-06 1.61734e-05 -0 -0 -0"/>
+        <!-- Part ring_2 -->
+        <geom type="mesh" class="visual" pos="0 -0 -0.01" quat="1 0 -0 0" mesh="ring" material="ring_material"/>
+        <geom type="mesh" class="collision" pos="0 -0 -0.01" quat="1 0 -0 0" mesh="ring" material="ring_material"/>
+      </body>
+      <!-- Link shaft1 -->
+      <body name="shaft1" pos="0 0 0.005" quat="0.933194 0 0 0.359373">
+        <!-- Joint from base to shaft1 -->
+        <joint axis="0 0 1" name="alpha" type="hinge"/>
+        <inertial pos="-0 0 0.02" mass="0.00868" fullinertia="1.31107e-06 1.31107e-06 3.07473e-07 0 0 0"/>
+        <!-- Part shaft1 -->
+        <geom type="mesh" class="visual" pos="-0 0 0.045" quat="0 1 0 0" mesh="shaft1" material="shaft1_material"/>
+        <geom type="mesh" class="collision" pos="-0 0 0.045" quat="0 1 0 0" mesh="shaft1" material="shaft1_material"/>
+        <!-- Link shaft2 -->
+        <body name="shaft2" pos="-0 -0.0075 0.02" quat="0.672499 -0.672499 -0.218508 -0.218508">
+          <!-- Joint from shaft1 to shaft2 -->
+          <joint axis="0 0 1" name="beta" type="hinge"/>
+          <inertial pos="0.0120943 -0.0166463 -0.0193923" mass="0.028492" fullinertia="2.00317e-05 1.2215e-05 2.77956e-05 1.20287e-05 2.79432e-06 -3.84604e-06"/>
+          <!-- Part shaft2 -->
+          <geom type="mesh" class="visual" pos="0 0.025 0.0075" quat="0.707107 0.707107 0 0" mesh="shaft2" material="shaft2_material"/>
+          <geom type="mesh" class="collision" pos="0 0.025 0.0075" quat="0.707107 0.707107 0 0" mesh="shaft2" material="shaft2_material"/>
+          <!-- Frame effector -->
+          <site group="3" name="effector" pos="0.0496679 -0.0683619 -0.0275" quat="0.630037 0.32102 0.630037 -0.32102"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="base.stl"/>
+    <mesh file="ring.stl"/>
+    <mesh file="shaft1.stl"/>
+    <mesh file="shaft2.stl"/>
+    <material name="base_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="ring_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="shaft1_material" rgba="0.909804 0.572549 0.164706 1"/>
+    <material name="shaft2_material" rgba="0.654902 0.823529 0.576471 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_differential_mujoc0" name="lower" joint="lower"/>
+    <position class="test_export_differential_mujoc0" name="upper" joint="upper"/>
+    <position class="test_export_differential_mujoc0" name="alpha" joint="alpha"/>
+    <position class="test_export_differential_mujoc0" name="beta" joint="beta"/>
+  </actuator>
+  <equality/>
+</mujoco>

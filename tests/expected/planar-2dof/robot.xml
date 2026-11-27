@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 1fdd0d64561342b0e458666d / version_id: e84b0b6e47ca77dee74bded7 -->
+<mujoco model="test_export_planar_2dof_mujoco0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_planar_2dof_mujoco0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link base -->
+    <body name="base" pos="0 0 0" quat="1 0 0 0" childclass="test_export_planar_2dof_mujoco0">
+      <freejoint name="base_freejoint"/>
+      <inertial pos="0.000673879 0 0.035858" mass="1.01252" fullinertia="0.00500639 0.000479748 0.00460688 -0 -6.2377e-06 0"/>
+      <!-- Part base -->
+      <geom type="mesh" class="visual" pos="-0.01 -0.125 0" quat="0.5 0.5 0.5 0.5" mesh="base" material="base_material"/>
+      <geom type="mesh" class="collision" pos="-0.01 -0.125 0" quat="0.5 0.5 0.5 0.5" mesh="base" material="base_material"/>
+      <!-- Link branch1 -->
+      <body name="branch1" pos="0.015 -0.06 0.045" quat="0.34641 -0.616441 -0.34641 0.616441">
+        <!-- Joint from base to branch1 -->
+        <joint axis="0 0 1" name="motor1" type="hinge"/>
+        <inertial pos="-0.0325 -0.0533854 -0.005" mass="0.123901" fullinertia="0.000170703 6.95315e-05 0.00023817 -9.78593e-05 -0 -0"/>
+        <!-- Part branch1 -->
+        <geom type="mesh" class="visual" pos="-0.065 0.045 0.025" quat="0 1 0 0" mesh="branch1" material="branch1_material"/>
+        <geom type="mesh" class="collision" pos="-0.065 0.045 0.025" quat="0 1 0 0" mesh="branch1" material="branch1_material"/>
+        <!-- Link branch2 -->
+        <body name="branch2" pos="-0.065 -0.106771 0" quat="0 0.953707 -0.300739 0">
+          <!-- Joint from branch1 to branch2 -->
+          <joint axis="0 0 1" name="passive1" type="hinge"/>
+          <inertial pos="0.035329 0.0413041 -0.00434716" mass="0.112876" fullinertia="9.43665e-05 7.1534e-05 0.000163133 -7.27633e-05 -2.18646e-06 -2.55625e-06"/>
+          <!-- Part branch2 -->
+          <geom type="mesh" class="visual" pos="0 -0.151771 -0.025" quat="1 0 -0 -0" mesh="branch2" material="branch2_material"/>
+          <geom type="mesh" class="collision" pos="0 -0.151771 -0.025" quat="1 0 -0 -0" mesh="branch2" material="branch2_material"/>
+          <!-- Frame closing_effector_1 -->
+          <site group="3" name="closing_effector_1" pos="0.065 0.0759934 0.005" quat="1 0 -0 -0"/>
+          <!-- Frame closing_effector_1_z -->
+          <site group="3" name="closing_effector_1_z" pos="0.065 0.0759934 0.105" quat="1 0 -0 -0"/>
+        </body>
+      </body>
+      <!-- Link branch1_2 -->
+      <body name="branch1_2" pos="0.015 0.06 0.045" quat="0.34641 0.616441 -0.34641 -0.616441">
+        <!-- Joint from base to branch1_2 -->
+        <joint axis="0 0 1" name="motor2" type="hinge"/>
+        <inertial pos="-0.0325 0.0533854 -0.005" mass="0.123901" fullinertia="0.000170703 6.95315e-05 0.00023817 9.78593e-05 0 0"/>
+        <!-- Part branch1_2 -->
+        <geom type="mesh" class="visual" pos="-0.065 -0.045 -0.035" quat="1 0 0 0" mesh="branch1" material="branch1_material"/>
+        <geom type="mesh" class="collision" pos="-0.065 -0.045 -0.035" quat="1 0 0 0" mesh="branch1" material="branch1_material"/>
+        <!-- Link branch2_2 -->
+        <body name="branch2_2" pos="-0.065 0.106771 -0.01" quat="0.953707 -0 -0 0.300739">
+          <!-- Joint from branch1_2 to branch2_2 -->
+          <joint axis="0 0 1" name="passive2" type="hinge"/>
+          <inertial pos="0.035329 0.0413041 -0.00434716" mass="0.112876" fullinertia="9.43665e-05 7.1534e-05 0.000163133 -7.27633e-05 -2.18646e-06 -2.55625e-06"/>
+          <!-- Part branch2_2 -->
+          <geom type="mesh" class="visual" pos="0 -0.151771 -0.025" quat="1 0 0 -0" mesh="branch2" material="branch2_material"/>
+          <geom type="mesh" class="collision" pos="0 -0.151771 -0.025" quat="1 0 0 -0" mesh="branch2" material="branch2_material"/>
+          <!-- Frame effector -->
+          <site group="3" name="effector" pos="0.065 0.0759934 -0.01" quat="0 -1 -0 -0"/>
+          <!-- Frame closing_effector_2 -->
+          <site group="3" name="closing_effector_2" pos="0.065 0.0759934 0.005" quat="0 -0.707107 -0.707107 0"/>
+          <!-- Frame closing_effector_2_z -->
+          <site group="3" name="closing_effector_2_z" pos="0.065 0.0759934 -0.095" quat="0 -0.707107 -0.707107 0"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="base.stl"/>
+    <mesh file="branch1.stl"/>
+    <mesh file="branch2.stl"/>
+    <material name="base_material" rgba="0.615686 0.811765 0.929412 1"/>
+    <material name="branch1_material" rgba="0.231373 0.380392 0.705882 1"/>
+    <material name="branch2_material" rgba="0.917647 0.917647 0.917647 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_planar_2dof_mujoco0" name="motor1" joint="motor1"/>
+    <position class="test_export_planar_2dof_mujoco0" name="passive1" joint="passive1"/>
+    <position class="test_export_planar_2dof_mujoco0" name="motor2" joint="motor2"/>
+    <position class="test_export_planar_2dof_mujoco0" name="passive2" joint="passive2"/>
+  </actuator>
+  <equality>
+    <connect site1="closing_effector_1" site2="closing_effector_2"/>
+    <connect site1="closing_effector_1_z" site2="closing_effector_2_z"/>
+  </equality>
+</mujoco>

@@ -1,0 +1,562 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3cddea8d10f23b74231e7636 / version_id: 1d5f0ae8daf92bbda6f52727 -->
+<mujoco model="test_export_megabot_mujoco_0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_megabot_mujoco_0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link center -->
+    <body name="center" pos="0 0 0" quat="1 0 0 0" childclass="test_export_megabot_mujoco_0">
+      <inertial pos="0 -0.525 0.000101117" mass="139.991" fullinertia="23.042 23.0687 46.0044 -0 -0 -0"/>
+      <!-- Part center -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="center" material="center_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="center" material="center_material"/>
+      <!-- Frame base -->
+      <site group="3" name="base" pos="0 -0.525 0.025" quat="0.707107 0 0 -0.707107"/>
+      <!-- Link cylinder_f -->
+      <body name="cylinder_f" pos="-0.44 -0.335 0" quat="0 0.797175 -0.603749 -0">
+        <!-- Joint from center to cylinder_f -->
+        <joint axis="0 0 1" name="l1_r1" type="hinge" range="-1.296390352596 0.274405974199"/>
+        <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+        <!-- Part cylinder_f -->
+        <geom type="mesh" class="visual" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <geom type="mesh" class="collision" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <!-- Link cylinder_m -->
+        <body name="cylinder_m" pos="0.531994 -0 -0" quat="0.707107 0 0.707107 0">
+          <!-- Joint from cylinder_f to cylinder_m -->
+          <joint axis="0 0 1" name="l1_c1" type="slide" range="-0.072494092679 0.127505907321"/>
+          <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+          <!-- Part cylinder_m -->
+          <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <!-- Frame l1_cl1_1 -->
+          <site group="3" name="l1_cl1_1" pos="0 0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+        </body>
+      </body>
+      <!-- Link hip -->
+      <body name="hip" pos="-0.5 -1.025 0.03" quat="0 0.930868 0.365357 0">
+        <!-- Joint from center to hip -->
+        <joint axis="0 0 1" name="l1_r2" type="hinge" range="-0.822764224101 0.748032102694"/>
+        <inertial pos="-0.0375418 -0 -0.0164898" mass="3.6" fullinertia="0.00825192 0.126424 0.128671 0 -0.0120504 0"/>
+        <!-- Part hip -->
+        <geom type="mesh" class="visual" pos="-0.065 -0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <geom type="mesh" class="collision" pos="-0.065 -0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <!-- Frame l1_cl1_2 -->
+        <site group="3" name="l1_cl1_2" pos="0.275 -0 0.03" quat="0 0 0.707107 -0.707107"/>
+        <!-- Link femur -->
+        <body name="femur" pos="0.125 -0.02 -0.04" quat="0.704605 -0.704605 0.0594326 0.0594326">
+          <!-- Joint from hip to femur -->
+          <joint axis="0 0 1" name="l1_r3" type="hinge" range="-1.739095701208 1.402496952382"/>
+          <inertial pos="0.00641397 0.245927 0.02" mass="3.6" fullinertia="0.0813908 0.00807931 0.0746916 0.000199157 -1.18e-10 -5.8e-11"/>
+          <!-- Part femur -->
+          <geom type="mesh" class="visual" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="femur" material="femur_material"/>
+          <geom type="mesh" class="collision" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="femur" material="femur_material"/>
+          <!-- Frame l1_cl2_2 -->
+          <site group="3" name="l1_cl2_2" pos="-0.013 0.384 0.02" quat="0.707107 0.707107 -0 0"/>
+          <!-- Link tibia -->
+          <body name="tibia" pos="0 0.49 -0" quat="0 0.992312 -0.123765 0">
+            <!-- Joint from femur to tibia -->
+            <joint axis="0 0 1" name="l1_r4" type="hinge" range="-1.818963306368 1.322629347222"/>
+            <inertial pos="-0.374888 0 -0.02" mass="4" fullinertia="0.00296427 0.21898 0.219917 -0 0 -0"/>
+            <!-- Part tibia -->
+            <geom type="mesh" class="visual" pos="-0.375 0 0" quat="0.707107 0.707107 -0 -0" mesh="tibia" material="tibia_material"/>
+            <geom type="mesh" class="collision" pos="-0.375 0 0" quat="0.707107 0.707107 -0 -0" mesh="tibia" material="tibia_material"/>
+            <!-- Frame l1_cl4_2 -->
+            <site group="3" name="l1_cl4_2" pos="-0.45 0 -0.02" quat="0 0 0.707107 -0.707107"/>
+            <!-- Link foot -->
+            <body name="foot" pos="-0.75 0 -0.04" quat="0.12688 0 -0 -0.991918">
+              <!-- Joint from tibia to foot -->
+              <joint axis="0 0 1" name="l1_r5" type="hinge" range="-1.825241885494 1.316350768096"/>
+              <inertial pos="0.00674789 -0.371096 0.02" mass="3.65" fullinertia="0.27435 0.00564812 0.270045 -0.000537481 3.1807e-08 3.381e-09"/>
+              <!-- Part foot -->
+              <geom type="mesh" class="visual" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 0 -0" mesh="foot" material="foot_material"/>
+              <geom type="mesh" class="collision" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 0 -0" mesh="foot" material="foot_material"/>
+              <!-- Frame l1_cl3_2 -->
+              <site group="3" name="l1_cl3_2" pos="0 -0.505 0.02" quat="0 0 0.707107 -0.707107"/>
+              <!-- Frame leg_1 -->
+              <site group="3" name="leg_1" pos="0.005 -1.0075 0.02" quat="0.707107 -0.707107 -0 0"/>
+            </body>
+          </body>
+        </body>
+        <!-- Link cylinder_f_2 -->
+        <body name="cylinder_f_2" pos="-0.41 -0 -0.095" quat="0.674255 0.674255 0.213026 -0.213026">
+          <!-- Joint from hip to cylinder_f_2 -->
+          <joint axis="0 0 1" name="l1_r6" type="hinge" range="-0.958761202737 0.612035124058"/>
+          <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+          <!-- Part cylinder_f_2 -->
+          <geom type="mesh" class="visual" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <geom type="mesh" class="collision" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <!-- Link cylinder_m_2 -->
+          <body name="cylinder_m_2" pos="0.568904 0 -0" quat="0.707107 0 0.707107 0">
+            <!-- Joint from cylinder_f_2 to cylinder_m_2 -->
+            <joint axis="0 0 1" name="l1_c2" type="slide" range="-0.109404156811 0.090595843189"/>
+            <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+            <!-- Part cylinder_m_2 -->
+            <geom type="mesh" class="visual" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <geom type="mesh" class="collision" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <!-- Frame l1_cl2_1 -->
+            <site group="3" name="l1_cl2_1" pos="-0 0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+          </body>
+        </body>
+        <!-- Link cylinder_support -->
+        <body name="cylinder_support" pos="-0.125 -0.02 -0.04" quat="0.685497 -0.685497 0.173475 0.173475">
+          <!-- Joint from hip to cylinder_support -->
+          <joint axis="0 0 1" name="l1_r7" type="hinge" range="-2.066518350167 1.075074303423"/>
+          <inertial pos="0.00543544 0.298634 0.0201529" mass="3.45" fullinertia="0.122413 0.00809203 0.115611 -0.000135757 -9.00296e-06 1.77445e-05"/>
+          <!-- Part cylinder_support -->
+          <geom type="mesh" class="visual" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <geom type="mesh" class="collision" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <!-- Frame l1_cl4_1 -->
+          <site group="3" name="l1_cl4_1" pos="0 0.59 0.02" quat="0 0 0.707107 0.707107"/>
+          <!-- Link cylinder_f_3 -->
+          <body name="cylinder_f_3" pos="0 0.4125 0.02" quat="2.35102e-07 0 -0 -1">
+            <!-- Joint from cylinder_support to cylinder_f_3 -->
+            <joint axis="0 0 1" name="l1_r8" type="hinge" range="-4.70204e-07 1.570795856591"/>
+            <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+            <!-- Part cylinder_f_3 -->
+            <geom type="mesh" class="visual" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <geom type="mesh" class="collision" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <!-- Link cylinder_m_3 -->
+            <body name="cylinder_m_3" pos="0.633829 0 -0" quat="0 -0.707107 -0 -0.707107">
+              <!-- Joint from cylinder_f_3 to cylinder_m_3 -->
+              <joint axis="0 0 1" name="l1_c3" type="slide" range="-0.174328783235 0.025671216765"/>
+              <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+              <!-- Part cylinder_m_3 -->
+              <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <!-- Frame l1_cl3_1 -->
+              <site group="3" name="l1_cl3_1" pos="0 -0 -0.0095" quat="0.5 0.5 0.5 -0.5"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <!-- Link cylinder_f_4 -->
+      <body name="cylinder_f_4" pos="0.19 -0.085 0" quat="0 0.0728037 -0.997346 -0">
+        <!-- Joint from center to cylinder_f_4 -->
+        <joint axis="0 0 1" name="l2_r1" type="hinge" range="-1.425060020555 0.14573630624"/>
+        <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+        <!-- Part cylinder_f_4 -->
+        <geom type="mesh" class="visual" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <geom type="mesh" class="collision" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <!-- Link cylinder_m_4 -->
+        <body name="cylinder_m_4" pos="0.4595 0 0" quat="0.707107 0 0.707107 0">
+          <!-- Joint from cylinder_f_4 to cylinder_m_4 -->
+          <joint axis="0 0 1" name="l2_c1" type="slide" range="-0.0 0.2"/>
+          <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+          <!-- Part cylinder_m_4 -->
+          <geom type="mesh" class="visual" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <!-- Frame l2_cl1_1 -->
+          <site group="3" name="l2_cl1_1" pos="0 0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+        </body>
+      </body>
+      <!-- Link hip_2 -->
+      <body name="hip_2" pos="-0.5 -0.025 0.03" quat="0 0.97213 -0.234442 0">
+        <!-- Joint from center to hip_2 -->
+        <joint axis="0 0 1" name="l2_r2" type="hinge" range="-0.473288925669 1.097507401126"/>
+        <inertial pos="-0.0375418 0 -0.0164898" mass="3.6" fullinertia="0.00825192 0.126424 0.128671 -0 -0.0120504 0"/>
+        <!-- Part hip_2 -->
+        <geom type="mesh" class="visual" pos="-0.065 0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <geom type="mesh" class="collision" pos="-0.065 0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <!-- Frame l2_cl1_2 -->
+        <site group="3" name="l2_cl1_2" pos="0.275 0 0.03" quat="0 -0 0.707107 -0.707107"/>
+        <!-- Link femur_2 -->
+        <body name="femur_2" pos="0.125 -0.02 -0.04" quat="0.687942 -0.687942 0.163511 0.163511">
+          <!-- Joint from hip_2 to femur_2 -->
+          <joint axis="0 0 1" name="l2_r3" type="hinge" range="-2.037499815189 1.104092838401"/>
+          <inertial pos="0.00641397 0.245927 0.02" mass="3.6" fullinertia="0.0813908 0.00807931 0.0746916 0.000199157 -1.18e-10 -5.8e-11"/>
+          <!-- Part femur_2 -->
+          <geom type="mesh" class="visual" pos="-0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="femur" material="femur_material"/>
+          <geom type="mesh" class="collision" pos="-0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="femur" material="femur_material"/>
+          <!-- Frame l2_cl2_2 -->
+          <site group="3" name="l2_cl2_2" pos="-0.013 0.384 0.02" quat="0.707107 0.707107 0 0"/>
+          <!-- Link tibia_2 -->
+          <body name="tibia_2" pos="0 0.49 0" quat="0 -0.978515 0.206175 -0">
+            <!-- Joint from femur_2 to tibia_2 -->
+            <joint axis="0 0 1" name="l2_r4" type="hinge" range="-1.986125541475 1.155467112115"/>
+            <inertial pos="-0.374888 0 -0.02" mass="4" fullinertia="0.00296427 0.21898 0.219917 -0 -0 -0"/>
+            <!-- Part tibia_2 -->
+            <geom type="mesh" class="visual" pos="-0.375 0 0" quat="0.707107 0.707107 0 0" mesh="tibia" material="tibia_material"/>
+            <geom type="mesh" class="collision" pos="-0.375 0 0" quat="0.707107 0.707107 0 0" mesh="tibia" material="tibia_material"/>
+            <!-- Frame l2_cl4_2 -->
+            <site group="3" name="l2_cl4_2" pos="-0.45 0 -0.02" quat="0 -0 0.707107 -0.707107"/>
+            <!-- Link foot_2 -->
+            <body name="foot_2" pos="-0.75 0 -0.04" quat="0.141607 0 -0 0.989923">
+              <!-- Joint from tibia_2 to foot_2 -->
+              <joint axis="0 0 1" name="l2_r5" type="hinge" range="-1.286627712513 1.854964941077"/>
+              <inertial pos="0.00674789 -0.371096 0.02" mass="3.65" fullinertia="0.27435 0.00564812 0.270045 -0.000537481 3.1807e-08 3.381e-09"/>
+              <!-- Part foot_2 -->
+              <geom type="mesh" class="visual" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 0 -0" mesh="foot" material="foot_material"/>
+              <geom type="mesh" class="collision" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 0 -0" mesh="foot" material="foot_material"/>
+              <!-- Frame l2_cl3_2 -->
+              <site group="3" name="l2_cl3_2" pos="-0 -0.505 0.02" quat="0 0 -0.707107 0.707107"/>
+              <!-- Frame leg_2 -->
+              <site group="3" name="leg_2" pos="0.005 -1.0075 0.02" quat="0.707107 -0.707107 -0 -0"/>
+            </body>
+          </body>
+        </body>
+        <!-- Link cylinder_f_5 -->
+        <body name="cylinder_f_5" pos="-0.41 0 -0.095" quat="0.666921 0.666921 0.234981 -0.234981">
+          <!-- Joint from hip_2 to cylinder_f_5 -->
+          <joint axis="0 0 1" name="l2_r6" type="hinge" range="-0.893287307915 0.67750901888"/>
+          <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+          <!-- Part cylinder_f_5 -->
+          <geom type="mesh" class="visual" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <geom type="mesh" class="collision" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <!-- Link cylinder_m_5 -->
+          <body name="cylinder_m_5" pos="0.4595 -0 0" quat="0.707107 0 0.707107 -0">
+            <!-- Joint from cylinder_f_5 to cylinder_m_5 -->
+            <joint axis="0 0 1" name="l2_c2" type="slide" range="-0.0 0.2"/>
+            <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+            <!-- Part cylinder_m_5 -->
+            <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 -0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 -0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <!-- Frame l2_cl2_1 -->
+            <site group="3" name="l2_cl2_1" pos="0 0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+          </body>
+        </body>
+        <!-- Link cylinder_support_2 -->
+        <body name="cylinder_support_2" pos="-0.125 -0.02 -0.04" quat="0.652404 -0.652404 0.272707 0.272707">
+          <!-- Joint from hip_2 to cylinder_support_2 -->
+          <joint axis="0 0 1" name="l2_r7" type="hinge" range="-2.362654189383 0.778938464207"/>
+          <inertial pos="0.00543544 0.298634 0.0201529" mass="3.45" fullinertia="0.122413 0.00809203 0.115611 -0.000135757 -9.00296e-06 1.77445e-05"/>
+          <!-- Part cylinder_support_2 -->
+          <geom type="mesh" class="visual" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <geom type="mesh" class="collision" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <!-- Frame l2_cl4_1 -->
+          <site group="3" name="l2_cl4_1" pos="0 0.59 0.02" quat="0 -0 -0.707107 -0.707107"/>
+          <!-- Link cylinder_f_6 -->
+          <body name="cylinder_f_6" pos="-0 0.4125 0.02" quat="0.0818705 0 -0 -0.996643">
+            <!-- Joint from cylinder_support_2 to cylinder_f_6 -->
+            <joint axis="0 0 1" name="l2_r8" type="hinge" range="-0.16392451796 1.406871808835"/>
+            <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+            <!-- Part cylinder_f_6 -->
+            <geom type="mesh" class="visual" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <geom type="mesh" class="collision" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <!-- Link cylinder_m_6 -->
+            <body name="cylinder_m_6" pos="0.4595 0 -0" quat="0 -0.707107 0 -0.707107">
+              <!-- Joint from cylinder_f_6 to cylinder_m_6 -->
+              <joint axis="0 0 1" name="l2_c3" type="slide" range="-0.0 0.2"/>
+              <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+              <!-- Part cylinder_m_6 -->
+              <geom type="mesh" class="visual" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <geom type="mesh" class="collision" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <!-- Frame l2_cl3_1 -->
+              <site group="3" name="l2_cl3_1" pos="-0 0 -0.0095" quat="0.5 0.5 0.5 -0.5"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <!-- Link cylinder_f_7 -->
+      <body name="cylinder_f_7" pos="0.44 -0.715 0" quat="0 0.65375 0.75671 -0">
+        <!-- Joint from center to cylinder_f_7 -->
+        <joint axis="0 0 1" name="l3_r1" type="hinge" range="-1.425060020555 0.14573630624"/>
+        <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+        <!-- Part cylinder_f_7 -->
+        <geom type="mesh" class="visual" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <geom type="mesh" class="collision" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <!-- Link cylinder_m_7 -->
+        <body name="cylinder_m_7" pos="0.4595 0 -0" quat="0.707107 0 0.707107 0">
+          <!-- Joint from cylinder_f_7 to cylinder_m_7 -->
+          <joint axis="0 0 1" name="l3_c1" type="slide" range="-0.0 0.2"/>
+          <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+          <!-- Part cylinder_m_7 -->
+          <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <!-- Frame l3_cl1_1 -->
+          <site group="3" name="l3_cl1_1" pos="-0 -0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+        </body>
+      </body>
+      <!-- Link hip_3 -->
+      <body name="hip_3" pos="0.5 -0.025 0.03" quat="0 0.521624 -0.853175 0">
+        <!-- Joint from center to hip_3 -->
+        <joint axis="0 0 1" name="l3_r2" type="hinge" range="-0.473288925669 1.097507401126"/>
+        <inertial pos="-0.0375418 0 -0.0164898" mass="3.6" fullinertia="0.00825192 0.126424 0.128671 -0 -0.0120504 0"/>
+        <!-- Part hip_3 -->
+        <geom type="mesh" class="visual" pos="-0.065 0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <geom type="mesh" class="collision" pos="-0.065 0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <!-- Frame l3_cl1_2 -->
+        <site group="3" name="l3_cl1_2" pos="0.275 0 0.03" quat="0 -0 -0.707107 0.707107"/>
+        <!-- Link femur_3 -->
+        <body name="femur_3" pos="0.125 -0.02 -0.04" quat="0.687942 -0.687942 0.163511 0.163511">
+          <!-- Joint from hip_3 to femur_3 -->
+          <joint axis="0 0 1" name="l3_r3" type="hinge" range="-2.037499815189 1.104092838401"/>
+          <inertial pos="0.00641397 0.245927 0.02" mass="3.6" fullinertia="0.0813908 0.00807931 0.0746916 0.000199157 -1.18e-10 -5.8e-11"/>
+          <!-- Part femur_3 -->
+          <geom type="mesh" class="visual" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 -0" mesh="femur" material="femur_material"/>
+          <geom type="mesh" class="collision" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 -0" mesh="femur" material="femur_material"/>
+          <!-- Frame l3_cl2_2 -->
+          <site group="3" name="l3_cl2_2" pos="-0.013 0.384 0.02" quat="0.707107 0.707107 -0 0"/>
+          <!-- Link tibia_3 -->
+          <body name="tibia_3" pos="0 0.49 0" quat="0 0.978515 -0.206175 0">
+            <!-- Joint from femur_3 to tibia_3 -->
+            <joint axis="0 0 1" name="l3_r4" type="hinge" range="-1.986125541475 1.155467112115"/>
+            <inertial pos="-0.374888 0 -0.02" mass="4" fullinertia="0.00296427 0.21898 0.219917 -0 -0 0"/>
+            <!-- Part tibia_3 -->
+            <geom type="mesh" class="visual" pos="-0.375 0 0" quat="0.707107 0.707107 0 -0" mesh="tibia" material="tibia_material"/>
+            <geom type="mesh" class="collision" pos="-0.375 0 0" quat="0.707107 0.707107 0 -0" mesh="tibia" material="tibia_material"/>
+            <!-- Frame l3_cl4_2 -->
+            <site group="3" name="l3_cl4_2" pos="-0.45 0 -0.02" quat="0 0 0.707107 -0.707107"/>
+            <!-- Link foot_3 -->
+            <body name="foot_3" pos="-0.75 0 -0.04" quat="0.141607 -0 -0 0.989923">
+              <!-- Joint from tibia_3 to foot_3 -->
+              <joint axis="0 0 1" name="l3_r5" type="hinge" range="-1.286627712513 1.854964941077"/>
+              <inertial pos="0.00674789 -0.371096 0.02" mass="3.65" fullinertia="0.27435 0.00564812 0.270045 -0.000537481 3.1807e-08 3.381e-09"/>
+              <!-- Part foot_3 -->
+              <geom type="mesh" class="visual" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 -0 0" mesh="foot" material="foot_material"/>
+              <geom type="mesh" class="collision" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 -0 0" mesh="foot" material="foot_material"/>
+              <!-- Frame l3_cl3_2 -->
+              <site group="3" name="l3_cl3_2" pos="-0 -0.505 0.02" quat="0 -0 -0.707107 0.707107"/>
+              <!-- Frame leg_3 -->
+              <site group="3" name="leg_3" pos="0.005 -1.0075 0.02" quat="0.707107 -0.707107 0 0"/>
+            </body>
+          </body>
+        </body>
+        <!-- Link cylinder_f_8 -->
+        <body name="cylinder_f_8" pos="-0.41 0 -0.095" quat="0.666921 0.666921 0.234981 -0.234981">
+          <!-- Joint from hip_3 to cylinder_f_8 -->
+          <joint axis="0 0 1" name="l3_r6" type="hinge" range="-0.893287307915 0.67750901888"/>
+          <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+          <!-- Part cylinder_f_8 -->
+          <geom type="mesh" class="visual" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <geom type="mesh" class="collision" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <!-- Link cylinder_m_8 -->
+          <body name="cylinder_m_8" pos="0.4595 0 -0" quat="0.707107 0 0.707107 -0">
+            <!-- Joint from cylinder_f_8 to cylinder_m_8 -->
+            <joint axis="0 0 1" name="l3_c2" type="slide" range="-0.0 0.2"/>
+            <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+            <!-- Part cylinder_m_8 -->
+            <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <!-- Frame l3_cl2_1 -->
+            <site group="3" name="l3_cl2_1" pos="0 0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+          </body>
+        </body>
+        <!-- Link cylinder_support_3 -->
+        <body name="cylinder_support_3" pos="-0.125 -0.02 -0.04" quat="0.652404 -0.652404 0.272707 0.272707">
+          <!-- Joint from hip_3 to cylinder_support_3 -->
+          <joint axis="0 0 1" name="l3_r7" type="hinge" range="-2.362654189383 0.778938464207"/>
+          <inertial pos="0.00543544 0.298634 0.0201529" mass="3.45" fullinertia="0.122413 0.00809203 0.115611 -0.000135757 -9.00296e-06 1.77445e-05"/>
+          <!-- Part cylinder_support_3 -->
+          <geom type="mesh" class="visual" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <geom type="mesh" class="collision" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <!-- Frame l3_cl4_1 -->
+          <site group="3" name="l3_cl4_1" pos="0 0.59 0.02" quat="0 -0 0.707107 0.707107"/>
+          <!-- Link cylinder_f_9 -->
+          <body name="cylinder_f_9" pos="-0 0.4125 0.02" quat="0.0818705 0 0 -0.996643">
+            <!-- Joint from cylinder_support_3 to cylinder_f_9 -->
+            <joint axis="0 0 1" name="l3_r8" type="hinge" range="-0.16392451796 1.406871808835"/>
+            <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+            <!-- Part cylinder_f_9 -->
+            <geom type="mesh" class="visual" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <geom type="mesh" class="collision" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <!-- Link cylinder_m_9 -->
+            <body name="cylinder_m_9" pos="0.4595 0 0" quat="0 -0.707107 0 -0.707107">
+              <!-- Joint from cylinder_f_9 to cylinder_m_9 -->
+              <joint axis="0 0 1" name="l3_c3" type="slide" range="-0.0 0.2"/>
+              <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+              <!-- Part cylinder_m_9 -->
+              <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 -0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <!-- Frame l3_cl3_1 -->
+              <site group="3" name="l3_cl3_1" pos="-0 0 -0.0095" quat="0.5 0.5 0.5 -0.5"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <!-- Link cylinder_f_10 -->
+      <body name="cylinder_f_10" pos="-0.19 -0.965 0" quat="0 0.997346 0.0728037 0">
+        <!-- Joint from center to cylinder_f_10 -->
+        <joint axis="0 0 1" name="l4_r1" type="hinge" range="-1.425060020555 0.14573630624"/>
+        <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+        <!-- Part cylinder_f_10 -->
+        <geom type="mesh" class="visual" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <geom type="mesh" class="collision" pos="0.118 -0.0355 -0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+        <!-- Link cylinder_m_10 -->
+        <body name="cylinder_m_10" pos="0.4595 0 -0" quat="0.707107 0 0.707107 0">
+          <!-- Joint from cylinder_f_10 to cylinder_m_10 -->
+          <joint axis="0 0 1" name="l4_c1" type="slide" range="-0.0 0.2"/>
+          <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+          <!-- Part cylinder_m_10 -->
+          <geom type="mesh" class="visual" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <geom type="mesh" class="collision" pos="-0 -0.0355 -0.337" quat="0.707107 0.707107 -0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+          <!-- Frame l4_cl1_1 -->
+          <site group="3" name="l4_cl1_1" pos="-0 0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+        </body>
+      </body>
+      <!-- Link hip_4 -->
+      <body name="hip_4" pos="0.5 -1.025 0.03" quat="0 0.234442 0.97213 0">
+        <!-- Joint from center to hip_4 -->
+        <joint axis="0 0 1" name="l4_r2" type="hinge" range="-0.473288925669 1.097507401126"/>
+        <inertial pos="-0.0375418 -0 -0.0164898" mass="3.6" fullinertia="0.00825192 0.126424 0.128671 -0 -0.0120504 0"/>
+        <!-- Part hip_4 -->
+        <geom type="mesh" class="visual" pos="-0.065 -0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <geom type="mesh" class="collision" pos="-0.065 -0 0" quat="0 1 0 0" mesh="hip" material="hip_material"/>
+        <!-- Frame l4_cl1_2 -->
+        <site group="3" name="l4_cl1_2" pos="0.275 0 0.03" quat="0 0 -0.707107 0.707107"/>
+        <!-- Link femur_4 -->
+        <body name="femur_4" pos="0.125 -0.02 -0.04" quat="0.687942 -0.687942 0.163511 0.163511">
+          <!-- Joint from hip_4 to femur_4 -->
+          <joint axis="0 0 1" name="l4_r3" type="hinge" range="-2.037499815189 1.104092838401"/>
+          <inertial pos="0.00641397 0.245927 0.02" mass="3.6" fullinertia="0.0813908 0.00807931 0.0746916 0.000199157 -1.18e-10 -5.8e-11"/>
+          <!-- Part femur_4 -->
+          <geom type="mesh" class="visual" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 -0" mesh="femur" material="femur_material"/>
+          <geom type="mesh" class="collision" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 -0 -0" mesh="femur" material="femur_material"/>
+          <!-- Frame l4_cl2_2 -->
+          <site group="3" name="l4_cl2_2" pos="-0.013 0.384 0.02" quat="0.707107 0.707107 0 -0"/>
+          <!-- Link tibia_4 -->
+          <body name="tibia_4" pos="0 0.49 0" quat="0 0.978515 -0.206175 0">
+            <!-- Joint from femur_4 to tibia_4 -->
+            <joint axis="0 0 1" name="l4_r4" type="hinge" range="-1.986125541475 1.155467112115"/>
+            <inertial pos="-0.374888 0 -0.02" mass="4" fullinertia="0.00296427 0.21898 0.219917 0 0 0"/>
+            <!-- Part tibia_4 -->
+            <geom type="mesh" class="visual" pos="-0.375 0 0" quat="0.707107 0.707107 0 0" mesh="tibia" material="tibia_material"/>
+            <geom type="mesh" class="collision" pos="-0.375 0 0" quat="0.707107 0.707107 0 0" mesh="tibia" material="tibia_material"/>
+            <!-- Frame l4_cl4_2 -->
+            <site group="3" name="l4_cl4_2" pos="-0.45 0 -0.02" quat="0 -0 0.707107 -0.707107"/>
+            <!-- Link foot_4 -->
+            <body name="foot_4" pos="-0.75 -0 -0.04" quat="0.141607 0 0 0.989923">
+              <!-- Joint from tibia_4 to foot_4 -->
+              <joint axis="0 0 1" name="l4_r5" type="hinge" range="-1.286627712513 1.854964941077"/>
+              <inertial pos="0.00674789 -0.371096 0.02" mass="3.65" fullinertia="0.27435 0.00564812 0.270045 -0.000537481 3.1807e-08 3.381e-09"/>
+              <!-- Part foot_4 -->
+              <geom type="mesh" class="visual" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 -0 0" mesh="foot" material="foot_material"/>
+              <geom type="mesh" class="collision" pos="0 -0.3475 -0.03" quat="0.707107 -0.707107 -0 0" mesh="foot" material="foot_material"/>
+              <!-- Frame l4_cl3_2 -->
+              <site group="3" name="l4_cl3_2" pos="-0 -0.505 0.02" quat="0 -0 -0.707107 0.707107"/>
+              <!-- Frame leg_4 -->
+              <site group="3" name="leg_4" pos="0.005 -1.0075 0.02" quat="0.707107 -0.707107 0 -0"/>
+            </body>
+          </body>
+        </body>
+        <!-- Link cylinder_f_11 -->
+        <body name="cylinder_f_11" pos="-0.41 0 -0.095" quat="0.666921 0.666921 0.234981 -0.234981">
+          <!-- Joint from hip_4 to cylinder_f_11 -->
+          <joint axis="0 0 1" name="l4_r6" type="hinge" range="-0.893287307915 0.67750901888"/>
+          <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+          <!-- Part cylinder_f_11 -->
+          <geom type="mesh" class="visual" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <geom type="mesh" class="collision" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+          <!-- Link cylinder_m_11 -->
+          <body name="cylinder_m_11" pos="0.4595 -0 0" quat="0.707107 0 0.707107 -0">
+            <!-- Joint from cylinder_f_11 to cylinder_m_11 -->
+            <joint axis="0 0 1" name="l4_c2" type="slide" range="-0.0 0.2"/>
+            <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+            <!-- Part cylinder_m_11 -->
+            <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+            <!-- Frame l4_cl2_1 -->
+            <site group="3" name="l4_cl2_1" pos="0 0 -0.0095" quat="0.5 -0.5 -0.5 -0.5"/>
+          </body>
+        </body>
+        <!-- Link cylinder_support_4 -->
+        <body name="cylinder_support_4" pos="-0.125 -0.02 -0.04" quat="0.652404 -0.652404 0.272707 0.272707">
+          <!-- Joint from hip_4 to cylinder_support_4 -->
+          <joint axis="0 0 1" name="l4_r7" type="hinge" range="-2.362654189383 0.778938464207"/>
+          <inertial pos="0.00543544 0.298634 0.0201529" mass="3.45" fullinertia="0.122413 0.00809203 0.115611 -0.000135757 -9.00296e-06 1.77445e-05"/>
+          <!-- Part cylinder_support_4 -->
+          <geom type="mesh" class="visual" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <geom type="mesh" class="collision" pos="0 0.2425 -0.03" quat="0.707107 -0.707107 0 0" mesh="cylinder_support" material="cylinder_support_material"/>
+          <!-- Frame l4_cl4_1 -->
+          <site group="3" name="l4_cl4_1" pos="0 0.59 0.02" quat="0 -0 -0.707107 -0.707107"/>
+          <!-- Link cylinder_f_12 -->
+          <body name="cylinder_f_12" pos="0 0.4125 0.02" quat="0.0818705 -0 0 -0.996643">
+            <!-- Joint from cylinder_support_4 to cylinder_f_12 -->
+            <joint axis="0 0 1" name="l4_r8" type="hinge" range="-0.16392451796 1.406871808835"/>
+            <inertial pos="0.139815 -0.0342983 -3.32e-10" mass="2.7502" fullinertia="0.00533295 0.0276458 0.0310777 -0.0021373 -9.8e-11 3e-12"/>
+            <!-- Part cylinder_f_12 -->
+            <geom type="mesh" class="visual" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <geom type="mesh" class="collision" pos="0.118 -0.0355 0" quat="0.5 0.5 0.5 -0.5" mesh="cylinder_f" material="cylinder_f_material"/>
+            <!-- Link cylinder_m_12 -->
+            <body name="cylinder_m_12" pos="0.4595 -0 0" quat="0 0.707107 -0 0.707107">
+              <!-- Joint from cylinder_f_12 to cylinder_m_12 -->
+              <joint axis="0 0 1" name="l4_c3" type="slide" range="-0.0 0.2"/>
+              <inertial pos="-3.859e-09 -4.418e-09 -0.19587" mass="2.74999" fullinertia="0.033691 0.033689 0.000282174 8.3e-11 1.661e-09 1.867e-09"/>
+              <!-- Part cylinder_m_12 -->
+              <geom type="mesh" class="visual" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <geom type="mesh" class="collision" pos="0 -0.0355 -0.337" quat="0.707107 0.707107 0 0" mesh="cylinder_m" material="cylinder_m_material"/>
+              <!-- Frame l4_cl3_1 -->
+              <site group="3" name="l4_cl3_1" pos="0 0 -0.0095" quat="0.5 0.5 0.5 -0.5"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="center.stl"/>
+    <mesh file="cylinder_f.stl"/>
+    <mesh file="cylinder_m.stl"/>
+    <mesh file="hip.stl"/>
+    <mesh file="femur.stl"/>
+    <mesh file="tibia.stl"/>
+    <mesh file="foot.stl"/>
+    <mesh file="cylinder_support.stl"/>
+    <material name="center_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="cylinder_f_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="cylinder_m_material" rgba="0.439216 0.47451 0.501961 1"/>
+    <material name="hip_material" rgba="0.647059 0.647059 0.647059 1"/>
+    <material name="femur_material" rgba="0.301961 0.301961 0.301961 1"/>
+    <material name="tibia_material" rgba="0.917647 0.917647 0.917647 1"/>
+    <material name="foot_material" rgba="0.301961 0.301961 0.301961 1"/>
+    <material name="cylinder_support_material" rgba="0.647059 0.647059 0.647059 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_megabot_mujoco_0" name="l1_r1" joint="l1_r1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_c1" joint="l1_c1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_r2" joint="l1_r2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_r3" joint="l1_r3" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_r4" joint="l1_r4" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_r5" joint="l1_r5" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_r6" joint="l1_r6" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_c2" joint="l1_c2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_r7" joint="l1_r7" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_r8" joint="l1_r8" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l1_c3" joint="l1_c3" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r1" joint="l2_r1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_c1" joint="l2_c1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r2" joint="l2_r2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r3" joint="l2_r3" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r4" joint="l2_r4" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r5" joint="l2_r5" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r6" joint="l2_r6" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_c2" joint="l2_c2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r7" joint="l2_r7" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_r8" joint="l2_r8" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l2_c3" joint="l2_c3" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r1" joint="l3_r1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_c1" joint="l3_c1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r2" joint="l3_r2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r3" joint="l3_r3" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r4" joint="l3_r4" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r5" joint="l3_r5" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r6" joint="l3_r6" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_c2" joint="l3_c2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r7" joint="l3_r7" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_r8" joint="l3_r8" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l3_c3" joint="l3_c3" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r1" joint="l4_r1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_c1" joint="l4_c1" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r2" joint="l4_r2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r3" joint="l4_r3" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r4" joint="l4_r4" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r5" joint="l4_r5" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r6" joint="l4_r6" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_c2" joint="l4_c2" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r7" joint="l4_r7" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_r8" joint="l4_r8" inheritrange="1"/>
+    <position class="test_export_megabot_mujoco_0" name="l4_c3" joint="l4_c3" inheritrange="1"/>
+  </actuator>
+  <equality/>
+</mujoco>

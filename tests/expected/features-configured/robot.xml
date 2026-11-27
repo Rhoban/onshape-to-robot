@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: 3da7edeeb70f989a5edba88b / version_id: cec8ddb1dda1f9c4a9676e77 -->
+<mujoco model="test_export_features_configure2">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <default>
+    <default class="test_export_features_configure2">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link base -->
+    <body name="base" pos="0 0 0" quat="1 0 0 0" childclass="test_export_features_configure2">
+      <freejoint name="base_freejoint"/>
+      <inertial pos="7.47222e-05 -0.000119555 0.0201315" mass="6.53863" fullinertia="0.0226458 0.0499322 0.0707933 -2.35103e-05 -1.4984e-05 1.70952e-05"/>
+      <!-- Part base -->
+      <geom type="mesh" class="visual" pos="0 0 0" quat="1 0 0 0" mesh="base" material="base_material"/>
+      <geom type="mesh" class="collision" pos="0 0 0" quat="1 0 0 0" mesh="base" material="base_material"/>
+      <!-- Link arm -->
+      <body name="arm" pos="-0.1 -0.01 0.044" quat="0 1 0 0">
+        <!-- Joint from base to arm -->
+        <joint axis="0 0 1" name="elbow" type="hinge" range="-0.174532925199 0.523598775598"/>
+        <inertial pos="0 0 -0.06" mass="0.1296" fullinertia="0.00015984 0.00015984 8.64e-06 0 0 0"/>
+        <!-- Part arm -->
+        <geom type="mesh" class="visual" pos="-0.4 0 0" quat="0 1 0 0" mesh="arm" material="arm_material"/>
+        <geom type="mesh" class="collision" pos="-0.4 0 0" quat="0 1 0 0" mesh="arm" material="arm_material"/>
+      </body>
+      <!-- Link arm_2 -->
+      <body name="arm_2" pos="-0.1 0.05 0.044" quat="0 1 0 0">
+        <!-- Joint from base to arm_2 -->
+        <joint axis="0 0 1" name="wrist" type="hinge" range="-0.349065850399 0.349065850399"/>
+        <inertial pos="0 0 -0.06" mass="0.1296" fullinertia="0.00015984 0.00015984 8.64e-06 0 0 0"/>
+        <!-- Part arm_2 -->
+        <geom type="mesh" class="visual" pos="-0.4 0 0" quat="0 1 0 0" mesh="arm" material="arm_material"/>
+        <geom type="mesh" class="collision" pos="-0.4 0 0" quat="0 1 0 0" mesh="arm" material="arm_material"/>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="base.stl"/>
+    <mesh file="arm.stl"/>
+    <material name="base_material" rgba="0.6 0.6 0.65098 1"/>
+    <material name="arm_material" rgba="0.2 0.4 0.8 1"/>
+  </asset>
+  <actuator>
+    <position class="test_export_features_configure2" name="elbow" joint="elbow" inheritrange="1"/>
+    <position class="test_export_features_configure2" name="wrist" joint="wrist" inheritrange="1"/>
+  </actuator>
+  <equality/>
+</mujoco>
