@@ -6,6 +6,8 @@ are recorded once and replayed.
 
 ```bash
 pip install -e . pytest
+# Optional, for the tests using them
+pip install mujoco coacd trimesh
 pytest tests
 ```
 
@@ -21,6 +23,12 @@ An export that is expected to fail is described by a `robot.<ext>.error` file.
 The cases cover real robots (quadrupeds, humanoids, arms, wheeled robots,
 parallel robots with closed loops...) and synthetic cases for degrees of
 freedom inside sub-assemblies.
+
+`tests/test_regressions.py` contains a test for each fixed bug, reproducing
+its situation (on a robot built in Python, or on a recorded robot). Some of
+them need an external tool and are skipped when it is not installed: MuJoCo
+(`pip install mujoco`), CoACD (`pip install coacd trimesh`), OpenSCAD and
+Gazebo (`gz`, installed in a separate job of the GitHub workflow).
 
 ## How it works
 
