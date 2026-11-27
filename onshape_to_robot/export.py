@@ -6,7 +6,7 @@ def main():
     from dotenv import load_dotenv, find_dotenv
     from .config import Config
     from .message import error, info
-    from .robot_builder import RobotBuilder
+    from .robot_builder import RobotBuilder, apply_properties
     from .exporter_urdf import ExporterURDF
     from .exporter_sdf import ExporterSDF
     from .exporter_mujoco import ExporterMuJoCo
@@ -87,6 +87,9 @@ def main():
         if args.convert:
             print(info(f"* Loading robot data from {pkl_filename}"))
             robot = pickle.load(open(pkl_filename, "rb"))
+            # robot_name, joint_properties and geom_properties are applied when
+            # the robot is built, use the ones of the current configuration
+            apply_properties(robot, config)
 
         if not args.retrieve:
             # Applying processors

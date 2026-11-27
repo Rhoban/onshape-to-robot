@@ -25,6 +25,8 @@ Similarly, steps **(2)** and **(3)** can be executed by passing the ``--convert`
 
 You can also use the ``--save-pickle`` argument to save the robot data after retrieval while still proceeding to conversion.
 
+When converting, the current ``config.json`` is used for the processors and the exporters, as well as for ``robot_name``, ``joint_properties`` and ``geom_properties``. However, the following entries are applied during the retrieval and are stored in ``robot.pkl``, so changing them requires to retrieve the robot again: the document and assembly entries (``url``, ``document_id``, ``assembly_name``, ``configuration``...), ``ignore``, ``color``, ``no_dynamics`` (for the masses), ``ignore_limits``, ``draw_frames``, ``include_configuration_suffix``, ``rename_dofs`` and ``assets_directory``.
+
 Processors list
 ~~~~~~~~~~~~~~~
 
