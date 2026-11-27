@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import re
 import numpy as np
 from .config import Config
-from .message import error, info, bright, success, warning
+from .message import info, bright, success, warning
 from .onshape_api.client import Client
 from .robot import Joint
 from .expression import ExpressionParser
@@ -1385,10 +1385,13 @@ class Assembly:
                         )
                 else:
                     raise Exception(
-                        "Can't read value of parameter {name} configured with {value['typeName']}"
+                        f"Can't read value of parameter {name} configured with {value['typeName']}"
                     )
 
-            print(error(f"Coud not find the value for {name}"))
+            raise Exception(
+                f"Could not find the value of {name} for the configuration "
+                f"{message['configurationParameterId']}={parameterValue}"
+            )
         else:
             raise Exception(f"Unknown feature type for {name}: {parameter['typeName']}")
 
