@@ -8,6 +8,7 @@ Provides access to the Onshape REST API
 from . import utils
 
 import os
+import sys
 import random
 import string
 import commentjson as json
@@ -237,9 +238,10 @@ class Onshape():
 
             if res.status_code == 403:
                 print('HINT: Check that your access rights are correct, and that the clock on your computer is set correctly')
-            exit()
             if self._logging:
                 utils.log('request failed, details: ' + res.text, level=1)
+            # Non-zero exit code, so that scripts and CI detect the failure
+            sys.exit(1)
         else:
             if self._logging:
                 utils.log('request succeeded, details: ' + res.text)
