@@ -19,6 +19,8 @@ class ExporterMuJoCo(Exporter):
         self.no_dynamics: bool = False
         self.additional_xml: str = ""
         self.meshes: list = []
+        # Meshes of surfaces (no volume), with a shell inertia for MuJoCo
+        self.shell_meshes: set = set()
         self.materials: dict = {}
 
         if config is not None:
@@ -79,7 +81,9 @@ class ExporterMuJoCo(Exporter):
         # Unique meshes, in a deterministic order (iterating a set of strings
         # gives a different order at each run)
         for mesh_file in dict.fromkeys(self.meshes):
-            self.append(f'<mesh file="{xml_escape(mesh_file)}" />')
+            # MuJoCo can't compute the volume inertia of a surface
+            shell = ' inertia="shell"' if mesh_file in self.shell_meshes else ""
+            self.append(f'<mesh file="{xml_escape(mesh_file)}"{shell} />')
         for material_name, color in self.materials.items():
             color_str = "%g %g %g %g" % self.config.round(tuple(color))
             self.append(f'<material name="{xml_escape(material_name)}" rgba="{color_str}" />')
@@ -262,6 +266,8 @@ class ExporterMuJoCo(Exporter):
 
         # Adding the mesh and material to appear in the assets section
         self.meshes.append(mesh_file)
+        if getattr(mesh, "surface", False):
+            self.shell_meshes.add(mesh_file)
         self.materials[material_name] = mesh.color
 
         self.append(geom)

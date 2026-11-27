@@ -1,3 +1,4 @@
+from __future__ import annotations
 import numpy as np
 import os
 import hashlib
@@ -279,18 +280,25 @@ class RobotBuilder:
 
         return self.config.asset_path(filename)
 
-    def get_color(self, instance: dict) -> np.ndarray:
+    def get_metadata(self, instance: dict) -> dict:
         """
-        Retrieve the color of a part
+        Retrieve the metadata of a part
+        """
+        params = self.instance_request_params(instance)
+        return self.assembly.client.part_get_metadata(
+            **params,
+            partid=instance["partId"],
+        )
+
+    def get_color(self, instance: dict, metadata: dict | None = None) -> np.ndarray:
+        """
+        Retrieve the color of a part (from its metadata)
         """
         if self.config.color is not None:
             color = np.array(self.config.color)
         else:
-            params = self.instance_request_params(instance)
-            metadata = self.assembly.client.part_get_metadata(
-                **params,
-                partid=instance["partId"],
-            )
+            if metadata is None:
+                metadata = self.get_metadata(instance)
 
             color = np.array([0.5, 0.5, 0.5, 1.0])
 
@@ -397,8 +405,11 @@ class RobotBuilder:
         else:
             stl_file = self.get_stl(instance)
 
-        # Obtain metadatas about part to retrieve color
-        color = self.get_color(instance)
+        # Obtain metadatas about part to retrieve color (unless the color is set in
+        # the configuration) and whether it is a surface
+        metadata = None if self.config.color is not None else self.get_metadata(instance)
+        color = self.get_color(instance, metadata)
+        is_surface = metadata is not None and metadata.get("partType") == "sheet"
 
         # Obtain the instance dynamics
         mass, com, inertia = self.get_dynamics(instance)
@@ -417,6 +428,12 @@ class RobotBuilder:
         if self.part_is_ignored(part_name, "visual"):
             mesh.visual = False
         if self.part_is_ignored(part_name, "collision"):
+            mesh.collision = False
+        if is_surface:
+            # A surface has no volume: it can't be used for collisions (e.g.
+            # MuJoCo can't compute its convex hull)
+            print(warning(f"WARNING: part {part_name} is a surface, it is exported without collision"))
+            mesh.surface = True
             mesh.collision = False
         if mesh.visual or mesh.collision:
             meshes.append(mesh)

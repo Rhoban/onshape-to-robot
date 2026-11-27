@@ -32,6 +32,8 @@ class Mesh(Geometry):
     ):
         super().__init__(color, visual, collision)
         self.filename: str = filename
+        # Surface (sheet body, without volume)
+        self.surface: bool = False
 
 
 class Shape(Geometry):
