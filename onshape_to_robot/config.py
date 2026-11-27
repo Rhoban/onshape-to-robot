@@ -29,9 +29,11 @@ class Config:
         self.output_directory: str = os.path.dirname(os.path.abspath(self.config_file))
 
         if self.robot_name is None:
-            self.robot_name = os.path.dirname(os.path.abspath(self.config_file)).split(
-                "/"
-            )[-1]
+            # Name of the robot directory (os.path, so that it also works with
+            # Windows paths)
+            self.robot_name = os.path.basename(
+                os.path.dirname(os.path.abspath(self.config_file))
+            )
 
         try:
             os.makedirs(self.output_directory)
