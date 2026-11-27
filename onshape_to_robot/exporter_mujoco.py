@@ -298,7 +298,7 @@ class ExporterMuJoCo(Exporter):
         joint_xml: str = "<joint "
         joint_xml += 'axis="%g %g %g" ' % self.config.round(tuple(joint.axis))
         joint_xml += f'name="{joint.name}" '
-        if joint.joint_type == Joint.REVOLUTE:
+        if joint.joint_type in (Joint.REVOLUTE, Joint.CONTINUOUS):
             joint_xml += 'type="hinge" '
         elif joint.joint_type == Joint.PRISMATIC:
             joint_xml += 'type="slide" '
