@@ -2,6 +2,7 @@ from __future__ import annotations
 import numpy as np
 import re
 import os
+import urllib.parse
 import commentjson as json
 
 
@@ -85,19 +86,27 @@ class Config:
             return version
 
     def parse_url(self):
-        pattern = "https://(.*)/(.*)/([wv])/(.*)/e/(.*)"
-        match = re.match(pattern, self.url)
+        # The query string and fragment (e.g. "?renderMode=0", added when the
+        # URL is copied from the browser) are not part of the element id
+        path = urllib.parse.urlparse(self.url).path
+        match = re.search(r"/([^/]+)/([wvm])/([^/]+)/e/([^/]+)/?$", path)
 
-        if match is None:
+        if not self.url.startswith("https://") or match is None:
             raise Exception(f"Invalid URL: {self.url}")
 
-        match_groups = match.groups()
-        self.document_id = match_groups[1]
-        if match_groups[2] == "w":
-            self.workspace_id = match_groups[3]
-        elif match_groups[2] == "v":
-            self.version_id = match_groups[3]
-        self.element_id = match_groups[4]
+        document_id, wvm, wvm_id, element_id = match.groups()
+        if wvm == "m":
+            raise Exception(
+                f"Microversion URLs (/m/) are not supported, use the URL of a "
+                f"workspace (/w/) or a version (/v/): {self.url}"
+            )
+
+        self.document_id = document_id
+        if wvm == "w":
+            self.workspace_id = wvm_id
+        else:
+            self.version_id = wvm_id
+        self.element_id = element_id
 
     def asset_path(self, asset_name: str) -> str:
         return f"{self.output_directory}/{self.assets_directory}/{asset_name}"
