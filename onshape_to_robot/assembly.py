@@ -773,7 +773,7 @@ class Assembly:
                 else:
                     raise Exception(
                         f"ERROR: {name} is declared as a DOF but the mate type is {data['mateType']}\n"
-                        + "       Only REVOLUTE, CYLINDRICAL, SLIDER and FASTENED are supported"
+                        + "       Only REVOLUTE, CYLINDRICAL, SLIDER, BALL and FASTENED are supported"
                     )
 
                 # We compute the axis in the world frame

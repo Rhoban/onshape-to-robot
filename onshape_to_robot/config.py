@@ -67,7 +67,7 @@ class Config:
 
             if values_list is not None and value not in values_list:
                 raise Exception(
-                    f"Value for {name} should be onf of: {','.join(values_list)}"
+                    f"Value for {name} should be one of: {','.join(values_list)}"
                 )
             return value
         elif required and default is None:
