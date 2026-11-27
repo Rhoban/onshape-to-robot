@@ -505,8 +505,15 @@ def test_edit_shape_from_assets_directory(tmp_path):
     assert f"RUN_IN={assets}" in result.stdout
 
 
-def test_pure_sketch_finds_robot_config(tmp_path):
-    robot = tmp_path / "robot"
+def run_pure_sketch(
+    tmp_path: Path, args: list, sketches: list = [], **env
+) -> subprocess.CompletedProcess:
+    """
+    Runs onshape-to-robot-pure-sketch on assets/part.stl of a robot directory
+    (tmp_path / "my robot"), with a fake Onshape client returning the given
+    sketches
+    """
+    robot = tmp_path / "my robot"
     (robot / "assets").mkdir(parents=True)
     (robot / "config.json").write_text('{"document_id": "x", "output_format": "urdf"}')
     # An unrelated config.json higher in the tree is not used
@@ -524,21 +531,87 @@ def test_pure_sketch_finds_robot_config(tmp_path):
         )
     )
     code = (
-        "import sys; sys.argv = ['pure-sketch', 'part.stl']\n"
+        f"import sys; sys.argv = ['pure-sketch'] + {args!r}\n"
         "from unittest import mock\n"
         "import onshape_to_robot.onshape_api.client as client\n"
         "class FakeClient:\n"
         "    def __init__(self, logging, creds): print('CREDS=' + creds)\n"
-        "    def get_sketches(self, *args): return {'sketches': []}\n"
+        f"    def get_sketches(self, *args): return {{'sketches': {sketches!r}}}\n"
         "with mock.patch.object(client, 'Client', FakeClient):\n"
         "    from onshape_to_robot.pure_sketch import main\n"
         "    main()\n"
     )
-    result = subprocess.run(
+    return subprocess.run(
         [sys.executable, "-c", code],
         cwd=robot / "assets",
         capture_output=True,
         text=True,
-        env=python_env(),
+        env=python_env(**env),
     )
-    assert f"CREDS={robot / 'config.json'}" in result.stdout
+
+
+def test_pure_sketch_finds_robot_config(tmp_path):
+    result = run_pure_sketch(tmp_path, ["part.stl"])
+    assert f"CREDS={tmp_path / 'my robot' / 'config.json'}" in result.stdout
+
+
+def pure_shapes_sketch(name: str) -> dict:
+    """A sketch with a circle and a rectangle (2 cm x 1 cm)"""
+    rectangle = {
+        "top.start": [0.0, 0.0],
+        "top.end": [0.02, 0.0],
+        "bottom.start": [0.0, 0.01],
+        "bottom.end": [0.02, 0.01],
+    }
+    return {
+        "sketch": name,
+        "transformMatrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+        "geomEntities": [
+            {"entityType": "circle", "id": "c", "center": [0.01, 0.02], "radius": 0.005}
+        ]
+        + [
+            {"entityType": "point", "id": f"r.{key}", "point": point}
+            for key, point in rectangle.items()
+        ],
+    }
+
+
+@pytest.mark.skipif(
+    sys.platform == "win32", reason="Uses a shell script as fake openscad"
+)
+def test_pure_sketch_generates_scad(tmp_path):
+    result = run_pure_sketch(
+        tmp_path,
+        ["part.stl"],
+        [pure_shapes_sketch("PureShapes 5.3"), pure_shapes_sketch("Other 2")],
+        PATH=fake_openscad(tmp_path),
+    )
+    assets = tmp_path / "my robot" / "assets"
+    assert f"RUN_IN={assets}" in result.stdout
+    scad = (assets / "part.scad").read_text()
+    assert 'import("part.stl")' in scad
+    # Only the sketch with the prefix is used, extruded by its thickness
+    assert scad.count("// Sketch") == 1
+    assert "thickness = 5.300000;" in scad
+    assert "translate([10.000000, 20.000000, 0])" in scad
+    assert "cylinder(r=5.000000,h=thickness);" in scad
+    assert "cube([20.000000, 10.000000, thickness]);" in scad
+
+
+@pytest.mark.skipif(
+    sys.platform == "win32", reason="Uses a shell script as fake openscad"
+)
+@pytest.mark.parametrize(
+    "args", [["--quiet", "part.stl", "Custom"], ["part.stl", "Custom", "--quiet"]]
+)
+def test_pure_sketch_quiet(tmp_path, args):
+    """With --quiet, the .scad file is written without opening OpenSCAD"""
+    result = run_pure_sketch(
+        tmp_path,
+        args,
+        [pure_shapes_sketch("Custom 3")],
+        PATH=fake_openscad(tmp_path),
+    )
+    assert "RUN_IN=" not in result.stdout
+    scad = (tmp_path / "my robot" / "assets" / "part.scad").read_text()
+    assert "// Sketch Custom 3" in scad
