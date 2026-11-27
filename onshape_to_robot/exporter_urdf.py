@@ -242,7 +242,7 @@ class ExporterURDF(Exporter):
                 (joint_limits[0], joint_limits[1])
             )
         elif joint_type == "revolute":
-            limits += f'lower="{-np.pi}" upper="{np.pi}" '
+            limits += f'lower="{self.config.round(-np.pi)}" upper="{self.config.round(np.pi)}" '
         elif joint_type == "prismatic":
             limits += 'lower="-1" upper="1" '
 
@@ -256,7 +256,7 @@ class ExporterURDF(Exporter):
 
         if joint.relation is not None:
             self.append(
-                f'<mimic joint="{xml_escape(joint.relation.source_joint)}" multiplier="{joint.relation.ratio}" />'
+                f'<mimic joint="{xml_escape(joint.relation.source_joint)}" multiplier="{self.config.round(joint.relation.ratio)}" />'
             )
 
         self.append("</joint>")

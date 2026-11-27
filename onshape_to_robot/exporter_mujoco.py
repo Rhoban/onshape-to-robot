@@ -126,7 +126,7 @@ class ExporterMuJoCo(Exporter):
                     if joint.properties.get("range", True) and type == "position":
                         actuator += f'inheritrange="1" '
                     else:
-                        actuator += f'ctrlrange="{joint_limits[0]} {joint_limits[1]}" '
+                        actuator += f'ctrlrange="{self.config.round(joint_limits[0])} {self.config.round(joint_limits[1])}" '
 
                 actuator += "/>"
                 self.append(actuator)
@@ -176,7 +176,7 @@ class ExporterMuJoCo(Exporter):
         for joint in robot.joints:
             if joint.relation is not None:
                 self.append(
-                    f'<joint joint1="{xml_escape(joint.name)}" joint2="{xml_escape(joint.relation.source_joint)}" polycoef="0 {joint.relation.ratio} 0 0 0" />'
+                    f'<joint joint1="{xml_escape(joint.name)}" joint2="{xml_escape(joint.relation.source_joint)}" polycoef="0 {self.config.round(joint.relation.ratio)} 0 0 0" />'
                 )
 
         self.append("</equality>")
@@ -254,8 +254,8 @@ class ExporterMuJoCo(Exporter):
             geom += 'type="box" size="%g %g %g" ' % self.config.round(tuple(shape.size / 2))
         elif isinstance(shape, Cylinder):
             geom += 'type="cylinder" size="%g %g" ' % (
-                shape.radius,
-                shape.length / 2,
+                self.config.round(shape.radius),
+                self.config.round(shape.length / 2),
             )
         elif isinstance(shape, Sphere):
             geom += 'type="sphere" size="%g" ' % self.config.round(shape.radius)
@@ -309,7 +309,7 @@ class ExporterMuJoCo(Exporter):
 
         joint_limits = joint.properties.get("limits", joint.limits)
         if joint_limits is not None and joint.properties.get("range", True):
-            joint_xml += f'range="{joint_limits[0]} {joint_limits[1]}" '
+            joint_xml += f'range="{self.config.round(joint_limits[0])} {self.config.round(joint_limits[1])}" '
 
         for key in (
             "class",

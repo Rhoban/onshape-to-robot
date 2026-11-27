@@ -249,13 +249,13 @@ class ExporterSDF(Exporter):
 
         # Continuous joints have no limits
         if joint_limits is not None:
-            self.append(f"<lower>{joint_limits[0]}</lower>")
-            self.append(f"<upper>{joint_limits[1]}</upper>")
+            self.append(f"<lower>{self.config.round(joint_limits[0])}</lower>")
+            self.append(f"<upper>{self.config.round(joint_limits[1])}</upper>")
         self.append("</limit>")
 
         if joint.relation is not None:
             self.append(
-                f'<mimic joint="{xml_escape(joint.relation.source_joint)}"><multiplier>{joint.relation.ratio}</multiplier></mimic>'
+                f'<mimic joint="{xml_escape(joint.relation.source_joint)}"><multiplier>{self.config.round(joint.relation.ratio)}</multiplier></mimic>'
             )
 
         self.append("<dynamics>")
