@@ -1349,6 +1349,34 @@ class Assembly:
                 for target, (source, ratio) in self.relations.items()
             }
 
+    def read_boolean_parameter(
+        self, parameter: dict, name: str, configuration_parameters: dict[str, str]
+    ) -> bool:
+        """
+        Read a boolean parameter (e.g. limitsEnabled), which can be configured
+        """
+        if parameter["typeName"] != "BTMParameterConfigured":
+            return parameter["message"]["value"]
+
+        message = parameter["message"]
+        parameter_value = configuration_parameters[message["configurationParameterId"]]
+        for value in message["values"]:
+            if value["typeName"] == "BTMConfiguredValueByBoolean":
+                matches = value["message"]["booleanValue"] == (parameter_value == "true")
+            elif value["typeName"] == "BTMConfiguredValueByEnum":
+                matches = value["message"]["enumValue"] == parameter_value
+            else:
+                raise Exception(
+                    f"Can't read value of parameter {name} configured with {value['typeName']}"
+                )
+            if matches:
+                return value["message"]["value"]["message"]["value"]
+
+        raise Exception(
+            f"Could not find the value of {name} for the configuration "
+            f"{message['configurationParameterId']}={parameter_value}"
+        )
+
     def read_parameter_value(
         self,
         parameter: dict,
@@ -1585,7 +1613,9 @@ class Assembly:
                 # Find min and max values
                 for parameter in feature["message"]["parameters"]:
                     if parameter["message"]["parameterId"] == "limitsEnabled":
-                        enabled = parameter["message"]["value"]
+                        enabled = self.read_boolean_parameter(
+                            parameter, feature_name, configured_values
+                        )
 
                 if enabled:
                     for parameter in feature["message"]["parameters"]:
