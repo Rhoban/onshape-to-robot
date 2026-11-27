@@ -80,7 +80,8 @@ def main():
 
         # Can be used for debugging
         pkl_filename = config.output_directory + "/robot.pkl"
-        if args.retrieve or args.save_pickle:
+        # With --convert, the robot comes from robot.pkl: nothing to save
+        if (args.retrieve or args.save_pickle) and not args.convert:
             pickle.dump(robot, open(pkl_filename, "wb"))
             print(info(f"* Robot data saved to {pkl_filename}"))
 
