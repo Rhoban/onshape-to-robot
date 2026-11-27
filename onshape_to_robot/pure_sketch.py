@@ -14,8 +14,36 @@ def main():
         print("Usage: onshape-to-robot-pure-shape {STL file} [prefix=PureShapes]")
     else:
         fileName = sys.argv[1]
-        robotDir = os.path.dirname(fileName)
-        configFile = os.path.join(robotDir, "config.json")
+
+        # The meshes are in the assets directory of the robot: looking for the
+        # config.json in the parents of the file whose assets directory contains
+        # it (so that an unrelated config.json higher in the tree is not used)
+        def is_robot_config(candidate: str) -> bool:
+            if not os.path.exists(candidate):
+                return False
+            try:
+                with open(candidate, "r", encoding="utf-8") as stream:
+                    entries = json.load(stream)
+                assets = entries.get("assets_directory", entries.get("assetsDirectory", "assets"))
+            except Exception:
+                return False
+            assets_path = os.path.abspath(os.path.join(os.path.dirname(candidate), assets))
+            return os.path.commonpath([assets_path, os.path.abspath(fileName)]) == assets_path
+
+        configFile = None
+        directory = os.path.dirname(os.path.abspath(fileName))
+        while configFile is None:
+            if is_robot_config(os.path.join(directory, "config.json")):
+                configFile = os.path.join(directory, "config.json")
+            elif os.path.dirname(directory) == directory:
+                print(
+                    Fore.RED
+                    + f"ERROR: Can't find the config.json of the robot of {fileName}"
+                    + Style.RESET_ALL
+                )
+                sys.exit(1)
+            else:
+                directory = os.path.dirname(directory)
         prefix = "PureShapes"
         if len(sys.argv) > 2:
             prefix = sys.argv[2]
