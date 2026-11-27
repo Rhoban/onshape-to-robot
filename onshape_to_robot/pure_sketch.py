@@ -10,10 +10,16 @@ def main():
 
     load_dotenv(find_dotenv(usecwd=True))
 
-    if len(sys.argv) < 2:
-        print("Usage: onshape-to-robot-pure-shape {STL file} [prefix=PureShapes]")
+    # --quiet: only writes the .scad file, without opening OpenSCAD
+    quiet = "--quiet" in sys.argv[1:]
+    args = [arg for arg in sys.argv[1:] if arg != "--quiet"]
+
+    if len(args) < 1:
+        print(
+            "Usage: onshape-to-robot-pure-sketch {STL file} [prefix=PureShapes] [--quiet]"
+        )
     else:
-        fileName = sys.argv[1]
+        fileName = args[0]
 
         # The meshes are in the assets directory of the robot: looking for the
         # config.json in the parents of the file whose assets directory contains
@@ -45,8 +51,8 @@ def main():
             else:
                 directory = os.path.dirname(directory)
         prefix = "PureShapes"
-        if len(sys.argv) > 2:
-            prefix = sys.argv[2]
+        if len(args) > 1:
+            prefix = args[1]
 
         from .onshape_api.client import Client
 
@@ -170,11 +176,16 @@ def main():
             with open(scadFileName, "w", encoding="utf-8") as stream:
                 stream.write(scad)
 
-            # Running OpenSCAD in the directory of the file (without a shell, so
-            # that it works for a file in the current directory or a path with
-            # spaces)
-            directory = os.path.dirname(fileName) or "."
-            subprocess.run(["openscad", os.path.basename(scadFileName)], cwd=directory)
+            if quiet:
+                print(f"Written {scadFileName}")
+            else:
+                # Running OpenSCAD in the directory of the file (without a
+                # shell, so that it works for a file in the current directory
+                # or a path with spaces)
+                directory = os.path.dirname(fileName) or "."
+                subprocess.run(
+                    ["openscad", os.path.basename(scadFileName)], cwd=directory
+                )
         else:
             print(
                 Fore.RED

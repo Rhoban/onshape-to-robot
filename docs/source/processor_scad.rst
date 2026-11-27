@@ -40,6 +40,14 @@ This will open a window similar to the following:
 
 Editing the ``.scad`` file with the same name as the ``.stl`` file. Pure shapes present here will be used as approximation.
 
+The ``.scad`` file can also be generated from sketches drawn in Onshape, in the part studio of the part. Sketches named ``PureShapes <thickness>`` (e.g. ``PureShapes 5.3``, thickness in mm) are extruded below their plane: their circles become cylinders, and their rectangles boxes:
+
+.. code-block:: bash
+
+    onshape-to-robot-pure-sketch <path_to_stl> [prefix] [--quiet]
+
+The optional ``prefix`` replaces ``PureShapes`` in the sketch names, and ``--quiet`` only writes the ``.scad`` file, without opening OpenSCAD.
+
 ``config.json`` entries
 -----------------------
 
